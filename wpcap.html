@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+  <HEAD>
+    <TITLE>Relationship of WPCAP.DLL and PACKET.DLL (25-Oct-2008)</TITLE>
+    <!-- Created by: Michael Richardson, 30-Nov-2000 -->
+    <!-- Changed by: Michael Richardson, 25-Oct-2008 -->
+
+
+  </HEAD>
+  <BODY>
+
+<H1> Info on WinPCAP/WinDUMP</h1>
+
+<TABLE>
+<TR><TD> <TD>WinPCAP<TD>WinDUMP</TR>
+<TR><TD> Home pages:
+      <TD> <A HREF="http://www.winpcap.org/">WinPcap</A>
+	<TD> <A HREF="http://www.winpcap.org/windump/">WinDump</A></TR>
+<TR> <TD> Release notes:
+  <TD><A HREF="http://www.winpcap.org/misc/changelog.htm">winpcap</A>,
+    <TD> <A HREF="http://www.winpcap.org/windump/misc/changelog.htm">windump</A>
+      </TR>
+<TR> <TD> Mail:
+  <TD> <A
+HREF="mailto:winpcap-users@winpcap.org">winpcap-users@winpcap.org</A>
+(also used for WinDump)</TR>
+</TABLE>
+
+
+    <H1>Relationship of WPCAP.DLL and PACKET.DLL</H1>
+
+<PRE>
+From: Guy Harris <gharris@flashcom.net>
+Subject: Re: [tcpdump-workers] libpcap
+
+On Thu, Nov 23, 2000 at 04:39:45PM -0700, Mark Reimer wrote:
+> In the sample programs from netgroup..., I have tried to translate a couple
+> of them to VB using Declares. The one that I think would be the easiest to
+> use has the following functions: This is from testapp.c
+> 
+> PacketGetAdapterNames
+
+</PRE>
+
+<P>
+Perhaps that would be easier to use; it depends on what you're doing.
+
+<P>
+Some history on libpcap might make the relationship between "packet.dll"
+and "wpcap.dll" a bit clearer.
+
+<P>
+libpcap was originally the code in tcpdump that hid from the bulk of
+tcpdump the differences between the mechanisms provided by various
+flavors of UNIX to allow raw link-layer packets to be transmitted and
+received; tcpdump merely receives link-layer packets, and doesn't send
+them, so libpcap doesn't have any routines to transmit packets. 
+(There's no reason why it *couldn't* have those routines; it just
+doesn't happen to have them.)
+
+<P>
+wpcap.dll implements the libpcap API (plus some extensions) for Win32
+systems; packet.dll, and the drivers for various Win32 operating
+systems, provide a Win32-specific raw link-layer packet access
+mechanism.
+
+<P>
+I.e., wpcap.dll provides an API that should work on BSD, Linux, Solaris,
+HP-UX, Irix, AIX, Windows 9x, Windows NT, etc., allowing applications to
+capture packets on a network without themselves having to do that
+capture differently on different OSes.  (Well, there are some minor
+glitches that require some slightly different behavior on some OSes, but
+the latest version of libpcap should handle at least one of those.)
+
+<P>
+packet.dll provides a Win32-specific API for capturing *and* sending
+packets, just as the BPF driver on BSD, PF_PACKET sockets on Linux, DLPI
+on Solaris and HP-UX and some other flavors of UNIX, etc. provide APIs
+that are somewhat OS-specific for capturing and sending packets on those
+OSes.
+
+<P>
+The routines with names beginning with "Packet" are the packet.dll
+routines; that's the packet.dll API.
+
+<P>
+The routines with names beginning with "pcap_" are the wpcap.dll
+routines; that's the libpcap API.
+
+<P>
+The libpcap API is a somewhat "higher-level" API, hiding, as it does,
+various low-level details of BPF or PF_PACKET sockets or DLPI or
+packet.dll or....  That *might* make it easier to use; however, it also
+*might* mean that it wouldn't allow you to do some things you could do
+by directly using the packet.dll API.
+
+<P>
+The page at
+
+	<A HREF="http://netgroup-serv.polito.it/winpcap/2.1beta.htm"> http://netgroup-serv.polito.it/winpcap/2.1beta.htm</A>
+
+describes that thus:
+
+<BLOCKQUOTE>
+<P>
+	WinPcap is an architecture for packet capture and network
+	analysis for the Win32 platforms, based on the model of BPF and
+	libpcap for UNIX.  It includes a kernel-level packet filter
+	driver, a low-level dynamic link library (packet.dll), and a
+	high-level and system-independent library (WPcap.dll).
+
+<P>
+	The packet capture driver is a device driver that adds to
+	Windows 95, Windows 98, Windows NT and Windows 2000 the ability
+	to capture and send raw packets in a way similar to the Berkeley
+	Packet Filter of UNIX kernels.
+
+<P>
+	Packet.dll is an API that can be used to access directly the
+	functions of the capture driver.
+
+<P>
+	WinPcap exports a set of functions fully compatible with libpcap
+	0.5.2.  It allows capturing packets in a way independent from
+	the underlying network hardware and operating system.
+</BLOCKQUOTE>
+
+<PRE>
+> Also I would need to come up with proper types (structures) for LPADAPTER
+> and LPPACKET. These use packet.dll.
+> 
+> The other is from pktdump.c and uses the following:
+> 
+> pcap_open_live
+> pcap_loop
+> 
+> For this one, it uses structure of pcap (which I haven't found defined
+> anywhere). I assume because wpcap.dll is loaded as needed, it is defined in
+> there, and not anywhere else.
+</PRE>
+
+<P>
+No, it's because the "pcap_t" structure's layout is relevant only if
+you're trying to write programs that use libpcap...
+
+<P>
+...just as LPADAPTER and LPPACKET are relevant only if you're trying to
+write programs that use packet.dll.
+
+<P>
+Given that you're planning on writing programs that use libpcap and/or
+packet.dll, they are relevant.
+
+<P>
+LPADAPTER is just a pointer to an "ADAPTER" structure; "ADAPTER" is
+defined in "PACKET32.H", which comes as part of the WinPcap 2.1 beta
+developer's pack.  LPPACKET is just a pointer to a "PACKET" structure;
+"PACKET" is also defined in "PACKET32.H".
+
+<P>
+"pcap_t" is a handle returned when you open a capture device with
+libpcap; it's defined in "pcap.h", which *also* comes as part of the
+WinPcap 2.1 beta developer's pack.
+
+<PRE>
+> I'm trying to write an update to a packet capture program that runs in DOS
+> (yes, pre-Windows), so I just need to capture the packets, then I know what
+> I'm doing.
+</PRE>
+
+<P>
+I assume the update is to make it run on Win32 operating systems
+(Windows 95/98 and Windows NT/2000), as WinPcap won't work on plain DOS.
+
+<P>
+If it's just a packet capture program, the libpcap API, rather than the
+raw packet.dll API, may be easier.  (If you download the WinPcap 2.1
+beta source, and look at "pcap-win32.c" in the "WPCAP\LIBPCAP"
+directory, that shows you the stuff that the libpcap library hides; it's
+not *that* complicated - take a look, for example, at "pcap-dlpi.c" in
+that directory, which shows you the stuff libpcap has to hide from you
+on a platform using DLPI, although "pcap-bpf.c" is a bit simpler, which
+is perhaps not surprising given that BPF was designed by the same folks
+who designed libpcap and tcpdump....)
+
+  </BODY>
+</HTML>
