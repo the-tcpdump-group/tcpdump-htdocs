@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates <http://www.freecsstemplates.org>
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <!-- HEAD -->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>LINKTYPE_PRISM_HEADER | TCPDUMP/LIBPCAP public repository</title>
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop" />
+        <meta name="description" content="Web site of Tcpdump and Libpcap" />
+		<meta name="DC.publisher" content="Tcpdump" />
+		<meta name="DC.publisher.url" content="http://www.tcpdump.org" />
+		<meta name="DC.title" content="Tcpdump/Libpcap public repository" />
+		<meta name="DC.identifier" content="http://www.tcpdump.org" />
+		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13" />
+		<meta name="DC.creator" content="tcpdump" />
+		<meta name="DC.rights.rightsHolder" content="tcpdump" />
+		<meta name="DC.language" content="en" scheme="rfc1766" />
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen" />
+        <link rel="canonical" href="http://www.tcpdump.org" />
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#source">Source</a></li>
+                <li><a href="../index.html#latest-release">Downloads</a></li>
+                <li><a href="../index.html#mailing-lists">Mailing lists</a></li>
+                <li><a href="../index.html#contribute">Contribute</a></li>
+                <li><a href="../related.html">Related Projects</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br/><img src="../images/logo.png" alt="" />
+        </div>
+        <div id="logo">
+            <hr />
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_PRISM_HEADER section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_PRISM_HEADER</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++-------------+
+|    Msgcode  |
+|  (4 Octets) |
++-------------+
+|    Msglen   |
+|  (4 Octets) |
++-------------+
+| Device name |
+| (16 Octets) |
++------------++-----------+------------+------------+
+|     DID    |   Status   |   Length   |    Data    |
+| (4 Octets) | (2 Octets) | (2 Octets) | (n Octets) |
++------------+------------+------------+------------+
+.                                                   .
+.                                                   .
+.                                                   .
++---------------------------------------------------+
+|                      Payload                      |
+.                                                   .
+.                                                   .
+.                                                   .
+</pre>
+
+                <h3>Description</h3>
+<p>
+All fields are in the host byte order of the machine on which the
+capture was done.  (In practice, this is likely to be little-endian, but
+that's not guaranteed.)
+</p>
+<p>
+The msgcode field has the value 0x0041.  The msglen field is the length
+of the entire Prism header.  In practice, it is almost always, if not
+always, 144 octets.  The device name is the interface name of the
+adapter.
+</p>
+<p>
+There could be, in theory, zero or more instances of the {DID, Status,
+Length, Data} quadruplet; in practice, there are almost always, if not
+always, 10 instances.  Each quadruplet represents the value of a
+parameter.  The DID field indicates what the parameter is:
+<ul>
+<li>0x1041 - host time;</li>
+<li>0x2041 - MAC time;</li>
+<li>0x3041 - channel;</li>
+<li>0x4041 - RSSI;</li>
+<li>0x5041 - signal quality;</li>
+<li>0x6041 - signal;</li>
+<li>0x7041 - noise;</li>
+<li>0x8041 - rate;</li>
+<li>0x9041 - transmitted frame indicator;</li>
+<li>0xA041 - frame length.</li>
+</ul>
+The Status field is 0 if the value of that parameter is supplied and 1
+if it is not supplied.  The Length field indicates the length of the
+following Data field; in theory, it could have any value, but it is
+almost always, if not always, 4.  The Data field contains the value of
+the parameter.
+</p>
+<p>
+The representation of the values may differ between different network
+adapters.  There is no official specification for the Prism header; <a
+href="http://home.martin.cc/linux/prism">this person's page on the Prism
+header</a> describes what he found from examining some adapter drivers.
+</p>
+            </div>
+            <!-- End of LINKTYPE_PRISM_HEADER section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                (c) 2010 Tcpdump/Libpcap. Designed by
+                <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
+                based on a template by <a href="http://www.freecsstemplates.org/">
+                Free CSS Templates</a>.
+                <a href="http://validator.w3.org/check?uri=referer">[Valid XHTML
+                1.0]</a> <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                [Valid CSS]</a>
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+        
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
