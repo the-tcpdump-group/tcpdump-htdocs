@@ -347,6 +347,15 @@ Reserved for private use; see above.
 <td>LINKTYPE_IEEE802_11_RADIO_AVS<td>163<td>DLT_IEEE802_11_RADIO_AVS<td>
 AVS monitor mode information followed by an 802.11 header.
                 <tr valign=top>
+<td>LINKTYPE_BACNET_MS_TP<td>165<td>DLT_BACNET_MS_TP<td>
+BACnet MS/TP frames, as specified by section 9.3 <b>MS/TP Frame
+Format</b> of
+<a
+href="http://www.ashrae.org/resources--publications/bookstore/standard-135">ANSI/ASHRAE
+Standard 135, BACnet&reg; - A Data Communication Protocol for Building
+Automation and Control Networks</a>, including the preamble and, if
+present, the Data CRC.
+                <tr valign=top>
 <td>LINKTYPE_PPP_PPPD<td>166<td>DLT_PPP_PPPD<td>
 PPP in HDLC-like encapsulation, but with the 0xff address byte replaced
 by a direction indication - 0x00 for incoming and 0x01 for outgoing.
