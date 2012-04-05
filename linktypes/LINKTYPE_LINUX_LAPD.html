@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates <http://www.freecsstemplates.org>
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <!-- HEAD -->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>LINKTYPE_LINUX_LAPD | TCPDUMP/LIBPCAP public repository</title>
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop" />
+        <meta name="description" content="Web site of Tcpdump and Libpcap" />
+		<meta name="DC.publisher" content="Tcpdump" />
+		<meta name="DC.publisher.url" content="http://www.tcpdump.org" />
+		<meta name="DC.title" content="Tcpdump/Libpcap public repository" />
+		<meta name="DC.identifier" content="http://www.tcpdump.org" />
+		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13" />
+		<meta name="DC.creator" content="tcpdump" />
+		<meta name="DC.rights.rightsHolder" content="tcpdump" />
+		<meta name="DC.language" content="en" scheme="rfc1766" />
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen" />
+        <link rel="canonical" href="http://www.tcpdump.org" />
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#source">Source</a></li>
+                <li><a href="../index.html#latest-release">Downloads</a></li>
+                <li><a href="../index.html#mailing-lists">Mailing lists</a></li>
+                <li><a href="../index.html#contribute">Contribute</a></li>
+                <li><a href="../related.html">Related Projects</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br/><img src="../images/logo.png" alt="" />
+        </div>
+        <div id="logo">
+            <hr />
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_LINUX_LAPD section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_LINUX_LAPD</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+|         Packet type       |
+|         (2 Octets)        |
++---------------------------+
+|        ARPHRD_ type       |
+|         (2 Octets)        |
++---------------------------+
+| Link-layer address length |
+|         (2 Octets)        |
++---------------------------+
+|    Link-layer address     |
+|         (8 Octets)        |
++---------------------------+
+|        Protocol type      |
+|         (2 Octets)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The packet type field is in network byte order (big-endian); it contains
+a value that is one of:
+<ul>
+<li>0, if the packet was sent to us by somebody else;</li>
+<li>3, if the packet was sent to somebody else by somebody else;</li>
+<li>4, if the packet was sent by us.</li>
+</ul>
+</p>
+<p>For LAPD frames, the lower byte of the field is 0 for incoming
+packets and 4 for outgoing packets.
+<p>For log messages, if the lower byte of the field is 1, it's an
+indication that one or more messages have been missed and not captured.
+<p>
+The ARPHRD_ type field is unused.
+</p>
+<p>
+The link-layer address length field is unused.
+</p>
+<p>
+The link-layer address field is unused.
+</p>
+<p>The protocol type field is in network byte order; it should contain
+the value 0x0030.
+</p>
+            </div>
+            <!-- End of LINKTYPE_LINUX_LAPD section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                (c) 2010 Tcpdump/Libpcap. Designed by
+                <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
+                based on a template by <a href="http://www.freecsstemplates.org/">
+                Free CSS Templates</a>.
+                <a href="http://validator.w3.org/check?uri=referer">[Valid XHTML
+                1.0]</a> <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                [Valid CSS]</a>
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+        
+    </body>
+    <!-- END OF HTML BODY -->
+</html>

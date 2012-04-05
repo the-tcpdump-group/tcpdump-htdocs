@@ -180,13 +180,14 @@ prototype defines it as:
 	int pcap_compile(pcap_t *p, struct bpf_program *fp, char *str, int optimize, 
 	    bpf_u_int32 netmask)
 </pre>
-<p>The first argument is our session handle (pcap_t *handle in our previous 
-example). Following that is a reference to the place we will store the 
-compiled version of our filter. Then comes the expression itself, in 
-regular string format. Next is an integer that decides if the expression 
-should be &quot;optimized&quot; or not (0 is false, 1 is true. Standard stuff.) 
-Finally, we must specify the net mask of the network the filter applies to. 
-The function returns -1 on failure; all other values imply success.
+<p>The first argument is our session handle (pcap_t *handle in our
+previous example).  Following that is a reference to the place we will
+store the compiled version of our filter.  Then comes the expression
+itself, in regular string format.  Next is an integer that decides if
+the expression should be &quot;optimized&quot; or not (0 is false, 1 is
+true.  Standard stuff.)  Finally, we must specify the network mask of the
+network the filter applies to.  The function returns -1 on failure; all
+other values imply success.
 
 <p>After the expression has been compiled, it is time to apply 
 it. Enter pcap_setfilter(). Following our format of explaining pcap, 
@@ -234,10 +235,12 @@ the same variable as the second argument to pcap_compile()).
 
 <p>You may notice that the previous example contains a function that we
 have not yet discussed.  pcap_lookupnet() is a function that, given the
-name of a device, returns its IP and net mask.  This was essential
-because we needed to know the net mask in order to apply the filter. 
-This function is described in the Miscellaneous section at the end of
-the document.
+name of a device, returns one of its IPv4 network numbers and
+corresponding network mask (the network number is the IPv4 address ANDed
+with the network mask, so it contains only the network part of the
+address).  This was essential because we needed to know the network mask
+in order to apply the filter.  This function is described in the
+Miscellaneous section at the end of the document.
 
 <p>It has been my experience that this filter does not work across all
 operating systems.  In my test environment, I found that OpenBSD 2.9
