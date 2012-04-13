@@ -170,8 +170,9 @@ file.
 802.3</a> Ethernet (10Mb, 100Mb, 1000Mb, and up); the 10MB in the
 DLT_ name is historical.
                 <tr valign=top>
-<td>LINKTYPE_TOKEN_RING<td>6<td>DLT_IEEE802<td>
-IEEE 802.5 Token Ring; the IEEE802 in the DLT_ name is historical. 
+<td>LINKTYPE_IEEE802_5<td>6<td>DLT_IEEE802<td>
+IEEE 802.5 Token Ring; the IEEE802, without _5, in the DLT_ name is
+historical. 
                 <tr valign=top>
 <td>LINKTYPE_ARCNET_BSD<td>7<td>DLT_ARCNET<td>
 ARCNET Data Packets, as described by the ARCNET Trade Association
@@ -263,8 +264,8 @@ differs from operating system to operating system and release to
 release; there is nothing in the file to indicate what the layout of
 that structure is.)
                 <tr valign=top>
-<td>LINKTYPE_PRISM_HEADER<td>119<td>DLT_PRISM_HEADER<td>
-<a href="linktypes/LINKTYPE_PRISM_HEADER.html">Prism monitor mode
+<td>LINKTYPE_IEEE802_11_PRISM<td>119<td>DLT_PRISM_HEADER<td>
+<a href="linktypes/LINKTYPE_IEEE802_11_PRISM.html">Prism monitor mode
 information</a> followed by an 802.11 header.
                 <tr valign=top>
 <td>LINKTYPE_IP_OVER_FC<td>122<td>DLT_IP_OVER_FC<td>
@@ -277,7 +278,7 @@ ATM traffic, encapsulated as per
 <a href="linktypes/LINKTYPE_SUNATM.html">the scheme used by SunATM
 devices</a>.
                 <tr valign=top>
-<td>LINKTYPE_IEEE802_11_RADIO<td>127<td>DLT_IEEE802_11_RADIO<td>
+<td>LINKTYPE_IEEE802_11_RADIOTAP<td>127<td>DLT_IEEE802_11_RADIO<td>
 <a href="http://www.radiotap.org/">Radiotap link-layer information</a>
 followed by an 802.11 header.
                 <tr valign=top>
@@ -344,7 +345,7 @@ specification.
 <td>LINKTYPE_USER0-LINKTYPE-USER15<td>147-162<td>DLT_USER0-DLT_USER15<td>
 Reserved for private use; see above.
                 <tr valign=top>
-<td>LINKTYPE_IEEE802_11_RADIO_AVS<td>163<td>DLT_IEEE802_11_RADIO_AVS<td>
+<td>LINKTYPE_IEEE802_11_AVS<td>163<td>DLT_IEEE802_11_RADIO_AVS<td>
 AVS monitor mode information followed by an 802.11 header.
                 <tr valign=top>
 <td>LINKTYPE_BACNET_MS_TP<td>165<td>DLT_BACNET_MS_TP<td>
