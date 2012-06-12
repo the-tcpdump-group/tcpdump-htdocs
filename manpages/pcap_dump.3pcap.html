@@ -1,0 +1,69 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of PCAP_DUMP</TITLE>
+</HEAD><BODY>
+<H1>PCAP_DUMP</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_dump - write a packet to a capture file
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+</B>
+<B>void pcap_dump(u_char *user, struct pcap_pkthdr *h,
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u_char *sp);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_dump()</B>
+
+outputs a packet to the ``savefile'' opened with
+<B>pcap_dump_open()</B>.
+
+Note that its calling arguments are suitable for use with
+<B>pcap_dispatch()</B>
+
+or
+<B>pcap_loop()</B>.
+
+If called directly, the 
+<I>user</I>
+
+parameter is of type 
+<B>pcap_dumper_t</B>
+
+as returned by
+<B>pcap_dump_open()</B>.
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dispatch(3PCAP),
+pcap_loop(3PCAP)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 17:15:13 GMT, June 12, 2012
+</BODY>
+</HTML>

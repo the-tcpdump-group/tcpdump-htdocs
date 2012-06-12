@@ -1,0 +1,28 @@
+PCAP_SET_PROMISC(3PCAP)                                PCAP_SET_PROMISC(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_set_promisc - set promiscuous mode for a not-yet-activated capture
+       handle
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__sseett__pprroommiisscc((ppccaapp__tt **pp,, iinntt pprroommiisscc));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__sseett__pprroommiisscc(()) sets whether promiscuous mode should  be  set  on  a
+       capture  handle  when the handle is activated.  If _p_r_o_m_i_s_c is non-zero,
+       promiscuous mode will be set, otherwise it will not be set.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__sseett__pprroommiisscc(()) returns 0  on  success  or  PPCCAAPP__EERRRROORR__AACCTTIIVVAATTEEDD  if
+       called on a capture handle that has been activated.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
+
+
+
+                                 5 April 2008          PCAP_SET_PROMISC(3PCAP)

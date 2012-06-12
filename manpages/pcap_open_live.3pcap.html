@@ -1,0 +1,120 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of PCAP_OPEN_LIVE</TITLE>
+</HEAD><BODY>
+<H1>PCAP_OPEN_LIVE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_open_live - open a device for capturing
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>pcap_t *pcap_open_live(const char *device, int snaplen,
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int promisc, int to_ms, char *errbuf);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_open_live()</B>
+
+is used to obtain a packet capture handle to look
+at packets on the network.
+<I>device</I>
+
+is a string that specifies the network device to open; on Linux systems
+with 2.2 or later kernels, a
+<I>device</I>
+
+argument of &quot;any&quot; or
+<B>NULL</B>
+
+can be used to capture packets from all interfaces.
+<P>
+
+<I>snaplen</I>
+
+specifies the snapshot length to be set on the handle.
+<P>
+
+<I>promisc</I>
+
+specifies if the interface is to be put into promiscuous mode.
+<P>
+
+<I>to_ms</I>
+
+specifies the read timeout in milliseconds.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_open_live()</B>
+
+returns a
+<I>pcap_t *</I>
+
+on success and
+<B>NULL</B>
+
+on failure.
+If
+<B>NULL</B>
+
+is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<I>errbuf</I>
+
+may also be set to warning text when
+<B>pcap_open_live()</B>
+
+succeeds; to detect this case the caller should store a zero-length string in
+<I>errbuf</I>
+
+before calling
+<B>pcap_open_live()</B>
+
+and display the warning to the user if
+<I>errbuf</I>
+
+is no longer a zero-length string.
+<I>errbuf</I>
+
+is assumed to be able to hold at least
+<B>PCAP_ERRBUF_SIZE</B>
+
+chars.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 17:15:13 GMT, June 12, 2012
+</BODY>
+</HTML>

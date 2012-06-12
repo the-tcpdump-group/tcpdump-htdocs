@@ -1,0 +1,83 @@
+PCAP_LOOP(3PCAP)                                              PCAP_LOOP(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_loop, pcap_dispatch - process packets from a live capture or save-
+       file
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       ttyyppeeddeeff vvooiidd ((**ppccaapp__hhaannddlleerr))((uu__cchhaarr **uusseerr,, ccoonnsstt ssttrruucctt ppccaapp__ppkktthhddrr **hh,,
+                                   ccoonnsstt uu__cchhaarr **bbyytteess));;
+
+       iinntt ppccaapp__lloooopp((ppccaapp__tt **pp,, iinntt ccnntt,,
+               ppccaapp__hhaannddlleerr ccaallllbbaacckk,, uu__cchhaarr **uusseerr));;
+       iinntt ppccaapp__ddiissppaattcchh((ppccaapp__tt **pp,, iinntt ccnntt,,
+               ppccaapp__hhaannddlleerr ccaallllbbaacckk,, uu__cchhaarr **uusseerr));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__lloooopp(()) processes packets from a live capture or ``savefile'' until
+       _c_n_t  packets are processed, the end of the ``savefile'' is reached when
+       reading from a ``savefile'', ppccaapp__bbrreeaakklloooopp(()) is called,  or  an  error
+       occurs.   It does nnoott return when live read timeouts occur.  A value of
+       -1 or 0 for _c_n_t is equivalent to infinity, so  that  packets  are  pro-
+       cessed until another ending condition occurs.
+
+       ppccaapp__ddiissppaattcchh(())  processes  packets from a live capture or ``savefile''
+       until _c_n_t packets are processed, the end of the  current  bufferful  of
+       packets  is  reached  when doing a live capture, the end of the ``save-
+       file'' is reached when reading from a ``savefile'', ppccaapp__bbrreeaakklloooopp(()) is
+       called,  or  an  error occurs.  Thus, when doing a live capture, _c_n_t is
+       the maximum number of packets to process before returning, but is not a
+       minimum  number;  when  reading  a  live capture, only one bufferful of
+       packets is read at a time, so fewer than _c_n_t packets may be  processed.
+       A  value of -1 or 0 for _c_n_t causes all the packets received in one buf-
+       fer to be processed when reading a live capture,  and  causes  all  the
+       packets in the file to be processed when reading a ``savefile''.
+
+       ((IInn  oollddeerr  vveerrssiioonnss  ooff lliibbppccaapp,, tthhee bbeehhaavviioorr wwhheenn _c_n_t wwaass 00 wwaass uunnddee--
+       ffiinneedd;; ddiiffffeerreenntt ppllaattffoorrmmss aanndd ddeevviicceess  bbeehhaavveedd  ddiiffffeerreennttllyy,,  ssoo  ccooddee
+       tthhaatt  mmuusstt wwoorrkk wwiitthh oollddeerr vveerrssiioonnss ooff lliibbppccaapp sshhoouulldd uussee --11,, nnoorr 00,, aass
+       tthhee vvaalluuee ooff _c_n_t..))
+
+       _c_a_l_l_b_a_c_k specifies a _p_c_a_p___h_a_n_d_l_e_r routine to be called with three argu-
+       ments:  a  _u___c_h_a_r  pointer  which  is  passed  in  the _u_s_e_r argument to
+       ppccaapp__lloooopp(()) or ppccaapp__ddiissppaattcchh(()),  a  _c_o_n_s_t  _s_t_r_u_c_t  _p_c_a_p___p_k_t_h_d_r  pointer
+       pointing  to  the  packet  time  stamp  and lengths, and a _c_o_n_s_t _u___c_h_a_r
+       pointer to the first ccaapplleenn (as  given  in  the  _s_t_r_u_c_t  _p_c_a_p___p_k_t_h_d_r  a
+       pointer  to which is passed to the callback routine) bytes of data from
+       the packet.  The _s_t_r_u_c_t _p_c_a_p___p_k_t_h_d_r and the packet data are not  to  be
+       freed by the callback routine, and are not guaranteed to be valid after
+       the callback routine returns; if the code needs them to be valid  after
+       the callback, it must make a copy of them.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__lloooopp(()) returns 0 if _c_n_t is exhausted, -1 if an error occurs, or -2
+       if the loop terminated due to a call  to  ppccaapp__bbrreeaakklloooopp(())  before  any
+       packets  were  processed.   It  does nnoott return when live read timeouts
+       occur; instead, it attempts to read more packets.
+
+       ppccaapp__ddiissppaattcchh(()) returns the number of  packets  processed  on  success;
+       this  can  be  0  if  no packets were read from a live capture (if, for
+       example, they were discarded because they didn't pass the  packet  fil-
+       ter, or if, on platforms that support a read timeout that starts before
+       any packets arrive, the timeout expires before any packets  arrive,  or
+       if  the  file descriptor for the capture device is in non-blocking mode
+       and no packets were available to be read) or if  no  more  packets  are
+       available in a ``savefile.''  It returns -1 if an error occurs or -2 if
+       the loop terminated due to a call to ppccaapp__bbrreeaakklloooopp(()) before any  pack-
+       ets  were  processed.   IIff yyoouurr aapppplliiccaattiioonn uusseess ppccaapp__bbrreeaakklloooopp(()),, mmaakkee
+       ssuurree tthhaatt yyoouu eexxpplliicciittllyy cchheecckk ffoorr --11 aanndd --22,, rraatthheerr tthhaann jjuusstt cchheecckkiinngg
+       ffoorr aa rreettuurrnn vvaalluuee << 00..
+
+       If  -1 is returned, ppccaapp__ggeetteerrrr(()) or ppccaapp__ppeerrrroorr(()) may be called with _p
+       as an argument to fetch or display the error text.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_geterr(3PCAP), pcap_breakloop(3PCAP)
+
+
+
+                               24 December 2008               PCAP_LOOP(3PCAP)

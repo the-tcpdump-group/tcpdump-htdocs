@@ -1,0 +1,29 @@
+PCAP_LOOKUPDEV(3PCAP)                                    PCAP_LOOKUPDEV(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_lookupdev - find the default device on which to capture
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       cchhaarr eerrrrbbuuff[[PPCCAAPP__EERRRRBBUUFF__SSIIZZEE]];;
+
+       cchhaarr **ppccaapp__llooookkuuppddeevv((cchhaarr **eerrrrbbuuff));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__llooookkuuppddeevv(())  returns  a  pointer  to a string giving the name of a
+       network device suitable for use with ppccaapp__ccrreeaattee(()) and ppccaapp__aaccttiivvaattee(()),
+       or  with  ppccaapp__ooppeenn__lliivvee(()),  and with ppccaapp__llooookkuuppnneett(()).  If there is an
+       error, NNUULLLL is returned and _e_r_r_b_u_f is filled  in  with  an  appropriate
+       error  message.   _e_r_r_b_u_f  is  assumed  to  be  able  to  hold  at least
+       PPCCAAPP__EERRRRBBUUFF__SSIIZZEE chars.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
+       pcap_open_live(3PCAP), pcap_lookupnet(3PCAP)
+
+
+
+                                 5 April 2008            PCAP_LOOKUPDEV(3PCAP)

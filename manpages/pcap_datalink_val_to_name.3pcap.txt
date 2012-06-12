@@ -1,0 +1,26 @@
+PCAP_DATALINK_VAL_TO_NAME(3PCAP)              PCAP_DATALINK_VAL_TO_NAME(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_datalink_val_to_name,  pcap_datalink_val_to_description  -  get  a
+       name or description for a link-layer header type value
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp..hh>>
+
+       ccoonnsstt cchhaarr **ppccaapp__ddaattaalliinnkk__vvaall__ttoo__nnaammee((iinntt ddlltt));;
+       ccoonnsstt cchhaarr **ppccaapp__ddaattaalliinnkk__vvaall__ttoo__ddeessccrriippttiioonn((iinntt ddlltt));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__ddaattaalliinnkk__vvaall__ttoo__nnaammee(()) translates a link-layer header  type  value
+       to  the corresponding link-layer header type name.  NULL is returned on
+       failure.
+
+       ppccaapp__ddaattaalliinnkk__vvaall__ttoo__ddeessccrriippttiioonn(()) translates a link-layer header  type
+       value  to  a short description of that link-layer header type.  NULL is
+       returned on failure.
+
+
+
+                                22 August 2010PCAP_DATALINK_VAL_TO_NAME(3PCAP)

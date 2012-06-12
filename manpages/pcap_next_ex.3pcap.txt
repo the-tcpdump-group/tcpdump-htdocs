@@ -1,0 +1,57 @@
+PCAP_NEXT_EX(3PCAP)                                        PCAP_NEXT_EX(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_next_ex, pcap_next - read the next packet from a pcap_t
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__nneexxtt__eexx((ppccaapp__tt **pp,, ssttrruucctt ppccaapp__ppkktthhddrr ****ppkktt__hheeaaddeerr,,
+               ccoonnsstt uu__cchhaarr ****ppkktt__ddaattaa));;
+       ccoonnsstt uu__cchhaarr **ppccaapp__nneexxtt((ppccaapp__tt **pp,, ssttrruucctt ppccaapp__ppkktthhddrr **hh));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__nneexxtt__eexx(())  reads  the  next  packet  and returns a success/failure
+       indication.  If the packet  was  read  without  problems,  the  pointer
+       pointed  to  by  the  _p_k_t___h_e_a_d_e_r  argument  is  set  to  point  to  the
+       _p_c_a_p___p_k_t_h_d_r struct for the packet, and the pointer pointed  to  by  the
+       _p_k_t___d_a_t_a  argument  is  set  to  point  to the data in the packet.  The
+       _s_t_r_u_c_t _p_c_a_p___p_k_t_h_d_r and the packet data are not to be freed by the call-
+       er,  and  are  not  guaranteed  to  be  valid  after  the  next call to
+       ppccaapp__nneexxtt__eexx(()), ppccaapp__nneexxtt(()), ppccaapp__lloooopp(()), or  ppccaapp__ddiissppaattcchh(());  if  the
+       code needs them to remain valid, it must make a copy of them.
+
+       ppccaapp__nneexxtt(())  reads  the  next packet (by calling ppccaapp__ddiissppaattcchh(()) with a
+       _c_n_t of 1) and returns a _u___c_h_a_r pointer to the data in that packet.  The
+       packet  data is not to be freed by the caller, and is not guaranteed to
+       be  valid  after  the  next  call   to   ppccaapp__nneexxtt__eexx(()),   ppccaapp__nneexxtt(()),
+       ppccaapp__lloooopp(()),  or ppccaapp__ddiissppaattcchh(()); if the code needs it to remain valid,
+       it must make a copy of it.  The _p_c_a_p___p_k_t_h_d_r structure pointed to  by  _h
+       is filled in with the appropriate values for the packet.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__nneexxtt__eexx(())  returns 1 if the packet was read without problems, 0 if
+       packets are being read from a live capture, and the timeout expired, -1
+       if  an  error  occurred while reading the packet, and -2 if packets are
+       being read from a ``savefile'', and there are no more packets  to  read
+       from  the  savefile.  If -1 is returned, ppccaapp__ggeetteerrrr(()) or ppccaapp__ppeerrrroorr(())
+       may be called with _p as an argument to fetch or display the error text.
+
+       ppccaapp__nneexxtt(()) returns a pointer  to  the  packet  data  on  success,  and
+       returns  NNUULLLL  if  an error occurred, or if no packets were read from a
+       live capture (if, for example, they were discarded because they  didn't
+       pass the packet filter, or if, on platforms that support a read timeout
+       that starts before any packets arrive, the timeout expires  before  any
+       packets  arrive, or if the file descriptor for the capture device is in
+       non-blocking mode and no packets were available to be read), or  if  no
+       more  packets are available in a ``savefile.''  Unfortunately, there is
+       no way to determine whether an error occurred or not.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_geterr(3PCAP), pcap_dispatch(3PCAP)
+
+
+
+                                 5 April 2008              PCAP_NEXT_EX(3PCAP)

@@ -1,0 +1,43 @@
+PCAP_DUMP_OPEN(3PCAP)                                    PCAP_DUMP_OPEN(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_dump_open, pcap_dump_fopen - open a file to which to write packets
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       ppccaapp__dduummppeerr__tt **ppccaapp__dduummpp__ooppeenn((ppccaapp__tt **pp,, ccoonnsstt cchhaarr **ffnnaammee));;
+       ppccaapp__dduummppeerr__tt **ppccaapp__dduummpp__ffooppeenn((ppccaapp__tt **pp,, FFIILLEE **ffpp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__dduummpp__ooppeenn(())  is  called to open a ``savefile'' for writing.  _f_n_a_m_e
+       specifies the name of the file to open. The file  will  have  the  same
+       format  as those used by ttccppdduummpp(1) and ttccppsslliiccee(1).  The name "-" in a
+       synonym for ssttddoouutt.
+
+       ppccaapp__dduummpp__ffooppeenn(()) is called to write data to an  existing  open  stream
+       _f_p.  Note that on Windows, that stream should be opened in binary mode.
+
+       _p  is  a  capture or ``savefile'' handle returned by an earlier call to
+       ppccaapp__ccrreeaattee(()) and activated by an earlier call to  ppccaapp__aaccttiivvaattee(()),  or
+       returned  by  an earlier call to ppccaapp__ooppeenn__oofffflliinnee(()), ppccaapp__ooppeenn__lliivvee(()),
+       or ppccaapp__ooppeenn__ddeeaadd(()).  The link-layer type and snapshot  length  from  _p
+       are used as the link-layer type and snapshot length of the output file.
+
+RREETTUURRNN VVAALLUUEESS
+       A pointer to a ppccaapp__dduummppeerr__tt structure to use in subsequent ppccaapp__dduummpp(())
+       and ppccaapp__dduummpp__cclloossee(()) calls is returned on success.  NNUULLLL  is  returned
+       on failure.  If NNUULLLL is returned, ppccaapp__ggeetteerrrr((_p)) can be used to get the
+       error text.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_create(3PCAP),  pcap_activate(3PCAP),  pcap_open_off-
+       line(3PCAP),        pcap_open_live(3PCAP),       pcap_open_dead(3PCAP),
+       pcap_dump(3PCAP),  pcap_dump_close(3PCAP),  pcap_geterr(3PCAP),   pcap-
+       savefile(5)
+
+
+
+                                 5 April 2008            PCAP_DUMP_OPEN(3PCAP)

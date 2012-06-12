@@ -1,0 +1,64 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of PCAP_DATALINK_NAME_TO_VAL</TITLE>
+</HEAD><BODY>
+<H1>PCAP_DATALINK_NAME_TO_VAL</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2010<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_datalink_name_to_val - get the link-layer header type value
+corresponding to a header type name
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+</B>
+<B>int pcap_datalink_name_to_val(const char *name);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_datalink_name_to_val()</B>
+
+translates a link-layer header type name, which is a
+<B>DLT_</B>
+
+name with the
+<B>DLT_</B>
+
+removed, to the corresponding link-layer header type value.  The
+translation is case-insensitive.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_datalink_name_to_val()</B>
+
+returns 0 on success and -1 on failure.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 17:15:13 GMT, June 12, 2012
+</BODY>
+</HTML>

@@ -1,0 +1,31 @@
+PCAP_LOOKUPNET(3PCAP)                                    PCAP_LOOKUPNET(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_lookupnet - find the IPv4 network number and netmask for a device
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       cchhaarr eerrrrbbuuff[[PPCCAAPP__EERRRRBBUUFF__SSIIZZEE]];;
+
+       iinntt ppccaapp__llooookkuuppnneett((ccoonnsstt cchhaarr **ddeevviiccee,, bbppff__uu__iinntt3322 **nneettpp,,
+               bbppff__uu__iinntt3322 **mmaasskkpp,, cchhaarr **eerrrrbbuuff));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__llooookkuuppnneett(())  is used to determine the IPv4 network number and mask
+       associated with the network device _d_e_v_i_c_e.  Both  _n_e_t_p  and  _m_a_s_k_p  are
+       _b_p_f___u___i_n_t_3_2 pointers.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__llooookkuuppnneett(())  returns  0  on  success  and -1 on failure.  If -1 is
+       returned, _e_r_r_b_u_f is  filled  in  with  an  appropriate  error  message.
+       _e_r_r_b_u_f is assumed to be able to hold at least PPCCAAPP__EERRRRBBUUFF__SSIIZZEE chars.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP)
+
+
+
+                                 5 April 2008            PCAP_LOOKUPNET(3PCAP)

@@ -1,0 +1,63 @@
+PCAP_STATS(3PCAP)                                            PCAP_STATS(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_stats - get capture statistics
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__ssttaattss((ppccaapp__tt **pp,, ssttrruucctt ppccaapp__ssttaatt **ppss));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__ssttaattss(())  fills  in  the  ssttrruucctt ppccaapp__ssttaatt pointed to by its second
+       argument.  The values represent packet statistics from the start of the
+       run to the time of the call.
+
+       ppccaapp__ssttaattss(())  is supported only on live captures, not on ``savefiles'';
+       no statistics are stored in ``savefiles'', so no statistics are  avail-
+       able when reading from a ``savefile''.
+
+       A ssttrruucctt ppccaapp__ssttaatt has the following members:
+
+              ppss__rreeccvv
+                     number of packets received;
+
+              ppss__ddrroopp
+                     number  of  packets  dropped because there was no room in
+                     the operating system's buffer when they arrived,  because
+                     packets weren't being read fast enough;
+
+              ppss__iiffddrroopp
+                     number of packets dropped by the network interface or its
+                     driver.
+
+       The statistics do not behave the same way on  all  platforms.   ppss__rreeccvv
+       might  count  packets whether they passed any filter set with ppccaapp__sseett--
+       ffiilltteerr(3PCAP) or not, or it might count only packets that pass the fil-
+       ter.   It also might, or might not, count packets dropped because there
+       was no room  in  the  operating  system's  buffer  when  they  arrived.
+       ppss__ddrroopp  is  not  available  on  all platforms; it is zero on platforms
+       where it's not available.  If packet  filtering  is  done  in  libpcap,
+       rather  than in the operating system, it would count packets that don't
+       pass the filter.  Both ppss__rreeccvv and ppss__ddrroopp might, or might  not,  count
+       packets not yet read from the operating system and thus not yet seen by
+       the application.  ppss__iiffddrroopp might, or might  not,  be  implemented;  if
+       it's  zero,  that might mean that no packets were dropped by the inter-
+       face, or it might mean that the statistic is unavailable, so it  should
+       not  be  treated  as  an indication that the interface did not drop any
+       packets.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__ssttaattss(()) returns 0 on success and returns -1 if there is  an  error
+       or  if  _p  doesn't  support  packet  statistics.   If  -1  is returned,
+       ppccaapp__ggeetteerrrr(()) or ppccaapp__ppeerrrroorr(()) may be called with _p as an  argument  to
+       fetch or display the error text.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_geterr(3PCAP)
+
+
+
+                               7 September 2009              PCAP_STATS(3PCAP)

@@ -1,0 +1,24 @@
+PCAP_DUMP_FTELL(3PCAP)                                  PCAP_DUMP_FTELL(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_dump_ftell  -  get  the  current  file offset for a savefile being
+       written
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       lloonngg ppccaapp__dduummpp__fftteellll((ppccaapp__dduummppeerr__tt **pp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__dduummpp__fftteellll(()) returns the current file  position  for  the  ``save-
+       file'',  representing  the  number of bytes written by ppccaapp__dduummpp__ooppeenn(())
+       and ppccaapp__dduummpp(()).  -1 is returned on error.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)
+
+
+
+                                 5 April 2008           PCAP_DUMP_FTELL(3PCAP)

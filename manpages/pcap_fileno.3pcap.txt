@@ -1,0 +1,32 @@
+PCAP_FILENO(3PCAP)                                          PCAP_FILENO(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_fileno - get the file descriptor for a live capture
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__ffiilleennoo((ppccaapp__tt **pp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       If  _p  refers  to  a  network device that was opened for a live capture
+       using a combination of  ppccaapp__ccrreeaattee(())  and  ppccaapp__aaccttiivvaattee(()),  or  using
+       ppccaapp__ooppeenn__lliivvee(()),  ppccaapp__ffiilleennoo(()) returns the file descriptor from which
+       captured packets are read.
+
+       If _p refers to a ``savefile'' that was opened using functions  such  as
+       ppccaapp__ooppeenn__oofffflliinnee(())  or  ppccaapp__ffooppeenn__oofffflliinnee(()), a ``dead'' ppccaapp__tt opened
+       using ppccaapp__ooppeenn__ddeeaadd(()), or a ppccaapp__tt that was created with ppccaapp__ccrreeaattee(())
+       but  that  has  not yet been activated with ppccaapp__aaccttiivvaattee(()), it returns
+       -1.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
+       pcap_open_live(3PCAP),     pcap_open_offline(3PCAP),    pcap_fopen_off-
+       line(3PCAP), pcap_open_dead(3PCAP)
+
+
+
+                                 5 April 2008               PCAP_FILENO(3PCAP)

@@ -1,0 +1,69 @@
+PCAP_GET_SELECTABLE_FD(3PCAP)                    PCAP_GET_SELECTABLE_FD(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_get_selectable_fd  - get a file descriptor on which a select() can
+       be done for a live capture
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__ggeett__sseelleeccttaabbllee__ffdd((ppccaapp__tt **pp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__ggeett__sseelleeccttaabbllee__ffdd(()) returns, on UNIX, a file descriptor number for
+       a  file descriptor on which one can do a sseelleecctt(()) or ppoollll(()) to wait for
+       it to be possible to read packets without blocking, if such a  descrip-
+       tor  exists, or -1, if no such descriptor exists.  Some network devices
+       opened   with    ppccaapp__ccrreeaattee(())    and    ppccaapp__aaccttiivvaattee(()),    or    with
+       ppccaapp__ooppeenn__lliivvee(()), do not support sseelleecctt(()) or ppoollll(()) (for example, regu-
+       lar network devices on FreeBSD 4.3 and 4.4, and Endace DAG devices), so
+       -1 is returned for those devices.
+
+       Note that in:
+
+              FreeBSD prior to FreeBSD 4.6;
+
+              NetBSD prior to NetBSD 3.0;
+
+              OpenBSD prior to OpenBSD 2.4;
+
+              Mac OS X prior to Mac OS X 10.7;
+
+       sseelleecctt(())   and   ppoollll(())   do   not   work  correctly  on  BPF  devices;
+       ppccaapp__ggeett__sseelleeccttaabbllee__ffdd(()) will return a file descriptor on most of those
+       versions  (the  exceptions  being  FreeBSD  4.3  and 4.4), but a simple
+       sseelleecctt(()) or ppoollll(()) will not indicate that the  descriptor  is  readable
+       until  a  full  buffer's worth of packets is received, even if the read
+       timeout expires before then.  To work around this, an application  that
+       uses  sseelleecctt(())  or  ppoollll(())  to  wait for packets to arrive must put the
+       ppccaapp__tt in non-blocking mode, and must  arrange  that  the  sseelleecctt(())  or
+       ppoollll(())  have a timeout less than or equal to the read timeout, and must
+       try to read packets after that timeout expires, regardless  of  whether
+       sseelleecctt(()) or ppoollll(()) indicated that the file descriptor for the ppccaapp__tt is
+       ready to be read or not.  (That workaround will not work in FreeBSD 4.3
+       and  later; however, in FreeBSD 4.6 and later, sseelleecctt(()) and ppoollll(()) work
+       correctly on BPF devices, so the workaround isn't  necessary,  although
+       it does no harm.)
+
+       Note  also that ppoollll(()) doesn't work on character special files, includ-
+       ing BPF devices, in Mac OS X 10.4 and 10.5, so, while sseelleecctt(())  can  be
+       used  on  the  descriptor  returned by ppccaapp__ggeett__sseelleeccttaabbllee__ffdd(()), ppoollll(())
+       cannot be used on it those versions of Mac OS X.   Kqueues  also  don't
+       work  on  that  descriptor.   ppoollll(()),  but  not  kqueues,  work on that
+       descriptor in Mac OS X releases prior to 10.4; ppoollll(()) and kqueues  work
+       on that descriptor in Mac OS X 10.6 and later.
+
+       ppccaapp__ggeett__sseelleeccttaabbllee__ffdd(()) is not available on Windows.
+
+RREETTUURRNN VVAALLUUEE
+       A  selectable  file descriptor is returned if one exists; otherwise, -1
+       is returned.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), select(2), poll(2)
+
+
+
+                                 5 April 2008    PCAP_GET_SELECTABLE_FD(3PCAP)

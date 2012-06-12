@@ -1,0 +1,31 @@
+PCAP_FILE(3PCAP)                                              PCAP_FILE(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_file - get the standard I/O stream for a savefile being read
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       FFIILLEE **ppccaapp__ffiillee((ppccaapp__tt **pp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__ffiillee(())  returns  the standard I/O stream of the ``savefile,'' if a
+       ``savefile'' was opened with ppccaapp__ooppeenn__oofffflliinnee(()), or NULL, if a network
+       device  was  opened  with  ppccaapp__ccrreeaattee(())  and  ppccaapp__aaccttiivvaattee(()), or with
+       ppccaapp__ooppeenn__lliivvee(()).
+
+       Note that the Packet Capture library is usually built with  large  file
+       support,  so the standard I/O stream of the ``savefile'' might refer to
+       a file larger than  2  gigabytes;  applications  that  use  ppccaapp__ffiillee(())
+       should,  if  possible, use calls that support large files on the return
+       value of ppccaapp__ffiillee(()) or the value returned by ffiilleennoo(()) when passed  the
+       return value of ppccaapp__ffiillee(()).
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_open_offline(3PCAP)
+
+
+
+                                 5 April 2008                 PCAP_FILE(3PCAP)

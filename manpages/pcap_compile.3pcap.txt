@@ -1,0 +1,39 @@
+PCAP_COMPILE(3PCAP)                                        PCAP_COMPILE(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_compile - compile a filter expression
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__ccoommppiillee((ppccaapp__tt **pp,, ssttrruucctt bbppff__pprrooggrraamm **ffpp,,
+               ccoonnsstt cchhaarr **ssttrr,, iinntt ooppttiimmiizzee,, bbppff__uu__iinntt3322 nneettmmaasskk));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__ccoommppiillee(()) is used to compile the string _s_t_r into a filter program.
+       See ppccaapp--ffiilltteerr(7) for the syntax of that string.  _p_r_o_g_r_a_m is a pointer
+       to  a  _b_p_f___p_r_o_g_r_a_m struct and is filled in by ppccaapp__ccoommppiillee(()).  _o_p_t_i_m_i_z_e
+       controls whether optimization on the resulting code is performed.  _n_e_t_-
+       _m_a_s_k  specifies  the  IPv4  netmask of the network on which packets are
+       being captured; it is  used  only  when  checking  for  IPv4  broadcast
+       addresses  in  the  filter  program.   If the netmask of the network on
+       which packets are being captured isn't known  to  the  program,  or  if
+       packets are being captured on the Linux "any" pseudo-interface that can
+       capture on more than one network, a value of  PCAP_NETMASK_UNKNOWN  can
+       be  supplied;  tests for IPv4 broadcast addresses will fail to compile,
+       but all other tests in the filter program will be OK.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__ccoommppiillee(()) returns 0 on success  and  -1  on  failure.   If  -1  is
+       returned,  ppccaapp__ggeetteerrrr(())  or  ppccaapp__ppeerrrroorr(())  may be called with _p as an
+       argument to fetch or display the error text.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP),        pcap_setfilter(3PCAP),        pcap_freecode(3PCAP),
+       pcap_geterr(3PCAP), pcap-filter(7)
+
+
+
+                                 5 April 2008              PCAP_COMPILE(3PCAP)

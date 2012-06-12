@@ -1,0 +1,177 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of PCAP_GET_SELECTABLE_FD</TITLE>
+</HEAD><BODY>
+<H1>PCAP_GET_SELECTABLE_FD</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_get_selectable_fd - get a file descriptor on which a select() can
+be done for a live capture
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+</B>
+<B>int pcap_get_selectable_fd(pcap_t *p);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_get_selectable_fd()</B>
+
+returns, on UNIX, a file descriptor number for a file descriptor on
+which one can
+do a
+<B>select()</B>
+
+or
+<B>poll()</B>
+
+to wait for it to be possible to read packets without blocking, if such
+a descriptor exists, or -1, if no such descriptor exists.  Some network
+devices opened with
+<B>pcap_create()</B>
+
+and
+<B>pcap_activate()</B>,
+
+or with
+<B>pcap_open_live()</B>,
+
+do not support
+<B>select()</B>
+
+or
+<B>poll()</B>
+
+(for example, regular network devices on FreeBSD 4.3 and 4.4, and Endace
+DAG devices), so -1 is returned for those devices.
+<P>
+
+Note that in:
+<DL COMPACT>
+<DT><DD>
+FreeBSD prior to FreeBSD 4.6;
+<DT><DD>
+NetBSD prior to NetBSD 3.0;
+<DT><DD>
+OpenBSD prior to OpenBSD 2.4;
+<DT><DD>
+Mac OS X prior to Mac OS X 10.7;
+</DL>
+<P>
+
+<B>select()</B>
+
+and
+<B>poll()</B>
+
+do not work correctly on BPF devices;
+<B>pcap_get_selectable_fd()</B>
+
+will return a file descriptor on most of those versions (the exceptions
+being FreeBSD 4.3 and 4.4), but a simple
+<B>select()</B>
+
+or
+<B>poll()</B>
+
+will not indicate that the descriptor is readable until a full buffer's
+worth of packets is received, even if the read timeout expires before
+then.  To work around this, an application that uses
+<B>select()</B>
+
+or
+<B>poll()</B>
+
+to wait for packets to arrive must put the
+<B>pcap_t</B>
+
+in non-blocking mode, and must arrange that the
+<B>select()</B>
+
+or
+<B>poll()</B>
+
+have a timeout less than or equal to the read timeout,
+and must try to read packets after that timeout expires, regardless of
+whether
+<B>select()</B>
+
+or
+<B>poll()</B>
+
+indicated that the file descriptor for the
+<B>pcap_t</B>
+
+is ready to be read or not.  (That workaround will not work in FreeBSD
+4.3 and later; however, in FreeBSD 4.6 and later,
+<B>select()</B>
+
+and
+<B>poll()</B>
+
+work correctly on BPF devices, so the workaround isn't necessary,
+although it does no harm.)
+<P>
+
+Note also that
+<B>poll()</B>
+
+doesn't work on character special files, including BPF devices, in Mac
+OS X 10.4 and 10.5, so, while
+<B>select()</B>
+
+can be used on the descriptor returned by
+<B>pcap_get_selectable_fd()</B>,
+
+<B>poll()</B>
+
+cannot be used on it those versions of Mac OS X.  Kqueues also don't
+work on that descriptor.
+<B>poll()</B>,
+
+but not kqueues, work on that descriptor in Mac OS X releases prior to
+10.4;
+<B>poll()</B>
+
+and kqueues work on that descriptor in Mac OS X 10.6 and later.
+<P>
+
+<B>pcap_get_selectable_fd()</B>
+
+is not available on Windows.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+A selectable file descriptor is returned if one exists; otherwise, -1
+is returned.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP), <A HREF="/cgi-bin/man/man2html?2+select">select</A>(2), <A HREF="/cgi-bin/man/man2html?2+poll">poll</A>(2)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 17:15:13 GMT, June 12, 2012
+</BODY>
+</HTML>

@@ -1,0 +1,135 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of PCAP_STATS</TITLE>
+</HEAD><BODY>
+<H1>PCAP_STATS</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 7 September 2009<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_stats - get capture statistics
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+</B>
+<B>int pcap_stats(pcap_t *p, struct pcap_stat *ps);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_stats()</B>
+
+fills in the
+<B>struct pcap_stat</B>
+
+pointed to by its second argument.  The values represent
+packet statistics from the start of the run to the time of the call.
+<P>
+
+<B>pcap_stats()</B>
+
+is supported only on live captures, not on ``savefiles''; no statistics
+are stored in ``savefiles'', so no statistics are available when reading
+from a ``savefile''.
+<P>
+
+A
+<B>struct pcap_stat</B>
+
+has the following members:
+<DL COMPACT><DT><DD>
+<DL COMPACT>
+<DT><B>ps_recv</B>
+
+<DD>
+number of packets received;
+<DT><B>ps_drop</B>
+
+<DD>
+number of packets dropped because there was no room in the operating
+system's buffer when they arrived, because packets weren't being read
+fast enough;
+<DT><B>ps_ifdrop</B>
+
+<DD>
+number of packets dropped by the network interface or its driver.
+</DL>
+</DL>
+
+<P>
+
+The statistics do not behave the same way on all platforms.
+<B>ps_recv</B>
+
+might count packets whether they passed any filter set with
+<B>pcap_setfilter</B>(3PCAP)
+
+or not, or it might count only packets that pass the filter.
+It also might, or might not, count packets dropped because there was no
+room in the operating system's buffer when they arrived.
+<B>ps_drop</B>
+
+is not available on all platforms; it is zero on platforms where it's
+not available.  If packet filtering is done in libpcap, rather than in
+the operating system, it would count packets that don't pass the filter.
+Both
+<B>ps_recv</B>
+
+and
+<B>ps_drop</B>
+
+might, or might not, count packets not yet read from the operating
+system and thus not yet seen by the application.
+<B>ps_ifdrop</B>
+
+might, or might not, be implemented; if it's zero, that might mean that
+no packets were dropped by the interface, or it might mean that the
+statistic is unavailable, so it should not be treated as an indication
+that the interface did not drop any packets.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_stats()</B>
+
+returns 0 on success and returns -1 if there is an error or if
+<I>p</I>
+
+doesn't support packet statistics.
+If -1 is returned,
+<B>pcap_geterr()</B>
+
+or
+<B>pcap_perror()</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display the error text.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP), pcap_geterr(3PCAP)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 17:15:13 GMT, June 12, 2012
+</BODY>
+</HTML>

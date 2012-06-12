@@ -1,0 +1,37 @@
+PCAP_LIST_DATALINKS(3PCAP)                          PCAP_LIST_DATALINKS(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_list_datalinks,  pcap_free_datalinks  -  get  a list of link-layer
+       header types supported by a capture device, and free that list
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__lliisstt__ddaattaalliinnkkss((ppccaapp__tt **pp,, iinntt ****ddlltt__bbuuff));;
+       vvooiidd ppccaapp__ffrreeee__ddaattaalliinnkkss((iinntt **ddlltt__lliisstt));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__lliisstt__ddaattaalliinnkkss(()) is used to get a list of the supported link-layer
+       header  types  of  the  interface  associated with the pcap descriptor.
+       ppccaapp__lliisstt__ddaattaalliinnkkss(()) allocates an array to  hold  the  list  and  sets
+       _*_d_l_t___b_u_f to point to that array.
+
+       The    caller    is    responsible   for   freeing   the   array   with
+       ppccaapp__ffrreeee__ddaattaalliinnkkss(()), which frees the list of link-layer header  types
+       pointed to by _d_l_t___l_i_s_t.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__lliisstt__ddaattaalliinnkkss(())  returns the number of link-layer header types in
+       the  array  on  success  and  -1  on  failure.   If  -1  is   returned,
+       ppccaapp__ggeetteerrrr(())  or  ppccaapp__ppeerrrroorr(()) may be called with _p as an argument to
+       fetch or display the error text.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP),   pcap_geterr(3PCAP),    pcap_datalink_val_to_name(3PCAP),
+       pcap-linktype(7)
+
+
+
+                                22 August 2010      PCAP_LIST_DATALINKS(3PCAP)

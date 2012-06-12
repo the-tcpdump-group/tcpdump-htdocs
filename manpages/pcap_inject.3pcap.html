@@ -1,0 +1,122 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of PCAP_INJECT</TITLE>
+</HEAD><BODY>
+<H1>PCAP_INJECT</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_inject, pcap_sendpacket - transmit a packet
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+</B>
+<B>int pcap_inject(pcap_t *p, const void *buf, size_t size);
+int pcap_sendpacket(pcap_t *p, const u_char *buf, int size);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_inject()</B>
+
+sends a raw packet through the network interface;
+<I>buf</I>
+
+points to the data of the packet, including the link-layer header, and
+<I>size</I>
+
+is the number of bytes in the packet.
+<P>
+
+Note that, even if you successfully open the network interface, you
+might not have permission to send packets on it, or it might not support
+sending packets; as
+<I>pcap_open_live()</I>
+
+doesn't have a flag to indicate whether to open for capturing, sending,
+or capturing and sending, you cannot request an open that supports
+sending and be notified at open time whether sending will be possible.
+Note also that some devices might not support sending packets.
+<P>
+
+Note that, on some platforms, the link-layer header of the packet that's
+sent might not be the same as the link-layer header of the packet
+supplied to
+<B>pcap_inject()</B>,
+
+as the source link-layer address, if the header contains such an
+address, might be changed to be the address assigned to the interface on
+which the packet it sent, if the platform doesn't support sending
+completely raw and unchanged packets.  Even worse, some drivers on some
+platforms might change the link-layer type field to whatever value
+libpcap used when attaching to the device, even on platforms that
+<I>do</I>
+
+nominally support sending completely raw and unchanged packets.
+<P>
+
+<B>pcap_sendpacket()</B>
+
+is like
+<B>pcap_inject()</B>,
+
+but it returns 0 on success, rather than returning the number of bytes
+written.
+(<B>pcap_inject()</B>
+
+comes from OpenBSD;
+<B>pcap_sendpacket()</B>
+
+comes from WinPcap.  Both are provided for compatibility.)
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_inject()</B>
+
+returns the number of bytes written on success and -1 on failure.
+<P>
+
+<B>pcap_sendpacket()</B>
+
+returns 0 on success and -1 on failure.
+<P>
+
+If -1 is returned,
+<B>pcap_geterr()</B>
+
+or
+<B>pcap_perror()</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display the error text.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP), pcap_geterr(3PCAP)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 17:15:13 GMT, June 12, 2012
+</BODY>
+</HTML>

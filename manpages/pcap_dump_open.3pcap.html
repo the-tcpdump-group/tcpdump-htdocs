@@ -1,0 +1,120 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of PCAP_DUMP_OPEN</TITLE>
+</HEAD><BODY>
+<H1>PCAP_DUMP_OPEN</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_dump_open, pcap_dump_fopen - open a file to which to write packets
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+</B>
+<B>pcap_dumper_t *pcap_dump_open(pcap_t *p, const char *fname);
+pcap_dumper_t *pcap_dump_fopen(pcap_t *p, FILE *fp);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_dump_open()</B>
+
+is called to open a ``savefile'' for writing.
+<I>fname</I>
+
+specifies the name of the file to open. The file will have
+the same format as those used by
+<B><A HREF="/cgi-bin/man/man2html?1+tcpdump">tcpdump</A></B>(1)
+
+and
+<B><A HREF="/cgi-bin/man/man2html?1+tcpslice">tcpslice</A></B>(1).
+
+The name &quot;-&quot; in a synonym
+for
+<B>stdout</B>.
+
+<P>
+
+<B>pcap_dump_fopen()</B>
+
+is called to write data to an existing open stream
+<I>fp</I>.
+
+Note that on Windows, that stream should be opened in binary mode.
+<P>
+
+<I>p</I>
+
+is a capture or ``savefile'' handle returned by an earlier call to
+<B>pcap_create()</B>
+
+and activated by an earlier call to
+<B>pcap_activate()</B>,
+
+or returned by an earlier call to
+<B>pcap_open_offline()</B>,
+
+<B>pcap_open_live()</B>,
+
+or
+<B>pcap_open_dead()</B>.
+
+The link-layer type and snapshot length from
+<I>p</I>
+
+are used as the link-layer type and snapshot length of the output file.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUES</H2>
+
+A pointer to a
+<B>pcap_dumper_t</B>
+
+structure to use in subsequent
+<B>pcap_dump()</B>
+
+and
+<B>pcap_dump_close()</B>
+
+calls is returned on success.
+<B>NULL</B>
+
+is returned on failure.
+If
+<B>NULL</B>
+
+is returned,
+<B>pcap_geterr(</B><I>p</I><B>)</B>
+
+can be used to get the error text.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP),
+pcap_open_offline(3PCAP), pcap_open_live(3PCAP), pcap_open_dead(3PCAP),
+pcap_dump(3PCAP), pcap_dump_close(3PCAP), pcap_geterr(3PCAP),
+<A HREF="/cgi-bin/man/man2html?5+pcap-savefile">pcap-savefile</A>(5)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUES</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 17:15:13 GMT, June 12, 2012
+</BODY>
+</HTML>

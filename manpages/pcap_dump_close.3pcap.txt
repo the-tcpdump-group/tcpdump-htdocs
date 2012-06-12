@@ -1,0 +1,21 @@
+PCAP_DUMP_CLOSE(3PCAP)                                  PCAP_DUMP_CLOSE(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_dump_close - close a savefile being written to
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       vvooiidd ppccaapp__dduummpp__cclloossee((ppccaapp__dduummppeerr__tt **pp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__dduummpp__cclloossee(()) closes the ``savefile.''
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)
+
+
+
+                                 5 April 2008           PCAP_DUMP_CLOSE(3PCAP)

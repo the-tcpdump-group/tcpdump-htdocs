@@ -1,0 +1,22 @@
+PCAP_CLOSE(3PCAP)                                            PCAP_CLOSE(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_close - close a capture device or savefile
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       vvooiidd ppccaapp__cclloossee((ppccaapp__tt **pp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__cclloossee(())  closes  the  files  associated  with  _p  and  deallocates
+       resources.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP)
+
+
+
+                                 5 April 2008                PCAP_CLOSE(3PCAP)

@@ -1,0 +1,42 @@
+PCAP_SETNONBLOCK(3PCAP)                                PCAP_SETNONBLOCK(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_setnonblock, pcap_getnonblock - set or get the state of non-block-
+       ing mode on a capture device
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       cchhaarr eerrrrbbuuff[[PPCCAAPP__EERRRRBBUUFF__SSIIZZEE]];;
+
+       iinntt ppccaapp__sseettnnoonnbblloocckk((ppccaapp__tt **pp,, iinntt nnoonnbblloocckk,, cchhaarr **eerrrrbbuuff));;
+       iinntt ppccaapp__ggeettnnoonnbblloocckk((ppccaapp__tt **pp,, cchhaarr **eerrrrbbuuff));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__sseettnnoonnbblloocckk(()) puts a capture handle into ``non-blocking'' mode, or
+       takes  it  out  of ``non-blocking'' mode, depending on whether the _n_o_n_-
+       _b_l_o_c_k argument is non-zero or zero.  It has no effect on ``savefiles''.
+       If  there  is  an error, -1 is returned and _e_r_r_b_u_f is filled in with an
+       appropriate error message; otherwise, 0 is returned.   In  ``non-block-
+       ing''  mode,  an  attempt  to  read  from  the  capture descriptor with
+       ppccaapp__ddiissppaattcchh(()) will, if no packets are currently available to be read,
+       return  0  immediately  rather  than  blocking  waiting  for packets to
+       arrive.  ppccaapp__lloooopp(()) and ppccaapp__nneexxtt(()) will not work in  ``non-blocking''
+       mode.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__ggeettnnoonnbblloocckk(())  returns  the  current ``non-blocking'' state of the
+       capture descriptor; it always returns 0 on ``savefiles''.  If there  is
+       an  error,  -1  is returned and _e_r_r_b_u_f is filled in with an appropriate
+       error message.
+
+       _e_r_r_b_u_f is assumed to be able to hold at least PPCCAAPP__EERRRRBBUUFF__SSIIZZEE chars.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_loop(3PCAP), pcap_next_ex(3PCAP), pcap_geterr(3PCAP)
+
+
+
+                                 5 April 2008          PCAP_SETNONBLOCK(3PCAP)

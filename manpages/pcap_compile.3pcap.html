@@ -1,0 +1,96 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of PCAP_COMPILE</TITLE>
+</HEAD><BODY>
+<H1>PCAP_COMPILE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_compile - compile a filter expression
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+</B>
+<B>int pcap_compile(pcap_t *p, struct bpf_program *fp,
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const char *str, int optimize, bpf_u_int32 netmask);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_compile()</B>
+
+is used to compile the string
+<I>str</I>
+
+into a filter program.  See
+<B><A HREF="/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A></B>(7)
+
+for the syntax of that string.
+<I>program</I>
+
+is a pointer to a
+<I>bpf_program</I>
+
+struct and is filled in by
+<B>pcap_compile()</B>.
+
+<I>optimize</I>
+
+controls whether optimization on the resulting code is performed.
+<I>netmask</I>
+
+specifies the IPv4 netmask of the network on which packets are being
+captured; it is used only when checking for IPv4 broadcast addresses in
+the filter program.  If the netmask of the network on which packets are
+being captured isn't known to the program, or if packets are being
+captured on the Linux &quot;any&quot; pseudo-interface that can capture on more
+than one network, a value of PCAP_NETMASK_UNKNOWN can be supplied; tests
+for IPv4 broadcast addresses will fail to compile, but all other tests in
+the filter program will be OK.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_compile()</B>
+
+returns 0 on success and -1 on failure.
+If -1 is returned,
+<B>pcap_geterr()</B>
+
+or
+<B>pcap_perror()</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display the error text.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP), pcap_setfilter(3PCAP), pcap_freecode(3PCAP),
+pcap_geterr(3PCAP), <A HREF="/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A>(7)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 17:15:13 GMT, June 12, 2012
+</BODY>
+</HTML>

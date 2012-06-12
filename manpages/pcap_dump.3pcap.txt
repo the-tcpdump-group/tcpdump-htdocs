@@ -1,0 +1,26 @@
+PCAP_DUMP(3PCAP)                                              PCAP_DUMP(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_dump - write a packet to a capture file
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       vvooiidd ppccaapp__dduummpp((uu__cchhaarr **uusseerr,, ssttrruucctt ppccaapp__ppkktthhddrr **hh,,
+               uu__cchhaarr **sspp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__dduummpp(())   outputs   a   packet  to  the  ``savefile''  opened  with
+       ppccaapp__dduummpp__ooppeenn(()).  Note that its calling arguments are suitable for use
+       with  ppccaapp__ddiissppaattcchh(())  or  ppccaapp__lloooopp(()).   If  called directly, the _u_s_e_r
+       parameter is of type ppccaapp__dduummppeerr__tt as returned by ppccaapp__dduummpp__ooppeenn(()).
+
+SSEEEE AALLSSOO
+       pcap(3PCAP),        pcap_dump_open(3PCAP),        pcap_dispatch(3PCAP),
+       pcap_loop(3PCAP)
+
+
+
+                                 5 April 2008                 PCAP_DUMP(3PCAP)

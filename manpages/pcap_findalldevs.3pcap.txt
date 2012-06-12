@@ -1,0 +1,103 @@
+PCAP_FINDALLDEVS(3PCAP)                                PCAP_FINDALLDEVS(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_findalldevs, pcap_freealldevs - get a list of capture devices, and
+       free that list
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       cchhaarr eerrrrbbuuff[[PPCCAAPP__EERRRRBBUUFF__SSIIZZEE]];;
+
+       iinntt ppccaapp__ffiinnddaallllddeevvss((ppccaapp__iiff__tt ****aallllddeevvsspp,, cchhaarr **eerrrrbbuuff));;
+       vvooiidd ppccaapp__ffrreeeeaallllddeevvss((ppccaapp__iiff__tt **aallllddeevvss));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__ffiinnddaallllddeevvss(()) constructs a list of network  devices  that  can  be
+       opened with ppccaapp__ccrreeaattee(()) and ppccaapp__aaccttiivvaattee(()) or with ppccaapp__ooppeenn__lliivvee(()).
+       (Note that there may be network devices that cannot be  opened  by  the
+       process  calling ppccaapp__ffiinnddaallllddeevvss(()), because, for example, that process
+       does not have sufficient privileges to open them for capturing; if  so,
+       those devices will not appear on the list.)  If ppccaapp__ffiinnddaallllddeevvss(()) suc-
+       ceeds, the pointer pointed to by _a_l_l_d_e_v_s_p is set to point to the  first
+       element  of the list, or to NNUULLLL if no devices were found (this is con-
+       sidered success).  Each element of the list is of type  ppccaapp__iiff__tt,  and
+       has the following members:
+
+              nneexxtt   if  not  NNUULLLL, a pointer to the next element in the list;
+                     NNUULLLL for the last element of the list
+
+              nnaammee   a pointer to a string giving a name  for  the  device  to
+                     pass to ppccaapp__ooppeenn__lliivvee(())
+
+              ddeessccrriippttiioonn
+                     if  not  NNUULLLL, a pointer to a string giving a human-read-
+                     able description of the device
+
+              aaddddrreesssseess
+                     a pointer to the first  element  of  a  list  of  network
+                     addresses  for  the  device, or NNUULLLL if the device has no
+                     addresses
+
+              ffllaaggss  device flags:
+
+                     PPCCAAPP__IIFF__LLOOOOPPBBAACCKK
+                            set if the device is a loopback interface
+
+       Each element of the list of addresses is of type ppccaapp__aaddddrr__tt,  and  has
+       the following members:
+
+              nneexxtt   if  not  NNUULLLL, a pointer to the next element in the list;
+                     NNUULLLL for the last element of the list
+
+              aaddddrr   a pointer to a ssttrruucctt ssoocckkaaddddrr containing an address
+
+              nneettmmaasskk
+                     if not NNUULLLL, a pointer to a ssttrruucctt ssoocckkaaddddrr that contains
+                     the  netmask  corresponding  to the address pointed to by
+                     aaddddrr
+
+              bbrrooaaddaaddddrr
+                     if not NNUULLLL, a pointer to a ssttrruucctt ssoocckkaaddddrr that contains
+                     the   broadcast  address  corresponding  to  the  address
+                     pointed to by aaddddrr; may be null  if  the  device  doesn't
+                     support broadcasts
+
+              ddssttaaddddrr
+                     if not NNUULLLL, a pointer to a ssttrruucctt ssoocckkaaddddrr that contains
+                     the destination  address  corresponding  to  the  address
+                     pointed  to  by  aaddddrr;  may be null if the device isn't a
+                     point-to-point interface
+
+       Note that the  addresses  in  the  list  of  addresses  might  be  IPv4
+       addresses, IPv6 addresses, or some other type of addresses, so you must
+       check the ssaa__ffaammiillyy member of the ssttrruucctt ssoocckkaaddddrr  before  interpreting
+       the  contents  of the address; do not assume that the addresses are all
+       IPv4 addresses, or even all IPv4 or  IPv6  addresses.   IPv4  addresses
+       have  the  value AAFF__IINNEETT, IPv6 addresses have the value AAFF__IINNEETT66 (which
+       older operating systems that don't support IPv6 might not define),  and
+       other  addresses  have  other  values.   Whether  other  addresses  are
+       returned, and what types they might have  is  platform-dependent.   For
+       IPv4 addresses, the ssttrruucctt ssoocckkaaddddrr pointer can be interpreted as if it
+       pointed to a ssttrruucctt ssoocckkaaddddrr__iinn; for IPv6 addresses, it can  be  inter-
+       preted as if it pointed to a ssttrruucctt ssoocckkaaddddrr__iinn66.
+
+       The  list  of devices must be freed with ppccaapp__ffrreeeeaallllddeevvss(()), whch frees
+       the list pointed to by _a_l_l_d_e_v_s.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__ffiinnddaallllddeevvss(()) returns 0 on success and -1  on  failure;  as  indi-
+       cated,  finding  no devices is considered success, rather than failure,
+       so 0 will be returned in that case.   If  -1  is  returned,  _e_r_r_b_u_f  is
+       filled  in  with an appropriate error message.  _e_r_r_b_u_f is assumed to be
+       able to hold at least PPCCAAPP__EERRRRBBUUFF__SSIIZZEE chars.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
+       pcap_open_live(3PCAP)
+
+
+
+                                22 August 2010         PCAP_FINDALLDEVS(3PCAP)

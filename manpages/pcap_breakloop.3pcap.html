@@ -1,0 +1,138 @@
+Content-type: text/html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD><TITLE>Man page of PCAP_BREAKLOOP</TITLE>
+</HEAD><BODY>
+<H1>PCAP_BREAKLOOP</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_breakloop - force a pcap_dispatch() or pcap_loop() call to return
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+</B>
+<B>void pcap_breakloop(pcap_t *);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_breakloop()</B>
+
+sets a flag that will force
+<B>pcap_dispatch()</B>
+
+or
+<B>pcap_loop()</B>
+
+to return rather than looping; they will return the number of packets
+that have been processed so far, or -2 if no packets have been
+processed so far.
+<P>
+
+This routine is safe to use inside a signal handler on UNIX or a console
+control handler on Windows, as it merely sets a flag that is checked
+within the loop.
+<P>
+
+The flag is checked in loops reading packets from the OS - a signal by
+itself will not necessarily terminate those loops - as well as in loops
+processing a set of packets returned by the OS.
+<B>
+Note that if you are catching signals on UNIX systems that support
+restarting system calls after a signal, and calling pcap_breakloop()
+in the signal handler, you must specify, when catching those signals,
+that system calls should NOT be restarted by that signal.  Otherwise,
+if the signal interrupted a call reading packets in a live capture,
+when your signal handler returns after calling pcap_breakloop(), the
+call will be restarted, and the loop will not terminate until more
+packets arrive and the call completes.
+<P>
+
+Note also that, in a multi-threaded application, if one thread is
+blocked in
+pcap_dispatch()</B>,
+
+<B>pcap_loop()</B>,
+
+<B>pcap_next()</B>,
+
+or
+<B>pcap_next_ex()</B>,
+
+a call to
+<B>pcap_breakloop()</B>
+
+in a different thread will not unblock that thread; you will need to use
+whatever mechanism the OS provides for breaking a thread out of blocking
+calls in order to unblock the thread, such as thread cancellation in
+systems that support POSIX threads.
+
+<P>
+
+Note that
+<B>pcap_next()</B>
+
+and
+<B>pcap_next_ex()</B>
+
+will, on some platforms, loop reading packets from the OS; that loop
+will not necessarily be terminated by a signal, so
+<B>pcap_breakloop()</B>
+
+should be used to terminate packet processing even if
+<B>pcap_next()</B>
+
+or
+<B>pcap_next_ex()</B>
+
+is being used.
+<P>
+
+<B>pcap_breakloop()</B>
+
+does not guarantee that no further packets will be processed by
+<B>pcap_dispatch()</B>
+
+or
+<B>pcap_loop()</B>
+
+after it is called; at most one more packet might be processed.
+<P>
+
+If -2 is returned from
+<B>pcap_dispatch()</B>
+
+or
+<B>pcap_loop()</B>,
+
+the flag is cleared, so a subsequent call will resume reading packets. 
+If a positive number is returned, the flag is not cleared, so a
+subsequent call will return -2 and clear the flag.
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP), pcap_loop(3PCAP), pcap_next_ex(3PCAP)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 17:15:13 GMT, June 12, 2012
+</BODY>
+</HTML>

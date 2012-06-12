@@ -1,0 +1,23 @@
+PCAP_IS_SWAPPED(3PCAP)                                  PCAP_IS_SWAPPED(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_is_swapped - find out whether a savefile has the native byte order
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__iiss__sswwaappppeedd((ppccaapp__tt **pp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__iiss__sswwaappppeedd(())  returns true if _p refers to a ``savefile'' that uses
+       a different byte order than the current system.  For a live capture, it
+       always returns false.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP)
+
+
+
+                                 5 April 2008           PCAP_IS_SWAPPED(3PCAP)

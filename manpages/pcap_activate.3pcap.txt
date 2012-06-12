@@ -1,0 +1,48 @@
+PCAP_ACTIVATE(3PCAP)                                      PCAP_ACTIVATE(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_activate - activate a capture handle
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__aaccttiivvaattee((ppccaapp__tt **pp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__aaccttiivvaattee(())  is used to activate a packet capture handle to look at
+       packets on the network, with the options that were set  on  the  handle
+       being in effect.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__aaccttiivvaattee(())  returns  0  on  success  without  warnings, PPCCAAPP__WWAARRNN--
+       IINNGG__PPRROOMMIISSCC__NNOOTTSSUUPP on success on a device that doesn't support  promis-
+       cuous    mode   if   promiscuous   mode   was   requested,   PPCCAAPP__WWAARRNN--
+       IINNGG__TTSSTTAAMMPP__TTYYPPEE__NNOOTTSSUUPP on success if the time stamp type specified in a
+       previous  ppccaapp__sseett__ttssttaammpp__ttyyppee(())  call  isn't  supported by the capture
+       source (the time stamp type is left as the  default),  PPCCAAPP__WWAARRNNIINNGG  on
+       success  with any other warning, PPCCAAPP__EERRRROORR__AACCTTIIVVAATTEEDD if the handle has
+       already been activated, PPCCAAPP__EERRRROORR__NNOO__SSUUCCHH__DDEEVVIICCEE if the capture source
+       specified    when    the    handle    was    created   doesn't   exist,
+       PPCCAAPP__EERRRROORR__PPEERRMM__DDEENNIIEEDD if the process doesn't have permission  to  open
+       the  capture  source, PPCCAAPP__EERRRROORR__PPRROOMMIISSCC__PPEERRMM__DDEENNIIEEDD if the process has
+       permission to open the capture source but doesn't  have  permission  to
+       put  it  into promiscuous mode, PPCCAAPP__EERRRROORR__RRFFMMOONN__NNOOTTSSUUPP if monitor mode
+       was specified but the capture  source  doesn't  support  monitor  mode,
+       PPCCAAPP__EERRRROORR__IIFFAACCEE__NNOOTT__UUPP if the capture source is not up, and PPCCAAPP__EERRRROORR
+       if another error occurred.  If PPCCAAPP__WWAARRNNIINNGG or PPCCAAPP__EERRRROORR is  returned,
+       ppccaapp__ggeetteerrrr(())  or  ppccaapp__ppeerrrroorr(()) may be called with _p as an argument to
+       fetch or display  a  message  describing  the  warning  or  error.   If
+       PPCCAAPP__WWAARRNNIINNGG__PPRROOMMIISSCC__NNOOTTSSUUPP,        PPCCAAPP__EERRRROORR__NNOO__SSUUCCHH__DDEEVVIICCEE,       or
+       PPCCAAPP__EERRRROORR__PPEERRMM__DDEENNIIEEDD is returned, ppccaapp__ggeetteerrrr(()) or ppccaapp__ppeerrrroorr(())  may
+       be  called  with _p as an argument to fetch or display an message giving
+       additional details about the problem that might be useful for debugging
+       the problem if it's unexpected.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP)
+
+
+
+                                 5 April 2008             PCAP_ACTIVATE(3PCAP)

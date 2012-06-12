@@ -1,0 +1,37 @@
+PCAP_CREATE(3PCAP)                                          PCAP_CREATE(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_create - create a live capture handle
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       cchhaarr eerrrrbbuuff[[PPCCAAPP__EERRRRBBUUFF__SSIIZZEE]];;
+
+       ppccaapp__tt **ppccaapp__ccrreeaattee((ccoonnsstt cchhaarr **ssoouurrccee,, cchhaarr **eerrrrbbuuff));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__ccrreeaattee(())  is  used  to  create  a packet capture handle to look at
+       packets on the network.  _s_o_u_r_c_e is a string that specifies the  network
+       device  to  open;  on Linux systems with 2.2 or later kernels, a _s_o_u_r_c_e
+       argument of "any" or NNUULLLL can be  used  to  capture  packets  from  all
+       interfaces.
+
+       The returned handle must be activated with ppccaapp__aaccttiivvaattee(()) before pack-
+       ets can be captured with it; options for the capture, such as promiscu-
+       ous mode, can be set on the handle before activating it.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__ccrreeaattee(())  returns  a  _p_c_a_p___t _* on success and NNUULLLL on failure.  If
+       NNUULLLL is returned, _e_r_r_b_u_f is filled in with an  appropriate  error  mes-
+       sage.   _e_r_r_b_u_f  is assumed to be able to hold at least PPCCAAPP__EERRRRBBUUFF__SSIIZZEE
+       chars.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_activate(3PCAP)
+
+
+
+                                 5 April 2008               PCAP_CREATE(3PCAP)

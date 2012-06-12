@@ -1,0 +1,26 @@
+PCAP_DUMP_FLUSH(3PCAP)                                  PCAP_DUMP_FLUSH(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_dump_flush - flush to a savefile packets dumped
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       iinntt ppccaapp__dduummpp__fflluusshh((ppccaapp__dduummppeerr__tt **pp));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__dduummpp__fflluusshh(())  flushes  the  output  buffer to the ``savefile,'' so
+       that any packets written with ppccaapp__dduummpp(()) but not yet  written  to  the
+       ``savefile'' will be written.
+
+RREETTUURRNN VVAALLUUEE
+       ppccaapp__dduummpp__fflluusshh(()) returns 0 on success and -1 on failure.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)
+
+
+
+                                 5 April 2008           PCAP_DUMP_FLUSH(3PCAP)

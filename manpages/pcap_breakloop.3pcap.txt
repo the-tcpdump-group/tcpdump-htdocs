@@ -1,0 +1,62 @@
+PCAP_BREAKLOOP(3PCAP)                                    PCAP_BREAKLOOP(3PCAP)
+
+
+
+NNAAMMEE
+       pcap_breakloop - force a pcap_dispatch() or pcap_loop() call to return
+
+SSYYNNOOPPSSIISS
+       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+
+       vvooiidd ppccaapp__bbrreeaakklloooopp((ppccaapp__tt **));;
+
+DDEESSCCRRIIPPTTIIOONN
+       ppccaapp__bbrreeaakklloooopp(())  sets  a  flag  that  will  force  ppccaapp__ddiissppaattcchh(())  or
+       ppccaapp__lloooopp(()) to return rather than looping; they will return the  number
+       of  packets  that  have been processed so far, or -2 if no packets have
+       been processed so far.
+
+       This routine is safe to use inside a signal handler on UNIX or  a  con-
+       sole  control  handler  on  Windows,  as  it merely sets a flag that is
+       checked within the loop.
+
+       The flag is checked in loops reading packets from the OS - a signal  by
+       itself will not necessarily terminate those loops - as well as in loops
+       processing a set of packets returned by the OS.  NNoottee tthhaatt iiff  yyoouu  aarree
+       ccaattcchhiinngg  ssiiggnnaallss  oonn UUNNIIXX ssyysstteemmss tthhaatt ssuuppppoorrtt rreessttaarrttiinngg ssyysstteemm ccaallllss
+       aafftteerr aa ssiiggnnaall,, aanndd ccaalllliinngg ppccaapp__bbrreeaakklloooopp(()) iinn tthhee ssiiggnnaall hhaannddlleerr,, yyoouu
+       mmuusstt ssppeecciiffyy,, wwhheenn ccaattcchhiinngg tthhoossee ssiiggnnaallss,, tthhaatt ssyysstteemm ccaallllss sshhoouulldd NNOOTT
+       bbee rreessttaarrtteedd bbyy tthhaatt ssiiggnnaall..  OOtthheerrwwiissee,, iiff tthhee  ssiiggnnaall  iinntteerrrruupptteedd  aa
+       ccaallll  rreeaaddiinngg  ppaacckkeettss  iinn  aa  lliivvee  ccaappttuurree,,  wwhheenn yyoouurr ssiiggnnaall hhaannddlleerr
+       rreettuurrnnss aafftteerr ccaalllliinngg ppccaapp__bbrreeaakklloooopp(()),, tthhee ccaallll wwiillll bbee rreessttaarrtteedd,, aanndd
+       tthhee lloooopp wwiillll nnoott tteerrmmiinnaattee uunnttiill mmoorree ppaacckkeettss aarrrriivvee aanndd tthhee ccaallll ccoomm--
+       pplleetteess..
+
+       Note also that, in a  multi-threaded  application,  if  one  thread  is
+       blocked    in    ppccaapp__ddiissppaattcchh(()),    ppccaapp__lloooopp(()),    ppccaapp__nneexxtt(()),    or
+       ppccaapp__nneexxtt__eexx(()), a call to ppccaapp__bbrreeaakklloooopp(()) in a different  thread  will
+       not unblock that thread; you will need to use whatever mechanism the OS
+       provides for breaking a thread  out  of  blocking  calls  in  order  to
+       unblock the thread, such as thread cancellation in systems that support
+       POSIX threads.
+
+       Note that ppccaapp__nneexxtt(()) and ppccaapp__nneexxtt__eexx(()) will, on some platforms,  loop
+       reading  packets  from the OS; that loop will not necessarily be termi-
+       nated by a signal, so ppccaapp__bbrreeaakklloooopp(())  should  be  used  to  terminate
+       packet processing even if ppccaapp__nneexxtt(()) or ppccaapp__nneexxtt__eexx(()) is being used.
+
+       ppccaapp__bbrreeaakklloooopp(())  does  not  guarantee  that no further packets will be
+       processed by ppccaapp__ddiissppaattcchh(()) or ppccaapp__lloooopp(()) after it is called; at most
+       one more packet might be processed.
+
+       If  -2  is  returned  from  ppccaapp__ddiissppaattcchh(()) or ppccaapp__lloooopp(()), the flag is
+       cleared, so a subsequent call will resume reading packets.  If a  posi-
+       tive  number is returned, the flag is not cleared, so a subsequent call
+       will return -2 and clear the flag.
+
+SSEEEE AALLSSOO
+       pcap(3PCAP), pcap_loop(3PCAP), pcap_next_ex(3PCAP)
+
+
+
+                                 5 April 2008            PCAP_BREAKLOOP(3PCAP)
