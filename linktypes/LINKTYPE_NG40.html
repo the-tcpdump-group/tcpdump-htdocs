@@ -1,27 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
 Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
 Original design  : "Collaboration" by Free CSS Templates <http://www.freecsstemplates.org>
 Original license : Creative Commons Attribution 2.5 License
 -->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
     <!-- HEAD -->
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>LINKTYPE_NG40 | TCPDUMP/LIBPCAP public repository</title>
-        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop" />
-        <meta name="description" content="Web site of Tcpdump and Libpcap" />
-		<meta name="DC.publisher" content="Tcpdump" />
-		<meta name="DC.publisher.url" content="http://www.tcpdump.org" />
-		<meta name="DC.title" content="Tcpdump/Libpcap public repository" />
-		<meta name="DC.identifier" content="http://www.tcpdump.org" />
-		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13" />
-		<meta name="DC.creator" content="tcpdump" />
-		<meta name="DC.rights.rightsHolder" content="tcpdump" />
-		<meta name="DC.language" content="en" scheme="rfc1766" />
-        <link href="../style.css" rel="stylesheet" type="text/css" media="screen" />
-        <link rel="canonical" href="http://www.tcpdump.org" />
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+		<meta name="DC.publisher" content="Tcpdump">
+		<meta name="DC.publisher.url" content="http://www.tcpdump.org">
+		<meta name="DC.title" content="Tcpdump/Libpcap public repository">
+		<meta name="DC.identifier" content="http://www.tcpdump.org">
+		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13">
+		<meta name="DC.creator" content="tcpdump">
+		<meta name="DC.rights.rightsHolder" content="tcpdump">
+		<meta name="DC.language" content="en" scheme="rfc1766">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="canonical" href="http://www.tcpdump.org">
     </head>
     <!-- END OF HTML HEAD -->
 
@@ -44,10 +44,10 @@ Original license : Creative Commons Attribution 2.5 License
 
         <!-- PAGE HEADER -->
         <div id="splash">
-            <br/><img src="../images/logo.png" alt="" />
+            <br><img src="../images/logo.png" alt="">
         </div>
         <div id="logo">
-            <hr />
+            <hr>
         </div>
         <!-- END OF PAGE HEADER -->
 
@@ -88,6 +88,7 @@ Original license : Creative Commons Attribution 2.5 License
 <p>All multi-byte fields are in network byte order (big-endian).
 <p>
 The type field contains a value that is one of:
+</p>
 <ul>
 <li>2, if the payload is ATM AAL2 traffic;</li>
 <li>3, if the payload is ATM AAL5 traffic;</li>
@@ -96,7 +97,6 @@ The type field contains a value that is one of:
 <li>6, if the payload is Iub-over-UDP-over-IPv6 traffic;</li>
 <li>7, if the payload is Iub-over-SCTP-over-IPv6 traffic.</li>
 </ul>
-</p>
 <p>
 The length field gives the length of the entire packet, including the
 five header fields.
@@ -104,21 +104,21 @@ five header fields.
 <p>
 The protocol field contains a value that specifies the protocol running
 atop the SSCOP protocol layer.  The value is one of:
+</p>
 <ul>
 <li>1, if the subprotocol is ALCAP;</li>
 <li>2, if the subprotocol is NBAP.</li>
 </ul>
-</p>
 <p>
 The ID field gives a "call ID" indicating to which call the packet
 pertains.
 </p>
 <p>
 The flags field contains the following flags:
+</p>
 <ul>
 <li>0x00000001 - the message is ciphered</li>
 </ul>
-</p>
 <p>
 The form of the subheader following the header depends on the value in
 the type field.
@@ -126,6 +126,7 @@ the type field.
                 <h4>Subheaders</h4>
 <p>
 For ATM AAL2 traffic, the subheader is of the form:
+</p>
 <pre>
 +---------------------------+
 |         Direction         |
@@ -144,9 +145,9 @@ For ATM AAL2 traffic, the subheader is of the form:
 |         (2 Octets)        |
 +---------------------------+
 </pre>
-</p>
 <p>
 The direction field contains a value that is one of:
+</p>
 <ul>
 <li>0, if the packet is a received message;</li>
 <li>1, if the packet is a transmitted message;</li>
@@ -155,7 +156,6 @@ Controller (up-link message);</li>
 <li>3, if the content is a message from the Radio Network Controller
 to NodeB (down-link message).</li>
 </ul>
-</p>
 <p>
 The VPI and VCI identify the ATM virtual circuit.
 </p>
@@ -165,6 +165,7 @@ circuit.
 </p>
 <p>
 For ATM AAL5 traffic, the subheader is of the form:
+</p>
 <pre>
 +---------------------------+
 |         Direction         |
@@ -183,9 +184,9 @@ For ATM AAL5 traffic, the subheader is of the form:
 |         (2 Octets)        |
 +---------------------------+
 </pre>
-</p>
 <p>
 The direction field contains a value that is one of:
+</p>
 <ul>
 <li>0, if the packet is a received message;</li>
 <li>1, if the packet is a transmitted message;</li>
@@ -194,12 +195,12 @@ Controller (up-link message);</li>
 <li>3, if the content is a message from the Radio Network Controller
 to NodeB (down-link message).</li>
 </ul>
-</p>
 <p>
 The VPI and VCI identify the ATM virtual circuit.
 </p>
 <p>
 For Iub-over-UDP-over-IPv4 traffic, the subheader is of the form:
+</p>
 <pre>
 +---------------------------+
 |         Direction         |
@@ -224,9 +225,9 @@ For Iub-over-UDP-over-IPv4 traffic, the subheader is of the form:
 |         (4 Octets)        |
 +---------------------------+
 </pre>
-</p>
 <p>
 The direction field contains a value that is one of:
+</p>
 <ul>
 <li>0, if the packet is a received message;</li>
 <li>1, if the packet is a transmitted message;</li>
@@ -235,12 +236,12 @@ Controller (up-link message);</li>
 <li>3, if the content is a message from the Radio Network Controller
 to NodeB (down-link message).</li>
 </ul>
-</p>
 <p>
 The IPv4 addresses and UDP ports identify the endpoints of the path.
 </p>
 <p>
 For Iub-over-SCTP-over-IPv4 traffic, the subheader is of the form:
+</p>
 <pre>
 +---------------------------+
 |         Direction         |
@@ -268,9 +269,9 @@ For Iub-over-SCTP-over-IPv4 traffic, the subheader is of the form:
 |         (4 Octets)        |
 +---------------------------+
 </pre>
-</p>
 <p>
 The direction field contains a value that is one of:
+</p>
 <ul>
 <li>0, if the packet is a received message;</li>
 <li>1, if the packet is a transmitted message.</li>
@@ -281,13 +282,13 @@ Controller (up-link message);</li>
 <li>3, if the content is a message from the Radio Network Controller
 to NodeB (down-link message).</li>-->
 </ul>
-</p>
 <p>
 The IPv4 addresses and SCTP ports identify the endpoints of the path;
 the SCTP stream ID identifies the SCTP stream of the path.
 </p>
 <p>
 For Iub-over-UDP-over-IPv6 traffic, the subheader is of the form:
+</p>
 <pre>
 +---------------------------+
 |         Direction         |
@@ -309,9 +310,9 @@ For Iub-over-UDP-over-IPv6 traffic, the subheader is of the form:
 |         (16 Octets)       |
 +---------------------------+
 </pre>
-</p>
 <p>
 The direction field contains a value that is one of:
+</p>
 <ul>
 <li>0, if the packet is a received message;</li>
 <li>1, if the packet is a transmitted message;</li>
@@ -320,11 +321,11 @@ Controller (up-link message);</li>
 <li>3, if the content is a message from the Radio Network Controller
 to NodeB (down-link message).</li>
 </ul>
-</p>
 <p>
 The IPv6 addresses and UDP ports identify the endpoints of the path.
 <p>
 For Iub-over-SCTP-over-IPv6 traffic, the subheader is of the form:
+</p>
 <pre>
 +---------------------------+
 |         Direction         |
@@ -349,9 +350,9 @@ For Iub-over-SCTP-over-IPv6 traffic, the subheader is of the form:
 |         (4 Octets)        |
 +---------------------------+
 </pre>
-</p>
 <p>
 The direction field contains a value that is one of:
+</p>
 <ul>
 <li>0, if the packet is a received message;</li>
 <li>1, if the packet is a transmitted message;</li>
@@ -360,7 +361,6 @@ Controller (up-link message);</li>
 <li>3, if the content is a message from the Radio Network Controller
 to NodeB (down-link message).</li>
 </ul>
-</p>
 <p>
 The IPv6 addresses and SCTP ports identify the endpoints of the path;
 the SCTP stream ID identifies the SCTP stream of the path.
@@ -373,6 +373,7 @@ the subheader.
 </p>
 <p>
 The Frame Protocol context information is of the form:
+</p>
 <pre>
 +----------------------------------+
 |         Network Interface        |
@@ -436,23 +437,22 @@ The Frame Protocol context information is of the form:
 |                                  |
 +----------------------------------+
 </pre>
-</p>
 <p>
 The network interface field contains a value that is one of:
+</p>
 <ul>
 <li>0, if the traffic is from the Iub interface;</li>
 <li>1, if the traffic is from the Iur interface.</li>
 </ul>
-</p>
 <p>
 The division field contains a value that is one of:
+</p>
 <ul>
 <li>0, if the air interface is using FDD;</li>
 <li>1, if the air interface is using 3.84 Mchips/s TDD;</li>
 <li>2, if the air interface is using 1.28 Mchips/s TDD;</li>
 <li>3, if the air interface is using 7.68 Mchips/s TDD.</li>
 </ul>
-</p>
 <p>
 The release field gives the release number for the version of the
 frame protocol.
@@ -472,6 +472,7 @@ the RNC.
 </p>
 <p>
 The channel type field contains a value that is one of:
+</p>
 <ul>
 <li>1, if the traffic is on the Random Access Channel (RACH) using
 FDD;</li>
@@ -511,7 +512,6 @@ DCT2000 text file format.
 <li>21, if the traffic is on the EDCH_COMMON.</li>
 -->
 </ul>
-</p>
 <p>
 The DCH CRC-present indicator is 0 if the CRC for DCHes and E-DCHes
 is absent and 1 if it's present.
@@ -525,12 +525,12 @@ The E-DCH type field is always 0.
 </p>
 <p>
 The HS-DSCH entity field contains a value that is one of:
+</p>
 <ul>
 <li>0, if the entity is not defined;</li>
 <li>1, if the traffic is an HS entity;</li>
 <li>2, if the traffic is an EHS entity.</li>
 </ul>
-</p>
 <p>
 The array of channel information structures has the number of channel
 information structure elements specified by the channel count field.
@@ -554,9 +554,11 @@ The size of transmitted RLC/MAC transport blocks is the size, in bits,
 of all such blocks in the Frame Protocol payload for the channel if the
 channel is not an E-DCH.
 </p>
+<p>
 The array of E-DCH DDI information structures has the number of E-DCH
 DDI information structure elements specified by the E-DCH DDI count
 field.  An E-DCH DDI information structure is of the form:
+</p>
 <pre>
 +---------------------------+
 | Data Description Indicator|
@@ -569,12 +571,12 @@ field.  An E-DCH DDI information structure is of the form:
 |         (4 Octets)        |
 +---------------------------+
 </pre>
-</p>
 <p>The Data Description Indicator contains a value as specified by <a
 href="http://www.3gpp.org/ftp/Specs/html-info/25321.htm">3GPP TS
 25.321</a>.
 <p>
 The RLC/MAC layer context information is of the form:
+</p>
 <pre>
 +---------------------------+
 |           U-RNTI          |
@@ -602,7 +604,6 @@ The RLC/MAC layer context information is of the form:
 |         (2 Octets)        |
 +---------------------------+
 </pre>
-</p>
 <p>
 There are 64 RLC/MAC layer context information structures in sequence;
 the number of valid structures is specified by the channel count field -
@@ -619,6 +620,7 @@ channel is multiplexed.
 <p>
 The content field indicates the type of RLC channel carrying the
 content; its value is one of:
+</p>
 <ul>
 <li>0, if the content is for an unknown type of channel;</li>
 <li>1, if the content is for a Dedicated Control Channel (DCCH);</li>
@@ -626,16 +628,15 @@ content; its value is one of:
 Channel (DTCH);</li>
 <li>3, if the content is for a Circuit Switched (CS) DTCH.</li>
 </ul>
-</p>
 <p>
 The mode field contains a value that specifies the mode used for the RLC
 sublayer; it is one of:
+</p>
 <ul>
 <li>0 for Transparent mode;</li>
 <li>1 for Unacknowledged mode;</li>
 <li>2 for Acknowledged mode.</li>
 </ul>
-</p>
 <p>
 The radio bearer id (RBID) contains a value used by the network elements
 at the Iub interface to refer a radio bearer.

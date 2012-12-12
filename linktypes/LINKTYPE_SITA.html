@@ -1,27 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
 Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
 Original design  : "Collaboration" by Free CSS Templates <http://www.freecsstemplates.org>
 Original license : Creative Commons Attribution 2.5 License
 -->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
     <!-- HEAD -->
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>LINKTYPE_SITA | TCPDUMP/LIBPCAP public repository</title>
-        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop" />
-        <meta name="description" content="Web site of Tcpdump and Libpcap" />
-		<meta name="DC.publisher" content="Tcpdump" />
-		<meta name="DC.publisher.url" content="http://www.tcpdump.org" />
-		<meta name="DC.title" content="Tcpdump/Libpcap public repository" />
-		<meta name="DC.identifier" content="http://www.tcpdump.org" />
-		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13" />
-		<meta name="DC.creator" content="tcpdump" />
-		<meta name="DC.rights.rightsHolder" content="tcpdump" />
-		<meta name="DC.language" content="en" scheme="rfc1766" />
-        <link href="../style.css" rel="stylesheet" type="text/css" media="screen" />
-        <link rel="canonical" href="http://www.tcpdump.org" />
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+		<meta name="DC.publisher" content="Tcpdump">
+		<meta name="DC.publisher.url" content="http://www.tcpdump.org">
+		<meta name="DC.title" content="Tcpdump/Libpcap public repository">
+		<meta name="DC.identifier" content="http://www.tcpdump.org">
+		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13">
+		<meta name="DC.creator" content="tcpdump">
+		<meta name="DC.rights.rightsHolder" content="tcpdump">
+		<meta name="DC.language" content="en" scheme="rfc1766">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="canonical" href="http://www.tcpdump.org">
     </head>
     <!-- END OF HTML HEAD -->
 
@@ -44,10 +44,10 @@ Original license : Creative Commons Attribution 2.5 License
 
         <!-- PAGE HEADER -->
         <div id="splash">
-            <br/><img src="../images/logo.png" alt="" />
+            <br><img src="../images/logo.png" alt="">
         </div>
         <div id="logo">
-            <hr />
+            <hr>
         </div>
         <!-- END OF PAGE HEADER -->
 
@@ -87,14 +87,15 @@ Original license : Creative Commons Attribution 2.5 License
                 <h3>Description</h3>
 <p>
 The bits in the Flags field are:
+</p>
 <ul>
 <li>0x01 - set if the frame was transmitted from the remote to the IOP,
 clear if the frame was received by the remote from the IOP;</li>
 <li>0x80 - set if there was a buffer failure.</li>
 </ul>
-</p>
 <p>
 The Signals field shows the state of various RS-232 signals:
+</p>
 <ul>
 <li>0x01 - Data Set Ready;</li>
 <li>0x02 - Data Terminal Ready;</li>
@@ -102,10 +103,10 @@ The Signals field shows the state of various RS-232 signals:
 <li>0x08 - Request To Send;</li>
 <li>0x10 - Data Carrier Detect.</li>
 </ul>
-</p>
 <p>
 The bits in the Errors 1 field are, for frames received by the remote
 from the IOP:
+</p>
 <ul>
 <li>0x01 - framing error;</li>
 <li>0x02 - parity error;</li>
@@ -113,12 +114,14 @@ from the IOP:
 <li>0x08 - long frame received;</li>
 <li>0x10 - short frame.</li>
 </ul>
+<p>
 The Errors 1 field is unused for frames transmitted from the remote to
 the IOP.
 </p>
 <p>
 The bits in the Errors 2 field are, for frames received by the remote
 from the IOP:
+</p>
 <ul>
 <li>0x01 - non-octet-aligned frame;</li>
 <li>0x02 - abort received;</li>
@@ -129,16 +132,18 @@ from the IOP:
 <li>0x40 - CRC error;</li>
 <li>0x80 - break received.</li>
 </ul>
+<p>
 and, for frames transmitted from the remote to the IOP:
+</p>
 <ul>
 <li>0x01 - transmitter underrun;</li>
 <li>0x02 - Clear To Send lost;</li>
 <li>0x04 - UART error;</li>
 <li>0x08 - retransmit limit reached.</li>
 </ul>
-</p>
 <p>
 The Protocol field indicates the protocol; the values of that field are:
+</p>
 <ul>
 <li>1 - LAPB;</li>
 <li>2 - Ethernet;</li>
@@ -155,7 +160,6 @@ System/Airline Link Control);</li>
 <li>17 - DPM link;</li>
 <li>18 - Frame Relay.</li>
 </ul>
-</p>
             </div>
             <!-- End of LINKTYPE_SITA section -->
           </div>
