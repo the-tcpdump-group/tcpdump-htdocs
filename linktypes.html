@@ -1,27 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
 Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
 Original design  : "Collaboration" by Free CSS Templates <http://www.freecsstemplates.org>
 Original license : Creative Commons Attribution 2.5 License
 -->
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
     <!-- HEAD -->
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Link-Layer Header Types | TCPDUMP/LIBPCAP public repository</title>
-        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop" />
-        <meta name="description" content="Web site of Tcpdump and Libpcap" />
-		<meta name="DC.publisher" content="Tcpdump" />
-		<meta name="DC.publisher.url" content="http://www.tcpdump.org" />
-		<meta name="DC.title" content="Tcpdump/Libpcap public repository" />
-		<meta name="DC.identifier" content="http://www.tcpdump.org" />
-		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13" />
-		<meta name="DC.creator" content="tcpdump" />
-		<meta name="DC.rights.rightsHolder" content="tcpdump" />
-		<meta name="DC.language" content="en" scheme="rfc1766" />
-        <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
-        <link rel="canonical" href="http://www.tcpdump.org" />
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+		<meta name="DC.publisher" content="Tcpdump">
+		<meta name="DC.publisher.url" content="http://www.tcpdump.org">
+		<meta name="DC.title" content="Tcpdump/Libpcap public repository">
+		<meta name="DC.identifier" content="http://www.tcpdump.org">
+		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13">
+		<meta name="DC.creator" content="tcpdump">
+		<meta name="DC.rights.rightsHolder" content="tcpdump">
+		<meta name="DC.language" content="en" scheme="rfc1766">
+        <link href="style.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="canonical" href="http://www.tcpdump.org">
     </head>
     <!-- END OF HTML HEAD -->
 
@@ -44,10 +44,10 @@ Original license : Creative Commons Attribution 2.5 License
 
         <!-- PAGE HEADER -->
         <div id="splash">
-            <br/><img src="images/logo.png" alt="" />
+            <br><img src="images/logo.png" alt="">
         </div>
         <div id="logo">
-            <hr />
+            <hr>
         </div>
         <!-- END OF PAGE HEADER -->
 
@@ -89,7 +89,6 @@ files using that link-layer header type not ever be sent outside your
 organization, you can use one or more these values.  No libpcap release
 will use these for any purpose, nor will any tcpdump release use them,
 either.
-</p>
 <p>
 Do <strong>NOT</strong> use these in capture files that you expect
 anybody not using your private versions of capture-file-reading tools to
@@ -133,7 +132,6 @@ specification.  If they do not exactly match, request your own
 link-layer header type for them. 
 </p>
 </ul>
-              </p>     
             </div>
             <!-- End of LINK-LAYER HEADER TYPES section -->
           </div>
@@ -342,7 +340,7 @@ Linux-IrDA packets, with a
 header</a>,
 with the payload for IrDA frames beginning with by the IrLAP header as
 defined by
-<a href="http://www.irda.org/displaycommon.cfm?an=1&subarticlenbr=7#Data">IrDA
+<a href="http://www.irda.org/displaycommon.cfm?an=1&amp;subarticlenbr=7#Data">IrDA
 Data Specifications</a>, including the IrDA Link Access Protocol
 specification.
                 <tr valign=top>
@@ -406,7 +404,7 @@ with the LINKTYPE_ value specified by the pph_dlt field of that header.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4<td>195<td>DLT_IEEE802_15_4<td>
 <a href="http://standards.ieee.org/about/get/802/802.15.html">IEEE
-802.15.4</a> wireless Personal Area Network</a>, with each packet having
+802.15.4</a> wireless Personal Area Network, with each packet having
 the FCS at the end of the frame.
                 <tr valign=top>
 <td>LINKTYPE_SITA<td>196<td>DLT_SITA<td>
@@ -475,7 +473,7 @@ pseudo-header</a>.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_NONASK_PHY<td>215<td>DLT_IEEE802_15_4_NONASK_PHY<td>
 <a href="http://standards.ieee.org/about/get/802/802.15.html">IEEE
-802.15.4</a> wireless Personal Area Network</a>, with each packet having
+802.15.4</a> wireless Personal Area Network, with each packet having
 the FCS at the end of the frame, and with the PHY-level data for non-ASK
 PHYs (4 octets of 0 as preamble, one octet of SFD, one octet of frame
 length + reserved bit) preceding the MAC-layer data (starting with the
@@ -520,7 +518,7 @@ Raw IPv6; the packet begins with an IPv6 header.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_NOFCS<td>230<td>DLT_IEEE802_15_4_NOFCS<td>
 <a href="http://standards.ieee.org/about/get/802/802.15.html">IEEE
-802.15.4</a> wireless Personal Area Network</a>, without the FCS at the
+802.15.4</a> wireless Personal Area Network, without the FCS at the
 end of the frame.
                 <tr valign=top>
 <td>LINKTYPE_DBUS<td>231<td>DLT_DBUS<td>
@@ -596,7 +594,7 @@ specified by
 <td>LINKTYPE_INFINIBAND<td>247<td>DLT_INFINIBAND<td>
 Raw InfiniBand frames, starting with the Local Routing Header, as
 specified in Chapter 5 "Data packet format" of <a
-href="http://members.infinibandta.org/kwspub/spec/V1r1_2_1.Release_12062007.zip">InfiniBand&#0153;
+href="http://members.infinibandta.org/kwspub/spec/V1r1_2_1.Release_12062007.zip">InfiniBand&#8482;
 Architectural Specification Release 1.2.1 Volume 1 - General
 Specifications</a>.
                 <tr valign=top>
