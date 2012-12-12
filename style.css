@@ -49,7 +49,7 @@ ul, ol {
 }
 /* Don't have extra leading in paragraphs in table entries. */
 td p {
-	margin-bottom: normal;
+	margin-bottom: 0;
 	line-height: normal;
 }
 
