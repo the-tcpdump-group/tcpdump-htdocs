@@ -1,9 +1,7 @@
-Content-type: text/html
-
 <HTML><HEAD><TITLE>Manpage of TCPDUMP</TITLE>
 </HEAD><BODY>
 <H1>TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 05 March 2009<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 12 July 2012<BR><A HREF="#index">Index</A>
 <A HREF="http://localhost/cgi-bin/man/man2html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -17,7 +15,7 @@ tcpdump - dump traffic on a network
 <B>tcpdump</B>
 
 [
-<B>-AdDefIKlLnNOpqRStuUvxX</B>
+<B>-AbdDefhHIJKlLnNOpqRStuUvxX</B>
 
 ] [
 <B>-B</B>
@@ -61,6 +59,12 @@ tcpdump - dump traffic on a network
 
 ]
 [
+<B>-j</B>
+
+<I>tstamp_type</I>
+
+]
+[
 <B>-m</B>
 
 <I>module</I>
@@ -78,6 +82,12 @@ tcpdump - dump traffic on a network
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-r</B>
+
+<I>file</I>
+
+]
+[
+<B>-V</B>
 
 <I>file</I>
 
@@ -166,8 +176,11 @@ analysis, and/or with the
 <B>-r</B>
 
 flag, which causes it to read from a saved packet file rather than to
-read packets from a network interface.  In all cases, only packets that
-match
+read packets from a network interface.  It can also be run with the
+<B>-V</B>
+
+flag, which causes it to read a list of saved packet files. In all cases,
+only packets that match
 <I>expression</I>
 
 will be processed by
@@ -258,10 +271,16 @@ special privileges.
 <DD>
 Print each packet (minus its link level header) in ASCII.  Handy for
 capturing web pages.
+<DT><B>-b</B>
+
+<DD>
+Print the AS number in BGP packets in ASDOT notation rather than ASPLAIN
+notation.
 <DT><B>-B</B>
 
 <DD>
-Set the operating system capture buffer size to <I>buffer_size</I>.
+Set the operating system capture buffer size to <I>buffer_size</I>, in
+units of KiB (1024 bytes).
 <DT><B>-c</B>
 
 <DD>
@@ -332,13 +351,15 @@ function.
 <DT><B>-e</B>
 
 <DD>
-Print the link-level header on each dump line.
+Print the link-level header on each dump line.  This can be used, for
+example, to print MAC layer addresses for protocols such as Ethernet and
+IEEE 802.11.
 <DT><B>-E</B>
 
 <DD>
 Use <I><A HREF="mailto:spi@ipaddr">spi@ipaddr</A> algo:secret</I> for decrypting IPsec ESP packets that
 are addressed to <I>addr</I> and contain Security Parameter Index value
-<I>spi</I>. This combination may be repeated with comma or newline seperation.
+<I>spi</I>. This combination may be repeated with comma or newline separation.
 <DT><DD>
 Note that setting the secret for IPv4 ESP packets is supported at this time.
 <DT><DD>
@@ -353,8 +374,8 @@ The default is <B>des-cbc</B>.
 The ability to decrypt packets is only present if <I>tcpdump</I> was compiled
 with cryptography enabled.
 <DT><DD>
-<I>secret</I> is the ASCII text for ESP secret key. 
-If preceeded by 0x, then a hex value will be read.
+<I>secret</I> is the ASCII text for ESP secret key.
+If preceded by 0x, then a hex value will be read.
 <DT><DD>
 The option assumes RFC2406 ESP, not RFC1827 ESP.
 The option is only for debugging purposes, and
@@ -366,7 +387,7 @@ you make it visible to others, via
 and other occasions.
 <DT><DD>
 In addition to the above syntax, the syntax <I>file name</I> may be used
-to have tcpdump read the provided file in. The file is opened upon 
+to have tcpdump read the provided file in. The file is opened upon
 receiving the first ESP packet, so any special permissions that tcpdump
 may have been given should already have been given up.
 <DT><B>-f</B>
@@ -408,6 +429,15 @@ If used in conjunction with the
 <B>-C</B>
 
 option, filenames will take the form of `<I>file</I>&lt;count&gt;'.
+<DT><B>-h</B>
+
+<DD>
+Print the tcpdump and libpcap version strings, print a usage message,
+and exit.
+<DT><B>-H</B>
+
+<DD>
+Attempt to detect 802.11s draft mesh headers.
 <DT><B>-i</B>
 
 <DD>
@@ -456,6 +486,21 @@ monitor mode will be shown; if
 
 is specified, only those link-layer types available when in monitor mode
 will be shown.
+<DT><B>-j</B>
+
+<DD>
+Set the time stamp type for the capture to <I>tstamp_type</I>.  The names
+to use for the time stamp types are given in
+<B><A HREF="http://localhost/cgi-bin/man/man2html?7+pcap-tstamp-type">pcap-tstamp-type</A></B>(7);
+
+not all the types listed there will necessarily be valid for any given
+interface.
+<DT><B>-J</B>
+
+<DD>
+List the supported time stamp types for the interface and exit.  If the
+time stamp type cannot be set for the interface, no time stamp types are
+listed.
 <DT><B>-K</B>
 
 <DD>
@@ -469,10 +514,46 @@ Make stdout line buffered.
 Useful if you want to see the data
 while capturing it.
 E.g.,
-<BR>
+<DT><DD>
+<DL COMPACT><DT><DD>
+<DL COMPACT><DT><DD>
+<PRE>
+<B>tcpdump -l | tee dat</B>
+</PRE>
 
-``tcpdump&nbsp;&nbsp;-l&nbsp;&nbsp;|&nbsp;&nbsp;tee dat'' or
-``tcpdump&nbsp;&nbsp;-l &nbsp;&nbsp;&gt; dat&nbsp;&nbsp;&amp;&nbsp;&nbsp;tail&nbsp;&nbsp;-f&nbsp;&nbsp;dat''.
+</DL>
+
+</DL>
+
+<DT><DD>
+or
+<DT><DD>
+<DL COMPACT><DT><DD>
+<DL COMPACT><DT><DD>
+<PRE>
+<B>tcpdump -l &gt; dat &amp; tail -f dat</B>
+</PRE>
+
+</DL>
+
+</DL>
+
+<DT><DD>
+Note that on Windows,``line buffered'' means ``unbuffered'', so that
+WinDump will write each character individually if
+<B>-l</B>
+
+is specified.
+<DT><DD>
+<B>-U</B>
+
+is similar to
+<B>-l</B>
+
+in its behavior, but it will cause output to be ``packet-buffered'', so
+that the output is written to stdout at the end of each packet rather
+than at the end of each line; this is buffered on all platforms,
+including Windows.
 <DT><B>-L</B>
 
 <DD>
@@ -573,15 +654,31 @@ Force packets selected by &quot;<I>expression</I>&quot; to be interpreted the
 specified <I>type</I>.
 Currently known types are
 <B>aodv</B> (Ad-hoc On-demand Distance Vector protocol),
+<B>carp</B> (Common Address Redundancy Protocol),
 <B>cnfp</B> (Cisco NetFlow protocol),
+<B>pgm</B> (Pragmatic General Multicast),
+<B>pgm_zmtp1</B> (ZMTP/1.0 inside PGM/EPGM),
+<B>radius</B> (RADIUS),
 <B>rpc</B> (Remote Procedure Call),
 <B>rtp</B> (Real-Time Applications protocol),
 <B>rtcp</B> (Real-Time Applications control protocol),
 <B>snmp</B> (Simple Network Management Protocol),
 <B>tftp</B> (Trivial File Transfer Protocol),
 <B>vat</B> (Visual Audio Tool),
+<B>wb</B> (distributed White Board),
+<B>zmtp1</B> (ZeroMQ Message Transport Protocol 1.0)
 and
-<B>wb</B> (distributed White Board).
+<B>vxlan</B> (Virtual eXtensible Local Area Network).
+<DT><DD>
+Note that the <B>pgm</B> type above affects UDP interpretation only, the native
+PGM is always recognised as IP protocol 113 regardless. UDP-encapsulated PGM is
+often called &quot;EPGM&quot; or &quot;PGM/UDP&quot;.
+<DT><DD>
+Note that the <B>pgm_zmtp1</B> type above affects interpretation of both native
+PGM and UDP at once. During the native PGM decoding the application data of an
+ODATA/RDATA packet would be decoded as a ZeroMQ datagram with ZMTP/1.0 frames.
+During the UDP decoding in addition to that any UDP packet would be treated as
+an encapsulated PGM packet.
 <DT><B>-t</B>
 
 <DD>
@@ -611,12 +708,22 @@ Print undecoded NFS handles.
 <DT><B>-U</B>
 
 <DD>
-Make output saved via the
+If the
 <B>-w</B>
 
-option ``packet-buffered''; i.e., as each packet is saved, it will be
-written to the output file, rather than being written only when the
-output buffer fills.
+option is not specified, make the printed packet output
+``packet-buffered''; i.e., as the description of the contents of each
+packet is printed, it will be written to the standard output, rather
+than, when not writing to a terminal, being written only when the output
+buffer fills.
+<DT><DD>
+If the
+<B>-w</B>
+
+option is specified, make the saved raw packet output
+``packet-buffered''; i.e., as each packet is saved, it will be written
+to the output file, rather than being written only when the output
+buffer fills.
 <DT><DD>
 The
 <B>-U</B>
@@ -661,6 +768,11 @@ With
 <B>-X</B>
 
 Telnet options are printed in hex as well.
+<DT><B>-V</B>
+
+<DD>
+Read a list of filenames from <I>file</I>. Standard input is used
+if <I>file</I> is ``-''.
 <DT><B>-w</B>
 
 <DD>
@@ -668,6 +780,23 @@ Write the raw packets to <I>file</I> rather than parsing and printing
 them out.
 They can later be printed with the -r option.
 Standard output is used if <I>file</I> is ``-''.
+<DT><DD>
+This output will be buffered if written to a file or pipe, so a program
+reading from the file or pipe may not see packets for an arbitrary
+amount of time after they are received.  Use the
+<B>-U</B>
+
+flag to cause packets to be written as soon as they are received.
+<DT><DD>
+The MIME type <I>application/vnd.tcpdump.pcap</I> has been registered
+with IANA for <I>pcap</I> files. The filename extension <I>.pcap</I>
+appears to be the most commonly used along with <I>.cap</I> and
+<I>.dmp</I>. <I>Tcpdump</I> itself doesn't check the extension when
+reading capture files and doesn't add an extension when writing them
+(it uses magic numbers in the file header instead). However, many
+operating systems and applications will use the extension if it is
+present and adding one (e.g. .pcap) is recommended.
+<DT><DD>
 See
 <B><A HREF="http://localhost/cgi-bin/man/man2html?5+pcap-savefile">pcap-savefile</A></B>(5)
 
@@ -675,17 +804,17 @@ for a description of the file format.
 <DT><B>-W</B>
 
 <DD>
-Used in conjunction with the 
-<B>-C </B>
+Used in conjunction with the
+<B>-C</B>
 
 option, this will limit the number
 of files created to the specified number, and begin overwriting files
-from the beginning, thus creating a 'rotating' buffer. 
+from the beginning, thus creating a 'rotating' buffer.
 In addition, it will name
 the files with enough leading 0s to support the maximum number of
 files, allowing them to sort correctly.
 <DT><DD>
-Used in conjunction with the 
+Used in conjunction with the
 <B>-G</B>
 
 option, this will limit the number of rotated dump files that get
@@ -698,7 +827,7 @@ as well, the behavior will result in cyclical files per timeslice.
 <DD>
 When parsing and printing,
 in addition to printing the headers of each packet, print the data of
-each packet (minus its link level header) in hex. 
+each packet (minus its link level header) in hex.
 The smaller of the entire packet or
 <I>snaplen</I>
 
@@ -771,7 +900,11 @@ and execute the command that you want.
 <DT><B>-Z</B>
 
 <DD>
-Drops privileges (if root) and changes user ID to
+If
+<I>tcpdump</I>
+
+is running as root, after opening the capture device or input savefile,
+but before opening any savefiles for output, change the user ID to
 <I>user</I>
 
 and the group ID to the primary group of
@@ -795,8 +928,10 @@ For the <I>expression</I> syntax, see
 
 Expression arguments can be passed to <I>tcpdump</I> as either a single
 argument or as multiple arguments, whichever is more convenient.
-Generally, if the expression contains Shell metacharacters, it is
-easier to pass it as a single, quoted argument.
+Generally, if the expression contains Shell metacharacters, such as
+backslashes used to escape protocol names, it is easier to pass it as
+a single, quoted argument rather than to escape the Shell
+metacharacters.
 Multiple arguments are concatenated with spaces before being parsed.
 </DL>
 </DL>
@@ -1096,8 +1231,8 @@ The general format of a tcp protocol line is:
 <I>Src</I> and <I>dst</I> are the source and destination IP
 addresses and ports.
 <I>Flags</I> are some combination of S (SYN),
-F (FIN), P (PUSH), R (RST), W (ECN CWR) or E (ECN-Echo), or a single
-`.' (no flags).
+F (FIN), P (PUSH), R (RST), U (URG), W (ECN CWR), E (ECN-Echo) or
+`.' (ACK), or `none' if no flags are set.
 <I>Data-seqno</I> describes the portion of sequence space covered
 by the data in this packet (see example below).
 <I>Ack</I> is sequence number of the next data expected the other
@@ -1122,12 +1257,12 @@ host <I>csam</I>.
 <FONT SIZE="-2"><TT>rtsg.1023 &gt; csam.login: S 768512:768512(0) win 4096 &lt;mss 1024&gt;
 csam.login &gt; rtsg.1023: S 947648:947648(0) ack 768513 win 4096 &lt;mss 1024&gt;
 rtsg.1023 &gt; csam.login: . ack 1 win 4096
-rtsg.1023 &gt; csam.login: P 1:<A HREF="http://localhost/cgi-bin/man/man2html?1+2">2</A>(1) ack 1 win 4096
+rtsg.1023 &gt; csam.login: P <A HREF="http://localhost/cgi-bin/man/man2html?1+1:2">1:2</A>(1) ack 1 win 4096
 csam.login &gt; rtsg.1023: . ack 2 win 4096
 rtsg.1023 &gt; csam.login: P 2:21(19) ack 1 win 4096
-csam.login &gt; rtsg.1023: P 1:<A HREF="http://localhost/cgi-bin/man/man2html?1+2">2</A>(1) ack 21 win 4077
-csam.login &gt; rtsg.1023: P 2:<A HREF="http://localhost/cgi-bin/man/man2html?1+3">3</A>(1) ack 21 win 4077 urg 1
-csam.login &gt; rtsg.1023: P 3:<A HREF="http://localhost/cgi-bin/man/man2html?1+4">4</A>(1) ack 21 win 4077 urg 1</TT></FONT>
+csam.login &gt; rtsg.1023: P <A HREF="http://localhost/cgi-bin/man/man2html?1+1:2">1:2</A>(1) ack 21 win 4077
+csam.login &gt; rtsg.1023: P <A HREF="http://localhost/cgi-bin/man/man2html?1+2:3">2:3</A>(1) ack 21 win 4077 urg 1
+csam.login &gt; rtsg.1023: P <A HREF="http://localhost/cgi-bin/man/man2html?1+3:4">3:4</A>(1) ack 21 win 4077 urg 1</TT></FONT>
 
 </PRE>
 
@@ -1149,8 +1284,7 @@ bytes and there was a max-segment-size option requesting an mss of
 Csam replies with a similar packet except it includes a piggy-backed
 ack for rtsg's SYN.
 Rtsg then acks csam's SYN.
-The `.' means no
-flags were set.
+The `.' means the ACK flag was set.
 The packet contained no data so there is no data sequence number.
 Note that the ack sequence
 number is a small integer (1).
@@ -1168,7 +1302,7 @@ feature, causing the original sequence numbers to be output.
 <P>
 
 On the 6th line, rtsg sends csam 19 bytes of data (bytes 2 through 20
-in the rtsg -> csam side of the conversation).
+in the rtsg &rarr; csam side of the conversation).
 The PUSH flag is set in the packet.
 On the 7th line, csam says it's received data sent by rtsg up to
 but not including byte 21.
@@ -1440,6 +1574,21 @@ This points us to the <I>tcpdump</I> filter expression
 
 <P>
 
+Some offsets and field values may be expressed as names
+rather than as numeric values. For example tcp[13] may
+be replaced with tcp[tcpflags]. The following TCP flag
+field values are also available: tcp-fin, tcp-syn, tcp-rst,
+tcp-push, tcp-act, tcp-urg.
+<P>
+
+This can be demonstrated as:
+<DL COMPACT><DT><DD>
+<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tcpdump&nbsp;-i&nbsp;xl0&nbsp;'tcp[tcpflags]&nbsp;&amp;&nbsp;tcp-push&nbsp;!=&nbsp;0'</B>
+
+</DL>
+
+<P>
+
 Note that you should use single quotes or a backslash
 in the expression to hide the AND ('&amp;') special character
 from the shell.
@@ -1576,7 +1725,6 @@ RA, <I>not</I> set) and `|' (truncated message, TC, set).
 If the
 `question' section doesn't contain exactly one entry, `[<I>n</I>q]'
 is printed.
-<P>
 
 <P>
 <B></B>
@@ -1590,18 +1738,19 @@ on UDP/137, UDP/138 and TCP/139.
 Some primitive decoding of IPX and
 NetBEUI SMB data is also done.
 <P>
+
 By default a fairly minimal decode is done, with a much more detailed
 decode done if -v is used.
 Be warned that with -v a single SMB packet
 may take up a page or more, so only use -v if you really want all the
 gory details.
 <P>
-For information on SMB packet formats and what all te fields mean see
+
+For information on SMB packet formats and what all the fields mean see
 <A HREF="http://www.cifs.org">www.cifs.org</A> or the pub/samba/specs/ directory on your favorite
 samba.org mirror site.
 The SMB patches were written by Andrew Tridgell
 (<A HREF="mailto:tridge@samba.org">tridge@samba.org</A>).
-<P>
 
 <P>
 <B></B>
@@ -1755,12 +1904,12 @@ AFS and RX.
 <P>
 
 If the -v (verbose) flag is given twice, acknowledgement packets and
-additional header information is printed, such as the the RX call ID,
+additional header information is printed, such as the RX call ID,
 call number, sequence number, serial number, and the RX packet flags.
 <P>
 
 If the -v flag is given twice, additional information is printed,
-such as the the RX call ID, serial number, and the RX packet flags.
+such as the RX call ID, serial number, and the RX packet flags.
 The MTU negotiation information is also printed from RX ack packets.
 <P>
 
@@ -2028,7 +2177,16 @@ serviced the `new packet' interrupt.
 <H2>SEE ALSO</H2>
 
 <A HREF="http://localhost/cgi-bin/man/man2html?1+stty">stty</A>(1), pcap(3PCAP), <A HREF="http://localhost/cgi-bin/man/man2html?4+bpf">bpf</A>(4), <A HREF="http://localhost/cgi-bin/man/man2html?4P+nit">nit</A>(4P), <A HREF="http://localhost/cgi-bin/man/man2html?5+pcap-savefile">pcap-savefile</A>(5),
-<A HREF="http://localhost/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A>(7)
+<A HREF="http://localhost/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A>(7), <A HREF="http://localhost/cgi-bin/man/man2html?7+pcap-tstamp-type">pcap-tstamp-type</A>(7)
+<P>
+
+<DL COMPACT><DT><DD>
+<I><A HREF="http://www.iana.org/assignments/media-types/application/vnd.tcpdump.pcap">http://www.iana.org/assignments/media-types/application/vnd.tcpdump.pcap</A></I>
+
+</DL>
+
+<P>
+
 <A NAME="lbAI">&nbsp;</A>
 <H2>AUTHORS</H2>
 
@@ -2058,7 +2216,7 @@ The original distribution is available via anonymous ftp:
 <P>
 
 <DL COMPACT><DT><DD>
-<I><A HREF="ftp://ftp.ee.lbl.gov/tcpdump.tar.Z">ftp://ftp.ee.lbl.gov/tcpdump.tar.Z</A></I>
+<I><A HREF="ftp://ftp.ee.lbl.gov/old/tcpdump.tar.Z">ftp://ftp.ee.lbl.gov/old/tcpdump.tar.Z</A></I>
 
 </DL>
 
@@ -2159,6 +2317,6 @@ It only looks at IPv4 packets.
 This document was created by
 <A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 14:27:56 GMT, November 19, 2009
+Time: 18:38:39 GMT, June 06, 2013
 </BODY>
 </HTML>
