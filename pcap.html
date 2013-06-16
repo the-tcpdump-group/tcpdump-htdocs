@@ -139,7 +139,7 @@ We are telling it to put the device into promiscuous mode, to sniff until an
 error occurs, and if there is an error, store it in the string errbuf; it
 uses that string to print an error message.
 
-<p>A note about promiscuous vs.  non-promiscuous sniffing: The two
+<p>A note about promiscuous vs. non-promiscuous sniffing: The two
 techniques are very different in style.  In standard, non-promiscuous
 sniffing, a host is sniffing only traffic that is directly related to
 it.  Only traffic to, from, or routed through the host will be picked up
@@ -153,6 +153,30 @@ reliability to determine if another host is doing promiscuous sniffing.
 Second, it only works in a non-switched environment (such as a hub, or a
 switch that is being ARP flooded).  Third, on high traffic networks, the
 host can become quite taxed for system resources.
+
+<p>Not all devices provide the same type of link-layer headers in the
+packets you read.  Ethernet devices, and some non-Ethernet devices,
+might provide Ethernet headers, but other device types, such as loopback
+devices in BSD and OS X, PPP interfaces, and Wi-Fi interfaces when
+capturing in monitor mode, don't.
+
+<p>You need to determine the type of link-layer headers the device
+provides, and use that type when processing the packet contents.  The
+pcap_datalink() routine returns a value indicating the type of
+link-layer headers; see <a href="linktypes.html">the list of link-layer
+header type values</a>.  The values it returns are the <tt>DLT_</tt>
+values in that list.
+
+<p>If your program doesn't support the link-layer header type provided
+by the device, it has to give up; this would be done with code such as
+<pre>
+	if (pcap_datalink(handle) != DLT_EN10MB) {
+		fprintf(stderr, &quot;Device %s doesn't provide Ethernet headers - not supported\n&quot;, somedev);
+		return(2);
+	}
+</pre>
+<p>which fails if the device doesn't supply Ethernet headers.  This
+would be appropriate for the code below, as it assumes Ethernet headers.
 
 <h2>Filtering traffic</h2>
 <p>Often times our sniffer may only be interested in specific 
