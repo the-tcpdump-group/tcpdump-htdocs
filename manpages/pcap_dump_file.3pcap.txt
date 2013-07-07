@@ -2,20 +2,20 @@ PCAP_DUMP_FILE(3PCAP)                                    PCAP_DUMP_FILE(3PCAP)
 
 
 
-NNAAMMEE
-       pcap_dump_file - get the standard I/O stream for a savefile being writ-
+NAME
+       pcap_dump_file - get the standard I/O stream for a savefile being writ‐
        ten
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       FFIILLEE **ppccaapp__dduummpp__ffiillee((ppccaapp__dduummppeerr__tt **pp));;
+       FILE *pcap_dump_file(pcap_dumper_t *p);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__dduummpp__ffiillee(()) returns the standard I/O stream  of  the  ``savefile''
-       opened by ppccaapp__dduummpp__ooppeenn(()).
+DESCRIPTION
+       pcap_dump_file() returns the standard I/O stream  of  the  ``savefile''
+       opened by pcap_dump_open().
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP)
 
 

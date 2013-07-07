@@ -2,25 +2,25 @@ PCAP_GETERR(3PCAP)                                          PCAP_GETERR(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_geterr, pcap_perror - get or print libpcap error message text
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       cchhaarr **ppccaapp__ggeetteerrrr((ppccaapp__tt **pp));;
-       vvooiidd ppccaapp__ppeerrrroorr((ppccaapp__tt **pp,, cchhaarr **pprreeffiixx));;
+       char *pcap_geterr(pcap_t *p);
+       void pcap_perror(pcap_t *p, char *prefix);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__ggeetteerrrr(())  returns  the  error  text  pertaining  to  the last pcap
-       library error.  NNOOTTEE: the pointer it returns will no longer point to  a
-       valid error message string after the ppccaapp__tt passed to it is closed; you
-       must use or copy the string before closing the ppccaapp__tt.
+DESCRIPTION
+       pcap_geterr()  returns  the  error  text  pertaining  to  the last pcap
+       library error.  NOTE: the pointer it returns will no longer point to  a
+       valid error message string after the pcap_t passed to it is closed; you
+       must use or copy the string before closing the pcap_t.
 
-       ppccaapp__ppeerrrroorr(()) prints the text of the last pcap library error on ssttddeerrrr,
-       prefixed by _p_r_e_f_i_x.
+       pcap_perror() prints the text of the last pcap library error on stderr,
+       prefixed by prefix.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP)
 
 

@@ -2,35 +2,35 @@ PCAP_SETDIRECTION(3PCAP)                              PCAP_SETDIRECTION(3PCAP)
 
 
 
-NNAAMMEE
-       pcap_setdirection  -  set  the direction for which packets will be cap-
+NAME
+       pcap_setdirection  -  set  the direction for which packets will be cap‐
        tured
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__sseettddiirreeccttiioonn((ppccaapp__tt **pp,, ppccaapp__ddiirreeccttiioonn__tt dd));;
+       int pcap_setdirection(pcap_t *p, pcap_direction_t d);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__sseettddiirreeccttiioonn(()) is used to specify a direction that packets will be
-       captured.    _d  is  one  of  the  constants  PPCCAAPP__DD__IINN,  PPCCAAPP__DD__OOUUTT  or
-       PPCCAAPP__DD__IINNOOUUTT.  PPCCAAPP__DD__IINN will only  capture  packets  received  by  the
-       device,  PPCCAAPP__DD__OOUUTT  will  only  capture packets sent by the device and
-       PPCCAAPP__DD__IINNOOUUTT will capture packets received by or sent  by  the  device.
-       PPCCAAPP__DD__IINNOOUUTT is the default setting if this function is not called.
+DESCRIPTION
+       pcap_setdirection() is used to specify a direction that packets will be
+       captured.    d  is  one  of  the  constants  PCAP_D_IN,  PCAP_D_OUT  or
+       PCAP_D_INOUT.  PCAP_D_IN will only  capture  packets  received  by  the
+       device,  PCAP_D_OUT  will  only  capture packets sent by the device and
+       PCAP_D_INOUT will capture packets received by or sent  by  the  device.
+       PCAP_D_INOUT is the default setting if this function is not called.
 
-       ppccaapp__sseettddiirreeccttiioonn(()) isn't necessarily fully supported on all platforms;
+       pcap_setdirection() isn't necessarily fully supported on all platforms;
        some platforms might return an error for all  values,  and  some  other
-       platforms might not support PPCCAAPP__DD__OOUUTT.
+       platforms might not support PCAP_D_OUT.
 
        This operation is not supported if a ``savefile'' is being read.
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__sseettddiirreeccttiioonn(())  returns  0 on success and -1 on failure.  If -1 is
-       returned, ppccaapp__ggeetteerrrr(()) or ppccaapp__ppeerrrroorr(()) may be called  with  _p  as  an
+RETURN VALUE
+       pcap_setdirection()  returns  0 on success and -1 on failure.  If -1 is
+       returned, pcap_geterr() or pcap_perror() may be called  with  p  as  an
        argument to fetch or display the error text.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP), pcap_geterr(3PCAP)
 
 

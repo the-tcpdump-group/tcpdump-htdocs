@@ -2,19 +2,19 @@ PCAP_DATALINK(3PCAP)                                      PCAP_DATALINK(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_datalink - get the link-layer header type
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__ddaattaalliinnkk((ppccaapp__tt **pp));;
+       int pcap_datalink(pcap_t *p);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__ddaattaalliinnkk(()) returns the link-layer header type for the live capture
-       or ``savefile'' specified by _p.
+DESCRIPTION
+       pcap_datalink() returns the link-layer header type for the live capture
+       or ``savefile'' specified by p.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP), pcap-linktype(7)
 
 

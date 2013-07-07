@@ -2,34 +2,34 @@ PCAP_SET_TSTAMP_TYPE(3PCAP)                        PCAP_SET_TSTAMP_TYPE(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_set_tstamp_type  - set the time stamp type to be used by a capture
        device
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__sseett__ttssttaammpp__ttyyppee((ppccaapp__tt **pp,, iinntt ttssttaammpp__ttyyppee));;
+       int pcap_set_tstamp_type(pcap_t *p, int tstamp_type);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__sseett__ttssttaammpp__ttyyppee(()) sets the the type  of  time  stamp  desired  for
+DESCRIPTION
+       pcap_set_tstamp_type() sets the the type  of  time  stamp  desired  for
        packets  captured  on  the  pcap  descriptor  to  the type specified by
-       _t_s_t_a_m_p___t_y_p_e.  It must  be  called  on  a  pcap  descriptor  created  by
-       ppccaapp__ccrreeaattee(())  that  has  not  yet  been  activated by ppccaapp__aaccttiivvaattee(()).
-       ppccaapp__lliisstt__ttssttaammpp__ttyyppeess(()) will give a list of the time stamp types  sup-
-       ported by a given capture device.  See ppccaapp--ttssttaammpp(7) for a list of all
+       tstamp_type.  It must  be  called  on  a  pcap  descriptor  created  by
+       pcap_create()  that  has  not  yet  been  activated by pcap_activate().
+       pcap_list_tstamp_types() will give a list of the time stamp types  sup‐
+       ported by a given capture device.  See pcap-tstamp(7) for a list of all
        the time stamp types.
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__sseett__ttssttaammpp__ttyyppee(()) returns 0 on success if the specified time stamp
-       type  is  expected  to  be  supported by the capture device, PPCCAAPP__WWAARRNN--
-       IINNGG__TTSSTTAAMMPP__TTYYPPEE__NNOOTTSSUUPP on success if the specified time stamp  type  is
-       not  supported by the capture device, PPCCAAPP__EERRRROORR__AACCTTIIVVAATTEEDD if called on
+RETURN VALUE
+       pcap_set_tstamp_type() returns 0 on success if the specified time stamp
+       type  is  expected  to  be  supported by the capture device, PCAP_WARN‐
+       ING_TSTAMP_TYPE_NOTSUP on success if the specified time stamp  type  is
+       not  supported by the capture device, PCAP_ERROR_ACTIVATED if called on
        a    capture    handle     that     has     been     activated,     and
-       PPCCAAPP__EERRRROORR__CCAANNTTSSEETT__TTSSTTAAMMPP__TTYYPPEE  if  the  capture device doesn't support
+       PCAP_ERROR_CANTSET_TSTAMP_TYPE  if  the  capture device doesn't support
        setting the time stamp type.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP),                             pcap_list_tstamp_types(3PCAP),
        pcap_tstamp_type_name_to_val(3PCAP), pcap-tstamp(7)
 

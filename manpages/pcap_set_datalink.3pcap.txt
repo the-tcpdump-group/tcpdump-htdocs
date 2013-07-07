@@ -2,25 +2,25 @@ PCAP_SET_DATALINK(3PCAP)                              PCAP_SET_DATALINK(3PCAP)
 
 
 
-NNAAMMEE
-       pcap_set_datalink - set the link-layer header type to be used by a cap-
+NAME
+       pcap_set_datalink - set the link-layer header type to be used by a cap‐
        ture device
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__sseett__ddaattaalliinnkk((ppccaapp__tt **pp,, iinntt ddlltt));;
+       int pcap_set_datalink(pcap_t *p, int dlt);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__sseett__ddaattaalliinnkk(()) is used to set the current link-layer  header  type
-       of the pcap descriptor to the type specified by _d_l_t.
+DESCRIPTION
+       pcap_set_datalink() is used to set the current link-layer  header  type
+       of the pcap descriptor to the type specified by dlt.
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__sseett__ddaattaalliinnkk(())  returns  0 on success and -1 on failure.  If -1 is
-       returned, ppccaapp__ggeetteerrrr(()) or ppccaapp__ppeerrrroorr(()) may be called  with  _p  as  an
+RETURN VALUE
+       pcap_set_datalink()  returns  0 on success and -1 on failure.  If -1 is
+       returned, pcap_geterr() or pcap_perror() may be called  with  p  as  an
        argument to fetch or display the error text.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP), pcap_geterr(3PCAP), pcap_datalink_name_to_val(3PCAP)
 
 

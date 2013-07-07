@@ -2,24 +2,24 @@ PCAP_DATALINK_NAME_TO_VAL(3PCAP)              PCAP_DATALINK_NAME_TO_VAL(3PCAP)
 
 
 
-NNAAMMEE
-       pcap_datalink_name_to_val - get the link-layer header type value corre-
+NAME
+       pcap_datalink_name_to_val - get the link-layer header type value corre‐
        sponding to a header type name
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__ddaattaalliinnkk__nnaammee__ttoo__vvaall((ccoonnsstt cchhaarr **nnaammee));;
+       int pcap_datalink_name_to_val(const char *name);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__ddaattaalliinnkk__nnaammee__ttoo__vvaall(()) translates a link-layer header  type  name,
-       which  is a DDLLTT__ name with the DDLLTT__ removed, to the corresponding link-
+DESCRIPTION
+       pcap_datalink_name_to_val() translates a link-layer header  type  name,
+       which  is a DLT_ name with the DLT_ removed, to the corresponding link-
        layer header type value.  The translation is case-insensitive.
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__ddaattaalliinnkk__nnaammee__ttoo__vvaall(()) returns 0 on success and -1 on failure.
+RETURN VALUE
+       pcap_datalink_name_to_val() returns 0 on success and -1 on failure.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP)
 
 

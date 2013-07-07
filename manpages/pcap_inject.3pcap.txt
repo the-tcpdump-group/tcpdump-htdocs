@@ -2,23 +2,23 @@ PCAP_INJECT(3PCAP)                                          PCAP_INJECT(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_inject, pcap_sendpacket - transmit a packet
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__iinnjjeecctt((ppccaapp__tt **pp,, ccoonnsstt vvooiidd **bbuuff,, ssiizzee__tt ssiizzee));;
-       iinntt ppccaapp__sseennddppaacckkeett((ppccaapp__tt **pp,, ccoonnsstt uu__cchhaarr **bbuuff,, iinntt ssiizzee));;
+       int pcap_inject(pcap_t *p, const void *buf, size_t size);
+       int pcap_sendpacket(pcap_t *p, const u_char *buf, int size);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__iinnjjeecctt(())  sends  a  raw  packet through the network interface; _b_u_f
+DESCRIPTION
+       pcap_inject()  sends  a  raw  packet through the network interface; buf
        points to the data of the packet, including the link-layer header,  and
-       _s_i_z_e is the number of bytes in the packet.
+       size is the number of bytes in the packet.
 
        Note  that,  even  if  you successfully open the network interface, you
-       might not have permission to send packets on it, or it might  not  sup-
-       port  sending packets; as _p_c_a_p___o_p_e_n___l_i_v_e_(_) doesn't have a flag to indi-
+       might not have permission to send packets on it, or it might  not  sup‐
+       port  sending packets; as pcap_open_live() doesn't have a flag to indi‐
        cate whether to open for capturing, sending, or capturing and  sending,
        you  cannot  request  an  open that supports sending and be notified at
        open time whether sending  will  be  possible.   Note  also  that  some
@@ -26,30 +26,30 @@ DDEESSCCRRIIPPTTIIOONN
 
        Note  that,  on  some  platforms,  the  link-layer header of the packet
        that's sent might not be the same  as  the  link-layer  header  of  the
-       packet  supplied to ppccaapp__iinnjjeecctt(()), as the source link-layer address, if
+       packet  supplied to pcap_inject(), as the source link-layer address, if
        the header contains such an address, might be changed to be the address
        assigned  to the interface on which the packet it sent, if the platform
        doesn't support sending completely raw  and  unchanged  packets.   Even
        worse,  some drivers on some platforms might change the link-layer type
        field to whatever value libpcap used when attaching to the device, even
-       on  platforms  that  _d_o  nominally  support  sending completely raw and
+       on  platforms  that  do  nominally  support  sending completely raw and
        unchanged packets.
 
-       ppccaapp__sseennddppaacckkeett(()) is like ppccaapp__iinnjjeecctt(()), but it returns 0  on  success,
-       rather  than  returning  the  number  of bytes written.  (ppccaapp__iinnjjeecctt(())
-       comes from OpenBSD; ppccaapp__sseennddppaacckkeett(()) comes  from  WinPcap.   Both  are
+       pcap_sendpacket() is like pcap_inject(), but it returns 0  on  success,
+       rather  than  returning  the  number  of bytes written.  (pcap_inject()
+       comes from OpenBSD; pcap_sendpacket() comes  from  WinPcap.   Both  are
        provided for compatibility.)
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__iinnjjeecctt(())  returns the number of bytes written on success and -1 on
+RETURN VALUE
+       pcap_inject()  returns the number of bytes written on success and -1 on
        failure.
 
-       ppccaapp__sseennddppaacckkeett(()) returns 0 on success and -1 on failure.
+       pcap_sendpacket() returns 0 on success and -1 on failure.
 
-       If -1 is returned, ppccaapp__ggeetteerrrr(()) or ppccaapp__ppeerrrroorr(()) may be called with  _p
+       If -1 is returned, pcap_geterr() or pcap_perror() may be called with  p
        as an argument to fetch or display the error text.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP), pcap_geterr(3PCAP)
 
 

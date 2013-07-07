@@ -2,36 +2,36 @@ PCAP_LIST_TSTAMP_TYPES(3PCAP)                    PCAP_LIST_TSTAMP_TYPES(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_list_tstamp_types,  pcap_free_tstamp_types  -  get  a list of time
        stamp types supported by a capture device, and free that list
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__lliisstt__ttssttaammpp__ttyyppeess((ppccaapp__tt **pp,, iinntt ****ttssttaammpp__ttyyppeesspp));;
-       vvooiidd ppccaapp__ffrreeee__ttssttaammpp__ttyyppeess((iinntt **ttssttaammpp__ttyyppeess));;
+       int pcap_list_tstamp_types(pcap_t *p, int **tstamp_typesp);
+       void pcap_free_tstamp_types(int *tstamp_types);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__lliisstt__ttssttaammpp__ttyyppeess(()) is used to get a list of  the  supported  time
+DESCRIPTION
+       pcap_list_tstamp_types() is used to get a list of  the  supported  time
        stamp  types  of  the  interface  associated  with the pcap descriptor.
-       ppccaapp__lliisstt__ttssttaammpp__ttyyppeess(()) allocates an array to hold the list  and  sets
-       _*_t_s_t_a_m_p___t_y_p_e_s_p to point to the array.  See ppccaapp--ttssttaammpp(7) for a list of
+       pcap_list_tstamp_types() allocates an array to hold the list  and  sets
+       *tstamp_typesp to point to the array.  See pcap-tstamp(7) for a list of
        all the time stamp types.
 
        The   caller   is   responsible   for   freeing    the    array    with
-       ppccaapp__ffrreeee__ttssttaammpp__ttyyppeess(()),   which   frees   the   list  pointed  to  by
-       _t_s_t_a_m_p___t_y_p_e_s.
+       pcap_free_tstamp_types(),   which   frees   the   list  pointed  to  by
+       tstamp_types.
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__lliisstt__ttssttaammpp__ttyyppeess(()) returns the number of time stamp types in  the
-       array  on  success  and  PPCCAAPP__EERRRROORR on failure.  A return value of zero
+RETURN VALUE
+       pcap_list_tstamp_types() returns the number of time stamp types in  the
+       array  on  success  and  PCAP_ERROR on failure.  A return value of zero
        means that you cannot specify a time stamp type; you are limited to the
-       capture  device's  default time stamp type.  If PPCCAAPP__EERRRROORR is returned,
-       ppccaapp__ggeetteerrrr(()) or ppccaapp__ppeerrrroorr(()) may be called with _p as an  argument  to
+       capture  device's  default time stamp type.  If PCAP_ERROR is returned,
+       pcap_geterr() or pcap_perror() may be called with p as an  argument  to
        fetch or display the error text.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP),  pcap_geterr(3PCAP),  pcap_tstamp_type_val_to_name(3PCAP),
        pcap-tstamp(7)
 

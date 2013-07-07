@@ -2,20 +2,20 @@ PCAP_STATUSTOSTR(3PCAP)                                PCAP_STATUSTOSTR(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_statustostr  -  convert  a PCAP_ERROR_ or PCAP_WARNING_ value to a
        string
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       ccoonnsstt cchhaarr **ppccaapp__ssttaattuussttoossttrr((iinntt eerrrroorr));;
+       const char *pcap_statustostr(int error);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__ssttaattuussttoossttrr(())  converts  a  PPCCAAPP__EERRRROORR__  or  PPCCAAPP__WWAARRNNIINNGG__   value
+DESCRIPTION
+       pcap_statustostr()  converts  a  PCAP_ERROR_  or  PCAP_WARNING_   value
        returned by a libpcap routine to an error string.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP)
 
 

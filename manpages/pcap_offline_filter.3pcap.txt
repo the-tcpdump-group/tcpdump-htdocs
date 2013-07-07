@@ -2,27 +2,27 @@ PCAP_OFFLINE_FILTER(3PCAP)                          PCAP_OFFLINE_FILTER(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_offline_filter - check whether a filter matches a packet
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__oofffflliinnee__ffiilltteerr((ssttrruucctt bbppff__pprrooggrraamm **ffpp,,
-               ccoonnsstt ssttrruucctt ppccaapp__ppkktthhddrr **hh,, ccoonnsstt uu__cchhaarr **ppkktt))
+       int pcap_offline_filter(const struct bpf_program *fp,
+               const struct pcap_pkthdr *h, const u_char *pkt)
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__oofffflliinnee__ffiilltteerr(())  checks whether a filter matches a packet.  _f_p is
-       a pointer to a _b_p_f___p_r_o_g_r_a_m struct, usually the  result  of  a  call  to
-       ppccaapp__ccoommppiillee(()).   _h points to the _p_c_a_p___p_k_t_h_d_r structure for the packet,
-       and _p_k_t points to the data in the packet.
+DESCRIPTION
+       pcap_offline_filter()  checks whether a filter matches a packet.  fp is
+       a pointer to a bpf_program struct, usually the  result  of  a  call  to
+       pcap_compile().   h points to the pcap_pkthdr structure for the packet,
+       and pkt points to the data in the packet.
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__oofffflliinnee__ffiilltteerr(()) returns the return value of the  filter  program.
+RETURN VALUE
+       pcap_offline_filter() returns the return value of the  filter  program.
        This  will  be zero if the packet doesn't match the filter and non-zero
        if the packet matches the filter.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP), pcap_compile(3PCAP)
 
 

@@ -2,38 +2,38 @@ PCAP_OPEN_OFFLINE(3PCAP)                              PCAP_OPEN_OFFLINE(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_open_offline,  pcap_fopen_offline  - open a saved capture file for
        reading
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       cchhaarr eerrrrbbuuff[[PPCCAAPP__EERRRRBBUUFF__SSIIZZEE]];;
+       char errbuf[PCAP_ERRBUF_SIZE];
 
-       ppccaapp__tt **ppccaapp__ooppeenn__oofffflliinnee((ccoonnsstt cchhaarr **ffnnaammee,, cchhaarr **eerrrrbbuuff));;
-       ppccaapp__tt **ppccaapp__ffooppeenn__oofffflliinnee((FFIILLEE **ffpp,, cchhaarr **eerrrrbbuuff));;
+       pcap_t *pcap_open_offline(const char *fname, char *errbuf);
+       pcap_t *pcap_fopen_offline(FILE *fp, char *errbuf);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__ooppeenn__oofffflliinnee(()) is called to open a ``savefile'' for reading.
+DESCRIPTION
+       pcap_open_offline() is called to open a ``savefile'' for reading.
 
-       _f_n_a_m_e specifies the name of the file to open. The  file  can  have  the
-       pcap  file  format  as described in ppccaapp--ssaavveeffiillee(5), which is the file
-       format used by, among other programs, ttccppdduummpp(1)  and  ttccppsslliiccee(1),  or
+       fname specifies the name of the file to open. The  file  can  have  the
+       pcap  file  format  as described in pcap-savefile(5), which is the file
+       format used by, among other programs, tcpdump(1)  and  tcpslice(1),  or
        can have the pcap-ng file format, although not all pcap-ng files can be
-       read.  The name "-" in a synonym for ssttddiinn.
+       read.  The name "-" in a synonym for stdin.
 
-       Alternatively, you may call ppccaapp__ffooppeenn__oofffflliinnee(()) to  read  dumped  data
-       from  an  existing  open  stream _f_p.  Note that on Windows, that stream
+       Alternatively, you may call pcap_fopen_offline() to  read  dumped  data
+       from  an  existing  open  stream fp.  Note that on Windows, that stream
        should be opened in binary mode.
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__ooppeenn__oofffflliinnee(()) and ppccaapp__ffooppeenn__oofffflliinnee(()) return a _p_c_a_p___t _* on  suc-
-       cess  and  NNUULLLL  on  failure.  If NNUULLLL is returned, _e_r_r_b_u_f is filled in
-       with an appropriate error message.  _e_r_r_b_u_f is assumed  to  be  able  to
-       hold at least PPCCAAPP__EERRRRBBUUFF__SSIIZZEE chars.
+RETURN VALUE
+       pcap_open_offline() and pcap_fopen_offline() return a pcap_t * on  suc‐
+       cess  and  NULL  on  failure.  If NULL is returned, errbuf is filled in
+       with an appropriate error message.  errbuf is assumed  to  be  able  to
+       hold at least PCAP_ERRBUF_SIZE chars.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP), pcap-savefile(5)
 
 

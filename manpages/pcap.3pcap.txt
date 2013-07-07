@@ -2,44 +2,44 @@ PCAP(3PCAP)                                                        PCAP(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap - Packet Capture library
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-DDEESSCCRRIIPPTTIIOONN
+DESCRIPTION
        The  Packet  Capture  library provides a high level interface to packet
        capture systems. All packets on the network, even  those  destined  for
        other  hosts,  are accessible through this mechanism.  It also supports
        saving captured packets to a ``savefile'', and reading packets  from  a
        ``savefile''.
 
-   OOppeenniinngg aa ccaappttuurree hhaannddllee ffoorr rreeaaddiinngg
+   Opening a capture handle for reading
        To  open  a handle for a live capture, given the name of the network or
-       other interface on which the capture should  be  done,  call  ppccaapp__ccrree--
-       aattee(),  set the appropriate options on the handle, and then activate it
-       with ppccaapp__aaccttiivvaattee().
+       other interface on which the capture should  be  done,  call  pcap_cre‐
+       ate(),  set the appropriate options on the handle, and then activate it
+       with pcap_activate().
 
        To obtain a list of devices that can be opened for a live capture, call
-       ppccaapp__ffiinnddaallllddeevvss();  to  free  the list returned by ppccaapp__ffiinnddaallllddeevvss(),
-       call ppccaapp__ffrreeeeaallllddeevvss().  ppccaapp__llooookkuuppddeevv() will return the first device
+       pcap_findalldevs();  to  free  the list returned by pcap_findalldevs(),
+       call pcap_freealldevs().  pcap_lookupdev() will return the first device
        on that list that is not a ``loopback`` network interface.
 
        To  open  a handle for a ``savefile'' from which to read packets, given
-       the pathname of the ``savefile'', call ppccaapp__ooppeenn__oofffflliinnee(); to set up a
-       handle  for  a ``savefile'', given a FFIILLEE ** referring to a file already
-       opened for reading, call ppccaapp__ffooppeenn__oofffflliinnee().
+       the pathname of the ``savefile'', call pcap_open_offline(); to set up a
+       handle  for  a ``savefile'', given a FILE * referring to a file already
+       opened for reading, call pcap_fopen_offline().
 
-       In order to get a ``fake'' ppccaapp__tt for use in routines  that  require  a
-       ppccaapp__tt  as  an  argument,  such  as routines to open a ``savefile'' for
-       writing and to compile a filter expression, call ppccaapp__ooppeenn__ddeeaadd().
+       In order to get a ``fake'' pcap_t for use in routines  that  require  a
+       pcap_t  as  an  argument,  such  as routines to open a ``savefile'' for
+       writing and to compile a filter expression, call pcap_open_dead().
 
-       ppccaapp__ccrreeaattee(),    ppccaapp__ooppeenn__oofffflliinnee(),    ppccaapp__ffooppeenn__oofffflliinnee(),     and
-       ppccaapp__ooppeenn__ddeeaadd() return a pointer to a ppccaapp__tt, which is the handle used
+       pcap_create(),    pcap_open_offline(),    pcap_fopen_offline(),     and
+       pcap_open_dead() return a pointer to a pcap_t, which is the handle used
        for reading packets from the capture stream or  the  ``savefile'',  and
        for  finding  out information about the capture stream or ``savefile''.
-       To close a handle, use ppccaapp__cclloossee().
+       To close a handle, use pcap_close().
 
        The options that can be set on a capture handle include
 
@@ -51,15 +51,15 @@ DDEESSCCRRIIPPTTIIOONN
               packet.  If you don't need the entire contents of the  packet  -
               for  example,  if  you are only interested in the TCP headers of
               packets - you can set the "snapshot length" for the  capture  to
-              an appropriate value.  If the snapshot length is set to _s_n_a_p_l_e_n,
-              and _s_n_a_p_l_e_n is less than the size of a packet that is  captured,
-              only the first _s_n_a_p_l_e_n bytes of that packet will be captured and
+              an appropriate value.  If the snapshot length is set to snaplen,
+              and snaplen is less than the size of a packet that is  captured,
+              only the first snaplen bytes of that packet will be captured and
               provided as packet data.
 
               A snapshot length of 65535 should be sufficient, on most if  not
               all networks, to capture all the data available from the packet.
 
-              The snapshot length is set with ppccaapp__sseett__ssnnaapplleenn().
+              The snapshot length is set with pcap_set_snaplen().
 
        promiscuous mode
               On  broadcast  LANs  such  as  Ethernet,  if  the  network isn't
@@ -72,7 +72,7 @@ DDEESSCCRRIIPPTTIIOONN
               Normally, the adapter will discard those packets; however,  many
               network  adapters support "promiscuous mode", which is a mode in
               which all packets, even if they are not sent to an address  that
-              the  adapter recognizes, are provided to the host.  This is use-
+              the  adapter recognizes, are provided to the host.  This is use‐
               ful for passively capturing traffic between two  or  more  other
               hosts for analysis.
 
@@ -84,10 +84,10 @@ DDEESSCCRRIIPPTTIIOONN
               of "any" or NULL is supplied, the setting of promiscuous mode is
               ignored.
 
-              Promiscuous mode is set with ppccaapp__sseett__pprroommiisscc().
+              Promiscuous mode is set with pcap_set_promisc().
 
        monitor mode
-              On IEEE 802.11 wireless LANs, even if an adapter is in promiscu-
+              On IEEE 802.11 wireless LANs, even if an adapter is in promiscu‐
               ous mode, it will supply to the host only frames for the network
               with  which  it's  associated.   It  might also supply only data
               frames, not management or control frames, and might not  provide
@@ -106,8 +106,8 @@ DDEESSCCRRIIPPTTIIOONN
               names or network addresses, if you are capturing in monitor mode
               and are not connected to another network with another adapter.
 
-              Monitor    mode    is    set    with    ppccaapp__sseett__rrffmmoonn(),    and
-              ppccaapp__ccaann__sseett__rrffmmoonn() can be used to determine whether an adapter
+              Monitor    mode    is    set    with    pcap_set_rfmon(),    and
+              pcap_can_set_rfmon() can be used to determine whether an adapter
               can be put into monitor mode.
 
        read timeout
@@ -132,22 +132,22 @@ DDEESSCCRRIIPPTTIIOONN
               could take an arbitrarily long period of time.
 
               Not all platforms support a  read  timeout;  on  platforms  that
-              don't,  the read timeout is ignored.  A zero value for the time-
+              don't,  the read timeout is ignored.  A zero value for the time‐
               out, on platforms that support a read timeout, will cause a read
-              to wait forever to allow enough packets to arrive, with no time-
+              to wait forever to allow enough packets to arrive, with no time‐
               out.
 
-              NNOOTTEE: the read timeout cannot be used to cause calls  that  read
+              NOTE: the read timeout cannot be used to cause calls  that  read
               packets  to  return within a limited period of time, because, on
               some platforms, the read timeout isn't supported, and, on  other
               platforms,  the  timer  doesn't  start until at least one packet
-              arrives.  This means that the read timeout should NNOOTT  be  used,
+              arrives.  This means that the read timeout should NOT  be  used,
               for  example,  in an interactive application to allow the packet
               capture loop to ``poll'' for user input periodically, as there's
               no  guarantee  that a call reading packets will return after the
               timeout expires even if no packets have arrived.
 
-              The read timeout is set with ppccaapp__sseett__ttiimmeeoouutt().
+              The read timeout is set with pcap_set_timeout().
 
        buffer size
               Packets that arrive for a capture are stored  in  a  buffer,  so
@@ -161,28 +161,28 @@ DDEESSCCRRIIPPTTIIOONN
               system memory than is necessary to prevent  packets  from  being
               dropped.
 
-              The buffer size is set with ppccaapp__sseett__bbuuffffeerr__ssiizzee().
+              The buffer size is set with pcap_set_buffer_size().
 
        timestamp type
-              On  some platforms, the time stamp given to packets on live cap-
+              On  some platforms, the time stamp given to packets on live cap‐
               tures can come from different sources that  can  have  different
               resolutions or that can have different relationships to the time
               values for the current time supplied by routines on  the  native
-              operating  system.   See ppccaapp--ttssttaammpp(7) for a list of time stamp
+              operating  system.   See pcap-tstamp(7) for a list of time stamp
               types.
 
-              The time stamp type is set with ppccaapp__sseett__ttssttaammpp__ttyyppee().
+              The time stamp type is set with pcap_set_tstamp_type().
 
-       Reading packets from a network interface may require that you have spe-
+       Reading packets from a network interface may require that you have spe‐
        cial privileges:
 
-       UUnnddeerr SSuunnOOSS 33..xx oorr 44..xx wwiitthh NNIITT oorr BBPPFF::
-              You must have read access to _/_d_e_v_/_n_i_t or _/_d_e_v_/_b_p_f_*.
+       Under SunOS 3.x or 4.x with NIT or BPF:
+              You must have read access to /dev/nit or /dev/bpf*.
 
-       UUnnddeerr SSoollaarriiss wwiitthh DDLLPPII::
+       Under Solaris with DLPI:
               You  must  have  read/write access to the network pseudo device,
-              e.g.  _/_d_e_v_/_l_e.  On at least some versions of  Solaris,  however,
-              this  is not sufficient to allow _t_c_p_d_u_m_p to capture in promiscu-
+              e.g.  /dev/le.  On at least some versions of  Solaris,  however,
+              this  is not sufficient to allow tcpdump to capture in promiscu‐
               ous mode; on those versions of Solaris, you must be root, or the
               application  capturing packets must be installed setuid to root,
               in order to capture in promiscuous mode.   Note  that,  on  many
@@ -191,21 +191,21 @@ DDEESSCCRRIIPPTTIIOONN
               done in promiscuous mode may not be very useful.
 
               In  newer  versions  of  Solaris,  you  must have been given the
-              nneett__rraawwaacccceessss privilege; this is both necessary  and  sufficient
+              net_rawaccess privilege; this is both necessary  and  sufficient
               to  give  you  access to the network pseudo-device - there is no
               need to change the privileges on that device.   A  user  can  be
               given  that  privilege by, for example, adding that privilege to
-              the user's ddeeffaauullttpprriivv key with the uusseerrmmoodd ((11MM)) command.
+              the user's defaultpriv key with the usermod (1M) command.
 
-       UUnnddeerr HHPP--UUXX wwiitthh DDLLPPII::
+       Under HP-UX with DLPI:
               You must be root or the application capturing  packets  must  be
               installed setuid to root.
 
-       UUnnddeerr IIRRIIXX wwiitthh ssnnoooopp::
+       Under IRIX with snoop:
               You  must  be  root or the application capturing packets must be
               installed setuid to root.
 
-       UUnnddeerr LLiinnuuxx::
+       Under Linux:
               You must be root or the application capturing  packets  must  be
               installed  setuid to root (unless your distribution has a kernel
               that supports capability bits such as CAP_NET_RAW  and  code  to
@@ -213,206 +213,206 @@ DDEESSCCRRIIPPTTIIOONN
               and to cause those bits to be set on a user's initial  processes
               when  they  log  in, in which case you  must have CAP_NET_RAW in
               order to capture and CAP_NET_ADMIN to enumerate network  devices
-              with, for example, the --DD flag).
+              with, for example, the -D flag).
 
-       UUnnddeerr UULLTTRRIIXX aanndd DDiiggiittaall UUNNIIXX//TTrruu6644 UUNNIIXX::
+       Under ULTRIX and Digital UNIX/Tru64 UNIX:
               Any  user  may  capture  network traffic.  However, no user (not
               even the super-user) can  capture  in  promiscuous  mode  on  an
               interface  unless  the  super-user  has enabled promiscuous-mode
-              operation on that interface using _p_f_c_o_n_f_i_g(8), and no user  (not
+              operation on that interface using pfconfig(8), and no user  (not
               even  the super-user) can capture unicast traffic received by or
               sent by the machine on an interface unless  the  super-user  has
-              enabled  copy-all-mode  operation on that interface using _p_f_c_o_n_-
-              _f_i_g, so _u_s_e_f_u_l packet capture on an interface probably  requires
+              enabled  copy-all-mode  operation on that interface using pfcon‐
+              fig, so useful packet capture on an interface probably  requires
               that either promiscuous-mode or copy-all-mode operation, or both
               modes of operation, be enabled on that interface.
 
-       UUnnddeerr BBSSDD ((tthhiiss iinncclluuddeess MMaacc OOSS XX))::
-              You must have read access to _/_d_e_v_/_b_p_f_*  on  systems  that  don't
-              have  a  cloning  BPF device, or to _/_d_e_v_/_b_p_f on systems that do.
+       Under BSD (this includes Mac OS X):
+              You must have read access to /dev/bpf*  on  systems  that  don't
+              have  a  cloning  BPF device, or to /dev/bpf on systems that do.
               On BSDs with a devfs  (this  includes  Mac  OS  X),  this  might
               involve  more  than  just having somebody with super-user access
               setting the ownership or permissions on the  BPF  devices  -  it
-              might  involve configuring devfs to set the ownership or permis-
-              sions every time the system is booted, if the system  even  sup-
+              might  involve configuring devfs to set the ownership or permis‐
+              sions every time the system is booted, if the system  even  sup‐
               ports  that;  if it doesn't support that, you might have to find
               some other way to make that happen at boot time.
 
        Reading a saved packet file doesn't require special privileges.
 
-       The packets read from the handle may include a  ``pseudo-header''  con-
+       The packets read from the handle may include a  ``pseudo-header''  con‐
        taining  various  forms  of  packet  meta-data, and probably includes a
        link-layer header whose  contents  can  differ  for  different  network
        interfaces.   To  determine  the  format of the packets supplied by the
-       handle,  call  ppccaapp__ddaattaalliinnkk();   _h_t_t_p_:_/_/_w_w_w_._t_c_p_d_u_m_p_._o_r_g_/_l_i_n_k_t_y_p_e_s_._h_t_m_l
-       lists  the values it returns and describes the packet formats that cor-
+       handle,  call  pcap_datalink();   http://www.tcpdump.org/linktypes.html
+       lists  the values it returns and describes the packet formats that cor‐
        respond to those values.
 
-       To obtain the FFIILLEE ** corresponding to a ppccaapp__tt  opened  for  a  ``save-
-       file'', call ppccaapp__ffiillee().
+       To obtain the FILE * corresponding to a pcap_t  opened  for  a  ``save‐
+       file'', call pcap_file().
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__ccrreeaattee(3PCAP)
-                     get a ppccaapp__tt for live capture
+              pcap_create(3PCAP)
+                     get a pcap_t for live capture
 
-              ppccaapp__aaccttiivvaattee(3PCAP)
-                     activate a ppccaapp__tt for live capture
+              pcap_activate(3PCAP)
+                     activate a pcap_t for live capture
 
-              ppccaapp__ffiinnddaallllddeevvss(3PCAP)
-                     get  a list of devices that can be opened for a live cap-
+              pcap_findalldevs(3PCAP)
+                     get  a list of devices that can be opened for a live cap‐
                      ture
 
-              ppccaapp__ffrreeeeaallllddeevvss(3PCAP)
+              pcap_freealldevs(3PCAP)
                      free list of devices
 
-              ppccaapp__llooookkuuppddeevv(3PCAP)
+              pcap_lookupdev(3PCAP)
                      get first non-loopback device on that list
 
-              ppccaapp__ooppeenn__oofffflliinnee(3PCAP)
-                     open a ppccaapp__tt for a ``savefile'', given a pathname
+              pcap_open_offline(3PCAP)
+                     open a pcap_t for a ``savefile'', given a pathname
 
-              ppccaapp__ffooppeenn__oofffflliinnee(3PCAP)
-                     open a ppccaapp__tt for a ``savefile'', given a FFIILLEE **
+              pcap_fopen_offline(3PCAP)
+                     open a pcap_t for a ``savefile'', given a FILE *
 
-              ppccaapp__ooppeenn__ddeeaadd(3PCAP)
-                     create a ``fake'' ppccaapp__tt
+              pcap_open_dead(3PCAP)
+                     create a ``fake'' pcap_t
 
-              ppccaapp__cclloossee(3PCAP)
-                     close a ppccaapp__tt
+              pcap_close(3PCAP)
+                     close a pcap_t
 
-              ppccaapp__sseett__ssnnaapplleenn(3PCAP)
-                     set the snapshot length for  a  not-yet-activated  ppccaapp__tt
+              pcap_set_snaplen(3PCAP)
+                     set the snapshot length for  a  not-yet-activated  pcap_t
                      for live capture
 
-              ppccaapp__ssnnaappsshhoott(3PCAP)
-                     get the snapshot length for a ppccaapp__tt
+              pcap_snapshot(3PCAP)
+                     get the snapshot length for a pcap_t
 
-              ppccaapp__sseett__pprroommiisscc(3PCAP)
-                     set  promiscuous  mode for a not-yet-activated ppccaapp__tt for
+              pcap_set_promisc(3PCAP)
+                     set  promiscuous  mode for a not-yet-activated pcap_t for
                      live capture
 
-              ppccaapp__sseett__rrffmmoonn(3PCAP)
-                     set monitor mode for a not-yet-activated ppccaapp__tt for  live
+              pcap_set_rfmon(3PCAP)
+                     set monitor mode for a not-yet-activated pcap_t for  live
                      capture
 
-              ppccaapp__ccaann__sseett__rrffmmoonn(3PCAP)
-                     determine  whether  monitor  mode can be set for a ppccaapp__tt
+              pcap_can_set_rfmon(3PCAP)
+                     determine  whether  monitor  mode can be set for a pcap_t
                      for live capture
 
-              ppccaapp__sseett__ttiimmeeoouutt(3PCAP)
-                     set read timeout for a not-yet-activated ppccaapp__tt for  live
+              pcap_set_timeout(3PCAP)
+                     set read timeout for a not-yet-activated pcap_t for  live
                      capture
 
-              ppccaapp__sseett__bbuuffffeerr__ssiizzee(3PCAP)
-                     set  buffer  size for a not-yet-activated ppccaapp__tt for live
+              pcap_set_buffer_size(3PCAP)
+                     set  buffer  size for a not-yet-activated pcap_t for live
                      capture
 
-              ppccaapp__sseett__ttssttaammpp__ttyyppee(3PCAP)
-                     set time stamp type for a  not-yet-activated  ppccaapp__tt  for
+              pcap_set_tstamp_type(3PCAP)
+                     set time stamp type for a  not-yet-activated  pcap_t  for
                      live capture
 
-              ppccaapp__lliisstt__ttssttaammpp__ttyyppeess(3PCAP)
+              pcap_list_tstamp_types(3PCAP)
                      get  list  of  available  time stamp types for a not-yet-
-                     activated ppccaapp__tt for live capture
+                     activated pcap_t for live capture
 
-              ppccaapp__ffrreeee__ttssttaammpp__ttyyppeess(3PCAP)
+              pcap_free_tstamp_types(3PCAP)
                      free list of available time stamp types
 
-              ppccaapp__ttssttaammpp__ttyyppee__vvaall__ttoo__nnaammee(3PCAP)
+              pcap_tstamp_type_val_to_name(3PCAP)
                      get name for a time stamp type
 
-              ppccaapp__ttssttaammpp__ttyyppee__vvaall__ttoo__ddeessccrriippttiioonn(3PCAP)
+              pcap_tstamp_type_val_to_description(3PCAP)
                      get description for a time stamp type
 
-              ppccaapp__ttssttaammpp__nnaammee__ttoo__vvaall(3PCAP)
+              pcap_tstamp_name_to_val(3PCAP)
                      get time stamp type corresponding to a name
 
-              ppccaapp__ddaattaalliinnkk(3PCAP)
-                     get link-layer header type for a ppccaapp__tt
+              pcap_datalink(3PCAP)
+                     get link-layer header type for a pcap_t
 
-              ppccaapp__ffiillee(3PCAP)
-                     get the FFIILLEE ** for a ppccaapp__tt opened for a ``savefile''
+              pcap_file(3PCAP)
+                     get the FILE * for a pcap_t opened for a ``savefile''
 
-              ppccaapp__iiss__sswwaappppeedd(3PCAP)
+              pcap_is_swapped(3PCAP)
                      determine whether a ``savefile'' being read came  from  a
                      machine with the opposite byte order
 
-              ppccaapp__mmaajjoorr__vveerrssiioonn(3PCAP)
-              ppccaapp__mmiinnoorr__vveerrssiioonn(3PCAP)
-                     get  the  major and minor version of the file format ver-
+              pcap_major_version(3PCAP)
+              pcap_minor_version(3PCAP)
+                     get  the  major and minor version of the file format ver‐
                      sion for a ``savefile''
 
-   SSeelleeccttiinngg aa lliinnkk--llaayyeerr hheeaaddeerr ttyyppee ffoorr aa lliivvee ccaappttuurree
+   Selecting a link-layer header type for a live capture
        Some devices may provide more than  one  link-layer  header  type.   To
        obtain a list of all link-layer header types provided by a device, call
-       ppccaapp__lliisstt__ddaattaalliinnkkss() on an activated ppccaapp__tt for the device.  To free a
-       list  of  link-layer  header types, call ppccaapp__ffrreeee__ddaattaalliinnkkss().  To set
-       the link-layer header type  for  a  device,  call  ppccaapp__sseett__ddaattaalliinnkk().
+       pcap_list_datalinks() on an activated pcap_t for the device.  To free a
+       list  of  link-layer  header types, call pcap_free_datalinks().  To set
+       the link-layer header type  for  a  device,  call  pcap_set_datalink().
        This  should be done after the device has been activated but before any
        packets are read and before any filters are compiled or installed.
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__lliisstt__ddaattaalliinnkkss(3PCAP)
+              pcap_list_datalinks(3PCAP)
                      get a list of link-layer header types for a device
 
-              ppccaapp__ffrreeee__ddaattaalliinnkkss(3PCAP)
+              pcap_free_datalinks(3PCAP)
                      free list of link-layer header types
 
-              ppccaapp__sseett__ddaattaalliinnkk(3PCAP)
+              pcap_set_datalink(3PCAP)
                      set link-layer header type for a device
 
-              ppccaapp__ddaattaalliinnkk__vvaall__ttoo__nnaammee(3PCAP)
+              pcap_datalink_val_to_name(3PCAP)
                      get name for a link-layer header type
 
-              ppccaapp__ddaattaalliinnkk__vvaall__ttoo__ddeessccrriippttiioonn(3PCAP)
+              pcap_datalink_val_to_description(3PCAP)
                      get description for a link-layer header type
 
-              ppccaapp__ddaattaalliinnkk__nnaammee__ttoo__vvaall(3PCAP)
+              pcap_datalink_name_to_val(3PCAP)
                      get link-layer header type corresponding to a name
 
-   RReeaaddiinngg ppaacckkeettss
-       Packets are read with ppccaapp__ddiissppaattcchh() or ppccaapp__lloooopp(), which process one
+   Reading packets
+       Packets are read with pcap_dispatch() or pcap_loop(), which process one
        or  more  packets,  calling a callback routine for each packet, or with
-       ppccaapp__nneexxtt() or ppccaapp__nneexxtt__eexx(), which return the next packet.  The call-
-       back  for  ppccaapp__ddiissppaattcchh()  and  ppccaapp__lloooopp() is supplied a pointer to a
-       _s_t_r_u_c_t _p_c_a_p___p_k_t_h_d_r, which includes the following members:
+       pcap_next() or pcap_next_ex(), which return the next packet.  The call‐
+       back  for  pcap_dispatch()  and  pcap_loop() is supplied a pointer to a
+       struct pcap_pkthdr, which includes the following members:
 
-              ttss     a _s_t_r_u_c_t _t_i_m_e_v_a_l containing the time when the packet  was
+              ts     a struct timeval containing the time when the packet  was
                      captured
 
-              ccaapplleenn a  _b_p_f___u___i_n_t_3_2  giving  the number of bytes of the packet
+              caplen a  bpf_u_int32  giving  the number of bytes of the packet
                      that are available from the capture
 
-              lleenn    a _b_p_f___u___i_n_t_3_2 giving the length of the packet,  in  bytes
+              len    a bpf_u_int32 giving the length of the packet,  in  bytes
                      (which  might  be more than the number of bytes available
                      from the capture, if the length of the packet  is  larger
                      than the maximum number of bytes to capture).
 
-       ppccaapp__nneexxtt__eexx()  supplies  that  pointer  through  a  pointer  argument.
-       ppccaapp__nneexxtt() is passed an argument that points to a  _s_t_r_u_c_t  _p_c_a_p___p_k_t_h_d_r
+       pcap_next_ex()  supplies  that  pointer  through  a  pointer  argument.
+       pcap_next() is passed an argument that points to a  struct  pcap_pkthdr
        structure, and fills it in.
 
-       The  callback  is  also  supplied  a  _c_o_n_s_t _u___c_h_a_r pointer to the first
-       ccaapplleenn (as given in the _s_t_r_u_c_t _p_c_a_p___p_k_t_h_d_r a pointer to which is passed
+       The  callback  is  also  supplied  a  const u_char pointer to the first
+       caplen (as given in the struct pcap_pkthdr a pointer to which is passed
        to  the  callback  routine)  bytes of data from the packet.  This won't
        necessarily be the entire packet; to capture  the  entire  packet,  you
-       will   have   to   provide   a  value  for  _s_n_a_p_l_e_n  in  your  call  to
-       ppccaapp__sseett__ssnnaapplleenn() that  is  sufficiently  large  to  get  all  of  the
+       will   have   to   provide   a  value  for  snaplen  in  your  call  to
+       pcap_set_snaplen() that  is  sufficiently  large  to  get  all  of  the
        packet's  data  -  a value of 65535 should be sufficient on most if not
        all networks).  When reading from a ``savefile'', the  snapshot  length
        specified  when  the  capture  was  performed  will limit the amount of
-       packet   data   available.    ppccaapp__nneexxtt()   returns    that    pointer;
-       ppccaapp__nneexxtt__eexx() supplies that pointer through a pointer argument.
+       packet   data   available.    pcap_next()   returns    that    pointer;
+       pcap_next_ex() supplies that pointer through a pointer argument.
 
-       To  force the loop in ppccaapp__ddiissppaattcchh() or ppccaapp__lloooopp() to terminate, call
-       ppccaapp__bbrreeaakklloooopp().
+       To  force the loop in pcap_dispatch() or pcap_loop() to terminate, call
+       pcap_breakloop().
 
        By default, when reading packets from an interface opened  for  a  live
-       capture,  ppccaapp__ddiissppaattcchh(),  ppccaapp__nneexxtt(), and ppccaapp__nneexxtt__eexx() will, if no
+       capture,  pcap_dispatch(),  pcap_next(), and pcap_next_ex() will, if no
        packets are currently available to be read, block waiting  for  packets
-       to  become available.  On some, but _n_o_t all, platforms, if a read time-
+       to  become available.  On some, but not all, platforms, if a read time‐
        out was specified, the wait  will  terminate  after  the  read  timeout
        expires;  applications  should  be  prepared for this, as it happens on
        some platforms, but should not rely on it, as it  does  not  happen  on
@@ -420,212 +420,212 @@ DDEESSCCRRIIPPTTIIOONN
 
        A  handle can be put into ``non-blocking mode'', so that those routines
        will, rather than blocking, return an indication that  no  packets  are
-       available  to  read.  Call ppccaapp__sseettnnoonnbblloocckk() to put a handle into non-
-       blocking mode or to take it out of non-blocking mode; call ppccaapp__ggeettnnoonn--
-       bblloocckk()  to  determine  whether a handle is in non-blocking mode.  Note
+       available  to  read.  Call pcap_setnonblock() to put a handle into non-
+       blocking mode or to take it out of non-blocking mode; call pcap_getnon‐
+       block()  to  determine  whether a handle is in non-blocking mode.  Note
        that non-blocking mode does not work correctly in Mac OS X 10.6.
 
-       Non-blocking mode is often combined with routines such as sseelleecctt(2)  or
-       ppoollll(2)  or other routines a platform offers to wait for the availabil-
+       Non-blocking mode is often combined with routines such as select(2)  or
+       poll(2)  or other routines a platform offers to wait for the availabil‐
        ity of data on any of a set of descriptors.  To obtain, for a handle, a
        descriptor    that    can    be    used   in   those   routines,   call
-       ppccaapp__ggeett__sseelleeccttaabbllee__ffdd().  Not  all  handles  have  such  a  descriptor
-       available;  ppccaapp__ggeett__sseelleeccttaabbllee__ffdd() will return -1 if no such descrip-
+       pcap_get_selectable_fd().  Not  all  handles  have  such  a  descriptor
+       available;  pcap_get_selectable_fd() will return -1 if no such descrip‐
        tor exists.  In addition, for various reasons, one  or  more  of  those
        routines  will not work properly with the descriptor; the documentation
-       for ppccaapp__ggeett__sseelleeccttaabbllee__ffdd() gives details.
+       for pcap_get_selectable_fd() gives details.
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__ddiissppaattcchh(3PCAP)
-                     read a bufferful of packets from a ppccaapp__tt open for a live
-                     capture or the full set of packets from a ppccaapp__tt open for
+              pcap_dispatch(3PCAP)
+                     read a bufferful of packets from a pcap_t open for a live
+                     capture or the full set of packets from a pcap_t open for
                      a ``savefile''
 
-              ppccaapp__lloooopp(3PCAP)
-                     read packets from a ppccaapp__tt until an  interrupt  or  error
+              pcap_loop(3PCAP)
+                     read packets from a pcap_t until an  interrupt  or  error
                      occurs
 
-              ppccaapp__nneexxtt(3PCAP)
-                     read  the next packet from a ppccaapp__tt without an indication
+              pcap_next(3PCAP)
+                     read  the next packet from a pcap_t without an indication
                      whether an error occurred
 
-              ppccaapp__nneexxtt__eexx(3PCAP)
-                     read the next packet from a ppccaapp__tt with an error  indica-
+              pcap_next_ex(3PCAP)
+                     read the next packet from a pcap_t with an error  indica‐
                      tion on an error
 
-              ppccaapp__bbrreeaakklloooopp(3PCAP)
-                     prematurely  terminate  the  loop  in  ppccaapp__ddiissppaattcchh() or
-                     ppccaapp__lloooopp()
+              pcap_breakloop(3PCAP)
+                     prematurely  terminate  the  loop  in  pcap_dispatch() or
+                     pcap_loop()
 
-              ppccaapp__sseettnnoonnbblloocckk(3PCAP)
-                     set or clear non-blocking mode on a ppccaapp__tt
+              pcap_setnonblock(3PCAP)
+                     set or clear non-blocking mode on a pcap_t
 
-              ppccaapp__ggeettnnoonnbblloocckk(3PCAP)
-                     get the state of non-blocking mode for a ppccaapp__tt
+              pcap_getnonblock(3PCAP)
+                     get the state of non-blocking mode for a pcap_t
 
-              ppccaapp__ggeett__sseelleeccttaabbllee__ffdd(3PCAP)
-                     attempt to get a descriptor for a ppccaapp__tt that can be used
-                     in calls such as sseelleecctt(2) and ppoollll(2)
+              pcap_get_selectable_fd(3PCAP)
+                     attempt to get a descriptor for a pcap_t that can be used
+                     in calls such as select(2) and poll(2)
 
-   FFiilltteerrss
+   Filters
        In  order  to  cause  only  certain packets to be returned when reading
-       packets, a filter can be set on a handle.  For a live capture, the fil-
+       packets, a filter can be set on a handle.  For a live capture, the fil‐
        tering  will be performed in kernel mode, if possible, to avoid copying
        ``uninteresting'' packets from the kernel to user mode.
 
        A filter can be specified as a text string; the syntax and semantics of
-       the string are as described by ppccaapp--ffiilltteerr(7).  A filter string is com-
-       piled into a program in a pseudo-machine-language by ppccaapp__ccoommppiillee() and
-       the  resulting program can be made a filter for a handle with ppccaapp__sseett--
-       ffiilltteerr().  The result of ppccaapp__ccoommppiillee() can be freed  with  a  call  to
-       ppccaapp__ffrreeeeccooddee().  ppccaapp__ccoommppiillee() may require a network mask for certain
-       expressions in the filter string; ppccaapp__llooookkuuppnneett() can be used to  find
+       the string are as described by pcap-filter(7).  A filter string is com‐
+       piled into a program in a pseudo-machine-language by pcap_compile() and
+       the  resulting program can be made a filter for a handle with pcap_set‐
+       filter().  The result of pcap_compile() can be freed  with  a  call  to
+       pcap_freecode().  pcap_compile() may require a network mask for certain
+       expressions in the filter string; pcap_lookupnet() can be used to  find
        the network address and network mask for a given capture device.
 
        A  compiled  filter  can  also be applied directly to a packet that has
-       been read using ppccaapp__oofffflliinnee__ffiilltteerr().
+       been read using pcap_offline_filter().
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__ccoommppiillee(3PCAP)
+              pcap_compile(3PCAP)
                      compile filter expression  to  a  pseudo-machine-language
                      code program
 
-              ppccaapp__ffrreeeeccooddee(3PCAP)
+              pcap_freecode(3PCAP)
                      free a filter program
 
-              ppccaapp__sseettffiilltteerr(3PCAP)
-                     set filter for a ppccaapp__tt
+              pcap_setfilter(3PCAP)
+                     set filter for a pcap_t
 
-              ppccaapp__llooookkuuppnneett(3PCAP)
+              pcap_lookupnet(3PCAP)
                      get network address and network mask for a capture device
 
-              ppccaapp__oofffflliinnee__ffiilltteerr(3PCAP)
+              pcap_offline_filter(3PCAP)
                      apply a filter program to a packet
 
-   IInnccoommiinngg aanndd oouuttggooiinngg ppaacckkeettss
+   Incoming and outgoing packets
        By  default,  libpcap  will attempt to capture both packets sent by the
        machine and packets received by the machine.  To limit it to  capturing
        only packets received by the machine or, if possible, only packets sent
-       by the machine, call ppccaapp__sseettddiirreeccttiioonn().
+       by the machine, call pcap_setdirection().
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__sseettddiirreeccttiioonn(3PCAP)
+              pcap_setdirection(3PCAP)
                      specify whether to  capture  incoming  packets,  outgoing
                      packets, or both
 
-   CCaappttuurree ssttaattiissttiiccss
+   Capture statistics
        To get statistics about packets received and dropped in a live capture,
-       call ppccaapp__ssttaattss().
+       call pcap_stats().
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__ssttaattss(3PCAP)
+              pcap_stats(3PCAP)
                      get capture statistics
 
-   OOppeenniinngg aa hhaannddllee ffoorr wwrriittiinngg ccaappttuurreedd ppaacckkeettss
+   Opening a handle for writing captured packets
        To open a ``savefile`` to which to write packets,  given  the  pathname
-       the ``savefile'' should have, call ppccaapp__dduummpp__ooppeenn().  To open a ``save-
+       the ``savefile'' should have, call pcap_dump_open().  To open a ``save‐
        file`` to which to write packets, given the pathname  the  ``savefile''
-       should  have,  call  ppccaapp__dduummpp__ooppeenn(); to set up a handle for a ``save-
-       file'', given a FFIILLEE ** referring to a file already opened for  writing,
-       call  ppccaapp__dduummpp__ffooppeenn().  They each return pointers to a ppccaapp__dduummppeerr__tt,
+       should  have,  call  pcap_dump_open(); to set up a handle for a ``save‐
+       file'', given a FILE * referring to a file already opened for  writing,
+       call  pcap_dump_fopen().  They each return pointers to a pcap_dumper_t,
        which is the handle used for writing packets to the  ``savefile''.   If
        it  succeeds,  it  will  have  created the file if it doesn't exist and
-       truncated the file if it does exist.  To close  a  ppccaapp__dduummppeerr__tt,  call
-       ppccaapp__dduummpp__cclloossee().
+       truncated the file if it does exist.  To close  a  pcap_dumper_t,  call
+       pcap_dump_close().
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__dduummpp__ooppeenn(3PCAP)
-                     open a ppccaapp__dduummppeerr__tt for a ``savefile``, given a pathname
+              pcap_dump_open(3PCAP)
+                     open a pcap_dumper_t for a ``savefile``, given a pathname
 
-              ppccaapp__dduummpp__ffooppeenn(3PCAP)
-                     open a ppccaapp__dduummppeerr__tt for a ``savefile``, given a FFIILLEE **
+              pcap_dump_fopen(3PCAP)
+                     open a pcap_dumper_t for a ``savefile``, given a FILE *
 
-              ppccaapp__dduummpp__cclloossee(3PCAP)
-                     close a ppccaapp__dduummppeerr__tt
+              pcap_dump_close(3PCAP)
+                     close a pcap_dumper_t
 
-              ppccaapp__dduummpp__ffiillee(3PCAP)
-                     get  the  FFIILLEE ** for a ppccaapp__dduummppeerr__tt opened for a ``save-
+              pcap_dump_file(3PCAP)
+                     get  the  FILE * for a pcap_dumper_t opened for a ``save‐
                      file''
 
-   WWrriittiinngg ppaacckkeettss
-       To write a packet to a ppccaapp__dduummppeerr__tt, call ppccaapp__dduummpp().  Packets  writ-
-       ten  with  ppccaapp__dduummpp()  may  be buffered, rather than being immediately
-       written to the ``savefile''.  Closing the ppccaapp__dduummppeerr__tt will cause  all
+   Writing packets
+       To write a packet to a pcap_dumper_t, call pcap_dump().  Packets  writ‐
+       ten  with  pcap_dump()  may  be buffered, rather than being immediately
+       written to the ``savefile''.  Closing the pcap_dumper_t will cause  all
        buffered-but-not-yet-written packets to be written to the ``savefile''.
-       To force all packets written to the ppccaapp__dduummppeerr__tt, and not yet  written
-       to  the  ``savefile'' because they're buffered by the ppccaapp__dduummppeerr__tt, to
-       be written to the ``savefile'', without closing the ppccaapp__dduummppeerr__tt, call
-       ppccaapp__dduummpp__fflluusshh().
+       To force all packets written to the pcap_dumper_t, and not yet  written
+       to  the  ``savefile'' because they're buffered by the pcap_dumper_t, to
+       be written to the ``savefile'', without closing the pcap_dumper_t, call
+       pcap_dump_flush().
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__dduummpp(3PCAP)
-                     write packet to a ppccaapp__dduummppeerr__tt
+              pcap_dump(3PCAP)
+                     write packet to a pcap_dumper_t
 
-              ppccaapp__dduummpp__fflluusshh(3PCAP)
-                     flush  buffered packets written to a ppccaapp__dduummppeerr__tt to the
+              pcap_dump_flush(3PCAP)
+                     flush  buffered packets written to a pcap_dumper_t to the
                      ``savefile''
 
-              ppccaapp__dduummpp__fftteellll(3PCAP)
-                     get current file position for a ppccaapp__dduummppeerr__tt
+              pcap_dump_ftell(3PCAP)
+                     get current file position for a pcap_dumper_t
 
-   IInnjjeeccttiinngg ppaacckkeettss
-       If you have the required privileges, you can inject packets onto a net-
-       work  with  a  ppccaapp__tt  for  a  live  capture,  using  ppccaapp__iinnjjeecctt()  or
-       ppccaapp__sseennddppaacckkeett().  (The two routines exist for compatibility with both
+   Injecting packets
+       If you have the required privileges, you can inject packets onto a net‐
+       work  with  a  pcap_t  for  a  live  capture,  using  pcap_inject()  or
+       pcap_sendpacket().  (The two routines exist for compatibility with both
        OpenBSD and WinPcap; they perform the same function, but have different
        return values.)
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__iinnjjeecctt(3PCAP)
-              ppccaapp__sseennddppaacckkeett(3PCAP)
+              pcap_inject(3PCAP)
+              pcap_sendpacket(3PCAP)
                      transmit a packet
 
-   RReeppoorrttiinngg eerrrroorrss
+   Reporting errors
        Some routines return error or warning status codes; to convert them  to
-       a string, use ppccaapp__ssttaattuussttoossttrr().
+       a string, use pcap_statustostr().
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__ssttaattuussttoossttrr(3PCAP)
+              pcap_statustostr(3PCAP)
                      get a string for an error or warning status code
 
-   GGeettttiinngg lliibbrraarryy vveerrssiioonn iinnffoorrmmaattiioonn
+   Getting library version information
        To  get  a  string  giving  version  information  about  libpcap,  call
-       ppccaapp__lliibbrraarryy__vveerrssiioonn().
+       pcap_library_version().
 
-       RRoouuttiinneess
+       Routines
 
-              ppccaapp__lliibbrraarryy__vveerrssiioonn(3PCAP)
+              pcap_library_version(3PCAP)
                      get library version string
 
-BBAACCKKWWAARRDDSS CCOOMMPPAATTIIBBIILLIITTYY
-       In versions of libpcap prior to 1.0, the ppccaapp..hh header file was not  in
-       a  ppccaapp  directory on most platforms; if you are writing an application
-       that must work on versions of libpcap prior to 1.0,  include  <<ppccaapp..hh>>,
-       which  will  include  <<ppccaapp//ppccaapp..hh>>  for  you,  rather  than  including
-       <<ppccaapp//ppccaapp..hh>>.
+BACKWARDS COMPATIBILITY
+       In versions of libpcap prior to 1.0, the pcap.h header file was not  in
+       a  pcap  directory on most platforms; if you are writing an application
+       that must work on versions of libpcap prior to 1.0,  include  <pcap.h>,
+       which  will  include  <pcap/pcap.h>  for  you,  rather  than  including
+       <pcap/pcap.h>.
 
-       ppccaapp__ccrreeaattee() and ppccaapp__aaccttiivvaattee() were not  available  in  versions  of
+       pcap_create() and pcap_activate() were not  available  in  versions  of
        libpcap  prior to 1.0; if you are writing an application that must work
-       on versions of libpcap prior to 1.0, either use ppccaapp__ooppeenn__lliivvee() to get
-       a handle for a live capture or, if you want to be able to use the addi-
-       tional capabilities offered by using ppccaapp__ccrreeaattee() and ppccaapp__aaccttiivvaattee(),
-       use  an  aauuttooccoonnff(1) script or some other configuration script to check
+       on versions of libpcap prior to 1.0, either use pcap_open_live() to get
+       a handle for a live capture or, if you want to be able to use the addi‐
+       tional capabilities offered by using pcap_create() and pcap_activate(),
+       use  an  autoconf(1) script or some other configuration script to check
        whether the libpcap 1.0 APIs are available and use them  only  if  they
        are.
 
-SSEEEE AALLSSOO
+SEE ALSO
        autoconf(1),   tcpdump(1),  tcpslice(1),  pcap-filter(7),  pfconfig(8),
        usermod(1M)
 
-AAUUTTHHOORRSS
+AUTHORS
        The original authors of libpcap are:
 
        Van Jacobson, Craig Leres and  Steven  McCanne,  all  of  the  Lawrence
@@ -633,9 +633,9 @@ AAUUTTHHOORRSS
 
        The current version is available from "The Tcpdump Group"'s Web site at
 
-              _h_t_t_p_:_/_/_w_w_w_._t_c_p_d_u_m_p_._o_r_g_/
+              http://www.tcpdump.org/
 
-BBUUGGSS
+BUGS
        Please send problems, bugs, questions, desirable enhancements, etc. to:
 
               tcpdump-workers@lists.tcpdump.org

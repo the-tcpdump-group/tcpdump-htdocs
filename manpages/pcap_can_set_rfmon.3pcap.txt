@@ -2,30 +2,30 @@ PCAP_CAN_SET_RFMON(3PCAP)                            PCAP_CAN_SET_RFMON(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_can_set_rfmon  -  check whether monitor mode can be set for a not-
        yet-activated capture handle
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__ccaann__sseett__rrffmmoonn((ppccaapp__tt **pp));;
+       int pcap_can_set_rfmon(pcap_t *p);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__ccaann__sseett__rrffmmoonn(()) checks whether monitor mode could be set on a cap-
+DESCRIPTION
+       pcap_can_set_rfmon() checks whether monitor mode could be set on a cap‐
        ture handle when the handle is activated.
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__ccaann__sseett__rrffmmoonn(())  returns  0 if monitor mode could not be set, 1 if
-       monitor mode could be set,  PPCCAAPP__EERRRROORR__NNOO__SSUUCCHH__DDEEVVIICCEE  if  the  capture
+RETURN VALUE
+       pcap_can_set_rfmon()  returns  0 if monitor mode could not be set, 1 if
+       monitor mode could be set,  PCAP_ERROR_NO_SUCH_DEVICE  if  the  capture
        source   specified   when   the   handle  was  created  doesn't  exist,
-       PPCCAAPP__EERRRROORR__PPEERRMM__DDEENNIIEEDD if the process doesn't have permission to  check
-       whether monitor mode could be supported, PPCCAAPP__EERRRROORR__AACCTTIIVVAATTEEDD if called
-       on a capture handle that has been activated, or PPCCAAPP__EERRRROORR if an  error
-       occurred.   If  PPCCAAPP__EERRRROORR  is returned, ppccaapp__ggeetteerrrr(()) or ppccaapp__ppeerrrroorr(())
-       may be called with _p as an argument to fetch or display the error text.
+       PCAP_ERROR_PERM_DENIED if the process doesn't have permission to  check
+       whether monitor mode could be supported, PCAP_ERROR_ACTIVATED if called
+       on a capture handle that has been activated, or PCAP_ERROR if an  error
+       occurred.   If  PCAP_ERROR  is returned, pcap_geterr() or pcap_perror()
+       may be called with p as an argument to fetch or display the error text.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
        pcap_set_rfmon(3PCAP)
 

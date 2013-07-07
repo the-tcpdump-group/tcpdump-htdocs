@@ -2,25 +2,25 @@ PCAP_SET_BUFFER_SIZE(3PCAP)                        PCAP_SET_BUFFER_SIZE(3PCAP)
 
 
 
-NNAAMMEE
-       pcap_set_buffer_size - set the buffer size for a not-yet-activated cap-
+NAME
+       pcap_set_buffer_size - set the buffer size for a not-yet-activated cap‐
        ture handle
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       iinntt ppccaapp__sseett__bbuuffffeerr__ssiizzee((ppccaapp__tt **pp,, iinntt bbuuffffeerr__ssiizzee));;
+       int pcap_set_buffer_size(pcap_t *p, int buffer_size);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__sseett__bbuuffffeerr__ssiizzee(()) sets the buffer size that will be used on a cap-
-       ture  handle  when  the handle is activated to _b_u_f_f_e_r___s_i_z_e, which is in
+DESCRIPTION
+       pcap_set_buffer_size() sets the buffer size that will be used on a cap‐
+       ture  handle  when  the handle is activated to buffer_size, which is in
        units of bytes.
 
-RREETTUURRNN VVAALLUUEE
-       ppccaapp__sseett__bbuuffffeerr__ssiizzee(()) returns 0 on success or PPCCAAPP__EERRRROORR__AACCTTIIVVAATTEEDD  if
+RETURN VALUE
+       pcap_set_buffer_size() returns 0 on success or PCAP_ERROR_ACTIVATED  if
        called on a capture handle that has been activated.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
 
 

@@ -2,25 +2,25 @@ PCAP_OPEN_DEAD(3PCAP)                                    PCAP_OPEN_DEAD(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_open_dead  - open a fake pcap_t for compiling filters or opening a
        capture for output
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp//ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap/pcap.h>
 
-       ppccaapp__tt **ppccaapp__ooppeenn__ddeeaadd((iinntt lliinnkkttyyppee,, iinntt ssnnaapplleenn));;
+       pcap_t *pcap_open_dead(int linktype, int snaplen);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__ooppeenn__ddeeaadd(()) is used for creating a ppccaapp__tt structure  to  use  when
+DESCRIPTION
+       pcap_open_dead() is used for creating a pcap_t structure  to  use  when
        calling the other functions in libpcap.  It is typically used when just
        using libpcap for compiling BPF code.
 
-       _l_i_n_k_t_y_p_e specifies the link-layer type for the ppccaapp__tt.
+       linktype specifies the link-layer type for the pcap_t.
 
-       _s_n_a_p_l_e_n specifies the snapshot length for the ppccaapp__tt.
+       snaplen specifies the snapshot length for the pcap_t.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP), pcap-linktype(7)
 
 

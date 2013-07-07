@@ -2,27 +2,27 @@ PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)        PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)
 
 
 
-NNAAMMEE
+NAME
        pcap_tstamp_type_val_to_name, pcap_tstamp_type_val_to_description - get
        a name or description for a time stamp type value
 
-SSYYNNOOPPSSIISS
-       ##iinncclluuddee <<ppccaapp..hh>>
+SYNOPSIS
+       #include <pcap.h>
 
-       ccoonnsstt cchhaarr **ppccaapp__ttssttaammpp__ttyyppee__vvaall__ttoo__nnaammee((iinntt ttssttaammpp__ttyyppee));;
-       ccoonnsstt cchhaarr **ppccaapp__ttssttaammpp__ttyyppee__vvaall__ttoo__ddeessccrriippttiioonn((iinntt ttssttaammpp__ttyyppee));;
+       const char *pcap_tstamp_type_val_to_name(int tstamp_type);
+       const char *pcap_tstamp_type_val_to_description(int tstamp_type);
 
-DDEESSCCRRIIPPTTIIOONN
-       ppccaapp__ttssttaammpp__ttyyppee__vvaall__ttoo__nnaammee(()) translates a time stamp  type  value  to
+DESCRIPTION
+       pcap_tstamp_type_val_to_name() translates a time stamp  type  value  to
        the corresponding time stamp type name.  NULL is returned on failure.
 
-       ppccaapp__ttssttaammpp__ttyyppee__vvaall__ttoo__ddeessccrriippttiioonn(())  translates  a  time  stamp  type
+       pcap_tstamp_type_val_to_description()  translates  a  time  stamp  type
        value to a short description of that time stamp type.  NULL is returned
        on failure.
 
-SSEEEE AALLSSOO
+SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_name_to_val(3PCAP)
 
 
 
-                                21 August 20P1C0AP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)
+                                21 August 2PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)
