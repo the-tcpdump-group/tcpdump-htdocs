@@ -1,39 +1,38 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML><HEAD><TITLE>Man page of PCAP_SET_PROMISC</TITLE>
+<HTML><HEAD><TITLE>Manpage of PCAP_SET_IMMEDIATE_MODE</TITLE>
 </HEAD><BODY>
-<H1>PCAP_SET_PROMISC</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+<H1>PCAP_SET_IMMEDIATE_MODE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 8 May 20013<BR><A HREF="#index">Index</A>
 <A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_set_promisc - set promiscuous mode for a not-yet-activated
-capture handle
+pcap_set_immediate_mode - set immediate mode for a not-yet-activated capture
+handle
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
 <PRE>
 <B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
 
-int pcap_set_promisc(pcap_t *p, int promisc);
+int pcap_set_immediate_mode(pcap_t *p, int immediate_mode);
 </B></PRE>
 
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_set_promisc()</B>
+<B>pcap_set_immediate_mode()</B>
 
-sets whether promiscuous mode should be set on a capture handle when
+sets whether immediate mode should be set on a capture handle when
 the handle is activated.
 If
-<I>promisc</I>
+<I>immediate_mode</I>
 
-is non-zero, promiscuous mode will be set, otherwise it will not be set.
+is non-zero, immediate mode will be set, otherwise it will not be set.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_set_promisc()</B>
+<B>pcap_set_immediate_mode()</B>
 
 returns 0 on success or
 <B>PCAP_ERROR_ACTIVATED</B>
@@ -58,6 +57,6 @@ pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 17:15:13 GMT, June 12, 2012
+Time: 10:54:11 GMT, July 07, 2013
 </BODY>
 </HTML>

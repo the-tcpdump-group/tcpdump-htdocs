@@ -1,0 +1,101 @@
+<HTML><HEAD><TITLE>Manpage of PCAP-CONFIG</TITLE>
+</HEAD><BODY>
+<H1>PCAP-CONFIG</H1>
+Section: User Commands  (1)<BR>Updated: 26 March 2009<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap-config - write libpcap compiler and linker flags to standard output
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+
+<B>pcap-config</B>
+
+[
+<B>--static</B>
+
+]
+[
+<B>--cflags | --libs | --additional-libs</B>
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<P>
+
+When run with the
+<B>--cflags</B>
+
+option,
+<I>pcap-config</I>
+
+writes to the standard output the
+<B>-I</B>
+
+compiler flags required to include libpcap's header files.
+When run with the
+<B>--libs</B>
+
+option,
+<I>pcap-config</I>
+
+writes to the standard output the
+<B>-L</B>
+
+and
+<B>-l</B>
+
+linker flags required to link with libpcap, including
+<B>-l</B>
+
+flags for libraries required by libpcap.
+When run with the
+<B>--additional-libs</B>
+
+option,
+<I>pcap-config</I>
+
+writes to the standard output the
+<B>-L</B>
+
+and
+<B>-l</B>
+
+flags for libraries required by libpcap, but not the
+<B>-lpcap</B>
+
+flag to link with libpcap itself.
+<P>
+
+By default, it writes flags appropriate for compiling with a
+dynamically-linked version of libpcap; the
+<B>--static</B>
+
+flag causes it to write flags appropriate for compiling with a
+statically-linked version of libpcap.
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+pcap(3PCAP)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 11:58:27 GMT, July 07, 2013
+</BODY>
+</HTML>

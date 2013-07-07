@@ -1,7 +1,4 @@
-Content-type: text/html
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML><HEAD><TITLE>Man page of PCAP_LOOP</TITLE>
+<HTML><HEAD><TITLE>Manpage of PCAP_LOOP</TITLE>
 </HEAD><BODY>
 <H1>PCAP_LOOP</H1>
 Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 24 December 2008<BR><A HREF="#index">Index</A>
@@ -85,7 +82,7 @@ processed when reading a ``savefile''.
 </B><I>cnt</I>
 was 0 was undefined; different platforms and devices behaved
 differently, so code that must work with older versions of libpcap
-should use -1, nor 0, as the value of
+should use -1, not 0, as the value of
 <I>cnt</I>.)
 
 <P>
@@ -136,8 +133,9 @@ them.
 returns 0 if
 <I>cnt</I>
 
-is exhausted, -1 if an error occurs, or -2 if the loop terminated due
-to a call to
+is exhausted or if, when reading from a ``savefile'', no more packets
+are available.  It returns -1 if an error occurs or -2 if the loop
+terminated due to a call to
 <B>pcap_breakloop()</B>
 
 before any packets were processed.
@@ -198,6 +196,6 @@ pcap(3PCAP), pcap_geterr(3PCAP), pcap_breakloop(3PCAP)
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 17:15:13 GMT, June 12, 2012
+Time: 10:54:11 GMT, July 07, 2013
 </BODY>
 </HTML>
