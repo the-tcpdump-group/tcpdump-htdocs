@@ -606,6 +606,18 @@ lower-level protocols such as IPv4 or IPv6.
 <td>LINKTYPE_USBPCAP<td>249<td>DLT_USBPCAP<td>
 USB packets, beginning with <a href="http://desowin.org/usbpcap/captureformat.html">a USBPcap
 header</a>.
+                <tr valign=top>
+<td>LINKTYPE_RTAC_SERIAL<td>250<td>DLT_RTAC_SERIAL<td>
+<a href="linktypes/LINKTYPE_RTAC_SERIAL.html">Serial-line packet header
+for the Schweitzer Engineering Laboratories "RTAC" product</a>, followed
+by a payload for one of a number of industrial control protocols.
+                <tr valign=top>
+<td>LINKTYPE_BLUETOOTH_LE_LL<td>251<td>DLT_BLUETOOTH_LE_LL<td>
+Bluetooth Low Energy air interface Link Layer packets, in the format
+described in section 2.1 "PACKET FORMAT" of volume 6 of the <a
+href="https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=229737">Bluetooth
+Specification Version 4.0</a> (see PDF page 2200), but without the
+Preamble.
               </table>  
             </div>
           </div>
