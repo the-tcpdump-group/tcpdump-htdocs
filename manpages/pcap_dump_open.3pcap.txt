@@ -33,7 +33,7 @@ RETURN VALUES
        error text.
 
 SEE ALSO
-       pcap(3PCAP), pcap_create(3PCAP),  pcap_activate(3PCAP),  pcap_open_off‐
+       pcap(3PCAP), pcap_create(3PCAP),  pcap_activate(3PCAP),  pcap_open_off-
        line(3PCAP),        pcap_open_live(3PCAP),       pcap_open_dead(3PCAP),
        pcap_dump(3PCAP),  pcap_dump_close(3PCAP),  pcap_geterr(3PCAP),   pcap-
        savefile(5)

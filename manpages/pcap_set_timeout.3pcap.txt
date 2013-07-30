@@ -13,7 +13,7 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_set_timeout() sets the read timeout that will be used on a capture
-       handle when the handle is activated to to_ms, which is in units of mil‐
+       handle when the handle is activated to to_ms, which is in units of mil-
        liseconds.
 
 RETURN VALUE

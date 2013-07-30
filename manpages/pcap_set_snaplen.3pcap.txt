@@ -3,7 +3,7 @@ PCAP_SET_SNAPLEN(3PCAP)                                PCAP_SET_SNAPLEN(3PCAP)
 
 
 NAME
-       pcap_set_snaplen - set the snapshot length for a not-yet-activated cap‐
+       pcap_set_snaplen - set the snapshot length for a not-yet-activated cap-
        ture handle
 
 SYNOPSIS

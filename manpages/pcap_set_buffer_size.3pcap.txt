@@ -3,7 +3,7 @@ PCAP_SET_BUFFER_SIZE(3PCAP)                        PCAP_SET_BUFFER_SIZE(3PCAP)
 
 
 NAME
-       pcap_set_buffer_size - set the buffer size for a not-yet-activated cap‐
+       pcap_set_buffer_size - set the buffer size for a not-yet-activated cap-
        ture handle
 
 SYNOPSIS
@@ -12,7 +12,7 @@ SYNOPSIS
        int pcap_set_buffer_size(pcap_t *p, int buffer_size);
 
 DESCRIPTION
-       pcap_set_buffer_size() sets the buffer size that will be used on a cap‐
+       pcap_set_buffer_size() sets the buffer size that will be used on a cap-
        ture  handle  when  the handle is activated to buffer_size, which is in
        units of bytes.
 

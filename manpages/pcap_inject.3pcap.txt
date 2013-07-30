@@ -17,8 +17,8 @@ DESCRIPTION
        size is the number of bytes in the packet.
 
        Note  that,  even  if  you successfully open the network interface, you
-       might not have permission to send packets on it, or it might  not  sup‐
-       port  sending packets; as pcap_open_live() doesn't have a flag to indi‐
+       might not have permission to send packets on it, or it might  not  sup-
+       port  sending packets; as pcap_open_live() doesn't have a flag to indi-
        cate whether to open for capturing, sending, or capturing and  sending,
        you  cannot  request  an  open that supports sending and be notified at
        open time whether sending  will  be  possible.   Note  also  that  some

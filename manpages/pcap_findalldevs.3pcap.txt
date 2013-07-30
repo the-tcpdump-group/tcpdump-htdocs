@@ -20,9 +20,9 @@ DESCRIPTION
        (Note that there may be network devices that cannot be  opened  by  the
        process  calling pcap_findalldevs(), because, for example, that process
        does not have sufficient privileges to open them for capturing; if  so,
-       those devices will not appear on the list.)  If pcap_findalldevs() suc‐
+       those devices will not appear on the list.)  If pcap_findalldevs() suc-
        ceeds, the pointer pointed to by alldevsp is set to point to the  first
-       element  of the list, or to NULL if no devices were found (this is con‐
+       element  of the list, or to NULL if no devices were found (this is con-
        sidered success).  Each element of the list is of type  pcap_if_t,  and
        has the following members:
 
@@ -33,7 +33,7 @@ DESCRIPTION
                      pass to pcap_open_live()
 
               description
-                     if  not  NULL, a pointer to a string giving a human-read‐
+                     if  not  NULL, a pointer to a string giving a human-read-
                      able description of the device
 
               addresses
@@ -81,14 +81,14 @@ DESCRIPTION
        other  addresses  have  other  values.   Whether  other  addresses  are
        returned, and what types they might have  is  platform-dependent.   For
        IPv4 addresses, the struct sockaddr pointer can be interpreted as if it
-       pointed to a struct sockaddr_in; for IPv6 addresses, it can  be  inter‐
+       pointed to a struct sockaddr_in; for IPv6 addresses, it can  be  inter-
        preted as if it pointed to a struct sockaddr_in6.
 
        The  list  of devices must be freed with pcap_freealldevs(), whch frees
        the list pointed to by alldevs.
 
 RETURN VALUE
-       pcap_findalldevs() returns 0 on success and -1  on  failure;  as  indi‐
+       pcap_findalldevs() returns 0 on success and -1  on  failure;  as  indi-
        cated,  finding  no devices is considered success, rather than failure,
        so 0 will be returned in that case.   If  -1  is  returned,  errbuf  is
        filled  in  with an appropriate error message.  errbuf is assumed to be

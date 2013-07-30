@@ -1,15 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML><HEAD><TITLE>Man page of PCAP_OPEN_DEAD</TITLE>
+<HTML><HEAD><TITLE>Manpage of PCAP_OPEN_DEAD</TITLE>
 </HEAD><BODY>
 <H1>PCAP_OPEN_DEAD</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 1 July 2013<BR><A HREF="#index">Index</A>
 <A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_open_dead - open a fake pcap_t for compiling filters or opening a
-capture for output
+pcap_open_dead, pcap_open_dead_with_tstamp_precision - open a fake
+pcap_t for compiling filters or opening a capture for output
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
@@ -17,6 +16,8 @@ capture for output
 <B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
 </B>
 <B>pcap_t *pcap_open_dead(int linktype, int snaplen);
+pcap_t *pcap_open_dead_with_tstamp_precision(int linktype, int snaplen,
+    u_int precision);
 </B></PRE>
 
 <A NAME="lbAD">&nbsp;</A>
@@ -26,11 +27,26 @@ capture for output
 
 <B>pcap_open_dead()</B>
 
-is used for creating a
+and
+<B>pcap_open_dead_with_tstamp_precision()</B>
+
+are used for creating a
 <B>pcap_t</B>
 
 structure to use when calling the other functions in libpcap.  It is
-typically used when just using libpcap for compiling BPF code.
+typically used when just using libpcap for compiling BPF code; it can
+also be used if using
+<B>pcap_dump_open()</B>,
+
+<B>pcap_dump()</B>,
+
+and
+<B>pcap_dump_close()</B>
+
+to write a savefile if there is no
+<B>pcap_t</B>
+
+that supplies the packets to be written.
 <P>
 
 <I>linktype</I>
@@ -45,10 +61,35 @@ specifies the link-layer type for the
 specifies the snapshot length for the
 <B>pcap_t</B>.
 
+<P>
+
+When
+<B>pcap_open_dead_with_tstamp_precision()</B>,
+
+is used to create a
+<B>pcap_t</B>
+
+for use with
+<B>pcap_dump_open()</B>,
+
+<I>precision</I>
+
+specifies the time stamp precision for packets;
+<B>PCAP_TSTAMP_PRECISION_MICRO</B>
+
+should be specified if the packets to be written have time stamps in
+seconds and microseconds, and
+<B>PCAP_TSTAMP_PRECISION_NANO</B>
+
+should be specified if the packets to be written have time stamps in
+seconds and nanoseconds.  Its value does not affect
+<B>pcap_compile()</B>.
+
 <A NAME="lbAE">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-pcap(3PCAP), <A HREF="/cgi-bin/man/man2html?7+pcap-linktype">pcap-linktype</A>(7)
+pcap(3PCAP), pcap_compile(3PCAP), pcap_dump_open(3PCAP),
+<A HREF="/cgi-bin/man/man2html?7+pcap-linktype">pcap-linktype</A>(7)
 <P>
 
 <HR>
@@ -63,6 +104,6 @@ pcap(3PCAP), <A HREF="/cgi-bin/man/man2html?7+pcap-linktype">pcap-linktype</A>(7
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 17:15:13 GMT, June 12, 2012
+Time: 11:43:52 GMT, July 30, 2013
 </BODY>
 </HTML>

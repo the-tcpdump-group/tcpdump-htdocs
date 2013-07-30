@@ -16,7 +16,7 @@ DESCRIPTION
        of  packets  that  have been processed so far, or -2 if no packets have
        been processed so far.
 
-       This routine is safe to use inside a signal handler on UNIX or  a  con‐
+       This routine is safe to use inside a signal handler on UNIX or  a  con-
        sole  control  handler  on  Windows,  as  it merely sets a flag that is
        checked within the loop.
 
@@ -29,7 +29,7 @@ DESCRIPTION
        be restarted by that signal.  Otherwise, if the  signal  interrupted  a
        call  reading  packets  in  a  live  capture,  when your signal handler
        returns after calling pcap_breakloop(), the call will be restarted, and
-       the loop will not terminate until more packets arrive and the call com‐
+       the loop will not terminate until more packets arrive and the call com-
        pletes.
 
        Note also that, in a  multi-threaded  application,  if  one  thread  is
@@ -41,7 +41,7 @@ DESCRIPTION
        POSIX threads.
 
        Note that pcap_next() and pcap_next_ex() will, on some platforms,  loop
-       reading  packets  from the OS; that loop will not necessarily be termi‐
+       reading  packets  from the OS; that loop will not necessarily be termi-
        nated by a signal, so pcap_breakloop()  should  be  used  to  terminate
        packet processing even if pcap_next() or pcap_next_ex() is being used.
 
@@ -50,7 +50,7 @@ DESCRIPTION
        one more packet might be processed.
 
        If  -2  is  returned  from  pcap_dispatch() or pcap_loop(), the flag is
-       cleared, so a subsequent call will resume reading packets.  If a  posi‐
+       cleared, so a subsequent call will resume reading packets.  If a  posi-
        tive  number is returned, the flag is not cleared, so a subsequent call
        will return -2 and clear the flag.
 

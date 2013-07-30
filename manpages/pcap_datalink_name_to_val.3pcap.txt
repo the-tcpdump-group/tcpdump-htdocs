@@ -3,7 +3,7 @@ PCAP_DATALINK_NAME_TO_VAL(3PCAP)              PCAP_DATALINK_NAME_TO_VAL(3PCAP)
 
 
 NAME
-       pcap_datalink_name_to_val - get the link-layer header type value corre‐
+       pcap_datalink_name_to_val - get the link-layer header type value corre-
        sponding to a header type name
 
 SYNOPSIS

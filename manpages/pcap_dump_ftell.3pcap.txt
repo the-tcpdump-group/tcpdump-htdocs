@@ -12,7 +12,7 @@ SYNOPSIS
        long pcap_dump_ftell(pcap_dumper_t *p);
 
 DESCRIPTION
-       pcap_dump_ftell() returns the current file  position  for  the  ``save‐
+       pcap_dump_ftell() returns the current file  position  for  the  ``save-
        file'',  representing  the  number of bytes written by pcap_dump_open()
        and pcap_dump().  -1 is returned on error.
 

@@ -1,14 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML><HEAD><TITLE>Man page of PCAP_OPEN_OFFLINE</TITLE>
+<HTML><HEAD><TITLE>Manpage of PCAP_OPEN_OFFLINE</TITLE>
 </HEAD><BODY>
 <H1>PCAP_OPEN_OFFLINE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 1 July 2013<BR><A HREF="#index">Index</A>
 <A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_open_offline, pcap_fopen_offline - open a saved capture file for reading
+pcap_open_offline, pcap_open_offline_with_tstamp_precision,
+pcap_fopen_offline, pcap_fopen_offline_with_tstamp_precision - open a saved capture file for reading
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
@@ -18,7 +18,11 @@ pcap_open_offline, pcap_fopen_offline - open a saved capture file for reading
 <B>char errbuf[PCAP_ERRBUF_SIZE];
 </B>
 <B>pcap_t *pcap_open_offline(const char *fname, char *errbuf);
+pcap_t *pcap_open_offline_with_tstamp_precision(const char *fname,
+    u_int precision, char *errbuf);
 pcap_t *pcap_fopen_offline(FILE *fp, char *errbuf);
+pcap_t *pcap_fopen_offline_with_tstamp_precision(FILE *fp,
+    u_int precision, char *errbuf);
 </B></PRE>
 
 <A NAME="lbAD">&nbsp;</A>
@@ -26,7 +30,10 @@ pcap_t *pcap_fopen_offline(FILE *fp, char *errbuf);
 
 <B>pcap_open_offline()</B>
 
-is called to open a ``savefile'' for reading.
+and
+<B>pcap_open_offline_with_tstamp_precision()</B>
+
+are called to open a ``savefile'' for reading.
 <P>
 
 <I>fname</I>
@@ -48,20 +55,52 @@ The name &quot;-&quot; in a synonym for
 
 <P>
 
+<B>pcap_open_offline_with_tstamp_precision()</B>
+
+takes an additional
+<I>precision</I>
+
+argument specifying the time stamp precision desired;
+if
+<B>PCAP_TSTAMP_PRECISION_MICRO</B>
+
+is specified, packet time stamps will be supplied in seconds and
+microseconds,
+and if
+<B>PCAP_TSTAMP_PRECISION_NANO</B>
+
+is specified, packet time stamps will be supplied in seconds and
+nanoseconds.  If the time stamps in the file do not have the same
+precision as the requested precision, they will be scaled up or down as
+necessary before being supplied.
+<P>
+
 Alternatively, you may call
 <B>pcap_fopen_offline()</B>
+
+or
+<B>pcap_fopen_offline_with_tstamp_precision()</B>
 
 to read dumped data from an existing open stream
 <I>fp</I>.
 
+<B>pcap_fopen_offline_with_tstamp_precision() takes an additional</B>
+
+<I>precision</I>
+
+argument as described above.
 Note that on Windows, that stream should be opened in binary mode.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_open_offline()</B>
+<B>pcap_open_offline()</B>,
+
+<B>pcap_open_offline_with_tstamp_precision()</B>,
+
+<B>pcap_fopen_offline()</B>,
 
 and
-<B>pcap_fopen_offline()</B>
+<B>pcap_fopen_offline_with_tstamp_precision()</B>
 
 return a
 <I>pcap_t *</I>
@@ -102,6 +141,6 @@ pcap(3PCAP), <A HREF="/cgi-bin/man/man2html?5+pcap-savefile">pcap-savefile</A>(5
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 17:15:13 GMT, June 12, 2012
+Time: 11:43:52 GMT, July 30, 2013
 </BODY>
 </HTML>

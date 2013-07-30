@@ -14,10 +14,10 @@ SYNOPSIS
 DESCRIPTION
        pcap_get_selectable_fd() returns, on UNIX, a file descriptor number for
        a  file descriptor on which one can do a select() or poll() to wait for
-       it to be possible to read packets without blocking, if such a  descrip‐
+       it to be possible to read packets without blocking, if such a  descrip-
        tor  exists, or -1, if no such descriptor exists.  Some network devices
        opened   with    pcap_create()    and    pcap_activate(),    or    with
-       pcap_open_live(), do not support select() or poll() (for example, regu‐
+       pcap_open_live(), do not support select() or poll() (for example, regu-
        lar network devices on FreeBSD 4.3 and 4.4, and Endace DAG devices), so
        -1 is returned for those devices.
 
@@ -47,7 +47,7 @@ DESCRIPTION
        correctly on BPF devices, so the workaround isn't  necessary,  although
        it does no harm.)
 
-       Note  also that poll() doesn't work on character special files, includ‐
+       Note  also that poll() doesn't work on character special files, includ-
        ing BPF devices, in Mac OS X 10.4 and 10.5, so, while select()  can  be
        used  on  the  descriptor  returned by pcap_get_selectable_fd(), poll()
        cannot be used on it those versions of Mac OS X.   Kqueues  also  don't

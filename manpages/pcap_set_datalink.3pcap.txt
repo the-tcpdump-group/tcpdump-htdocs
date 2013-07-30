@@ -3,7 +3,7 @@ PCAP_SET_DATALINK(3PCAP)                              PCAP_SET_DATALINK(3PCAP)
 
 
 NAME
-       pcap_set_datalink - set the link-layer header type to be used by a cap‐
+       pcap_set_datalink - set the link-layer header type to be used by a cap-
        ture device
 
 SYNOPSIS

@@ -16,13 +16,13 @@ DESCRIPTION
        packets  captured  on  the  pcap  descriptor  to  the type specified by
        tstamp_type.  It must  be  called  on  a  pcap  descriptor  created  by
        pcap_create()  that  has  not  yet  been  activated by pcap_activate().
-       pcap_list_tstamp_types() will give a list of the time stamp types  sup‐
+       pcap_list_tstamp_types() will give a list of the time stamp types  sup-
        ported by a given capture device.  See pcap-tstamp(7) for a list of all
        the time stamp types.
 
 RETURN VALUE
        pcap_set_tstamp_type() returns 0 on success if the specified time stamp
-       type  is  expected  to  be  supported by the capture device, PCAP_WARN‐
+       type  is  expected  to  be  supported by the capture device, PCAP_WARN-
        ING_TSTAMP_TYPE_NOTSUP on success if the specified time stamp  type  is
        not  supported by the capture device, PCAP_ERROR_ACTIVATED if called on
        a    capture    handle     that     has     been     activated,     and

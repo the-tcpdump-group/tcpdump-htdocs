@@ -16,9 +16,9 @@ DESCRIPTION
        being in effect.
 
 RETURN VALUE
-       pcap_activate()  returns  0  on  success  without  warnings, PCAP_WARN‐
-       ING_PROMISC_NOTSUP on success on a device that doesn't support  promis‐
-       cuous    mode   if   promiscuous   mode   was   requested,   PCAP_WARN‐
+       pcap_activate()  returns  0  on  success  without  warnings, PCAP_WARN-
+       ING_PROMISC_NOTSUP on success on a device that doesn't support  promis-
+       cuous    mode   if   promiscuous   mode   was   requested,   PCAP_WARN-
        ING_TSTAMP_TYPE_NOTSUP on success if the time stamp type specified in a
        previous  pcap_set_tstamp_type()  call  isn't  supported by the capture
        source (the time stamp type is left as the  default),  PCAP_WARNING  on

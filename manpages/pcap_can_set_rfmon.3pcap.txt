@@ -12,7 +12,7 @@ SYNOPSIS
        int pcap_can_set_rfmon(pcap_t *p);
 
 DESCRIPTION
-       pcap_can_set_rfmon() checks whether monitor mode could be set on a cap‐
+       pcap_can_set_rfmon() checks whether monitor mode could be set on a cap-
        ture handle when the handle is activated.
 
 RETURN VALUE

@@ -17,7 +17,7 @@ DESCRIPTION
 
    Opening a capture handle for reading
        To  open  a handle for a live capture, given the name of the network or
-       other interface on which the capture should  be  done,  call  pcap_cre‐
+       other interface on which the capture should  be  done,  call  pcap_cre-
        ate(),  set the appropriate options on the handle, and then activate it
        with pcap_activate().
 
@@ -72,7 +72,7 @@ DESCRIPTION
               Normally, the adapter will discard those packets; however,  many
               network  adapters support "promiscuous mode", which is a mode in
               which all packets, even if they are not sent to an address  that
-              the  adapter recognizes, are provided to the host.  This is use‐
+              the  adapter recognizes, are provided to the host.  This is use-
               ful for passively capturing traffic between two  or  more  other
               hosts for analysis.
 
@@ -87,7 +87,7 @@ DESCRIPTION
               Promiscuous mode is set with pcap_set_promisc().
 
        monitor mode
-              On IEEE 802.11 wireless LANs, even if an adapter is in promiscu‐
+              On IEEE 802.11 wireless LANs, even if an adapter is in promiscu-
               ous mode, it will supply to the host only frames for the network
               with  which  it's  associated.   It  might also supply only data
               frames, not management or control frames, and might not  provide
@@ -132,9 +132,9 @@ DESCRIPTION
               could take an arbitrarily long period of time.
 
               Not all platforms support a  read  timeout;  on  platforms  that
-              don't,  the read timeout is ignored.  A zero value for the time‐
+              don't,  the read timeout is ignored.  A zero value for the time-
               out, on platforms that support a read timeout, will cause a read
-              to wait forever to allow enough packets to arrive, with no time‐
+              to wait forever to allow enough packets to arrive, with no time-
               out.
 
               NOTE: the read timeout cannot be used to cause calls  that  read
@@ -164,7 +164,7 @@ DESCRIPTION
               The buffer size is set with pcap_set_buffer_size().
 
        timestamp type
-              On  some platforms, the time stamp given to packets on live cap‐
+              On  some platforms, the time stamp given to packets on live cap-
               tures can come from different sources that  can  have  different
               resolutions or that can have different relationships to the time
               values for the current time supplied by routines on  the  native
@@ -173,7 +173,7 @@ DESCRIPTION
 
               The time stamp type is set with pcap_set_tstamp_type().
 
-       Reading packets from a network interface may require that you have spe‐
+       Reading packets from a network interface may require that you have spe-
        cial privileges:
 
        Under SunOS 3.x or 4.x with NIT or BPF:
@@ -182,7 +182,7 @@ DESCRIPTION
        Under Solaris with DLPI:
               You  must  have  read/write access to the network pseudo device,
               e.g.  /dev/le.  On at least some versions of  Solaris,  however,
-              this  is not sufficient to allow tcpdump to capture in promiscu‐
+              this  is not sufficient to allow tcpdump to capture in promiscu-
               ous mode; on those versions of Solaris, you must be root, or the
               application  capturing packets must be installed setuid to root,
               in order to capture in promiscuous mode.   Note  that,  on  many
@@ -222,7 +222,7 @@ DESCRIPTION
               operation on that interface using pfconfig(8), and no user  (not
               even  the super-user) can capture unicast traffic received by or
               sent by the machine on an interface unless  the  super-user  has
-              enabled  copy-all-mode  operation on that interface using pfcon‐
+              enabled  copy-all-mode  operation on that interface using pfcon-
               fig, so useful packet capture on an interface probably  requires
               that either promiscuous-mode or copy-all-mode operation, or both
               modes of operation, be enabled on that interface.
@@ -233,22 +233,22 @@ DESCRIPTION
               On BSDs with a devfs  (this  includes  Mac  OS  X),  this  might
               involve  more  than  just having somebody with super-user access
               setting the ownership or permissions on the  BPF  devices  -  it
-              might  involve configuring devfs to set the ownership or permis‐
-              sions every time the system is booted, if the system  even  sup‐
+              might  involve configuring devfs to set the ownership or permis-
+              sions every time the system is booted, if the system  even  sup-
               ports  that;  if it doesn't support that, you might have to find
               some other way to make that happen at boot time.
 
        Reading a saved packet file doesn't require special privileges.
 
-       The packets read from the handle may include a  ``pseudo-header''  con‐
+       The packets read from the handle may include a  ``pseudo-header''  con-
        taining  various  forms  of  packet  meta-data, and probably includes a
        link-layer header whose  contents  can  differ  for  different  network
        interfaces.   To  determine  the  format of the packets supplied by the
        handle,  call  pcap_datalink();   http://www.tcpdump.org/linktypes.html
-       lists  the values it returns and describes the packet formats that cor‐
+       lists  the values it returns and describes the packet formats that cor-
        respond to those values.
 
-       To obtain the FILE * corresponding to a pcap_t  opened  for  a  ``save‐
+       To obtain the FILE * corresponding to a pcap_t  opened  for  a  ``save-
        file'', call pcap_file().
 
        Routines
@@ -260,7 +260,7 @@ DESCRIPTION
                      activate a pcap_t for live capture
 
               pcap_findalldevs(3PCAP)
-                     get  a list of devices that can be opened for a live cap‐
+                     get  a list of devices that can be opened for a live cap-
                      ture
 
               pcap_freealldevs(3PCAP)
@@ -340,7 +340,7 @@ DESCRIPTION
 
               pcap_major_version(3PCAP)
               pcap_minor_version(3PCAP)
-                     get  the  major and minor version of the file format ver‐
+                     get  the  major and minor version of the file format ver-
                      sion for a ``savefile''
 
    Selecting a link-layer header type for a live capture
@@ -375,7 +375,7 @@ DESCRIPTION
    Reading packets
        Packets are read with pcap_dispatch() or pcap_loop(), which process one
        or  more  packets,  calling a callback routine for each packet, or with
-       pcap_next() or pcap_next_ex(), which return the next packet.  The call‐
+       pcap_next() or pcap_next_ex(), which return the next packet.  The call-
        back  for  pcap_dispatch()  and  pcap_loop() is supplied a pointer to a
        struct pcap_pkthdr, which includes the following members:
 
@@ -390,49 +390,54 @@ DESCRIPTION
                      from the capture, if the length of the packet  is  larger
                      than the maximum number of bytes to capture).
 
-       pcap_next_ex()  supplies  that  pointer  through  a  pointer  argument.
-       pcap_next() is passed an argument that points to a  struct  pcap_pkthdr
-       structure, and fills it in.
-
        The  callback  is  also  supplied  a  const u_char pointer to the first
-       caplen (as given in the struct pcap_pkthdr a pointer to which is passed
-       to  the  callback  routine)  bytes of data from the packet.  This won't
-       necessarily be the entire packet; to capture  the  entire  packet,  you
-       will   have   to   provide   a  value  for  snaplen  in  your  call  to
-       pcap_set_snaplen() that  is  sufficiently  large  to  get  all  of  the
-       packet's  data  -  a value of 65535 should be sufficient on most if not
-       all networks).  When reading from a ``savefile'', the  snapshot  length
-       specified  when  the  capture  was  performed  will limit the amount of
-       packet   data   available.    pcap_next()   returns    that    pointer;
-       pcap_next_ex() supplies that pointer through a pointer argument.
+       caplen (as given in the struct pcap_pkthdr mentioned  above)  bytes  of
+       data  from the packet.  This won't necessarily be the entire packet; to
+       capture the entire packet, you will have to provide a value for snaplen
+       in  your  call  to pcap_set_snaplen() that is sufficiently large to get
+       all of the packet's data - a value of 65535  should  be  sufficient  on
+       most if not all networks).  When reading from a ``savefile'', the snap-
+       shot length specified when the capture was  performed  will  limit  the
+       amount of packet data available.
 
-       To  force the loop in pcap_dispatch() or pcap_loop() to terminate, call
+       pcap_next()  is  passed an argument that points to a struct pcap_pkthdr
+       structure, and fills it in with the time stamp and  length  values  for
+       the packet.  It returns a const u_char to the first caplen bytes of the
+       packet on success, and NULL on error.
+
+       pcap_next_ex() is passed two pointer arguments, one of which points  to
+       a  structpcap_pkthdr*  and  one of which points to a const u_char*.  It
+       sets the first pointer to point to a struct pcap_pkthdr structure  with
+       the  time  stamp  and length values for the packet, and sets the second
+       pointer to point to the first caplen bytes of the packet.
+
+       To force the loop in pcap_dispatch() or pcap_loop() to terminate,  call
        pcap_breakloop().
 
-       By default, when reading packets from an interface opened  for  a  live
-       capture,  pcap_dispatch(),  pcap_next(), and pcap_next_ex() will, if no
-       packets are currently available to be read, block waiting  for  packets
-       to  become available.  On some, but not all, platforms, if a read time‐
-       out was specified, the wait  will  terminate  after  the  read  timeout
-       expires;  applications  should  be  prepared for this, as it happens on
-       some platforms, but should not rely on it, as it  does  not  happen  on
+       By  default,  when  reading packets from an interface opened for a live
+       capture, pcap_dispatch(), pcap_next(), and pcap_next_ex() will,  if  no
+       packets  are  currently available to be read, block waiting for packets
+       to become available.  On some, but not all, platforms, if a read  time-
+       out  was  specified,  the  wait  will  terminate after the read timeout
+       expires; applications should be prepared for this,  as  it  happens  on
+       some  platforms,  but  should  not rely on it, as it does not happen on
        other platforms.
 
-       A  handle can be put into ``non-blocking mode'', so that those routines
-       will, rather than blocking, return an indication that  no  packets  are
-       available  to  read.  Call pcap_setnonblock() to put a handle into non-
-       blocking mode or to take it out of non-blocking mode; call pcap_getnon‐
-       block()  to  determine  whether a handle is in non-blocking mode.  Note
+       A handle can be put into ``non-blocking mode'', so that those  routines
+       will,  rather  than  blocking, return an indication that no packets are
+       available to read.  Call pcap_setnonblock() to put a handle  into  non-
+       blocking mode or to take it out of non-blocking mode; call pcap_getnon-
+       block() to determine whether a handle is in  non-blocking  mode.   Note
        that non-blocking mode does not work correctly in Mac OS X 10.6.
 
-       Non-blocking mode is often combined with routines such as select(2)  or
-       poll(2)  or other routines a platform offers to wait for the availabil‐
+       Non-blocking  mode is often combined with routines such as select(2) or
+       poll(2) or other routines a platform offers to wait for the  availabil-
        ity of data on any of a set of descriptors.  To obtain, for a handle, a
-       descriptor    that    can    be    used   in   those   routines,   call
-       pcap_get_selectable_fd().  Not  all  handles  have  such  a  descriptor
-       available;  pcap_get_selectable_fd() will return -1 if no such descrip‐
-       tor exists.  In addition, for various reasons, one  or  more  of  those
-       routines  will not work properly with the descriptor; the documentation
+       descriptor   that   can   be   used    in    those    routines,    call
+       pcap_get_selectable_fd().   Not  all  handles  have  such  a descriptor
+       available; pcap_get_selectable_fd() will return -1 if no such  descrip-
+       tor  exists.   In  addition,  for various reasons, one or more of those
+       routines will not work properly with the descriptor; the  documentation
        for pcap_get_selectable_fd() gives details.
 
        Routines
@@ -443,19 +448,19 @@ DESCRIPTION
                      a ``savefile''
 
               pcap_loop(3PCAP)
-                     read packets from a pcap_t until an  interrupt  or  error
+                     read  packets  from  a pcap_t until an interrupt or error
                      occurs
 
               pcap_next(3PCAP)
-                     read  the next packet from a pcap_t without an indication
+                     read the next packet from a pcap_t without an  indication
                      whether an error occurred
 
               pcap_next_ex(3PCAP)
-                     read the next packet from a pcap_t with an error  indica‐
+                     read  the next packet from a pcap_t with an error indica-
                      tion on an error
 
               pcap_breakloop(3PCAP)
-                     prematurely  terminate  the  loop  in  pcap_dispatch() or
+                     prematurely terminate  the  loop  in  pcap_dispatch()  or
                      pcap_loop()
 
               pcap_setnonblock(3PCAP)
@@ -469,27 +474,27 @@ DESCRIPTION
                      in calls such as select(2) and poll(2)
 
    Filters
-       In  order  to  cause  only  certain packets to be returned when reading
-       packets, a filter can be set on a handle.  For a live capture, the fil‐
-       tering  will be performed in kernel mode, if possible, to avoid copying
+       In order to cause only certain packets  to  be  returned  when  reading
+       packets, a filter can be set on a handle.  For a live capture, the fil-
+       tering will be performed in kernel mode, if possible, to avoid  copying
        ``uninteresting'' packets from the kernel to user mode.
 
        A filter can be specified as a text string; the syntax and semantics of
-       the string are as described by pcap-filter(7).  A filter string is com‐
+       the string are as described by pcap-filter(7).  A filter string is com-
        piled into a program in a pseudo-machine-language by pcap_compile() and
-       the  resulting program can be made a filter for a handle with pcap_set‐
-       filter().  The result of pcap_compile() can be freed  with  a  call  to
+       the resulting program can be made a filter for a handle with  pcap_set-
+       filter().   The  result  of  pcap_compile() can be freed with a call to
        pcap_freecode().  pcap_compile() may require a network mask for certain
-       expressions in the filter string; pcap_lookupnet() can be used to  find
+       expressions  in the filter string; pcap_lookupnet() can be used to find
        the network address and network mask for a given capture device.
 
-       A  compiled  filter  can  also be applied directly to a packet that has
+       A compiled filter can also be applied directly to  a  packet  that  has
        been read using pcap_offline_filter().
 
        Routines
 
               pcap_compile(3PCAP)
-                     compile filter expression  to  a  pseudo-machine-language
+                     compile  filter  expression  to a pseudo-machine-language
                      code program
 
               pcap_freecode(3PCAP)
@@ -505,15 +510,15 @@ DESCRIPTION
                      apply a filter program to a packet
 
    Incoming and outgoing packets
-       By  default,  libpcap  will attempt to capture both packets sent by the
-       machine and packets received by the machine.  To limit it to  capturing
+       By default, libpcap will attempt to capture both packets  sent  by  the
+       machine  and packets received by the machine.  To limit it to capturing
        only packets received by the machine or, if possible, only packets sent
        by the machine, call pcap_setdirection().
 
        Routines
 
               pcap_setdirection(3PCAP)
-                     specify whether to  capture  incoming  packets,  outgoing
+                     specify  whether  to  capture  incoming packets, outgoing
                      packets, or both
 
    Capture statistics
@@ -526,15 +531,15 @@ DESCRIPTION
                      get capture statistics
 
    Opening a handle for writing captured packets
-       To open a ``savefile`` to which to write packets,  given  the  pathname
-       the ``savefile'' should have, call pcap_dump_open().  To open a ``save‐
-       file`` to which to write packets, given the pathname  the  ``savefile''
-       should  have,  call  pcap_dump_open(); to set up a handle for a ``save‐
-       file'', given a FILE * referring to a file already opened for  writing,
-       call  pcap_dump_fopen().  They each return pointers to a pcap_dumper_t,
-       which is the handle used for writing packets to the  ``savefile''.   If
-       it  succeeds,  it  will  have  created the file if it doesn't exist and
-       truncated the file if it does exist.  To close  a  pcap_dumper_t,  call
+       To  open  a  ``savefile`` to which to write packets, given the pathname
+       the ``savefile'' should have, call pcap_dump_open().  To open a ``save-
+       file``  to  which to write packets, given the pathname the ``savefile''
+       should have, call pcap_dump_open(); to set up a handle  for  a  ``save-
+       file'',  given a FILE * referring to a file already opened for writing,
+       call pcap_dump_fopen().  They each return pointers to a  pcap_dumper_t,
+       which  is  the handle used for writing packets to the ``savefile''.  If
+       it succeeds, it will have created the file  if  it  doesn't  exist  and
+       truncated  the  file  if it does exist.  To close a pcap_dumper_t, call
        pcap_dump_close().
 
        Routines
@@ -549,16 +554,16 @@ DESCRIPTION
                      close a pcap_dumper_t
 
               pcap_dump_file(3PCAP)
-                     get  the  FILE * for a pcap_dumper_t opened for a ``save‐
+                     get the FILE * for a pcap_dumper_t opened for  a  ``save-
                      file''
 
    Writing packets
-       To write a packet to a pcap_dumper_t, call pcap_dump().  Packets  writ‐
-       ten  with  pcap_dump()  may  be buffered, rather than being immediately
-       written to the ``savefile''.  Closing the pcap_dumper_t will cause  all
+       To  write a packet to a pcap_dumper_t, call pcap_dump().  Packets writ-
+       ten with pcap_dump() may be buffered,  rather  than  being  immediately
+       written  to the ``savefile''.  Closing the pcap_dumper_t will cause all
        buffered-but-not-yet-written packets to be written to the ``savefile''.
-       To force all packets written to the pcap_dumper_t, and not yet  written
-       to  the  ``savefile'' because they're buffered by the pcap_dumper_t, to
+       To  force all packets written to the pcap_dumper_t, and not yet written
+       to the ``savefile'' because they're buffered by the  pcap_dumper_t,  to
        be written to the ``savefile'', without closing the pcap_dumper_t, call
        pcap_dump_flush().
 
@@ -568,14 +573,14 @@ DESCRIPTION
                      write packet to a pcap_dumper_t
 
               pcap_dump_flush(3PCAP)
-                     flush  buffered packets written to a pcap_dumper_t to the
+                     flush buffered packets written to a pcap_dumper_t to  the
                      ``savefile''
 
               pcap_dump_ftell(3PCAP)
                      get current file position for a pcap_dumper_t
 
    Injecting packets
-       If you have the required privileges, you can inject packets onto a net‐
+       If you have the required privileges, you can inject packets onto a net-
        work  with  a  pcap_t  for  a  live  capture,  using  pcap_inject()  or
        pcap_sendpacket().  (The two routines exist for compatibility with both
        OpenBSD and WinPcap; they perform the same function, but have different
@@ -588,7 +593,7 @@ DESCRIPTION
                      transmit a packet
 
    Reporting errors
-       Some routines return error or warning status codes; to convert them  to
+       Some  routines return error or warning status codes; to convert them to
        a string, use pcap_statustostr().
 
        Routines
@@ -606,29 +611,29 @@ DESCRIPTION
                      get library version string
 
 BACKWARDS COMPATIBILITY
-       In versions of libpcap prior to 1.0, the pcap.h header file was not  in
-       a  pcap  directory on most platforms; if you are writing an application
-       that must work on versions of libpcap prior to 1.0,  include  <pcap.h>,
+       In  versions of libpcap prior to 1.0, the pcap.h header file was not in
+       a pcap directory on most platforms; if you are writing  an  application
+       that  must  work on versions of libpcap prior to 1.0, include <pcap.h>,
        which  will  include  <pcap/pcap.h>  for  you,  rather  than  including
        <pcap/pcap.h>.
 
-       pcap_create() and pcap_activate() were not  available  in  versions  of
-       libpcap  prior to 1.0; if you are writing an application that must work
+       pcap_create()  and  pcap_activate()  were  not available in versions of
+       libpcap prior to 1.0; if you are writing an application that must  work
        on versions of libpcap prior to 1.0, either use pcap_open_live() to get
-       a handle for a live capture or, if you want to be able to use the addi‐
+       a handle for a live capture or, if you want to be able to use the addi-
        tional capabilities offered by using pcap_create() and pcap_activate(),
-       use  an  autoconf(1) script or some other configuration script to check
-       whether the libpcap 1.0 APIs are available and use them  only  if  they
+       use an autoconf(1) script or some other configuration script  to  check
+       whether  the  libpcap  1.0 APIs are available and use them only if they
        are.
 
 SEE ALSO
-       autoconf(1),   tcpdump(1),  tcpslice(1),  pcap-filter(7),  pfconfig(8),
+       autoconf(1),  tcpdump(1),  tcpslice(1),  pcap-filter(7),   pfconfig(8),
        usermod(1M)
 
 AUTHORS
        The original authors of libpcap are:
 
-       Van Jacobson, Craig Leres and  Steven  McCanne,  all  of  the  Lawrence
+       Van  Jacobson,  Craig  Leres  and  Steven  McCanne, all of the Lawrence
        Berkeley National Laboratory, University of California, Berkeley, CA.
 
        The current version is available from "The Tcpdump Group"'s Web site at
@@ -642,4 +647,4 @@ BUGS
 
 
 
-                                 4 April 2008                      PCAP(3PCAP)
+                                  1 July 2013                      PCAP(3PCAP)

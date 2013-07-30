@@ -18,7 +18,7 @@ DESCRIPTION
        pointed  to  by  the  pkt_header  argument  is  set  to  point  to  the
        pcap_pkthdr struct for the packet, and the pointer pointed  to  by  the
        pkt_data  argument  is  set  to  point  to the data in the packet.  The
-       struct pcap_pkthdr and the packet data are not to be freed by the call‐
+       struct pcap_pkthdr and the packet data are not to be freed by the call-
        er,  and  are  not  guaranteed  to  be  valid  after  the  next call to
        pcap_next_ex(), pcap_next(), pcap_loop(), or  pcap_dispatch();  if  the
        code needs them to remain valid, it must make a copy of them.

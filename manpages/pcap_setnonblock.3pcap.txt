@@ -3,7 +3,7 @@ PCAP_SETNONBLOCK(3PCAP)                                PCAP_SETNONBLOCK(3PCAP)
 
 
 NAME
-       pcap_setnonblock, pcap_getnonblock - set or get the state of non-block‐
+       pcap_setnonblock, pcap_getnonblock - set or get the state of non-block-
        ing mode on a capture device
 
 SYNOPSIS
@@ -16,10 +16,10 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_setnonblock() puts a capture handle into ``non-blocking'' mode, or
-       takes  it  out  of ``non-blocking'' mode, depending on whether the non‐
+       takes  it  out  of ``non-blocking'' mode, depending on whether the non-
        block argument is non-zero or zero.  It has no effect on ``savefiles''.
        If  there  is  an error, -1 is returned and errbuf is filled in with an
-       appropriate error message; otherwise, 0 is returned.   In  ``non-block‐
+       appropriate error message; otherwise, 0 is returned.   In  ``non-block-
        ing''  mode,  an  attempt  to  read  from  the  capture descriptor with
        pcap_dispatch() will, if no packets are currently available to be read,
        return  0  immediately  rather  than  blocking  waiting  for packets to

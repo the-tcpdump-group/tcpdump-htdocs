@@ -15,7 +15,7 @@ DESCRIPTION
        pcap_compile() is used to compile the string str into a filter program.
        See pcap-filter(7) for the syntax of that string.  program is a pointer
        to  a  bpf_program struct and is filled in by pcap_compile().  optimize
-       controls whether optimization on the resulting code is performed.  net‐
+       controls whether optimization on the resulting code is performed.  net-
        mask  specifies  the  IPv4  netmask of the network on which packets are
        being captured; it is  used  only  when  checking  for  IPv4  broadcast
        addresses  in  the  filter  program.   If the netmask of the network on

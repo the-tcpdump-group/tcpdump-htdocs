@@ -12,7 +12,7 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_lib_version()  returns  a  pointer  to a string giving information
-       about the version of the libpcap library being used; note that it  con‐
+       about the version of the libpcap library being used; note that it  con-
        tains more information than just a version number.
 
 SEE ALSO
