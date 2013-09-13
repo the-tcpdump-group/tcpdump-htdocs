@@ -81,6 +81,14 @@ tcpdump - dump traffic on a network
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
+<B>-P</B>
+
+<I>in|out|inout</I>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
 <B>-r</B>
 
 <I>file</I>
@@ -443,8 +451,8 @@ Attempt to detect 802.11s draft mesh headers.
 <DD>
 Listen on <I>interface</I>.
 If unspecified, <I>tcpdump</I> searches the system interface list for the
-lowest numbered, configured up interface (excluding loopback).
-Ties are broken by choosing the earliest match.
+lowest numbered, configured up interface (excluding loopback), which may turn
+out to be, for example, ``eth0''.
 <DT><DD>
 On Linux systems with 2.2 or later kernels, an
 <I>interface</I>
@@ -602,6 +610,12 @@ into promiscuous mode.
 Note that the interface might be in promiscuous
 mode for some other reason; hence, `-p' cannot be used as an abbreviation for
 `ether host {local-hw-addr} or ether broadcast'.
+<DT><B>-P</B>
+
+<DD>
+Choose send/receive direction <I>direction</I> for which packets should be
+captured. Possible values are `in', `out' and `inout'. Not available
+on all platforms.
 <DT><B>-q</B>
 
 <DD>
@@ -656,6 +670,7 @@ Currently known types are
 <B>aodv</B> (Ad-hoc On-demand Distance Vector protocol),
 <B>carp</B> (Common Address Redundancy Protocol),
 <B>cnfp</B> (Cisco NetFlow protocol),
+<B>lmp</B> (Link Management Protocol),
 <B>pgm</B> (Pragmatic General Multicast),
 <B>pgm_zmtp1</B> (ZMTP/1.0 inside PGM/EPGM),
 <B>radius</B> (RADIUS),
@@ -926,8 +941,8 @@ For the <I>expression</I> syntax, see
 
 <P>
 
-Expression arguments can be passed to <I>tcpdump</I> as either a single
-argument or as multiple arguments, whichever is more convenient.
+The <I>expression</I> argument can be passed to <I>tcpdump</I> as either a single
+Shell argument, or as multiple Shell arguments, whichever is more convenient.
 Generally, if the expression contains Shell metacharacters, such as
 backslashes used to escape protocol names, it is easier to pass it as
 a single, quoted argument rather than to escape the Shell
@@ -2317,6 +2332,6 @@ It only looks at IPv4 packets.
 This document was created by
 <A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 18:38:39 GMT, June 06, 2013
+Time: 12:23:08 GMT, September 13, 2013
 </BODY>
 </HTML>
