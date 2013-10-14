@@ -15,6 +15,14 @@ DESCRIPTION
        pcap_set_snapshot() or pcap_open_live() was called, for a live capture,
        or the snapshot length from the capture file, for a ``savefile''.
 
+       It  must  not  be  called on a pcap descriptor created by pcap_create()
+       that has not yet been activated by pcap_activate().
+
+RETURN VALUE
+       pcap_snapshot()  returns   the   snapshot   length   on   success   and
+       PCAP_ERROR_NOT_ACTIVATED  if  called  on a capture handle that has been
+       created but not activated.
+
 SEE ALSO
        pcap(3PCAP)
 

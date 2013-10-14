@@ -14,6 +14,14 @@ DESCRIPTION
        pcap_datalink() returns the link-layer header type for the live capture
        or ``savefile'' specified by p.
 
+       It must not be called on a pcap  descriptor  created  by  pcap_create()
+       that has not yet been activated by pcap_activate().
+
+RETURN VALUE
+       pcap_datalink()  returns  the  link-layer  header  type  on success and
+       PCAP_ERROR_NOT_ACTIVATED if called on a capture handle  that  has  been
+       created but not activated.
+
 SEE ALSO
        pcap(3PCAP), pcap-linktype(7)
 

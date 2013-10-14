@@ -1,54 +1,43 @@
-<HTML><HEAD><TITLE>Manpage of PCAP_IS_SWAPPED</TITLE>
+<HTML><HEAD><TITLE>Manpage of PCAP_GET_TSTAMP_PRECISION</TITLE>
 </HEAD><BODY>
-<H1>PCAP_IS_SWAPPED</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR><A HREF="#index">Index</A>
+<H1>PCAP_GET_TSTAMP_PRECISION</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 27 August 2013<BR><A HREF="#index">Index</A>
 <A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_is_swapped - find out whether a savefile has the native byte order
+pcap_get_tstamp_precision - get the time stamp precision returned in
+captures
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
 <PRE>
 <B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
 </B>
-<B>int pcap_is_swapped(pcap_t *p);
+<B>int pcap_get_tstamp_precision(pcap_t *p);
 </B></PRE>
 
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_is_swapped()</B>
+<B>pcap_get_tstamp_precision()</B>
 
-returns true (1) if
-<I>p</I>
-
-refers to a ``savefile'' that uses a different byte order
-than the current system.  For a live capture, it always returns false
-(0).
-<P>
-
-It must not be called on a pcap descriptor created by
-<B>pcap_create()</B>
-
-that has not yet been activated by
-<B>pcap_activate()</B>.
-
+returns the precision of the time stamp returned in packet captures on the pcap
+descriptor.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_datalink()</B>
+<B>pcap_get_tstamp_precision()</B>
 
-returns true (1) or false (0) on success and
-<B>PCAP_ERROR_NOT_ACTIVATED</B>
-
-if called on a capture handle that has been created but not activated.
+returns PCAP_TSTAMP_PRECISION_MICRO or PCAP_TSTAMP_PRECISION_NANO, which indicates
+that pcap captures contains time stamps in microseconds or nanoseconds respectively.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-pcap(3PCAP)
+pcap(3PCAP),
+pcap_set_tstamp_precision(3PCAP),
+<A HREF="/cgi-bin/man/man2html?7+pcap-tstamp">pcap-tstamp</A>(7)
 <P>
 
 <HR>

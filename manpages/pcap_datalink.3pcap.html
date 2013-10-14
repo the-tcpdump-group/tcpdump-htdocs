@@ -1,5 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML><HEAD><TITLE>Man page of PCAP_DATALINK</TITLE>
+<HTML><HEAD><TITLE>Manpage of PCAP_DATALINK</TITLE>
 </HEAD><BODY>
 <H1>PCAP_DATALINK</H1>
 Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2010<BR><A HREF="#index">Index</A>
@@ -27,7 +26,24 @@ returns the link-layer header type for the live capture or ``savefile''
 specified by
 <I>p</I>.
 
+<P>
+
+It must not be called on a pcap descriptor created by
+<B>pcap_create()</B>
+
+that has not yet been activated by
+<B>pcap_activate()</B>.
+
 <A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_datalink()</B>
+
+returns the link-layer header type on success and
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+if called on a capture handle that has been created but not activated.
+<A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
 pcap(3PCAP), <A HREF="/cgi-bin/man/man2html?7+pcap-linktype">pcap-linktype</A>(7)
@@ -39,12 +55,13 @@ pcap(3PCAP), <A HREF="/cgi-bin/man/man2html?7+pcap-linktype">pcap-linktype</A>(7
 <DT><A HREF="#lbAB">NAME</A><DD>
 <DT><A HREF="#lbAC">SYNOPSIS</A><DD>
 <DT><A HREF="#lbAD">DESCRIPTION</A><DD>
-<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
 </DL>
 <HR>
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 17:15:13 GMT, June 12, 2012
+Time: 06:57:02 GMT, October 14, 2013
 </BODY>
 </HTML>

@@ -1,5 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML><HEAD><TITLE>Man page of PCAP_LIST_DATALINKS</TITLE>
+<HTML><HEAD><TITLE>Manpage of PCAP_LIST_DATALINKS</TITLE>
 </HEAD><BODY>
 <H1>PCAP_LIST_DATALINKS</H1>
 Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2010<BR><A HREF="#index">Index</A>
@@ -41,14 +40,31 @@ The caller is responsible for freeing the array with
 which frees the list of link-layer header types pointed to by
 <I>dlt_list</I>.
 
+<P>
+
+It must not be called on a pcap descriptor created by
+<B>pcap_create()</B>
+
+that has not yet been activated by
+<B>pcap_activate()</B>.
+
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
 <B>pcap_list_datalinks()</B>
 
-returns the number of link-layer header types in the array on success
-and -1 on failure.
-If -1 is returned,
+returns the number of link-layer header types in the array on success,
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+if called on a capture handle that has been created but not activated,
+and
+<B>PCAP_ERROR</B>
+
+(-1) on other errors.
+If
+<B>PCAP_ERROR</B>
+
+is returned,
 <B>pcap_geterr()</B>
 
 or
@@ -79,6 +95,6 @@ pcap_datalink_val_to_name(3PCAP),
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 17:15:13 GMT, June 12, 2012
+Time: 06:57:03 GMT, October 14, 2013
 </BODY>
 </HTML>

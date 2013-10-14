@@ -1,0 +1,37 @@
+
+PCAP_SET_TSTAMP_PRECISION(3PCAP)              PCAP_SET_TSTAMP_PRECISION(3PCAP)
+
+
+
+NAME
+       pcap_set_tstamp_precision  -  set  the time stamp precision returned in
+       captures
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_tstamp_precision(pcap_t *p, int tstamp_precision);
+
+DESCRIPTION
+       pcap_set_tstamp_precision()  sets  the  precision  of  the  time  stamp
+       desired  for packets captured on the pcap descriptor to the type speci-
+       fied by tstamp_precision.  It must be called on a pcap descriptor  cre-
+       ated  by  pcap_create()  that  has not yet been activated by pcap_acti-
+       vate().  Two time stamp  precisions  are  supported,  microseconds  and
+       nanoseconds.   One  can  use  options  PCAP_TSTAMP_PRECISION_MICRO  and
+       PCAP_TSTAMP_PRECISION_NANO to request desired  precision.  By  default,
+       time stamps are in microseconds.
+
+RETURN VALUE
+       pcap_set_tstamp_type() returns 0 on success if the specified time stamp
+       precision  is  expected  to  be  supported  by  the  operating  system,
+       PCAP_ERROR_TSTAMP_PRECISION_NOTSUP if operating system does not support
+       requested time stamp precision, PCAP_ERROR_ACTIVATED  if  called  on  a
+       capture handle that has been activated.
+
+SEE ALSO
+       pcap(3PCAP), pcap_get_tstamp_precision(3PCAP), pcap-tstamp(7)
+
+
+
+                                27 August 2013PCAP_SET_TSTAMP_PRECISION(3PCAP)
