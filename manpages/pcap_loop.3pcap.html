@@ -125,6 +125,56 @@ and the packet data are not to be freed by the callback routine, and are
 not guaranteed to be valid after the callback routine returns; if the
 code needs them to be valid after the callback, it must make a copy of
 them.
+<P>
+
+The bytes of data from the packet begin with a link-layer header.  The
+format of the link-layer header is indicated by the return value of the
+<B>pcap_datalink()</B>
+
+routine when handed the
+<B>pcap_t</B>
+
+value also passed to
+<B>pcap_loop()</B>
+
+or
+<B>pcap_dispatch()</B>.
+
+<I><A HREF="http://www.tcpdump.org/linktypes.html">http://www.tcpdump.org/linktypes.html</A></I>
+
+lists the values
+<B>pcap_datalink()</B>
+
+can return and describes the packet formats that
+correspond to those values.  The value it returns will be valid for all
+packets received unless and until
+<B>pcap_set_datalink()</B>
+
+is called; after a successful call to
+<B>pcap_set_datalink()</B>,
+
+all subsequent packets will have a link-layer header of the type
+specified by the link-layer header type value passed to
+<B>pcap_set_datalink()</B>.
+
+<P>
+
+Do
+<B>NOT</B>
+
+assume that the packets for a given capture or ``savefile`` will have
+any given link-layer header type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.  For example, the &quot;any&quot; device on Linux will have a
+link-layer header type of
+<B>DLT_LINUX_SLL</B>
+
+even if all devices on the system at the time the &quot;any&quot; device is opened
+have some other data link type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
@@ -180,7 +230,8 @@ as an argument to fetch or display the error text.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-pcap(3PCAP), pcap_geterr(3PCAP), pcap_breakloop(3PCAP)
+pcap(3PCAP), pcap_geterr(3PCAP), pcap_breakloop(3PCAP),
+pcap_datalink(3PCAP)
 <P>
 
 <HR>
@@ -196,6 +247,6 @@ pcap(3PCAP), pcap_geterr(3PCAP), pcap_breakloop(3PCAP)
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 10:54:11 GMT, July 07, 2013
+Time: 09:06:12 GMT, October 15, 2013
 </BODY>
 </HTML>

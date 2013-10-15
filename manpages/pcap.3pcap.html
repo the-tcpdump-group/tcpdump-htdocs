@@ -365,6 +365,24 @@ lists the values it returns and describes the packet formats that
 correspond to those values.
 <P>
 
+Do
+<B>NOT</B>
+
+assume that the packets for a given capture or ``savefile`` will have
+any given link-layer header type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.  For example, the &quot;any&quot; device on Linux will have a
+link-layer header type of
+<B>DLT_LINUX_SLL</B>
+
+even if all devices on the system at the time the &quot;any&quot; device is opened
+have some other data link type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.
+<P>
+
 To obtain the
 <B>FILE&nbsp;*</B>
 
@@ -1282,6 +1300,6 @@ Please send problems, bugs, questions, desirable enhancements, etc. to:
 This document was created by
 <A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 11:43:51 GMT, July 30, 2013
+Time: 09:06:12 GMT, October 15, 2013
 </BODY>
 </HTML>
