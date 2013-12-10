@@ -2,7 +2,7 @@
 </HEAD><BODY>
 <H1>PCAP</H1>
 Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 1 July 2013<BR><A HREF="#index">Index</A>
-<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+<A HREF=".">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
@@ -235,7 +235,7 @@ On some platforms, the time stamp given to packets on live captures can
 come from different sources that can have different resolutions or that
 can have different relationships to the time values for the current time
 supplied by routines on the native operating system.  See
-<B><A HREF="/cgi-bin/man/man2html?7+pcap-tstamp">pcap-tstamp</A></B>(7)
+<B><A HREF="pcap-tstamp.7.html">pcap-tstamp</A></B>(7)
 
 for a list of time stamp types.
 <DT><DD>
@@ -317,7 +317,7 @@ Any user may capture network traffic.
 However, no user (not even the super-user) can capture in promiscuous
 mode on an interface unless the super-user has enabled promiscuous-mode
 operation on that interface using
-<I><A HREF="/cgi-bin/man/man2html?8+pfconfig">pfconfig</A></I>(8),
+<I>pfconfig</I>(8),
 
 and no user (not even the super-user) can capture unicast traffic
 received by or sent by the machine on an interface unless the super-user
@@ -777,10 +777,10 @@ non-blocking mode does not work correctly in Mac OS X 10.6.
 <P>
 
 Non-blocking mode is often combined with routines such as
-<B><A HREF="/cgi-bin/man/man2html?2+select">select</A></B>(2)
+<B>select</B>(2)
 
 or
-<B><A HREF="/cgi-bin/man/man2html?2+poll">poll</A></B>(2)
+<B>poll</B>(2)
 
 or other routines a platform offers to wait for the availability of data
 on any of a set of descriptors.  To obtain, for a handle, a descriptor
@@ -861,10 +861,10 @@ attempt to get a descriptor for a
 <B>pcap_t</B>
 
 that can be used in calls such as
-<B><A HREF="/cgi-bin/man/man2html?2+select">select</A></B>(2)
+<B>select</B>(2)
 
 and
-<B><A HREF="/cgi-bin/man/man2html?2+poll">poll</A></B>(2)
+<B>poll</B>(2)
 
 </DL>
 </DL>
@@ -881,7 +881,7 @@ copying ``uninteresting'' packets from the kernel to user mode.
 
 A filter can be specified as a text string; the syntax and semantics of
 the string are as described by
-<B><A HREF="/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A></B>(7).
+<B><A HREF="pcap-filter.7.html">pcap-filter</A></B>(7).
 
 A filter string is compiled into a program in a pseudo-machine-language
 by
@@ -1231,15 +1231,15 @@ and
 <B>pcap_activate</B>(),
 
 use an
-<B><A HREF="/cgi-bin/man/man2html?1+autoconf">autoconf</A></B>(1)
+<B>autoconf</B>(1)
 
 script or some other configuration script to check whether the libpcap
 1.0 APIs are available and use them only if they are.
 <A NAME="lbAQ">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF="/cgi-bin/man/man2html?1+autoconf">autoconf</A>(1), <A HREF="/cgi-bin/man/man2html?1+tcpdump">tcpdump</A>(1), <A HREF="/cgi-bin/man/man2html?1+tcpslice">tcpslice</A>(1), <A HREF="/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A>(7), <A HREF="/cgi-bin/man/man2html?8+pfconfig">pfconfig</A>(8),
-<A HREF="/cgi-bin/man/man2html?1M+usermod">usermod</A>(1M)
+autoconf(1), <A HREF="../tcpdump_man.html">tcpdump</A>(1), tcpslice(1), <A HREF="pcap-filter.7.html">pcap-filter</A>(7), pfconfig(8),
+usermod(1M)
 <A NAME="lbAR">&nbsp;</A>
 <H2>AUTHORS</H2>
 
@@ -1298,7 +1298,7 @@ Please send problems, bugs, questions, desirable enhancements, etc. to:
 </DL>
 <HR>
 This document was created by
-<A HREF="/cgi-bin/man/man2html">man2html</A>,
+man2html,
 using the manual pages.<BR>
 Time: 09:06:12 GMT, October 15, 2013
 </BODY>
