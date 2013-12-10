@@ -1,8 +1,8 @@
 <HTML><HEAD><TITLE>Manpage of PCAP</TITLE>
 </HEAD><BODY>
 <H1>PCAP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 4 April 2008<BR><A HREF="#index">Index</A>
-<A HREF="http://localhost/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 1 July 2013<BR><A HREF="#index">Index</A>
+<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
@@ -235,7 +235,7 @@ On some platforms, the time stamp given to packets on live captures can
 come from different sources that can have different resolutions or that
 can have different relationships to the time values for the current time
 supplied by routines on the native operating system.  See
-<B><A HREF="http://localhost/cgi-bin/man/man2html?7+pcap-tstamp">pcap-tstamp</A></B>(7)
+<B><A HREF="/cgi-bin/man/man2html?7+pcap-tstamp">pcap-tstamp</A></B>(7)
 
 for a list of time stamp types.
 <DT><DD>
@@ -317,7 +317,7 @@ Any user may capture network traffic.
 However, no user (not even the super-user) can capture in promiscuous
 mode on an interface unless the super-user has enabled promiscuous-mode
 operation on that interface using
-<I><A HREF="http://localhost/cgi-bin/man/man2html?8+pfconfig">pfconfig</A></I>(8),
+<I><A HREF="/cgi-bin/man/man2html?8+pfconfig">pfconfig</A></I>(8),
 
 and no user (not even the super-user) can capture unicast traffic
 received by or sent by the machine on an interface unless the super-user
@@ -363,6 +363,24 @@ handle, call
 
 lists the values it returns and describes the packet formats that
 correspond to those values.
+<P>
+
+Do
+<B>NOT</B>
+
+assume that the packets for a given capture or ``savefile`` will have
+any given link-layer header type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.  For example, the &quot;any&quot; device on Linux will have a
+link-layer header type of
+<B>DLT_LINUX_SLL</B>
+
+even if all devices on the system at the time the &quot;any&quot; device is opened
+have some other data link type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.
 <P>
 
 To obtain the
@@ -658,17 +676,6 @@ is larger than the maximum number of bytes to capture).
 
 <P>
 
-<B>pcap_next_ex</B>()
-
-supplies that pointer through a pointer argument.
-<B>pcap_next</B>()
-
-is passed an argument that points to a
-<I>struct pcap_pkthdr</I>
-
-structure, and fills it in.
-<P>
-
 The callback is also supplied a
 <I>const u_char</I>
 
@@ -678,7 +685,7 @@ pointer to the first
 (as given in the
 <I>struct pcap_pkthdr</I>
 
-a pointer to which is passed to the callback routine)
+mentioned above)
 bytes of data from the packet.  This won't necessarily be the entire
 packet; to capture the entire packet, you will have to provide a value
 for
@@ -691,12 +698,39 @@ that is sufficiently large to get all of the packet's data - a value of
 65535 should be sufficient on most if not all networks).  When reading
 from a ``savefile'', the snapshot length specified when the capture was
 performed will limit the amount of packet data available.
+<P>
+
 <B>pcap_next</B>()
 
-returns that pointer;
+is passed an argument that points to a
+<I>struct pcap_pkthdr</I>
+
+structure, and fills it in with the time stamp and length values for the
+packet.  It returns a
+<I>const u_char</I>
+
+to the first
+<B>caplen</B>
+
+bytes of the packet on success, and NULL on error.
+<P>
+
 <B>pcap_next_ex</B>()
 
-supplies that pointer through a pointer argument.
+is passed two pointer arguments, one of which points to a
+<I>struct</I>pcap_pkthdr<I>*</I>
+
+and one of which points to a 
+<I>const u_char</I>*.
+
+It sets the first pointer to point to a
+<I>struct pcap_pkthdr</I>
+
+structure with the time stamp and length values for the packet, and sets
+the second pointer to point to the first
+<B>caplen</B>
+
+bytes of the packet.
 <P>
 
 To force the loop in
@@ -743,10 +777,10 @@ non-blocking mode does not work correctly in Mac OS X 10.6.
 <P>
 
 Non-blocking mode is often combined with routines such as
-<B><A HREF="http://localhost/cgi-bin/man/man2html?2+select">select</A></B>(2)
+<B><A HREF="/cgi-bin/man/man2html?2+select">select</A></B>(2)
 
 or
-<B><A HREF="http://localhost/cgi-bin/man/man2html?2+poll">poll</A></B>(2)
+<B><A HREF="/cgi-bin/man/man2html?2+poll">poll</A></B>(2)
 
 or other routines a platform offers to wait for the availability of data
 on any of a set of descriptors.  To obtain, for a handle, a descriptor
@@ -827,10 +861,10 @@ attempt to get a descriptor for a
 <B>pcap_t</B>
 
 that can be used in calls such as
-<B><A HREF="http://localhost/cgi-bin/man/man2html?2+select">select</A></B>(2)
+<B><A HREF="/cgi-bin/man/man2html?2+select">select</A></B>(2)
 
 and
-<B><A HREF="http://localhost/cgi-bin/man/man2html?2+poll">poll</A></B>(2)
+<B><A HREF="/cgi-bin/man/man2html?2+poll">poll</A></B>(2)
 
 </DL>
 </DL>
@@ -847,7 +881,7 @@ copying ``uninteresting'' packets from the kernel to user mode.
 
 A filter can be specified as a text string; the syntax and semantics of
 the string are as described by
-<B><A HREF="http://localhost/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A></B>(7).
+<B><A HREF="/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A></B>(7).
 
 A filter string is compiled into a program in a pseudo-machine-language
 by
@@ -1197,15 +1231,15 @@ and
 <B>pcap_activate</B>(),
 
 use an
-<B><A HREF="http://localhost/cgi-bin/man/man2html?1+autoconf">autoconf</A></B>(1)
+<B><A HREF="/cgi-bin/man/man2html?1+autoconf">autoconf</A></B>(1)
 
 script or some other configuration script to check whether the libpcap
 1.0 APIs are available and use them only if they are.
 <A NAME="lbAQ">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF="http://localhost/cgi-bin/man/man2html?1+autoconf">autoconf</A>(1), <A HREF="http://localhost/cgi-bin/man/man2html?1+tcpdump">tcpdump</A>(1), <A HREF="http://localhost/cgi-bin/man/man2html?1+tcpslice">tcpslice</A>(1), <A HREF="http://localhost/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A>(7), <A HREF="http://localhost/cgi-bin/man/man2html?8+pfconfig">pfconfig</A>(8),
-<A HREF="http://localhost/cgi-bin/man/man2html?1M+usermod">usermod</A>(1M)
+<A HREF="/cgi-bin/man/man2html?1+autoconf">autoconf</A>(1), <A HREF="/cgi-bin/man/man2html?1+tcpdump">tcpdump</A>(1), <A HREF="/cgi-bin/man/man2html?1+tcpslice">tcpslice</A>(1), <A HREF="/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A>(7), <A HREF="/cgi-bin/man/man2html?8+pfconfig">pfconfig</A>(8),
+<A HREF="/cgi-bin/man/man2html?1M+usermod">usermod</A>(1M)
 <A NAME="lbAR">&nbsp;</A>
 <H2>AUTHORS</H2>
 
@@ -1264,8 +1298,8 @@ Please send problems, bugs, questions, desirable enhancements, etc. to:
 </DL>
 <HR>
 This document was created by
-<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+<A HREF="/cgi-bin/man/man2html">man2html</A>,
 using the manual pages.<BR>
-Time: 18:38:08 GMT, June 06, 2013
+Time: 11:33:29 GMT, December 10, 2013
 </BODY>
 </HTML>
