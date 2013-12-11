@@ -195,9 +195,11 @@ arbitrarily long period of time.
 <DT><DD>
 Not all platforms support a read timeout; on platforms that
 don't, the read timeout is ignored.  A zero value for the timeout,
-on platforms that support a read timeout,
-will cause a read to wait forever to allow enough packets to
-arrive, with no timeout.
+on platforms that support a read timeout, has platform-dependent
+behavior that could cause a read to wait for an unlimited amount
+of time until the capture buffer fills up or could cause a read timeout
+of 1 millisecond to be used.  We recommend that a value of zero not be
+used.
 <DT><DD>
 <B>NOTE</B>:
 
@@ -235,7 +237,7 @@ On some platforms, the time stamp given to packets on live captures can
 come from different sources that can have different resolutions or that
 can have different relationships to the time values for the current time
 supplied by routines on the native operating system.  See
-<B><A HREF="pcap-tstamp.7.html">pcap-tstamp</A></B>(7)
+<B><A HREF="/manpages/pcap-tstamp.7.html">pcap-tstamp</A></B>(7)
 
 for a list of time stamp types.
 <DT><DD>
@@ -881,7 +883,7 @@ copying ``uninteresting'' packets from the kernel to user mode.
 
 A filter can be specified as a text string; the syntax and semantics of
 the string are as described by
-<B><A HREF="pcap-filter.7.html">pcap-filter</A></B>(7).
+<B><A HREF="/manpages/pcap-filter.7.html">pcap-filter</A></B>(7).
 
 A filter string is compiled into a program in a pseudo-machine-language
 by
@@ -1238,7 +1240,7 @@ script or some other configuration script to check whether the libpcap
 <A NAME="lbAQ">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-autoconf(1), <A HREF="../tcpdump_man.html">tcpdump</A>(1), tcpslice(1), <A HREF="pcap-filter.7.html">pcap-filter</A>(7), pfconfig(8),
+autoconf(1), <A HREF="/tcpdump_man.html">tcpdump</A>(1), tcpslice(1), <A HREF="/manpages/pcap-filter.7.html">pcap-filter</A>(7), pfconfig(8),
 usermod(1M)
 <A NAME="lbAR">&nbsp;</A>
 <H2>AUTHORS</H2>
@@ -1300,6 +1302,6 @@ Please send problems, bugs, questions, desirable enhancements, etc. to:
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 09:06:12 GMT, October 15, 2013
+Time: 14:21:32 GMT, December 11, 2013
 </BODY>
 </HTML>
