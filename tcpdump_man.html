@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of TCPDUMP</TITLE>
 </HEAD><BODY>
 <H1>TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 12 July 2012<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 13 December 2013<BR><A HREF="#index">Index</A>
 <A HREF=".">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -1795,8 +1795,12 @@ wrl.nfs &gt; sushi.201b:
 </DL>
 
 In the first line, host <I>sushi</I> sends a transaction with id <I>6709</I>
-to <I>wrl</I> (note that the number following the src host is a
-transaction id, <I>not</I> the source port).
+to <I>wrl</I>.
+(Note that for UDP NFS packets the standard UDP header isn't printed and the
+number following the src host is a transaction id, <I>not</I> the source port.
+The example above represents UDP NFS traffic.
+For TCP NFS packets port numbers are printed as part of the standard TCP header
+and the transaction id is printed separately as &quot;xid&quot; field of the packet.)
 The request was 112 bytes,
 excluding the UDP and IP headers.
 The operation was a <I>readlink</I>
@@ -2332,6 +2336,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 14:21:31 GMT, December 11, 2013
+Time: 10:51:28 GMT, December 13, 2013
 </BODY>
 </HTML>
