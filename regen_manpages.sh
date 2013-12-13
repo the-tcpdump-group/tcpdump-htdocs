@@ -53,8 +53,15 @@ function produceHTML
 	man2html -M $MAN2HTML_PFX $infile | stripContentTypeHeader | conditionAnchors > $outfile
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
-	git show $outfile 2>/dev/null || return
-	git diff $outfile | tail --lines +5 | egrep -q '^[-+][^T][^i][^m][^e][^:][^ ]' || git checkout $outfile
+	git show $outfile >/dev/null 2>&1 || {
+		echo "Updated but not in repository: $outfile"
+		return
+	}
+	git diff $outfile | tail --lines +5 | egrep -q '^[-+][^T][^i][^m][^e][^:][^ ]' || {
+		git checkout $outfile
+		return
+	}
+	echo "Updated: $outfile"
 }
 
 function produceTXT
