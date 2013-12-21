@@ -92,6 +92,7 @@ pcap_dump_fopen							pcap_dump_open
 pcap_dump_ftell
 pcap_dump_open
 pcap_file
+pcap_fileno
 pcap_findalldevs
 pcap_fopen_offline						pcap_open_offline
 pcap_fopen_offline_with_tstamp_precision			pcap_open_offline
@@ -102,6 +103,7 @@ pcap_free_tstamp_types						pcap_list_tstamp_types
 pcap_geterr
 pcap_getnonblock						pcap_setnonblock
 pcap_get_selectable_fd
+pcap_get_tstamp_precision
 pcap_inject
 pcap_is_swapped
 pcap_lib_version
@@ -117,6 +119,7 @@ pcap_next							pcap_next_ex
 pcap_offline_filter
 pcap_open_dead
 pcap_open_dead_with_tstamp_precision				pcap_open_dead
+pcap_open_live
 pcap_open_offline
 pcap_open_offline_with_tstamp_precision				pcap_open_offline
 pcap_perror							pcap_geterr
@@ -125,16 +128,19 @@ pcap_set_buffer_size
 pcap_set_datalink
 pcap_setdirection
 pcap_setfilter
+pcap_set_immediate_mode
 pcap_setnonblock
 pcap_set_promisc
 pcap_set_rfmon
 pcap_set_snaplen
 pcap_set_timeout
+pcap_set_tstamp_precision
 pcap_set_tstamp_type
 pcap_snapshot
 pcap_stats
 pcap_statustostr
-pcap_tstamp_name_to_val						pcap_datalink
+pcap_strerror
+pcap_tstamp_type_name_to_val
 pcap_tstamp_type_val_to_description				pcap_tstamp_type_val_to_name
 pcap_tstamp_type_val_to_name
 ENDOFLIST
