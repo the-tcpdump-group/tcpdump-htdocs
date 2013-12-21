@@ -334,7 +334,7 @@ DESCRIPTION
               pcap_tstamp_type_val_to_description(3PCAP)
                      get description for a time stamp type
 
-              pcap_tstamp_name_to_val(3PCAP)
+              pcap_tstamp_type_name_to_val(3PCAP)
                      get time stamp type corresponding to a name
 
               pcap_datalink(3PCAP)
