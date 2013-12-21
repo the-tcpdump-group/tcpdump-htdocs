@@ -363,7 +363,7 @@ DESCRIPTION
               by OpenBSD's or FreeBSD's pf(4)).
 
        ruleset name
-              Synonomous with the rset modifier.
+              Synonymous with the rset modifier.
 
        srnr num
               True  if the packet was logged as matching the specified PF rule
@@ -371,7 +371,7 @@ DESCRIPTION
               OpenBSD's or FreeBSD's pf(4)).
 
        subrulenum num
-              Synonomous with the srnr modifier.
+              Synonymous with the srnr modifier.
 
        action act
               True if PF took the specified action when the packet was logged.

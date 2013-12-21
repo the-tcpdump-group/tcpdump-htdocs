@@ -612,11 +612,11 @@ DESCRIPTION
 
    Getting library version information
        To  get  a  string  giving  version  information  about  libpcap,  call
-       pcap_library_version().
+       pcap_lib_version().
 
        Routines
 
-              pcap_library_version(3PCAP)
+              pcap_lib_version(3PCAP)
                      get library version string
 
 BACKWARDS COMPATIBILITY
