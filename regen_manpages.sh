@@ -44,7 +44,6 @@ ENDOFFILE
 2	poll
 1	autoconf
 1M	usermod
-1	tcpslice
 3	strerror
 1	kill
 1	stty
@@ -63,6 +62,7 @@ ENDOFLIST
 7+pcap-filter		$WEBSITE_PFX/pcap-filter.7.html
 5+pcap-savefile		$WEBSITE_PFX/pcap-savefile.5.html
 1+tcpdump		/tcpdump_man.html
+1+tcpslice		$WEBSITE_PFX/tcpslice.1.html
 ENDOFLIST
 
 	# Fixup links to local pages, part 2.
@@ -183,6 +183,8 @@ write_sedfile
 
 produceHTML ../tcpdump/tcpdump.1 tcpdump_man.html
 produceHTML ../libpcap/pcap.3pcap pcap3_man.html
+produceHTML ../tcpslice/tcpslice.1 manpages/tcpslice.1.html
+produceTXT ../tcpslice/tcpslice.1 manpages/tcpslice.1.txt
 
 produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
 produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
