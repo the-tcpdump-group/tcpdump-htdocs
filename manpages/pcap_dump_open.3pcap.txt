@@ -14,7 +14,7 @@ SYNOPSIS
 DESCRIPTION
        pcap_dump_open()  is  called to open a ``savefile'' for writing.  fname
        specifies the name of the file to open. The file  will  have  the  same
-       format  as those used by tcpdump(1) and tcpslice(1).  The name "-" in a
+       format  as those used by tcpdump(1) and tcpslice(1).  The name "-" is a
        synonym for stdout.
 
        pcap_dump_fopen() is called to write data to an  existing  open  stream

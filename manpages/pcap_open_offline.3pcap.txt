@@ -27,7 +27,7 @@ DESCRIPTION
        pcap  file  format  as described in pcap-savefile(5), which is the file
        format used by, among other programs, tcpdump(1)  and  tcpslice(1),  or
        can have the pcap-ng file format, although not all pcap-ng files can be
-       read.  The name "-" in a synonym for stdin.
+       read.  The name "-" is a synonym for stdin.
 
        pcap_open_offline_with_tstamp_precision() takes an additional precision
        argument    specifying   the   time   stamp   precision   desired;   if

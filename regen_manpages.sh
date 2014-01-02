@@ -61,7 +61,7 @@ ENDOFLIST
 7+pcap-tstamp		$WEBSITE_PFX/pcap-tstamp.7.html
 7+pcap-filter		$WEBSITE_PFX/pcap-filter.7.html
 5+pcap-savefile		$WEBSITE_PFX/pcap-savefile.5.html
-1+tcpdump		/tcpdump_man.html
+1+tcpdump		$WEBSITE_PFX/tcpdump.1.html
 1+tcpslice		$WEBSITE_PFX/tcpslice.1.html
 ENDOFLIST
 
@@ -157,7 +157,7 @@ function produceHTML
 		echo "Updated but not in repository: $outfile"
 		return
 	}
-	git diff $outfile | tail --lines +5 | egrep -q '^[-+][^T][^i][^m][^e][^:][^ ]' || {
+	git diff $outfile | tail --lines +5 | egrep '^[-+]' | egrep -q -v '^[-+]Time: ' || {
 		git checkout $outfile
 		return
 	}
@@ -181,11 +181,6 @@ fi
 SEDFILE=`mktemp --tmpdir manpages_sedfile.XXXXXX`
 write_sedfile
 
-produceHTML ../tcpdump/tcpdump.1 tcpdump_man.html
-produceHTML ../libpcap/pcap.3pcap pcap3_man.html
-produceHTML ../tcpslice/tcpslice.1 manpages/tcpslice.1.html
-produceTXT ../tcpslice/tcpslice.1 manpages/tcpslice.1.txt
-
 produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
 produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
 produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
@@ -196,7 +191,7 @@ produceHTML ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.html
 produceHTML ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.html
 produceHTML ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.html
 
-for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1; do
+for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
 	produceTXT $f manpages/`basename $f`.txt
 	produceHTML $f manpages/`basename $f`.html
 done
