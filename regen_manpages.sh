@@ -169,6 +169,7 @@ function produceTXT
 	local infile=${1:?argument required}
 	local outfile=${2:?argument required}
 	man -E ascii $infile > $outfile
+	git diff $outfile | egrep -q '^[-+]' && echo "Updated: $outfile"
 }
 
 # $COLUMNS doesn't always work
