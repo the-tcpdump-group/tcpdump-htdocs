@@ -46,6 +46,12 @@ DESCRIPTION
                      PCAP_IF_LOOPBACK
                             set if the device is a loopback interface
 
+                     PCAP_IF_UP
+                            set if the device is up
+
+                     PCAP_IF_RUNNING
+                            set if the device is running
+
        Each element of the list of addresses is of type pcap_addr_t,  and  has
        the following members:
 
@@ -84,7 +90,7 @@ DESCRIPTION
        pointed to a struct sockaddr_in; for IPv6 addresses, it can  be  inter-
        preted as if it pointed to a struct sockaddr_in6.
 
-       The  list  of devices must be freed with pcap_freealldevs(), whch frees
+       The  list of devices must be freed with pcap_freealldevs(), which frees
        the list pointed to by alldevs.
 
 RETURN VALUE

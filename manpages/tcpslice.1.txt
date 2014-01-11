@@ -200,42 +200,41 @@ BUGS
 
               tcpdump-workers@lists.tcpdump.org
 
-       Please send source code contributions, etc. to:
+       Please  send source code contributions as git pull requests through the
+       project page above.
 
-              patches@tcpdump.org
-
-       An  input  filename  that  beings with a digit or a `+' can be confused
-       with a start/end time.  Such filenames can be specified with a  leading
-       `./';    for    example,    specify   the   file   `04Jul76.trace'   as
+       An input filename that beings with a digit or a  `+'  can  be  confused
+       with  a start/end time.  Such filenames can be specified with a leading
+       `./';   for   example,   specify   the    file    `04Jul76.trace'    as
        `./04Jul76.trace'.
 
-       tcpslice cannot read its input from stdin, since it uses  random-access
+       tcpslice  cannot read its input from stdin, since it uses random-access
        to rummage through its input files.
 
-       tcpslice  refuses  to write to its output if it is a terminal (as indi-
-       cated by isatty(3)).  This is not a bug but a feature,  to  prevent  it
+       tcpslice refuses to write to its output if it is a terminal  (as  indi-
+       cated  by  isatty(3)).   This is not a bug but a feature, to prevent it
        from spraying binary data to the user's terminal.  Note that this means
        you must either redirect stdout or specify an output file via -w.
 
        tcpslice will not work properly on tcpdump files spanning more than one
-       year;  with  files containing portions of packets whose original length
-       was more than 65,535 bytes; nor with files containing  fewer  than  two
-       packets.   Such files result in the error message: `couldn't find final
-       packet in file'.  These problems are due to  the  interpolation  scheme
-       used  by  tcpslice to greatly speed up its processing when dealing with
-       large trace files.  Note that tcpslice can efficiently  extract  slices
-       from  the  middle  of  trace  files of any size, and can also work with
-       truncated trace files (i.e., the final packet in the file is only  par-
+       year; with files containing portions of packets whose  original  length
+       was  more  than  65,535 bytes; nor with files containing fewer than two
+       packets.  Such files result in the error message: `couldn't find  final
+       packet  in  file'.   These problems are due to the interpolation scheme
+       used by tcpslice to greatly speed up its processing when  dealing  with
+       large  trace  files.  Note that tcpslice can efficiently extract slices
+       from the middle of trace files of any size,  and  can  also  work  with
+       truncated  trace files (i.e., the final packet in the file is only par-
        tially present, typically due to tcpdump being ungracefully killed).
 
        Adding -l has broken some compatibility with older versions, since tcp-
-       slice now merges its input files, rather than (approximately)  concate-
+       slice  now merges its input files, rather than (approximately) concate-
        nating them together as it did previously.
 
        It would sometimes be convenient if you could specify a clock offset to
        use with the -l option.
 
-       It would be nice if tcpslice supported more general  editing  of  trace
+       It  would  be  nice if tcpslice supported more general editing of trace
        files.
 
 
