@@ -1,4 +1,4 @@
-PCAP-CONFIG(1)                                                  PCAP-CONFIG(1)
+PCAP-CONFIG(1)              General Commands Manual             PCAP-CONFIG(1)
 
 
 

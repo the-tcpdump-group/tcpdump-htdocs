@@ -2,7 +2,7 @@
 </HEAD><BODY>
 <H1>PCAP-FILTER</H1>
 Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 6 January 2008<BR><A HREF="#index">Index</A>
-<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+<A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
@@ -237,7 +237,7 @@ be checked for a match.
 True if the Ethernet destination address is <I>ehost</I>.
 <I>Ehost</I>
 may be either a name from /etc/ethers or a number (see
-<I><A HREF="/cgi-bin/man/man2html?3N+ethers">ethers</A></I>(3N)
+<I>ethers</I>(3N)
 
 for numeric format).
 <DT><B>ether src </B><I>ehost</I><DD>
@@ -293,10 +293,10 @@ May be qualified with <B>src</B> or <B>dst</B>.
 True if the packet is ip/tcp, ip/udp, ip6/tcp or ip6/udp and has a
 destination port value of <I>port</I>.
 The <I>port</I> can be a number or a name used in /etc/services (see
-<I><A HREF="/cgi-bin/man/man2html?4P+tcp">tcp</A></I>(4P)
+<I>tcp</I>(4P)
 
 and
-<I><A HREF="/cgi-bin/man/man2html?4P+udp">udp</A></I>(4P)).
+<I>udp</I>(4P)).
 
 If a name is used, both the port
 number and protocol are checked.
@@ -358,7 +358,7 @@ This is equivalent to:
 
 <DT><B>ip proto </B><I>protocol</I><DD>
 True if the packet is an IPv4 packet (see
-<I><A HREF="/cgi-bin/man/man2html?4P+ip">ip</A></I>(4P))
+<I>ip</I>(4P))
 
 of protocol type <I>protocol</I>.
 <I>Protocol</I> can be a number or one of the names
@@ -506,7 +506,7 @@ Abbreviations for:
 
 where <I>p</I> is one of the above protocols.
 Note that not all applications using
-<B>pcap</B>(3PCAP)
+<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
 currently know how to parse these protocols.
 <DT><B>decnet src </B><I>host</I><DD>
@@ -528,7 +528,7 @@ True if either the DECNET source or destination address is
 <DT><B>ifname </B><I>interface</I><DD>
 True if the packet was logged as coming from the specified interface (applies
 only to packets logged by OpenBSD's or FreeBSD's
-<B><A HREF="/cgi-bin/man/man2html?4+pf">pf</A></B>(4)).
+<B>pf</B>(4)).
 
 <DT><B>on </B><I>interface</I><DD>
 Synonymous with the
@@ -538,7 +538,7 @@ modifier.
 <DT><B>rnr </B><I>num</I><DD>
 True if the packet was logged as matching the specified PF rule number
 (applies only to packets logged by OpenBSD's or FreeBSD's
-<B><A HREF="/cgi-bin/man/man2html?4+pf">pf</A></B>(4)).
+<B>pf</B>(4)).
 
 <DT><B>rulenum </B><I>num</I><DD>
 Synonymous with the
@@ -562,16 +562,16 @@ and
 <B>memory</B>
 
 (applies only to packets logged by OpenBSD's or FreeBSD's
-<B><A HREF="/cgi-bin/man/man2html?4+pf">pf</A></B>(4)).
+<B>pf</B>(4)).
 
 <DT><B>rset </B><I>name</I><DD>
 True if the packet was logged as matching the specified PF ruleset
 name of an anchored ruleset (applies only to packets logged by OpenBSD's
 or FreeBSD's
-<B><A HREF="/cgi-bin/man/man2html?4+pf">pf</A></B>(4)).
+<B>pf</B>(4)).
 
 <DT><B>ruleset </B><I>name</I><DD>
-Synonomous with the
+Synonymous with the
 <B>rset</B>
 
 modifier.
@@ -579,10 +579,10 @@ modifier.
 True if the packet was logged as matching the specified PF rule number
 of an anchored ruleset (applies only to packets logged by OpenBSD's or
 FreeBSD's
-<B><A HREF="/cgi-bin/man/man2html?4+pf">pf</A></B>(4)).
+<B>pf</B>(4)).
 
 <DT><B>subrulenum </B><I>num</I><DD>
-Synonomous with the
+Synonymous with the
 <B>srnr</B>
 
 modifier.
@@ -595,7 +595,7 @@ and
 <B>block</B>
 
 and, with later versions of
-<B><A HREF="/cgi-bin/man/man2html?4+pf">pf</A></B>(4)),
+<B>pf</B>(4)),
 
 <B>nat</B>,
 
@@ -607,7 +607,7 @@ and
 <B>scrub</B>
 
 (applies only to packets logged by OpenBSD's or FreeBSD's
-<B><A HREF="/cgi-bin/man/man2html?4+pf">pf</A></B>(4)).
+<B>pf</B>(4)).
 
 <DT><B>wlan ra </B><I>ehost</I><DD>
 True if the IEEE 802.11 RA is
@@ -1084,7 +1084,7 @@ ping packets):
 <A NAME="lbAE">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-pcap(3PCAP)
+<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP)
 <A NAME="lbAF">&nbsp;</A>
 <H2>BUGS</H2>
 
@@ -1129,8 +1129,8 @@ It only looks at IPv4 packets.
 </DL>
 <HR>
 This document was created by
-<A HREF="/cgi-bin/man/man2html">man2html</A>,
+man2html,
 using the manual pages.<BR>
-Time: 12:22:07 GMT, July 30, 2013
+Time: 14:40:46 GMT, December 21, 2013
 </BODY>
 </HTML>

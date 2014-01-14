@@ -2,7 +2,7 @@
 </HEAD><BODY>
 <H1>PCAP</H1>
 Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 1 July 2013<BR><A HREF="#index">Index</A>
-<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+<A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
@@ -195,9 +195,11 @@ arbitrarily long period of time.
 <DT><DD>
 Not all platforms support a read timeout; on platforms that
 don't, the read timeout is ignored.  A zero value for the timeout,
-on platforms that support a read timeout,
-will cause a read to wait forever to allow enough packets to
-arrive, with no timeout.
+on platforms that support a read timeout, has platform-dependent
+behavior that could cause a read to wait for an unlimited amount
+of time until the capture buffer fills up or could cause a read timeout
+of 1 millisecond to be used.  We recommend that a value of zero not be
+used.
 <DT><DD>
 <B>NOTE</B>:
 
@@ -235,7 +237,7 @@ On some platforms, the time stamp given to packets on live captures can
 come from different sources that can have different resolutions or that
 can have different relationships to the time values for the current time
 supplied by routines on the native operating system.  See
-<B><A HREF="/cgi-bin/man/man2html?7+pcap-tstamp">pcap-tstamp</A></B>(7)
+<B><A HREF="/manpages/pcap-tstamp.7.html">pcap-tstamp</A></B>(7)
 
 for a list of time stamp types.
 <DT><DD>
@@ -317,7 +319,7 @@ Any user may capture network traffic.
 However, no user (not even the super-user) can capture in promiscuous
 mode on an interface unless the super-user has enabled promiscuous-mode
 operation on that interface using
-<I><A HREF="/cgi-bin/man/man2html?8+pfconfig">pfconfig</A></I>(8),
+<I>pfconfig</I>(8),
 
 and no user (not even the super-user) can capture unicast traffic
 received by or sent by the machine on an interface unless the super-user
@@ -398,40 +400,40 @@ opened for a ``savefile'', call
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_create</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
 
 <DD>
 get a
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_activate</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
 
 <DD>
 activate a
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_findalldevs</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_findalldevs.3pcap.html'><B>pcap_findalldevs</B></A>(3PCAP)
 
 <DD>
 get a list of devices that can be opened for a live capture
-<DT><B>pcap_freealldevs</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_findalldevs.3pcap.html'><B>pcap_freealldevs</B></A>(3PCAP)
 
 <DD>
 free list of devices
-<DT><B>pcap_lookupdev</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_lookupdev.3pcap.html'><B>pcap_lookupdev</B></A>(3PCAP)
 
 <DD>
 get first non-loopback device on that list
-<DT><B>pcap_open_offline</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_open_offline</B></A>(3PCAP)
 
 <DD>
 open a
 <B>pcap_t</B>
 
 for a ``savefile'', given a pathname
-<DT><B>pcap_fopen_offline</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_fopen_offline</B></A>(3PCAP)
 
 <DD>
 open a
@@ -440,103 +442,103 @@ open a
 for a ``savefile'', given a
 <B>FILE&nbsp;*</B>
 
-<DT><B>pcap_open_dead</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_open_dead.3pcap.html'><B>pcap_open_dead</B></A>(3PCAP)
 
 <DD>
 create a ``fake''
 <B>pcap_t</B>
 
-<DT><B>pcap_close</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_close.3pcap.html'><B>pcap_close</B></A>(3PCAP)
 
 <DD>
 close a
 <B>pcap_t</B>
 
-<DT><B>pcap_set_snaplen</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_set_snaplen.3pcap.html'><B>pcap_set_snaplen</B></A>(3PCAP)
 
 <DD>
 set the snapshot length for a not-yet-activated
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_snapshot</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_snapshot.3pcap.html'><B>pcap_snapshot</B></A>(3PCAP)
 
 <DD>
 get the snapshot length for a
 <B>pcap_t</B>
 
-<DT><B>pcap_set_promisc</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_set_promisc.3pcap.html'><B>pcap_set_promisc</B></A>(3PCAP)
 
 <DD>
 set promiscuous mode for a not-yet-activated
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_set_rfmon</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_set_rfmon.3pcap.html'><B>pcap_set_rfmon</B></A>(3PCAP)
 
 <DD>
 set monitor mode for a not-yet-activated
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_can_set_rfmon</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_can_set_rfmon.3pcap.html'><B>pcap_can_set_rfmon</B></A>(3PCAP)
 
 <DD>
 determine whether monitor mode can be set for a
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_set_timeout</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_set_timeout.3pcap.html'><B>pcap_set_timeout</B></A>(3PCAP)
 
 <DD>
 set read timeout for a not-yet-activated
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_set_buffer_size</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_set_buffer_size.3pcap.html'><B>pcap_set_buffer_size</B></A>(3PCAP)
 
 <DD>
 set buffer size for a not-yet-activated
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_set_tstamp_type</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_set_tstamp_type.3pcap.html'><B>pcap_set_tstamp_type</B></A>(3PCAP)
 
 <DD>
 set time stamp type for a not-yet-activated
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_list_tstamp_types</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_list_tstamp_types.3pcap.html'><B>pcap_list_tstamp_types</B></A>(3PCAP)
 
 <DD>
 get list of available time stamp types for a not-yet-activated
 <B>pcap_t</B>
 
 for live capture
-<DT><B>pcap_free_tstamp_types</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_list_tstamp_types.3pcap.html'><B>pcap_free_tstamp_types</B></A>(3PCAP)
 
 <DD>
 free list of available time stamp types
-<DT><B>pcap_tstamp_type_val_to_name</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_tstamp_type_val_to_name.3pcap.html'><B>pcap_tstamp_type_val_to_name</B></A>(3PCAP)
 
 <DD>
 get name for a time stamp type
-<DT><B>pcap_tstamp_type_val_to_description</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_tstamp_type_val_to_name.3pcap.html'><B>pcap_tstamp_type_val_to_description</B></A>(3PCAP)
 
 <DD>
 get description for a time stamp type
-<DT><B>pcap_tstamp_name_to_val</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_tstamp_type_name_to_val.3pcap.html'><B>pcap_tstamp_type_name_to_val</B></A>(3PCAP)
 
 <DD>
 get time stamp type corresponding to a name
-<DT><B>pcap_datalink</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_datalink.3pcap.html'><B>pcap_datalink</B></A>(3PCAP)
 
 <DD>
 get link-layer header type for a
 <B>pcap_t</B>
 
-<DT><B>pcap_file</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_file.3pcap.html'><B>pcap_file</B></A>(3PCAP)
 
 <DD>
 get the
@@ -546,16 +548,16 @@ for a
 <B>pcap_t</B>
 
 opened for a ``savefile''
-<DT><B>pcap_is_swapped</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_is_swapped.3pcap.html'><B>pcap_is_swapped</B></A>(3PCAP)
 
 <DD>
 determine whether a ``savefile'' being read came from a machine with the
 opposite byte order
-<DT><B>pcap_major_version</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_major_version.3pcap.html'><B>pcap_major_version</B></A>(3PCAP)
 
 <DD>
 
-<DT><B>pcap_minor_version</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_major_version.3pcap.html'><B>pcap_minor_version</B></A>(3PCAP)
 
 <DD>
 get the major and minor version of the file format version for a
@@ -590,27 +592,27 @@ packets are read and before any filters are compiled or installed.
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_list_datalinks</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_list_datalinks.3pcap.html'><B>pcap_list_datalinks</B></A>(3PCAP)
 
 <DD>
 get a list of link-layer header types for a device
-<DT><B>pcap_free_datalinks</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_list_datalinks.3pcap.html'><B>pcap_free_datalinks</B></A>(3PCAP)
 
 <DD>
 free list of link-layer header types
-<DT><B>pcap_set_datalink</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_set_datalink.3pcap.html'><B>pcap_set_datalink</B></A>(3PCAP)
 
 <DD>
 set link-layer header type for a device
-<DT><B>pcap_datalink_val_to_name</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_datalink_val_to_name.3pcap.html'><B>pcap_datalink_val_to_name</B></A>(3PCAP)
 
 <DD>
 get name for a link-layer header type
-<DT><B>pcap_datalink_val_to_description</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_datalink_val_to_name.3pcap.html'><B>pcap_datalink_val_to_description</B></A>(3PCAP)
 
 <DD>
 get description for a link-layer header type
-<DT><B>pcap_datalink_name_to_val</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_datalink_name_to_val.3pcap.html'><B>pcap_datalink_name_to_val</B></A>(3PCAP)
 
 <DD>
 get link-layer header type corresponding to a name
@@ -777,10 +779,10 @@ non-blocking mode does not work correctly in Mac OS X 10.6.
 <P>
 
 Non-blocking mode is often combined with routines such as
-<B><A HREF="/cgi-bin/man/man2html?2+select">select</A></B>(2)
+<B>select</B>(2)
 
 or
-<B><A HREF="/cgi-bin/man/man2html?2+poll">poll</A></B>(2)
+<B>poll</B>(2)
 
 or other routines a platform offers to wait for the availability of data
 on any of a set of descriptors.  To obtain, for a handle, a descriptor
@@ -802,7 +804,7 @@ gives details.
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_dispatch</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP)
 
 <DD>
 read a bufferful of packets from a
@@ -812,28 +814,28 @@ open for a live capture or the full set of packets from a
 <B>pcap_t</B>
 
 open for a ``savefile''
-<DT><B>pcap_loop</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_loop</B></A>(3PCAP)
 
 <DD>
 read packets from a
 <B>pcap_t</B>
 
 until an interrupt or error occurs
-<DT><B>pcap_next</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next</B></A>(3PCAP)
 
 <DD>
 read the next packet from a
 <B>pcap_t</B>
 
 without an indication whether an error occurred
-<DT><B>pcap_next_ex</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP)
 
 <DD>
 read the next packet from a
 <B>pcap_t</B>
 
 with an error indication on an error
-<DT><B>pcap_breakloop</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_breakloop.3pcap.html'><B>pcap_breakloop</B></A>(3PCAP)
 
 <DD>
 prematurely terminate the loop in
@@ -842,29 +844,29 @@ prematurely terminate the loop in
 or
 <B>pcap_loop</B>()
 
-<DT><B>pcap_setnonblock</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_setnonblock.3pcap.html'><B>pcap_setnonblock</B></A>(3PCAP)
 
 <DD>
 set or clear non-blocking mode on a
 <B>pcap_t</B>
 
-<DT><B>pcap_getnonblock</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_setnonblock.3pcap.html'><B>pcap_getnonblock</B></A>(3PCAP)
 
 <DD>
 get the state of non-blocking mode for a
 <B>pcap_t</B>
 
-<DT><B>pcap_get_selectable_fd</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_get_selectable_fd.3pcap.html'><B>pcap_get_selectable_fd</B></A>(3PCAP)
 
 <DD>
 attempt to get a descriptor for a
 <B>pcap_t</B>
 
 that can be used in calls such as
-<B><A HREF="/cgi-bin/man/man2html?2+select">select</A></B>(2)
+<B>select</B>(2)
 
 and
-<B><A HREF="/cgi-bin/man/man2html?2+poll">poll</A></B>(2)
+<B>poll</B>(2)
 
 </DL>
 </DL>
@@ -881,7 +883,7 @@ copying ``uninteresting'' packets from the kernel to user mode.
 
 A filter can be specified as a text string; the syntax and semantics of
 the string are as described by
-<B><A HREF="/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A></B>(7).
+<B><A HREF="/manpages/pcap-filter.7.html">pcap-filter</A></B>(7).
 
 A filter string is compiled into a program in a pseudo-machine-language
 by
@@ -915,25 +917,25 @@ read using
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_compile</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_compile.3pcap.html'><B>pcap_compile</B></A>(3PCAP)
 
 <DD>
 compile filter expression to a pseudo-machine-language code program
-<DT><B>pcap_freecode</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_freecode.3pcap.html'><B>pcap_freecode</B></A>(3PCAP)
 
 <DD>
 free a filter program
-<DT><B>pcap_setfilter</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_setfilter.3pcap.html'><B>pcap_setfilter</B></A>(3PCAP)
 
 <DD>
 set filter for a
 <B>pcap_t</B>
 
-<DT><B>pcap_lookupnet</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_lookupnet.3pcap.html'><B>pcap_lookupnet</B></A>(3PCAP)
 
 <DD>
 get network address and network mask for a capture device
-<DT><B>pcap_offline_filter</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_offline_filter.3pcap.html'><B>pcap_offline_filter</B></A>(3PCAP)
 
 <DD>
 apply a filter program to a packet
@@ -956,7 +958,7 @@ by the machine, call
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_setdirection</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_setdirection.3pcap.html'><B>pcap_setdirection</B></A>(3PCAP)
 
 <DD>
 specify whether to capture incoming packets, outgoing packets, or both
@@ -977,7 +979,7 @@ call
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_stats</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_stats.3pcap.html'><B>pcap_stats</B></A>(3PCAP)
 
 <DD>
 get capture statistics
@@ -1020,14 +1022,14 @@ call
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_dump_open</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_dump_open.3pcap.html'><B>pcap_dump_open</B></A>(3PCAP)
 
 <DD>
 open a
 <B>pcap_dumper_t</B>
 
 for a ``savefile``, given a pathname
-<DT><B>pcap_dump_fopen</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_dump_open.3pcap.html'><B>pcap_dump_fopen</B></A>(3PCAP)
 
 <DD>
 open a
@@ -1036,13 +1038,13 @@ open a
 for a ``savefile``, given a
 <B>FILE&nbsp;*</B>
 
-<DT><B>pcap_dump_close</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP)
 
 <DD>
 close a
 <B>pcap_dumper_t</B>
 
-<DT><B>pcap_dump_file</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_dump_file.3pcap.html'><B>pcap_dump_file</B></A>(3PCAP)
 
 <DD>
 get the
@@ -1092,20 +1094,20 @@ call
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_dump</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_dump.3pcap.html'><B>pcap_dump</B></A>(3PCAP)
 
 <DD>
 write packet to a
 <B>pcap_dumper_t</B>
 
-<DT><B>pcap_dump_flush</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_dump_flush.3pcap.html'><B>pcap_dump_flush</B></A>(3PCAP)
 
 <DD>
 flush buffered packets written to a
 <B>pcap_dumper_t</B>
 
 to the ``savefile''
-<DT><B>pcap_dump_ftell</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_dump_ftell.3pcap.html'><B>pcap_dump_ftell</B></A>(3PCAP)
 
 <DD>
 get current file position for a
@@ -1136,11 +1138,11 @@ they perform the same function, but have different return values.)
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_inject</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_inject.3pcap.html'><B>pcap_inject</B></A>(3PCAP)
 
 <DD>
 
-<DT><B>pcap_sendpacket</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_inject.3pcap.html'><B>pcap_sendpacket</B></A>(3PCAP)
 
 <DD>
 transmit a packet
@@ -1162,7 +1164,7 @@ string, use
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_statustostr</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_statustostr.3pcap.html'><B>pcap_statustostr</B></A>(3PCAP)
 
 <DD>
 get a string for an error or warning status code
@@ -1174,7 +1176,7 @@ get a string for an error or warning status code
 <H3>Getting library version information</H3>
 
 To get a string giving version information about libpcap, call
-<B>pcap_library_version</B>().
+<B>pcap_lib_version</B>().
 
 <DL COMPACT>
 <DT><B>Routines</B>
@@ -1182,7 +1184,7 @@ To get a string giving version information about libpcap, call
 <DD>
 <DL COMPACT><DT><DD>
 <DL COMPACT>
-<DT><B>pcap_library_version</B>(3PCAP)
+<DT><A HREF='/manpages/pcap_lib_version.3pcap.html'><B>pcap_lib_version</B></A>(3PCAP)
 
 <DD>
 get library version string
@@ -1231,15 +1233,15 @@ and
 <B>pcap_activate</B>(),
 
 use an
-<B><A HREF="/cgi-bin/man/man2html?1+autoconf">autoconf</A></B>(1)
+<B>autoconf</B>(1)
 
 script or some other configuration script to check whether the libpcap
 1.0 APIs are available and use them only if they are.
 <A NAME="lbAQ">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF="/cgi-bin/man/man2html?1+autoconf">autoconf</A>(1), <A HREF="/cgi-bin/man/man2html?1+tcpdump">tcpdump</A>(1), <A HREF="/cgi-bin/man/man2html?1+tcpslice">tcpslice</A>(1), <A HREF="/cgi-bin/man/man2html?7+pcap-filter">pcap-filter</A>(7), <A HREF="/cgi-bin/man/man2html?8+pfconfig">pfconfig</A>(8),
-<A HREF="/cgi-bin/man/man2html?1M+usermod">usermod</A>(1M)
+autoconf(1), <A HREF="/manpages/tcpdump.1.html">tcpdump</A>(1), <A HREF="/manpages/tcpslice.1.html">tcpslice</A>(1), <A HREF="/manpages/pcap-filter.7.html">pcap-filter</A>(7), pfconfig(8),
+usermod(1M)
 <A NAME="lbAR">&nbsp;</A>
 <H2>AUTHORS</H2>
 
@@ -1298,8 +1300,8 @@ Please send problems, bugs, questions, desirable enhancements, etc. to:
 </DL>
 <HR>
 This document was created by
-<A HREF="/cgi-bin/man/man2html">man2html</A>,
+man2html,
 using the manual pages.<BR>
-Time: 09:06:12 GMT, October 15, 2013
+Time: 13:20:47 GMT, January 02, 2014
 </BODY>
 </HTML>

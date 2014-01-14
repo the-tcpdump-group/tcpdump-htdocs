@@ -2,7 +2,7 @@
 </HEAD><BODY>
 <H1>PCAP-TSTAMP</H1>
 Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 22 August 2010<BR><A HREF="#index">Index</A>
-<A HREF="/cgi-bin/man/man2html">Return to Main Contents</A><HR>
+<A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
@@ -69,19 +69,19 @@ stamp of an event on the host triggered by the arrival of that packet.
 
 Depending on the capture device and the software on the host, libpcap
 might allow different types of time stamp to be used.  The
-<B>pcap_list_tstamp_types</B>(3PCAP)
+<A HREF='/manpages/pcap_list_tstamp_types.3pcap.html'><B>pcap_list_tstamp_types</B></A>(3PCAP)
 
 routine provides, for a packet capture handle created by
-<B>pcap_create</B>(3PCAP)
+<A HREF='/manpages/pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
 
 but not yet activated by
-<B>pcap_activate</B>(3PCAP),
+<A HREF='/manpages/pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP),
 
 a list of time stamp types supported by the capture device for that
 handle.
 The list might be empty, in which case no choice of time stamp type is
 offered for that capture device.  If the list is not empty, the
-<B>pcap_set_tstamp_type</B>(3PCAP)
+<A HREF='/manpages/pcap_set_tstamp_type.3pcap.html'><B>pcap_set_tstamp_type</B></A>(3PCAP)
 
 routine can be used after a
 <B>pcap_create()</B>
@@ -95,7 +95,7 @@ use in code, the second value is the value returned by
 <B>pcap_tstamp_type_val_to_name()</B>
 
 and accepted by
-<B>pcap_tstamp_name_to_val()</B>.
+<B>pcap_tstamp_type_name_to_val()</B>.
 
 <DL COMPACT><DT><DD>
 <DL COMPACT>
@@ -138,10 +138,10 @@ the host operating system's clock.
 <A NAME="lbAD">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-pcap_set_tstamp_type(3PCAP),
-pcap_list_tstamp_types(3PCAP),
-pcap_tstamp_type_val_to_name(3PCAP),
-pcap_tstamp_name_to_val(3PCAP)
+<A HREF='/manpages/pcap_set_tstamp_type.3pcap.html'>pcap_set_tstamp_type</A>(3PCAP),
+<A HREF='/manpages/pcap_list_tstamp_types.3pcap.html'>pcap_list_tstamp_types</A>(3PCAP),
+<A HREF='/manpages/pcap_tstamp_type_val_to_name.3pcap.html'>pcap_tstamp_type_val_to_name</A>(3PCAP),
+<A HREF='/manpages/pcap_tstamp_type_name_to_val.3pcap.html'>pcap_tstamp_type_name_to_val</A>(3PCAP)
 <P>
 
 <HR>
@@ -153,8 +153,8 @@ pcap_tstamp_name_to_val(3PCAP)
 </DL>
 <HR>
 This document was created by
-<A HREF="/cgi-bin/man/man2html">man2html</A>,
+man2html,
 using the manual pages.<BR>
-Time: 12:22:07 GMT, July 30, 2013
+Time: 16:50:37 GMT, December 21, 2013
 </BODY>
 </HTML>

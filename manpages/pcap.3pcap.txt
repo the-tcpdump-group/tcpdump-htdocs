@@ -133,9 +133,11 @@ DESCRIPTION
 
               Not all platforms support a  read  timeout;  on  platforms  that
               don't,  the read timeout is ignored.  A zero value for the time-
-              out, on platforms that support a read timeout, will cause a read
-              to wait forever to allow enough packets to arrive, with no time-
-              out.
+              out, on platforms that support a  read  timeout,  has  platform-
+              dependent behavior that could cause a read to wait for an unlim-
+              ited amount of time until the capture buffer fills up  or  could
+              cause  a read timeout of 1 millisecond to be used.  We recommend
+              that a value of zero not be used.
 
               NOTE: the read timeout cannot be used to cause calls  that  read
               packets  to  return within a limited period of time, because, on
@@ -332,7 +334,7 @@ DESCRIPTION
               pcap_tstamp_type_val_to_description(3PCAP)
                      get description for a time stamp type
 
-              pcap_tstamp_name_to_val(3PCAP)
+              pcap_tstamp_type_name_to_val(3PCAP)
                      get time stamp type corresponding to a name
 
               pcap_datalink(3PCAP)
@@ -610,11 +612,11 @@ DESCRIPTION
 
    Getting library version information
        To  get  a  string  giving  version  information  about  libpcap,  call
-       pcap_library_version().
+       pcap_lib_version().
 
        Routines
 
-              pcap_library_version(3PCAP)
+              pcap_lib_version(3PCAP)
                      get library version string
 
 BACKWARDS COMPATIBILITY

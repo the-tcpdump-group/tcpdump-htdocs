@@ -1,4 +1,4 @@
-PCAP-LINKTYPE(7)                                              PCAP-LINKTYPE(7)
+PCAP-LINKTYPE(7)       Miscellaneous Information Manual       PCAP-LINKTYPE(7)
 
 
 
