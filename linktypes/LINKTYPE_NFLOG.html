@@ -99,10 +99,84 @@ is the nflog group for the packet.
 </p>
 <p>
 Following the resource ID is a sequence of zero or more TLVs, running to
-the end of the packet; the length and type are in host byte order.  The
-type values are enumerated in the Linux
-<code>linux/netfilter/nfnetlink_log.h</code> header.  The length value
-includes the 4 octets for the length and type.
+the end of the packet; the length and type are in the host byte order
+for the pcap file, as specified by the file's magic number, or for the
+section of the pcap-ng file, as specified by the Section Header Block.
+<p>
+The type values are, as per the Linux
+<code>linux/netfilter/nfnetlink_log.h</code> header:
+<ul>
+<li>1, for a packet header structure;</li>
+<li>2, for the 32-bit packet mark value from the skbuff for the packet;</li>
+<li>3, for a packet time stamp structure;</li>
+<li>4, for the 32-bit ifindex of the device on which the packet was
+received, which could be a bridge group;</li>
+<li>5, for the 32-bit ifindex of the device on which the packet was
+sent, which could be a bridge group;</li>
+<li>6, for the 32-bit ifindex of the physical device on which the packet
+was received, which is not a bridge group;</li>
+<li>7, for the 32-bit ifindex of the physical device on which the packet
+was sent, which is not a bridge group;</li>
+<li>8, for a hardware address structure;</li>
+<li>9, for the packet payload following the link-layer header;</li>
+<li>10, for a null-terminated text string;</li>
+<li>11, for the 32-bit user ID that owned the socket on which the packet
+was sent or received;</li>
+<li>12, for a 32-bit sequence number for packets provided by this nflog
+device;</li>
+<li>13, for a 32-bit sequence number for packets provided by all nflog
+devices;</li>
+<li>14, for the 32-bit group ID that owned the socket on which the packet
+was sent or received;</li>
+<li>15, for the 32-bit Linux <tt>ARPHRD_</tt> value for the device
+associated with the skbuff for the packet;</li>
+<li>16, for the MAC-layer header for the skbuff for the packet;</li>
+<li>17, for the length of the MAC-layer header.</li>
+</ul>
+<p>
+The length value includes the 4 octets for the length and type.
+<p>
+The packet header structure is:
+<pre>
++---------------------------+
+|      Hardware protocol    |
+|         (2 Octets)        |
++---------------------------+
+|       Netfilter hook      |
+|          (1 Octet)        |
++---------------------------+
+|           Padding         |
+|          (1 Octet)        |
++---------------------------+
+</pre>
+<p>
+The packet time stamp structure is:
+<pre>
++---------------------------+
+|           Seconds         |
+|          (8 Octets)       |
++---------------------------+
+|         Microseconds      |
+|          (8 Octets)       |
++---------------------------+
+</pre>
+<p>
+The hardware address structure is:
+<pre>
++-------------------------------+
+|         Address length        |
+|           (2 Octets)          |
++-------------------------------+
+|             Padding           |
+|            (1 Octet)          |
++-------------------------------+
+|            Address            |
+| (8 Octets, including padding) |
++-------------------------------+
+</pre>
+<p>
+All 32-bit integral values, and all multi-byte integral values in
+structures listed above, are in big-endian (network) byte order.
             </div>
             <!-- End of LINKTYPE_NFLOG section -->
           </div>
