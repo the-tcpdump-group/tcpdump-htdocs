@@ -51,9 +51,9 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_next_ex()  returns 1 if the packet was read without problems, 0 if
-       packets are being read from a live capture, and the timeout expired, -1
+       packets are being read from a live capture and the timeout expired,  -1
        if  an  error  occurred while reading the packet, and -2 if packets are
-       being read from a ``savefile'', and there are no more packets  to  read
+       being read from a ``savefile'' and there are no more  packets  to  read
        from  the  savefile.  If -1 is returned, pcap_geterr() or pcap_perror()
        may be called with p as an argument to fetch or display the error text.
 
