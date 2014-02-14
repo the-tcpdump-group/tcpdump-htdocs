@@ -381,11 +381,13 @@ field.
                 <tr valign=top>
 <td>LINKTYPE_BLUETOOTH_HCI_H4<td>187<td>DLT_BLUETOOTH_HCI_H4<td>
 Bluetooth HCI UART transport layer; the frame contains an HCI packet
-indicator byte, as specified by Volume 4, part A of the Core Version 4.0
-of the
+indicator byte, as specified by the UART Transport Layer portion of the
+most recent
 <a href="https://www.bluetooth.org/Technical/Specifications/adopted.htm">
-Bluetooth specifications</a>, followed by an HCI packet of the specified packet
-type, as specified by Volume 2, Part E of the same document.
+Bluetooth Core specification</a>, followed by an HCI packet of the
+specified packet type, as specified by the Host Controller Interface
+Functional Specification portion of the most recent Bluetooth Core
+Specification.
                 <tr valign=top>
 <td>LINKTYPE_USB_LINUX<td>189<td>DLT_USB_LINUX<td>
 USB packets, beginning with a Linux USB header, as specified by the
@@ -421,11 +423,13 @@ Bluetooth HCI UART transport layer; the frame contains a 4-byte
 direction field, in network byte order (big-endian), the low-order bit
 of which is set if the frame was sent from the host to the controller
 and clear if the frame was received by the host from the controller,
-followed by an HCI packet indicator byte, as specified by Volume 4, part
-A of the Core Version 4.0 of the
-<a href="https://www.bluetooth.org/Technical/Specifications/adopted.htm">
-Bluetooth specifications</a>, followed by an HCI packet of the specified
-packet type, as specified by Volume 2, Part E of the same document.
+followed by an HCI packet indicator byte, as specified by the UART
+Transport Layer portion of the most recent <a
+href="https://www.bluetooth.org/Technical/Specifications/adopted.htm">
+Bluetooth Core specification</a>, followed by an HCI packet of the
+specified packet type, as specified by the Host Controller Interface
+Functional Specification portion of the most recent Bluetooth Core
+Specification.
                 <tr valign=top>
 <td>LINKTYPE_AX25_KISS<td>202<td>DLT_AX25_KISS<td>
 <a href="http://www.ax25.net/AX25.2.2-Jul%2098-2.pdf">AX.25</a> packet,
