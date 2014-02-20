@@ -474,11 +474,13 @@ definitions that I use to describe a TCP/IP packet over Ethernet.
 	#define IP_V(ip)		(((ip)->ip_vhl) >> 4)
 
 	/* TCP header */
+	typedef u_int tcp_seq;
+
 	struct sniff_tcp {
 		u_short th_sport;	/* source port */
 		u_short th_dport;	/* destination port */
 		tcp_seq th_seq;		/* sequence number */
-		tcp_seq th_ack;		/* acknowledgement number */<br>
+		tcp_seq th_ack;		/* acknowledgement number */
 		u_char th_offx2;	/* data offset, rsvd */
 	#define TH_OFF(th)	(((th)->th_offx2 & 0xf0) >> 4)
 		u_char th_flags;
@@ -496,19 +498,6 @@ definitions that I use to describe a TCP/IP packet over Ethernet.
 		u_short th_urp;		/* urgent pointer */
 };
 </pre>
-
-<p><b>Note:</b> On my Slackware Linux 8 box (stock 
-kernel 2.2.19) I found that code using the above structures would not compile. 
-The problem, as it turns out, was in include/features.h, which implements a 
-POSIX interface unless _BSD_SOURCE is defined. If it was not defined, then 
-I had to use a different structure definition for the TCP header. The more 
-universal solution, that does not prevent the code from working on FreeBSD or 
-OpenBSD (where it had previously worked fine), is simply to do the following:<br>
-#define _BSD_SOURCE 1<br>
-prior to including any of your header files. This will ensure that a BSD 
-style API is being used. Again, if you don't wish to do this, then you can 
-simply use the alternative TCP header structure, which I've linked to
-<a href="alt-tcp.c">here</a>, along with some quick notes about using it.
 
 <p>So how does all of this relate to pcap and our mysterious u_char
 pointer? Well, those structures define the headers that appear in the
