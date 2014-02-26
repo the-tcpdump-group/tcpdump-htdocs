@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of TCPDUMP</TITLE>
 </HEAD><BODY>
 <H1>TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 13 December 2013<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 26 February 2014<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -1778,15 +1778,17 @@ Sun NFS (Network File System) requests and replies are printed as:
 <DL COMPACT><DT><DD>
 <PRE>
 
-<I>src.xid &gt; dst.nfs: len op args</I>
-<I>src.nfs &gt; dst.xid: reply stat len op results</I>
+<I>src.sport &gt; dst.nfs: NFS request xid xid len op args</I>
+<I>src.nfs &gt; dst.dport: NFS reply xid xid reply stat len op results</I>
 
 <TT>
-sushi.6709 &gt; wrl.nfs: 112 readlink fh 21,24/10.73165
-wrl.nfs &gt; sushi.6709: reply ok 40 readlink &quot;../var&quot;
-sushi.201b &gt; wrl.nfs:
+sushi.1023 &gt; wrl.nfs: NFS request xid 26377
+        112 readlink fh 21,24/10.73165
+wrl.nfs &gt; sushi.1023: NFS reply xid 26377
+        reply ok 40 readlink &quot;../var&quot;
+sushi.1022 &gt; wrl.nfs: NFS request xid 8219
         144 lookup fh 9,74/4096.6878 &quot;xcolors&quot;
-wrl.nfs &gt; sushi.201b:
+wrl.nfs &gt; sushi.1022: NFS reply xid 8219
         reply ok 128 lookup fh 9,74/4134.3150
 </TT>
 
@@ -1794,30 +1796,31 @@ wrl.nfs &gt; sushi.201b:
 
 </DL>
 
-In the first line, host <I>sushi</I> sends a transaction with id <I>6709</I>
+In the first line, host <I>sushi</I> sends a transaction with id <I>26377</I>
 to <I>wrl</I>.
-(Note that for UDP NFS packets the standard UDP header isn't printed and the
-number following the src host is a transaction id, <I>not</I> the source port.
-The example above represents UDP NFS traffic.
-For TCP NFS packets port numbers are printed as part of the standard TCP header
-and the transaction id is printed separately as &quot;xid&quot; field of the packet.)
 The request was 112 bytes,
 excluding the UDP and IP headers.
 The operation was a <I>readlink</I>
 (read symbolic link) on file handle (<I>fh</I>) 21,24/10.731657119.
 (If one is lucky, as in this case, the file handle can be interpreted
 as a major,minor device number pair, followed by the inode number and
-generation number.)
-<I>Wrl</I> replies `ok' with the contents of the link.
+generation number.) In the second line, <I>wrl</I> replies `ok' with
+the same transaction id and the contents of the link.
 <P>
 
-In the third line, <I>sushi</I> asks <I>wrl</I> to lookup the name
-`<I>xcolors</I>' in directory file 9,74/4096.6878.
+In the third line, <I>sushi</I> asks (using a new transaction id) <I>wrl</I>
+to lookup the name `<I>xcolors</I>' in directory file 9,74/4096.6878. In
+the fourth line, <I>wrl</I> sends a reply with the respective transaction id.
+<P>
+
 Note that the data printed
 depends on the operation type.
 The format is intended to be self
 explanatory if read in conjunction with
 an NFS protocol spec.
+Also note that older versions of tcpdump printed NFS packets in a
+slightly different format: the transaction id (xid) would be printed
+instead of the non-NFS port number of the packet.
 <P>
 
 If the -v (verbose) flag is given, additional information is printed.
@@ -1826,9 +1829,9 @@ For example:
 <PRE>
 
 <TT>
-sushi.1372a &gt; wrl.nfs:
+sushi.1023 &gt; wrl.nfs: NFS request xid 79658
         148 read fh 21,11/12.195 8192 bytes @ 24576
-wrl.nfs &gt; sushi.1372a:
+wrl.nfs &gt; sushi.1023: NFS reply xid 79658
         reply ok 1472 read REG 100664 ids 417/0 sz 29388
 </TT>
 
@@ -2336,6 +2339,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 13:20:49 GMT, January 02, 2014
+Time: 12:42:34 GMT, February 26, 2014
 </BODY>
 </HTML>
