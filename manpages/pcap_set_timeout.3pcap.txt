@@ -28,4 +28,4 @@ SEE ALSO
 
 
 
-                                 5 April 2008          PCAP_SET_TIMEOUT(3PCAP)
+                               10 December 2013        PCAP_SET_TIMEOUT(3PCAP)
