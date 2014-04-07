@@ -69,6 +69,10 @@ ENDOFLIST
 	while read mantopic manfile; do
 		[ "$manfile" = "" ] && manfile=$mantopic
 		manfile="${WEBSITE_PFX}/${manfile}.3pcap.html"
+		# Two substitutions below make up for the new smartness added
+		# in man2html-1.6-13.g.fc20.
+		echo "s@<B><A HREF=\"$MAN2HTML_PFX?3PCAP+${mantopic}\">$mantopic</A></B>(3PCAP)@<B>$mantopic</B>(3PCAP)@g"
+		echo "s@<A HREF=\"$MAN2HTML_PFX?3PCAP+${mantopic}\">$mantopic</A>(3PCAP)@$mantopic(3PCAP)@g"
 		echo "s@$mantopic(3PCAP)@<A HREF='$manfile'>$mantopic</A>(3PCAP)@g"
 		echo "s@<B>$mantopic</B>(3PCAP)@<A HREF='$manfile'><B>$mantopic</B></A>(3PCAP)@g"
 	done >>$SEDFILE <<ENDOFLIST
