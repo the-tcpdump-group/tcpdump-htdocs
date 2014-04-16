@@ -16,11 +16,8 @@ DESCRIPTION
        handle when the handle is activated to to_ms, which is in units of mil-
        liseconds.
 
-       The behavior, if the timeout isn't specified, is undefined.  We  recom-
-       mend always setting the timeout to a non-zero value.
-
 RETURN VALUE
-       pcap_set_timeout()  returns  0  on  success  or PCAP_ERROR_ACTIVATED if
+       pcap_set_timeout() returns 0  on  success  or  PCAP_ERROR_ACTIVATED  if
        called on a capture handle that has been activated.
 
 SEE ALSO
@@ -28,4 +25,4 @@ SEE ALSO
 
 
 
-                               10 December 2013        PCAP_SET_TIMEOUT(3PCAP)
+                                 16 April 2014         PCAP_SET_TIMEOUT(3PCAP)
