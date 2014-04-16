@@ -154,6 +154,10 @@ function produceHTML
 {
 	local infile=${1:?argument required}
 	local outfile=${2:?argument required}
+	[ -s $infile ] || {
+		echo "Skipped: $infile, which does not exist or is empty"
+		return
+	}
 	man2html -M $MAN2HTML_PFX $infile | stripContentTypeHeader | conditionAnchors > $outfile
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
@@ -172,6 +176,10 @@ function produceTXT
 {
 	local infile=${1:?argument required}
 	local outfile=${2:?argument required}
+	[ -s $infile ] || {
+		echo "Skipped: $infile, which does not exist or is empty"
+		return
+	}
 	man -E ascii $infile > $outfile
 	git diff $outfile | egrep -q '^[-+]' && echo "Updated: $outfile"
 }
