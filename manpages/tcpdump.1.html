@@ -81,6 +81,10 @@ tcpdump - dump traffic on a network
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
+<B>--number</B>
+
+]
+[
 <B>-Q</B>
 
 <I>in|out|inout</I>
@@ -162,6 +166,10 @@ tcpdump - dump traffic on a network
 ]
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>--version</B>
+
+]
 [
 <I>expression</I>
 
@@ -284,16 +292,21 @@ capturing web pages.
 <DD>
 Print the AS number in BGP packets in ASDOT notation rather than ASPLAIN
 notation.
-<DT><B>-B</B>
+<DT><B>-B</B><I> buffer_size</I>
 
 <DD>
+
+<DT><B>--buffer-size=</B><I>buffer_size</I>
+
+<DD>
+
 Set the operating system capture buffer size to <I>buffer_size</I>, in
 units of KiB (1024 bytes).
-<DT><B>-c</B>
+<DT><B>-c</B><I> count</I>
 
 <DD>
 Exit after receiving <I>count</I> packets.
-<DT><B>-C</B>
+<DT><B>-C</B><I> file_size</I>
 
 <DD>
 Before writing a raw packet to a savefile, check whether the file is
@@ -324,6 +337,11 @@ Dump packet-matching code as decimal numbers (preceded with a count).
 <DT><B>-D</B>
 
 <DD>
+
+<DT><B>--list-interfaces</B>
+
+<DD>
+
 Print the list of the network interfaces available on the system and on
 which
 <I>tcpdump</I>
@@ -413,12 +431,12 @@ interface on which capture is being done has no address or netmask or
 because the capture is being done on the Linux &quot;any&quot; interface, which
 can capture on more than one interface, this option will not work
 correctly.
-<DT><B>-F</B>
+<DT><B>-F</B><I> file</I>
 
 <DD>
 Use <I>file</I> as input for the filter expression.
 An additional expression given on the command line is ignored.
-<DT><B>-G</B>
+<DT><B>-G</B><I> rotate_seconds</I>
 
 <DD>
 If specified, rotates the dump file specified with the
@@ -440,15 +458,30 @@ option, filenames will take the form of `<I>file</I>&lt;count&gt;'.
 <DT><B>-h</B>
 
 <DD>
+
+<DT><B>--help</B>
+
+<DD>
+
 Print the tcpdump and libpcap version strings, print a usage message,
 and exit.
+<DT><B>--version</B>
+
+<DD>
+
+Print the tcpdump and libpcap version strings and exit.
 <DT><B>-H</B>
 
 <DD>
 Attempt to detect 802.11s draft mesh headers.
-<DT><B>-i</B>
+<DT><B>-i</B><I> interface</I>
 
 <DD>
+
+<DT><B>--interface=</B><I>interface</I>
+
+<DD>
+
 Listen on <I>interface</I>.
 If unspecified, <I>tcpdump</I> searches the system interface list for the
 lowest numbered, configured up interface (excluding loopback), which may turn
@@ -472,6 +505,11 @@ argument.
 <DT><B>-I</B>
 
 <DD>
+
+<DT><B>--monitor-mode</B>
+
+<DD>
+
 Put the interface in &quot;monitor mode&quot;; this is supported only on IEEE
 802.11 Wi-Fi interfaces, and supported only on some operating systems.
 <DT><DD>
@@ -494,9 +532,14 @@ monitor mode will be shown; if
 
 is specified, only those link-layer types available when in monitor mode
 will be shown.
-<DT><B>-j</B>
+<DT><B>-j</B><I> tstamp_type</I>
 
 <DD>
+
+<DT><B>--time-stamp-type=</B><I>tstamp_type</I>
+
+<DD>
+
 Set the time stamp type for the capture to <I>tstamp_type</I>.  The names
 to use for the time stamp types are given in
 <B><A HREF="/manpages/pcap-tstamp.7.html">pcap-tstamp</A></B>(7);
@@ -506,12 +549,22 @@ interface.
 <DT><B>-J</B>
 
 <DD>
+
+<DT><B>--list-time-stamp-types</B>
+
+<DD>
+
 List the supported time stamp types for the interface and exit.  If the
 time stamp type cannot be set for the interface, no time stamp types are
 listed.
 <DT><B>-K</B>
 
 <DD>
+
+<DT><B>--dont-verify-checksums</B>
+
+<DD>
+
 Don't attempt to verify IP, TCP, or UDP checksums.  This is useful for
 interfaces that perform some or all of those checksum calculation in
 hardware; otherwise, all outgoing TCP checksums will be flagged as bad.
@@ -565,6 +618,11 @@ including Windows.
 <DT><B>-L</B>
 
 <DD>
+
+<DT><B>--list-data-link-types</B>
+
+<DD>
+
 List the known data link types for the interface, in the specified mode,
 and exit.  The list of known data link types may be dependent on the
 specified mode; for example, on some platforms, a Wi-Fi interface might
@@ -574,13 +632,13 @@ example, it might support only fake Ethernet headers, or might support
 and another set of data link types when in monitor mode (for example, it
 might support 802.11 headers, or 802.11 headers with radio information,
 only in monitor mode).
-<DT><B>-m</B>
+<DT><B>-m</B><I> module</I>
 
 <DD>
 Load SMI MIB module definitions from file <I>module</I>.
 This option
 can be used several times to load several MIB modules into <I>tcpdump</I>.
-<DT><B>-M</B>
+<DT><B>-M</B><I> secret</I>
 
 <DD>
 Use <I>secret</I> as a shared secret for validating the digests found in
@@ -596,23 +654,42 @@ Don't print domain name qualification of host names.
 E.g.,
 if you give this flag then <I>tcpdump</I> will print ``nic''
 instead of ``nic.ddn.mil''.
+<DT><B>--number</B>
+
+<DD>
+Print an optional packet number at the beginning of the line.
 <DT><B>-O</B>
 
 <DD>
+
+<DT><B>--no-optimize</B>
+
+<DD>
+
 Do not run the packet-matching code optimizer.
 This is useful only
 if you suspect a bug in the optimizer.
 <DT><B>-p</B>
 
 <DD>
+
+<DT><B>--no-promiscuous-mode</B>
+
+<DD>
+
 <I>Don't</I> put the interface
 into promiscuous mode.
 Note that the interface might be in promiscuous
 mode for some other reason; hence, `-p' cannot be used as an abbreviation for
 `ether host {local-hw-addr} or ether broadcast'.
-<DT><B>-Q</B>
+<DT><B>-Q</B><I> direction</I>
 
 <DD>
+
+<DT><B>--direction=</B><I>direction</I>
+
+<DD>
+
 Choose send/receive direction <I>direction</I> for which packets should be
 captured. Possible values are `in', `out' and `inout'. Not available
 on all platforms.
@@ -629,21 +706,31 @@ Assume ESP/AH packets to be based on old specification (RFC1825 to RFC1829).
 If specified, <I>tcpdump</I> will not print replay prevention field.
 Since there is no protocol version field in ESP/AH specification,
 <I>tcpdump</I> cannot deduce the version of ESP/AH protocol.
-<DT><B>-r</B>
+<DT><B>-r</B><I> file</I>
 
 <DD>
 Read packets from <I>file</I> (which was created with the
 <B>-w</B>
 
-option).
+option or by other tools that write pcap or pcap-ng files).
 Standard input is used if <I>file</I> is ``-''.
 <DT><B>-S</B>
 
 <DD>
-Print absolute, rather than relative, TCP sequence numbers.
-<DT><B>-s</B>
+
+<DT><B>--absolute-tcp-sequence-numbers</B>
 
 <DD>
+
+Print absolute, rather than relative, TCP sequence numbers.
+<DT><B>-s</B><I> snaplen</I>
+
+<DD>
+
+<DT><B>--snapshot-length=</B><I>snaplen</I>
+
+<DD>
+
 Snarf <I>snaplen</I> bytes of data from each packet rather than the
 default of 65535 bytes.
 Packets truncated because of a limited snapshot
@@ -661,7 +748,7 @@ Setting
 for backwards compatibility with recent older versions of
 <I>tcpdump</I>.
 
-<DT><B>-T</B>
+<DT><B>-T</B><I> type</I>
 
 <DD>
 Force packets selected by &quot;<I>expression</I>&quot; to be interpreted the
@@ -723,6 +810,11 @@ Print undecoded NFS handles.
 <DT><B>-U</B>
 
 <DD>
+
+<DT><B>--packet-buffered</B>
+
+<DD>
+
 If the
 <B>-w</B>
 
@@ -783,12 +875,12 @@ With
 <B>-X</B>
 
 Telnet options are printed in hex as well.
-<DT><B>-V</B>
+<DT><B>-V</B><I> file</I>
 
 <DD>
 Read a list of filenames from <I>file</I>. Standard input is used
 if <I>file</I> is ``-''.
-<DT><B>-w</B>
+<DT><B>-w</B><I> file</I>
 
 <DD>
 Write the raw packets to <I>file</I> rather than parsing and printing
@@ -875,11 +967,16 @@ each packet,
 <I>including</I>
 
 its link level header, in hex and ASCII.
-<DT><B>-y</B>
+<DT><B>-y</B><I> datalinktype</I>
 
 <DD>
+
+<DT><B>--linktype=</B><I>datalinktype</I>
+
+<DD>
+
 Set the data link type to use while capturing packets to <I>datalinktype</I>.
-<DT><B>-z</B>
+<DT><B>-z</B><I> postrotate-command</I>
 
 <DD>
 Used in conjunction with the
@@ -892,7 +989,7 @@ options, this will make
 <I>tcpdump</I>
 
 run &quot;
-<I>command file</I>
+<I>postrotate-command file</I>
 
 &quot; where
 <I>file</I>
@@ -912,9 +1009,14 @@ And in case you would like to use a command that itself takes flags or
 different arguments, you can always write a shell script that will take the
 savefile name as the only argument, make the flags &amp; arguments arrangements
 and execute the command that you want.
-<DT><B>-Z</B>
+<DT><B>-Z</B><I> user</I>
 
 <DD>
+
+<DT><B>--relinquish-privileges=</B><I>user</I>
+
+<DD>
+
 If
 <I>tcpdump</I>
 
@@ -2339,6 +2441,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 12:42:34 GMT, February 26, 2014
+Time: 15:11:30 GMT, May 07, 2014
 </BODY>
 </HTML>
