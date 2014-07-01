@@ -223,7 +223,9 @@ DESCRIPTION
               tion  header,  routing  header,  or  hop-by-hop  option  header,
               between  IPv6  header  and  TCP header.  The BPF code emitted by
               this primitive is complex and cannot be  optimized  by  the  BPF
-              optimizer code, so this can be somewhat slow.
+              optimizer  code,  and  is not supported by filter engines in the
+              kernel, so this can be somewhat slow, and may cause more packets
+              to be dropped.
 
        ip protochain protocol
               Equivalent to ip6 protochain protocol, but this is for IPv4.
@@ -334,6 +336,49 @@ DESCRIPTION
 
        decnet host host
               True if either the DECNET source or destination address is host.
+
+       llc    True if the packet has an 802.2 LLC header.  This includes:
+
+              Ethernet packets with a length field rather than  a  type  field
+              that aren't raw NetWare-over-802.3 packets;
+
+              IEEE 802.11 data packets;
+
+              Token Ring packets (no check is done for LLC frames);
+
+              FDDI packets (no check is done for LLC frames);
+
+              LLC-encapsulated ATM packets, for SunATM on Solaris.
+
+       llc type
+              True if the packet has an 802.2 LLC header and has the specified
+              type.  type can be one of:
+
+              i      Information (I) PDUs
+
+              s      Supervisory (S) PDUs
+
+              u      Unnumbered (U) PDUs
+
+              rr     Receiver Ready (RR) S PDUs
+
+              rnr    Receiver Not Ready (RNR) S PDUs
+
+              rej    Reject (REJ) S PDUs
+
+              ui     Unnumbered Information (UI) U PDUs
+
+              ua     Unnumbered Acknowledgment (UA) U PDUs
+
+              disc   Disconnect (DISC) U PDUs
+
+              sabme  Set Asynchronous Balanced Mode Extended (SABME) U PDUs
+
+              test   Test (TEST) U PDUs
+
+              xid    Exchange Identification (XID) U PDUs
+
+              frmr   Frame Reject (FRMR) U PDUs
 
        ifname interface
               True if the packet was  logged  as  coming  from  the  specified
@@ -514,93 +559,98 @@ DESCRIPTION
               isn't specified, the tests are done under  the  assumption  that
               the packet is an LLC-encapsulated packet.
 
-       llc    True  if the packet is an ATM packet, for SunATM on Solaris, and
-              is an LLC-encapsulated packet.
-
-       oamf4s True if the packet is an ATM packet, for SunATM on Solaris,  and
+       oamf4s True  if the packet is an ATM packet, for SunATM on Solaris, and
               is a segment OAM F4 flow cell (VPI=0 & VCI=3).
 
-       oamf4e True  if the packet is an ATM packet, for SunATM on Solaris, and
+       oamf4e True if the packet is an ATM packet, for SunATM on Solaris,  and
               is an end-to-end OAM F4 flow cell (VPI=0 & VCI=4).
 
-       oamf4  True if the packet is an ATM packet, for SunATM on Solaris,  and
-              is  a  segment  or end-to-end OAM F4 flow cell (VPI=0 & (VCI=3 |
+       oamf4  True  if the packet is an ATM packet, for SunATM on Solaris, and
+              is a segment or end-to-end OAM F4 flow cell (VPI=0  &  (VCI=3  |
               VCI=4)).
 
-       oam    True if the packet is an ATM packet, for SunATM on Solaris,  and
-              is  a  segment  or end-to-end OAM F4 flow cell (VPI=0 & (VCI=3 |
+       oam    True  if the packet is an ATM packet, for SunATM on Solaris, and
+              is a segment or end-to-end OAM F4 flow cell (VPI=0  &  (VCI=3  |
               VCI=4)).
 
-       metac  True if the packet is an ATM packet, for SunATM on Solaris,  and
+       metac  True  if the packet is an ATM packet, for SunATM on Solaris, and
               is on a meta signaling circuit (VPI=0 & VCI=1).
 
-       bcc    True  if the packet is an ATM packet, for SunATM on Solaris, and
+       bcc    True if the packet is an ATM packet, for SunATM on Solaris,  and
               is on a broadcast signaling circuit (VPI=0 & VCI=2).
 
-       sc     True if the packet is an ATM packet, for SunATM on Solaris,  and
+       sc     True  if the packet is an ATM packet, for SunATM on Solaris, and
               is on a signaling circuit (VPI=0 & VCI=5).
 
-       ilmic  True  if the packet is an ATM packet, for SunATM on Solaris, and
+       ilmic  True if the packet is an ATM packet, for SunATM on Solaris,  and
               is on an ILMI circuit (VPI=0 & VCI=16).
 
        connectmsg
-              True if the packet is an ATM packet, for SunATM on Solaris,  and
-              is  on  a signaling circuit and is a Q.2931 Setup, Call Proceed-
+              True  if the packet is an ATM packet, for SunATM on Solaris, and
+              is on a signaling circuit and is a Q.2931 Setup,  Call  Proceed-
               ing, Connect, Connect Ack, Release, or Release Done message.
 
        metaconnect
-              True if the packet is an ATM packet, for SunATM on Solaris,  and
-              is  on a meta signaling circuit and is a Q.2931 Setup, Call Pro-
+              True  if the packet is an ATM packet, for SunATM on Solaris, and
+              is on a meta signaling circuit and is a Q.2931 Setup, Call  Pro-
               ceeding, Connect, Release, or Release Done message.
 
        expr relop expr
-              True if the relation holds, where relop is one of >, <, >=,  <=,
-              =,  !=, and expr is an arithmetic expression composed of integer
-              constants (expressed in standard C syntax),  the  normal  binary
-              operators  [+,  -,  *,  /, &, |, <<, >>], a length operator, and
-              special packet data accessors.  Note that  all  comparisons  are
-              unsigned,  so that, for example, 0x80000000 and 0xffffffff are >
-              0.  To access data inside the packet, use the following syntax:
+              True  if the relation holds, where relop is one of >, <, >=, <=,
+              =, !=, and expr is an arithmetic expression composed of  integer
+              constants  (expressed  in  standard C syntax), the normal binary
+              operators [+, -, *, /, %, &, |, ^, <<, >>], a  length  operator,
+              and  special  packet  data accessors.  Note that all comparisons
+              are unsigned, so that, for example,  0x80000000  and  0xffffffff
+              are > 0.
+
+              The % and ^ operators are currently only supported for filtering
+              in the kernel on Linux with 3.7 and later kernels; on all  other
+              systems,  if those operators are used, filtering will be done in
+              user mode, which will increase the overhead of capturing packets
+              and may cause more packets to be dropped.
+
+              To access data inside the packet, use the following syntax:
                    proto [ expr : size ]
               Proto is one of ether, fddi, tr, wlan, ppp, slip, link, ip, arp,
-              rarp,  tcp,  udp, icmp, ip6 or radio, and indicates the protocol
-              layer for the index operation.  (ether,  fddi,  wlan,  tr,  ppp,
-              slip  and  link all refer to the link layer. radio refers to the
-              "radio header" added to some 802.11 captures.)  Note  that  tcp,
+              rarp, tcp, udp, icmp, ip6 or radio, and indicates  the  protocol
+              layer  for  the  index  operation.  (ether, fddi, wlan, tr, ppp,
+              slip and link all refer to the link layer. radio refers  to  the
+              "radio  header"  added to some 802.11 captures.)  Note that tcp,
               udp and other upper-layer protocol types only apply to IPv4, not
               IPv6 (this will be fixed in the future).  The byte offset, rela-
               tive to the indicated protocol layer, is given by expr.  Size is
-              optional and indicates the number  of  bytes  in  the  field  of
-              interest;  it  can  be either one, two, or four, and defaults to
-              one.  The length operator, indicated by the keyword  len,  gives
+              optional  and  indicates  the  number  of  bytes in the field of
+              interest; it can be either one, two, or four,  and  defaults  to
+              one.   The  length operator, indicated by the keyword len, gives
               the length of the packet.
 
-              For  example, `ether[0] & 1 != 0' catches all multicast traffic.
-              The expression `ip[0] & 0xf != 5' catches all IPv4 packets  with
-              options.   The  expression  `ip[6:2]  & 0x1fff = 0' catches only
-              unfragmented IPv4 datagrams and frag  zero  of  fragmented  IPv4
-              datagrams.   This check is implicitly applied to the tcp and udp
-              index operations.  For instance, tcp[0] always means  the  first
-              byte  of  the  TCP  header, and never means the first byte of an
+              For example, `ether[0] & 1 != 0' catches all multicast  traffic.
+              The  expression `ip[0] & 0xf != 5' catches all IPv4 packets with
+              options.  The expression `ip[6:2] & 0x1fff  =  0'  catches  only
+              unfragmented  IPv4  datagrams  and  frag zero of fragmented IPv4
+              datagrams.  This check is implicitly applied to the tcp and  udp
+              index  operations.   For instance, tcp[0] always means the first
+              byte of the TCP header, and never means the  first  byte  of  an
               intervening fragment.
 
-              Some offsets and field values may be expressed as  names  rather
-              than  as  numeric  values.   The following protocol header field
-              offsets are available:  icmptype  (ICMP  type  field),  icmpcode
+              Some  offsets  and field values may be expressed as names rather
+              than as numeric values.  The  following  protocol  header  field
+              offsets  are  available:  icmptype  (ICMP  type field), icmpcode
               (ICMP code field), and tcpflags (TCP flags field).
 
               The following ICMP type field values are available: icmp-echore-
-              ply, icmp-unreach, icmp-sourcequench, icmp-redirect,  icmp-echo,
-              icmp-routeradvert,   icmp-routersolicit,   icmp-timxceed,  icmp-
-              paramprob, icmp-tstamp, icmp-tstampreply,  icmp-ireq,  icmp-ire-
+              ply,  icmp-unreach, icmp-sourcequench, icmp-redirect, icmp-echo,
+              icmp-routeradvert,  icmp-routersolicit,   icmp-timxceed,   icmp-
+              paramprob,  icmp-tstamp,  icmp-tstampreply, icmp-ireq, icmp-ire-
               qreply, icmp-maskreq, icmp-maskreply.
 
-              The  following  TCP  flags  field values are available: tcp-fin,
+              The following TCP flags field  values  are  available:  tcp-fin,
               tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg.
 
        Primitives may be combined using:
 
-              A parenthesized group of primitives and  operators  (parentheses
+              A  parenthesized  group of primitives and operators (parentheses
               are special to the Shell and must be escaped).
 
               Negation (`!' or `not').
@@ -609,8 +659,8 @@ DESCRIPTION
 
               Alternation (`||' or `or').
 
-       Negation  has  highest  precedence.  Alternation and concatenation have
-       equal precedence and associate left to right.  Note that  explicit  and
+       Negation has highest precedence.  Alternation  and  concatenation  have
+       equal  precedence  and associate left to right.  Note that explicit and
        tokens, not juxtaposition, are now required for concatenation.
 
        If an identifier is given without a keyword, the most recent keyword is
@@ -642,12 +692,12 @@ EXAMPLES
        local net).
               ip and not net localnet
 
-       To select the start and end packets (the SYN and FIN packets)  of  each
+       To  select  the start and end packets (the SYN and FIN packets) of each
        TCP conversation that involves a non-local host.
               tcp[tcpflags] & (tcp-syn|tcp-fin) != 0 and not src and dst net localnet
 
-       To  select  all  IPv4 HTTP packets to and from port 80, i.e. print only
-       packets that contain data, not, for example, SYN and  FIN  packets  and
+       To select all IPv4 HTTP packets to and from port 80,  i.e.  print  only
+       packets  that  contain  data, not, for example, SYN and FIN packets and
        ACK-only packets.  (IPv6 is left as an exercise for the reader.)
               tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)
 
@@ -658,7 +708,7 @@ EXAMPLES
        ernet broadcast or multicast:
               ether[0] & 1 = 0 and ip[16] >= 224
 
-       To select all ICMP packets that are not  echo  requests/replies  (i.e.,
+       To  select  all  ICMP packets that are not echo requests/replies (i.e.,
        not ping packets):
               icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply
 
@@ -670,17 +720,17 @@ BUGS
 
               tcpdump-workers@lists.tcpdump.org
 
-       Filter  expressions  on  fields  other than those in Token Ring headers
+       Filter expressions on fields other than those  in  Token  Ring  headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter expressions on fields other than those in  802.11  headers  will
-       not  correctly  handle  802.11 data packets with both To DS and From DS
+       Filter  expressions  on  fields other than those in 802.11 headers will
+       not correctly handle 802.11 data packets with both To DS  and  From  DS
        set.
 
-       ip6 proto should chase header chain, but at this moment  it  does  not.
+       ip6  proto  should  chase header chain, but at this moment it does not.
        ip6 protochain is supplied for this behavior.
 
-       Arithmetic  expression  against  transport  layer headers, like tcp[0],
+       Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
 

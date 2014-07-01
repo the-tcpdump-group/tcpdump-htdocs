@@ -167,9 +167,15 @@ tcpdump - dump traffic on a network
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
+<B>--time-stamp-precision=</B><I>tstamp_precision</I>
+
+]
+[
 <B>--version</B>
 
 ]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <I>expression</I>
 
@@ -557,6 +563,30 @@ interface.
 List the supported time stamp types for the interface and exit.  If the
 time stamp type cannot be set for the interface, no time stamp types are
 listed.
+<DT><B>--time-stamp-precision=</B><I>tstamp_precision</I>
+
+<DD>
+When capturing, set the time stamp precision for the capture to
+<I>tstamp_precision</I>.  Note that availability of high precision time
+stamps (nanoseconds) and their actual accuracy is platform and hardware
+dependent.  Also note that when writing captures made with nanosecond
+accuracy to a savefile, the time stamps are written with nanosecond
+resolution, and the file is written with a different magic number, to
+indicate that the time stamps are in seconds and nanoseconds; not all
+programs that read pcap savefiles will be able to read those captures.
+</DL>
+<P>
+
+When reading a savefile, convert time stamps to the precision specified
+by <I>timestamp_precision</I>, and display them with that resolution.  If
+the precision specified is less than the precision of time stamps in the
+file, the conversion will lose precision.
+<P>
+
+The supported values for <I>timestamp_precision</I> are <B>micro</B> for
+microsecond resolution and <B>nano</B> for nanosecond resolution.  The
+default is microsecond resolution.
+<DL COMPACT>
 <DT><B>-K</B>
 
 <DD>
@@ -2441,6 +2471,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 15:50:40 GMT, May 07, 2014
+Time: 11:01:07 GMT, July 01, 2014
 </BODY>
 </HTML>

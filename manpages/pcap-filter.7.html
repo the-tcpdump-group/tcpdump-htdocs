@@ -399,8 +399,9 @@ The packet may contain, for example,
 authentication header, routing header, or hop-by-hop option header,
 between IPv6 header and TCP header.
 The BPF code emitted by this primitive is complex and
-cannot be optimized by the BPF optimizer code, so this can be somewhat
-slow.
+cannot be optimized by the BPF optimizer code, and is not supported by
+filter engines in the kernel, so this can be somewhat slow, and may
+cause more packets to be dropped.
 <DT><B>ip protochain </B><I>protocol</I><DD>
 Equivalent to <B>ip6 protochain </B><I>protocol</I>, but this is for IPv4.
 <DT><B>protochain </B><I>protocol</I><DD>
@@ -524,6 +525,59 @@ True if the DECNET destination address is
 <DT><B>decnet host </B><I>host</I><DD>
 True if either the DECNET source or destination address is
 <I>host</I>.
+
+<DT><B>llc</B><DD>
+True if the packet has an 802.2 LLC header.  This includes:
+<DT><DD>
+Ethernet packets with a length field rather than a type field that
+aren't raw NetWare-over-802.3 packets;
+<DT><DD>
+IEEE 802.11 data packets;
+<DT><DD>
+Token Ring packets (no check is done for LLC frames);
+<DT><DD>
+FDDI packets (no check is done for LLC frames);
+<DT><DD>
+LLC-encapsulated ATM packets, for SunATM on Solaris.
+<DT><DD>
+<P>
+<DT><B>llc</B> Fitype<DD>
+True if the packet has an 802.2 LLC header and has the specified
+<I>type</I>.
+
+<I>type</I>
+
+can be one of:
+<DL COMPACT><DT><DD>
+<DL COMPACT>
+<DT><B>i</B><DD>
+Information (I) PDUs
+<DT><B>s</B><DD>
+Supervisory (S) PDUs
+<DT><B>u</B><DD>
+Unnumbered (U) PDUs
+<DT><B>rr</B><DD>
+Receiver Ready (RR) S PDUs
+<DT><B>rnr</B><DD>
+Receiver Not Ready (RNR) S PDUs
+<DT><B>rej</B><DD>
+Reject (REJ) S PDUs
+<DT><B>ui</B><DD>
+Unnumbered Information (UI) U PDUs
+<DT><B>ua</B><DD>
+Unnumbered Acknowledgment (UA) U PDUs
+<DT><B>disc</B><DD>
+Disconnect (DISC) U PDUs
+<DT><B>sabme</B><DD>
+Set Asynchronous Balanced Mode Extended (SABME) U PDUs
+<DT><B>test</B><DD>
+Test (TEST) U PDUs
+<DT><B>xid</B><DD>
+Exchange Identification (XID) U PDUs
+<DT><B>frmr</B><DD>
+Frame Reject (FRMR) U PDUs
+</DL>
+</DL>
 
 <DT><B>ifname </B><I>interface</I><DD>
 True if the packet was logged as coming from the specified interface (applies
@@ -818,9 +872,6 @@ on the assumption that the packet is either a LANE emulated Ethernet
 packet or a LANE LE Control packet.  If <B>lane</B> isn't specified, the
 tests are done under the assumption that the packet is an
 LLC-encapsulated packet.
-<DT><B>llc</B><DD>
-True if the packet is an ATM packet, for SunATM on Solaris, and is
-an LLC-encapsulated packet.
 <DT><B>oamf4s</B><DD>
 True if the packet is an ATM packet, for SunATM on Solaris, and is
 a segment OAM F4 flow cell (VPI=0 &amp; VCI=3).
@@ -857,11 +908,17 @@ Release, or Release Done message.
 True if the relation holds, where <I>relop</I> is one of &gt;, &lt;, &gt;=, &lt;=, =,
 !=, and <I>expr</I> is an arithmetic expression composed of integer
 constants (expressed in standard C syntax), the normal binary operators
-[+, -, *, /, &amp;, |, &lt;&lt;, &gt;&gt;], a length operator, and special packet data
+[+, -, *, /, %, &amp;, |, ^, &lt;&lt;, &gt;&gt;], a length operator, and special packet data
 accessors.  Note that all comparisons are unsigned, so that, for example,
 0x80000000 and 0xffffffff are &gt; 0.
-To access
-data inside the packet, use the following syntax:
+<DT><DD>
+The % and ^ operators are currently only supported for filtering in the
+kernel on Linux with 3.7 and later kernels; on all other systems, if
+those operators are used, filtering will be done in user mode, which
+will increase the overhead of capturing packets and may cause more
+packets to be dropped.
+<DT><DD>
+To access data inside the packet, use the following syntax:
 
 <PRE>
 <I>proto</I><B> [ </B><I>expr</I><B> : </B><I>size</I><B> ]</B>
@@ -1131,6 +1188,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 13:36:52 GMT, April 07, 2014
+Time: 11:01:03 GMT, July 01, 2014
 </BODY>
 </HTML>
