@@ -6,7 +6,8 @@ NAME
        tcpdump - dump traffic on a network
 
 SYNOPSIS
-       tcpdump [ -AbdDefhHIJKlLnNOpqRStuUvxX ] [ -B buffer_size ] [ -c count ]
+       tcpdump [ -AbdDefhHIJKlLnNOpqRStuUvxX# ] [ -B buffer_size ]
+               [ -c count ]
                [ -C file_size ] [ -G rotate_seconds ] [ -F file ]
                [ -i interface ] [ -j tstamp_type ] [ -m module ] [ -M secret ]
                [ --number ] [ -Q in|out|inout ]
@@ -307,6 +308,7 @@ OPTIONS
               you  give  this  flag then tcpdump will print ``nic'' instead of
               ``nic.ddn.mil''.
 
+       -#
        --number
               Print an optional packet number at the beginning of the line.
 
@@ -1289,4 +1291,4 @@ BUGS
 
 
 
-                                  6 May 2014                        TCPDUMP(1)
+                                 11 July 2014                       TCPDUMP(1)
