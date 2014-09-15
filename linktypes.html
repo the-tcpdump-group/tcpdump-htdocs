@@ -124,18 +124,18 @@ risk of using a value that's already being used for some other purpose,
 and of having tools that read libpcap-format captures not being able to
 handle captures with your new link-layer header type value, with no hope
 that they will ever be changed to do so (as that would destroy their
-ability to read captures using that value for that other purpose). 
+ability to read captures using that value for that other purpose).
 <p>
 Do <strong>NOT</strong> use any of these link-layer header type values
 unless your link-layer headers <strong>EXACTLY</strong> match the
 specification.  If they do not exactly match, request your own
-link-layer header type for them. 
+link-layer header type for them.
 </p>
 </ul>
             </div>
             <!-- End of LINK-LAYER HEADER TYPES section -->
           </div>
-               
+
           <!-- Start of LINK-LAYER HEADER TYPE VALUES section -->
           <div class="post">
             <h2 class="title">
@@ -174,7 +174,7 @@ with nothing preceding it.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_5<td>6<td>DLT_IEEE802<td>
 IEEE 802.5 Token Ring; the IEEE802, without _5, in the DLT_ name is
-historical. 
+historical.
                 <tr valign=top>
 <td>LINKTYPE_ARCNET_BSD<td>7<td>DLT_ARCNET<td>
 ARCNET Data Packets, as described by the ARCNET Trade Association
@@ -392,7 +392,7 @@ Specification.
 <td>LINKTYPE_USB_LINUX<td>189<td>DLT_USB_LINUX<td>
 USB packets, beginning with a Linux USB header, as specified by the
 <tt>struct usbmon_packet</tt> in the
-<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree. 
+<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree.
 Only the first 48 bytes of that header are present.  All fields in the
 header are in the host byte order for the pcap file, as specified by the
 file's magic number, or for the section of the pcap-ng file, as
@@ -486,7 +486,7 @@ frame control field).
 <td>LINKTYPE_USB_LINUX_MMAPPED<td>220<td>DLT_USB_LINUX_MMAPPED<td>
 USB packets, beginning with a Linux USB header, as specified by the
 <tt>struct usbmon_packet</tt> in the
-<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree. 
+<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree.
 All 64 bytes of the header are present.  All fields in the header are in
 the host byte order for the pcap file, as specified by the file's magic
 number, or for the section of the pcap-ng file, as specified by the
@@ -661,7 +661,18 @@ in
 <a href="http://www.picmg.org/v2internal/specifications2.cfm?thetype=One&thebusid=12">the PICMG HPM.2 specification</a>.
 The time stamps for packets in this format must match the time stamps in
 the Trace Data Blocks.
-              </table>  
+</tr>
+                <tr valign=top>
+<td>LINKTYPE_ZWAVE_R1_R2</td><td>261</td><td>DLT_ZWAVE_R1_R2</td><td>
+per  Joshua Wright <jwright@hasborg.com>, formats for Zwave captures.
+</td>
+                <tr valign=top>
+<td>LINKTYPE_ZWAVE_R3</td><td>262</td><td>DLT_ZWAVE_R3</td><td>
+per  Joshua Wright <jwright@hasborg.com>, formats for Zwave captures.
+</td>
+
+</tr>
+              </table>
             </div>
           </div>
           <!-- End of LINK-LAYER HEADER TYPE VALUES section -->
@@ -681,7 +692,7 @@ the Trace Data Blocks.
             </p>
         </div>
         <!-- END OF FOOTER -->
-        
+
     </body>
     <!-- END OF HTML BODY -->
 </html>
