@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+    <!-- HEAD -->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>LINKTYPE_ZWAVE_R1_R2 | TCPDUMP/LIBPCAP public repository</title>
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="canonical" href="http://www.tcpdump.org">
+    </head>
+    <body>
+
+        <div id="page">
+
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_ZWAVE_R1_R2</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------+
+|       Home ID       |
+|      (4 Octets)     |
++---------------------+
+|    Source NodeID    |
+|      (1 Octets)     |
++---------------------+
+|    Frame Control    |
+|      (2 Octets)     |
++---------------------+
+| Destination NodeID  |
+|     (0-1 Octets)    |
++---------------------+
+|       Length        |
+|      (1 Octet)      |
++---------------------+
+|       Payload       |
+|    (0-54 Octets)    |
++---------------------+
+|        FCS          |
+|     (1 Octet)       |
++---------------------+
+</pre>
+
+<h3>Description</h3>
+<p>
+Z-Wave is defined in ITU-T G.9959. The MAC header format here is used by Type 1 devices with a supported data rate of 9.6 Kbps (R1) and Type 2 devices with a supported data rate of 40 Kbps (R2).
+</p>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>
