@@ -49,6 +49,18 @@ and
 <B>pcap_next()</B>
 
 will not work in ``non-blocking'' mode.
+<P>
+
+When first activated with
+<B>pcap_activate()</B>
+
+or opened with
+<B>pcap_open_live() ,</B>
+
+a capture handle is not in ``non-blocking mode''; a call to
+<B>pcap_setnonblock()</B>
+
+is required in order to put it into ``non-blocking'' mode.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
@@ -87,6 +99,6 @@ chars.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 14:40:48 GMT, December 21, 2013
+Time: 12:34:23 GMT, October 20, 2014
 </BODY>
 </HTML>

@@ -26,11 +26,11 @@ be done for a live capture
 returns, on UNIX, a file descriptor number for a file descriptor on
 which one can
 do a
-<B>select()</B>
+<B>select()</B>,
 
-or
-<B>poll()</B>
+<B>poll()</B>,
 
+or other such call
 to wait for it to be possible to read packets without blocking, if such
 a descriptor exists, or -1, if no such descriptor exists.  Some network
 devices opened with
@@ -50,6 +50,14 @@ or
 
 (for example, regular network devices on FreeBSD 4.3 and 4.4, and Endace
 DAG devices), so -1 is returned for those devices.
+<P>
+
+Note that a descriptor on which a read can be done without blocking may,
+on some platforms, not have any packets to read if the read timeout has
+expired.  A call to
+<B>pcap_dispatch()</B>
+
+will return 0 in this case, but will not block.
 <P>
 
 Note that in:
@@ -169,6 +177,6 @@ is returned.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 13:36:54 GMT, April 07, 2014
+Time: 12:34:12 GMT, October 20, 2014
 </BODY>
 </HTML>
