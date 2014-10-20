@@ -184,6 +184,11 @@ function produceTXT
 	git diff $outfile | egrep -q '^[-+]' && echo "Updated: $outfile"
 }
 
+which man2html >/dev/null 2>&1 || {
+	echo "man2html must be installed to proceed"
+	exit 1
+}
+
 # $COLUMNS doesn't always work
 COLS=`stty size | cut -d' ' -f2`
 if [ "$COLS" != "80" ]; then
