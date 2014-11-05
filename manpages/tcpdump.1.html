@@ -194,7 +194,9 @@ tcpdump - dump traffic on a network
 <P>
 
 <I>Tcpdump</I> prints out a description of the contents of packets on a
-network interface that match the boolean <I>expression</I>.  It can also
+network interface that match the boolean <I>expression</I>; the
+description is preceded by a time stamp, printed, by default, as hours,
+minutes, seconds, and fractions of a second since midnight.  It can also
 be run with the
 <B>-w</B>
 
@@ -828,7 +830,8 @@ an encapsulated PGM packet.
 <DT><B>-tt</B>
 
 <DD>
-Print an unformatted timestamp on each dump line.
+Print the timestamp, as seconds since January 1, 1970, 00:00:00, UTC, and
+fractions of a second since that time, on each dump line.
 <DT><B>-ttt</B>
 
 <DD>
@@ -837,7 +840,8 @@ on each dump line.
 <DT><B>-tttt</B>
 
 <DD>
-Print a timestamp in default format proceeded by date on each dump line.
+Print a timestamp, as hours, minutes, seconds, and fractions of a second
+since midnight, preceded by the date, on each dump line.
 <DT><B>-ttttt</B>
 
 <DD>
@@ -2481,6 +2485,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 09:05:29 GMT, July 11, 2014
+Time: 20:30:37 GMT, November 05, 2014
 </BODY>
 </HTML>
