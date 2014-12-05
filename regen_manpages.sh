@@ -9,18 +9,18 @@ MAN2HTML_PFX=/cgi-bin/man/man2html
 WEBSITE_PFX=/manpages
 
 # man2html prepends its HTML output with a Content-type header.
-function stripContentTypeHeader
+stripContentTypeHeader()
 {
 	# FIXME: use sed
 	tail --lines +3
 }
 
-function conditionAnchors
+conditionAnchors()
 {
 	sed --file="$SEDFILE"
 }
 
-function write_sedfile
+write_sedfile()
 {
 	local mansection mantopic manfile
 
@@ -150,7 +150,7 @@ pcap_tstamp_type_val_to_name
 ENDOFLIST
 }
 
-function produceHTML
+produceHTML()
 {
 	local infile=${1:?argument required}
 	local outfile=${2:?argument required}
@@ -172,7 +172,7 @@ function produceHTML
 	echo "Updated: $outfile"
 }
 
-function produceTXT
+produceTXT()
 {
 	local infile=${1:?argument required}
 	local outfile=${2:?argument required}
