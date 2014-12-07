@@ -1,18 +1,27 @@
 #!/bin/sh
 
-# This script regenerates (updates but not commits) tcpdump and libpcap manpages
-# for the www.tcpdump.org web-site. It is intended to be run in tcpdump-htdocs
-# git repository with the original manpages available in ../tcpdump and
-# ../libpcap. It works on a Linux system and may work on other systems as well.
+# This script regenerates (updates but not commits) tcpdump, libpcap and
+# tcpslice man pages for the www.tcpdump.org web-site. It is intended to be
+# run in tcpdump-htdocs git repository clone with the source man pages
+# available in ../tcpdump, ../libpcap and ../tcpslice git clones respectively.
+# To make the source man pages available it is sufficient to have ./configure
+# run successfully in each of those directories.
+#
+# This script has been tested to work on the following Linux systems:
+#
+# * Fedora 20
+# * Ubuntu 14.04
+#
 
 MAN2HTML_PFX=/cgi-bin/man/man2html
 WEBSITE_PFX=/manpages
 
-# man2html prepends its HTML output with a Content-type header.
+# Fedora man2html prepends its HTML output with a Content-type header.
+# Ubuntu man2html in addition to that adds the <!DOCTYPE ...> XML tag
+# before the HTML. For portability strip both variants of the preamble.
 stripContentTypeHeader()
 {
-	# FIXME: use sed
-	tail --lines +3
+	sed -n '/^<HTML><HEAD><TITLE>/,$p'
 }
 
 conditionAnchors()
@@ -25,9 +34,11 @@ write_sedfile()
 	local mansection mantopic manfile
 
 	# Fixup custom links.
+	# Suppress some output difference between Fedora and Ubuntu versions of man2html.
 	cat >$SEDFILE <<ENDOFFILE
 s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX">Return to Main Contents</A>@g
 s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
+s@^<HTML><HEAD><TITLE>Man page of @<HTML><HEAD><TITLE>Manpage of @
 ENDOFFILE
 
 	# Convert links to non-local pages to plain text.
