@@ -17,7 +17,8 @@ DESCRIPTION
        layer header type value.  The translation is case-insensitive.
 
 RETURN VALUE
-       pcap_datalink_name_to_val() returns 0 on success and -1 on failure.
+       pcap_datalink_name_to_val() returns type value on  success  and  -1  on
+       failure.
 
 SEE ALSO
        pcap(3PCAP)

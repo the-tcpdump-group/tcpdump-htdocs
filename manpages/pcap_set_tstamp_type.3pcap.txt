@@ -23,11 +23,10 @@ DESCRIPTION
 RETURN VALUE
        pcap_set_tstamp_type() returns 0 on success if the specified time stamp
        type  is  expected  to  be  supported by the capture device, PCAP_WARN-
-       ING_TSTAMP_TYPE_NOTSUP on success if the specified time stamp  type  is
-       not  supported by the capture device, PCAP_ERROR_ACTIVATED if called on
-       a    capture    handle     that     has     been     activated,     and
-       PCAP_ERROR_CANTSET_TSTAMP_TYPE  if  the  capture device doesn't support
-       setting the time stamp type.
+       ING_TSTAMP_TYPE_NOTSUP if the specified time stamp  type  is  not  sup-
+       ported  by the capture device, PCAP_ERROR_ACTIVATED if called on a cap-
+       ture handle that has been activated, and PCAP_ERROR_CANTSET_TSTAMP_TYPE
+       if the capture device doesn't support setting the time stamp type.
 
 SEE ALSO
        pcap(3PCAP),                             pcap_list_tstamp_types(3PCAP),
