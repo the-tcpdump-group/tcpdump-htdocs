@@ -431,6 +431,14 @@ open a
 <B>pcap_t</B>
 
 for a ``savefile'', given a pathname
+<DT><A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_open_offline_with_tstamp_precision</B></A>(3PCAP)
+
+<DD>
+open a
+<B>pcap_t</B>
+
+for a ``savefile'', given a pathname, and specify the precision to
+provide for packet time stamps
 <DT><A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_fopen_offline</B></A>(3PCAP)
 
 <DD>
@@ -440,6 +448,16 @@ open a
 for a ``savefile'', given a
 <B>FILE&nbsp;*</B>
 
+<DT><A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_fopen_offline_with_tstamp_precision</B></A>(3PCAP)
+
+<DD>
+open a
+<B>pcap_t</B>
+
+for a ``savefile'', given a
+<B>FILE&nbsp;*</B>,
+
+and specify the precision to provide for packet time stamps
 <DT><A HREF='/manpages/pcap_open_dead.3pcap.html'><B>pcap_open_dead</B></A>(3PCAP)
 
 <DD>
@@ -530,6 +548,20 @@ get description for a time stamp type
 
 <DD>
 get time stamp type corresponding to a name
+<DT><A HREF='/manpages/pcap_set_tstamp_precision.3pcap.html'><B>pcap_set_tstamp_precision</B></A>(3PCAP)
+
+<DD>
+set time stamp precision for a not-yet-activated
+<B>pcap_t</B>
+
+for live capture
+<DT><A HREF='/manpages/pcap_get_tstamp_precision.3pcap.html'><B>pcap_get_tstamp_precision</B></A>(3PCAP)
+
+<DD>
+get the time stamp precision of a
+<B>pcap_t</B>
+
+for live capture
 <DT><A HREF='/manpages/pcap_datalink.3pcap.html'><B>pcap_datalink</B></A>(3PCAP)
 
 <DD>
@@ -1312,6 +1344,6 @@ Please send problems, bugs, questions, desirable enhancements, etc. to:
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 12:33:55 GMT, October 20, 2014
+Time: 23:26:08 GMT, February 09, 2015
 </BODY>
 </HTML>

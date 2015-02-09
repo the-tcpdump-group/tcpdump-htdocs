@@ -23,8 +23,8 @@ DESCRIPTION
        time stamps are in microseconds.
 
 RETURN VALUE
-       pcap_set_tstamp_type() returns 0 on success if the specified time stamp
-       precision  is  expected  to  be  supported  by  the  operating  system,
+       pcap_set_tstamp_precision()  returns 0 on success if the specified time
+       stamp precision is expected to be supported by  the  operating  system,
        PCAP_ERROR_TSTAMP_PRECISION_NOTSUP if operating system does not support
        requested time stamp precision, PCAP_ERROR_ACTIVATED  if  called  on  a
        capture handle that has been activated.

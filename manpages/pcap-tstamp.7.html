@@ -135,13 +135,68 @@ the host operating system's clock.
 </DL>
 </DL>
 
+<P>
+
+By default, when performing a live capture or reading from a savefile,
+time stamps are supplied as seconds since January 1, 1970, 00:00:00 UTC,
+and microseconds since that seconds value, even if higher-resolution
+time stamps are available from the capture device or in the savefile. 
+If, when reading a savefile, the time stamps in the file have a higher
+resolution than one microsecond, the additional digits of resolution are
+discarded.
+<P>
+
+The
+<A HREF='/manpages/pcap_set_tstamp_precision.3pcap.html'><B>pcap_set_tstamp_precision</B></A>(3PCAP)
+
+routine can be used after a
+<B>pcap_create()</B>
+
+call and after a
+<B>pcap_activate()</B>
+
+call to specify the resolution of the time stamps to get for the device.
+If the hardware or software cannot supply a higher-resolution time
+stamp, the
+<B>pcap_set_tstamp_precision()</B>
+
+call will fail, and the time stamps supplied after the
+<B>pcap_activate()</B>
+
+call will have microsecond resolution.
+<P>
+
+When opening a savefile, the
+<A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_open_offline_with_tstamp_precision</B></A>(3PCAP)
+
+and
+<A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_fopen_offline_with_tstamp_precision</B></A>(3PCAP)
+
+routines can be used to specify the resolution of time stamps to be read
+from the file; if the time stamps in the file have a lower resolution,
+the fraction-of-a-second portion of the time stamps will be scaled to
+the specified resolution.
+<P>
+
+The
+<A HREF='/manpages/pcap_get_tstamp_precision.3pcap.html'><B>pcap_get_tstamp_precision</B></A>(3PCAP)
+
+routine returns the resolution of time stamps that will be supplied;
+when capturing packets, this does not reflect the actual precision of
+the time stamp supplied by the hardware or operating system and, when
+reading a savefile, this does not indicate the actual precision of time
+stamps in the file.
 <A NAME="lbAD">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
 <A HREF='/manpages/pcap_set_tstamp_type.3pcap.html'>pcap_set_tstamp_type</A>(3PCAP),
 <A HREF='/manpages/pcap_list_tstamp_types.3pcap.html'>pcap_list_tstamp_types</A>(3PCAP),
 <A HREF='/manpages/pcap_tstamp_type_val_to_name.3pcap.html'>pcap_tstamp_type_val_to_name</A>(3PCAP),
-<A HREF='/manpages/pcap_tstamp_type_name_to_val.3pcap.html'>pcap_tstamp_type_name_to_val</A>(3PCAP)
+<A HREF='/manpages/pcap_tstamp_type_name_to_val.3pcap.html'>pcap_tstamp_type_name_to_val</A>(3PCAP),
+<A HREF='/manpages/pcap_set_tstamp_precision.3pcap.html'>pcap_set_tstamp_precision</A>(3PCAP),
+<A HREF='/manpages/pcap_open_offline.3pcap.html'>pcap_open_offline_with_tstamp_precision</A>(3PCAP),
+<A HREF='/manpages/pcap_open_offline.3pcap.html'>pcap_fopen_offline_with_tstamp_precision</A>(3PCAP),
+<A HREF='/manpages/pcap_get_tstamp_precision.3pcap.html'>pcap_get_tstamp_precision</A>(3PCAP)
 <P>
 
 <HR>
@@ -155,6 +210,6 @@ the host operating system's clock.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 13:36:52 GMT, April 07, 2014
+Time: 23:26:07 GMT, February 09, 2015
 </BODY>
 </HTML>
