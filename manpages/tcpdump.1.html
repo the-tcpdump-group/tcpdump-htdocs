@@ -175,6 +175,12 @@ tcpdump - dump traffic on a network
 <B>--time-stamp-precision=</B><I>tstamp_precision</I>
 
 ]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>--immediate-mode</B>
+
+]
 [
 <B>--version</B>
 
@@ -545,6 +551,14 @@ monitor mode will be shown; if
 
 is specified, only those link-layer types available when in monitor mode
 will be shown.
+<DT><B>--immediate-mode</B>
+
+<DD>
+Capture in &quot;immediate mode&quot;.  In this mode, packets are delivered to
+tcpdump as soon as they arrive, rather than being buffered for
+efficiency.  This is the default when printing packets rather than
+saving packets to a ``savefile'' if the packets are being printed to a
+terminal rather than to a file or pipe.
 <DT><B>-j</B><I> tstamp_type</I>
 
 <DD>
@@ -2485,6 +2499,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 20:30:37 GMT, November 05, 2014
+Time: 17:18:47 GMT, February 11, 2015
 </BODY>
 </HTML>
