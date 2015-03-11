@@ -288,7 +288,9 @@ platforms, such as Mac OS X, the ``status'' character is not set by
 default, so you must set it with
 <B>stty</B>(1)
 
-in order to use it) and will continue capturing packets.
+in order to use it) and will continue capturing packets. On platforms that
+do not support the SIGINFO signal, the same can be achieved by using the
+SIGUSR1 signal.
 <P>
 
 Reading packets from a network interface may require that you have
@@ -2499,6 +2501,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 17:18:47 GMT, February 11, 2015
+Time: 09:19:30 GMT, February 25, 2015
 </BODY>
 </HTML>
