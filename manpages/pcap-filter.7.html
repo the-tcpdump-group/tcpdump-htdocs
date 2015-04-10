@@ -799,7 +799,7 @@ changes the decoding offsets for the remainder of <I>expression</I> on
 the assumption that the packet is a MPLS-encapsulated IP packet.  The
 <B>mpls </B><I>[label_num]</I> expression may be used more than once, to
 filter on MPLS hierarchies.  Each use of that expression increments the
-filter offsets by 4. 
+filter offsets by 4.
 <DT><DD>
 For example:
 
@@ -838,6 +838,23 @@ For example:
 
 
 filters IPv4 protocols encapsulated in PPPoE session id 0x27.
+<DT><B>geneve </B><I>[vni]</I><DD>
+True if the packet is a Geneve packet (UDP port 6081). If <I>[vni]</I>
+is specified, only true if the packet has the specified <I>vni</I>.
+Note that when the <B>geneve</B> keyword is encountered in
+<I>expression</I>, it changes the decoding offsets for the remainder of
+<I>expression</I> on the assumption that the packet is a Geneve packet.
+<DT><DD>
+For example:
+
+<PRE>
+<B>geneve 0xb &amp;&amp; ip</B>
+</PRE>
+
+
+filters IPv4 protocols encapsulated in Geneve with VNI 0xb. This will
+match both IP directly encapsulated in Geneve as well as IP contained
+inside an Ethernet frame.
 <DT><B>iso proto </B><I>protocol</I><DD>
 True if the packet is an OSI packet of protocol type <I>protocol</I>.
 <I>Protocol</I> can be a number or one of the names
@@ -1188,6 +1205,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 11:01:03 GMT, July 01, 2014
+Time: 10:11:39 GMT, April 10, 2015
 </BODY>
 </HTML>

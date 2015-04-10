@@ -532,6 +532,19 @@ DESCRIPTION
                    pppoes 0x27 && ip
               filters IPv4 protocols encapsulated in PPPoE session id 0x27.
 
+       geneve [vni]
+              True  if the packet is a Geneve packet (UDP port 6081). If [vni]
+              is specified, only true if the packet  has  the  specified  vni.
+              Note  that when the geneve keyword is encountered in expression,
+              it changes the decoding offsets for the remainder of  expression
+              on the assumption that the packet is a Geneve packet.
+
+              For example:
+                   geneve 0xb && ip
+              filters IPv4 protocols encapsulated in Geneve with VNI 0xb. This
+              will match both IP directly encapsulated in Geneve as well as IP
+              contained inside an Ethernet frame.
+
        iso proto protocol
               True  if  the packet is an OSI packet of protocol type protocol.
               Protocol can be a number or one of  the  names  clnp,  esis,  or
