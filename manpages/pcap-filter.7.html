@@ -365,7 +365,7 @@ of protocol type <I>protocol</I>.
 <B>icmp</B>, <B>icmp6</B>, <B>igmp</B>, <B>igrp</B>, <B>pim</B>, <B>ah</B>,
 <B>esp</B>, <B>vrrp</B>, <B>udp</B>, or <B>tcp</B>.
 Note that the identifiers <B>tcp</B>, <B>udp</B>, and <B>icmp</B> are also
-keywords and must be escaped via backslash (\), which is \\ in the C-shell.
+keywords and must be escaped via backslash (\).
 Note that this primitive does not chase the protocol header chain.
 <DT><B>ip6 proto </B><I>protocol</I><DD>
 True if the packet is an IPv6 packet of protocol type <I>protocol</I>.
@@ -992,8 +992,7 @@ The following TCP flags field values are available: <B>tcp-fin</B>,
 Primitives may be combined using:
 <DL COMPACT>
 <DT><DD>
-A parenthesized group of primitives and operators
-(parentheses are special to the Shell and must be escaped).
+A parenthesized group of primitives and operators.
 <DT><DD>
 Negation (`<B>!</B>' or `<B>not</B>').
 <DT><DD>
@@ -1205,6 +1204,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 10:11:39 GMT, April 10, 2015
+Time: 00:40:34 GMT, May 03, 2015
 </BODY>
 </HTML>
