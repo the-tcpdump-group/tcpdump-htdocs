@@ -127,13 +127,13 @@ errbuf).  The function returns our session handler.
 	 ...
 	 pcap_t *handle;
 
-	 handle = pcap_open_live(somedev, BUFSIZ, 1, 1000, errbuf);
+	 handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
 	 if (handle == NULL) {
-		 fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, somedev, errbuf);
+		 fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, dev, errbuf);
 		 return(2);
 	 }
 </pre>
-<p>This code fragment opens the device stored in the strong &quot;somedev&quot;, tells it to 
+<p>This code fragment opens the device stored in the strong &quot;dev&quot;, tells it to 
 read however many bytes are specified in BUFSIZ (which is defined in pcap.h). 
 We are telling it to put the device into promiscuous mode, to sniff until an 
 error occurs, and if there is an error, store it in the string errbuf; it
@@ -171,7 +171,7 @@ values in that list.
 by the device, it has to give up; this would be done with code such as
 <pre>
 	if (pcap_datalink(handle) != DLT_EN10MB) {
-		fprintf(stderr, &quot;Device %s doesn't provide Ethernet headers - not supported\n&quot;, somedev);
+		fprintf(stderr, &quot;Device %s doesn't provide Ethernet headers - not supported\n&quot;, dev);
 		return(2);
 	}
 </pre>
@@ -244,7 +244,7 @@ the same variable as the second argument to pcap_compile()).
 	 }
 	 handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
 	 if (handle == NULL) {
-		 fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, somedev, errbuf);
+		 fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, dev, errbuf);
 		 return(2);
 	 }
 	 if (pcap_compile(handle, &amp;fp, filter_exp, 0, net) == -1) {
@@ -329,7 +329,7 @@ packet.
 		/* Open the session in promiscuous mode */
 		handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
 		if (handle == NULL) {
-			fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, somedev, errbuf);
+			fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, dev, errbuf);
 			return(2);
 		}
 		/* Compile and apply the filter */
