@@ -1,56 +1,55 @@
-Date: Wed, 22 Apr 2015 09:36:35 +0000 (UTC)
-From: Francois-Xavier Le Bail <fx.lebail@yahoo.com>
-Reply-To: Francois-Xavier Le Bail <fx.lebail@yahoo.com>
-To: Michael Richardson <mcr+ietf@sandelman.ca>
-Cc: Denis Ovsienko <denis@ovsienko.info>, Guy Harris <guy@alum.mit.edu>,
-        Dagobert Michelsen <dam@opencsw.org>
-Subject: [libpcap/tcpdump] Buildbot on Solaris for Release Candidates
-X-CanItPRO-Stream: sandelman-ca:mcr (inherits from sandelman-ca:default,rp-01:default,base:default)
-X-Canit-Stats-ID: 02OiVDSOi - 1b292a4788b1 - 20150422
-X-Antispam-Training-Forget: https://antispam.roaringpenguin.com/canit/b.php?i=02OiVDSOi&m=1b292a4788b1&t=20150422&c=f
-X-Antispam-Training-Nonspam: https://antispam.roaringpenguin.com/canit/b.php?i=02OiVDSOi&m=1b292a4788b1&t=20150422&c=n
-X-Antispam-Training-Spam: https://antispam.roaringpenguin.com/canit/b.php?i=02OiVDSOi&m=1b292a4788b1&t=20150422&c=s
-X-CanIt-Archive-Cluster: irqpXI7aJGyo4Ewta7qVH399FOg
+RELEASE CANDIDATES TESTS ON SOLARIS
+-----------------------------------
 
-> From: Francois-Xavier Le Bail <fx.lebail@yahoo.com>
+On OpenCSW Buildbot, exist four builders targeted on 'test-rc' branches of bpf.
 
+To test Release Candidates, for example libpcap-1.7/tcpdump-4.7, the process is:
 
->>  From: Michael Richardson <mcr+ietf@sandelman.ca>
+#A) LIBPCAP TESTS
 
->>  I am unclear from the Buildbot results if 4.7.4 compiles correctly on
->>  Solaris.  That's why I have held off on doing the release.
+cd <bpf-libpcap-branch>
 
-> My idea is to have a setup which could test 'pre-release' branches (1.7
-> and 4.7 for now) on the four configurations of the Solaris Buildbot.
-Thanks to Dagobert Michelsen, Administrator of OpenCSW Buildbot,
-We have now four builders targeted on branches 'test-rc' of bpf.
+#1) Define the branch to test and checkout it
+branch_to_test=libpcap-1.7
+git branch --set-upstream $branch_to_test origin/$branch_to_test
+git checkout $branch_to_test
 
-To test Release Candidates, for example 1.7 / 4.7, you could do:
-(Already done for now)
-
-A) bpf/libpcap:
-cd XXX
-1) delete old local and remote 'test-rc'
+#2) Delete old local and remote 'test-rc' branches
+git branch -D test-rc
 git push origin --delete test-rc
-git branch -D test-rc
-2) push 'test-rc'
-git checkout libpcap-1.7
+
+#3) Create the new 'test-rc' branch
 git checkout -b test-rc
-git push
 
-
-B) bpf/tcpdump:
-
-cd XXX
-1) delete old local and remote 'test-rc'git push origin --delete test-rc
-git branch -D test-rc
-2) push 'test-rc'
-git checkout tcpdump-4.7
-git checkout -b test-rc
-git push
-
+#4) Push 'test-rc'
+git push origin test-rc
 
 The results are here:
+https://buildfarm.opencsw.org/buildbot/waterfall?builder=libpcap-rc-solaris10-amd64&builder=libpcap-rc-solaris10-i386&builder=libpcap-rc-solaris10-sparc&builder=libpcap-rc-solaris10-sparcv9&reload=300
+
+When libpcap tests are OK, continue with tcpdump tests.
+
+#B) TCPDUMP TESTS
+
+cd <bpf-tcpdump-branch>
+
+#1) Define the branch to test and checkout it
+branch_to_test=tcpdump-4.7
+git branch --set-upstream $branch_to_test origin/$branch_to_test
+git checkout $branch_to_test
+
+#2) Delete old local and remote 'test-rc' branches
+git branch -D test-rc
+git push origin --delete test-rc
+
+#3) Create the new 'test-rc' branch
+git checkout -b test-rc
+
+#4) Push 'test-rc'
+git push origin test-rc
+
+The results are here:
+https://buildfarm.opencsw.org/buildbot/waterfall?builder=tcpdump-rc-solaris10-amd64&builder=tcpdump-rc-solaris10-i386&builder=tcpdump-rc-solaris10-sparc&builder=tcpdump-rc-solaris10-sparcv9&reload=300
+
+the results 'all-in-one' are here:
 https://buildfarm.opencsw.org/buildbot/waterfall?builder=libpcap-rc-solaris10-amd64&builder=libpcap-rc-solaris10-i386&builder=libpcap-rc-solaris10-sparc&builder=libpcap-rc-solaris10-sparcv9&builder=tcpdump-rc-solaris10-amd64&builder=tcpdump-rc-solaris10-i386&builder=tcpdump-rc-solaris10-sparc&builder=tcpdump-rc-solaris10-sparcv9&reload=300
-I hope this help,
-FX
