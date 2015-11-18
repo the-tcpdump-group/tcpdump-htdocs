@@ -15,7 +15,7 @@ tcpdump - dump traffic on a network
 <B>tcpdump</B>
 
 [
-<B>-AbdDefhHIJKlLnNOpqRStuUvxX#</B>
+<B>-AbdDefhHIJKlLnNOpqStuUvxX#</B>
 
 ] [
 <B>-B</B>
@@ -757,13 +757,6 @@ on all platforms.
 Quick (quiet?) output.
 Print less protocol information so output
 lines are shorter.
-<DT><B>-R</B>
-
-<DD>
-Assume ESP/AH packets to be based on old specification (RFC1825 to RFC1829).
-If specified, <I>tcpdump</I> will not print replay prevention field.
-Since there is no protocol version field in ESP/AH specification,
-<I>tcpdump</I> cannot deduce the version of ESP/AH protocol.
 <DT><B>-r</B><I> file</I>
 
 <DD>
@@ -790,7 +783,7 @@ Print absolute, rather than relative, TCP sequence numbers.
 <DD>
 
 Snarf <I>snaplen</I> bytes of data from each packet rather than the
-default of 65535 bytes.
+default of 262144 bytes.
 Packets truncated because of a limited snapshot
 are indicated in the output with ``[|<I>proto</I>]'', where <I>proto</I>
 is the name of the protocol level at which the truncation has occurred.
@@ -802,7 +795,7 @@ lost.
 You should limit <I>snaplen</I> to the smallest number that will
 capture the protocol information you're interested in.
 Setting
-<I>snaplen</I> to 0 sets it to the default of 65535,
+<I>snaplen</I> to 0 sets it to the default of 262144,
 for backwards compatibility with recent older versions of
 <I>tcpdump</I>.
 
@@ -2505,6 +2498,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 22:42:49 GMT, July 30, 2015
+Time: 21:36:41 GMT, November 18, 2015
 </BODY>
 </HTML>

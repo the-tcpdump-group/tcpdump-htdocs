@@ -6,7 +6,7 @@ NAME
        tcpdump - dump traffic on a network
 
 SYNOPSIS
-       tcpdump [ -AbdDefhHIJKlLnNOpqRStuUvxX# ] [ -B buffer_size ]
+       tcpdump [ -AbdDefhHIJKlLnNOpqStuUvxX# ] [ -B buffer_size ]
                [ -c count ]
                [ -C file_size ] [ -G rotate_seconds ] [ -F file ]
                [ -i interface ] [ -j tstamp_type ] [ -m module ] [ -M secret ]
@@ -345,12 +345,6 @@ OPTIONS
        -q     Quick (quiet?) output.  Print less protocol information so  out-
               put lines are shorter.
 
-       -R     Assume  ESP/AH packets to be based on old specification (RFC1825
-              to RFC1829).  If specified, tcpdump will not print  replay  pre-
-              vention  field.   Since  there  is  no protocol version field in
-              ESP/AH specification,  tcpdump  cannot  deduce  the  version  of
-              ESP/AH protocol.
-
        -r file
               Read  packets from file (which was created with the -w option or
               by other tools that write  pcap  or  pcap-ng  files).   Standard
@@ -363,7 +357,7 @@ OPTIONS
        -s snaplen
        --snapshot-length=snaplen
               Snarf  snaplen  bytes  of  data from each packet rather than the
-              default of 65535 bytes.  Packets truncated because of a  limited
+              default of 262144 bytes.  Packets truncated because of a limited
               snapshot  are  indicated  in the output with ``[|proto]'', where
               proto is the name of the protocol level at which the  truncation
               has  occurred.  Note that taking larger snapshots both increases
@@ -371,7 +365,7 @@ OPTIONS
               decreases  the amount of packet buffering.  This may cause pack-
               ets to be lost.  You should limit snaplen to the smallest number
               that will capture the protocol information you're interested in.
-              Setting snaplen to 0 sets it to the default of 65535, for  back-
+              Setting snaplen to 0 sets it to the default of 262144, for back-
               wards compatibility with recent older versions of tcpdump.
 
        -T type
