@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of PCAP_SET_TIMEOUT</TITLE>
 </HEAD><BODY>
 <H1>PCAP_SET_TIMEOUT</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 16 April 2014<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 1 December 2015<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -28,6 +28,11 @@ the handle is activated to
 <I>to_ms</I>,
 
 which is in units of milliseconds.
+<P>
+
+The behavior, if the timeout isn't specified, is undefined.  We
+recommend always setting the timeout to a non-zero value unless
+immediate mode is set, in which case the timeout has no effect.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
@@ -40,7 +45,8 @@ if called on a capture handle that has been activated.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP), <A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)
+<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP), <A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP),
+<A HREF='/manpages/pcap_set_immediate_mode.3pcap.html'>pcap_set_immediate_mode</A>(3PCAP)
 <P>
 
 <HR>
@@ -56,6 +62,6 @@ if called on a capture handle that has been activated.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 08:04:28 GMT, April 16, 2014
+Time: 20:07:07 GMT, December 02, 2015
 </BODY>
 </HTML>
