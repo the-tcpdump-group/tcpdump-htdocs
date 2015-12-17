@@ -230,12 +230,71 @@ updateOutputFiles()
 	rm -f $SEDFILE
 }
 
+getLastCommitDate()
+{
+	local path="${1:?argument required}"
+	local filename=`basename "$path"`
+	# dash has no pushd/popd
+	local oldcwd=`pwd`
+	cd `dirname "$path"`
+	local gitdate
+	gitdate=`git log --max-count=1 --format=format:%cD "$filename" | cut -d' ' -f 2-4`
+	# man page date format is slightly different
+	date +'%-d %B %Y' --date="$gitdate"
+	cd "$oldcwd"
+}
+
+getManTHDate()
+{
+	local file="${1:?argument required}"
+	sed --regexp-extended --silent "/^\.TH .+\"([[:digit:]]+ [[:alpha:]]+ [[:digit:]]+)\"/ { s/^.+\"(.+)\".*$/\1/;p }" "$file"
+}
+
+rewriteManTHDate()
+{
+	local file="${1:?argument required}"
+	local date="${2:?argument required}"
+	sed --regexp-extended --in-place "/^\.TH .+\"([[:digit:]]+ [[:alpha:]]+ [[:digit:]]+)\"/ { s/\".+\"/\"$date\"/ }" "$file"
+	echo $file: rewritten to $date
+}
+
+checkLastModified()
+{
+	local file=${1:?argument required}
+	[ -f "$file.in" ] && file="$file.in"
+	# For some reason dash fails to process a local declaration, an assignment
+	# and backticks as a single operation.
+	local in_git in_file
+	in_git=`getLastCommitDate "$file"`
+	in_file=`getManTHDate "$file"`
+	if [ "$in_git" = "" -o "$in_file" = "" ]; then
+		echo "$file: failed to retrieve both dates"
+		return
+	fi
+	[ "$in_git" = "$in_file" ] || rewriteManTHDate "$file" "$in_git"
+}
+
+updateInputFiles()
+{
+	checkLastModified ../libpcap/pcap-filter.manmisc
+	checkLastModified ../libpcap/pcap-linktype.manmisc
+	checkLastModified ../libpcap/pcap-savefile.manfile
+	checkLastModified ../libpcap/pcap-tstamp.manmisc
+	for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
+		checkLastModified "$f"
+	done
+}
+
 case "$1" in
+input)
+	updateInputFiles
+	;;
 output)
 	updateOutputFiles
 	;;
 *)
-	echo "Usage: $0 <output>"
+	echo "Usage: $0 <input|output>"
+	echo "	input  : update the source tcpdump/libpcap man pages"
 	echo "	output : update .html and .txt versions in this repository"
 	;;
 esac
