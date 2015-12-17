@@ -195,34 +195,47 @@ produceTXT()
 	git diff $outfile | egrep -q '^[-+]' && echo "Updated: $outfile"
 }
 
-which man2html >/dev/null 2>&1 || {
-	echo "man2html must be installed to proceed"
-	exit 1
+updateOutputFiles()
+{
+	which man2html >/dev/null 2>&1 || {
+		echo "man2html must be installed to proceed"
+		exit 1
+	}
+
+	# $COLUMNS doesn't always work
+	COLS=`stty size | cut -d' ' -f2`
+	if [ "$COLS" != "80" ]; then
+		echo "This terminal must be 80 ($COLS right now) columns wide"
+		exit 1
+	fi
+
+	SEDFILE=`mktemp --tmpdir manpages_sedfile.XXXXXX`
+	write_sedfile
+
+	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
+	produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
+	produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
+	produceTXT ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.txt
+    
+	produceHTML ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.html
+	produceHTML ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.html
+	produceHTML ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.html
+	produceHTML ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.html
+
+	for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
+		produceTXT $f manpages/`basename $f`.txt
+		produceHTML $f manpages/`basename $f`.html
+	done
+
+	rm -f $SEDFILE
 }
 
-# $COLUMNS doesn't always work
-COLS=`stty size | cut -d' ' -f2`
-if [ "$COLS" != "80" ]; then
-	echo "This terminal must be 80 ($COLS right now) columns wide"
-	exit 1
-fi
-
-SEDFILE=`mktemp --tmpdir manpages_sedfile.XXXXXX`
-write_sedfile
-
-produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
-produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
-produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
-produceTXT ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.txt
-    
-produceHTML ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.html
-produceHTML ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.html
-produceHTML ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.html
-produceHTML ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.html
-
-for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
-	produceTXT $f manpages/`basename $f`.txt
-	produceHTML $f manpages/`basename $f`.html
-done
-
-rm -f $SEDFILE
+case "$1" in
+output)
+	updateOutputFiles
+	;;
+*)
+	echo "Usage: $0 <output>"
+	echo "	output : update .html and .txt versions in this repository"
+	;;
+esac
