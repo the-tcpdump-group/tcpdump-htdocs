@@ -34,4 +34,4 @@ SEE ALSO
 
 
 
-                                21 August 2010     PCAP_SET_TSTAMP_TYPE(3PCAP)
+                                5 December 2014    PCAP_SET_TSTAMP_TYPE(3PCAP)

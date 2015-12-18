@@ -26,4 +26,4 @@ SEE ALSO
 
 
 
-                                27 August 2013PCAP_GET_TSTAMP_PRECISION(3PCAP)
+                               18 December 201PCAP_GET_TSTAMP_PRECISION(3PCAP)

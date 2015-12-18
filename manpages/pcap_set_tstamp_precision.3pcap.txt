@@ -34,4 +34,4 @@ SEE ALSO
 
 
 
-                                27 August 2013PCAP_SET_TSTAMP_PRECISION(3PCAP)
+                                5 February 201PCAP_SET_TSTAMP_PRECISION(3PCAP)
