@@ -9,7 +9,7 @@ SYNOPSIS
        #include <pcap/pcap.h>
 
        char *pcap_geterr(pcap_t *p);
-       void pcap_perror(pcap_t *p, char *prefix);
+       void pcap_perror(pcap_t *p, const char *prefix);
 
 DESCRIPTION
        pcap_geterr()  returns  the  error  text  pertaining  to  the last pcap
