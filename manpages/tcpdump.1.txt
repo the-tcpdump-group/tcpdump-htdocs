@@ -374,13 +374,13 @@ OPTIONS
               demand  Distance  Vector  protocol), carp (Common Address Redun-
               dancy Protocol), cnfp (Cisco NetFlow protocol), lmp  (Link  Man-
               agement  Protocol), pgm (Pragmatic General Multicast), pgm_zmtp1
-              (ZMTP/1.0 inside PGM/EPGM), radius (RADIUS), rpc (Remote  Proce-
-              dure  Call),  rtp (Real-Time Applications protocol), rtcp (Real-
-              Time Applications control protocol), snmp (Simple  Network  Man-
-              agement  Protocol),  tftp  (Trivial File Transfer Protocol), vat
-              (Visual Audio Tool), wb (distributed White Board), zmtp1 (ZeroMQ
-              Message  Transport  Protocol  1.0) and vxlan (Virtual eXtensible
-              Local Area Network).
+              (ZMTP/1.0 inside PGM/EPGM), resp (REdis Serialization Protocol),
+              radius  (RADIUS),  rpc  (Remote  Procedure Call), rtp (Real-Time
+              Applications protocol),  rtcp  (Real-Time  Applications  control
+              protocol),  snmp  (Simple  Network  Management  Protocol),  tftp
+              (Trivial File Transfer Protocol), vat (Visual  Audio  Tool),  wb
+              (distributed  White Board), zmtp1 (ZeroMQ Message Transport Pro-
+              tocol 1.0) and vxlan (Virtual eXtensible Local Area Network).
 
               Note that the pgm type above affects  UDP  interpretation  only,
               the  native  PGM is always recognised as IP protocol 113 regard-
