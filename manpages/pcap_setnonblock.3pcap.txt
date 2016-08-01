@@ -26,10 +26,15 @@ DESCRIPTION
        arrive.  pcap_loop() and pcap_next() will not work in  ``non-blocking''
        mode.
 
+       When    first   activated   with   pcap_activate()   or   opened   with
+       pcap_open_live() , a capture handle is not in ``non-blocking mode'';  a
+       call  to  pcap_setnonblock() is required in order to put it into ``non-
+       blocking'' mode.
+
 RETURN VALUE
-       pcap_getnonblock()  returns  the  current ``non-blocking'' state of the
-       capture descriptor; it always returns 0 on ``savefiles''.  If there  is
-       an  error,  -1  is returned and errbuf is filled in with an appropriate
+       pcap_getnonblock() returns the current ``non-blocking''  state  of  the
+       capture  descriptor; it always returns 0 on ``savefiles''.  If there is
+       an error, -1 is returned and errbuf is filled in  with  an  appropriate
        error message.
 
        errbuf is assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
@@ -39,4 +44,4 @@ SEE ALSO
 
 
 
-                                 5 April 2008          PCAP_SETNONBLOCK(3PCAP)
+                                18 October 2014        PCAP_SETNONBLOCK(3PCAP)

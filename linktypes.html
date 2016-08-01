@@ -124,18 +124,18 @@ risk of using a value that's already being used for some other purpose,
 and of having tools that read libpcap-format captures not being able to
 handle captures with your new link-layer header type value, with no hope
 that they will ever be changed to do so (as that would destroy their
-ability to read captures using that value for that other purpose). 
+ability to read captures using that value for that other purpose).
 <p>
 Do <strong>NOT</strong> use any of these link-layer header type values
 unless your link-layer headers <strong>EXACTLY</strong> match the
 specification.  If they do not exactly match, request your own
-link-layer header type for them. 
+link-layer header type for them.
 </p>
 </ul>
             </div>
             <!-- End of LINK-LAYER HEADER TYPES section -->
           </div>
-               
+
           <!-- Start of LINK-LAYER HEADER TYPE VALUES section -->
           <div class="post">
             <h2 class="title">
@@ -174,7 +174,7 @@ with nothing preceding it.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_5<td>6<td>DLT_IEEE802<td>
 IEEE 802.5 Token Ring; the IEEE802, without _5, in the DLT_ name is
-historical. 
+historical.
                 <tr valign=top>
 <td>LINKTYPE_ARCNET_BSD<td>7<td>DLT_ARCNET<td>
 ARCNET Data Packets, as described by the ARCNET Trade Association
@@ -199,7 +199,8 @@ and
 <a href="http://tools.ietf.org/html/rfc1662">RFC 1662</a>; if
 the first 2 bytes are 0xff and 0x03, it's PPP in HDLC-like
 framing, with the PPP header following those two bytes, otherwise it's
-PPP without framing, and the packet begins with the PPP header.
+PPP without framing, and the packet begins with the PPP header.  The
+data in the frame is not octet-stuffed or bit-stuffed.
                 <tr valign=top>
 <td>LINKTYPE_FDDI<td>10<td>DLT_FDDI<td>
 FDDI, as specified by ANSI INCITS 239-1994.
@@ -211,7 +212,8 @@ or Cisco PPP with HDLC
 framing, as per <a href="http://tools.ietf.org/html/rfc1547#section-4.3.1">
 section 4.3.1 of RFC 1547</a>; the first byte will be 0xFF
 for PPP in HDLC-like framing, and will be 0x0F or 0x8F for Cisco PPP
-with HDLC framing.
+with HDLC framing.  The data in the frame is not octet-stuffed or
+bit-stuffed.
                 <tr valign=top>
 <td>LINKTYPE_PPP_ETHER<td>51<td>DLT_PPP_ETHER<td>
 PPPoE; the packet begins with a PPPoE header, as per
@@ -331,7 +333,7 @@ Q.714</a>, with no MTP3 or MTP2 headers preceding the SCCP packet.
                 <tr valign=top>
 <td>LINKTYPE_DOCSIS<td>143<td>DLT_DOCSIS<td>
 DOCSIS MAC frames, as described by <a
-href="http://www.cablelabs.com/specifications/CM-SP-MULPIv3.0-I15-110210.pdf">the
+href="http://www.cablelabs.com/specification/docsis-3-0-mac-and-upper-layer-protocols-interface-specification/">the
 DOCSIS 3.0 MAC and Upper Layer Protocols Interface Specification</a>.
                 <tr valign=top>
 <td>LINKTYPE_LINUX_IRDA<td>144<td>DLT_LINUX_IRDA<td>
@@ -361,12 +363,23 @@ Automation and Control Networks</a>, including the preamble and, if
 present, the Data CRC.
                 <tr valign=top>
 <td>LINKTYPE_PPP_PPPD<td>166<td>DLT_PPP_PPPD<td>
-PPP in HDLC-like encapsulation, but with the 0xff address byte replaced
-by a direction indication - 0x00 for incoming and 0x01 for outgoing.
+PPP in HDLC-like encapsulation, like LINKTYPE_PPP_HDLC, but with the
+0xff address byte replaced by a direction indication - 0x00 for incoming
+and 0x01 for outgoing.
                 <tr valign=top>
 <td>LINKTYPE_GPRS_LLC<td>169<td>DLT_GPRS_LLC<td>
 General Packet Radio Service Logical Link Control, as defined by <a
 href="http://www.3gpp.org/ftp/Specs/html-info/0464.htm">3GPP TS 04.64</a>.
+                <tr valign=top>
+<td>LINKTYPE_GPF_T<td>170<td>DLT_GPF_T<td>
+Transparent-mapped generic framing procedure, as specified by
+<a href="http://www.itu.int/rec/T-REC-G.7041/en">ITU-T
+Recommendation G.7041/Y.1303</a>.
+                <tr valign=top>
+<td>LINKTYPE_GPF_F<td>171<td>DLT_GPF_F<td>
+Frame-mapped generic framing procedure, as specified by
+<a href="http://www.itu.int/rec/T-REC-G.7041/en">ITU-T
+Recommendation G.7041/Y.1303</a>.
                 <tr valign=top>
 <td>LINKTYPE_LINUX_LAPD<td>177<td>DLT_LINUX_LAPD<td>
 Link Access Procedures on the D Channel (LAPD) frames, as specified by
@@ -392,7 +405,7 @@ Specification.
 <td>LINKTYPE_USB_LINUX<td>189<td>DLT_USB_LINUX<td>
 USB packets, beginning with a Linux USB header, as specified by the
 <tt>struct usbmon_packet</tt> in the
-<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree. 
+<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree.
 Only the first 48 bytes of that header are present.  All fields in the
 header are in the host byte order for the pcap file, as specified by the
 file's magic number, or for the section of the pcap-ng file, as
@@ -452,7 +465,10 @@ and
 <a href="http://tools.ietf.org/html/rfc1662">RFC 1662</a>,
 preceded with a one-byte pseudo-header with a zero value meaning
 "received by this host" and a non-zero value meaning "sent by this
-host".
+host"; if the first 2 bytes are 0xff and 0x03, it's PPP in HDLC-like
+framing, with the PPP header following those two bytes, otherwise it's
+PPP without framing, and the packet begins with the PPP header.  The
+data in the frame is not octet-stuffed or bit-stuffed.
                 <tr valign=top>
 <td>LINKTYPE_C_HDLC_WITH_DIR<td>205<td>DLT_C_HDLC_WITH_DIR<td>
 Cisco PPP with HDLC framing, as per
@@ -486,7 +502,7 @@ frame control field).
 <td>LINKTYPE_USB_LINUX_MMAPPED<td>220<td>DLT_USB_LINUX_MMAPPED<td>
 USB packets, beginning with a Linux USB header, as specified by the
 <tt>struct usbmon_packet</tt> in the
-<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree. 
+<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree.
 All 64 bytes of the header are present.  All fields in the header are in
 the host byte order for the pcap file, as specified by the file's magic
 number, or for the section of the pcap-ng file, as specified by the
@@ -661,7 +677,36 @@ in
 <a href="http://www.picmg.org/v2internal/specifications2.cfm?thetype=One&thebusid=12">the PICMG HPM.2 specification</a>.
 The time stamps for packets in this format must match the time stamps in
 the Trace Data Blocks.
-              </table>  
+</tr>
+                <tr valign=top>
+<td>LINKTYPE_ZWAVE_R1_R2</td><td>261</td><td>DLT_ZWAVE_R1_R2</td><td>
+Per Joshua Wright &lt;jwright@hasborg.com&gt;, formats for <a href="linktypes/LINKTYPE_ZWAVE_R1_R2.html">Z-Wave RF profiles R1 and R2</a> captures.
+</td>
+                <tr valign=top>
+<td>LINKTYPE_ZWAVE_R3</td><td>262</td><td>DLT_ZWAVE_R3</td><td>
+Per Joshua Wright &lt;jwright@hasborg.com&gt;, formats for <a href="linktypes/LINKTYPE_ZWAVE_R3.html">Z-Wave RF profile R3</a> captures.
+</td>
+
+                <tr valign=top>
+<td>LINKTYPE_WATTSTOPPER_DLM</td><td>263</td><td>DLT_WATTSTOPPER_DLM</td><td>
+Formats for <a href="linktypes/LINKTYPE_WATTSTOPPER_DLM.html">WattStopper
+Digital Lighting Management</a> (DLM) and Legrand Nitoo Open protocol common
+packet structure captures.
+</td>
+
+</tr>
+
+                <tr valign=top>
+<td>LINKTYPE_ISO_14443</td><td>264</td><td>DLT_ISO_14443</td><td>
+Messages between ISO 14443 contactless smartcards (Proximity Integrated
+Circuit Card, PICC) and card readers (Proximity Coupling Device, PCD),
+with the message format specified by <a
+href="http://www.kaiser.cx/pcap-iso14443.html">the PCAP format for
+ISO14443 specification</a>.
+</td>
+
+</tr>
+              </table>
             </div>
           </div>
           <!-- End of LINK-LAYER HEADER TYPE VALUES section -->
@@ -671,7 +716,7 @@ the Trace Data Blocks.
         <!-- FOOTER -->
         <div id="footer">
             <p>
-                (c) 2010-2014 Tcpdump/Libpcap. Designed by
+                (c) 2010-2016 Tcpdump/Libpcap. Designed by
                 <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
                 based on a template by <a href="http://www.freecsstemplates.org/">
                 Free CSS Templates</a>.
@@ -681,7 +726,7 @@ the Trace Data Blocks.
             </p>
         </div>
         <!-- END OF FOOTER -->
-        
+
     </body>
     <!-- END OF HTML BODY -->
 </html>

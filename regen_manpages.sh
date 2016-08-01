@@ -1,33 +1,44 @@
 #!/bin/sh
 
-# This script regenerates (updates but not commits) tcpdump and libpcap manpages
-# for the www.tcpdump.org web-site. It is intended to be run in tcpdump-htdocs
-# git repository with the original manpages available in ../tcpdump and
-# ../libpcap. It works on a Linux system and may work on other systems as well.
+# This script regenerates (updates but not commits) tcpdump, libpcap and
+# tcpslice man pages for the www.tcpdump.org web-site. It is intended to be
+# run in tcpdump-htdocs git repository clone with the source man pages
+# available in ../tcpdump, ../libpcap and ../tcpslice git clones respectively.
+# To make the source man pages available it is sufficient to have ./configure
+# run successfully in each of those directories.
+#
+# This script has been tested to work on the following Linux systems:
+#
+# * Fedora 20
+# * Ubuntu 14.04
+#
 
 MAN2HTML_PFX=/cgi-bin/man/man2html
 WEBSITE_PFX=/manpages
 
-# man2html prepends its HTML output with a Content-type header.
-function stripContentTypeHeader
+# Fedora man2html prepends its HTML output with a Content-type header.
+# Ubuntu man2html in addition to that adds the <!DOCTYPE ...> XML tag
+# before the HTML. For portability strip both variants of the preamble.
+stripContentTypeHeader()
 {
-	# FIXME: use sed
-	tail --lines +3
+	sed -n '/^<HTML><HEAD><TITLE>/,$p'
 }
 
-function conditionAnchors
+conditionAnchors()
 {
 	sed --file="$SEDFILE"
 }
 
-function write_sedfile
+write_sedfile()
 {
 	local mansection mantopic manfile
 
 	# Fixup custom links.
+	# Suppress some output difference between Fedora and Ubuntu versions of man2html.
 	cat >$SEDFILE <<ENDOFFILE
 s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX">Return to Main Contents</A>@g
 s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
+s@^<HTML><HEAD><TITLE>Man page of @<HTML><HEAD><TITLE>Manpage of @
 ENDOFFILE
 
 	# Convert links to non-local pages to plain text.
@@ -150,7 +161,7 @@ pcap_tstamp_type_val_to_name
 ENDOFLIST
 }
 
-function produceHTML
+produceHTML()
 {
 	local infile=${1:?argument required}
 	local outfile=${2:?argument required}
@@ -172,7 +183,7 @@ function produceHTML
 	echo "Updated: $outfile"
 }
 
-function produceTXT
+produceTXT()
 {
 	local infile=${1:?argument required}
 	local outfile=${2:?argument required}
@@ -184,29 +195,106 @@ function produceTXT
 	git diff $outfile | egrep -q '^[-+]' && echo "Updated: $outfile"
 }
 
-# $COLUMNS doesn't always work
-COLS=`stty size | cut -d' ' -f2`
-if [ "$COLS" != "80" ]; then
-	echo "This terminal must be 80 ($COLS right now) columns wide"
-	exit 1
-fi
+updateOutputFiles()
+{
+	which man2html >/dev/null 2>&1 || {
+		echo "man2html must be installed to proceed"
+		exit 1
+	}
 
-SEDFILE=`mktemp --tmpdir manpages_sedfile.XXXXXX`
-write_sedfile
+	# $COLUMNS doesn't always work
+	COLS=`stty size | cut -d' ' -f2`
+	if [ "$COLS" != "80" ]; then
+		echo "This terminal must be 80 ($COLS right now) columns wide"
+		exit 1
+	fi
 
-produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
-produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
-produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
-produceTXT ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.txt
+	SEDFILE=`mktemp --tmpdir manpages_sedfile.XXXXXX`
+	write_sedfile
+
+	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
+	produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
+	produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
+	produceTXT ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.txt
     
-produceHTML ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.html
-produceHTML ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.html
-produceHTML ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.html
-produceHTML ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.html
+	produceHTML ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.html
+	produceHTML ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.html
+	produceHTML ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.html
+	produceHTML ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.html
 
-for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
-	produceTXT $f manpages/`basename $f`.txt
-	produceHTML $f manpages/`basename $f`.html
-done
+	for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
+		produceTXT $f manpages/`basename $f`.txt
+		produceHTML $f manpages/`basename $f`.html
+	done
 
-rm -f $SEDFILE
+	rm -f $SEDFILE
+}
+
+getLastCommitDate()
+{
+	local path="${1:?argument required}"
+	local filename=`basename "$path"`
+	# dash has no pushd/popd
+	local oldcwd=`pwd`
+	cd `dirname "$path"`
+	local gitdate
+	gitdate=`git log --max-count=1 --format=format:%cD "$filename" | cut -d' ' -f 2-4`
+	# man page date format is slightly different
+	date +'%-d %B %Y' --date="$gitdate"
+	cd "$oldcwd"
+}
+
+getManTHDate()
+{
+	local file="${1:?argument required}"
+	sed --regexp-extended --silent "/^\.TH .+\"([[:digit:]]+ [[:alpha:]]+ [[:digit:]]+)\"/ { s/^.+\"(.+)\".*$/\1/;p }" "$file"
+}
+
+rewriteManTHDate()
+{
+	local file="${1:?argument required}"
+	local date="${2:?argument required}"
+	sed --regexp-extended --in-place "/^\.TH .+\"([[:digit:]]+ [[:alpha:]]+ [[:digit:]]+)\"/ { s/\".+\"/\"$date\"/ }" "$file"
+	echo $file: rewritten to $date
+}
+
+checkLastModified()
+{
+	local file=${1:?argument required}
+	[ -f "$file.in" ] && file="$file.in"
+	# For some reason dash fails to process a local declaration, an assignment
+	# and backticks as a single operation.
+	local in_git in_file
+	in_git=`getLastCommitDate "$file"`
+	in_file=`getManTHDate "$file"`
+	if [ "$in_git" = "" -o "$in_file" = "" ]; then
+		echo "$file: failed to retrieve both dates"
+		return
+	fi
+	[ "$in_git" = "$in_file" ] || rewriteManTHDate "$file" "$in_git"
+}
+
+updateInputFiles()
+{
+	checkLastModified ../libpcap/pcap-filter.manmisc
+	checkLastModified ../libpcap/pcap-linktype.manmisc
+	checkLastModified ../libpcap/pcap-savefile.manfile
+	checkLastModified ../libpcap/pcap-tstamp.manmisc
+	for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
+		checkLastModified "$f"
+	done
+}
+
+case "$1" in
+input)
+	updateInputFiles
+	;;
+output)
+	updateOutputFiles
+	;;
+*)
+	echo "Usage: $0 <input|output>"
+	echo "	input  : update the source tcpdump/libpcap man pages"
+	echo "	output : update .html and .txt versions in this repository"
+	;;
+esac

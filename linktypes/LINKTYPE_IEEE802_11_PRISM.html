@@ -92,28 +92,44 @@ capture was done.  (In practice, this is likely to be little-endian, but
 that's not guaranteed.)
 </p>
 <p>
-The msgcode field has the value 0x0041.  The msglen field is the length
-of the entire Prism header.  In practice, it is almost always, if not
-always, 144 octets.  The device name is the interface name of the
-adapter.
+The msgcode field either has the value 0x00000041 or the value
+0x00000044.  The msglen field is the length of the entire Prism header. 
+In practice, it is almost always, if not always, 144 octets.  The device
+name is the interface name of the adapter.
 </p>
 <p>
 There could be, in theory, zero or more instances of the {DID, Status,
 Length, Data} quadruplet; in practice, there are almost always, if not
 always, 10 instances.  Each quadruplet represents the value of a
-parameter.  The DID field indicates what the parameter is:
+parameter.  The DID field indicates what the parameter is.  For packets
+with the msgcode value 0x00000041, the DID field values are:
 </p>
 <ul>
-<li>0x1041 - host time;</li>
-<li>0x2041 - MAC time;</li>
-<li>0x3041 - channel;</li>
-<li>0x4041 - RSSI;</li>
-<li>0x5041 - signal quality;</li>
-<li>0x6041 - signal;</li>
-<li>0x7041 - noise;</li>
-<li>0x8041 - rate;</li>
-<li>0x9041 - transmitted frame indicator;</li>
-<li>0xA041 - frame length.</li>
+<li>0x00001041 - host time;</li>
+<li>0x00002041 - MAC time;</li>
+<li>0x00003041 - channel;</li>
+<li>0x00004041 - RSSI;</li>
+<li>0x00005041 - signal quality;</li>
+<li>0x00006041 - signal;</li>
+<li>0x00007041 - noise;</li>
+<li>0x00008041 - rate;</li>
+<li>0x00009041 - transmitted frame indicator;</li>
+<li>0x0000A041 - frame length.</li>
+</ul>
+<p>
+For packets with the msgcode value 0x00000044, the DID field values are:
+</p>
+<ul>
+<li>0x00010044 - host time;</li>
+<li>0x00020044 - MAC time;</li>
+<li>0x00030044 - channel;</li>
+<li>0x00040044 - RSSI;</li>
+<li>0x00050044 - signal quality;</li>
+<li>0x00060044 - signal;</li>
+<li>0x00070044 - noise;</li>
+<li>0x00080044 - rate;</li>
+<li>0x00090044 - transmitted frame indicator;</li>
+<li>0x000A0044 - frame length.</li>
 </ul>
 <p>
 The Status field is 0 if the value of that parameter is supplied and 1
@@ -125,7 +141,7 @@ the parameter.
 <p>
 The representation of the values may differ between different network
 adapters.  There is no official specification for the Prism header; <a
-href="http://home.martin.cc/linux/prism">this person's page on the Prism
+href="http://www.martin.cc/linux/prism">this person's page on the Prism
 header</a> describes what he found from examining some adapter drivers.
 </p>
             </div>
@@ -137,7 +153,7 @@ header</a> describes what he found from examining some adapter drivers.
         <!-- FOOTER -->
         <div id="footer">
             <p>
-                (c) 2010-2014 Tcpdump/Libpcap. Designed by
+                (c) 2010-2016 Tcpdump/Libpcap. Designed by
                 <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
                 based on a template by <a href="http://www.freecsstemplates.org/">
                 Free CSS Templates</a>.

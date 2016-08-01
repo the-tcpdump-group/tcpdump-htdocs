@@ -102,7 +102,6 @@
 
               <li><a href="manpages/pcap.3pcap.html">Main pcap man page</a> (<a href="manpages/">MORE pcap man pages</a>)</li>
 
-
               <li><a href="faq.html">Tcpdump.org Frequently
                     Asked Questions</a></li>
 
@@ -111,27 +110,32 @@
               <!-- This is curretly broken <li><a href="http://www.cet.nau.edu/%7Emc8/Socket/Tutorials/section1.html">
                    Packet Capture With libpcap and other Low Level
                    Network Tricks</a>. NAU's Computer Systems
-                   Engineering.</li> -->
+                Engineering.</li> -->
 
               <li><a href="http://sharkfest.wireshark.org/sharkfest.11/">http://sharkfest.wireshark.org/sharkfest.11/</a> has a nice talk by Steve McCanne on architecture of libpcap.</li>
 
               <li><a href="http://eecs.wsu.edu/~sshaikot/docs/lbpcap/libpcap-tutorial.pdf">
                     Packet Capture With libpcap and other Low Level
                     Network Tricks</a>. NAU's Computer Systems
-                Engineering.</li>
+                Engineering.
+              </li>
 
               <li><a href="http://www.e-ghost.deusto.es/docs/2005/conferencias/pcap.pdf">
                     Aprendiendo a programar con libpcap</a>
-                (in Spanish), by Alejandro Lopez Monge.</li>
+                (in Spanish), by Alejandro Lopez Monge.
+              </li>
 
               <li><a href="http://www.cs.ucr.edu/~marios/ethereal-tcpdump.pdf">
-                    Tcpdump filters</a>, by Marios Iliofotou. </li>
+                    Tcpdump filters</a>, by Marios Iliofotou.
+              </li>
 
               <li><a href="http://recursos.aldabaknocking.com/libpcapHakin9LuisMartinGarcia.pdf">
                     Programming with Libpcap - Sniffing the network
                     from our own application</a> by Luis MartinGarcia.
                 Hakin9 Magazine. Issue 2/2008.
-                [<a href="http://www.programming-pcap.aldabaknocking.com/">Code Samples</a>]</li>
+                [<a href="http://www.programming-pcap.aldabaknocking.com/">Code
+                    Samples</a>]
+              </li>
             </ul>
           </div>
         </div>
@@ -144,19 +148,23 @@
           </h2>
           <div class="entry">
             <p>
-              <strong>Version:</strong> 4.6.1 / 1.6.1<br/>
-              <strong>Release Date:</strong> Jul 19, 2014<br/></br>
-       <small>Version 4.6.0/1.6.0 revised for minor fixes discovered during
-       rc process</small>
-       </p>
+              <strong>Version:</strong> 4.7.4 / 1.7.4<br/>
+              <strong>Release Date:</strong> April 22, 2015 / June 26, 2015 (libpcap 1.7.4)<br/><br />
+              <small>Version 4.7.0/1.7.0 were partially released in Dec. 2014, for
+                security patches, but never properly released</small>
+              <small>revisions .1 were cycled with errors</small>
+              <small>tcpdump 4.7.2 was released 2015-03-10, but had built issues on FreeBSD</small>
+              <small>tcpdump 4.7.3, libpcap 1.7.2 was released 2015-03-11</small>
+              <small>tcpdump 4.7.4, libpcap 1.7.3 was released 2015-04-22</small>
+            </p>
             <ul>
-              <li> <a href="release/tcpdump-4.6.1.tar.gz">tcpdump-4.6.1.tar.gz</a>
+              <li> <a href="release/tcpdump-4.7.4.tar.gz">tcpdump-4.7.4.tar.gz</a>
                 (<a href="tcpdump-changes.txt">changelog</a>)
-                (<a href="release/tcpdump-4.6.1.tar.gz.sig">PGP signature</a>)</li>
-              <li> <a href="release/libpcap-1.6.1.tar.gz">libpcap-1.6.1.tar.gz</a>
+                (<a href="release/tcpdump-4.7.4.tar.gz.sig">PGP signature</a>)</li>
+              <li> <a href="release/libpcap-1.7.4.tar.gz">libpcap-1.7.4.tar.gz</a>
                 (<a href="libpcap-changes.txt">changelog</a>)
-                (<a href="release/libpcap-1.6.1.tar.gz.sig">PGP signature</a>)</li>
-              <li> <a href="tcpdump-workers.asc">tcpdump-workers.asc</a> (NEW! tcpdump.org signing key)</li>
+                (<a href="release/libpcap-1.7.4.tar.gz.sig">PGP signature</a>)</li>
+              <li> <a href="tcpdump-workers.asc">tcpdump-workers.asc</a> (tcpdump.org signing key)</li>
             </ul>
           </div>
         </div>
@@ -169,26 +177,45 @@
           </h2>
           <div class="entry">
             <p>
-              <strong>Version:</strong> 4.5.1 / 1.5.3<br/>
-              <strong>Release Date:</strong> Nov 20, 2013/Dec 3, 2013/Jan 14, 2014<br/></br>
-       <small>Version 4.5.0/1.5.0 revised for non-code edits and a crash fix in libpcap</small>
-       <small>Version libpcap 1.5.1 revised for interop against Linux prior to 3.2.0</small>
-       <small>Version libpcap 1.5.2 revised for for further issues with TPACKET_V3 packet capture</small>
-       </p>
+              <strong>Version:</strong> 4.6.2 / 1.6.2<br/>
+              <strong>Release Date:</strong> Sep 2, 2014<br/><br />
+              <small>Version 4.6.0/1.6.0 revised for minor fixes discovered during rc process</small>
+              <small>libpcap 1.6.1 updated due to small bug fixes</small>
+              <small>tcpdump 4.6.1 updated due to libsmi and build fixes</small>
+            </p>
             <ul>
-              <li> <a href="release/tcpdump-4.5.1.tar.gz">tcpdump-4.5.1.tar.gz</a>
+              <li> <a href="release/tcpdump-4.6.2.tar.gz">tcpdump-4.6.2.tar.gz</a>
                 (<a href="tcpdump-changes.txt">changelog</a>)
-                (<a href="release/tcpdump-4.5.1.tar.gz.sig">PGP signature</a>)</li>
-              <li> <a href="release/libpcap-1.5.3.tar.gz">libpcap-1.5.3.tar.gz</a>
+                (<a href="release/tcpdump-4.6.2.tar.gz.sig">PGP signature</a>)</li>
+              <li> <a href="release/libpcap-1.6.2.tar.gz">libpcap-1.6.2.tar.gz</a>
                 (<a href="libpcap-changes.txt">changelog</a>)
-                (<a href="release/libpcap-1.5.3.tar.gz.sig">PGP signature</a>)</li>
-              <li> <a href="tcpdump-workers.asc">tcpdump-workers.asc</a> (NEW! tcpdump.org signing key)</li>
+                (<a href="release/libpcap-1.6.2.tar.gz.sig">PGP signature</a>)</li>
+              <li> <a href="tcpdump-workers.asc">tcpdump-workers.asc</a> (tcpdump.org signing key)</li>
+            </ul>
+          </div>
+
+          <div class="entry">
+            <p>
+              <strong>Version:</strong> 4.5.1 / 1.5.3<br/>
+              <strong>Release Date:</strong> Nov 20, 2013/Dec 3, 2013/Jan 14, 2014<br/><br/>
+              <small>Version 4.5.0/1.5.0 revised for non-code edits and a crash fix in libpcap</small>
+              <small>Version libpcap 1.5.1 revised for interop against Linux prior to 3.2.0</small>
+              <small>Version libpcap 1.5.2 revised for for further issues with TPACKET_V3 packet capture</small>
+            </p>
+            <ul>
+            <li> <a href="release/tcpdump-4.5.1.tar.gz">tcpdump-4.5.1.tar.gz</a>
+              (<a href="tcpdump-changes.txt">changelog</a>)
+              (<a href="release/tcpdump-4.5.1.tar.gz.sig">PGP signature</a>)</li>
+            <li> <a href="release/libpcap-1.5.3.tar.gz">libpcap-1.5.3.tar.gz</a>
+              (<a href="libpcap-changes.txt">changelog</a>)
+              (<a href="release/libpcap-1.5.3.tar.gz.sig">PGP signature</a>)</li>
+            <li> <a href="tcpdump-workers.asc">tcpdump-workers.asc</a> (NEW! tcpdump.org signing key)</li>
             </ul>
           </div>
           <div class="entry">
             <p>
               <strong>Version:</strong> 4.4.0 / 1.4.0<br/>
-                                                       <strong>Release Date:</strong> May 20, 2013<br/>
+              <strong>Release Date:</strong> May 20, 2013<br/>
             </p>
             <ul>
               <li> <a href="release/tcpdump-4.4.0.tar.gz">tcpdump-4.4.0.tar.gz</a>
@@ -204,7 +231,7 @@
           <div class="entry">
             <p>
               <strong>Version:</strong> 4.3.0 / 1.3.0<br/>
-                                                       <strong>Release Date:</strong> June 12, 2012<br/>
+              <strong>Release Date:</strong> June 12, 2012<br/>
             </p>
             <ul>
               <li> <a href="release/tcpdump-4.3.0.tar.gz">tcpdump-4.3.0.tar.gz</a>
@@ -220,7 +247,7 @@
           <div class="entry">
             <p>
               <strong>Version:</strong> 4.2.1 / 1.2.1<br/>
-                                                       <strong>Release Date:</strong> January 1, 2012<br/>
+              <strong>Release Date:</strong> January 1, 2012<br/>
             </p>
             <ul>
               <li> <a href="release/tcpdump-4.2.1.tar.gz">tcpdump-4.2.1.tar.gz</a>
@@ -235,7 +262,7 @@
           <div class="entry">
             <p>
               <strong>Version:</strong> 4.1.1 / 1.1.1<br/>
-                                                       <strong>Release Date:</strong> April 5, 2010<br/>
+              <strong>Release Date:</strong> April 5, 2010<br/>
             </p>
             <ul>
               <li> <a href="release/tcpdump-4.1.1.tar.gz">tcpdump-4.1.1.tar.gz</a>
@@ -248,7 +275,7 @@
             </ul>
             <p>
               <!-- This used to contain a link to <a href="binaries.html"> but the link is broken -->
-                                                    If you can offer binary/RPM distributions, please contact tcpdump-workers@lists.tcpdump.org.
+              If you can offer binary/RPM distributions, please contact tcpdump-workers@lists.tcpdump.org.
             </p>
             <p>
               Release 4.1.0 / 1.1.0 had build issues on FreeBSD,
@@ -256,7 +283,7 @@
               point release was made.
             </p>
           </div>
-        </div>
+        </div> <!-- OLD RELEASES? -->
 
         <div class="entry">
           <p>
@@ -265,7 +292,7 @@
           <h3><a name="4.0">TCPDUMP 4.0.0 / LIBPCAP 1.0.0</a></h3>
           <p>
             <strong>Version:</strong> 4.0.0 / 1.0.0<br/>
-                                                     <strong>Release Date:</strong> October 27, 2008<br/>
+            <strong>Release Date:</strong> October 27, 2008<br/>
           </p>
           <ul>
             <li> <a href="release/tcpdump-4.0.0.tar.gz">tcpdump-4.0.0.tar.gz</a>
@@ -276,7 +303,6 @@
               (<a href="release/libpcap-1.0.0.tar.gz.sig">PGP signature</a>)</li>
             <li> <a href="tcpdump-workers.asc">tcpdump-workers.asc</a> (tcpdump.org signing key)</li>
           </ul>
-
         </div>
         <!-- End of OLD RELEASES section -->
 
@@ -288,45 +314,37 @@
           <div class="entry">
             <p>
               The current development version is freely accessible
-              through the anonymous
-              <a href="http://www.kernel.org/pub/software/scm/git/docs/">GIT</a>
-              server. To checkout a copy of <em>libpcap</em> or <em>tcpdump</em>, do:
-            </p>
-            <h4>
-              git clone git://bpf.tcpdump.org/tcpdump
-            </h4>
-            <h4>
-              git clone git://bpf.tcpdump.org/libpcap
-            </h4>
-            <p>
-              One can then configure and compile the source
-              via the normal GNU autoconf method. You can also
-              find a nightly update at
-              <a href="https://github.com/the-tcpdump-group/libpcap">
-                git hub: libpcap</a> and
+              through the <a href="https://github.com/">GitHub</a>
+              <a href="http://www.kernel.org/pub/software/scm/git/docs/">Git</a>
+              site.  tcpdump can be found at
               <a href="https://github.com/the-tcpdump-group/tcpdump">
-                git hub: tcpdump</a> and you are encouraged to
-              do your initial clone from there:
+                GitHub: tcpdump</a> and libpcap can be found at
+              <a href="https://github.com/the-tcpdump-group/libpcap">
+                GitHub: libpcap</a>.  You can clone the tcpdump GitHub
+              repository using
+            <pre>
+    git clone https://github.com/the-tcpdump-group/tcpdump.git
+            </pre>
+            and can clone the libpcap GitHub repository using
+            <pre>
+    git clone https://github.com/the-tcpdump-group/libpcap.git
+            </pre>
+              You can then configure and compile the source
+              via the normal GNU autoconf method.
             </p>
-            <h4>
-              git clone https://github.com/the-tcpdump-group/libpcap.git
-            </h4>
-            <h4>
-              git clone https://github.com/the-tcpdump-group/tcpdump.git
-            </h4>
             <p>
               You are also encouraged to submit patches in the form of git
-              trees hosted on github or elsewhere.
+              trees hosted on GitHub or elsewhere.
             </p>
             <p>
               The continuous integration systems below automatically build the
               current development version of tcpdump/libpcap:
               <ul>
-                <li><a href='https://travis-ci.org/the-tcpdump-group/tcpdump'>Travis CI: tcpdump</a></li>
-                <li><a href='https://travis-ci.org/the-tcpdump-group/libpcap'>Travis CI: libpcap</a></li>
+                <li><a href='https://travis-ci.org/the-tcpdump-group/tcpdump'>Travis CI: tcpdump <img src='https://travis-ci.org/the-tcpdump-group/tcpdump.svg?branch=master'></a></li>
+                <li><a href='https://travis-ci.org/the-tcpdump-group/libpcap'>Travis CI: libpcap <img src='https://travis-ci.org/the-tcpdump-group/libpcap.svg?branch=master'></a></li>
                 <li><a href='https://buildfarm.opencsw.org/buildbot/waterfall?builder=tcpdump-solaris10-amd64&builder=tcpdump-solaris10-i386&builder=tcpdump-solaris10-sparc&builder=tcpdump-solaris10-sparcv9&reload=60'>OpenCSW: tcpdump</a></li>
                 <li><a href='https://buildfarm.opencsw.org/buildbot/waterfall?builder=libpcap-solaris10-amd64&builder=libpcap-solaris10-i386&builder=libpcap-solaris10-sparc&builder=libpcap-solaris10-sparcv9&builder=libpcapgcc-solaris10-i386&builder=libpcapgcc-solaris10-sparc&reload=60'>OpenCSW: libpcap</a></li>
-                <li><a href='http://buildbot.wireshark.org/tcpdump/'>Wireshark buildbot: tcpdump</a></li>
+                <li><a href='http://buildbot.wireshark.org/tcpdump/'>Wireshark buildbot: tcpdump and libpcap</a></li>
               </ul>
             </p>
           </div>
@@ -374,7 +392,6 @@
                 <a href="lists/announce/">here.</a><br/><br/>
               </dd>
 
-
               <dt>
                 <strong>tcpdump-workers</strong>
               </dt>
@@ -411,69 +428,70 @@
               Bugs and patches are tracked through
               <a href="http://github.com">GitHub</a>.
               Please submit them using the following resources:
-                 <p>
-                     For <b>libpcap</b>:
-                     <ul>
-                       <li>Submit bugs and feature requests on the
-                       <a href="https://github.com/the-tcpdump-group/libpcap/issues">issue tracker</a>.
-                       <br/><br/>
-                       <li>Submit patches by forking the branch at
-                       <a href="https://github.com/the-tcpdump-group/libpcap">GitHub: libpcap</a>
-                       and issuing a pull request.
-                     </ul>
-                 </p>
-                 <p>
-                     For <b>tcpdump</b>:
-                     <ul>
-                       <li>Submit bugs and feature requests on the
-                       <a href="https://github.com/the-tcpdump-group/tcpdump/issues">issue tracker</a>.
-                       <br/><br/>
-                       <li>Submit patches by forking the branch at
-                       <a href="https://github.com/the-tcpdump-group/tcpdump">GitHub: tcpdump</a>
-                       and issuing a pull request.
-                     </ul>
-                 </p>
-            </p>
-<!-- insert GitHub logo-based link here?
             <p>
-              <img src="http://github.com/" width="125" height="37" alt="github.com" />
+              For <b>libpcap</b>:
+              <ul>
+                <li>Submit bugs and feature requests on the
+                  <a href="https://github.com/the-tcpdump-group/libpcap/issues">issue tracker</a>.
+                  <br/><br/>
+                </li>
+                <li>Submit patches by forking the branch at
+                  <a href="https://github.com/the-tcpdump-group/libpcap">GitHub: libpcap</a>
+                  and issuing a pull request.
+                </li>
+              </ul>
             </p>
--->
+            <p>
+              For <b>tcpdump</b>:
+              <ul>
+                <li>Submit bugs and feature requests on the
+                  <a href="https://github.com/the-tcpdump-group/tcpdump/issues">issue tracker</a>.
+                  <br/><br/>
+                </li>
+                <li>Submit patches by forking the branch at
+                  <a href="https://github.com/the-tcpdump-group/tcpdump">GitHub: tcpdump</a>
+                  and issuing a pull request.
+                </li>
+              </ul>
+            </p>
+            <p><a href="https://github.com/the-tcpdump-group/">
+              <img src="images/GitHub_logo_100x41.png" width="100" height="41" alt="github.com" border=0 /></a>
+            </p>
+            </div>
           </div>
-        </div>
-        <!-- End of PATCHES, BUGS, AND FEATURE REQUESTS section -->
+          <!-- End of PATCHES, BUGS, AND FEATURE REQUESTS section -->
 
-        <!-- Start of HOW TO CONTRIBUTE section -->
-        <div class="post">
-          <h2 class="title">
-            <a name="contribute">How to Contribute</a>
-          </h2>
-          <div class="entry">
-            <p>
-              <em>Tcpdump</em> and <em>libpcap</em> are open
-              source software and anyone can make contributions.
-              Basically we need people to:
-            </p>
+          <!-- Start of HOW TO CONTRIBUTE section -->
+          <div class="post">
+            <h2 class="title">
+              <a name="contribute">How to Contribute</a>
+            </h2>
+            <div class="entry">
+              <p>
+                <em>Tcpdump</em> and <em>libpcap</em> are open
+                source software and anyone can make contributions.
+                Basically we need people to:
+              </p>
 
-            <ul>
-              <li> Download and test versions of <em>libpcap</em> and <em>tcpdump</em> on their platform</li>
-              <li> Contribute code</li>
-              <li> Maintain web pages (less important now)</li>
-              <li> Maintain binary/RPM packages</li>
-            </ul>
+              <ul>
+                <li> Download and test versions of <em>libpcap</em> and <em>tcpdump</em> on their platform</li>
+                <li> Contribute code</li>
+                <li> Maintain web pages (less important now)</li>
+                <li> Maintain binary/RPM packages</li>
+              </ul>
 
-            <p>
-              If you want to contribute, please subscribe to the
-              <a href="#mailing-lists">tcpdump-workers</a> mailing
-              list. It's a good idea to discuss bugfixes and new
-              feature additions in advance, because the changes
-              may have bigger implications than you think and
-              your patch may not get accepted.
-            </p>
+              <p>
+                    If you want to contribute, please subscribe to the
+                    <a href="#mailing-lists">tcpdump-workers</a> mailing
+                    list. It's a good idea to discuss bugfixes and new
+                    feature additions in advance, because the changes
+                    may have bigger implications than you think and
+                    your patch may not get accepted.
+              </p>
+            </div>
           </div>
+          <!-- End of HOW TO CONTRIBUTE section -->
         </div>
-        <!-- End of HOW TO CONTRIBUTE section -->
-
       </div>
       <!-- RIGHT HAND SIDE PAGE CONTENTS -->
 
@@ -504,13 +522,13 @@
     <!-- FOOTER -->
     <div id="footer">
       <p>
-        (c) 2010-2014 Tcpdump/Libpcap. Designed by
+        (c) 2010-2016 Tcpdump/Libpcap. Designed by
         <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
         based on a template by <a href="http://www.freecsstemplates.org/">
-                                 Free CSS Templates</a>.
+          Free CSS Templates</a>.
         <a href="http://validator.w3.org/check?uri=referer">[Valid XHTML
           1.0]</a> <a href="http://jigsaw.w3.org/css-validator/check/referer">
-                     [Valid CSS]</a>
+          [Valid CSS]</a>
       </p>
     </div>
     <!-- END OF FOOTER -->

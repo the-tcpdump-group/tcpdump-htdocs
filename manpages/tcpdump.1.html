@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of TCPDUMP</TITLE>
 </HEAD><BODY>
 <H1>TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 11 July 2014<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 17 September 2015<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -15,7 +15,7 @@ tcpdump - dump traffic on a network
 <B>tcpdump</B>
 
 [
-<B>-AbdDefhHIJKlLnNOpqRStuUvxX#</B>
+<B>-AbdDefhHIJKlLnNOpqStuUvxX#</B>
 
 ] [
 <B>-B</B>
@@ -175,6 +175,12 @@ tcpdump - dump traffic on a network
 <B>--time-stamp-precision=</B><I>tstamp_precision</I>
 
 ]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>--immediate-mode</B>
+
+]
 [
 <B>--version</B>
 
@@ -194,7 +200,9 @@ tcpdump - dump traffic on a network
 <P>
 
 <I>Tcpdump</I> prints out a description of the contents of packets on a
-network interface that match the boolean <I>expression</I>.  It can also
+network interface that match the boolean <I>expression</I>; the
+description is preceded by a time stamp, printed, by default, as hours,
+minutes, seconds, and fractions of a second since midnight.  It can also
 be run with the
 <B>-w</B>
 
@@ -280,7 +288,9 @@ platforms, such as Mac OS X, the ``status'' character is not set by
 default, so you must set it with
 <B>stty</B>(1)
 
-in order to use it) and will continue capturing packets.
+in order to use it) and will continue capturing packets. On platforms that
+do not support the SIGINFO signal, the same can be achieved by using the
+SIGUSR1 signal.
 <P>
 
 Reading packets from a network interface may require that you have
@@ -543,6 +553,14 @@ monitor mode will be shown; if
 
 is specified, only those link-layer types available when in monitor mode
 will be shown.
+<DT><B>--immediate-mode</B>
+
+<DD>
+Capture in &quot;immediate mode&quot;.  In this mode, packets are delivered to
+tcpdump as soon as they arrive, rather than being buffered for
+efficiency.  This is the default when printing packets rather than
+saving packets to a ``savefile'' if the packets are being printed to a
+terminal rather than to a file or pipe.
 <DT><B>-j</B><I> tstamp_type</I>
 
 <DD>
@@ -739,13 +757,6 @@ on all platforms.
 Quick (quiet?) output.
 Print less protocol information so output
 lines are shorter.
-<DT><B>-R</B>
-
-<DD>
-Assume ESP/AH packets to be based on old specification (RFC1825 to RFC1829).
-If specified, <I>tcpdump</I> will not print replay prevention field.
-Since there is no protocol version field in ESP/AH specification,
-<I>tcpdump</I> cannot deduce the version of ESP/AH protocol.
 <DT><B>-r</B><I> file</I>
 
 <DD>
@@ -772,7 +783,7 @@ Print absolute, rather than relative, TCP sequence numbers.
 <DD>
 
 Snarf <I>snaplen</I> bytes of data from each packet rather than the
-default of 65535 bytes.
+default of 262144 bytes.
 Packets truncated because of a limited snapshot
 are indicated in the output with ``[|<I>proto</I>]'', where <I>proto</I>
 is the name of the protocol level at which the truncation has occurred.
@@ -784,7 +795,7 @@ lost.
 You should limit <I>snaplen</I> to the smallest number that will
 capture the protocol information you're interested in.
 Setting
-<I>snaplen</I> to 0 sets it to the default of 65535,
+<I>snaplen</I> to 0 sets it to the default of 262144,
 for backwards compatibility with recent older versions of
 <I>tcpdump</I>.
 
@@ -800,6 +811,7 @@ Currently known types are
 <B>lmp</B> (Link Management Protocol),
 <B>pgm</B> (Pragmatic General Multicast),
 <B>pgm_zmtp1</B> (ZMTP/1.0 inside PGM/EPGM),
+<B>resp</B> (REdis Serialization Protocol),
 <B>radius</B> (RADIUS),
 <B>rpc</B> (Remote Procedure Call),
 <B>rtp</B> (Real-Time Applications protocol),
@@ -828,7 +840,8 @@ an encapsulated PGM packet.
 <DT><B>-tt</B>
 
 <DD>
-Print an unformatted timestamp on each dump line.
+Print the timestamp, as seconds since January 1, 1970, 00:00:00, UTC, and
+fractions of a second since that time, on each dump line.
 <DT><B>-ttt</B>
 
 <DD>
@@ -837,7 +850,8 @@ on each dump line.
 <DT><B>-tttt</B>
 
 <DD>
-Print a timestamp in default format proceeded by date on each dump line.
+Print a timestamp, as hours, minutes, seconds, and fractions of a second
+since midnight, preceded by the date, on each dump line.
 <DT><B>-ttttt</B>
 
 <DD>
@@ -2332,11 +2346,15 @@ is the current clock time in the form
 </DL>
 
 and is as accurate as the kernel's clock.
-The timestamp reflects the time the kernel first saw the packet.
-No attempt
-is made to account for the time lag between when the
-Ethernet interface removed the packet from the wire and when the kernel
-serviced the `new packet' interrupt.
+The timestamp reflects the time the kernel applied a time stamp to the packet.
+No attempt is made to account for the time lag between when the network
+interface finished receiving the packet from the network and when the
+kernel applied a time stamp to the packet; that time lag could include a
+delay between the time when the network interface finished receiving a
+packet from the network and the time when an interrupt was delivered to
+the kernel to get it to read the packet and a delay between the time
+when the kernel serviced the `new packet' interrupt and the time when it
+applied a time stamp to the packet.
 <A NAME="lbAH">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
@@ -2481,6 +2499,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 09:05:29 GMT, July 11, 2014
+Time: 20:50:34 GMT, April 29, 2016
 </BODY>
 </HTML>

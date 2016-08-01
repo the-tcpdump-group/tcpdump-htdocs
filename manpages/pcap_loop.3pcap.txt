@@ -37,6 +37,12 @@ DESCRIPTION
        fer to be processed when reading a live capture,  and  causes  all  the
        packets in the file to be processed when reading a ``savefile''.
 
+       Note  that,  when  doing  a live capture on some platforms, if the read
+       timeout expires when there are no  packets  available,  pcap_dispatch()
+       will  return  0,  even  when  not in non-blocking mode, as there are no
+       packets to process.  Applications should be prepared for this  to  hap-
+       pen, but must not rely on it happening.
+
        (In  older  versions  of libpcap, the behavior when cnt was 0 was unde-
        fined; different platforms and devices  behaved  differently,  so  code
        that  must work with older versions of libpcap should use -1, not 0, as
@@ -100,4 +106,4 @@ SEE ALSO
 
 
 
-                                13 October 2013               PCAP_LOOP(3PCAP)
+                                18 October 2014               PCAP_LOOP(3PCAP)

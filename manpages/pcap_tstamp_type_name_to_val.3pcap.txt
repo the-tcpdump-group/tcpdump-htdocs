@@ -17,12 +17,12 @@ DESCRIPTION
        tive.
 
 RETURN VALUE
-       pcap_tstamp_type_name_to_val() returns 0 on success and  PCAP_ERROR  on
-       failure.
+       pcap_tstamp_type_name_to_val() returns time stamp type value on success
+       and PCAP_ERROR on failure.
 
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_val_to_name(3PCAP)
 
 
 
-                                21 August 2PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)
+                                5 December PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)

@@ -13,13 +13,18 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_get_selectable_fd() returns, on UNIX, a file descriptor number for
-       a  file descriptor on which one can do a select() or poll() to wait for
-       it to be possible to read packets without blocking, if such a  descrip-
-       tor  exists, or -1, if no such descriptor exists.  Some network devices
-       opened   with    pcap_create()    and    pcap_activate(),    or    with
+       a file descriptor on which one can do a select(), poll(), or other such
+       call to wait for it to be possible to read packets without blocking, if
+       such  a  descriptor  exists, or -1, if no such descriptor exists.  Some
+       network devices opened with pcap_create() and pcap_activate(), or  with
        pcap_open_live(), do not support select() or poll() (for example, regu-
        lar network devices on FreeBSD 4.3 and 4.4, and Endace DAG devices), so
        -1 is returned for those devices.
+
+       Note  that  a  descriptor  on which a read can be done without blocking
+       may, on some platforms, not have any packets to read if the read  time-
+       out has expired.  A call to pcap_dispatch() will return 0 in this case,
+       but will not block.
 
        Note that in:
 
@@ -31,34 +36,34 @@ DESCRIPTION
 
               Mac OS X prior to Mac OS X 10.7;
 
-       select()   and   poll()   do   not   work  correctly  on  BPF  devices;
+       select()  and  poll()  do  not   work   correctly   on   BPF   devices;
        pcap_get_selectable_fd() will return a file descriptor on most of those
-       versions  (the  exceptions  being  FreeBSD  4.3  and 4.4), but a simple
-       select() or poll() will not indicate that the  descriptor  is  readable
-       until  a  full  buffer's worth of packets is received, even if the read
-       timeout expires before then.  To work around this, an application  that
-       uses  select()  or  poll()  to  wait for packets to arrive must put the
-       pcap_t in non-blocking mode, and must  arrange  that  the  select()  or
-       poll()  have a timeout less than or equal to the read timeout, and must
-       try to read packets after that timeout expires, regardless  of  whether
+       versions (the exceptions being FreeBSD  4.3  and  4.4),  but  a  simple
+       select()  or  poll()  will not indicate that the descriptor is readable
+       until a full buffer's worth of packets is received, even  if  the  read
+       timeout  expires before then.  To work around this, an application that
+       uses select() or poll() to wait for packets  to  arrive  must  put  the
+       pcap_t  in  non-blocking  mode,  and  must arrange that the select() or
+       poll() have a timeout less than or equal to the read timeout, and  must
+       try  to  read packets after that timeout expires, regardless of whether
        select() or poll() indicated that the file descriptor for the pcap_t is
        ready to be read or not.  (That workaround will not work in FreeBSD 4.3
-       and  later; however, in FreeBSD 4.6 and later, select() and poll() work
-       correctly on BPF devices, so the workaround isn't  necessary,  although
+       and later; however, in FreeBSD 4.6 and later, select() and poll()  work
+       correctly  on  BPF devices, so the workaround isn't necessary, although
        it does no harm.)
 
-       Note  also that poll() doesn't work on character special files, includ-
-       ing BPF devices, in Mac OS X 10.4 and 10.5, so, while select()  can  be
-       used  on  the  descriptor  returned by pcap_get_selectable_fd(), poll()
-       cannot be used on it those versions of Mac OS X.   Kqueues  also  don't
-       work  on  that  descriptor.   poll(),  but  not  kqueues,  work on that
-       descriptor in Mac OS X releases prior to 10.4; poll() and kqueues  work
+       Note also that poll() doesn't work on character special files,  includ-
+       ing  BPF  devices, in Mac OS X 10.4 and 10.5, so, while select() can be
+       used on the descriptor  returned  by  pcap_get_selectable_fd(),  poll()
+       cannot  be  used  on it those versions of Mac OS X.  Kqueues also don't
+       work on that  descriptor.   poll(),  but  not  kqueues,  work  on  that
+       descriptor  in Mac OS X releases prior to 10.4; poll() and kqueues work
        on that descriptor in Mac OS X 10.6 and later.
 
        pcap_get_selectable_fd() is not available on Windows.
 
 RETURN VALUE
-       A  selectable  file descriptor is returned if one exists; otherwise, -1
+       A selectable file descriptor is returned if one exists;  otherwise,  -1
        is returned.
 
 SEE ALSO
@@ -66,4 +71,4 @@ SEE ALSO
 
 
 
-                                 22 July 2011    PCAP_GET_SELECTABLE_FD(3PCAP)
+                                18 October 2014  PCAP_GET_SELECTABLE_FD(3PCAP)

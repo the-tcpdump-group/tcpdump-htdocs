@@ -20,4 +20,4 @@ SEE ALSO
 
 
 
-                                 9 April 2008          PCAP_STATUSTOSTR(3PCAP)
+                                3 January 2014         PCAP_STATUSTOSTR(3PCAP)
