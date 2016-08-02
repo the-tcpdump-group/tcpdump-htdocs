@@ -527,8 +527,9 @@ SOFi2, which is K28.5 - D21.5 - D1.2 - D21.2, is represented as 0xBC
 followed by an IPv4 or IPv6 datagram.
                 <tr valign=top>
 <td>LINKTYPE_CAN_SOCKETCAN<td>227<td>DLT_CAN_SOCKETCAN<td>
-CAN (Controller Area Network) frames, with a pseudo-header as supplied
-by Linux SocketCAN.
+CAN (Controller Area Network) frames, with <a
+href="linktypes/LINKTYPE_CAN_SOCKETCAN.html">a pseudo-header</a>
+followed by the frame payload.
                 <tr valign=top>
 <td>LINKTYPE_IPV4<td>228<td>DLT_IPV4<td>
 Raw IPv4; the packet begins with an IPv4 header.
