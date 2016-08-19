@@ -9,7 +9,7 @@ Original license : Creative Commons Attribution 2.5 License
     <!-- HEAD -->
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title>LINKTYPE_CAN_SOCKETCAN | TCPDUMP/LIBPCAP public repository</title>
+        <title>LINKTYPE_CAN_SOCKETCAN_HOSTENDIAN | TCPDUMP/LIBPCAP public repository</title>
         <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
         <meta name="description" content="Web site of Tcpdump and Libpcap">
 		<meta name="DC.publisher" content="Tcpdump">
@@ -54,10 +54,10 @@ Original license : Creative Commons Attribution 2.5 License
         <!-- PAGE CONTENTS -->
         <div id="page">
 
-          <!-- Start of LINKTYPE_CAN_SOCKETCAN section -->
+          <!-- Start of LINKTYPE_CAN_SOCKETCAN_HOSTENDIAN section -->
           <div class="post">
             <h2 class="title">
-                <a name="intro">LINKTYPE_CAN_SOCKETCAN</a>
+                <a name="intro">LINKTYPE_CAN_SOCKETCAN_HOSTENDIAN</a>
             </h2>
             <div class="entry">
                 <h3>Packet structure</h3>
@@ -86,8 +86,14 @@ Original license : Creative Commons Attribution 2.5 License
 
                 <h3>Description</h3>
 <p>
-The CAN ID and flags is in network byte order (big-endian).  The bottom
-29 bits contain the CAN ID of the frame.  The remaining bits are:
+The CAN ID and flags is in host byte order.  When performing a live
+capture, the host byte order is the byte order of the machine on which
+the packets are captured.  When reading a pcap file, the byte order is
+the byte order for the file, as specified by the file's magic number;
+when reading a pcapng file, the byte order is the byte order for the
+section of the pcapng file, as specified by the Section Header Block. 
+The bottom 29 bits contain the CAN ID of the frame.  The remaining bits
+are:
 </p>
 <ul>
 <li>0x20000000 - set if the frame is an error message rather than a data
@@ -99,7 +105,7 @@ than a standard 11-bit frame.
 frame.
 </ul>
             </div>
-            <!-- End of LINKTYPE_CAN_SOCKETCAN section -->
+            <!-- End of LINKTYPE_CAN_SOCKETCAN_HOSTENDIAN section -->
           </div>
         </div>
         <!-- END OF PAGE CONTENTS -->
