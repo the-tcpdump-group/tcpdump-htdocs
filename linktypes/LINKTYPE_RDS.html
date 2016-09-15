@@ -93,19 +93,20 @@ Original license : Creative Commons Attribution 2.5 License
 <p>
 Each frame corresponds to a group in the RDS specification.  The
 information words from the four blocks in the group appear first, in
-big-endian byte order, followed by an <!-- ASCII -->encoding of the offset words
+big-endian byte order, followed by an encoding of the offset words
 from the four blocks in the group.
 </p>
 <p>
-The offset words contain <!-- an ASCII character --> a value that is one of:
+The offset words contain a value that is one of:
 </p>
 <ul>
-<li><!-- 'A' -->TBD, for offset word A;
-<li><!-- 'B' -->TBD, for offset word B;
-<li><!-- 'C' -->TBD, for offset word C;
-<li><!-- 'c' -->TBD, for offset word C';
-<li><!-- 'D' -->TBD, for offset word D;
-<li><!-- 'E' -->TBD, for offset word E;
+<li>0, for offset word A;
+<li>1, for offset word B;
+<li>2, for offset word C;
+<li>3, for offset word D;
+<li>4, for offset word C' (C-TAG);
+<li>5, for offset word E (MMBS);
+<li>255, if the offset word has an invalid value.
 </ul>
             </div>
             <!-- End of LINKTYPE_RDS section -->
