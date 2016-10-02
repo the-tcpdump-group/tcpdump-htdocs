@@ -9,8 +9,8 @@
 #
 # This script has been tested to work on the following Linux systems:
 #
-# * Fedora 20
-# * Ubuntu 14.04
+# * Fedora 24
+# * Ubuntu 16.04
 #
 
 MAN2HTML_PFX=/cgi-bin/man/man2html
@@ -230,6 +230,8 @@ updateOutputFiles()
 	rm -f $SEDFILE
 }
 
+# FIXME: This function should ignore its own commits, which change only the
+# "last modified" date in the man page header. As it goes now it is useless.
 getLastCommitDate()
 {
 	local path="${1:?argument required}"
@@ -294,7 +296,7 @@ output)
 	;;
 *)
 	echo "Usage: $0 <input|output>"
-	echo "	input  : update the source tcpdump/libpcap man pages"
+	echo "	input  : update the source tcpdump/libpcap man pages (does not work)"
 	echo "	output : update .html and .txt versions in this repository"
 	;;
 esac
