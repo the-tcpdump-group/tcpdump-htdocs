@@ -1,7 +1,5 @@
 PCAP_OFFLINE_FILTER(3PCAP)                          PCAP_OFFLINE_FILTER(3PCAP)
 
-
-
 NAME
        pcap_offline_filter - check whether a filter matches a packet
 
@@ -24,7 +22,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_compile(3PCAP)
-
-
 
                                  7 April 2014       PCAP_OFFLINE_FILTER(3PCAP)

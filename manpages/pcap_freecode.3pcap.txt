@@ -1,7 +1,5 @@
 PCAP_FREECODE(3PCAP)                                      PCAP_FREECODE(3PCAP)
 
-
-
 NAME
        pcap_freecode - free a BPF program
 
@@ -18,7 +16,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP), pcap_compile(3PCAP), pcap_setfilter(3PCAP)
-
-
 
                                 3 January 2014            PCAP_FREECODE(3PCAP)

@@ -1,7 +1,5 @@
 PCAP_OPEN_DEAD(3PCAP)                                    PCAP_OPEN_DEAD(3PCAP)
 
-
-
 NAME
        pcap_open_dead,  pcap_open_dead_with_tstamp_precision  -  open  a  fake
        pcap_t for compiling filters or opening a capture for output
@@ -36,7 +34,5 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP),   pcap_compile(3PCAP),  pcap_dump_open(3PCAP),  pcap-link-
        type(7)
-
-
 
                                 3 January 2014           PCAP_OPEN_DEAD(3PCAP)

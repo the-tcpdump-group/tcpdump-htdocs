@@ -1,7 +1,5 @@
 PCAP_GET_SELECTABLE_FD(3PCAP)                    PCAP_GET_SELECTABLE_FD(3PCAP)
 
-
-
 NAME
        pcap_get_selectable_fd  - get a file descriptor on which a select() can
        be done for a live capture
@@ -68,7 +66,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), select(2), poll(2)
-
-
 
                                 18 October 2014  PCAP_GET_SELECTABLE_FD(3PCAP)

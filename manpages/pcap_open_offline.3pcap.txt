@@ -1,7 +1,5 @@
 PCAP_OPEN_OFFLINE(3PCAP)                              PCAP_OPEN_OFFLINE(3PCAP)
 
-
-
 NAME
        pcap_open_offline,             pcap_open_offline_with_tstamp_precision,
        pcap_fopen_offline, pcap_fopen_offline_with_tstamp_precision -  open  a
@@ -53,7 +51,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap-savefile(5)
-
-
 
                                 3 January 2014        PCAP_OPEN_OFFLINE(3PCAP)

@@ -1,7 +1,5 @@
 PCAP_SETDIRECTION(3PCAP)                              PCAP_SETDIRECTION(3PCAP)
 
-
-
 NAME
        pcap_setdirection  -  set  the direction for which packets will be cap-
        tured
@@ -32,7 +30,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_geterr(3PCAP)
-
-
 
                                  8 March 2015         PCAP_SETDIRECTION(3PCAP)

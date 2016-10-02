@@ -1,7 +1,5 @@
 PCAP_LOOP(3PCAP)                                              PCAP_LOOP(3PCAP)
 
-
-
 NAME
        pcap_loop, pcap_dispatch - process packets from a live capture or save-
        file
@@ -103,7 +101,5 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP),         pcap_geterr(3PCAP),         pcap_breakloop(3PCAP),
        pcap_datalink(3PCAP)
-
-
 
                                 18 October 2014               PCAP_LOOP(3PCAP)

@@ -1,7 +1,5 @@
 PCAP-SAVEFILE(5)              File Formats Manual             PCAP-SAVEFILE(5)
 
-
-
 NAME
        pcap-savefile - libpcap savefile format
 
@@ -102,7 +100,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP), pcap-linktype(7)
-
-
 
                                  8 March 2015                 PCAP-SAVEFILE(5)

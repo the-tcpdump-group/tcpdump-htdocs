@@ -1,7 +1,5 @@
 PCAP_DATALINK_NAME_TO_VAL(3PCAP)              PCAP_DATALINK_NAME_TO_VAL(3PCAP)
 
-
-
 NAME
        pcap_datalink_name_to_val - get the link-layer header type value corre-
        sponding to a header type name
@@ -22,7 +20,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                 5 December 201PCAP_DATALINK_NAME_TO_VAL(3PCAP)

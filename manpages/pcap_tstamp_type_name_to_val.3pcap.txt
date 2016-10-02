@@ -1,7 +1,5 @@
 PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)        PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)
 
-
-
 NAME
        pcap_tstamp_type_name_to_val  -  get  the  time stamp type value corre-
        sponding to a time stamp type name
@@ -22,7 +20,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_val_to_name(3PCAP)
-
-
 
                                 5 December PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)

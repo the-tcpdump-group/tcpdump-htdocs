@@ -1,7 +1,5 @@
 PCAP_INJECT(3PCAP)                                          PCAP_INJECT(3PCAP)
 
-
-
 NAME
        pcap_inject, pcap_sendpacket - transmit a packet
 
@@ -51,7 +49,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_geterr(3PCAP)
-
-
 
                                 3 January 2014              PCAP_INJECT(3PCAP)

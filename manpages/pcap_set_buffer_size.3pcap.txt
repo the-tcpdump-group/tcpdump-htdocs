@@ -1,7 +1,5 @@
 PCAP_SET_BUFFER_SIZE(3PCAP)                        PCAP_SET_BUFFER_SIZE(3PCAP)
 
-
-
 NAME
        pcap_set_buffer_size - set the buffer size for a not-yet-activated cap-
        ture handle
@@ -22,7 +20,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
-
-
 
                                 3 January 2014     PCAP_SET_BUFFER_SIZE(3PCAP)

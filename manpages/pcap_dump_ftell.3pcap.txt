@@ -1,7 +1,5 @@
 PCAP_DUMP_FTELL(3PCAP)                                  PCAP_DUMP_FTELL(3PCAP)
 
-
-
 NAME
        pcap_dump_ftell  -  get  the  current  file offset for a savefile being
        written
@@ -18,7 +16,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)
-
-
 
                                 3 January 2014          PCAP_DUMP_FTELL(3PCAP)

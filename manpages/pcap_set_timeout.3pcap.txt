@@ -1,7 +1,5 @@
 PCAP_SET_TIMEOUT(3PCAP)                                PCAP_SET_TIMEOUT(3PCAP)
 
-
-
 NAME
        pcap_set_timeout - set the read timeout for a not-yet-activated capture
        handle
@@ -27,7 +25,5 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP), pcap_set_immedi-
        ate_mode(3PCAP)
-
-
 
                                 1 December 2015        PCAP_SET_TIMEOUT(3PCAP)

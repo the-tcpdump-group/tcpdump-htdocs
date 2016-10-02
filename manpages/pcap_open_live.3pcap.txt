@@ -1,7 +1,5 @@
 PCAP_OPEN_LIVE(3PCAP)                                    PCAP_OPEN_LIVE(3PCAP)
 
-
-
 NAME
        pcap_open_live - open a device for capturing
 
@@ -37,7 +35,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
-
-
 
                                 3 January 2014           PCAP_OPEN_LIVE(3PCAP)

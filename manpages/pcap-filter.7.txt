@@ -1,7 +1,5 @@
 PCAP-FILTER(7)         Miscellaneous Information Manual         PCAP-FILTER(7)
 
-
-
 NAME
        pcap-filter - packet filter syntax
 
@@ -743,7 +741,5 @@ BUGS
 
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
-
-
 
                                  3 August 2015                  PCAP-FILTER(7)

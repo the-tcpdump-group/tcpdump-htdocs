@@ -1,7 +1,5 @@
 PCAP-TSTAMP(7)         Miscellaneous Information Manual         PCAP-TSTAMP(7)
 
-
-
 NAME
        pcap-tstamp - packet time stamps in libpcap
 
@@ -134,7 +132,5 @@ SEE ALSO
        pcap_tstamp_type_name_to_val(3PCAP),  pcap_set_tstamp_precision(3PCAP),
        pcap_open_offline_with_tstamp_precision(3PCAP),         pcap_fopen_off-
        line_with_tstamp_precision(3PCAP), pcap_get_tstamp_precision(3PCAP)
-
-
 
                                  8 March 2015                   PCAP-TSTAMP(7)

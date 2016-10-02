@@ -1,7 +1,5 @@
 PCAP_DATALINK_VAL_TO_NAME(3PCAP)              PCAP_DATALINK_VAL_TO_NAME(3PCAP)
 
-
-
 NAME
        pcap_datalink_val_to_name,  pcap_datalink_val_to_description  -  get  a
        name or description for a link-layer header type value
@@ -20,7 +18,5 @@ DESCRIPTION
        pcap_datalink_val_to_description() translates a link-layer header  type
        value  to  a short description of that link-layer header type.  NULL is
        returned on failure.
-
-
 
                                 3 January 2014PCAP_DATALINK_VAL_TO_NAME(3PCAP)

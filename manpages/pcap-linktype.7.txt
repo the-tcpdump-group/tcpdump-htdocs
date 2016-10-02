@@ -1,7 +1,5 @@
 PCAP-LINKTYPE(7)       Miscellaneous Information Manual       PCAP-LINKTYPE(7)
 
-
-
 NAME
        pcap-linktype - link-layer header types supported by libpcap
 
@@ -25,7 +23,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap_datalink(3PCAP)
-
-
 
                                  7 April 2014                 PCAP-LINKTYPE(7)

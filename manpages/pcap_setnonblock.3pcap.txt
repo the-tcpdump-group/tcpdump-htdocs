@@ -1,7 +1,5 @@
 PCAP_SETNONBLOCK(3PCAP)                                PCAP_SETNONBLOCK(3PCAP)
 
-
-
 NAME
        pcap_setnonblock, pcap_getnonblock - set or get the state of non-block-
        ing mode on a capture device
@@ -41,7 +39,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_loop(3PCAP), pcap_next_ex(3PCAP), pcap_geterr(3PCAP)
-
-
 
                                 18 October 2014        PCAP_SETNONBLOCK(3PCAP)

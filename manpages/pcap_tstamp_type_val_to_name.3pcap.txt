@@ -1,7 +1,5 @@
 PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)        PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)
 
-
-
 NAME
        pcap_tstamp_type_val_to_name, pcap_tstamp_type_val_to_description - get
        a name or description for a time stamp type value
@@ -22,7 +20,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_name_to_val(3PCAP)
-
-
 
                                12 December PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)

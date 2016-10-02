@@ -1,7 +1,5 @@
 PCAP_LIST_TSTAMP_TYPES(3PCAP)                    PCAP_LIST_TSTAMP_TYPES(3PCAP)
 
-
-
 NAME
        pcap_list_tstamp_types,  pcap_free_tstamp_types  -  get  a list of time
        stamp types supported by a capture device, and free that list
@@ -34,7 +32,5 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP),  pcap_geterr(3PCAP),  pcap_tstamp_type_val_to_name(3PCAP),
        pcap-tstamp(7)
-
-
 
                                 22 August 2010   PCAP_LIST_TSTAMP_TYPES(3PCAP)

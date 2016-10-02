@@ -1,7 +1,5 @@
 PCAP_ACTIVATE(3PCAP)                                      PCAP_ACTIVATE(3PCAP)
 
-
-
 NAME
        pcap_activate - activate a capture handle
 
@@ -80,7 +78,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                  7 April 2014             PCAP_ACTIVATE(3PCAP)

@@ -1,7 +1,5 @@
 PCAP_DUMP_CLOSE(3PCAP)                                  PCAP_DUMP_CLOSE(3PCAP)
 
-
-
 NAME
        pcap_dump_close - close a savefile being written to
 
@@ -15,7 +13,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)
-
-
 
                                 3 January 2014          PCAP_DUMP_CLOSE(3PCAP)

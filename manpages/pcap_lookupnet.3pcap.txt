@@ -1,7 +1,5 @@
 PCAP_LOOKUPNET(3PCAP)                                    PCAP_LOOKUPNET(3PCAP)
 
-
-
 NAME
        pcap_lookupnet - find the IPv4 network number and netmask for a device
 
@@ -25,7 +23,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                 3 January 2014           PCAP_LOOKUPNET(3PCAP)

@@ -1,7 +1,5 @@
 PCAP-CONFIG(1)              General Commands Manual             PCAP-CONFIG(1)
 
-
-
 NAME
        pcap-config  - write libpcap compiler and linker flags to standard out-
        put
@@ -26,7 +24,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                15 February 2015                 PCAP-CONFIG(1)

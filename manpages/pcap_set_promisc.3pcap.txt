@@ -1,7 +1,5 @@
 PCAP_SET_PROMISC(3PCAP)                                PCAP_SET_PROMISC(3PCAP)
 
-
-
 NAME
        pcap_set_promisc - set promiscuous mode for a not-yet-activated capture
        handle
@@ -22,7 +20,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
-
-
 
                                 3 January 2014         PCAP_SET_PROMISC(3PCAP)

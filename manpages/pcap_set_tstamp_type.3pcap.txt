@@ -1,7 +1,5 @@
 PCAP_SET_TSTAMP_TYPE(3PCAP)                        PCAP_SET_TSTAMP_TYPE(3PCAP)
 
-
-
 NAME
        pcap_set_tstamp_type  - set the time stamp type to be used by a capture
        device
@@ -31,7 +29,5 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP),                             pcap_list_tstamp_types(3PCAP),
        pcap_tstamp_type_name_to_val(3PCAP), pcap-tstamp(7)
-
-
 
                                 5 December 2014    PCAP_SET_TSTAMP_TYPE(3PCAP)

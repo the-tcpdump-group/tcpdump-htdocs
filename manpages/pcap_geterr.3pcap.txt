@@ -1,7 +1,5 @@
 PCAP_GETERR(3PCAP)                                          PCAP_GETERR(3PCAP)
 
-
-
 NAME
        pcap_geterr, pcap_perror - get or print libpcap error message text
 
@@ -22,7 +20,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                 3 January 2014              PCAP_GETERR(3PCAP)

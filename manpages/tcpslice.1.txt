@@ -1,7 +1,5 @@
 TCPSLICE(1)                 General Commands Manual                TCPSLICE(1)
 
-
-
 NAME
        tcpslice - extract pieces of and/or merge together tcpdump files
 
@@ -236,7 +234,5 @@ BUGS
 
        It  would  be  nice if tcpslice supported more general editing of trace
        files.
-
-
 
                                  7 April 2014                      TCPSLICE(1)

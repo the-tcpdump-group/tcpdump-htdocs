@@ -1,7 +1,5 @@
 PCAP_DUMP_OPEN(3PCAP)                                    PCAP_DUMP_OPEN(3PCAP)
 
-
-
 NAME
        pcap_dump_open, pcap_dump_fopen - open a file to which to write packets
 
@@ -45,7 +43,5 @@ SEE ALSO
        line(3PCAP),       pcap_open_live(3PCAP),        pcap_open_dead(3PCAP),
        pcap_dump(3PCAP),   pcap_dump_close(3PCAP),  pcap_geterr(3PCAP),  pcap-
        savefile(5)
-
-
 
                                16 February 2015          PCAP_DUMP_OPEN(3PCAP)

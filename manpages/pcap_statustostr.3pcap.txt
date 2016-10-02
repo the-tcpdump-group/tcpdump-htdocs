@@ -1,7 +1,5 @@
 PCAP_STATUSTOSTR(3PCAP)                                PCAP_STATUSTOSTR(3PCAP)
 
-
-
 NAME
        pcap_statustostr  -  convert  a PCAP_ERROR_ or PCAP_WARNING_ value to a
        string
@@ -17,7 +15,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                 3 January 2014         PCAP_STATUSTOSTR(3PCAP)

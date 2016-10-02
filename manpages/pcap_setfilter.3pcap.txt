@@ -1,7 +1,5 @@
 PCAP_SETFILTER(3PCAP)                                    PCAP_SETFILTER(3PCAP)
 
-
-
 NAME
        pcap_setfilter - set the filter
 
@@ -22,7 +20,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_compile(3PCAP), pcap_geterr(3PCAP)
-
-
 
                                  7 April 2014            PCAP_SETFILTER(3PCAP)

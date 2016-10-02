@@ -1,7 +1,5 @@
 PCAP_NEXT_EX(3PCAP)                                        PCAP_NEXT_EX(3PCAP)
 
-
-
 NAME
        pcap_next_ex, pcap_next - read the next packet from a pcap_t
 
@@ -70,7 +68,5 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP),         pcap_geterr(3PCAP),          pcap_dispatch(3PCAP),
        pcap_datalink(3PCAP)
-
-
 
                                  7 April 2014              PCAP_NEXT_EX(3PCAP)

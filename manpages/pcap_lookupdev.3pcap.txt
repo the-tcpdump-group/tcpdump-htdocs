@@ -1,7 +1,5 @@
 PCAP_LOOKUPDEV(3PCAP)                                    PCAP_LOOKUPDEV(3PCAP)
 
-
-
 NAME
        pcap_lookupdev - find the default device on which to capture
 
@@ -23,7 +21,5 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
        pcap_open_live(3PCAP), pcap_lookupnet(3PCAP)
-
-
 
                                 3 January 2014           PCAP_LOOKUPDEV(3PCAP)

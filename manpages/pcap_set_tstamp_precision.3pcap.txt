@@ -1,8 +1,6 @@
 
 PCAP_SET_TSTAMP_PRECISION(3PCAP)              PCAP_SET_TSTAMP_PRECISION(3PCAP)
 
-
-
 NAME
        pcap_set_tstamp_precision  -  set  the time stamp precision returned in
        captures
@@ -31,7 +29,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_get_tstamp_precision(3PCAP), pcap-tstamp(7)
-
-
 
                                 5 February 201PCAP_SET_TSTAMP_PRECISION(3PCAP)

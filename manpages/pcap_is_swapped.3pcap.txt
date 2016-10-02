@@ -1,7 +1,5 @@
 PCAP_IS_SWAPPED(3PCAP)                                  PCAP_IS_SWAPPED(3PCAP)
 
-
-
 NAME
        pcap_is_swapped - find out whether a savefile has the native byte order
 
@@ -25,7 +23,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                  7 April 2014           PCAP_IS_SWAPPED(3PCAP)

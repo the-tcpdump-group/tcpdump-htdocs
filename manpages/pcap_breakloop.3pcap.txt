@@ -1,7 +1,5 @@
 PCAP_BREAKLOOP(3PCAP)                                    PCAP_BREAKLOOP(3PCAP)
 
-
-
 NAME
        pcap_breakloop - force a pcap_dispatch() or pcap_loop() call to return
 
@@ -56,7 +54,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP), pcap_loop(3PCAP), pcap_next_ex(3PCAP)
-
-
 
                                  8 March 2015            PCAP_BREAKLOOP(3PCAP)

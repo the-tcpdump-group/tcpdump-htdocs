@@ -1,7 +1,5 @@
 PCAP_CLOSE(3PCAP)                                            PCAP_CLOSE(3PCAP)
 
-
-
 NAME
        pcap_close - close a capture device or savefile
 
@@ -16,7 +14,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                 3 January 2014               PCAP_CLOSE(3PCAP)

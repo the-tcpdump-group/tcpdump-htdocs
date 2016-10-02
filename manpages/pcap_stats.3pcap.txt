@@ -1,7 +1,5 @@
 PCAP_STATS(3PCAP)                                            PCAP_STATS(3PCAP)
 
-
-
 NAME
        pcap_stats - get capture statistics
 
@@ -57,7 +55,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_geterr(3PCAP)
-
-
 
                                 3 January 2014               PCAP_STATS(3PCAP)

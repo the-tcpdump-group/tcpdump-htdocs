@@ -1,7 +1,5 @@
 PCAP(3PCAP)                                                        PCAP(3PCAP)
 
-
-
 NAME
        pcap - Packet Capture library
 
@@ -672,7 +670,5 @@ BUGS
        Please send problems, bugs, questions, desirable enhancements, etc. to:
 
               tcpdump-workers@lists.tcpdump.org
-
-
 
                                  8 March 2015                      PCAP(3PCAP)

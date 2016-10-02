@@ -1,7 +1,5 @@
 PCAP_SNAPSHOT(3PCAP)                                      PCAP_SNAPSHOT(3PCAP)
 
-
-
 NAME
        pcap_snapshot - get the snapshot length
 
@@ -25,7 +23,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                  7 April 2014             PCAP_SNAPSHOT(3PCAP)

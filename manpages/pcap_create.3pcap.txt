@@ -1,7 +1,5 @@
 PCAP_CREATE(3PCAP)                                          PCAP_CREATE(3PCAP)
 
-
-
 NAME
        pcap_create - create a live capture handle
 
@@ -31,7 +29,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_activate(3PCAP)
-
-
 
                                 3 January 2014              PCAP_CREATE(3PCAP)

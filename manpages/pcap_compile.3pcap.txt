@@ -1,7 +1,5 @@
 PCAP_COMPILE(3PCAP)                                        PCAP_COMPILE(3PCAP)
 
-
-
 NAME
        pcap_compile - compile a filter expression
 
@@ -33,7 +31,5 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP),        pcap_setfilter(3PCAP),        pcap_freecode(3PCAP),
        pcap_geterr(3PCAP), pcap-filter(7)
-
-
 
                                  7 April 2014              PCAP_COMPILE(3PCAP)

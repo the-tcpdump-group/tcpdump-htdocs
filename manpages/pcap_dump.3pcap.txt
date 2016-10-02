@@ -1,7 +1,5 @@
 PCAP_DUMP(3PCAP)                                              PCAP_DUMP(3PCAP)
 
-
-
 NAME
        pcap_dump - write a packet to a capture file
 
@@ -20,7 +18,5 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP),        pcap_dump_open(3PCAP),        pcap_dispatch(3PCAP),
        pcap_loop(3PCAP)
-
-
 
                                  8 March 2015                 PCAP_DUMP(3PCAP)

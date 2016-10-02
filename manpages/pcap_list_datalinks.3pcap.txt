@@ -1,7 +1,5 @@
 PCAP_LIST_DATALINKS(3PCAP)                          PCAP_LIST_DATALINKS(3PCAP)
 
-
-
 NAME
        pcap_list_datalinks,  pcap_free_datalinks  -  get  a list of link-layer
        header types supported by a capture device, and free that list
@@ -36,7 +34,5 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP),    pcap_geterr(3PCAP),   pcap_datalink_val_to_name(3PCAP),
        pcap-linktype(7)
-
-
 
                                  8 March 2015       PCAP_LIST_DATALINKS(3PCAP)

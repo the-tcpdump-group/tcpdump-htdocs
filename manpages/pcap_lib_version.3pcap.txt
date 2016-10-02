@@ -1,7 +1,5 @@
 PCAP_LIB_VERSION(3PCAP)                                PCAP_LIB_VERSION(3PCAP)
 
-
-
 NAME
        pcap_lib_version - get the version information for libpcap
 
@@ -17,7 +15,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                 3 January 2014         PCAP_LIB_VERSION(3PCAP)

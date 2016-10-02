@@ -1,7 +1,5 @@
 PCAP_DATALINK(3PCAP)                                      PCAP_DATALINK(3PCAP)
 
-
-
 NAME
        pcap_datalink - get the link-layer header type
 
@@ -35,7 +33,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap-linktype(7)
-
-
 
                                  7 April 2014             PCAP_DATALINK(3PCAP)

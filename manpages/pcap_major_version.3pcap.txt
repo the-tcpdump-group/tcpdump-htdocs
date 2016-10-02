@@ -1,7 +1,5 @@
 PCAP_MAJOR_VERSION(3PCAP)                            PCAP_MAJOR_VERSION(3PCAP)
 
-
-
 NAME
        pcap_major_version,  pcap_minor_version  -  get the version number of a
        savefile
@@ -25,7 +23,5 @@ DESCRIPTION
 
 SEE ALSO
        pcap(3PCAP)
-
-
 
                                  7 April 2014        PCAP_MAJOR_VERSION(3PCAP)

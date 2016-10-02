@@ -1,7 +1,5 @@
 PCAP_FINDALLDEVS(3PCAP)                                PCAP_FINDALLDEVS(3PCAP)
 
-
-
 NAME
        pcap_findalldevs, pcap_freealldevs - get a list of capture devices, and
        free that list
@@ -103,7 +101,5 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
        pcap_open_live(3PCAP)
-
-
 
                                  7 April 2014          PCAP_FINDALLDEVS(3PCAP)

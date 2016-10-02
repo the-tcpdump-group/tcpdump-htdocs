@@ -1,7 +1,5 @@
 PCAP_CAN_SET_RFMON(3PCAP)                            PCAP_CAN_SET_RFMON(3PCAP)
 
-
-
 NAME
        pcap_can_set_rfmon  -  check whether monitor mode can be set for a not-
        yet-activated capture handle
@@ -46,7 +44,5 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
        pcap_set_rfmon(3PCAP)
-
-
 
                                 3 January 2014       PCAP_CAN_SET_RFMON(3PCAP)

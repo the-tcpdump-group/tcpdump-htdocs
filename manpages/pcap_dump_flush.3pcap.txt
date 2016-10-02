@@ -1,7 +1,5 @@
 PCAP_DUMP_FLUSH(3PCAP)                                  PCAP_DUMP_FLUSH(3PCAP)
 
-
-
 NAME
        pcap_dump_flush - flush to a savefile packets dumped
 
@@ -20,7 +18,5 @@ RETURN VALUE
 
 SEE ALSO
        pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)
-
-
 
                                 3 January 2014          PCAP_DUMP_FLUSH(3PCAP)

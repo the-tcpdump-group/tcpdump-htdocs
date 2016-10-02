@@ -1,7 +1,5 @@
 TCPDUMP(1)                  General Commands Manual                 TCPDUMP(1)
 
-
-
 NAME
        tcpdump - dump traffic on a network
 
@@ -1093,7 +1091,6 @@ OUTPUT FORMAT
        to the replies using the call number and service ID.  If a  reply  does
        not closely follow the corresponding request, it might not be parsable.
 
-
        KIP AppleTalk (DDP in UDP)
 
        AppleTalk DDP packets encapsulated in UDP datagrams are de-encapsulated
@@ -1175,7 +1172,6 @@ OUTPUT FORMAT
        resends them then jssmag.209 releases the transaction.   Finally,  jss-
        mag.209  initiates  the next request.  The `*' on the request indicates
        that XO (`exactly once') was not set.
-
 
        IP Fragmentation
 
@@ -1304,7 +1300,5 @@ BUGS
 
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
-
-
 
                                17 September 2015                    TCPDUMP(1)
