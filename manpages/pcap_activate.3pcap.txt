@@ -16,29 +16,67 @@ DESCRIPTION
        being in effect.
 
 RETURN VALUE
-       pcap_activate()  returns  0  on  success  without  warnings, PCAP_WARN-
-       ING_PROMISC_NOTSUP on success on a device that doesn't support  promis-
-       cuous    mode   if   promiscuous   mode   was   requested,   PCAP_WARN-
-       ING_TSTAMP_TYPE_NOTSUP on success if the time stamp type specified in a
-       previous  pcap_set_tstamp_type()  call  isn't  supported by the capture
-       source (the time stamp type is left as the  default),  PCAP_WARNING  on
-       success  with any other warning, PCAP_ERROR_ACTIVATED if the handle has
-       already been activated, PCAP_ERROR_NO_SUCH_DEVICE if the capture source
-       specified    when    the    handle    was    created   doesn't   exist,
-       PCAP_ERROR_PERM_DENIED if the process doesn't have permission  to  open
-       the  capture  source, PCAP_ERROR_PROMISC_PERM_DENIED if the process has
-       permission to open the capture source but doesn't  have  permission  to
-       put  it  into promiscuous mode, PCAP_ERROR_RFMON_NOTSUP if monitor mode
-       was specified but the capture  source  doesn't  support  monitor  mode,
-       PCAP_ERROR_IFACE_NOT_UP if the capture source is not up, and PCAP_ERROR
-       if another error occurred.  If PCAP_WARNING or PCAP_ERROR is  returned,
-       pcap_geterr()  or  pcap_perror() may be called with p as an argument to
-       fetch or display  a  message  describing  the  warning  or  error.   If
-       PCAP_WARNING_PROMISC_NOTSUP,        PCAP_ERROR_NO_SUCH_DEVICE,       or
-       PCAP_ERROR_PERM_DENIED is returned, pcap_geterr() or pcap_perror()  may
-       be  called  with p as an argument to fetch or display an message giving
+       pcap_activate() returns 0 on success without warnings, a non-zero posi-
+       tive value on success with warnings, and a negative value on error.   A
+       non-zero  return  value  indicates  what  warning  or  error  condition
+       occurred.
+
+       The possible warning values are:
+
+       PCAP_WARNING_PROMISC_NOTSUP
+              Promiscuous mode was requested, but the capture  source  doesn't
+              support promiscuous mode.
+
+       PCAP_WARNING_TSTAMP_TYPE_NOTSUP
+              The    time    stamp    type    specified    in    a    previous
+              pcap_set_tstamp_type()  call  isn't  supported  by  the  capture
+              source (the time stamp type is left as the default),
+
+       PCAP_WARNING
+              Another  warning  condition occurred; pcap_geterr() or pcap_per-
+              ror() may be called with p as an argument to fetch or display  a
+              message describing the warning condition.
+
+       The possible error values are:
+
+       PCAP_ERROR_ACTIVATED
+              The handle has already been activated.
+
+       PCAP_ERROR_NO_SUCH_DEVICE
+              The capture source specified when the handle was created doesn't
+              exist.
+
+       PCAP_ERROR_PERM_DENIED
+              The process doesn't have permission to open the capture source.
+
+       PCAP_ERROR_PROMISC_PERM_DENIED
+              The process has  permission  to  open  the  capture  source  but
+              doesn't have permission to put it into promiscuous mode.
+
+       PCAP_ERROR_RFMON_NOTSUP
+              Monitor  mode  was specified but the capture source doesn't sup-
+              port monitor mode.
+
+       PCAP_ERROR_IFACE_NOT_UP
+              The capture source device is not up.
+
+       PCAP_ERROR
+              Another error occurred.  pcap_geterr() or pcap_perror()  may  be
+              called  with  p  as  an  argument  to fetch or display a message
+              describing the error.
+
+       If    PCAP_WARNING_PROMISC_NOTSUP,    PCAP_ERROR_NO_SUCH_DEVICE,     or
+       PCAP_ERROR_PERM_DENIED  is returned, pcap_geterr() or pcap_perror() may
+       be called with p as an argument to fetch or display an  message  giving
        additional details about the problem that might be useful for debugging
        the problem if it's unexpected.
+
+       Additional warning and error codes may be added in the future;  a  pro-
+       gram  should  check  for positive, negative, and zero return codes, and
+       treat all positive return codes as warnings  and  all  negative  return
+       codes  as  errors.  pcap_statustostr() can be called, with a warning or
+       error code as an argument, to fetch a message describing the warning or
+       error code.
 
 SEE ALSO
        pcap(3PCAP)

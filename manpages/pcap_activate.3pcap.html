@@ -30,52 +30,31 @@ being in effect.
 
 <B>pcap_activate()</B>
 
-returns 0 on success without warnings,
-<B>PCAP_WARNING_PROMISC_NOTSUP</B>
+returns 0 on success without warnings, a non-zero positive value on
+success with warnings, and a negative value on error.
+A non-zero return value indicates what warning or error condition
+occurred.
+<P>
 
-on success on a device that doesn't support promiscuous mode if
-promiscuous mode was requested,
-<B>PCAP_WARNING_TSTAMP_TYPE_NOTSUP</B>
+The possible warning values are:
+<DL COMPACT>
+<DT><B>PCAP_WARNING_PROMISC_NOTSUP</B>
 
-on success if the time stamp type specified in a previous
+<DD>
+Promiscuous mode was requested, but the capture source doesn't support
+promiscuous mode.
+<DT><B>PCAP_WARNING_TSTAMP_TYPE_NOTSUP</B>
+
+<DD>
+The time stamp type specified in a previous
 <B>pcap_set_tstamp_type()</B>
 
 call isn't supported by the capture source (the time stamp type is
 left as the default),
-<B>PCAP_WARNING</B>
+<DT><B>PCAP_WARNING</B>
 
-on success with any other warning,
-<B>PCAP_ERROR_ACTIVATED</B>
-
-if the handle has already been activated,
-<B>PCAP_ERROR_NO_SUCH_DEVICE</B>
-
-if the capture source specified when the handle was created doesn't
-exist,
-<B>PCAP_ERROR_PERM_DENIED</B>
-
-if the process doesn't have permission to open the capture source,
-<B>PCAP_ERROR_PROMISC_PERM_DENIED</B>
-
-if the process has permission to open the capture source but doesn't
-have permission to put it into promiscuous mode,
-<B>PCAP_ERROR_RFMON_NOTSUP</B>
-
-if monitor mode was specified but the capture source doesn't support
-monitor mode,
-<B>PCAP_ERROR_IFACE_NOT_UP</B>
-
-if the capture source is not up, and
-<B>PCAP_ERROR</B>
-
-if another error occurred.
-If
-<B>PCAP_WARNING</B>
-
-or
-<B>PCAP_ERROR</B>
-
-is returned,
+<DD>
+Another warning condition occurred;
 <B>pcap_geterr()</B>
 
 or
@@ -84,8 +63,56 @@ or
 may be called with
 <I>p</I>
 
-as an argument to fetch or display a message describing the warning or
-error.
+as an argument to fetch or display a message describing the warning
+condition.
+</DL>
+<P>
+
+The possible error values are:
+<DL COMPACT>
+<DT><B>PCAP_ERROR_ACTIVATED</B>
+
+<DD>
+The handle has already been activated.
+<DT><B>PCAP_ERROR_NO_SUCH_DEVICE</B>
+
+<DD>
+The capture source specified when the handle was created doesn't
+exist.
+<DT><B>PCAP_ERROR_PERM_DENIED</B>
+
+<DD>
+The process doesn't have permission to open the capture source.
+<DT><B>PCAP_ERROR_PROMISC_PERM_DENIED</B>
+
+<DD>
+The process has permission to open the capture source but doesn't
+have permission to put it into promiscuous mode.
+<DT><B>PCAP_ERROR_RFMON_NOTSUP</B>
+
+<DD>
+Monitor mode was specified but the capture source doesn't support
+monitor mode.
+<DT><B>PCAP_ERROR_IFACE_NOT_UP</B>
+
+<DD>
+The capture source device is not up.
+<DT><B>PCAP_ERROR</B>
+
+<DD>
+Another error occurred.
+<B>pcap_geterr()</B>
+
+or
+<B>pcap_perror()</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display a message describing the error.
+</DL>
+<P>
+
 If
 <B>PCAP_WARNING_PROMISC_NOTSUP</B>,
 
@@ -106,6 +133,16 @@ may be called with
 as an argument to fetch or display an message giving additional details
 about the problem that might be useful for debugging the problem if it's
 unexpected.
+<P>
+
+Additional warning and error codes may be added in the future; a program
+should check for positive, negative, and zero return codes, and treat
+all positive return codes as warnings and all negative return
+codes as errors.
+<B>pcap_statustostr()</B>
+
+can be called, with a warning or error code as an argument, to fetch a
+message describing the warning or error code.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
@@ -125,6 +162,6 @@ unexpected.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 00:07:26 GMT, December 18, 2015
+Time: 16:34:14 GMT, October 02, 2016
 </BODY>
 </HTML>

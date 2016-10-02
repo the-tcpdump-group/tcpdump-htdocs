@@ -17,13 +17,31 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_can_set_rfmon()  returns  0 if monitor mode could not be set, 1 if
-       monitor mode could be set,  PCAP_ERROR_NO_SUCH_DEVICE  if  the  capture
-       source   specified   when   the   handle  was  created  doesn't  exist,
-       PCAP_ERROR_PERM_DENIED if the process doesn't have permission to  check
-       whether monitor mode could be supported, PCAP_ERROR_ACTIVATED if called
-       on a capture handle that has been activated, or PCAP_ERROR if an  error
-       occurred.   If  PCAP_ERROR  is returned, pcap_geterr() or pcap_perror()
-       may be called with p as an argument to fetch or display the error text.
+       monitor mode could be set, and a negative value on error.   A  negative
+       return  value  indicates  what  error condition occurred.  The possible
+       error values are:
+
+       PCAP_ERROR_NO_SUCH_DEVICE
+              The capture source specified when the handle was created doesn't
+              exist.
+
+       PCAP_ERROR_PERM_DENIED
+              The  process  doesn't  have  permission to check whether monitor
+              mode could be supported.
+
+       PCAP_ERROR_ACTIVATED
+              The capture handle has already been activated.
+
+       PCAP_ERROR
+              Another error occurred.  pcap_geterr() or pcap_perror()  may  be
+              called  with  p  as  an  argument  to fetch or display a message
+              describing the error.
+
+       Additional error codes may be added in the  future;  a  program  should
+       check  for  0,  1,  and  negative, return codes, and treat all negative
+       return codes as errors.  pcap_statustostr() can be called, with a warn-
+       ing  or  error  code  as an argument, to fetch a message describing the
+       warning or error code.
 
 SEE ALSO
        pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
