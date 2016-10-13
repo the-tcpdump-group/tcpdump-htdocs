@@ -25,10 +25,19 @@ const char *pcap_datalink_val_to_description(int dlt);
 <B>pcap_datalink_val_to_name()</B>
 
 translates a link-layer header type value to the corresponding
-link-layer header type name.
+link-layer header type name, which is the
+<B>DLT_</B>
+
+name for the link-layer header type value with the
+<B>DLT_</B>
+
+removed.
 <B>NULL</B>
 
-is returned on failure.
+is returned if the type value does not correspond to a known
+<B>DLT_</B>
+
+value.
 <P>
 
 <B>pcap_datalink_val_to_description()</B>
@@ -37,7 +46,10 @@ translates a link-layer header type value to a short description of that
 link-layer header type.
 <B>NULL</B>
 
-is returned on failure.
+is returned if the type value does not correspond to a known
+<B>DLT_</B>
+
+value.
 <P>
 
 <HR>
@@ -51,6 +63,6 @@ is returned on failure.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 00:07:27 GMT, December 18, 2015
+Time: 09:19:04 GMT, October 13, 2016
 </BODY>
 </HTML>
