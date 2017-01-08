@@ -257,7 +257,9 @@ indicates how many bytes of data there are for that frame.
 </p>
 <li>If the packet indicates a submitted request, the payload is a
 sequence of "number of isochronous frames following" isochronous frame
-headers, without any data following the header.</li>
+headers, with the frame length set to the number of bytes to be
+transferred, the frame status field set to 0xe0000001, and without any
+data following the header.</li>
 </ul>
             </div>
             <!-- End of LINKTYPE_USB_DARWIN section -->
