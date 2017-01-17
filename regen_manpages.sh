@@ -45,7 +45,6 @@ ENDOFFILE
 	while read mansection mantopic; do
 		echo "s@<A HREF=\"$MAN2HTML_PFX?${mansection}+${mantopic}\">$mantopic</A>@$mantopic@g"
 	done >>$SEDFILE <<ENDOFLIST
-3N	ethers
 4P	tcp
 4P	udp
 4P	ip
@@ -54,7 +53,7 @@ ENDOFFILE
 2	select
 2	poll
 1	autoconf
-1M	usermod
+8	usermod
 3	strerror
 1	kill
 1	stty
