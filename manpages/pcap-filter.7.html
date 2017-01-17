@@ -236,10 +236,10 @@ be checked for a match.
 <DT><B>ether dst </B><I>ehost</I><DD>
 True if the Ethernet destination address is <I>ehost</I>.
 <I>Ehost</I>
-may be either a name from /etc/ethers or a number (see
-<I>ethers</I>(3N)
-
-for numeric format).
+may be either a name from /etc/ethers or a numerical MAC address of the
+form &quot;xx:xx:xx:xx:xx:xx&quot;, &quot;xx.xx.xx.xx.xx.xx&quot;, &quot;xx-xx-xx-xx-xx-xx&quot;,
+&quot;xxxx.xxxx.xxxx&quot;, &quot;xxxxxxxxxxxx&quot;, or various mixes of ':', '.', and '-',
+where each &quot;x&quot; is a hex digit (0-9, a-f, or A-F).
 <DT><B>ether src </B><I>ehost</I><DD>
 True if the Ethernet source address is <I>ehost</I>.
 <DT><B>ether host </B><I>ehost</I><DD>
@@ -1204,6 +1204,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 00:07:25 GMT, December 18, 2015
+Time: 12:48:55 GMT, January 17, 2017
 </BODY>
 </HTML>

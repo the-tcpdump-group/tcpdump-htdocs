@@ -193,7 +193,7 @@ DESCRIPTION
               to  give  you  access to the network pseudo-device - there is no
               need to change the privileges on that device.   A  user  can  be
               given  that  privilege by, for example, adding that privilege to
-              the user's defaultpriv key with the usermod (1M) command.
+              the user's defaultpriv key with the usermod (8) command.
 
        Under HP-UX with DLPI:
               You must be root or the application capturing  packets  must  be
@@ -654,7 +654,7 @@ BACKWARDS COMPATIBILITY
 
 SEE ALSO
        autoconf(1),  tcpdump(1),  tcpslice(1),  pcap-filter(7),   pfconfig(8),
-       usermod(1M)
+       usermod(8)
 
 AUTHORS
        The original authors of libpcap are:

@@ -87,8 +87,10 @@ DESCRIPTION
 
        ether dst ehost
               True if the Ethernet destination address is ehost.  Ehost may be
-              either a name from /etc/ethers or a number (see  ethers(3N)  for
-              numeric format).
+              either a name from /etc/ethers or a numerical MAC address of the
+              form  "xx:xx:xx:xx:xx:xx", "xx.xx.xx.xx.xx.xx", "xx-xx-xx-xx-xx-
+              xx", "xxxx.xxxx.xxxx", "xxxxxxxxxxxx", or various mixes of  ':',
+              '.', and '-', where each "x" is a hex digit (0-9, a-f, or A-F).
 
        ether src ehost
               True if the Ethernet source address is ehost.
