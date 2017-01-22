@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of PCAP_GET_SELECTABLE_FD</TITLE>
 </HEAD><BODY>
 <H1>PCAP_GET_SELECTABLE_FD</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 18 October 2014<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 20 January 2017<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -53,8 +53,8 @@ DAG devices), so -1 is returned for those devices.
 <P>
 
 Note that a descriptor on which a read can be done without blocking may,
-on some platforms, not have any packets to read if the read timeout has
-expired.  A call to
+on some platforms, not have any packets to read if the packet buffer
+timeout has expired.  A call to
 <B>pcap_dispatch()</B>
 
 will return 0 in this case, but will not block.
@@ -89,7 +89,7 @@ or
 <B>poll()</B>
 
 will not indicate that the descriptor is readable until a full buffer's
-worth of packets is received, even if the read timeout expires before
+worth of packets is received, even if the packet timeout expires before
 then.  To work around this, an application that uses
 <B>select()</B>
 
@@ -105,7 +105,7 @@ in non-blocking mode, and must arrange that the
 or
 <B>poll()</B>
 
-have a timeout less than or equal to the read timeout,
+have a timeout less than or equal to the packet buffer timeout,
 and must try to read packets after that timeout expires, regardless of
 whether
 <B>select()</B>
@@ -177,6 +177,6 @@ is returned.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 00:07:28 GMT, December 18, 2015
+Time: 06:50:51 GMT, January 22, 2017
 </BODY>
 </HTML>

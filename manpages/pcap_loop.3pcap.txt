@@ -19,9 +19,9 @@ DESCRIPTION
        pcap_loop() processes packets from a live capture or ``savefile'' until
        cnt  packets are processed, the end of the ``savefile'' is reached when
        reading from a ``savefile'', pcap_breakloop() is called,  or  an  error
-       occurs.   It does not return when live read timeouts occur.  A value of
-       -1 or 0 for cnt is equivalent to infinity, so  that  packets  are  pro-
-       cessed until another ending condition occurs.
+       occurs.   It does not return when live packet buffer timeouts occur.  A
+       value of -1 or 0 for cnt is equivalent to infinity, so that packets are
+       processed until another ending condition occurs.
 
        pcap_dispatch()  processes  packets from a live capture or ``savefile''
        until cnt packets are processed, the end of the  current  bufferful  of
@@ -79,21 +79,21 @@ RETURN VALUE
        pcap_loop()  returns  0  if cnt is exhausted or if, when reading from a
        ``savefile'', no more packets are available.  It returns -1 if an error
        occurs  or  -2 if the loop terminated due to a call to pcap_breakloop()
-       before any packets were processed.  It does not return when  live  read
-       timeouts occur; instead, it attempts to read more packets.
+       before any packets were processed.  It does not return when live packet
+       buffer timeouts occur; instead, it attempts to read more packets.
 
        pcap_dispatch()  returns  the  number  of packets processed on success;
        this can be 0 if no packets were read from  a  live  capture  (if,  for
        example,  they  were discarded because they didn't pass the packet fil-
-       ter, or if, on platforms that support a read timeout that starts before
-       any  packets  arrive, the timeout expires before any packets arrive, or
-       if the file descriptor for the capture device is in  non-blocking  mode
-       and  no  packets  were  available to be read) or if no more packets are
-       available in a ``savefile.''  It returns -1 if an error occurs or -2 if
-       the  loop terminated due to a call to pcap_breakloop() before any pack-
-       ets were processed.  If your application  uses  pcap_breakloop(),  make
-       sure that you explicitly check for -1 and -2, rather than just checking
-       for a return value < 0.
+       ter, or if, on platforms that support  a  packet  buffer  timeout  that
+       starts  before any packets arrive, the timeout expires before any pack-
+       ets arrive, or if the file descriptor for the capture device is in non-
+       blocking  mode  and no packets were available to be read) or if no more
+       packets are available in a ``savefile.'' It  returns  -1  if  an  error
+       occurs  or  -2 if the loop terminated due to a call to pcap_breakloop()
+       before  any  packets  were  processed.   If   your   application   uses
+       pcap_breakloop(),  make  sure  that you explicitly check for -1 and -2,
+       rather than just checking for a return value < 0.
 
        If -1 is returned, pcap_geterr() or pcap_perror() may be called with  p
        as an argument to fetch or display the error text.
@@ -102,4 +102,4 @@ SEE ALSO
        pcap(3PCAP),         pcap_geterr(3PCAP),         pcap_breakloop(3PCAP),
        pcap_datalink(3PCAP)
 
-                                18 October 2014               PCAP_LOOP(3PCAP)
+                                20 January 2017               PCAP_LOOP(3PCAP)

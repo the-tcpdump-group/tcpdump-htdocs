@@ -20,9 +20,9 @@ DESCRIPTION
        -1 is returned for those devices.
 
        Note  that  a  descriptor  on which a read can be done without blocking
-       may, on some platforms, not have any packets to read if the read  time-
-       out has expired.  A call to pcap_dispatch() will return 0 in this case,
-       but will not block.
+       may, on some platforms, not have any packets to read if the packet buf-
+       fer  timeout  has  expired.  A call to pcap_dispatch() will return 0 in
+       this case, but will not block.
 
        Note that in:
 
@@ -38,17 +38,17 @@ DESCRIPTION
        pcap_get_selectable_fd() will return a file descriptor on most of those
        versions (the exceptions being FreeBSD  4.3  and  4.4),  but  a  simple
        select()  or  poll()  will not indicate that the descriptor is readable
-       until a full buffer's worth of packets is received, even  if  the  read
+       until a full buffer's worth of packets is received, even if the  packet
        timeout  expires before then.  To work around this, an application that
        uses select() or poll() to wait for packets  to  arrive  must  put  the
        pcap_t  in  non-blocking  mode,  and  must arrange that the select() or
-       poll() have a timeout less than or equal to the read timeout, and  must
-       try  to  read packets after that timeout expires, regardless of whether
-       select() or poll() indicated that the file descriptor for the pcap_t is
-       ready to be read or not.  (That workaround will not work in FreeBSD 4.3
-       and later; however, in FreeBSD 4.6 and later, select() and poll()  work
-       correctly  on  BPF devices, so the workaround isn't necessary, although
-       it does no harm.)
+       poll() have a timeout less than or equal to the packet buffer  timeout,
+       and  must try to read packets after that timeout expires, regardless of
+       whether select() or poll() indicated that the file descriptor  for  the
+       pcap_t  is  ready to be read or not.  (That workaround will not work in
+       FreeBSD 4.3 and later; however, in FreeBSD 4.6 and later, select()  and
+       poll()  work  correctly  on BPF devices, so the workaround isn't neces-
+       sary, although it does no harm.)
 
        Note also that poll() doesn't work on character special files,  includ-
        ing  BPF  devices, in Mac OS X 10.4 and 10.5, so, while select() can be
@@ -67,4 +67,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP), select(2), poll(2)
 
-                                18 October 2014  PCAP_GET_SELECTABLE_FD(3PCAP)
+                                20 January 2017  PCAP_GET_SELECTABLE_FD(3PCAP)

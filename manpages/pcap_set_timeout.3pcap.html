@@ -1,14 +1,14 @@
 <HTML><HEAD><TITLE>Manpage of PCAP_SET_TIMEOUT</TITLE>
 </HEAD><BODY>
 <H1>PCAP_SET_TIMEOUT</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 1 December 2015<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 20 January 2017<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_set_timeout - set the read timeout for a not-yet-activated
-capture handle
+pcap_set_timeout - set the packet buffer timeout for a
+not-yet-activated capture handle
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
@@ -23,11 +23,14 @@ int pcap_set_timeout(pcap_t *p, int to_ms);
 
 <B>pcap_set_timeout()</B>
 
-sets the read timeout that will be used on a capture handle when
-the handle is activated to
+sets the packet buffer timeout that will be used on a capture handle
+when the handle is activated to
 <I>to_ms</I>,
 
-which is in units of milliseconds.
+which is in units of milliseconds.  (See
+<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+for an explanation of the packet buffer timeout.)
 <P>
 
 The behavior, if the timeout isn't specified, is undefined.  We
@@ -62,6 +65,6 @@ if called on a capture handle that has been activated.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 20:07:07 GMT, December 02, 2015
+Time: 06:50:54 GMT, January 22, 2017
 </BODY>
 </HTML>
