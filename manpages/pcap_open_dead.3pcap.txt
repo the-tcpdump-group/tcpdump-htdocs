@@ -32,7 +32,7 @@ DESCRIPTION
        not affect pcap_compile().
 
 SEE ALSO
-       pcap(3PCAP),   pcap_compile(3PCAP),  pcap_dump_open(3PCAP),  pcap-link-
-       type(7)
+       pcap(3PCAP),         pcap_compile(3PCAP),        pcap_dump_open(3PCAP),
+       pcap-linktype(7)
 
                                 3 January 2014           PCAP_OPEN_DEAD(3PCAP)
