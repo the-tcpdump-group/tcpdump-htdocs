@@ -215,7 +215,7 @@ updateOutputFiles()
 	produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
 	produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
 	produceTXT ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.txt
-    
+
 	produceHTML ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.html
 	produceHTML ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.html
 	produceHTML ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.html
