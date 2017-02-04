@@ -1251,10 +1251,12 @@ AUTHORS
        Eric Young's SSLeay library, under specific configurations.
 
 BUGS
-       Please send problems, bugs, questions, desirable enhancements,  patches
-       etc. to:
+       To   report   a   security   issue   please   send   an    e-mail    to
+       security@tcpdump.org.
 
-              tcpdump-workers@lists.tcpdump.org
+       To  report  bugs and other problems, contribute patches, request a fea-
+       ture, provide generic feedback etc please see the file CONTRIBUTING  in
+       the tcpdump source tree root.
 
        NIT doesn't let you watch your own outbound traffic, BPF will.  We rec-
        ommend that you use the latter.
@@ -1301,4 +1303,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                               17 September 2015                    TCPDUMP(1)
+                                2 February 2017                     TCPDUMP(1)
