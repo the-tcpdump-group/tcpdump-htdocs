@@ -658,7 +658,7 @@ DESCRIPTION
               qreply, icmp-maskreq, icmp-maskreply.
 
               The  following  TCP  flags  field values are available: tcp-fin,
-              tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg.
+              tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg, tcp-ece, tcp-cwr.
 
        Primitives may be combined using:
 
