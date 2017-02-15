@@ -34,7 +34,7 @@
       <ul>
         <li class="current_page_item"><a href="#">Home</a></li>
         <li><a href="#source">Source</a></li>
-        <li><a href="#latest-release">Downloads</a></li>
+        <li><a href="#latest-releases">Downloads</a></li>
         <li><a href="#mailing-lists">Mailing list</a></li>
         <li><a href="#security">Security</a></li>
         <li><a href="#contribute">Contribute</a></li>
@@ -142,20 +142,35 @@
         </div>
         <!-- End of DOCUMENTATION section -->
 
-        <!-- Start of LATEST RELEASE section -->
+        <!-- Start of LATEST RELEASES section -->
         <div class="post">
           <h2 class="title">
-            <a name="latest-release">Latest Release</a>
+            <a name="latest-releases">Latest Releases</a>
           </h2>
           <div class="entry">
+            <h3 class="subtitle">
+              Tcpdump
+            </h3>
             <p>
-              <strong>Version:</strong> 4.9.0 / 1.8.1<br/>
-              <strong>Release Date:</strong> January 18, 2017<br/><br />
+              <strong>Version:</strong> 4.9.0<br/>
+              <strong>Release Date:</strong> January 18, 2017
             </p>
             <ul>
               <li> <a href="release/tcpdump-4.9.0.tar.gz">tcpdump-4.9.0.tar.gz</a>
                 (<a href="tcpdump-changes.txt">changelog</a>)
                 (<a href="release/tcpdump-4.9.0.tar.gz.sig">PGP signature</a>)</li>
+              <li> <a href="release/signing-key.asc">tcpdump.org signing key</a></li>
+            </ul>
+            <h3 class="subtitle">
+              Libpcap
+            </h3>
+            <p>
+              <strong>Version:</strong> 1.8.1<br/>
+              <strong>Release Date:</strong> October 25, 2016<br/><br />
+              <small>Version 1.8.0 was partially released in August 2016, but
+		was withheld along with tcpdump 4.8.0.</small>
+            </p>
+            <ul>
               <li> <a href="release/libpcap-1.8.1.tar.gz">libpcap-1.8.1.tar.gz</a>
                 (<a href="libpcap-changes.txt">changelog</a>)
                 (<a href="release/libpcap-1.8.1.tar.gz.sig">PGP signature</a>)</li>
@@ -163,7 +178,7 @@
             </ul>
           </div>
         </div>
-        <!-- End of LATEST RELEASE section -->
+        <!-- End of LATEST RELEASES section -->
 
         <!-- Start of OLD RELEASES section -->
         <div class="post">
@@ -171,37 +186,51 @@
             <a name="old-releases">Old Releases</a>
           </h2>
           <div class="entry">
+            <h3 class="subtitle">
+              Tcpdump
+            </h3>
             <p>
-              <strong>Version:</strong> 4.8.1 / 1.8.1<br/>
+              <strong>Version:</strong> 4.8.1<br/>
               <strong>Release Date:</strong> October 25, 2016<br/><br />
-              <small>Version 4.8.0/1.8.0 were partially released in August 2016, but
-		were withheld due to outstanding security patches.</small>
+              <small>Version 4.8.0 was partially released in August 2016, but
+		was withheld due to outstanding security patches.</small>
             </p>
             <ul>
               <li> <a href="release/tcpdump-4.8.1.tar.gz">tcpdump-4.8.1.tar.gz</a>
                 (<a href="tcpdump-changes.txt">changelog</a>)
                 (<a href="release/tcpdump-4.8.1.tar.gz.sig">PGP signature</a>)</li>
-              <li> <a href="release/libpcap-1.8.1.tar.gz">libpcap-1.8.1.tar.gz</a>
-                (<a href="libpcap-changes.txt">changelog</a>)
-                (<a href="release/libpcap-1.8.1.tar.gz.sig">PGP signature</a>)</li>
               <li> <a href="release/signing-key.asc">tcpdump.org signing key</a></li>
             </ul>
-          </div>
-          <div class="entry">
             <p>
-              <strong>Version:</strong> 4.7.4 / 1.7.4<br/>
-              <strong>Release Date:</strong> April 22, 2015 / June 26, 2015 (libpcap 1.7.4)<br/><br />
-              <small>Version 4.7.0/1.7.0 were partially released in Dec. 2014, for
-                security patches, but never properly released</small>
-              <small>revisions .1 were cycled with errors</small>
-              <small>tcpdump 4.7.2 was released 2015-03-10, but had built issues on FreeBSD</small>
-              <small>tcpdump 4.7.3, libpcap 1.7.2 was released 2015-03-11</small>
-              <small>tcpdump 4.7.4, libpcap 1.7.3 was released 2015-04-22</small>
+              <strong>Version:</strong> 4.7.4<br/>
+              <strong>Release Date:</strong> April 22, 2015<br/><br />
+              <small>Version 4.7.0 was partially released in December 2014, for
+                security patches, but never properly released.</small>
+              <small>tcpdump 4.7.1 was cycled with errors.</small>
+              <small>tcpdump 4.7.2 was released 2015-03-10, but had build issues on FreeBSD.</small>
+              <small>tcpdump 4.7.3 was released 2015-03-11.</small>
+              <small>tcpdump 4.7.4 was released 2015-04-22.</small>
             </p>
             <ul>
               <li> <a href="release/tcpdump-4.7.4.tar.gz">tcpdump-4.7.4.tar.gz</a>
                 (<a href="tcpdump-changes.txt">changelog</a>)
                 (<a href="release/tcpdump-4.7.4.tar.gz.sig">PGP signature</a>)</li>
+              <li> <a href="release/signing-key.asc">tcpdump.org signing key</a></li>
+            </ul>
+            <h3 class="subtitle">
+              Libpcap
+            </h3>
+            <p>
+              <strong>Version:</strong> 1.7.4<br/>
+              <strong>Release Date:</strong> June 26, 2015<br/><br />
+              <small>Version 1.7.0 was partially released in December 2014,
+                 along with tcpdump 1.7.0, but was never properly
+                 released.</small>
+              <small>libpcap 1.7.1 was cycled with errors.</small>
+              <small>libpcap 1.7.2 was released 2015-03-11.</small>
+              <small>libpcap 1.7.3 was released 2015-04-22.</small>
+            </p>
+            <ul>
               <li> <a href="release/libpcap-1.7.4.tar.gz">libpcap-1.7.4.tar.gz</a>
                 (<a href="libpcap-changes.txt">changelog</a>)
                 (<a href="release/libpcap-1.7.4.tar.gz.sig">PGP signature</a>)</li>
@@ -216,14 +245,14 @@
         </div>
         <!-- End of OLD RELEASES section -->
 
-        <!-- Start of CURRENT DEVELOPMENT VERSION section -->
+        <!-- Start of CURRENT DEVELOPMENT VERSIONS section -->
         <div class="post">
           <h2 class="title">
-            <a name="source">Current Development Version</a>
+            <a name="source">Current Development Versions</a>
           </h2>
           <div class="entry">
             <p>
-              The current development version is freely accessible
+              The current development versions are freely accessible
               through the <a href="https://github.com/">GitHub</a>
               <a href="http://www.kernel.org/pub/software/scm/git/docs/">Git</a>
               site.  tcpdump can be found at
@@ -248,7 +277,7 @@
             </p>
             <p>
               The continuous integration systems below automatically build the
-              current development version of tcpdump/libpcap:
+              current development versions of tcpdump and libpcap:
               <ul>
                 <li><a href='https://travis-ci.org/the-tcpdump-group/tcpdump'>Travis CI: tcpdump <img src='https://travis-ci.org/the-tcpdump-group/tcpdump.svg?branch=master'></a></li>
                 <li><a href='https://travis-ci.org/the-tcpdump-group/libpcap'>Travis CI: libpcap <img src='https://travis-ci.org/the-tcpdump-group/libpcap.svg?branch=master'></a></li>
@@ -259,7 +288,7 @@
             </p>
           </div>
         </div>
-        <!-- End of CURRENT DEVELOPMENT VERSION section -->
+        <!-- End of CURRENT DEVELOPMENT VERSIONS section -->
 
         <!-- Start of MIRRORS section -->
         <div class="post">

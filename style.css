@@ -195,6 +195,16 @@ hr {
 	text-decoration: none;
 }
 
+.post .subtitle {
+	margin: 0;
+	padding: 5px 20px;
+	font-size: 20px;
+}
+
+.post .subtitle a {
+	text-decoration: none;
+}
+
 .post .entry {
 	padding: 10px 20px;
 }
