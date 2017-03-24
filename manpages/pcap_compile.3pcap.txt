@@ -23,6 +23,12 @@ DESCRIPTION
        be  supplied;  tests for IPv4 broadcast addresses will fail to compile,
        but all other tests in the filter program will be OK.
 
+       NOTE: in libpcap 1.8.0 and later, pcap_compile() can be used in  multi-
+       ple  threads  within a single process.  However, in earlier versions of
+       libpcap, it is not safe to use pcap_compile() in multiple threads in  a
+       single  process without some form of mutual exclusion allowing only one
+       thread to call it at any given time.
+
 RETURN VALUE
        pcap_compile() returns 0 on success  and  -1  on  failure.   If  -1  is
        returned,  pcap_geterr()  or  pcap_perror()  may be called with p as an

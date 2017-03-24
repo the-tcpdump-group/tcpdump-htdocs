@@ -52,6 +52,20 @@ captured on the Linux &quot;any&quot; pseudo-interface that can capture on more
 than one network, a value of PCAP_NETMASK_UNKNOWN can be supplied; tests
 for IPv4 broadcast addresses will fail to compile, but all other tests in
 the filter program will be OK.
+<P>
+
+NOTE: in libpcap 1.8.0 and later,
+<B>pcap_compile()</B>
+
+can be used in multiple threads within a single process.  However, in
+earlier versions of libpcap, it is
+<I>not</I>
+
+safe to use
+<B>pcap_compile()</B>
+
+in multiple threads in a single process without some form of mutual
+exclusion allowing only one thread to call it at any given time.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
@@ -88,6 +102,6 @@ as an argument to fetch or display the error text.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 00:07:26 GMT, December 18, 2015
+Time: 09:22:47 GMT, March 24, 2017
 </BODY>
 </HTML>

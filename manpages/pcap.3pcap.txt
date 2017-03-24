@@ -668,8 +668,11 @@ AUTHORS
               http://www.tcpdump.org/
 
 BUGS
-       Please send problems, bugs, questions, desirable enhancements, etc. to:
+       To  report  a  security  issue  please  send an e-mail to security@tcp-
+       dump.org.
 
-              tcpdump-workers@lists.tcpdump.org
+       To report bugs and other problems, contribute patches, request  a  fea-
+       ture,  provide generic feedback etc please see the file CONTRIBUTING in
+       the libpcap source tree root.
 
                                 20 January 2017                    PCAP(3PCAP)

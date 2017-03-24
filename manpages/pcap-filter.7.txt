@@ -727,21 +727,24 @@ SEE ALSO
        pcap(3PCAP)
 
 BUGS
-       Please send problems, bugs, questions, desirable enhancements, etc. to:
+       To report a security issue  please  send  an  e-mail  to  security@tcp-
+       dump.org.
 
-              tcpdump-workers@lists.tcpdump.org
+       To  report  bugs and other problems, contribute patches, request a fea-
+       ture, provide generic feedback etc please see the file CONTRIBUTING  in
+       the libpcap source tree root.
 
-       Filter expressions on fields other than those  in  Token  Ring  headers
+       Filter  expressions  on  fields  other than those in Token Ring headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter  expressions  on  fields other than those in 802.11 headers will
-       not correctly handle 802.11 data packets with both To DS  and  From  DS
+       Filter expressions on fields other than those in  802.11  headers  will
+       not  correctly  handle  802.11 data packets with both To DS and From DS
        set.
 
-       ip6  proto  should  chase header chain, but at this moment it does not.
+       ip6 proto should chase header chain, but at this moment  it  does  not.
        ip6 protochain is supplied for this behavior.
 
-       Arithmetic expression against transport  layer  headers,  like  tcp[0],
+       Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
                                  3 August 2015                  PCAP-FILTER(7)
