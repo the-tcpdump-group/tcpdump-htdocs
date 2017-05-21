@@ -86,8 +86,9 @@ Original license : Creative Commons Attribution 2.5 License
 
                 <h3>Description</h3>
 <p>
-The CAN ID and flags is in network byte order (big-endian).  The bottom
-29 bits contain the CAN ID of the frame.  The remaining bits are:
+The field containing the CAN ID and flags is in network byte order
+(big-endian).  The bottom 29 bits contain the CAN ID of the frame.  The
+remaining bits are:
 </p>
 <ul>
 <li>0x20000000 - set if the frame is an error message rather than a data
