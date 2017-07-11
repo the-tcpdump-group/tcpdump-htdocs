@@ -29,7 +29,7 @@ conditionAnchors()
 	sed --file="$SEDFILE"
 }
 
-write_sedfile()
+writeSedFile()
 {
 	local mansection mantopic manfile
 
@@ -209,7 +209,7 @@ updateOutputFiles()
 	fi
 
 	SEDFILE=`mktemp --tmpdir manpages_sedfile.XXXXXX`
-	write_sedfile
+	writeSedFile
 
 	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
 	produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
