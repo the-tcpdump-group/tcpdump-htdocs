@@ -7,7 +7,7 @@ Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 January 2014<BR><A H
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_dump_ftell - get the current file offset for a savefile being written
+pcap_dump_ftell, pcap_dump_ftell64 - get the current file offset for a savefile being written
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
@@ -15,6 +15,7 @@ pcap_dump_ftell - get the current file offset for a savefile being written
 <B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
 </B>
 <B>long pcap_dump_ftell(pcap_dumper_t *p);
+int64_t pcap_dump_ftell64(pcap_dumper_t *p);
 </B></PRE>
 
 <A NAME="lbAD">&nbsp;</A>
@@ -29,6 +30,24 @@ number of bytes written by
 and
 <B>pcap_dump()</B>.
 
+-1 is returned on error.
+If the current file position does not fit in a
+<B>long</B>,
+
+it will be truncated; this can happen on 32-bit UNIX-like systems with
+large file support and on Windows.
+<B>pcap_dump_ftell64()</B>
+
+returns the current file position in a
+<B>int64_t</B>,
+
+so if file offsets that don't fit in a
+<B>long</B>
+
+but that fit in a
+<B>int64_t</B>
+
+are supported, this will return the file offset without truncation.
 -1 is returned on error.
 <A NAME="lbAE">&nbsp;</A>
 <H2>SEE ALSO</H2>
@@ -48,6 +67,6 @@ and
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 00:07:27 GMT, December 18, 2015
+Time: 20:33:44 GMT, October 11, 2017
 </BODY>
 </HTML>

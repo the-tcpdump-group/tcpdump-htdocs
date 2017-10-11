@@ -1,0 +1,90 @@
+<HTML><HEAD><TITLE>Manpage of PCAP_SET_PROTOCOL</TITLE>
+</HEAD><BODY>
+<H1>PCAP_SET_PROTOCOL</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 January 2014<BR><A HREF="#index">Index</A>
+<A HREF="/manpages">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_set_protocol - set capture protocol for a not-yet-activated
+capture handle
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
+
+int pcap_set_protocol(pcap_t *p, int protocol);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+On network interface devices on Linux,
+<B>pcap_set_protocol()</B>
+
+sets the protocol to be used in the
+<B><A HREF="/cgi-bin/man/man2html?2+socket">socket</A></B>(2)
+
+call to create a capture socket when the handle is activated.  The
+argument is a link-layer protocol value, such as the values in the
+<B>&lt;<A HREF="file:///usr/include/linux/if_ether.h">linux/if_ether.h</A>&gt;</B>
+
+header file, specified in host byte order.
+If
+<I>protocol</I>
+
+is non-zero, packets of that protocol will be captured when the
+handle is activated, otherwise, all packets will be captured.  This
+function is only provided on Linux, and, if it is used on any device
+other than a network interface, it will have no effect.
+<P>
+
+It should not be used in portable code; instead, a filter should be
+specified with
+<B>pcap_setfilter()</B>.
+
+<P>
+
+If a given network interface provides a standard link-layer header, with
+a standard packet type, but provides some packet types with a different
+socket-layer protocol type from the one in the link-layer header, that
+packet type cannot be filtered with a filter specified with
+<B>pcap_setfilter()</B>
+
+but can be filtered by specifying the socket-layer protocol type using
+<B>pcap_set_protocol()</B>.
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_set_protocol()</B>
+
+returns 0 on success or
+<B>PCAP_ERROR_ACTIVATED</B>
+
+if called on a capture handle that has been activated.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP), <A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP), <A HREF="/cgi-bin/man/man2html?2+socket">socket</A>(2),
+<A HREF='/manpages/pcap_setfilter.3pcap.html'>pcap_setfilter</A>(3PCAP)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">RETURN VALUE</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+man2html,
+using the manual pages.<BR>
+Time: 20:33:46 GMT, October 11, 2017
+</BODY>
+</HTML>

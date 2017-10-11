@@ -33,34 +33,44 @@ tcpdump - dump traffic on a network
 <I>count</I>
 
 ]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-C</B>
 
 <I>file_size</I>
 
-] [
-<B>-G</B>
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>-E</B>
 
-<I>rotate_seconds</I>
+<I><A HREF="mailto:spi@ipaddr">spi@ipaddr</A> algo:secret,...</I>
 
-] [
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
 <B>-F</B>
 
 <I>file</I>
 
 ]
-<BR>
+[
+<B>-G</B>
 
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<I>rotate_seconds</I>
+
+]
 [
 <B>-i</B>
 
 <I>interface</I>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>--immediate-mode</B>
 
 ]
 [
@@ -75,18 +85,20 @@ tcpdump - dump traffic on a network
 <I>module</I>
 
 ]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-M</B>
 
 <I>secret</I>
 
 ]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>--number</B>
+
+]
+[
+<B>--print</B>
 
 ]
 [
@@ -104,12 +116,6 @@ tcpdump - dump traffic on a network
 
 ]
 [
-<B>-V</B>
-
-<I>file</I>
-
-]
-[
 <B>-s</B>
 
 <I>snaplen</I>
@@ -122,41 +128,37 @@ tcpdump - dump traffic on a network
 
 ]
 [
+<B>--version</B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>-V</B>
+
+<I>file</I>
+
+]
+[
 <B>-w</B>
 
 <I>file</I>
 
 ]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-W</B>
 
 <I>filecount</I>
 
 ]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[
-<B>-E</B>
-
-<I><A HREF="mailto:spi@ipaddr">spi@ipaddr</A> algo:secret,...</I>
-
-]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-y</B>
 
 <I>datalinktype</I>
 
 ]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-z</B>
 
@@ -173,16 +175,6 @@ tcpdump - dump traffic on a network
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>--time-stamp-precision=</B><I>tstamp_precision</I>
-
-]
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[
-<B>--immediate-mode</B>
-
-]
-[
-<B>--version</B>
 
 ]
 <BR>
@@ -597,19 +589,15 @@ accuracy to a savefile, the time stamps are written with nanosecond
 resolution, and the file is written with a different magic number, to
 indicate that the time stamps are in seconds and nanoseconds; not all
 programs that read pcap savefiles will be able to read those captures.
-</DL>
-<P>
-
+<DT><DD>
 When reading a savefile, convert time stamps to the precision specified
 by <I>timestamp_precision</I>, and display them with that resolution.  If
 the precision specified is less than the precision of time stamps in the
 file, the conversion will lose precision.
-<P>
-
+<DT><DD>
 The supported values for <I>timestamp_precision</I> are <B>micro</B> for
 microsecond resolution and <B>nano</B> for nanosecond resolution.  The
 default is microsecond resolution.
-<DL COMPACT>
 <DT><B>-K</B>
 
 <DD>
@@ -740,6 +728,14 @@ into promiscuous mode.
 Note that the interface might be in promiscuous
 mode for some other reason; hence, `-p' cannot be used as an abbreviation for
 `ether host {local-hw-addr} or ether broadcast'.
+<DT><B>--print</B>
+
+<DD>
+Print parsed packet output, even if the raw packets are being saved to a
+file with the
+<B>-w</B>
+
+flag.
 <DT><B>-Q</B><I> direction</I>
 
 <DD>
@@ -872,7 +868,10 @@ Print undecoded NFS handles.
 If the
 <B>-w</B>
 
-option is not specified, make the printed packet output
+option is not specified, or if it is specified but the
+<B>--print</B>
+
+flag is also specified, make the printed packet output
 ``packet-buffered''; i.e., as the description of the contents of each
 packet is printed, it will be written to the standard output, rather
 than, when not writing to a terminal, being written only when the output
@@ -2490,6 +2489,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 22:00:48 GMT, September 19, 2017
+Time: 20:33:48 GMT, October 11, 2017
 </BODY>
 </HTML>

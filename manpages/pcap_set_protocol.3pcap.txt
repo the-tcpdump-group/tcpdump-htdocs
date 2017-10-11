@@ -1,0 +1,41 @@
+PCAP_SET_PROTOCOL(3PCAP)                              PCAP_SET_PROTOCOL(3PCAP)
+
+NAME
+       pcap_set_protocol  -  set capture protocol for a not-yet-activated cap-
+       ture handle
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_protocol(pcap_t *p, int protocol);
+
+DESCRIPTION
+       On network interface devices on  Linux,  pcap_set_protocol()  sets  the
+       protocol  to  be  used in the socket(2) call to create a capture socket
+       when the handle is activated.  The argument is  a  link-layer  protocol
+       value, such as the values in the <linux/if_ether.h> header file, speci-
+       fied in host byte order.  If protocol is non-zero, packets of that pro-
+       tocol  will  be  captured  when the handle is activated, otherwise, all
+       packets will be captured.  This function is  only  provided  on  Linux,
+       and,  if  it  is  used on any device other than a network interface, it
+       will have no effect.
+
+       It should not be used in portable code; instead,  a  filter  should  be
+       specified with pcap_setfilter().
+
+       If  a  given  network  interface provides a standard link-layer header,
+       with a standard packet type, but provides some packet types with a dif-
+       ferent  socket-layer  protocol  type  from  the  one  in the link-layer
+       header, that packet type cannot be filtered  with  a  filter  specified
+       with  pcap_setfilter()  but  can  be filtered by specifying the socket-
+       layer protocol type using pcap_set_protocol().
+
+RETURN VALUE
+       pcap_set_protocol() returns 0 on  success  or  PCAP_ERROR_ACTIVATED  if
+       called on a capture handle that has been activated.
+
+SEE ALSO
+       pcap(3PCAP),   pcap_create(3PCAP),   pcap_activate(3PCAP),   socket(2),
+       pcap_setfilter(3PCAP)
+
+                                3 January 2014        PCAP_SET_PROTOCOL(3PCAP)
