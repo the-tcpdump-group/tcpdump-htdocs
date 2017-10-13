@@ -438,8 +438,8 @@ OPTIONS
               additional  packet integrity checks such as verifying the IP and
               ICMP header checksum.
 
-              When writing to a file with the -w option, report, every 10 sec-
-              onds, the number of packets captured.
+              When writing to a file with the -w option, report, once per sec-
+              ond, the number of packets captured.
 
        -vv    Even  more  verbose  output.  For example, additional fields are
               printed from NFS  reply  packets,  and  SMB  packets  are  fully
@@ -758,9 +758,9 @@ OUTPUT FORMAT
        login  on csam.  The S indicates that the SYN flag was set.  The packet
        sequence number was 768512 and it contained no data.  (The notation  is
        `first:last'  which means `sequence numbers first up to but not includ-
-       ing last.)  There was no piggy-backed ack, the available receive window
-       was  4096  bytes  and there was a max-segment-size option requesting an
-       mss of 1024 bytes.
+       ing last'.)  There was no piggy-backed ack, the available receive  win-
+       dow  was  4096 bytes and there was a max-segment-size option requesting
+       an mss of 1024 bytes.
 
        Csam replies with a similar packet except it  includes  a  piggy-backed
        ack  for rtsg's SYN.  Rtsg then acks csam's SYN.  The `.' means the ACK
@@ -1248,7 +1248,7 @@ AUTHORS
               ftp://ftp.ee.lbl.gov/old/tcpdump.tar.Z
 
        IPv6/IPsec support is added by WIDE/KAME project.   This  program  uses
-       Eric Young's SSLeay library, under specific configurations.
+       OpenSSL/LibreSSL, under specific configurations.
 
 BUGS
        To    report    a   security   issue   please   send   an   e-mail   to
