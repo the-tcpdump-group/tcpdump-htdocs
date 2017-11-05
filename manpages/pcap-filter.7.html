@@ -973,8 +973,9 @@ intervening fragment.
 Some offsets and field values may be expressed as names rather than
 as numeric values.
 The following protocol header field offsets are
-available: <B>icmptype</B> (ICMP type field), <B>icmpcode</B> (ICMP
-code field), and <B>tcpflags</B> (TCP flags field).
+available: <B>icmptype</B> (ICMP type field), <B>icmp6type (ICMP v6 type field)
+icmpcode</B> (ICMP code field), <B>icmp6code</B> (ICMP v6 code field), and
+<B>tcpflags</B> (TCP flags field).
 <P>
 The following ICMP type field values are available: <B>icmp-echoreply</B>,
 <B>icmp-unreach</B>, <B>icmp-sourcequench</B>, <B>icmp-redirect</B>,
@@ -982,6 +983,20 @@ The following ICMP type field values are available: <B>icmp-echoreply</B>,
 <B>icmp-timxceed</B>, <B>icmp-paramprob</B>, <B>icmp-tstamp</B>,
 <B>icmp-tstampreply</B>, <B>icmp-ireq</B>, <B>icmp-ireqreply</B>,
 <B>icmp-maskreq</B>, <B>icmp-maskreply</B>.
+<P>
+The following ICMPv6 type fields are available: <B>icmp6-echo</B>,
+<B>icmp6-echoreply</B>, <B>icmp6-multicastlistenerquery</B>,
+<B>icmp6-multicastlistenerreportv1</B>, <B>icmp6-multicastlistenerdone</B>,
+<B>icmp6-routersolicit</B>, <B>icmp6-routeradvert</B>,
+<B>icmp6-neighborsolicit</B>, <B>icmp6-neighboradvert</B>, <B>icmp6-redirect</B>,
+<B>icmp6-routerrenum</B>, <B>icmp6-nodeinformationquery</B>,
+<B>icmp6-nodeinformationresponse</B>, <B>icmp6-ineighbordiscoverysolicit</B>,
+<B>icmp6-ineighbordiscoveryadvert</B>, <B>icmp6-multicastlistenerreportv2</B>,
+<B>icmp6-homeagentdiscoveryrequest</B>, <B>icmp6-homeagentdiscoveryreply</B>,
+<B>icmp6-mobileprefixsolicit</B>, <B>icmp6-mobileprefixadvert</B>,
+<B>icmp6-certpathsolicit</B>, <B>icmp6-certpathadvert</B>,
+<B>icmp6-multicastrouteradvert</B>, <B>icmp6-multicastroutersolicit</B>,
+<B>icmp6-multicastrouterterm</B>.
 <P>
 The following TCP flags field values are available: <B>tcp-fin</B>,
 <B>tcp-syn</B>, <B>tcp-rst</B>, <B>tcp-push</B>,
@@ -1206,6 +1221,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 09:22:46 GMT, March 24, 2017
+Time: 22:33:27 GMT, November 05, 2017
 </BODY>
 </HTML>

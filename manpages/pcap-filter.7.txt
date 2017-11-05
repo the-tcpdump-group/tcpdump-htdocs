@@ -648,14 +648,28 @@ DESCRIPTION
 
               Some offsets and field values may be expressed as  names  rather
               than  as  numeric  values.   The following protocol header field
-              offsets are available:  icmptype  (ICMP  type  field),  icmpcode
-              (ICMP code field), and tcpflags (TCP flags field).
+              offsets are available: icmptype  (ICMP  type  field),  icmp6type
+              (ICMP v6 type field) icmpcode (ICMP code field), icmp6code (ICMP
+              v6 code field), and tcpflags (TCP flags field).
 
               The following ICMP type field values are available: icmp-echore-
-              ply, icmp-unreach, icmp-sourcequench, icmp-redirect,  icmp-echo,
-              icmp-routeradvert,   icmp-routersolicit,   icmp-timxceed,  icmp-
-              paramprob, icmp-tstamp, icmp-tstampreply,  icmp-ireq,  icmp-ire-
+              ply,  icmp-unreach, icmp-sourcequench, icmp-redirect, icmp-echo,
+              icmp-routeradvert,  icmp-routersolicit,   icmp-timxceed,   icmp-
+              paramprob,  icmp-tstamp,  icmp-tstampreply, icmp-ireq, icmp-ire-
               qreply, icmp-maskreq, icmp-maskreply.
+
+              The following ICMPv6  type  fields  are  available:  icmp6-echo,
+              icmp6-echoreply,  icmp6-multicastlistenerquery,  icmp6-multicas-
+              tlistenerreportv1, icmp6-multicastlistenerdone,  icmp6-routerso-
+              licit, icmp6-routeradvert, icmp6-neighborsolicit, icmp6-neighbo-
+              radvert, icmp6-redirect,  icmp6-routerrenum,  icmp6-nodeinforma-
+              tionquery, icmp6-nodeinformationresponse, icmp6-ineighbordiscov-
+              erysolicit, icmp6-ineighbordiscoveryadvert,  icmp6-multicastlis-
+              tenerreportv2, icmp6-homeagentdiscoveryrequest, icmp6-homeagent-
+              discoveryreply, icmp6-mobileprefixsolicit, icmp6-mobileprefixad-
+              vert,  icmp6-certpathsolicit, icmp6-certpathadvert, icmp6-multi-
+              castrouteradvert, icmp6-multicastroutersolicit,  icmp6-multicas-
+              trouterterm.
 
               The  following  TCP  flags  field values are available: tcp-fin,
               tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg, tcp-ece, tcp-cwr.
