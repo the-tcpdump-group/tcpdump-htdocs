@@ -163,7 +163,7 @@ if a ``savefile'' is being read, the byte order is not necessarily that
 of the machine reading the capture file.
                 <tr valign=top>
 <td>LINKTYPE_ETHERNET<td>1<td>DLT_EN10MB<td>
-<a href="http://standards.ieee.org/about/get/802/802.3.html">IEEE
+<a href="http://ieeexplore.ieee.org/document/7428776/">IEEE
 802.3</a> Ethernet (10Mb, 100Mb, 1000Mb, and up); the 10MB in the
 DLT_ name is historical.
                 <tr valign=top>
@@ -221,8 +221,8 @@ PPPoE; the packet begins with a PPPoE header, as per
 <td>LINKTYPE_ATM_RFC1483<td>100<td>DLT_ATM_RFC1483<td>
 <a href="http://tools.ietf.org/html/rfc1483">RFC 1483</a>
 LLC/SNAP-encapsulated ATM; the packet begins with an
-<a href="http://standards.ieee.org/about/get/802/802.2.html">IEEE 802.2</a>
-LLC header.
+<a href="https://www.iso.org/standard/30174.html">ISO 8802-2</a>
+(formerly known as IEEE 802.2) LLC header.
                 <tr valign=top>
 <td>LINKTYPE_RAW<td>101<td>DLT_RAW<td>
 Raw IP; the packet begins with an IPv4 or IPv6 header, with the
@@ -235,7 +235,7 @@ Cisco PPP with HDLC framing, as per
 section 4.3.1 of RFC 1547</a>.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_11<td>105<td>DLT_IEEE802_11<td>
-<a href="http://standards.ieee.org/about/get/802/802.11.html">IEEE 802.11</a>
+<a href="http://ieeexplore.ieee.org/document/7786995/">IEEE 802.11</a>
 wireless LAN.
                 <tr valign=top>
 <td>LINKTYPE_FRELAY<td>107<td>DLT_FRELAY<td>
@@ -421,7 +421,7 @@ Per-Packet Information Header Specification</a>,  followed by a packet
 with the LINKTYPE_ value specified by the pph_dlt field of that header.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4<td>195<td>DLT_IEEE802_15_4<td>
-<a href="http://standards.ieee.org/about/get/802/802.15.html">IEEE
+<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE
 802.15.4</a> wireless Personal Area Network, with each packet having
 the FCS at the end of the frame.
                 <tr valign=top>
@@ -495,7 +495,7 @@ circuit, with
 pseudo-header</a>.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_NONASK_PHY<td>215<td>DLT_IEEE802_15_4_NONASK_PHY<td>
-<a href="http://standards.ieee.org/about/get/802/802.15.html">IEEE
+<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE
 802.15.4</a> wireless Personal Area Network, with each packet having
 the FCS at the end of the frame, and with the PHY-level data for non-ASK
 PHYs (4 octets of 0 as preamble, one octet of SFD, one octet of frame
@@ -545,7 +545,7 @@ Raw IPv4; the packet begins with an IPv4 header.
 Raw IPv6; the packet begins with an IPv6 header.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_NOFCS<td>230<td>DLT_IEEE802_15_4_NOFCS<td>
-<a href="http://standards.ieee.org/about/get/802/802.15.html">IEEE
+<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE
 802.15.4</a> wireless Personal Area Network, without the FCS at the
 end of the frame.
                 <tr valign=top>
@@ -676,7 +676,7 @@ encapsulation</a>.
 Ethernet-over-passive-optical-network packets, starting with the last 6
 octets of the modified preamble as specified by 65.1.3.2 "Transmit" in
 Clause 65 of Section 5 of
-<a href="http://standards.ieee.org/about/get/802/802.3.html">IEEE
+<a href="http://ieeexplore.ieee.org/document/7428776/">IEEE
 802.3</a>, followed immediately by an Ethernet frame.
                 <tr valign=top>
 <td>LINKTYPE_IPMI_HPM_2<td>260<td>DLT_IPMI_HPM_2<td>
@@ -755,6 +755,13 @@ between host and guest machines in VMware and KVM hypervisors.</a>
 Messages to and from a Nordic Semiconductor nRF Sniffer for Bluetooth LE
 packets, beginning with <a href="linktypes/LINKTYPE_NORDIC_BLE.html">a
 pseudo-header</a>.
+</td>
+                <tr valign=top>
+<td>LINKTYPE_ETHERNET_MPACKET<td>274<td>DLT_ETHERNET_MPACKET<td>
+mPackets, as specified by
+<a href="http://ieeexplore.ieee.org/document/7900321/">IEEE 802.3br</a>
+Figure 99-4, starting with the preamble and always ending with a CRC
+field.
 </td>
 </tr>
 
