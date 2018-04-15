@@ -420,10 +420,10 @@ href="http://www.cacetech.com/documents/PPI%20Header%20format%201.0.7.pdf">the
 Per-Packet Information Header Specification</a>,  followed by a packet
 with the LINKTYPE_ value specified by the pph_dlt field of that header.
                 <tr valign=top>
-<td>LINKTYPE_IEEE802_15_4<td>195<td>DLT_IEEE802_15_4<td>
+<td>LINKTYPE_IEEE802_15_4_WITHFCS<td>195<td>DLT_IEEE802_15_4_WITHFCS<td>
 <a href="http://ieeexplore.ieee.org/document/7460875/">IEEE
-802.15.4</a> wireless Personal Area Network, with each packet having
-the FCS at the end of the frame.
+802.15.4</a> Low-Rate Wireless Networks, with each packet having the FCS
+at the end of the frame.
                 <tr valign=top>
 <td>LINKTYPE_SITA<td>196<td>DLT_SITA<td>
 Various link-layer types, with
@@ -495,12 +495,12 @@ circuit, with
 pseudo-header</a>.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_NONASK_PHY<td>215<td>DLT_IEEE802_15_4_NONASK_PHY<td>
-<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE
-802.15.4</a> wireless Personal Area Network, with each packet having
-the FCS at the end of the frame, and with the PHY-level data for non-ASK
-PHYs (4 octets of 0 as preamble, one octet of SFD, one octet of frame
-length + reserved bit) preceding the MAC-layer data (starting with the
-frame control field).
+<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE 802.15.4</a>
+Low-Rate Wireless Networks, with each packet having the FCS at the end
+of the frame, and with the PHY-level data for non-ASK PHYs (4 octets of
+0 as preamble, one octet of SFD, one octet of frame length + reserved
+bit) preceding the MAC-layer data (starting with the frame control
+field).
                 <tr valign=top>
 <td>LINKTYPE_USB_LINUX_MMAPPED<td>220<td>DLT_USB_LINUX_MMAPPED<td>
 USB packets, beginning with a Linux USB header, as specified by the
@@ -545,9 +545,8 @@ Raw IPv4; the packet begins with an IPv4 header.
 Raw IPv6; the packet begins with an IPv6 header.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_NOFCS<td>230<td>DLT_IEEE802_15_4_NOFCS<td>
-<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE
-802.15.4</a> wireless Personal Area Network, without the FCS at the
-end of the frame.
+<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE 802.15.4</a>
+Low-Rate Wireless Network, without the FCS at the end of the frame.
                 <tr valign=top>
 <td>LINKTYPE_DBUS<td>231<td>DLT_DBUS<td>
 Raw <a href="http://www.freedesktop.org/wiki/Software/dbus">D-Bus</a>
