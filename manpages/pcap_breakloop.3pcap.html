@@ -57,11 +57,26 @@ packets arrive and the call completes.
 Note also that, in a multi-threaded application, if one thread is
 blocked in pcap_dispatch(), pcap_loop(), pcap_next(), or pcap_next_ex(),
 a call to pcap_breakloop() in a different thread will not unblock that
-thread; you will need to use whatever mechanism the OS provides for
+thread.
+</B>
+You will need to use whatever mechanism the OS provides for
 breaking a thread out of blocking calls in order to unblock the thread,
 such as thread cancellation or thread signalling in systems that support
-POSIX threads.
-</B>
+POSIX threads, or
+<B>SetEvent()</B>
+
+on the result of
+<B>pcap_getevent()</B>
+
+on a
+<B>pcap_t</B>
+
+on which the thread is blocked on Windows.  Asynchronous procedure calls
+will not work on Windows, as a thread blocked on a
+<B>pcap_t</B>
+
+will not be in an alertable state.
+
 <P>
 
 Note that
@@ -121,6 +136,6 @@ subsequent call will return -2 and clear the flag.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 22:46:12 GMT, November 07, 2017
+Time: 20:05:20 GMT, April 15, 2018
 </BODY>
 </HTML>

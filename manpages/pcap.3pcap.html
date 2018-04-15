@@ -197,6 +197,8 @@ Not all platforms support a packet buffer timeout; on platforms that
 don't, the packet buffer timeout is ignored.  A zero value for the
 timeout, on platforms that support a packet buffer timeout, will cause a
 read to wait forever to allow enough packets to arrive, with no timeout.
+A negative value is invalid; the result of setting the timeout to a
+negative value is unpredictable.
 <DT><DD>
 <B>NOTE</B>:
 
@@ -329,7 +331,7 @@ so
 packet capture on an interface probably requires that either
 promiscuous-mode or copy-all-mode operation, or both modes of
 operation, be enabled on that interface.
-<DT><B>Under BSD (this includes Mac OS X):</B>
+<DT><B>Under BSD (this includes macOS):</B>
 
 <DD>
 You must have read access to
@@ -339,7 +341,7 @@ on systems that don't have a cloning BPF device, or to
 <I>/dev/bpf</I>
 
 on systems that do.
-On BSDs with a devfs (this includes Mac OS X), this might involve more
+On BSDs with a devfs (this includes macOS), this might involve more
 than just having somebody with super-user access setting the ownership
 or permissions on the BPF devices - it might involve configuring devfs
 to set the ownership or permissions every time the system is booted,
@@ -1352,6 +1354,6 @@ in the libpcap source tree root.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 20:33:42 GMT, October 11, 2017
+Time: 20:05:20 GMT, April 15, 2018
 </BODY>
 </HTML>

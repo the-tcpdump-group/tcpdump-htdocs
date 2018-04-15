@@ -133,7 +133,9 @@ DESCRIPTION
               that  don't, the packet buffer timeout is ignored.  A zero value
               for the timeout, on platforms that support a packet buffer time-
               out,  will  cause a read to wait forever to allow enough packets
-              to arrive, with no timeout.
+              to arrive, with no timeout.  A negative value  is  invalid;  the
+              result  of  setting  the  timeout  to a negative value is unpre-
+              dictable.
 
               NOTE: the packet buffer timeout cannot be used  to  cause  calls
               that  read  packets  to  return within a limited period of time,
@@ -226,16 +228,16 @@ DESCRIPTION
               that either promiscuous-mode or copy-all-mode operation, or both
               modes of operation, be enabled on that interface.
 
-       Under BSD (this includes Mac OS X):
+       Under BSD (this includes macOS):
               You  must  have  read  access to /dev/bpf* on systems that don't
               have a cloning BPF device, or to /dev/bpf on  systems  that  do.
-              On  BSDs  with  a  devfs  (this  includes  Mac OS X), this might
-              involve more than just having somebody  with  super-user  access
-              setting  the  ownership  or  permissions on the BPF devices - it
-              might involve configuring devfs to set the ownership or  permis-
-              sions  every  time the system is booted, if the system even sup-
-              ports that; if it doesn't support that, you might have  to  find
-              some other way to make that happen at boot time.
+              On  BSDs  with a devfs (this includes macOS), this might involve
+              more than just having somebody with  super-user  access  setting
+              the  ownership  or  permissions  on  the  BPF devices - it might
+              involve configuring devfs to set the  ownership  or  permissions
+              every  time  the  system  is booted, if the system even supports
+              that; if it doesn't support that, you might have  to  find  some
+              other way to make that happen at boot time.
 
        Reading a saved packet file doesn't require special privileges.
 

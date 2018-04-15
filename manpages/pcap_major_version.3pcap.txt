@@ -16,7 +16,7 @@ DESCRIPTION
        returns the minor number of the file format of the  ``savefile''.   The
        version  number is stored in the ``savefile''; note that the meaning of
        its values depends on the type of ``savefile'' (for  example,  pcap  or
-       pcap-NG).
+       pcapng).
 
        If  p  refers to a live capture, the values returned by pcap_major_ver-
        sion() and pcap_minor_version() are not meaningful.

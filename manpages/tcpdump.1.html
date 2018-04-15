@@ -273,16 +273,22 @@ it will be reported as 0).
 <P>
 
 On platforms that support the SIGINFO signal, such as most BSDs
-(including Mac OS X) and Digital/Tru64 UNIX, it will report those counts
+(including macOS) and Digital/Tru64 UNIX, it will report those counts
 when it receives a SIGINFO signal (generated, for example, by typing
 your ``status'' character, typically control-T, although on some
-platforms, such as Mac OS X, the ``status'' character is not set by
+platforms, such as macOS, the ``status'' character is not set by
 default, so you must set it with
 <B>stty</B>(1)
 
 in order to use it) and will continue capturing packets. On platforms that
 do not support the SIGINFO signal, the same can be achieved by using the
 SIGUSR1 signal.
+<P>
+
+Using the SIGUSR2 signal along with the
+<B>-w</B>
+
+flag will forcibly flush the packet buffer into the output file.
 <P>
 
 Reading packets from a network interface may require that you have
@@ -759,7 +765,7 @@ lines are shorter.
 Read packets from <I>file</I> (which was created with the
 <B>-w</B>
 
-option or by other tools that write pcap or pcap-ng files).
+option or by other tools that write pcap or pcapng files).
 Standard input is used if <I>file</I> is ``-''.
 <DT><B>-S</B>
 
@@ -783,14 +789,21 @@ default of 262144 bytes.
 Packets truncated because of a limited snapshot
 are indicated in the output with ``[|<I>proto</I>]'', where <I>proto</I>
 is the name of the protocol level at which the truncation has occurred.
+<DT><DD>
 Note that taking larger snapshots both increases
 the amount of time it takes to process packets and, effectively,
 decreases the amount of packet buffering.
 This may cause packets to be
 lost.
-You should limit <I>snaplen</I> to the smallest number that will
-capture the protocol information you're interested in.
-Setting
+Note also that taking smaller snapshots will discard data from protocols
+above the transport layer, which loses information that may be
+important.  NFS and AFS requests and replies, for example, are very
+large, and much of the detail won't be available if a too-short snapshot
+length is selected.
+<DT><DD>
+If you need to reduce the snapshot size below the default, you should
+limit <I>snaplen</I> to the smallest number that will capture the
+protocol information you're interested in.  Setting
 <I>snaplen</I> to 0 sets it to the default of 262144,
 for backwards compatibility with recent older versions of
 <I>tcpdump</I>.
@@ -1435,7 +1448,7 @@ those are reported as <B><A HREF="/cgi-bin/man/man2html?1+ECT">ECT</A>(1)</B>, <
 <I>offset</I> is the fragment offset field; it is printed whether this is
 part of a fragmented datagram or not.
 <I>flags</I> are the MF and DF flags; <B>+</B> is reported if MF is set,
-and <B>DFP is reported if F is set.  If neither are set, .</B> is
+and <B>DF</B> is reported if F is set.  If neither are set, <B>.</B> is
 reported.
 <I>proto</I> is the protocol ID field.
 <I>length</I> is the total length field.
@@ -2097,12 +2110,6 @@ the file mode (in octal), the uid and gid, and the file size.
 If the -v flag is given more than once, even more details are printed.
 <P>
 
-Note that NFS requests are very large and much of the detail won't be printed
-unless <I>snaplen</I> is increased.
-Try using `<B>-s 192</B>' to watch
-NFS traffic.
-<P>
-
 NFS reply packets do not explicitly identify the RPC operation.
 Instead,
 <I>tcpdump</I> keeps track of ``recent'' requests, and matches them to the
@@ -2182,12 +2189,6 @@ are printed.
 Error codes are printed for abort packets, with the exception of Ubik
 beacon packets (because abort packets are used to signify a yes vote
 for the Ubik protocol).
-<P>
-
-Note that AFS requests are very large and many of the arguments won't
-be printed unless <I>snaplen</I> is increased.
-Try using `<B>-s 256</B>'
-to watch AFS traffic.
 <P>
 
 AFS reply packets do not explicitly identify the RPC operation.
@@ -2489,6 +2490,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 09:44:42 GMT, October 13, 2017
+Time: 20:05:22 GMT, April 15, 2018
 </BODY>
 </HTML>

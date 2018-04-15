@@ -15,16 +15,17 @@ DESCRIPTION
        units of milliseconds.  (See pcap(3PCAP)  for  an  explanation  of  the
        packet buffer timeout.)
 
-       The  behavior, if the timeout isn't specified, is undefined.  We recom-
-       mend always setting the timeout to a non-zero  value  unless  immediate
+       The  behavior,  if the timeout isn't specified, is undefined, as is the
+       behavior if the timeout is set to zero or to a negative value.  We rec-
+       ommend  always setting the timeout to a non-zero value unless immediate
        mode is set, in which case the timeout has no effect.
 
 RETURN VALUE
-       pcap_set_timeout()  returns  0  on  success  or PCAP_ERROR_ACTIVATED if
+       pcap_set_timeout() returns 0  on  success  or  PCAP_ERROR_ACTIVATED  if
        called on a capture handle that has been activated.
 
 SEE ALSO
-       pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
+       pcap(3PCAP),          pcap_create(3PCAP),         pcap_activate(3PCAP),
        pcap_set_immediate_mode(3PCAP)
 
                                 20 January 2017        PCAP_SET_TIMEOUT(3PCAP)
