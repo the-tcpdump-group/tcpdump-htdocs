@@ -114,13 +114,89 @@ there are more than 8 bytes, only the first 8 bytes are present, and
 if there are fewer than 8 bytes, there are padding bytes after the
 address to pad the field to 8 bytes.
 </p>
-<p>The protocol type field is in network byte order; it contains an
-Ethernet protocol type, or one of:
+<p>The protocol type field is in network byte order.  If the ARPHRD_
+type is ARPHRD_IPGRE, the protocol type field contains a
+<a href="https://tools.ietf.org/html/rfc2784">GRE</a> protocol type. 
+Otherwise, it contains an Ethernet protocol type, or one of:
 </p>
 <ul>
-<li>1, if the frame is a Novell 802.3 frame without an 802.2 LLC
+<li>0x0001, if the frame is a Novell 802.3 frame without an 802.2 LLC
 header;</li>
-<li>4, if the frame begins with an 802.2 LLC header.</li>
+<li>0x0004, if the frame begins with an 802.2 LLC header;</li>
+<li>0x000C, if the frame is a CAN bus frame that begins with a header of
+the form</li>
+
+<pre>
++---------------------------+
+|      CAN ID and flags     |
+|         (4 Octets)        |
++---------------------------+
+|    Frame payload length   |
+|         (1 Octet)         |
++---------------------------+
+|          Padding          |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+</pre>
+
+<p>
+where the field containing the CAN ID and flags is in host byte order.
+The bottom 29 bits contain the CAN ID of the frame.  The remaining bits
+are:
+</p>
+<ul>
+<li>0x20000000 - set if the frame is an error message rather than a data
+frame.
+<li>0x40000000 - set if the frame is a remote transmission request
+frame.
+<li>0x80000000 - set if the frame is an extended 29-bit frame rather
+than a standard 11-bit frame;
+</ul>
+and the header is followed by the payload;</li>
+
+<li>0x000D, if the frame is a CAN FD (CAN with Flexible Data-Rate) frame
+that begins with a header of the form</li>
+
+<pre>
++---------------------------+
+|      CAN ID and flags     |
+|         (4 Octets)        |
++---------------------------+
+|    Frame payload length   |
+|         (1 Octet)         |
++---------------------------+
+|         FD flags          |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+</pre>
+
+<p>
+where the field containing the CAN ID and flags is in host byte order.
+The bottom 29 bits of that field contain the CAN ID of the frame.  The
+remaining bits are:
+</p>
+<ul>
+<li>0x80000000 - set if the frame is an extended 29-bit frame rather
+than a standard 11-bit frame.</li>
+</ul>
+The bits of the FD flags field are:
+<ul>
+<li>0x01 - set if the bit rate switch flag is set for the frame;</li>
+<li>0x02 - set if the error state indicator is set for the frame;</li>
+</ul>
+and the header is followed by the payload.</li>
 </ul>
             </div>
             <!-- End of LINKTYPE_LINUX_SLL section -->
