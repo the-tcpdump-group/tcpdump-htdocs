@@ -10,7 +10,7 @@
 # This script has been tested to work on the following Linux systems:
 #
 # * Fedora 24, 25
-# * Ubuntu 16.04
+# * Ubuntu 16.04, 18.04
 #
 
 MAN2HTML_PFX=/cgi-bin/man/man2html
