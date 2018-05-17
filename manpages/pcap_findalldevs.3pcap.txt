@@ -50,6 +50,34 @@ DESCRIPTION
                      PCAP_IF_RUNNING
                             set if the device is running
 
+                     PCAP_IF_WIRELESS
+                            set if the device is a  wireless  interface;  this
+                            includes IrDA as well as radio-based networks such
+                            as IEEE 802.15.4 and IEEE 802.11,  so  it  doesn't
+                            just mean Wi-Fi
+
+                     PCAP_IF_CONNECTION_STATUS
+                            a bitmask for an indication of whether the adapter
+                            is connected  or  not;  for  wireless  interfaces,
+                            "connected" means "associated with a network"
+
+                     The possible values for the connection status bits are:
+
+                     PCAP_IF_CONNECTION_STATUS_UNKNOWN
+                            it's  unknown  whether the adapter is connected or
+                            not
+
+                     PCAP_IF_CONNECTION_STATUS_CONNECTED
+                            the adapter is connected
+
+                     PCAP_IF_CONNECTION_STATUS_DISCONNECTED
+                            the adapter is disconnected
+
+                     PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE
+                            the notion of "connected" and "disconnected" don't
+                            apply  to  this interface; for example, it doesn't
+                            apply to a loopback device
+
        Each element of the list of addresses is of type pcap_addr_t,  and  has
        the following members:
 

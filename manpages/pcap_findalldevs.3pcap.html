@@ -108,6 +108,35 @@ set if the device is up
 
 <DD>
 set if the device is running
+<DT><B>PCAP_IF_WIRELESS</B>
+
+<DD>
+set if the device is a wireless interface; this includes IrDA as well as
+radio-based networks such as IEEE 802.15.4 and IEEE 802.11, so it
+doesn't just mean Wi-Fi
+<DT><B>PCAP_IF_CONNECTION_STATUS</B>
+
+<DD>
+a bitmask for an indication of whether the adapter is connected or not;
+for wireless interfaces, &quot;connected&quot; means &quot;associated with a network&quot;
+<DT>The possible values for the connection status bits are:<DD>
+<DT><B>PCAP_IF_CONNECTION_STATUS_UNKNOWN</B>
+
+<DD>
+it's unknown whether the adapter is connected or not
+<DT><B>PCAP_IF_CONNECTION_STATUS_CONNECTED</B>
+
+<DD>
+the adapter is connected
+<DT><B>PCAP_IF_CONNECTION_STATUS_DISCONNECTED</B>
+
+<DD>
+the adapter is disconnected
+<DT><B>PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE</B>
+
+<DD>
+the notion of &quot;connected&quot; and &quot;disconnected&quot; don't apply to this
+interface; for example, it doesn't apply to a loopback device
 </DL>
 </DL>
 
@@ -258,6 +287,6 @@ chars.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 00:07:27 GMT, December 18, 2015
+Time: 20:51:56 GMT, May 17, 2018
 </BODY>
 </HTML>
