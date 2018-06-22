@@ -43,7 +43,10 @@ for
 <B>pcap_dump_fopen()</B>
 
 is called to write data to an existing open stream
-<I>fp</I>.
+<I>fp</I>;
+
+this stream will be closed by a subsequent call to 
+<B>pcap_dump_close()</B>.
 
 Note that on Windows, that stream should be opened in binary mode.
 <P>
@@ -127,6 +130,6 @@ can be used to get the error text.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 00:07:27 GMT, December 18, 2015
+Time: 19:06:42 GMT, June 22, 2018
 </BODY>
 </HTML>

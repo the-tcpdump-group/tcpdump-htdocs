@@ -17,7 +17,9 @@ DESCRIPTION
        synonym for stdout.
 
        pcap_dump_fopen() is called to write data to an  existing  open  stream
-       fp.  Note that on Windows, that stream should be opened in binary mode.
+       fp;   this   stream   will   be   closed   by   a  subsequent  call  to
+       pcap_dump_close().  Note that on Windows, that stream should be  opened
+       in binary mode.
 
        p  is  a  capture or ``savefile'' handle returned by an earlier call to
        pcap_create() and activated by an earlier call to  pcap_activate(),  or
