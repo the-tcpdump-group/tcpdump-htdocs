@@ -168,6 +168,7 @@ produceHTML()
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
 	}
+	# A possible alternative: mandoc -T html $infile > $outfile
 	man2html -M $MAN2HTML_PFX $infile | stripContentTypeHeader | conditionAnchors > $outfile
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
