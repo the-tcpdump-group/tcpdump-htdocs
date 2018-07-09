@@ -1245,7 +1245,7 @@ AUTHORS
 
        The current version is available via http:
 
-              http://www.tcpdump.org/
+              https://www.tcpdump.org/
 
        The original distribution is available via anonymous ftp:
 

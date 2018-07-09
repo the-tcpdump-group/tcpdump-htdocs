@@ -32,7 +32,7 @@ DESCRIPTION
        The  bytes of data from the packet begin with a link-layer header.  The
        format of the link-layer header is indicated by the return value of the
        pcap_datalink()  routine  when  handed  the pcap_t value also passed to
-       pcap_loop() or pcap_dispatch().   http://www.tcpdump.org/linktypes.html
+       pcap_loop() or pcap_dispatch().  https://www.tcpdump.org/linktypes.html
        lists  the  values  pcap_datalink() can return and describes the packet
        formats that correspond to those values.  The value it returns will  be
        valid  for all packets received unless and until pcap_set_datalink() is

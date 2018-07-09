@@ -15,7 +15,7 @@ DESCRIPTION
        It must not be called on a pcap  descriptor  created  by  pcap_create()
        that has not yet been activated by pcap_activate().
 
-       http://www.tcpdump.org/linktypes.html  lists the values pcap_datalink()
+       https://www.tcpdump.org/linktypes.html lists the values pcap_datalink()
        can return and describes the packet formats that  correspond  to  those
        values.
 

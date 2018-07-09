@@ -245,7 +245,7 @@ DESCRIPTION
        taining various forms of packet  meta-data,  and  probably  includes  a
        link-layer  header  whose  contents  can  differ  for different network
        interfaces.  To determine the format of the  packets  supplied  by  the
-       handle,   call  pcap_datalink();  http://www.tcpdump.org/linktypes.html
+       handle,  call  pcap_datalink();  https://www.tcpdump.org/linktypes.html
        lists the values it returns and describes the packet formats that  cor-
        respond to those values.
 
@@ -671,7 +671,7 @@ AUTHORS
 
        The current version is available from "The Tcpdump Group"'s Web site at
 
-              http://www.tcpdump.org/
+              https://www.tcpdump.org/
 
 BUGS
        To report a security issue  please  send  an  e-mail  to  security@tcp-
