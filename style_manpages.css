@@ -1,0 +1,15 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	background: #FFFFFF url(images/img01.gif) repeat-x;
+}
+
+h2, h3 {
+	border-bottom: 1px dashed #B9B9B9;
+}
+
+a:hover {
+	text-decoration: none;
+}

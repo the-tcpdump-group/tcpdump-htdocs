@@ -39,6 +39,8 @@ writeSedFile()
 s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX">Return to Main Contents</A>@g
 s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
 s@^<HTML><HEAD><TITLE>Man page of @<HTML><HEAD><TITLE>Manpage of @
+s@</HEAD><BODY>@<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">\n</HEAD><BODY>@
+s@<H1>@<H1>Manpage of @
 ENDOFFILE
 
 	# Convert links to non-local pages to plain text.
