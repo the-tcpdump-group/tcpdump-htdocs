@@ -10,7 +10,7 @@ SYNOPSIS
 
 DESCRIPTION
        Tcpslice  is  a  program  for extracting portions of packet-trace files
-       generated using tcpdump(l)'s -w flag.  It can also  be  used  to  merge
+       generated using tcpdump(1)'s -w flag.  It can also  be  used  to  merge
        together several such files, as discussed below.
 
        The  basic  operation of tcpslice is to copy to stdout all packets from
