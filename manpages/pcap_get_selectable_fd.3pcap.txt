@@ -76,4 +76,4 @@ SEE ALSO
        pcap(3PCAP),    pcap_get_required_select_timeout(3PCAP),   pcap_setnon-
        block(3PCAP), select(2), poll(2), epoll_wait(2), kqueue(2)
 
-                                20 January 2017  PCAP_GET_SELECTABLE_FD(3PCAP)
+                                20 January 2018  PCAP_GET_SELECTABLE_FD(3PCAP)

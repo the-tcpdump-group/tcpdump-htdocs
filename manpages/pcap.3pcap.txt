@@ -681,4 +681,4 @@ BUGS
        ture, provide generic feedback etc please see the file CONTRIBUTING  in
        the libpcap source tree root.
 
-                                20 January 2017                    PCAP(3PCAP)
+                                 20 April 2018                     PCAP(3PCAP)

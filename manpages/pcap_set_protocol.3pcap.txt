@@ -38,4 +38,4 @@ SEE ALSO
        pcap(3PCAP),   pcap_create(3PCAP),   pcap_activate(3PCAP),   socket(2),
        pcap_setfilter(3PCAP)
 
-                                3 January 2014        PCAP_SET_PROTOCOL(3PCAP)
+                                24 August 2017        PCAP_SET_PROTOCOL(3PCAP)

@@ -38,4 +38,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
 
-                                20 January 2017          PCAP_OPEN_LIVE(3PCAP)
+                                6 December 2017          PCAP_OPEN_LIVE(3PCAP)

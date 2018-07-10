@@ -79,4 +79,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP)
 
-                                 7 April 2014             PCAP_ACTIVATE(3PCAP)
+                                 31 July 2016             PCAP_ACTIVATE(3PCAP)

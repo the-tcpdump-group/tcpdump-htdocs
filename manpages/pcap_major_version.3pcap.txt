@@ -24,4 +24,4 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP)
 
-                                 7 April 2014        PCAP_MAJOR_VERSION(3PCAP)
+                                8 January 2018       PCAP_MAJOR_VERSION(3PCAP)

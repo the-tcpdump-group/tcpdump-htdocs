@@ -39,4 +39,4 @@ SEE ALSO
        pcap(3PCAP),   pcap_get_selectable_fd(3PCAP),    select(2),    poll(2),
        epoll_wait(2), kqueue(2)
 
-                                19 JanuPCAP_GET_REQUIRED_SELECT_TIMEOUT(3PCAP)
+                                20 JanuPCAP_GET_REQUIRED_SELECT_TIMEOUT(3PCAP)

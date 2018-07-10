@@ -761,4 +761,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                 3 August 2015                  PCAP-FILTER(7)
+                                5 November 2017                 PCAP-FILTER(7)

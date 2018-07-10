@@ -45,4 +45,4 @@ SEE ALSO
        pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
        pcap_set_rfmon(3PCAP)
 
-                                3 January 2014       PCAP_CAN_SET_RFMON(3PCAP)
+                                 31 July 2016        PCAP_CAN_SET_RFMON(3PCAP)

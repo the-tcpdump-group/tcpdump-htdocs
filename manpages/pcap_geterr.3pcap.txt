@@ -21,4 +21,4 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP)
 
-                                3 January 2014              PCAP_GETERR(3PCAP)
+                                15 January 2016             PCAP_GETERR(3PCAP)

@@ -58,4 +58,4 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP), pcap_loop(3PCAP), pcap_next_ex(3PCAP)
 
-                                 8 March 2015            PCAP_BREAKLOOP(3PCAP)
+                                8 November 2017          PCAP_BREAKLOOP(3PCAP)

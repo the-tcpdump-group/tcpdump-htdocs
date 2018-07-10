@@ -130,4 +130,4 @@ SEE ALSO
        pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
        pcap_open_live(3PCAP)
 
-                                 7 April 2014          PCAP_FINDALLDEVS(3PCAP)
+                                 29 April 2018         PCAP_FINDALLDEVS(3PCAP)

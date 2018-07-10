@@ -24,4 +24,4 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)
 
-                                3 January 2014          PCAP_DUMP_FTELL(3PCAP)
+                               29 September 2017        PCAP_DUMP_FTELL(3PCAP)

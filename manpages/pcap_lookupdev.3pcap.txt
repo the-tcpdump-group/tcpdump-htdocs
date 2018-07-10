@@ -35,4 +35,4 @@ BUGS
        In WinPcap, this function may return a UTF-16  string  rather  than  an
        ASCII or UTF-8 string.
 
-                                3 January 2014           PCAP_LOOKUPDEV(3PCAP)
+                               8 September 2017          PCAP_LOOKUPDEV(3PCAP)

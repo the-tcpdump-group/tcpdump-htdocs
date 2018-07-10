@@ -21,4 +21,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP)
 
-                                5 December 201PCAP_DATALINK_NAME_TO_VAL(3PCAP)
+                                12 October 201PCAP_DATALINK_NAME_TO_VAL(3PCAP)
