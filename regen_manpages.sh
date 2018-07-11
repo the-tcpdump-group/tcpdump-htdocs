@@ -24,18 +24,13 @@ stripContentTypeHeader()
 	sed -n '/^<HTML><HEAD><TITLE>/,$p'
 }
 
-conditionAnchors()
-{
-	sed --file="$SEDFILE"
-}
-
-writeSedFile()
+printSedFile()
 {
 	local mansection mantopic manfile
 
 	# Fixup custom links.
 	# Suppress some output difference between Fedora and Ubuntu versions of man2html.
-	cat >$SEDFILE <<ENDOFFILE
+	cat <<ENDOFFILE
 s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX">Return to Main Contents</A>@g
 s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
 s@^<HTML><HEAD><TITLE>Man page of @<HTML><HEAD><TITLE>Manpage of @
@@ -46,7 +41,7 @@ ENDOFFILE
 	# Convert links to non-local pages to plain text.
 	while read mansection mantopic; do
 		echo "s@<A HREF=\"$MAN2HTML_PFX?${mansection}+${mantopic}\">$mantopic</A>@$mantopic@g"
-	done >>$SEDFILE <<ENDOFLIST
+	done <<ENDOFLIST
 4P	tcp
 4P	udp
 4P	ip
@@ -73,7 +68,7 @@ ENDOFLIST
 	# Fixup links to local pages, part 1.
 	while read mantopic manfile; do
 		echo "s@<A HREF=\"${MAN2HTML_PFX}?${mantopic}\"@<A HREF=\"$manfile\"@g"
-	done >>$SEDFILE <<ENDOFLIST
+	done <<ENDOFLIST
 7+pcap-linktype		$WEBSITE_PFX/pcap-linktype.7.html
 7+pcap-tstamp		$WEBSITE_PFX/pcap-tstamp.7.html
 7+pcap-filter		$WEBSITE_PFX/pcap-filter.7.html
@@ -92,7 +87,7 @@ ENDOFLIST
 		echo "s@<A HREF=\"$MAN2HTML_PFX?3PCAP+${mantopic}\">$mantopic</A>(3PCAP)@$mantopic(3PCAP)@g"
 		echo "s@$mantopic(3PCAP)@<A HREF='$manfile'>$mantopic</A>(3PCAP)@g"
 		echo "s@<B>$mantopic</B>(3PCAP)@<A HREF='$manfile'><B>$mantopic</B></A>(3PCAP)@g"
-	done >>$SEDFILE
+	done
 }
 
 print3PCAPMap()
@@ -178,13 +173,14 @@ ENDOFLIST
 produceHTML()
 {
 	local infile=${1:?argument required}
-	local outfile=${2:?argument required}
+	local sedfile=${2:?argument required}
+	local outfile=${3:?argument required}
 	[ -s $infile ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
 	}
 	# A possible alternative: mandoc -T html $infile > $outfile
-	man2html -M $MAN2HTML_PFX $infile | stripContentTypeHeader | conditionAnchors > $outfile
+	man2html -M $MAN2HTML_PFX $infile | stripContentTypeHeader | sed --file="$sedfile" > $outfile
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
 	git show $outfile >/dev/null 2>&1 || {
@@ -233,24 +229,24 @@ updateOutputFiles()
 	}
 
 	# $COLUMNS doesn't always work
-	COLS=`stty size | cut -d' ' -f2`
-	if [ "$COLS" != "80" ]; then
-		echo "This terminal must be 80 ($COLS right now) columns wide"
+	local cols=`stty size | cut -d' ' -f2`
+	if [ "$cols" != "80" ]; then
+		echo "This terminal must be 80 ($cols right now) columns wide"
 		exit 1
 	fi
 
-	SEDFILE=`mktemp --tmpdir manpages_sedfile.XXXXXX`
-	writeSedFile
+	local sedfile="`mktemp --tmpdir manpages_sedfile.XXXXXX`"
+	printSedFile > "$sedfile"
 
 	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
 	produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
 	produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
 	produceTXT ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.txt
 
-	produceHTML ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.html
-	produceHTML ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.html
-	produceHTML ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.html
-	produceHTML ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.html
+	produceHTML ../libpcap/pcap-filter.manmisc "$sedfile" manpages/pcap-filter.7.html
+	produceHTML ../libpcap/pcap-linktype.manmisc "$sedfile" manpages/pcap-linktype.7.html
+	produceHTML ../libpcap/pcap-savefile.manfile "$sedfile" manpages/pcap-savefile.5.html
+	produceHTML ../libpcap/pcap-tstamp.manmisc "$sedfile" manpages/pcap-tstamp.7.html
 
 	for f in ../libpcap/*.3pcap; do
 		[ "`known3PCAPFile $f`" = 'no' ] && echo "WARNING: file $f is not in the 3PCAP map"
@@ -258,10 +254,10 @@ updateOutputFiles()
 
 	for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
 		produceTXT $f manpages/`basename $f`.txt
-		produceHTML $f manpages/`basename $f`.html
+		produceHTML $f "$sedfile" manpages/`basename $f`.html
 	done
 
-	rm -f $SEDFILE
+	rm -f "$sedfile"
 }
 
 updateOutputFiles
