@@ -63,6 +63,11 @@ ENDOFFILE
 3	strftime
 4	bpf
 4P	nit
+2	epoll_wait
+2	kqueue
+2	socket
+1	date
+3	isatty
 ENDOFLIST
 
 	# Fixup links to local pages, part 1.
