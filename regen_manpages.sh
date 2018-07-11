@@ -78,7 +78,7 @@ ENDOFLIST
 ENDOFLIST
 
 	# Fixup links to local pages, part 2.
-	while read mantopic manfile; do
+	print3PCAPMap | while read mantopic manfile; do
 		[ "$manfile" = "" ] && manfile=$mantopic
 		manfile="${WEBSITE_PFX}/${manfile}.3pcap.html"
 		# Two substitutions below make up for the new smartness added
@@ -87,7 +87,12 @@ ENDOFLIST
 		echo "s@<A HREF=\"$MAN2HTML_PFX?3PCAP+${mantopic}\">$mantopic</A>(3PCAP)@$mantopic(3PCAP)@g"
 		echo "s@$mantopic(3PCAP)@<A HREF='$manfile'>$mantopic</A>(3PCAP)@g"
 		echo "s@<B>$mantopic</B>(3PCAP)@<A HREF='$manfile'><B>$mantopic</B></A>(3PCAP)@g"
-	done >>$SEDFILE <<ENDOFLIST
+	done >>$SEDFILE
+}
+
+print3PCAPMap()
+{
+	cat <<ENDOFLIST
 pcap
 pcap_activate
 pcap_breakloop
@@ -106,6 +111,7 @@ pcap_dump_file
 pcap_dump_flush
 pcap_dump_fopen							pcap_dump_open
 pcap_dump_ftell
+pcap_dump_ftell64						pcap_dump_ftell
 pcap_dump_open
 pcap_file
 pcap_fileno
@@ -116,6 +122,7 @@ pcap_freealldevs						pcap_findalldevs
 pcap_freecode
 pcap_free_datalinks						pcap_list_datalinks
 pcap_free_tstamp_types						pcap_list_tstamp_types
+pcap_get_required_select_timeout
 pcap_geterr
 pcap_getnonblock						pcap_setnonblock
 pcap_get_selectable_fd
@@ -147,6 +154,7 @@ pcap_setfilter
 pcap_set_immediate_mode
 pcap_setnonblock
 pcap_set_promisc
+pcap_set_protocol_linux
 pcap_set_rfmon
 pcap_set_snaplen
 pcap_set_timeout
@@ -197,6 +205,21 @@ produceTXT()
 	git diff $outfile | egrep -q '^[-+]' && echo "Updated: $outfile"
 }
 
+known3PCAPFile()
+{
+	local f=`basename ${1:?argument required} .3pcap`
+	local manfile mantopic
+	print3PCAPMap | while read mantopic manfile; do
+		if [ "${manfile:-$mantopic}" = "$f" ]; then
+			# Cannot just return 0 or 1 because the while end of
+			# the pipe may be in a sub-shell.
+			echo 'yes'
+			return
+		fi
+	done
+	echo 'no'
+}
+
 updateOutputFiles()
 {
 	which man2html >/dev/null 2>&1 || {
@@ -223,6 +246,10 @@ updateOutputFiles()
 	produceHTML ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.html
 	produceHTML ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.html
 	produceHTML ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.html
+
+	for f in ../libpcap/*.3pcap; do
+		[ "`known3PCAPFile $f`" = 'no' ] && echo "WARNING: file $f is not in the 3PCAP map"
+	done
 
 	for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
 		produceTXT $f manpages/`basename $f`.txt
