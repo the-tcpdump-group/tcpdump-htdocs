@@ -308,7 +308,7 @@ DESCRIPTION
                      set  promiscuous  mode for a not-yet-activated pcap_t for
                      live capture
 
-              pcap_set_protocol(3PCAP)
+              pcap_set_protocol_linux(3PCAP)
                      set capture protocol for a not-yet-activated  pcap_t  for
                      live capture (Linux only)
 

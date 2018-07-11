@@ -1,14 +1,14 @@
-<HTML><HEAD><TITLE>Manpage of PCAP_SET_PROTOCOL</TITLE>
+<HTML><HEAD><TITLE>Manpage of PCAP_SET_PROTOCOL_LINUX</TITLE>
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
-<H1>Manpage of PCAP_SET_PROTOCOL</H1>
+<H1>Manpage of PCAP_SET_PROTOCOL_LINUX</H1>
 Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 24 August 2017<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_set_protocol - set capture protocol for a not-yet-activated
+pcap_set_protocol_linux - set capture protocol for a not-yet-activated
 capture handle
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
@@ -16,14 +16,14 @@ capture handle
 <PRE>
 <B>#include &lt;<A HREF="file:///usr/include/pcap/pcap.h">pcap/pcap.h</A>&gt;
 
-int pcap_set_protocol(pcap_t *p, int protocol);
+int pcap_set_protocol_linux(pcap_t *p, int protocol);
 </B></PRE>
 
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
 On network interface devices on Linux,
-<B>pcap_set_protocol()</B>
+<B>pcap_set_protocol_linux()</B>
 
 sets the protocol to be used in the
 <B><A HREF="/cgi-bin/man/man2html?2+socket">socket</A></B>(2)
@@ -55,12 +55,12 @@ packet type cannot be filtered with a filter specified with
 <B>pcap_setfilter()</B>
 
 but can be filtered by specifying the socket-layer protocol type using
-<B>pcap_set_protocol()</B>.
+<B>pcap_set_protocol_linux()</B>.
 
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_set_protocol()</B>
+<B>pcap_set_protocol_linux()</B>
 
 returns 0 on success or
 <B>PCAP_ERROR_ACTIVATED</B>
@@ -86,6 +86,6 @@ if called on a capture handle that has been activated.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 08:49:05 GMT, July 10, 2018
+Time: 08:17:19 GMT, July 11, 2018
 </BODY>
 </HTML>
