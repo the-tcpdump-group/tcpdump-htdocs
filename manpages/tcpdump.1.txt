@@ -237,9 +237,9 @@ OPTIONS
        -j tstamp_type
        --time-stamp-type=tstamp_type
               Set the time stamp type for the  capture  to  tstamp_type.   The
-              names  to  use  for  the  time  stamp  types  are given in pcap-
-              tstamp(7); not all the types listed there  will  necessarily  be
-              valid for any given interface.
+              names   to   use   for   the  time  stamp  types  are  given  in
+              pcap-tstamp(7); not all the types listed there will  necessarily
+              be valid for any given interface.
 
        -J
        --list-time-stamp-types
@@ -1229,8 +1229,8 @@ OUTPUT FORMAT
        that XO (`exactly once') was not set.
 
 SEE ALSO
-       stty(1),  pcap(3PCAP),  bpf(4),  nit(4P),  pcap-savefile(5),  pcap-fil-
-       ter(7), pcap-tstamp(7)
+       stty(1),     pcap(3PCAP),     bpf(4),     nit(4P),    pcap-savefile(5),
+       pcap-filter(7), pcap-tstamp(7)
 
               http://www.iana.org/assignments/media-types/application/vnd.tcp-
               dump.pcap
