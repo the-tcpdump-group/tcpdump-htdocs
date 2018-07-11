@@ -66,6 +66,9 @@ Original license : Creative Commons Attribution 2.5 License
 |        Protocol type      |
 |         (2 Octets)        |
 +---------------------------+
+|       Reserved (MBZ)      |
+|         (2 Octets)        |
++---------------------------+
 |       Interface index     |
 |         (4 Octets)        |
 +---------------------------+
@@ -96,6 +99,8 @@ Ethernet protocol type, or one of:
 header;</li>
 <li>4, if the frame begins with an 802.2 LLC header.</li>
 </ul>
+</p>
+<p>The "Reserved (MBZ) field is reserved, and must be set to zero.
 </p>
 <p>
 The interface index field is a signed integer in network byte order and
