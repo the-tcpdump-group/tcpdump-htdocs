@@ -175,7 +175,7 @@ ENDOFLIST
 produceHTML()
 {
 	local infile=${1:?argument required}
-	local sedfile=${2:?argument required}
+	local sedfile="${2:?argument required}"
 	local outfile=${3:?argument required}
 	[ -s $infile ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
