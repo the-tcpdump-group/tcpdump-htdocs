@@ -420,8 +420,8 @@ DESCRIPTION
        action act
               True if PF took the specified action when the packet was logged.
               Known  actions  are:  pass and block and, with later versions of
-              pf(4)), nat, rdr, binat  and  scrub  (applies  only  to  packets
-              logged by OpenBSD's or FreeBSD's pf(4)).
+              pf(4), nat, rdr, binat and scrub (applies only to packets logged
+              by OpenBSD's or FreeBSD's pf(4)).
 
        wlan ra ehost
               True  if  the  IEEE 802.11 RA is ehost.  The RA field is used in
