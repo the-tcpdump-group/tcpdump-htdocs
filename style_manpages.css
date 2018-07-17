@@ -14,3 +14,7 @@ a:hover {
 pre {
 	font-size: large;
 }
+
+#indexlist tr.even {
+	background-color: #f0f0f0;
+}
