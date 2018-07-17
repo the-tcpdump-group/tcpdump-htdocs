@@ -46,10 +46,10 @@ guaranteed to be valid after the next call to
 
 <B>pcap_next()</B>,
 
-<B>pcap_loop()</B>,
+<B><A HREF='/manpages/pcap_loop.3pcap.html'>pcap_loop</A>(3PCAP)</B>,
 
 or
-<B>pcap_dispatch()</B>;
+<B><A HREF='/manpages/pcap_loop.3pcap.html'>pcap_dispatch</A>(3PCAP)</B>;
 
 if the code needs them to remain valid, it must make a copy of them.
 <P>
@@ -89,7 +89,7 @@ is filled in with the appropriate values for the packet.
 
 The bytes of data from the packet begin with a link-layer header.  The
 format of the link-layer header is indicated by the return value of the
-<B>pcap_datalink()</B>
+<B>pcap_datalink(PCAP)</B>
 
 routine when handed the
 <B>pcap_t</B>
@@ -108,7 +108,7 @@ lists the values
 can return and describes the packet formats that
 correspond to those values.  The value it returns will be valid for all
 packets received unless and until
-<B>pcap_set_datalink()</B>
+<B><A HREF='/manpages/pcap_set_datalink.3pcap.html'>pcap_set_datalink</A>(3PCAP)</B>
 
 is called; after a successful call to
 <B>pcap_set_datalink()</B>,
@@ -145,10 +145,10 @@ being read from a live capture and the packet buffer timeout expired,
 -1 if an error occurred while reading the packet, and -2 if packets
 are being read from a ``savefile'' and there are no more packets to read
 from the savefile.  If -1 is returned,
-<B>pcap_geterr()</B>
+<B><A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)</B>
 
 or
-<B>pcap_perror()</B>
+<B><A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_perror</A>(3PCAP)</B>
 
 may be called with
 <I>p</I>
@@ -172,8 +172,7 @@ way to determine whether an error occurred or not.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP), <A HREF='/manpages/pcap_loop.3pcap.html'>pcap_dispatch</A>(3PCAP),
-<A HREF='/manpages/pcap_datalink.3pcap.html'>pcap_datalink</A>(3PCAP)
+<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP)
 <P>
 
 <HR>
@@ -189,6 +188,6 @@ way to determine whether an error occurred or not.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 14:13:01 GMT, July 13, 2018
+Time: 16:54:15 GMT, July 17, 2018
 </BODY>
 </HTML>

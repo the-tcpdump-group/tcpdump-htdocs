@@ -32,15 +32,15 @@ than the current system.  For a live capture, it always returns false
 <P>
 
 It must not be called on a pcap descriptor created by
-<B>pcap_create()</B>
+<B><A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP)</B>
 
 that has not yet been activated by
-<B>pcap_activate()</B>.
+<B><A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)</B>.
 
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_datalink()</B>
+<B>pcap_is_swapped()</B>
 
 returns true (1) or false (0) on success and
 <B>PCAP_ERROR_NOT_ACTIVATED</B>
@@ -65,6 +65,6 @@ if called on a capture handle that has been created but not activated.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 14:13:00 GMT, July 13, 2018
+Time: 16:54:14 GMT, July 17, 2018
 </BODY>
 </HTML>

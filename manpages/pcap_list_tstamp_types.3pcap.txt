@@ -26,11 +26,10 @@ RETURN VALUE
        array  on  success  and  PCAP_ERROR on failure.  A return value of zero
        means that you cannot specify a time stamp type; you are limited to the
        capture  device's  default time stamp type.  If PCAP_ERROR is returned,
-       pcap_geterr() or pcap_perror() may be called with p as an  argument  to
-       fetch or display the error text.
+       pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called  with  p  as  an
+       argument to fetch or display the error text.
 
 SEE ALSO
-       pcap(3PCAP),  pcap_geterr(3PCAP),  pcap_tstamp_type_val_to_name(3PCAP),
-       pcap-tstamp(7)
+       pcap(3PCAP), pcap_tstamp_type_val_to_name(3PCAP), pcap-tstamp(7)
 
                                 22 August 2010   PCAP_LIST_TSTAMP_TYPES(3PCAP)

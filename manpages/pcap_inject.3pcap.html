@@ -36,7 +36,7 @@ is the number of bytes in the packet.
 Note that, even if you successfully open the network interface, you
 might not have permission to send packets on it, or it might not support
 sending packets; as
-<I>pcap_open_live()</I>
+<B><A HREF='/manpages/pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP)</B>
 
 doesn't have a flag to indicate whether to open for capturing, sending,
 or capturing and sending, you cannot request an open that supports
@@ -87,10 +87,10 @@ returns 0 on success and -1 on failure.
 <P>
 
 If -1 is returned,
-<B>pcap_geterr()</B>
+<B><A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)</B>
 
 or
-<B>pcap_perror()</B>
+<B><A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_perror</A>(3PCAP)</B>
 
 may be called with
 <I>p</I>
@@ -99,7 +99,7 @@ as an argument to fetch or display the error text.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)
+<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP)
 <P>
 
 <HR>
@@ -115,6 +115,6 @@ as an argument to fetch or display the error text.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 14:13:00 GMT, July 13, 2018
+Time: 16:54:14 GMT, July 17, 2018
 </BODY>
 </HTML>

@@ -27,11 +27,11 @@ be done for a live capture
 returns, on UNIX, a file descriptor number for a file descriptor on
 which one can
 do a
-<B>select()</B>,
+<B>select(2)</B>,
 
-<B>poll()</B>,
+<B>poll(2)</B>,
 
-<B>epoll_wait()</B>,
+<B>epoll_wait(2)</B>,
 
 <B>kevent()</B>,
 
@@ -41,25 +41,25 @@ a descriptor exists, or -1, if no such descriptor exists.
 <P>
 
 Some network devices opened with
-<B>pcap_create()</B>
+<B><A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP)</B>
 
 and
-<B>pcap_activate()</B>,
+<B><A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)</B>,
 
 or with
-<B>pcap_open_live()</B>,
+<B><A HREF='/manpages/pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP)</B>,
 
 do not support those calls (for example, regular network devices on
 FreeBSD 4.3 and 4.4, and Endace DAG devices), so -1 is returned for
 those devices.  In that case, those calls must be given a timeout less
 than or equal to the timeout returned by
-<B>pcap_get_required_select_timeout()</B>
+<B><A HREF='/manpages/pcap_get_required_select_timeout.3pcap.html'>pcap_get_required_select_timeout</A>(3PCAP)</B>
 
 for the device for which
 <B>pcap_get_selectable_fd()</B>
 
 returned -1, the device must be put in non-blocking mode with a call to
-<B>pcap_setnonblock()</B>,
+<B><A HREF='/manpages/pcap_setnonblock.3pcap.html'>pcap_setnonblock</A>(3PCAP)</B>,
 
 and an attempt must always be made to read packets from the device
 when the call returns.  If
@@ -75,10 +75,10 @@ event loop.
 Note that a device on which a read can be done without blocking may,
 on some platforms, not have any packets to read if the packet buffer
 timeout has expired.  A call to
-<B>pcap_dispatch()</B>
+<B><A HREF='/manpages/pcap_loop.3pcap.html'>pcap_dispatch</A>(3PCAP)</B>
 
 or
-<B>pcap_next_ex()</B>
+<B><A HREF='/manpages/pcap_next_ex.3pcap.html'>pcap_next_ex</A>(3PCAP)</B>
 
 will return 0 in this case, but will not block.
 <P>
@@ -178,8 +178,7 @@ is returned.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_get_required_select_timeout.3pcap.html'>pcap_get_required_select_timeout</A>(3PCAP),
-<A HREF='/manpages/pcap_setnonblock.3pcap.html'>pcap_setnonblock</A>(3PCAP), select(2), poll(2), epoll_wait(2), kqueue(2)
+<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), kqueue(2)
 <P>
 
 <HR>
@@ -195,6 +194,6 @@ is returned.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 14:12:59 GMT, July 13, 2018
+Time: 16:54:13 GMT, July 17, 2018
 </BODY>
 </HTML>

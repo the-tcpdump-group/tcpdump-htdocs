@@ -20,19 +20,19 @@ DESCRIPTION
        pcap_free_datalinks(), which frees the list of link-layer header  types
        pointed to by dlt_list.
 
-       It  must  not  be  called on a pcap descriptor created by pcap_create()
-       that has not yet been activated by pcap_activate().
+       It   must   not   be   called   on   a   pcap   descriptor  created  by
+       pcap_create(3PCAP)   that   has   not    yet    been    activated    by
+       pcap_activate(3PCAP).
 
 RETURN VALUE
-       pcap_list_datalinks() returns the number of link-layer header types  in
-       the  array  on success, PCAP_ERROR_NOT_ACTIVATED if called on a capture
-       handle that has been created but not activated, and PCAP_ERROR (-1)  on
-       other  errors.   If  PCAP_ERROR is returned, pcap_geterr() or pcap_per-
-       ror() may be called with p as an argument to fetch or display the error
-       text.
+       pcap_list_datalinks()  returns the number of link-layer header types in
+       the array on success, PCAP_ERROR_NOT_ACTIVATED if called on  a  capture
+       handle  that has been created but not activated, and PCAP_ERROR (-1) on
+       other  errors.   If  PCAP_ERROR  is  returned,  pcap_geterr(3PCAP)   or
+       pcap_perror(3PCAP) may be called with p as an argument to fetch or dis-
+       play the error text.
 
 SEE ALSO
-       pcap(3PCAP),    pcap_geterr(3PCAP),   pcap_datalink_val_to_name(3PCAP),
-       pcap-linktype(7)
+       pcap(3PCAP), pcap_datalink_val_to_name(3PCAP), pcap-linktype(7)
 
                                  8 March 2015       PCAP_LIST_DATALINKS(3PCAP)

@@ -17,22 +17,21 @@ DESCRIPTION
        the list is empty, there are no devices on which capture is possible.)
 
        pcap_lookupdev() returns a pointer to a string giving  the  name  of  a
-       network device suitable for use with pcap_create() and pcap_activate(),
-       or with pcap_open_live(), and with pcap_lookupnet().  If  there  is  an
-       error,  NULL  is  returned  and errbuf is filled in with an appropriate
-       error message.   errbuf  is  assumed  to  be  able  to  hold  at  least
-       PCAP_ERRBUF_SIZE chars.
+       network   device   suitable   for   use   with  pcap_create(3PCAP)  and
+       pcap_activate(3PCAP),   or   with   pcap_open_live(3PCAP),   and   with
+       pcap_lookupnet(3PCAP).   If  there  is  an  error, NULL is returned and
+       errbuf is filled in with  an  appropriate  error  message.   errbuf  is
+       assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
 
 SEE ALSO
-       pcap(3PCAP),          pcap_create(3PCAP),         pcap_activate(3PCAP),
-       pcap_open_live(3PCAP), pcap_lookupnet(3PCAP)
+       pcap(3PCAP)
 
 BUGS
-       The pointer returned by pcap_lookupdev() points  to  a  static  buffer;
-       subsequent  calls  to  pcap_lookupdev() in the same thread, or calls to
+       The  pointer  returned  by  pcap_lookupdev() points to a static buffer;
+       subsequent calls to pcap_lookupdev() in the same thread,  or  calls  to
        pcap_lookupdev() in another thread, may overwrite that buffer.
 
-       In WinPcap, this function may return a UTF-16  string  rather  than  an
+       In  WinPcap,  this  function  may return a UTF-16 string rather than an
        ASCII or UTF-8 string.
 
                                8 September 2017          PCAP_LOOKUPDEV(3PCAP)

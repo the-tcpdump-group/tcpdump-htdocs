@@ -14,15 +14,15 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_findalldevs() constructs a list of network  devices  that  can  be
-       opened with pcap_create() and pcap_activate() or with pcap_open_live().
-       (Note that there may be network devices that cannot be  opened  by  the
-       process  calling pcap_findalldevs(), because, for example, that process
-       does not have sufficient privileges to open them for capturing; if  so,
-       those devices will not appear on the list.)  If pcap_findalldevs() suc-
-       ceeds, the pointer pointed to by alldevsp is set to point to the  first
-       element  of the list, or to NULL if no devices were found (this is con-
-       sidered success).  Each element of the list is of type  pcap_if_t,  and
-       has the following members:
+       opened   with   pcap_create(3PCAP)  and  pcap_activate(3PCAP)  or  with
+       pcap_open_live(3PCAP).  (Note that there may be  network  devices  that
+       cannot  be  opened  by the process calling pcap_findalldevs(), because,
+       for example, that process does not have sufficient privileges  to  open
+       them  for capturing; if so, those devices will not appear on the list.)
+       If pcap_findalldevs() succeeds, the pointer pointed to by  alldevsp  is
+       set to point to the first element of the list, or to NULL if no devices
+       were found (this is considered success).  Each element of the  list  is
+       of type pcap_if_t, and has the following members:
 
               next   if  not  NULL, a pointer to the next element in the list;
                      NULL for the last element of the list
@@ -116,8 +116,8 @@ DESCRIPTION
        pointed to a struct sockaddr_in; for IPv6 addresses, it can  be  inter-
        preted as if it pointed to a struct sockaddr_in6.
 
-       The  list of devices must be freed with pcap_freealldevs(), which frees
-       the list pointed to by alldevs.
+       The  list  of devices must be freed with pcap_freealldevs(3PCAP), which
+       frees the list pointed to by alldevs.
 
 RETURN VALUE
        pcap_findalldevs() returns 0 on success and -1  on  failure;  as  indi-
@@ -127,7 +127,6 @@ RETURN VALUE
        able to hold at least PCAP_ERRBUF_SIZE chars.
 
 SEE ALSO
-       pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
-       pcap_open_live(3PCAP)
+       pcap(3PCAP)
 
                                  29 April 2018         PCAP_FINDALLDEVS(3PCAP)

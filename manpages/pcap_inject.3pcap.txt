@@ -16,10 +16,10 @@ DESCRIPTION
 
        Note  that,  even  if  you successfully open the network interface, you
        might not have permission to send packets on it, or it might  not  sup-
-       port  sending packets; as pcap_open_live() doesn't have a flag to indi-
-       cate whether to open for capturing, sending, or capturing and  sending,
-       you  cannot  request  an  open that supports sending and be notified at
-       open time whether sending  will  be  possible.   Note  also  that  some
+       port  sending  packets; as pcap_open_live(3PCAP) doesn't have a flag to
+       indicate whether to open for capturing, sending, or capturing and send-
+       ing,  you  cannot request an open that supports sending and be notified
+       at open time whether sending will be possible.   Note  also  that  some
        devices might not support sending packets.
 
        Note  that,  on  some  platforms,  the  link-layer header of the packet
@@ -44,10 +44,10 @@ RETURN VALUE
 
        pcap_sendpacket() returns 0 on success and -1 on failure.
 
-       If -1 is returned, pcap_geterr() or pcap_perror() may be called with  p
-       as an argument to fetch or display the error text.
+       If -1 is returned,  pcap_geterr(3PCAP)  or  pcap_perror(3PCAP)  may  be
+       called with p as an argument to fetch or display the error text.
 
 SEE ALSO
-       pcap(3PCAP), pcap_geterr(3PCAP)
+       pcap(3PCAP)
 
                                 3 January 2014              PCAP_INJECT(3PCAP)
