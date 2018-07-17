@@ -47,7 +47,7 @@ is called to write data to an existing open stream
 <I>fp</I>;
 
 this stream will be closed by a subsequent call to
-<B>pcap_dump_close()</B>.
+<B><A HREF='/manpages/pcap_dump_close.3pcap.html'>pcap_dump_close</A>(3PCAP)</B>.
 
 Note that on Windows, that stream should be opened in binary mode.
 <P>
@@ -55,18 +55,18 @@ Note that on Windows, that stream should be opened in binary mode.
 <I>p</I>
 
 is a capture or ``savefile'' handle returned by an earlier call to
-<B>pcap_create()</B>
+<B><A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP)</B>
 
 and activated by an earlier call to
-<B>pcap_activate()</B>,
+<B><A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)</B>,
 
 or returned by an earlier call to
-<B>pcap_open_offline()</B>,
+<B><A HREF='/manpages/pcap_open_offline.3pcap.html'>pcap_open_offline</A>(3PCAP)</B>,
 
-<B>pcap_open_live()</B>,
+<B><A HREF='/manpages/pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP)</B>,
 
 or
-<B>pcap_open_dead()</B>.
+<B><A HREF='/manpages/pcap_open_dead.3pcap.html'>pcap_open_dead</A>(3PCAP)</B>.
 
 The time stamp precision, link-layer type, and snapshot length from
 <I>p</I>
@@ -93,10 +93,10 @@ A pointer to a
 <B>pcap_dumper_t</B>
 
 structure to use in subsequent
-<B>pcap_dump()</B>
+<B><A HREF='/manpages/pcap_dump.3pcap.html'>pcap_dump</A>(3PCAP)</B>
 
 and
-<B>pcap_dump_close()</B>
+<B><A HREF='/manpages/pcap_dump_close.3pcap.html'>pcap_dump_close</A>(3PCAP)</B>
 
 calls is returned on success.
 <B>NULL</B>
@@ -106,15 +106,13 @@ If
 <B>NULL</B>
 
 is returned,
-<B>pcap_geterr(</B><I>p</I><B>)</B>
+<B><A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)</B>
 
 can be used to get the error text.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP), <A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP),
-<A HREF='/manpages/pcap_open_offline.3pcap.html'>pcap_open_offline</A>(3PCAP), <A HREF='/manpages/pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP), <A HREF='/manpages/pcap_open_dead.3pcap.html'>pcap_open_dead</A>(3PCAP),
-<A HREF='/manpages/pcap_dump.3pcap.html'>pcap_dump</A>(3PCAP), <A HREF='/manpages/pcap_dump_close.3pcap.html'>pcap_dump_close</A>(3PCAP), <A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP),
+<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP),
 <A HREF="/manpages/pcap-savefile.5.html">pcap-savefile</A>(5)
 <P>
 
@@ -131,6 +129,6 @@ can be used to get the error text.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 07:48:40 GMT, July 16, 2018
+Time: 21:06:05 GMT, July 17, 2018
 </BODY>
 </HTML>

@@ -31,11 +31,10 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_compile() returns 0 on success  and  -1  on  failure.   If  -1  is
-       returned,  pcap_geterr()  or  pcap_perror()  may be called with p as an
-       argument to fetch or display the error text.
+       returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p
+       as an argument to fetch or display the error text.
 
 SEE ALSO
-       pcap(3PCAP),        pcap_setfilter(3PCAP),        pcap_freecode(3PCAP),
-       pcap_geterr(3PCAP), pcap-filter(7)
+       pcap(3PCAP), pcap_setfilter(3PCAP), pcap_freecode(3PCAP),
 
                                  24 March 2017             PCAP_COMPILE(3PCAP)
