@@ -10,13 +10,13 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_dump_flush()  flushes  the  output  buffer to the ``savefile,'' so
-       that any packets written with pcap_dump() but not yet  written  to  the
-       ``savefile'' will be written.
+       that any packets written with pcap_dump(3PCAP) but not yet  written  to
+       the ``savefile'' will be written.
 
 RETURN VALUE
        pcap_dump_flush() returns 0 on success and -1 on failure.
 
 SEE ALSO
-       pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)
+       pcap(3PCAP), pcap_dump_open(3PCAP)
 
                                 3 January 2014          PCAP_DUMP_FLUSH(3PCAP)

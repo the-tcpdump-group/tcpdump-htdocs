@@ -10,9 +10,9 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_file()  returns  the standard I/O stream of the ``savefile,'' if a
-       ``savefile'' was opened with pcap_open_offline(), or NULL, if a network
-       device  was  opened  with  pcap_create()  and  pcap_activate(), or with
-       pcap_open_live().
+       ``savefile'' was opened with pcap_open_offline(3PCAP), or  NULL,  if  a
+       network    device    was    opened    with    pcap_create(3PCAP)    and
+       pcap_activate(3PCAP), or with pcap_open_live(3PCAP).
 
        Note that the Packet Capture library is usually built with  large  file
        support,  so the standard I/O stream of the ``savefile'' might refer to
@@ -22,6 +22,6 @@ DESCRIPTION
        return value of pcap_file().
 
 SEE ALSO
-       pcap(3PCAP), pcap_open_offline(3PCAP)
+       pcap(3PCAP)
 
                                 3 January 2014                PCAP_FILE(3PCAP)

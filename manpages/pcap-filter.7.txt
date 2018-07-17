@@ -6,8 +6,8 @@ NAME
 DESCRIPTION
        pcap_compile()  is used to compile a string into a filter program.  The
        resulting filter program can then be applied to some stream of  packets
-       to  determine  which packets will be supplied to pcap_loop(), pcap_dis-
-       patch(), pcap_next(), or pcap_next_ex().
+       to  determine  which  packets  will  be  supplied  to pcap_loop(3PCAP),
+       pcap_dispatch(3PCAP), pcap_next(3PCAP), or pcap_next_ex(3PCAP).
 
        The filter expression consists of one or more  primitives.   Primitives
        usually consist of an id (name or number) preceded by one or more qual-

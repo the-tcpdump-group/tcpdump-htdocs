@@ -17,9 +17,9 @@ DESCRIPTION
        argument of "any" or NULL can be  used  to  capture  packets  from  all
        interfaces.
 
-       The returned handle must be activated with pcap_activate() before pack-
-       ets can be captured with it; options for the capture, such as promiscu-
-       ous mode, can be set on the handle before activating it.
+       The  returned handle must be activated with pcap_activate(3PCAP) before
+       packets can be captured with it; options for the capture, such as  pro-
+       miscuous mode, can be set on the handle before activating it.
 
 RETURN VALUE
        pcap_create()  returns  a  pcap_t * on success and NULL on failure.  If
@@ -28,6 +28,6 @@ RETURN VALUE
        chars.
 
 SEE ALSO
-       pcap(3PCAP), pcap_activate(3PCAP)
+       pcap(3PCAP)
 
                                 3 January 2014              PCAP_CREATE(3PCAP)
