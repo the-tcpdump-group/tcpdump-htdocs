@@ -18,7 +18,7 @@ DESCRIPTION
        support,  so the standard I/O stream of the ``savefile'' might refer to
        a file larger than  2  gigabytes;  applications  that  use  pcap_file()
        should,  if  possible, use calls that support large files on the return
-       value of pcap_file() or the value returned by fileno() when passed  the
+       value of pcap_file() or the value returned by fileno(3) when passed the
        return value of pcap_file().
 
 SEE ALSO
