@@ -21,7 +21,7 @@ DESCRIPTION
        will have no effect.
 
        It should not be used in portable code; instead,  a  filter  should  be
-       specified with pcap_setfilter().
+       specified with pcap_setfilter(3PCAP).
 
        If  a  given  network  interface provides a standard link-layer header,
        with a standard packet type, but provides some packet types with a dif-
@@ -35,7 +35,6 @@ RETURN VALUE
        if called on a capture handle that has been activated.
 
 SEE ALSO
-       pcap(3PCAP),   pcap_create(3PCAP),   pcap_activate(3PCAP),   socket(2),
-       pcap_setfilter(3PCAP)
+       pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
 
                                 24 August 2017  PCAP_SET_PROTOCOL_LINUX(3PCAP)

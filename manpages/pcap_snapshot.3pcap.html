@@ -24,20 +24,20 @@ pcap_snapshot - get the snapshot length
 <B>pcap_snapshot()</B>
 
 returns the snapshot length specified when
-<B>pcap_set_snapshot()</B>
+<B>pcap_set_snapshot(3PCAP)</B>
 
 or
-<B>pcap_open_live()</B>
+<B><A HREF='/manpages/pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP)</B>
 
 was called, for a live capture, or the snapshot length from the capture
 file, for a ``savefile''.
 <P>
 
 It must not be called on a pcap descriptor created by
-<B>pcap_create()</B>
+<B><A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP)</B>
 
 that has not yet been activated by
-<B>pcap_activate()</B>.
+<B><A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)</B>.
 
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
@@ -67,6 +67,6 @@ if called on a capture handle that has been created but not activated.
 This document was created by
 man2html,
 using the manual pages.<BR>
-Time: 14:13:03 GMT, July 13, 2018
+Time: 11:40:14 GMT, July 18, 2018
 </BODY>
 </HTML>

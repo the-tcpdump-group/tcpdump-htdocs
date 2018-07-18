@@ -25,7 +25,7 @@ RETURN VALUE
        called on a capture handle that has been activated.
 
 SEE ALSO
-       pcap(3PCAP),          pcap_create(3PCAP),         pcap_activate(3PCAP),
+       pcap_create(3PCAP),                               pcap_activate(3PCAP),
        pcap_set_immediate_mode(3PCAP)
 
                                 6 December 2017        PCAP_SET_TIMEOUT(3PCAP)

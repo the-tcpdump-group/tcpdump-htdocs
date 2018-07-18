@@ -12,7 +12,4 @@ DESCRIPTION
        pcap_strerror()  is  provided  in case strerror(3) isn't available.  It
        returns an error message string corresponding to error.
 
-SEE ALSO
-       strerror(3)
-
                                 3 January 2014            PCAP_STRERROR(3PCAP)

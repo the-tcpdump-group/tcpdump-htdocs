@@ -10,11 +10,13 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_snapshot()    returns   the   snapshot   length   specified   when
-       pcap_set_snapshot() or pcap_open_live() was called, for a live capture,
-       or the snapshot length from the capture file, for a ``savefile''.
+       pcap_set_snapshot(3PCAP) or pcap_open_live(3PCAP)  was  called,  for  a
+       live  capture,  or  the  snapshot  length  from the capture file, for a
+       ``savefile''.
 
-       It  must  not  be  called on a pcap descriptor created by pcap_create()
-       that has not yet been activated by pcap_activate().
+       It  must  not   be   called   on   a   pcap   descriptor   created   by
+       pcap_create(3PCAP)    that    has    not    yet   been   activated   by
+       pcap_activate(3PCAP).
 
 RETURN VALUE
        pcap_snapshot()  returns   the   snapshot   length   on   success   and

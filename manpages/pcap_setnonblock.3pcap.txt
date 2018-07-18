@@ -19,15 +19,15 @@ DESCRIPTION
        If  there  is  an error, -1 is returned and errbuf is filled in with an
        appropriate error message; otherwise, 0 is returned.   In  ``non-block-
        ing''  mode,  an  attempt  to  read  from  the  capture descriptor with
-       pcap_dispatch() will, if no packets are currently available to be read,
-       return  0  immediately  rather  than  blocking  waiting  for packets to
-       arrive.  pcap_loop() and pcap_next() will not work in  ``non-blocking''
-       mode.
-
-       When    first   activated   with   pcap_activate()   or   opened   with
-       pcap_open_live() , a capture handle is not in ``non-blocking mode'';  a
-       call  to  pcap_setnonblock() is required in order to put it into ``non-
+       pcap_dispatch(3PCAP) will, if no packets are currently available to  be
+       read,  return 0 immediately rather than blocking waiting for packets to
+       arrive.  pcap_loop(3PCAP) and pcap_next(3PCAP) will not work in  ``non-
        blocking'' mode.
+
+       When   first   activated   with  pcap_activate(3PCAP)  or  opened  with
+       pcap_open_live(3PCAP) , a  capture  handle  is  not  in  ``non-blocking
+       mode'';  a  call  to  pcap_setnonblock() is required in order to put it
+       into ``non-blocking'' mode.
 
 RETURN VALUE
        pcap_getnonblock() returns the current ``non-blocking''  state  of  the
@@ -38,6 +38,6 @@ RETURN VALUE
        errbuf is assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
 
 SEE ALSO
-       pcap(3PCAP), pcap_loop(3PCAP), pcap_next_ex(3PCAP), pcap_geterr(3PCAP)
+       pcap(3PCAP), pcap_next_ex(3PCAP), pcap_geterr(3PCAP)
 
                                 18 October 2014        PCAP_SETNONBLOCK(3PCAP)
