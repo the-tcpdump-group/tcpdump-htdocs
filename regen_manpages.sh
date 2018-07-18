@@ -65,6 +65,7 @@ ENDOFFILE
 2	socket
 1	date
 3	isatty
+3	fileno
 ENDOFLIST
 
 	# Fixup links to local pages, part 1.
