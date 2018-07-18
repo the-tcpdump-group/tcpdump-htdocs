@@ -66,6 +66,7 @@ ENDOFFILE
 1	date
 3	isatty
 3	fileno
+1	ECT
 ENDOFLIST
 
 	# Fixup links to local pages, part 1.
