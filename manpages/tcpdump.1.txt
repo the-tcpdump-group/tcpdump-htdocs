@@ -71,7 +71,7 @@ DESCRIPTION
        packet buffer into the output file.
 
        Reading packets from a network interface may require that you have spe-
-       cial  privileges; see the pcap (3PCAP) man page for details.  Reading a
+       cial  privileges;  see the pcap(3PCAP) man page for details.  Reading a
        saved packet file doesn't require special privileges.
 
 OPTIONS
@@ -121,8 +121,8 @@ OPTIONS
               where the interface name is a somewhat complex string.
 
               The  -D  flag will not be supported if tcpdump was built with an
-              older version of libpcap that lacks the pcap_findalldevs() func-
-              tion.
+              older version of libpcap that lacks the  pcap_findalldevs(3PCAP)
+              function.
 
        -e     Print  the  link-level  header  on  each dump line.  This can be
               used, for example, to print MAC layer  addresses  for  protocols
@@ -441,8 +441,8 @@ OPTIONS
               the output buffer fills.
 
               The -U flag will not be supported if tcpdump was built  with  an
-              older  version of libpcap that lacks the pcap_dump_flush() func-
-              tion.
+              older  version  of libpcap that lacks the pcap_dump_flush(3PCAP)
+              function.
 
        -v     When parsing and printing, produce (slightly more) verbose  out-
               put.   For  example,  the  time  to  live, identification, total
