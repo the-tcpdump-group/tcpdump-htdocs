@@ -34,7 +34,7 @@ stripIndexSection()
 		cat
 		;;
 	*)
-		sed '/^<A NAME="index">/,/^<HR>/d'
+		sed '/^<A NAME="index">/,/^<HR>/d' | sed 's@<A HREF="#index">Index</A>@@'
 		;;
 	esac
 }
