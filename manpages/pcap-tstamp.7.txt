@@ -128,4 +128,7 @@ DESCRIPTION
        hardware  or  operating  system and, when reading a savefile, this does
        not indicate the actual precision of time stamps in the file.
 
+SEE ALSO
+       pcap(3PCAP)
+
                                  8 March 2015                   PCAP-TSTAMP(7)

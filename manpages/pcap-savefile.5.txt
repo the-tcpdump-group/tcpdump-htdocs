@@ -99,6 +99,6 @@ DESCRIPTION
        less than or equal to the snapshot length.
 
 SEE ALSO
-       pcap(3PCAP), pcap-linktype(7)
+       pcap(3PCAP)
 
                                  8 March 2015                 PCAP-SAVEFILE(5)

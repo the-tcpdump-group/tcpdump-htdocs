@@ -36,6 +36,6 @@ RETURN VALUE
        assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
 
 SEE ALSO
-       pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
+       pcap_create(3PCAP), pcap_activate(3PCAP)
 
                                 6 December 2017          PCAP_OPEN_LIVE(3PCAP)

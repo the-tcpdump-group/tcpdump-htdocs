@@ -22,6 +22,6 @@ DESCRIPTION
        https://www.tcpdump.org/linktypes.html.
 
 SEE ALSO
-       pcap_datalink(3PCAP)
+       pcap(3PCAP)
 
                                  7 April 2014                 PCAP-LINKTYPE(7)

@@ -21,4 +21,7 @@ DESCRIPTION
        value  to  a short description of that link-layer header type.  NULL is
        returned if the type value does not correspond to a known DLT_ value.
 
+SEE ALSO
+       pcap(3PCAP)
+
                                 12 October 201PCAP_DATALINK_VAL_TO_NAME(3PCAP)
