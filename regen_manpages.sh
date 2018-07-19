@@ -24,6 +24,21 @@ stripContentTypeHeader()
 	sed -n '/^<HTML><HEAD><TITLE>/,$p'
 }
 
+# Most (but not all) of the generated HTML files have a short useless
+# "Index" section near EOF.
+stripIndexSection()
+{
+	local infile=${1:?argument required}
+	case `basename "$infile"` in
+	tcpdump.1|tcpslice.1|pcap.3pcap)
+		cat
+		;;
+	*)
+		sed '/^<A NAME="index">/,/^<HR>/d'
+		;;
+	esac
+}
+
 printSedFile()
 {
 	local mansection mantopic manfile
@@ -31,6 +46,7 @@ printSedFile()
 	# Fixup custom links.
 	# Suppress some output difference between Fedora and Ubuntu versions of man2html.
 	# Convert file:// schema hyperlinks to plain text.
+	# Customize the page footer.
 	cat <<ENDOFFILE
 s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX">Return to Main Contents</A>@g
 s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
@@ -38,6 +54,7 @@ s@^<HTML><HEAD><TITLE>Man page of @<HTML><HEAD><TITLE>Manpage of @
 s@</HEAD><BODY>@<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">\n</HEAD><BODY>@
 s@<H1>@<H1>Manpage of @
 s@<A HREF="file://\(.*\)">\(.*\)</A>@\2@g
+s/^using the manual pages.<BR>$/using the manual pages from "The Tcpdump Group" git repositories.<BR>/
 ENDOFFILE
 
 	# Convert links to non-local pages to plain text.
@@ -184,7 +201,8 @@ produceHTML()
 		return
 	}
 	# A possible alternative: mandoc -T html $infile > $outfile
-	man2html -M $MAN2HTML_PFX $infile | stripContentTypeHeader | sed --file="$sedfile" > $outfile
+	man2html -M $MAN2HTML_PFX $infile | stripContentTypeHeader | \
+		stripIndexSection $infile | sed --file="$sedfile" > $outfile
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
 	git show $outfile >/dev/null 2>&1 || {
