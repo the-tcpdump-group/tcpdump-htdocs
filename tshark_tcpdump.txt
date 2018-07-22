@@ -1,0 +1,27 @@
+Date: Thu, 5 Jul 2018 18:04:53 -0400
+From: Viktor Dukhovni <openssl-users@dukhovni.org>
+To: openssl-users@openssl.org
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Subject: Re: [openssl-users] Packet capture SSL traffic
+Reply-To: openssl-users@openssl.org
+Sender: "openssl-users" <openssl-users-bounces@openssl.org>
+X-Antispam-Training-Phish: https://emailfilteringservice.net/canit/b.php?c=p&i=0gW7a58ND&m=66e67f3b9c87&rlm=sandelman-ca&t=20180705
+
+On Thu, Jul 05, 2018 at 11:50:12PM +0530, Kaushal Shriyan wrote:
+
+> Is there a way to capture SSL traffic using openssl and tcpdump or any
+> other utility on Linux? I look forward to hearing from you.
+
+
+See the bottom of:
+
+    https://mta.openssl.org/pipermail/openssl-users/2017-April/005624.html
+
+for a short summary of how to combine "tcpdump" and "tshark" (the
+wireshark CLI) to get textual SSL traffic decoding.
+
+-- 
+	Viktor.
+-- 
+openssl-users mailing list
+To unsubscribe: https://mta.openssl.org/mailman/listinfo/openssl-users
