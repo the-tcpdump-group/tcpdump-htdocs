@@ -462,9 +462,9 @@ DESCRIPTION
        Non-blocking  mode is often combined with routines such as select(2) or
        poll(2) or other routines a platform offers to wait for any of a set of
        descriptors to be ready to read.  To obtain, for a handle, a descriptor
-       that can be used in those routines, call pcap_get_selectable_fd().Ifth-
-       eroutineindicatesthatdatais  available  to  read  on the descriptor, an
-       attempt should be made to read from the device.
+       that can be used in those routines, call pcap_get_selectable_fd().   If
+       the routine indicates that data is available to read on the descriptor,
+       an attempt should be made to read from the device.
 
        Not    all    handles    have    such    a    descriptor     available;
        pcap_get_selectable_fd() will return -1 if no such descriptor is avail-
