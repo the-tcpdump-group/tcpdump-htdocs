@@ -462,16 +462,28 @@ DESCRIPTION
        Non-blocking  mode is often combined with routines such as select(2) or
        poll(2) or other routines a platform offers to wait for any of a set of
        descriptors to be ready to read.  To obtain, for a handle, a descriptor
-       that can be used in those routines, call pcap_get_selectable_fd().  Not
-       all  handles have such a descriptor available; pcap_get_selectable_fd()
-       will return -1 if no such descriptor exists.  In addition, for  various
-       reasons,  one or more of those routines will not work properly with the
-       descriptor;  the  documentation  for   pcap_get_selectable_fd()   gives
-       details.   Note  that, just as an attempt to read packets from a pcap_t
-       may not return any packets if the  packet  buffer  timeout  expires,  a
-       select(),  poll(), or other such call may, if the packet buffer timeout
-       expires, indicate that a descriptor is ready to read even if there  are
-       no packets available to read.
+       that can be used in those routines, call pcap_get_selectable_fd().Ifth-
+       eroutineindicatesthatdatais  available  to  read  on the descriptor, an
+       attempt should be made to read from the device.
+
+       Not    all    handles    have    such    a    descriptor     available;
+       pcap_get_selectable_fd() will return -1 if no such descriptor is avail-
+       able.  If no such descriptor is available,  this  may  be  because  the
+       device   must  be  polled  periodically  for  packets;  in  that  case,
+       pcap_get_required_select_timeout() will return a pointer  to  a  struct
+       timeval  whose  value can be used as a timeout in those routines.  When
+       the routine returns, an attmept should be made to read packets from the
+       device.   If  pcap_get_required_select_timeout()  returns NULL, no such
+       timeout is available, and  those  routines  cannot  be  used  with  the
+       device.
+
+       In  addition,  for  various reasons, one or more of those routines will
+       not  work  properly  with  the  descriptor;   the   documentation   for
+       pcap_get_selectable_fd()  gives details.  Note that, just as an attempt
+       to read packets from a pcap_t may not return any packets if the  packet
+       buffer  timeout expires, a select(), poll(), or other such call may, if
+       the packet buffer timeout expires, indicate that a descriptor is  ready
+       to read even if there are no packets available to read.
 
        Routines
 
@@ -505,6 +517,11 @@ DESCRIPTION
               pcap_get_selectable_fd(3PCAP)
                      attempt to get a descriptor for a pcap_t that can be used
                      in calls such as select(2) and poll(2)
+
+              pcap_get_required_select_timeout(3PCAP)
+                     if no descriptor usable with  select(2)  and  poll(2)  is
+                     available for the pcap_t, attempt to get a timeout usable
+                     with those routines
 
    Filters
        In order to cause only certain packets  to  be  returned  when  reading

@@ -829,12 +829,33 @@ or
 or other routines a platform offers to wait for any of a set of
 descriptors to be ready to read.  To obtain, for a handle, a descriptor
 that can be used in those routines, call
-<B>pcap_get_selectable_fd</B>().
+<B>pcap_get_selectable_fd</B>().<B>If</B>the<B>routine</B>indicates<B>that</B>data<B>is</B>
+
+available to read on the descriptor, an attempt should be made to read
+from the device.
+<P>
 
 Not all handles have such a descriptor available;
 <B>pcap_get_selectable_fd</B>()
 
-will return -1 if no such descriptor exists.  In addition, for various
+will return -1 if no such descriptor is available.  If no such
+descriptor is available, this may be because the device must be polled
+periodically for packets; in that case,
+<B>pcap_get_required_select_timeout</B>()
+
+will return a pointer to a
+<B>struct timeval</B>
+
+whose value can be used as a timeout in those routines.  When the
+routine returns, an attmept should be made to read packets from the
+device.  If
+<B>pcap_get_required_select_timeout</B>()
+
+returns NULL, no such timeout is available, and those routines cannot be
+used with the device.
+<P>
+
+In addition, for various
 reasons, one or more of those routines will not work properly with the
 descriptor; the documentation for
 <B>pcap_get_selectable_fd</B>()
@@ -920,6 +941,19 @@ that can be used in calls such as
 and
 <B>poll</B>(2)
 
+<DT><A HREF='/manpages/pcap_get_required_select_timeout.3pcap.html'><B>pcap_get_required_select_timeout</B></A>(3PCAP)
+
+<DD>
+if no descriptor usable with
+<B>select</B>(2)
+
+and
+<B>poll</B>(2)
+
+is available for the
+<B>pcap_t</B>,
+
+attempt to get a timeout usable with those routines
 </DL>
 </DL>
 
@@ -1355,6 +1389,6 @@ in the libpcap source tree root.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:37:12 GMT, July 19, 2018
+Time: 06:18:19 GMT, July 23, 2018
 </BODY>
 </HTML>
