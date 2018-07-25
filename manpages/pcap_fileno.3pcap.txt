@@ -18,9 +18,9 @@ DESCRIPTION
        pcap_open_offline(3PCAP)   or   pcap_fopen_offline(3PCAP),  a  ``dead''
        pcap_t opened using pcap_open_dead(3PCAP), or a pcap_t that was created
        with  pcap_create() but that has not yet been activated with pcap_acti-
-       vate(), it returns -1.
+       vate(), it returns PCAP_ERROR.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                 7 April 2014               PCAP_FILENO(3PCAP)
+                                 25 July 2018               PCAP_FILENO(3PCAP)

@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP_NEXT_EX</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 20 January 2017<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -142,9 +142,17 @@ for Ethernet.
 
 returns 1 if the packet was read without problems, 0 if packets are
 being read from a live capture and the packet buffer timeout expired,
--1 if an error occurred while reading the packet, and -2 if packets
+<B>PCAP_ERROR</B>
+
+if an error occurred while reading the packet, and
+<B>PCAP_ERROR_BREAK</B>
+
+if packets
 are being read from a ``savefile'' and there are no more packets to read
-from the savefile.  If -1 is returned,
+from the savefile.  If
+<B>PCAP_ERROR</B>
+
+is returned,
 <B><A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)</B>
 
 or
@@ -179,6 +187,6 @@ way to determine whether an error occurred or not.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:49:43 GMT, July 19, 2018
+Time: 16:35:53 GMT, July 25, 2018
 </BODY>
 </HTML>

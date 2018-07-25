@@ -14,11 +14,11 @@ DESCRIPTION
        of the pcap descriptor to the type specified by dlt.
 
 RETURN VALUE
-       pcap_set_datalink()  returns  0 on success and -1 on failure.  If -1 is
-       returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p
-       as an argument to fetch or display the error text.
+       pcap_set_datalink()  returns 0 on success and PCAP_ERROR on failure. If
+       PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be
+       called with p as an argument to fetch or display the error text.
 
 SEE ALSO
        pcap(3PCAP), pcap_datalink_name_to_val(3PCAP)
 
-                                3 January 2014        PCAP_SET_DATALINK(3PCAP)
+                                 25 July 2018         PCAP_SET_DATALINK(3PCAP)

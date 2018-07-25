@@ -39,15 +39,15 @@ DESCRIPTION
        provided for compatibility.)
 
 RETURN VALUE
-       pcap_inject()  returns the number of bytes written on success and -1 on
-       failure.
+       pcap_inject()  returns  the  number  of  bytes  written  on success and
+       PCAP_ERROR on failure.
 
-       pcap_sendpacket() returns 0 on success and -1 on failure.
+       pcap_sendpacket() returns 0 on success and PCAP_ERROR on failure.
 
-       If -1 is returned,  pcap_geterr(3PCAP)  or  pcap_perror(3PCAP)  may  be
-       called with p as an argument to fetch or display the error text.
+       If PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may
+       be called with p as an argument to fetch or display the error text.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                3 January 2014              PCAP_INJECT(3PCAP)
+                                 25 July 2018               PCAP_INJECT(3PCAP)

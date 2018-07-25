@@ -17,11 +17,12 @@ DESCRIPTION
        bpf_u_int32 pointers.
 
 RETURN VALUE
-       pcap_lookupnet()  returns  0  on  success  and -1 on failure.  If -1 is
-       returned, errbuf is  filled  in  with  an  appropriate  error  message.
-       errbuf is assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
+       pcap_lookupnet()  returns  0  on  success and PCAP_ERROR on failure. If
+       PCAP_ERROR is returned, errbuf is filled in with an  appropriate  error
+       message.    errbuf   is   assumed   to   be   able  to  hold  at  least
+       PCAP_ERRBUF_SIZE chars.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                3 January 2014           PCAP_LOOKUPNET(3PCAP)
+                                 25 July 2018            PCAP_LOOKUPNET(3PCAP)

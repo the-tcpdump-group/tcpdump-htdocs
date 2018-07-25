@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP_GET_REQUIRED_SELECT_TIMEOUT</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 20 January 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -40,7 +40,9 @@ and
 calls if
 <B><A HREF='/manpages/pcap_get_selectable_fd.3pcap.html'>pcap_get_selectable_fd</A>(3PCAP)</B>
 
-returns -1.
+returns
+<B>PCAP_ERROR</B>.
+
 <P>
 
 The timeout that should be used in those calls must be no larger than
@@ -53,7 +55,10 @@ for devices from which packets will be captured.
 The device for which
 <B>pcap_get_selectable_fd()</B>
 
-returned -1 must be put in non-blocking mode with
+returned
+<B>PCAP_ERROR</B>
+
+must be put in non-blocking mode with
 <B><A HREF='/manpages/pcap_setnonblock.3pcap.html'>pcap_setnonblock</A>(3PCAP)</B>,
 
 and an attempt must always be made to read packets from the device
@@ -104,6 +109,6 @@ is returned.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:49:42 GMT, July 19, 2018
+Time: 16:35:52 GMT, July 25, 2018
 </BODY>
 </HTML>

@@ -15,10 +15,10 @@ DESCRIPTION
        layer header type value.  The translation is case-insensitive.
 
 RETURN VALUE
-       pcap_datalink_name_to_val() returns the type value on success and -1 if
-       the name is not a known type name..
+       pcap_datalink_name_to_val() returns  the  type  value  on  success  and
+       PCAP_ERROR if the name is not a known type name..
 
 SEE ALSO
        pcap(3PCAP)
 
-                                12 October 201PCAP_DATALINK_NAME_TO_VAL(3PCAP)
+                                 25 July 2018 PCAP_DATALINK_NAME_TO_VAL(3PCAP)

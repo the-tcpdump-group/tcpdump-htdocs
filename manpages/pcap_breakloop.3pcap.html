@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP_BREAKLOOP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 8 November 2017<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -30,8 +30,10 @@ or
 <B><A HREF='/manpages/pcap_loop.3pcap.html'>pcap_loop</A>(3PCAP)</B>
 
 to return rather than looping; they will return the number of packets
-that have been processed so far, or -2 if no packets have been
-processed so far.
+that have been processed so far, or
+<B>PCAP_ERROR_BREAK</B>
+
+if no packets have been processed so far.
 <P>
 
 This routine is safe to use inside a signal handler on UNIX or a console
@@ -110,7 +112,10 @@ or
 after it is called; at most one more packet might be processed.
 <P>
 
-If -2 is returned from
+If
+<B>PCAP_ERROR_BREAK</B>
+
+is returned from
 <B>pcap_dispatch()</B>
 
 or
@@ -118,7 +123,10 @@ or
 
 the flag is cleared, so a subsequent call will resume reading packets.
 If a positive number is returned, the flag is not cleared, so a
-subsequent call will return -2 and clear the flag.
+subsequent call will return
+<B>PCAP_ERROR_BREAK</B>
+
+and clear the flag.
 <A NAME="lbAE">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
@@ -129,6 +137,6 @@ subsequent call will return -2 and clear the flag.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:49:40 GMT, July 19, 2018
+Time: 16:35:50 GMT, July 25, 2018
 </BODY>
 </HTML>

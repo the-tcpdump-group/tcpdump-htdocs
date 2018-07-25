@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 20 April 2018<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -839,7 +839,10 @@ from the device.
 Not all handles have such a descriptor available;
 <B>pcap_get_selectable_fd</B>()
 
-will return -1 if no such descriptor is available.  If no such
+will return
+<B>PCAP_ERROR</B>
+
+if no such descriptor is available.  If no such
 descriptor is available, this may be because the device must be polled
 periodically for packets; in that case,
 <B>pcap_get_required_select_timeout</B>()
@@ -1390,6 +1393,6 @@ in the libpcap source tree root.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 13:08:58 GMT, July 23, 2018
+Time: 16:35:50 GMT, July 25, 2018
 </BODY>
 </HTML>

@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP_FINDALLDEVS</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 29 April 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -255,10 +255,15 @@ which frees the list pointed to by
 
 <B>pcap_findalldevs()</B>
 
-returns 0 on success and -1 on failure; as indicated, finding no
+returns 0 on success and
+<B>PCAP_ERROR</B>
+
+on failure; as indicated, finding no
 devices is considered success, rather than failure, so 0 will be
-returned in that case.
-If -1 is returned,
+returned in that case. If
+<B>PCAP_ERROR</B>
+
+is returned,
 <I>errbuf</I>
 
 is filled in with an appropriate error message.
@@ -278,6 +283,6 @@ chars.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:49:41 GMT, July 19, 2018
+Time: 16:35:52 GMT, July 25, 2018
 </BODY>
 </HTML>

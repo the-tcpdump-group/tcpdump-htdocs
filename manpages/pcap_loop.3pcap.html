@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP_LOOP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 20 January 2017<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -194,8 +194,13 @@ returns 0 if
 <I>cnt</I>
 
 is exhausted or if, when reading from a ``savefile'', no more packets
-are available.  It returns -1 if an error occurs or -2 if the loop
-terminated due to a call to
+are available.  It returns
+<B>PCAP_ERROR</B>
+
+if an error occurs or
+<B>PCAP_ERROR_BREAK</B>
+
+if the loop terminated due to a call to
 <B>pcap_breakloop()</B>
 
 before any packets were processed.
@@ -215,19 +220,27 @@ platforms that support a packet buffer timeout that starts before any
 packets arrive, the timeout expires before any packets arrive, or if the
 file descriptor for the capture device is in non-blocking mode and no
 packets were available to be read) or if no more packets are available
-in a ``savefile.'' It returns -1 if an error occurs or -2 if the loop
-terminated due to a call to
+in a ``savefile.'' It returns
+<B>PCAP_ERROR</B>
+
+if an error occurs or
+<B>PCAP_ERROR_BREAK</B>
+
+if the loop terminated due to a call to
 <B>pcap_breakloop()</B>
 
 before any packets were processed.
 <B>
 If your application uses pcap_breakloop(),
-make sure that you explicitly check for -1 and -2, rather than just
-checking for a return value &lt; 0.
+make sure that you explicitly check for PCAP_ERROR and PCAP_ERROR_BREAK,
+rather than just checking for a return value &lt; 0.
 </B>
 <P>
 
-If -1 is returned,
+If
+<B>PCAP_ERROR</B>
+
+is returned,
 <B><A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)</B>
 
 or
@@ -247,6 +260,6 @@ as an argument to fetch or display the error text.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:49:43 GMT, July 19, 2018
+Time: 16:35:53 GMT, July 25, 2018
 </BODY>
 </HTML>

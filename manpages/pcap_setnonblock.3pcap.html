@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP_SETNONBLOCK</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 18 October 2014<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -32,7 +32,10 @@ of ``non-blocking'' mode, depending on whether the
 <I>nonblock</I>
 
 argument is non-zero or zero.  It has no effect on ``savefiles''.
-If there is an error, -1 is returned and
+If there is an error,
+<B>PCAP_ERROR</B>
+
+is returned and
 <I>errbuf</I>
 
 is filled in with an appropriate error message; otherwise, 0 is
@@ -69,7 +72,10 @@ is required in order to put it into ``non-blocking'' mode.
 
 returns the current ``non-blocking'' state of the capture descriptor; it
 always returns 0 on ``savefiles''.
-If there is an error, -1 is returned and
+If there is an error,
+<B>PCAP_ERROR</B>
+
+is returned and
 <I>errbuf</I>
 
 is filled in with an appropriate error message.
@@ -91,6 +97,6 @@ chars.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:49:44 GMT, July 19, 2018
+Time: 16:35:55 GMT, July 25, 2018
 </BODY>
 </HTML>

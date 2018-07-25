@@ -27,12 +27,12 @@ DESCRIPTION
 RETURN VALUE
        pcap_list_datalinks()  returns the number of link-layer header types in
        the array on success, PCAP_ERROR_NOT_ACTIVATED if called on  a  capture
-       handle  that has been created but not activated, and PCAP_ERROR (-1) on
-       other  errors.   If  PCAP_ERROR  is  returned,  pcap_geterr(3PCAP)   or
+       handle that has been created but not activated, and PCAP_ERROR on other
+       errors.    If   PCAP_ERROR   is   returned,    pcap_geterr(3PCAP)    or
        pcap_perror(3PCAP) may be called with p as an argument to fetch or dis-
        play the error text.
 
 SEE ALSO
        pcap(3PCAP), pcap_datalink_val_to_name(3PCAP), pcap-linktype(7)
 
-                                 8 March 2015       PCAP_LIST_DATALINKS(3PCAP)
+                                 25 July 2018       PCAP_LIST_DATALINKS(3PCAP)

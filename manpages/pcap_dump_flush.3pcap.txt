@@ -14,9 +14,9 @@ DESCRIPTION
        the ``savefile'' will be written.
 
 RETURN VALUE
-       pcap_dump_flush() returns 0 on success and -1 on failure.
+       pcap_dump_flush() returns 0 on success and PCAP_ERROR on failure.
 
 SEE ALSO
        pcap(3PCAP), pcap_dump_open(3PCAP)
 
-                                3 January 2014          PCAP_DUMP_FLUSH(3PCAP)
+                                 25 July 2018           PCAP_DUMP_FLUSH(3PCAP)

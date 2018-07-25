@@ -13,15 +13,15 @@ SYNOPSIS
 DESCRIPTION
        pcap_dump_ftell() returns the current file  position  for  the  ``save-
        file'',    representing    the    number    of    bytes    written   by
-       pcap_dump_open(3PCAP) and pcap_dump(3PCAP).  -1 is returned  on  error.
-       If  the  current file position does not fit in a long, it will be trun-
-       cated; this can happen on 32-bit UNIX-like systems with large file sup-
-       port  and  on  Windows.   pcap_dump_ftell64()  returns the current file
+       pcap_dump_open(3PCAP) and pcap_dump(3PCAP).  PCAP_ERROR is returned  on
+       error.  If the current file position does not fit in a long, it will be
+       truncated; this can happen on 32-bit UNIX-like systems with large  file
+       support  and  on Windows.  pcap_dump_ftell64() returns the current file
        position in a int64_t, so if file offsets that don't fit in a long  but
        that  fit  in a int64_t are supported, this will return the file offset
-       without truncation.  -1 is returned on error.
+       without truncation.  PCAP_ERROR is returned on error.
 
 SEE ALSO
        pcap(3PCAP)
 
-                               29 September 2017        PCAP_DUMP_FTELL(3PCAP)
+                                 25 July 2018           PCAP_DUMP_FTELL(3PCAP)
