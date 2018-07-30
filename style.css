@@ -75,7 +75,6 @@ hr {
 	height: 45px;
 	margin: 0 auto;
 	padding: 0px 0;
-	background: url(images/img02.jpg) no-repeat center top;
 }
 
 #menu ul {
@@ -269,7 +268,6 @@ hr {
 	height: 20px;
 	margin: 0;
 	padding: 6px 0 0 20px;
-	background: url(images/img07.jpg) no-repeat;
 	border-bottom: 1px dashed #B9B9B9;
 	text-transform: uppercase;
 	font-size: 14px;
