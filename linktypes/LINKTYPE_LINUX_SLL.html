@@ -117,11 +117,13 @@ address to pad the field to 8 bytes.
 <p>The protocol type field is in network byte order.  If the ARPHRD_
 type is ARPHRD_IPGRE, the protocol type field contains a
 <a href="https://tools.ietf.org/html/rfc2784">GRE</a> protocol type. 
-Otherwise, it contains an Ethernet protocol type, or one of:
+Otherwise, it contains the Ethernet protocol type for the packet, or one
+of:
 </p>
 <ul>
 <li>0x0001, if the frame is a Novell 802.3 frame without an 802.2 LLC
 header;</li>
+<li>0x0003, in some mysterious cases;</li>
 <li>0x0004, if the frame begins with an 802.2 LLC header;</li>
 <li>0x000C, if the frame is a CAN bus frame that begins with a header of
 the form</li>
