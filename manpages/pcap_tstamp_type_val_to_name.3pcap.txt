@@ -18,7 +18,10 @@ DESCRIPTION
        value to a short description of that time stamp type.  NULL is returned
        on failure.
 
+BACKWARD COMPATIBILITY
+       These functions became available in libpcap release 1.2.1.
+
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_name_to_val(3PCAP)
 
-                               12 December PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)
+                                22 August 2PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)

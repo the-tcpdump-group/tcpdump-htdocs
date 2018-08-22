@@ -34,7 +34,11 @@ RETURN VALUE
        PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be
        called with p as an argument to fetch or display the error text.
 
+BACKWARD COMPATIBILITY
+       The PCAP_NETMASK_UNKNOWN constant became available in  libpcap  release
+       1.1.0.
+
 SEE ALSO
        pcap(3PCAP), pcap_setfilter(3PCAP), pcap_freecode(3PCAP),
 
-                                 25 July 2018              PCAP_COMPILE(3PCAP)
+                                22 August 2018             PCAP_COMPILE(3PCAP)

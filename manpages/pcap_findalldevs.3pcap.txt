@@ -126,7 +126,11 @@ RETURN VALUE
        errbuf  is  filled  in  with  an  appropriate error message.  errbuf is
        assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
 
+BACKWARD COMPATIBILITY
+       The PCAP_IF_UP and PCAP_IF_RUNNING constants became available in  libp-
+       cap release 1.6.1.
+
 SEE ALSO
        pcap(3PCAP)
 
-                                 25 July 2018          PCAP_FINDALLDEVS(3PCAP)
+                                22 August 2018         PCAP_FINDALLDEVS(3PCAP)

@@ -26,7 +26,10 @@ RETURN VALUE
        ture handle that has been activated, and PCAP_ERROR_CANTSET_TSTAMP_TYPE
        if the capture device doesn't support setting the time stamp type.
 
+BACKWARD COMPATIBILITY
+       This function became available in libpcap release 1.2.1.
+
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_name_to_val(3PCAP)
 
-                                5 December 2014    PCAP_SET_TSTAMP_TYPE(3PCAP)
+                                22 August 2018     PCAP_SET_TSTAMP_TYPE(3PCAP)

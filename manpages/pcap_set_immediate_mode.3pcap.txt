@@ -18,7 +18,10 @@ RETURN VALUE
        pcap_set_immediate_mode() returns 0 on success or  PCAP_ERROR_ACTIVATED
        if called on a capture handle that has been activated.
 
+BACKWARD COMPATIBILITY
+       This function became available in libpcap release 1.5.0.
+
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
 
-                                5 December 2013 PCAP_SET_IMMEDIATE_MODE(3PCAP)
+                                22 August 2018  PCAP_SET_IMMEDIATE_MODE(3PCAP)

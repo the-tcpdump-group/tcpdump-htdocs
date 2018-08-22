@@ -29,7 +29,10 @@ RETURN VALUE
        pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called  with  p  as  an
        argument to fetch or display the error text.
 
+BACKWARD COMPATIBILITY
+       These functions became available in libpcap release 1.2.1.
+
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_val_to_name(3PCAP), pcap-tstamp(7)
 
-                                22 August 2010   PCAP_LIST_TSTAMP_TYPES(3PCAP)
+                                22 August 2018   PCAP_LIST_TSTAMP_TYPES(3PCAP)

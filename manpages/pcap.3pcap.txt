@@ -660,7 +660,7 @@ DESCRIPTION
               pcap_lib_version(3PCAP)
                      get library version string
 
-BACKWARDS COMPATIBILITY
+BACKWARD COMPATIBILITY
        In  versions of libpcap prior to 1.0, the pcap.h header file was not in
        a pcap directory on most platforms; if you are writing  an  application
        that  must  work on versions of libpcap prior to 1.0, include <pcap.h>,

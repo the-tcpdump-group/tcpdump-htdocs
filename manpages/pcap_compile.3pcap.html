@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP_COMPILE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2018<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -50,7 +50,10 @@ captured; it is used only when checking for IPv4 broadcast addresses in
 the filter program.  If the netmask of the network on which packets are
 being captured isn't known to the program, or if packets are being
 captured on the Linux &quot;any&quot; pseudo-interface that can capture on more
-than one network, a value of PCAP_NETMASK_UNKNOWN can be supplied; tests
+than one network, a value of
+<B>PCAP_NETMASK_UNKNOWN</B>
+
+can be supplied; tests
 for IPv4 broadcast addresses will fail to compile, but all other tests in
 the filter program will be OK.
 <P>
@@ -89,6 +92,15 @@ may be called with
 
 as an argument to fetch or display the error text.
 <A NAME="lbAF">&nbsp;</A>
+<H2>BACKWARD COMPATIBILITY</H2>
+
+<P>
+
+The
+<B>PCAP_NETMASK_UNKNOWN</B>
+
+constant became available in libpcap release 1.1.0.
+<A NAME="lbAG">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
 <A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_setfilter.3pcap.html'>pcap_setfilter</A>(3PCAP), <A HREF='/manpages/pcap_freecode.3pcap.html'>pcap_freecode</A>(3PCAP),
@@ -98,6 +110,6 @@ as an argument to fetch or display the error text.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 16:35:50 GMT, July 25, 2018
+Time: 09:25:00 GMT, August 22, 2018
 </BODY>
 </HTML>

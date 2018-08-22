@@ -41,7 +41,11 @@ RETURN VALUES
        cess.    NULL   is   returned   on   failure.   If  NULL  is  returned,
        pcap_geterr(3PCAP) can be used to get the error text.
 
+BACKWARD COMPATIBILITY
+       The  pcap_dump_open_append()  function  became  available  in   libpcap
+       release 1.7.2.
+
 SEE ALSO
        pcap(3PCAP), pcap-savefile(5)
 
-                                 22 June 2018            PCAP_DUMP_OPEN(3PCAP)
+                                22 August 2018           PCAP_DUMP_OPEN(3PCAP)

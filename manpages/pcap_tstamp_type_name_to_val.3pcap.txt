@@ -18,7 +18,10 @@ RETURN VALUE
        pcap_tstamp_type_name_to_val() returns time stamp type value on success
        and PCAP_ERROR on failure.
 
+BACKWARD COMPATIBILITY
+       This function became available in libpcap release 1.2.1.
+
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_val_to_name(3PCAP)
 
-                                5 December PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)
+                                22 August 2PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)
