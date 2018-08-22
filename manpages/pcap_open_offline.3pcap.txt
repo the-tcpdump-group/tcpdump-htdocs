@@ -49,6 +49,10 @@ RETURN VALUE
        errbuf is filled in with  an  appropriate  error  message.   errbuf  is
        assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
 
+BACKWARD COMPATIBILITY
+       pcap_open_offline_with_tstamp_precision       and       pcap_fopen_off-
+       line_with_tstamp_precision became available in libpcap release 1.5.1.
+
 SEE ALSO
        pcap(3PCAP), pcap-savefile(5)
 

@@ -27,6 +27,9 @@ RETURN VALUE
        requested time stamp precision, PCAP_ERROR_ACTIVATED  if  called  on  a
        capture handle that has been activated.
 
+BACKWARD COMPATIBILITY
+       This function became available in libpcap release 1.5.1.
+
 SEE ALSO
        pcap(3PCAP), pcap_get_tstamp_precision(3PCAP), pcap-tstamp(7)
 

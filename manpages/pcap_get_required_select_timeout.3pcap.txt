@@ -36,6 +36,9 @@ RETURN VALUE
        A pointer to a struct timeval is returned if the timeout  is  required;
        otherwise NULL is returned.
 
+BACKWARD COMPATIBILITY
+       This function became available in libpcap release 1.9.0.
+
 SEE ALSO
        pcap(3PCAP), kqueue(2)
 

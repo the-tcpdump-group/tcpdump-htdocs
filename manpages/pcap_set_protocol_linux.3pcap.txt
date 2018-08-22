@@ -34,6 +34,9 @@ RETURN VALUE
        pcap_set_protocol_linux() returns 0 on success or  PCAP_ERROR_ACTIVATED
        if called on a capture handle that has been activated.
 
+BACKWARD COMPATIBILITY
+       This function became available in libpcap release 1.9.0.
+
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
 

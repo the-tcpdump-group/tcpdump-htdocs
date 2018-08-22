@@ -19,6 +19,9 @@ RETURN VALUE
        PCAP_TSTAMP_PRECISION_NANO, which indicates that pcap captures contains
        time stamps in microseconds or nanoseconds respectively.
 
+BACKWARD COMPATIBILITY
+       This function became available in libpcap release 1.5.1.
+
 SEE ALSO
        pcap(3PCAP), pcap_set_tstamp_precision(3PCAP), pcap-tstamp(7)
 
