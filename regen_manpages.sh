@@ -84,6 +84,8 @@ ENDOFFILE
 3	isatty
 3	fileno
 1	ECT
+2	ioctl
+7	packetfilter
 ENDOFLIST
 
 	# Fixup links to local pages, part 1.
@@ -264,13 +266,13 @@ updateOutputFiles()
 	produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
 	produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
 	produceTXT ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.txt
-	produceTXT ../libpcap/rpcapd/rpcapd.manadmin manpages/rpcapd.1.txt
+	produceTXT ../libpcap/rpcapd/rpcapd.manadmin manpages/rpcapd.8.txt
 
 	produceHTML ../libpcap/pcap-filter.manmisc "$sedfile" manpages/pcap-filter.7.html
 	produceHTML ../libpcap/pcap-linktype.manmisc "$sedfile" manpages/pcap-linktype.7.html
 	produceHTML ../libpcap/pcap-savefile.manfile "$sedfile" manpages/pcap-savefile.5.html
 	produceHTML ../libpcap/pcap-tstamp.manmisc "$sedfile" manpages/pcap-tstamp.7.html
-	produceHTML ../libpcap/rpcapd/rpcapd.manadmin "$sedfile" manpages/rpcapd.1.html
+	produceHTML ../libpcap/rpcapd/rpcapd.manadmin "$sedfile" manpages/rpcapd.8.html
 
 	for f in ../libpcap/*.3pcap; do
 		[ "`known3PCAPFile $f`" = 'no' ] && echo "WARNING: file $f is not in the 3PCAP map"
