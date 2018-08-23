@@ -37,9 +37,12 @@ RETURN VALUE
        otherwise NULL is returned.
 
 BACKWARD COMPATIBILITY
-       This function became available in libpcap release 1.9.0.
+       This  function  became available in libpcap release 1.9.0.  In previous
+       releases, select(), poll(), epoll_wait(), and kevent() cannot  be  used
+       on any capture source for which pcap_get_selectable_fd returns -1.
 
 SEE ALSO
-       pcap(3PCAP), kqueue(2)
+       pcap(3PCAP),    pcap_get_selectable_fd(3PCAP),    select(2),   poll(2),
+       epoll_wait(2), kqueue(2)
 
                                  25 JulPCAP_GET_REQUIRED_SELECT_TIMEOUT(3PCAP)

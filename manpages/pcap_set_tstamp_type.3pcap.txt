@@ -27,7 +27,9 @@ RETURN VALUE
        if the capture device doesn't support setting the time stamp type.
 
 BACKWARD COMPATIBILITY
-       This function became available in libpcap release 1.2.1.
+       This  function  became available in libpcap release 1.2.1.  In previous
+       releases, the time stamp type cannot be  set;  only  the  default  time
+       stamp type offered by a capture source is available.
 
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_name_to_val(3PCAP)

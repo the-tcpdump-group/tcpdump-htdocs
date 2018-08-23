@@ -22,13 +22,15 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_set_tstamp_precision()  returns 0 on success if the specified time
-       stamp precision is expected to be supported by  the  operating  system,
-       PCAP_ERROR_TSTAMP_PRECISION_NOTSUP if operating system does not support
-       requested time stamp precision, PCAP_ERROR_ACTIVATED  if  called  on  a
-       capture handle that has been activated.
+       stamp precision is expected to be  supported  by  the  capture  device,
+       PCAP_ERROR_TSTAMP_PRECISION_NOTSUP  if the capture device does not sup-
+       port the requested time stamp precision, PCAP_ERROR_ACTIVATED if called
+       on a capture handle that has been activated.
 
 BACKWARD COMPATIBILITY
-       This function became available in libpcap release 1.5.1.
+       This  function  became available in libpcap release 1.5.1.  In previous
+       releases, time stamps from a capture  device  or  savefile  are  always
+       given in seconds and microseconds.
 
 SEE ALSO
        pcap(3PCAP), pcap_get_tstamp_precision(3PCAP), pcap-tstamp(7)

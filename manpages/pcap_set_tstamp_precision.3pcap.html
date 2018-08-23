@@ -47,17 +47,20 @@ to request desired precision. By default, time stamps are in microseconds.
 <B>pcap_set_tstamp_precision()</B>
 
 returns 0 on success if the specified time stamp precision is expected to be
-supported by the operating system,
+supported by the capture device,
 <B>PCAP_ERROR_TSTAMP_PRECISION_NOTSUP</B>
 
-if operating system does not support requested time stamp precision,
+if the capture device does not support the requested time stamp
+precision,
 <B>PCAP_ERROR_ACTIVATED</B>
 
 if called on a capture handle that has been activated.
 <A NAME="lbAF">&nbsp;</A>
 <H2>BACKWARD COMPATIBILITY</H2>
 
-This function became available in libpcap release 1.5.1.
+This function became available in libpcap release 1.5.1.  In previous
+releases, time stamps from a capture device or savefile are always given
+in seconds and microseconds.
 <A NAME="lbAG">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
@@ -70,6 +73,6 @@ This function became available in libpcap release 1.5.1.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 19:51:32 GMT, August 22, 2018
+Time: 06:01:47 GMT, August 23, 2018
 </BODY>
 </HTML>

@@ -20,7 +20,9 @@ RETURN VALUE
        time stamps in microseconds or nanoseconds respectively.
 
 BACKWARD COMPATIBILITY
-       This function became available in libpcap release 1.5.1.
+       This  function  became available in libpcap release 1.5.1.  In previous
+       releases, time stamps from a capture  device  or  savefile  are  always
+       given in seconds and microseconds.
 
 SEE ALSO
        pcap(3PCAP), pcap_set_tstamp_precision(3PCAP), pcap-tstamp(7)

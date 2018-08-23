@@ -43,7 +43,8 @@ RETURN VALUES
 
 BACKWARD COMPATIBILITY
        The  pcap_dump_open_append()  function  became  available  in   libpcap
-       release 1.7.2.
+       release 1.7.2.  In previous releases, there is no support for appending
+       packets to an existing savefile.
 
 SEE ALSO
        pcap(3PCAP), pcap-savefile(5)

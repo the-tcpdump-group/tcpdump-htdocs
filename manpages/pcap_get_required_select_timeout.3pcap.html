@@ -102,17 +102,32 @@ is returned.
 <A NAME="lbAF">&nbsp;</A>
 <H2>BACKWARD COMPATIBILITY</H2>
 
-This function became available in libpcap release 1.9.0.
+This function became available in libpcap release 1.9.0.  In previous
+releases,
+<B>select()</B>,
+
+<B>poll()</B>,
+
+<B>epoll_wait()</B>,
+
+and
+<B>kevent()</B>
+
+cannot be used on any capture source for which
+<B>pcap_get_selectable_fd</B>
+
+returns -1.
 <A NAME="lbAG">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), kqueue(2)
+<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_get_selectable_fd.3pcap.html'>pcap_get_selectable_fd</A>(3PCAP), select(2), poll(2),
+epoll_wait(2), kqueue(2)
 <P>
 
 <HR>
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 19:51:29 GMT, August 22, 2018
+Time: 06:01:45 GMT, August 23, 2018
 </BODY>
 </HTML>

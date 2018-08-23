@@ -218,6 +218,11 @@ expires even if no packets have arrived.
 The packet buffer timeout is set with
 <B>pcap_set_timeout</B>().
 
+<DT>immediate mode<DD>
+In immediate mode, packets are always delivered as soon as they arrive,
+with no buffering.  Immediate mode is set with
+<B>pcap_set_immediate_mode</B>().
+
 <DT>buffer size<DD>
 Packets that arrive for a capture are stored in a buffer, so that they
 do not have to be read by the application as soon as they arrive.  On
@@ -517,6 +522,13 @@ for live capture
 
 <DD>
 set packet buffer timeout for a not-yet-activated
+<B>pcap_t</B>
+
+for live capture
+<DT><B>pcap_set_immediate</B>mode<B>(3PCAP)</B>
+
+<DD>
+set immediate mode for a not-yet-activated
 <B>pcap_t</B>
 
 for live capture
@@ -1393,6 +1405,6 @@ in the libpcap source tree root.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:25:00 GMT, August 22, 2018
+Time: 06:01:43 GMT, August 23, 2018
 </BODY>
 </HTML>
