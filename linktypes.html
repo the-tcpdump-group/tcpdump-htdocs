@@ -239,7 +239,10 @@ section 4.3.1 of RFC 1547</a>.
 wireless LAN.
                 <tr valign=top>
 <td>LINKTYPE_FRELAY<td>107<td>DLT_FRELAY<td>
-Frame Relay
+Frame Relay LAPF frames, beginning with a <a
+href="http://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
+Q.922</a> LAPF header starting with the address field, and without an
+FCS at the end of the frame.
                 <tr valign=top>
 <td>LINKTYPE_LOOP<td>108<td>DLT_LOOP<td>
 OpenBSD loopback encapsulation; the link-layer header is a 4-byte field,
@@ -392,6 +395,12 @@ Recommendation Q.921</a>, captured via vISDN, with a
 header</a>, followed by the Q.921 frame, starting with the address
 field.
                 <tr valign=top>
+<td>LINKTYPE_MFR<td>182<td>DLT_MFR<td>
+<a href="https://www.broadband-forum.org/technical/download/FRF.16/frf16.1.pdf">FRF.16.1</a>
+Multi-Link Frame Relay frames, beginning with an
+<a href="https://www.broadband-forum.org/technical/download/FRF.12/frf12.pdf">FRF.12</a>
+Interface fragmentation format fragmentation header.
+                <tr valign=top>
 <td>LINKTYPE_BLUETOOTH_HCI_H4<td>187<td>DLT_BLUETOOTH_HCI_H4<td>
 Bluetooth HCI UART transport layer; the frame contains an HCI packet
 indicator byte, as specified by the UART Transport Layer portion of the
@@ -482,9 +491,19 @@ preceded with a one-byte pseudo-header with a zero value meaning
 host".
                 <tr valign=top>
 <td>LINKTYPE_FRELAY_WITH_DIR<td>206<td>DLT_FRELAY_WITH_DIR<td>
-Frame Relay, preceded with a one-byte pseudo-header with a zero value
-meaning "received by this host" and a non-zero value meaning "sent by
-this host".
+Frame Relay LAPF frames, beginning with a one-byte pseudo-header with a
+zero value meaning "received by this host" (DCE->DTE) and a non-zero
+value meaning "sent by this host" (DTE->DCE). followed by an <a
+href="http://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
+Q.922</a> LAPF header starting with the address field, and without an
+FCS at the end of the frame.
+                <tr valign=top>
+<td>LINKTYPE_LAPB_WITH_DIR<td>207<td>DLT_LAPB_WITH_DIR<td>
+Link Access Procedure, Balanced (LAPB), as specified by
+<a href="http://www.itu.int/rec/T-REC-X.25/en">ITU-T
+Recommendation X.25</a>, preceded with a one-byte pseudo-header with a
+zero value meaning "received by this host" (DCE->DTE) and a non-zero
+value meaning "sent by this host" (DTE->DCE).
                 <tr valign=top>
 <td>LINKTYPE_IPMB_LINUX<td>209<td>DLT_IPMB_LINUX<td>
 <a href="http://www.intel.com/design/servers/ipmi/spec.htm">IPMB</a>
