@@ -855,8 +855,11 @@ fractions of a second since that time, on each dump line.
 <DT><B>-ttt</B>
 
 <DD>
-Print a delta (micro-second resolution) between current and previous line
-on each dump line.
+Print a delta (microsecond or nanosecond resolution depending on the
+<B>--time-stamp-precision</B>
+
+option) between current and previous line on each dump line.
+The default is microsecond resolution.
 <DT><B>-tttt</B>
 
 <DD>
@@ -865,8 +868,11 @@ since midnight, preceded by the date, on each dump line.
 <DT><B>-ttttt</B>
 
 <DD>
-Print a delta (micro-second resolution) between current and first line
-on each dump line.
+Print a delta (microsecond or nanosecond resolution depending on the
+<B>--time-stamp-precision</B>
+
+option) between current and first line on each dump line.
+The default is microsecond resolution.
 <DT><B>-u</B>
 
 <DD>
@@ -2491,6 +2497,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 11:23:12 GMT, July 19, 2018
+Time: 21:28:52 GMT, October 05, 2018
 </BODY>
 </HTML>
