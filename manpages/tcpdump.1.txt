@@ -414,15 +414,17 @@ OPTIONS
               UTC,  and  fractions  of  a second since that time, on each dump
               line.
 
-       -ttt   Print a delta (micro-second resolution) between current and pre-
-              vious line on each dump line.
+       -ttt   Print a delta (microsecond or nanosecond resolution depending on
+              the  --time-stamp-precision option) between current and previous
+              line on each dump line.  The default is microsecond resolution.
 
-       -tttt  Print  a timestamp, as hours, minutes, seconds, and fractions of
-              a second since midnight, preceded by  the  date,  on  each  dump
+       -tttt  Print a timestamp, as hours, minutes, seconds, and fractions  of
+              a  second  since  midnight,  preceded  by the date, on each dump
               line.
 
-       -ttttt Print  a  delta  (micro-second  resolution)  between current and
-              first line on each dump line.
+       -ttttt Print a delta (microsecond or nanosecond resolution depending on
+              the  --time-stamp-precision  option)  between  current and first
+              line on each dump line.  The default is microsecond resolution.
 
        -u     Print undecoded NFS handles.
 
