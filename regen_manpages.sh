@@ -28,7 +28,7 @@ stripContentTypeHeader()
 # "Index" section near EOF.
 stripIndexSection()
 {
-	local infile=${1:?argument required}
+	local infile=${1:?}
 	case `basename "$infile"` in
 	tcpdump.1|tcpslice.1|pcap.3pcap)
 		cat
@@ -195,9 +195,9 @@ ENDOFLIST
 
 produceHTML()
 {
-	local infile=${1:?argument required}
-	local sedfile="${2:?argument required}"
-	local outfile=${3:?argument required}
+	local infile=${1:?}
+	local sedfile="${2:?}"
+	local outfile=${3:?}
 	[ -s $infile ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
@@ -220,8 +220,8 @@ produceHTML()
 
 produceTXT()
 {
-	local infile=${1:?argument required}
-	local outfile=${2:?argument required}
+	local infile=${1:?}
+	local outfile=${2:?}
 	[ -s $infile ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
@@ -232,7 +232,7 @@ produceTXT()
 
 known3PCAPFile()
 {
-	local f=`basename ${1:?argument required} .3pcap`
+	local f=`basename ${1:?} .3pcap`
 	local manfile mantopic
 	print3PCAPMap | while read mantopic manfile; do
 		if [ "${manfile:-$mantopic}" = "$f" ]; then
