@@ -114,11 +114,29 @@ there are more than 8 bytes, only the first 8 bytes are present, and
 if there are fewer than 8 bytes, there are padding bytes after the
 address to pad the field to 8 bytes.
 </p>
-<p>The protocol type field is in network byte order.  If the ARPHRD_
-type is ARPHRD_IPGRE, the protocol type field contains a
-<a href="https://tools.ietf.org/html/rfc2784">GRE</a> protocol type. 
-Otherwise, it contains the Ethernet protocol type for the packet, or one
-of:
+<p>
+The protocol type field is in network byte order.
+</p>
+<p>
+If the ARPHRD_ type is ARPHRD_NETLINK (824), the packet data,
+including the LINKTYPE_LINUX_SLL header, is <a
+href="linktypes/LINKTYPE_NETLINK.html">a LINKTYPE_NETLINK packet</a>,
+with the protocol type field being the Netlink protocol type.
+</p>
+<p>
+If the ARPHRD_ type is ARPHRD_IPGRE (778), the protocol type field
+contains a <a href="https://tools.ietf.org/html/rfc2784">GRE</a>
+protocol type.
+</p>
+<p>
+If the ARPHRD_ type is ARPHRD_IEEE80211_RADIOTAP (803), the protocol
+type field is ignored, and the payload following the LINKTYPE_LINUX_SLL
+header begins with <a href="http://www.radiotap.org/">Radiotap
+link-layer information</a> followed by an 802.11 header.
+</p>
+<p>
+Otherwise, the protocol type field contains the Ethernet protocol
+type for the packet, or one of:
 </p>
 <ul>
 <li>0x0001, if the frame is a Novell 802.3 frame without an 802.2 LLC
