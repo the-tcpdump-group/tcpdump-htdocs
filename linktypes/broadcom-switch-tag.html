@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates <http://www.freecsstemplates.org>
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html>
+
+    <!-- HEAD -->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>LINKTYPE_LINUX_SLL | TCPDUMP/LIBPCAP public repository</title>
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+		<meta name="DC.publisher" content="Tcpdump">
+		<meta name="DC.publisher.url" content="https://www.tcpdump.org">
+		<meta name="DC.title" content="Tcpdump/Libpcap public repository">
+		<meta name="DC.identifier" content="https://www.tcpdump.org">
+		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13">
+		<meta name="DC.creator" content="tcpdump">
+		<meta name="DC.rights.rightsHolder" content="tcpdump">
+		<meta name="DC.language" content="en" scheme="rfc1766">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="canonical" href="https://www.tcpdump.org">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#source">Source</a></li>
+                <li><a href="../index.html#latest-releases">Downloads</a></li>
+                <li><a href="../index.html#mailing-lists">Mailing lists</a></li>
+                <li><a href="../index.html#contribute">Contribute</a></li>
+                <li><a href="../related.html">Related Projects</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of Broadcom switch tag section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">Broadcom switch tag</a>
+            </h2>
+            <div class="entry">
+                <h3>Switch tag structure</h3>
+<p>
+The Broadcom switch tag is 4 octets long.
+</p>
+The first octet of the tag has the format:
+<pre>
++----------------------------------------------------------+
+| OPcode[7:5] | OPcode-dependent[4:0]                      |
++----------------------------------------------------------+
+</pre>
+<p>
+The OPcode field has a value that is one of:
+</p>
+<ul>
+<li>0b000, if the tag is an egress tag, for a packet going from the
+switch to the management port
+<li>0b001, if the tag is an ingress tag, for a packet going from the
+management port to the switch
+</ul>
+<p>
+Other values are reserved.
+</p>
+<p>
+The format for an egress tag is:
+</p>
+<pre>
++----------------------------------------------------------+
+| OPcode[7:5] | Traffic class[4:2] | Tag enforcement[1:0]  |
++----------------------------------------------------------+
+| Time stamp[7] | Unused[6:0]                              |
++----------------------------------------------------------+
+| Reserved[7:1]                         | Desination map[0]|
++----------------------------------------------------------+
+| Destination map[7:0]                                     |
++----------------------------------------------------------+
+</pre>
+<p>
+The traffic class (TC) field values map to 802.1p/CoS traffic classes.
+</p>
+<p>
+The tag enforcement (TE) field has a value that is one of:
+</p>
+<ul>
+<li>0b00, if there is no no enforcement
+<li>0b01, if there is untag enforcement (VLAN untagged packets are
+checked against VLAN entries)
+<li>0b10, if there is header enforcement
+</ul>
+<p>
+0b11 is a reserved value.
+</p>
+<p>
+The TS bit indicates whether the packets should be timestamped or not by
+the switch. That tells the network stack whether to expect PTP packets
+to follow.
+</p>
+<p>
+The destination map is a bit mask of ports to send a packet to; it can be
+either one or multiple ports (e.g: broadcast/multicast), and the possible
+values are 0 through 0x1ff (total of 9 ports). The switch takes care of
+copying the packet to multiple ports if specified.
+</p>
+<p>
+The format for an ingress tag is:
+</p>
+<pre>
++----------------------------------------------------------+
+| OPcode[7:5] | Reserved[4:0]                              |
++----------------------------------------------------------+
+| Classification ID[7:0]                                   |
++----------------------------------------------------------+
+| Reason code[7:0]                                         |
++----------------------------------------------------------+
+| Traffic class[7:5]  | Source port number[4:0]            |
++----------------------------------------------------------+
+</pre>
+<p>
+The classification ID is a number from 0 to 255.  Broadcom switches
+feature a Compact Field Processor (CFP) which is a TCAM capable of
+parsing layer 2, 3 and 4 packets and perform an action which can be:
+redirect the packet to a certain queue/port (bypassing traditional
+switching decisions), police the packet (e.g.: rate limit it), etc. The
+TCAM has 256 entries, so when the packet hits a particular entry due to
+a match, it can eventually get copied to the management port and the
+classification ID will reflect which TCAM entry index was hit.
+</p>
+The reason code is set when the packets are sent to the management port;
+its value is one of:
+<ul>
+<li>0: mirroring: the CPU is a capturing device.
+<li>1: MAC SA learning
+<li>2: Switching: CPU is the intended destination port for the packet
+<li>3: Protocol termination: 802.1 protocol that needs to be terminated
+by the CPU, e.g: 802.1x/Radius
+<li>4: Protocol snooping: the CPU needs to look at the packets: IGMP/MLD,
+RARP/ARP/DHCP etc.
+<li>5: Exception processing flooding
+</ul>
+<p>
+Values of 6 and 7 are reserved.
+</p>
+<p>
+The traffic class (TC) field values map to 802.1p/CoS traffic classes.
+</p>
+            </div>
+            <!-- End of Broadcom switch tag section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                (c) 2010-2018 Tcpdump/Libpcap. Designed by
+                <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
+                based on a template by <a href="http://www.freecsstemplates.org/">
+                Free CSS Templates</a>.
+                <a href="http://validator.w3.org/check?uri=referer">[Valid XHTML
+                1.0]</a> <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                [Valid CSS]</a>
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+        
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
