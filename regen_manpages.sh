@@ -102,8 +102,7 @@ ENDOFLIST
 
 	# Fixup links to local pages, part 2.
 	print3PCAPMap | while read mantopic manfile; do
-		[ "$manfile" = "" ] && manfile=$mantopic
-		manfile="${WEBSITE_PFX}/${manfile}.3pcap.html"
+		manfile="${WEBSITE_PFX}/${manfile:-$mantopic}.3pcap.html"
 		# Two substitutions below make up for the new smartness added
 		# in man2html-1.6-13.g.fc20.
 		echo "s@<B><A HREF=\"$MAN2HTML_PFX?3PCAP+${mantopic}\">$mantopic</A></B>(3PCAP)@<B>$mantopic</B>(3PCAP)@g"
