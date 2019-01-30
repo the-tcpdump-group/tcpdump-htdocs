@@ -6,8 +6,9 @@ NAME
 
 SYNOPSIS
        rpcapd [ -b address ] [ -p port ] [ -4 ] [ -l host_list ]
-               [ -a host,port ] [ -n ] [ -v ] [ -d ] [ -i ] [ -s config_file ]
-               [ -f config_file ]
+               [ -a host,port ] [ -n ] [ -v ] [ -d ] [ -i ]
+               [ -D ] [ -s config_file ] [ -f config_file ] [ -S ]
+               [ -K ssl_keyfile ] [ -X ssl_certfile ] [ -C ]
 
 DESCRIPTION
        Rpcapd is a daemon (Unix) or service (Win32) that  allows  the  capture
@@ -89,36 +90,55 @@ OPTIONS
               both IPv4 and IPv6 addresses.
 
        -l host_list
-              Only allow hosts specified in the host_list file to  connect  to
-              this  server.   Hosts  are listed one per line.  We suggest that
-              you use use host names rather than literal IP addresses in order
-              to avoid problems with different address families.
+              Only allow hosts specified in the host_list argument to  connect
+              to  this  server.   host_list  is  a  list  of  host names or IP
+              addresses, separated by commas.  We suggest  that  you  use  use
+              host  names  rather  than literal IP addresses in order to avoid
+              problems with different address families.
 
        -n     Permit NULL authentication (usually used with -l).
 
        -a host,port
-              Run  in  active  mode, connecting to host host on port port.  In
+              Run in active mode, connecting to host host on  port  port.   In
               case port is omitted, the default port (2003) is used.
 
-       -v     Run in active mode only; by default, if -a is specified,  rpcapd
+       -v     Run  in active mode only; by default, if -a is specified, rpcapd
               it accepts passive connections as well.
 
-       -d     Run  in  daemon  mode  (UNIX  only) or as a service (Win32 only)
-              Warning (Win32): this switch is provided automatically when  the
+       -d     Run in daemon mode (UNIX only) or  as  a  service  (Win32  only)
+              Warning  (Win32): this switch is provided automatically when the
               service is started from the control panel.
 
        -i     Run in inetd mode (UNIX only).
 
+       -D     Log debugging messages.
+
        -s config_file
-              Save the current configuration to config_file.
+              Save the current configuration  to  config_file  in  the  format
+              specified by rpcapd-config(5).
 
        -f config_file
-              Load  the  current  configuration from config_file; all switches
-              specified from the command line are ignored.
+              Load  the  current  configuration from config_file in the format
+              specified by rpcapd-config(5); all switches specified  from  the
+              command line are ignored.
 
        -h     Print this help screen.
 
+       If  rpcapd was compiled with SSL support, these options are also avail-
+       able:
+
+       -S     Require that SSL be used on connections.
+
+       -C     With SSL enabled, XXX - I'm not sure how *fetching* the list  of
+              compression mechanisms does anything to compression.
+
+       -S     ssl_keyfile  With  SSL  enabled,  use ssl_keyfile as the SSL key
+              file.
+
+       -X     ssl_certfile With SSL enabled, use ssl_certfile as the SSL  cer-
+              tificate file.
+
 SEE ALSO
-       pcap(3PCAP)
+       pcap(3PCAP), rpcapd-config(5)
 
                                 April 20, 2018                       RPCAPD(8)

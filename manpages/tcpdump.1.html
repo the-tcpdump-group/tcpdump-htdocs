@@ -470,6 +470,9 @@ which should include a time format as defined by
 <B>strftime</B>(3).
 
 If no time format is specified, each new file will overwrite the previous.
+Whenever a generated filename is not unique, tcpdump will overwrite the
+preexisting data; providing a time specification that is coarser than the
+capture period is therefore not advised.
 <DT><DD>
 If used in conjunction with the
 <B>-C</B>
@@ -998,10 +1001,18 @@ Used in conjunction with the
 <B>-G</B>
 
 option, this will limit the number of rotated dump files that get
-created, exiting with status 0 when reaching the limit. If used with
+created, exiting with status 0 when reaching the limit.
+<DT><DD>
+If used in conjunction with both
 <B>-C</B>
 
-as well, the behavior will result in cyclical files per timeslice.
+and
+<B>-G,</B>
+
+the
+<B>-W</B>
+
+option will currently be ignored, and will only affect the file name.
 <DT><B>-x</B>
 
 <DD>
@@ -2497,6 +2508,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 21:28:52 GMT, October 05, 2018
+Time: 11:32:53 GMT, January 30, 2019
 </BODY>
 </HTML>

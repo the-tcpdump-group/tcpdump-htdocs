@@ -54,10 +54,28 @@ rpcapd
 ] [
 <B>-i</B>
 
+]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>-D</B>
+
 ] [
 <B>-s</B>
 
 <I>config_file</I>
+
+]
+[
+<B>-f</B>
+
+<I>config_file</I>
+
+]
+[
+<B>-S</B>
 
 ]
 <BR>
@@ -65,9 +83,17 @@ rpcapd
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
-<B>-f</B>
+<B>-K</B>
 
-<I>config_file</I>
+<I>ssl_keyfile</I>
+
+] [
+<B>-X</B>
+
+<I>ssl_certfile</I>
+
+] [
+<B>-C</B>
 
 ]
 <BR>
@@ -216,8 +242,10 @@ listens on both IPv4 and IPv6 addresses.
 Only allow hosts specified in the
 <I>host_list</I>
 
-file to connect to this server.
-Hosts are listed one per line.
+argument to connect to this server.
+<I>host_list</I>
+
+is a list of host names or IP addresses, separated by commas.
 We suggest that you use use host names rather than literal IP addresses
 in order to avoid problems with different address families.
 <DT><B>-n</B>
@@ -259,23 +287,66 @@ the service is started from the control panel.
 
 <DD>
 Run in inetd mode (UNIX only).
+<DT><B>-D</B>
+
+<DD>
+Log debugging messages.
 <DT><B>-s</B><I> config_file</I>
 
 <DD>
 Save the current configuration to
-<I>config_file</I>.
+<I>config_file</I>
+
+in the format specified by
+<B><A HREF="/cgi-bin/man/man2html?5+rpcapd-config">rpcapd-config</A></B>(5).
 
 <DT><B>-f</B><I> config_file</I>
 
 <DD>
 Load the current configuration from
-<I>config_file</I>;
+<I>config_file</I>
+
+in the format specified by
+<B><A HREF="/cgi-bin/man/man2html?5+rpcapd-config">rpcapd-config</A></B>(5);
 
 all switches specified from the command line are ignored.
 <DT><B>-h</B>
 
 <DD>
 Print this help screen.
+</DL>
+<P>
+
+If rpcapd was compiled with SSL support, these options are also
+available:
+<DL COMPACT>
+<DT><B>-S</B>
+
+<DD>
+Require that SSL be used on connections.
+<DT><B>-C</B>
+
+<DD>
+With SSL enabled, XXX - I'm not sure how *fetching* the list of
+compression mechanisms does anything to compression.
+<DT><B>-S</B>
+
+<DD>
+<I>ssl_keyfile</I>
+
+With SSL enabled, use
+<I>ssl_keyfile</I>
+
+as the SSL key file.
+<DT><B>-X</B>
+
+<DD>
+<I>ssl_certfile</I>
+
+With SSL enabled, use
+<I>ssl_certfile</I>
+
+as the SSL certificate file.
 <BR>
 
 
@@ -283,13 +354,13 @@ Print this help screen.
 <A NAME="lbAK">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP)
+<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF="/cgi-bin/man/man2html?5+rpcapd-config">rpcapd-config</A>(5)
 <P>
 
 <HR>
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 06:01:42 GMT, August 23, 2018
+Time: 11:32:44 GMT, January 30, 2019
 </BODY>
 </HTML>
