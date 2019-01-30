@@ -98,6 +98,8 @@ ENDOFLIST
 5+pcap-savefile		$WEBSITE_PFX/pcap-savefile.5.html
 1+tcpdump		$WEBSITE_PFX/tcpdump.1.html
 1+tcpslice		$WEBSITE_PFX/tcpslice.1.html
+5+rpcapd-config		$WEBSITE_PFX/rpcapd-config.5.html
+8+rpcapd		$WEBSITE_PFX/rpcapd.8.html
 ENDOFLIST
 
 	# Fixup links to local pages, part 2.
