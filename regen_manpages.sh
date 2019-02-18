@@ -13,8 +13,8 @@
 # * Ubuntu 16.04, 18.04
 #
 
-MAN2HTML_PFX=/cgi-bin/man/man2html
-WEBSITE_PFX=/manpages
+readonly MAN2HTML_PFX=/cgi-bin/man/man2html
+readonly WEBSITE_PFX=/manpages
 
 # Fedora man2html prepends its HTML output with a Content-type header.
 # Ubuntu man2html in addition to that adds the <!DOCTYPE ...> XML tag
@@ -28,7 +28,7 @@ stripContentTypeHeader()
 # "Index" section near EOF.
 stripIndexSection()
 {
-	local infile=${1:?}
+	local readonly infile=${1:?}
 	case `basename "$infile"` in
 	tcpdump.1|tcpslice.1|pcap.3pcap)
 		cat
@@ -196,9 +196,9 @@ ENDOFLIST
 
 produceHTML()
 {
-	local infile=${1:?}
-	local sedfile="${2:?}"
-	local outfile=${3:?}
+	local readonly infile=${1:?}
+	local readonly sedfile="${2:?}"
+	local readonly outfile=${3:?}
 	[ -s $infile ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
@@ -221,8 +221,8 @@ produceHTML()
 
 produceTXT()
 {
-	local infile=${1:?}
-	local outfile=${2:?}
+	local readonly infile=${1:?}
+	local readonly outfile=${2:?}
 	[ -s $infile ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
@@ -233,7 +233,7 @@ produceTXT()
 
 known3PCAPFile()
 {
-	local f=`basename ${1:?} .3pcap`
+	local readonly f=`basename ${1:?} .3pcap`
 	local manfile mantopic
 	print3PCAPMap | while read mantopic manfile; do
 		if [ "${manfile:-$mantopic}" = "$f" ]; then
@@ -254,13 +254,13 @@ updateOutputFiles()
 	}
 
 	# $COLUMNS doesn't always work
-	local cols=`stty size | cut -d' ' -f2`
+	local readonly cols=`stty size | cut -d' ' -f2`
 	if [ "$cols" != "80" ]; then
 		echo "This terminal must be 80 ($cols right now) columns wide"
 		exit 1
 	fi
 
-	local sedfile="`mktemp --tmpdir manpages_sedfile.XXXXXX`"
+	local readonly sedfile="`mktemp --tmpdir manpages_sedfile.XXXXXX`"
 	printSedFile > "$sedfile"
 
 	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
