@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<TITLE>Season of Docs for tcpdump.org</TITLE>
+<LINK REV="MADE" HREF="mailto:mcr@sandelman.ca">
+<link href="style.css" rel="stylesheet" type="text/css" media="screen">
+</HEAD>
+<BODY>
+
+  <H1>Season of Docs ideas</H1>
+
+  <p>
+    To complement (I guess!) the Google Summer of Code, Google has started a
+    <a href="https://developers.google.com/season-of-docs/">Season of Docs</a>
+    to "Let's bring open source and technical writer communities together, to
+    the benefit of both. "
+  </p>
+
+  <p>
+    The TCPUMP group maintains the tcpdump packet decoder, and the libpcap capture
+    library. libpcap is used by wide variety of <a href="related.html">network diagnostic tools</a>
+    including the very
+    popular <a href="https://www.wireshark.org/">wireshark</a>.
+  </p>
+
+  <p>
+    TCPDUMP contains two sets of Unix-style manpages: <a href="manpages/tcpdump.1.html">tcpdump(1)</a>
+    and <a href="manpages/pcap.3pcap.html">pcap(3pcap)</a>.  The later of
+    which links to 60-some additional pcap pages.  In addition there is a set
+    of <a href="linktypes.html">link types</a> which describe the kind of
+    information and meta-information that can be found in pcap files,
+    an ancient <a href="pcap.html">pcap tutorial</a>.  There is an ancient
+    <a href="faq.html">FAQ</a> which is hard to update and hard to add things
+    to.
+  </p>
+
+  <p>
+    Some ideas for things to redo:
+    <ul>
+      <li> rewrite the manpages to provide better reference, removing tutorial
+        contents, but including "contract" promises</li>
+      <li> create higher-level documentation (in HTML or markdown), with
+        diagrams, to explain how to use libpcap to a programmer new to
+        libpcap</li>
+      <li> illustrate an actual example via an API walkthrough with libpcap.
+        This could involve the tcpsplice code or something new.</li>
+      <li> tuning for better performance of libpcap, advanced details on
+        Linux memory mapped packet interfaces, how to use threads with
+        libpcap</li>
+    </ul>
+
+<hr>
+by <a href="http://www.sandelman.ca/mcr/Bio.html">MCR</a>
+</BODY></HTML>
