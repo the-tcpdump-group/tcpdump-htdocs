@@ -271,6 +271,15 @@ OPTIONS
               microsecond  resolution and nano for nanosecond resolution.  The
               default is microsecond resolution.
 
+       --micro
+       --nano Shorthands for --time-stamp-precision=micro or --time-stamp-pre-
+              cision=nano,  adjusting  the  time  stamp precision accordingly.
+              When reading packets from a savefile,  using  --micro  truncates
+              time  stamps  if the savefile was created with nanosecond preci-
+              sion.  In contrast, a savefile created with  microsecond  preci-
+              sion  will  have  trailing  zeroes  added to the time stamp when
+              --nano is used.
+
        -K
        --dont-verify-checksums
               Don't attempt to verify IP, TCP, or UDP checksums.  This is use-
@@ -1314,4 +1323,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                 8 April 2018                       TCPDUMP(1)
+                                  2 Apr 2019                        TCPDUMP(1)

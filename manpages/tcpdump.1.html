@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 8 April 2018<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 2 Apr 2019<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -608,6 +608,21 @@ file, the conversion will lose precision.
 The supported values for <I>timestamp_precision</I> are <B>micro</B> for
 microsecond resolution and <B>nano</B> for nanosecond resolution.  The
 default is microsecond resolution.
+<DT><B>--micro</B>
+
+<DD>
+
+<DT><B>--nano</B>
+
+<DD>
+
+Shorthands for <B>--time-stamp-precision=micro</B> or
+<B>--time-stamp-precision=nano</B>, adjusting the time stamp
+precision accordingly.  When reading packets from a savefile, using
+<B>--micro</B> truncates time stamps if the savefile was created with
+nanosecond precision.  In contrast, a savefile created with microsecond
+precision will have trailing zeroes added to the time stamp when
+<B>--nano</B> is used.
 <DT><B>-K</B>
 
 <DD>
@@ -2508,6 +2523,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 11:32:53 GMT, January 30, 2019
+Time: 19:39:14 GMT, April 11, 2019
 </BODY>
 </HTML>
