@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates <http://www.freecsstemplates.org>
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html>
+
+    <!-- HEAD -->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Marvell switch tag | TCPDUMP/LIBPCAP public repository</title>
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+		<meta name="DC.publisher" content="Tcpdump">
+		<meta name="DC.publisher.url" content="https://www.tcpdump.org">
+		<meta name="DC.title" content="Tcpdump/Libpcap public repository">
+		<meta name="DC.identifier" content="https://www.tcpdump.org">
+		<meta name="DC.date.created" scheme="WTN8601" content="2010-09-20T08:01:13">
+		<meta name="DC.creator" content="tcpdump">
+		<meta name="DC.rights.rightsHolder" content="tcpdump">
+		<meta name="DC.language" content="en" scheme="rfc1766">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="canonical" href="https://www.tcpdump.org">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#source">Source</a></li>
+                <li><a href="../index.html#latest-releases">Downloads</a></li>
+                <li><a href="../index.html#mailing-lists">Mailing lists</a></li>
+                <li><a href="../index.html#contribute">Contribute</a></li>
+                <li><a href="../related.html">Related Projects</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of Marvell switch tag section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">Marvell switch tag</a>
+            </h2>
+            <div class="entry">
+                <h3>Switch tag structure</h3>
+The Marvell (Ethertyped or not) DSA tagged frames contains a
+proprietary tag inserted between the source address field and the
+type/length field in the Ethernet header.
+
+The DSA tag is 4 octets. It contains the source (or target) switch
+device and port or trunk numbers. It is placed in the frame on top
+of the standard IEEE tag.
+
+The EDSA tag is 8 octets. It contains a programmable Ethernet type,
+two reserved bytes (always 0), and a standard DSA tag.
+
+<pre>
+     7   6   5   4   3   2   1   0  
+   .   .   .   .   .   .   .   .   .
+ 0 +---+---+---+---+---+---+---+---+
+   |   Ether Destination Address   |
++6 +---+---+---+---+---+---+---+---+
+   |     Ether Source Address      |
++6 +---+---+---+---+---+---+---+---+  --
+   |  Prog. DSA Ether Type [15:8]  |  |
++1 +---+---+---+---+---+---+---+---+  |
+   |  Prog. DSA Ether Type [7:0]   |  | EDSA tag
++1 +---+---+---+---+---+---+---+---+  |
+   |     Reserved (0x00 0x00)      |  |
++2 +---+---+---+---+---+---+---+---+  |  --
+   | Mode  |b29|   Switch Device   |  |  |
++1 +---+---+---+---+---+---+---+---+  |  |
+   |    Switch Port    |b18|b17|b16|  |  |
++1 +---+---+---+---+---+---+---+---+  |  | DSA tag
+   | PRI [2:0] |b12|  VID [11:8]   |  |  |
++1 +---+---+---+---+---+---+---+---+  |  |
+   |           VID [7:0]           |  |  |
++1 +---+---+---+---+---+---+---+---+  -- --
+   |       Ether Length/Type       |
++2 +---+---+---+---+---+---+---+---+
+   .   .   .   .   .   .   .   .   .
+</pre>
+
+<h4>To_CPU frame mode (ingress)</h4>
+The DSA tag mode 0x0 describes a To_CPU frame.
+
+If the b29 bit is set, the original frame contained an IEEE tag
+converted into a DSA tag, otherwise the frame was originally untagged
+and the DSA tag was added to the frame.
+
+The switch device and port bits define the numbers of the original
+source device and port where the frame first ingressed.
+
+Bits b17, b16 and b12 are the frame type code bits 2, 1 and 0,
+describing the kind of To_CPU frame:
+<ul>
+<li>0x0 for BPDU (MGMT) Trap</li>
+<li>0x1 for Frame2Reg Response</li>
+<li>0x2 for IGMP/MLD Trap</li>
+<li>0x3 Policy Trap</li>
+<li>0x4 for ARP Mirror</li>
+<li>0x3 Policy Mirror</li>
+</ul>
+
+The b16 bit is the original frame's CFI bit if it was IEEE tagged.
+
+The PRI bits define the priority assigned to the frame when it entered
+the source device.
+
+The VID bits define the VLAN identifier assigned to the frame when
+it entered the source device.
+
+<h4>From_CPU frame mode (egress)</h4>
+The DSA tag mode 0x1 describes a From_CPU frame.
+
+If the b29 bit is set, the frame egresses the target port with an
+IEEE tag, otherwise the frame egresses the target port untagged.
+
+The switch device and port bits define the numbers of the target
+device and port where the frame must egress.
+
+The b16 bit is used as the frame's IEEE tag CFI bit if the frame
+egresses the target port tagged.
+
+The PRI bits define the IEEE tag priority of the frame if it egresses
+the target port tagged, otherwise they indicate the egress queue the
+frame is to be switched to.
+
+The VID bits define the IEEE VID of the frame if it egresses the
+target port tagged, otherwise they are ignored.
+
+<h4>To_Sniffer frame mode (ingress)</h4>
+The DSA tag mode 0x2 describes a To_Sniffer frame.
+
+If the b29 bit is set, the original frame contained an IEEE tag
+converted into a DSA tag, otherwise the frame was originally untagged
+and the DSA tag was added to the frame.
+
+The switch device and port bits define the numbers of the original
+source device and port where the frame first ingressed.
+
+If the b18 bit is set, the frame came from an ingress source port,
+otherwise it came from an egress source port.
+
+The b16 bit is the original frame's CFI bit if it was IEEE tagged.
+
+The PRI bits define the priority assigned to the frame when it entered
+the source device.
+
+The VID bits define the VLAN identifier assigned to the frame when
+it entered the source device.
+
+<h4>Forward DSA tag frame mode (egress)</h4>
+The DSA tag mode 0x3 describes a Forward frame.
+
+The b29 bit is used to inform the egress port to consider the frame
+as tagged if set, otherwise as untagged.
+
+The PRI bits are used as the IEEE tag priority of the frame.
+
+The VID bits are used as the IEEE VID of the frame.
+
+<h4>Forward DSA tag frame mode (ingress)</h4>
+The DSA tag mode 0x3 describes a Forward frame.
+
+If the b29 bit is set, the original frame contained an IEEE tag
+converted into a DSA tag, otherwise the frame was originally untagged
+and the DSA tag was added to the frame.
+
+The switch device and port bits define the numbers of the original
+source device and port where the frame first ingressed.
+
+If the b18 bit is set, the switch port bits indicate a trunk ID,
+otherwise a port number.
+
+The b16 bit is the original frame's CFI bit if it was IEEE tagged.
+
+The PRI bits define the priority assigned to the frame when it entered
+the source device.
+
+The VID bits define the VLAN identifier assigned to the frame when
+it entered the source device.
+            </div>
+            <!-- End of Marvell switch tag section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                (c) 2010-2019 Tcpdump/Libpcap. Designed by
+                <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
+                based on a template by <a href="http://www.freecsstemplates.org/">
+                Free CSS Templates</a>.
+                <a href="http://validator.w3.org/check?uri=referer">[Valid XHTML
+                1.0]</a> <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                [Valid CSS]</a>
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+        
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
