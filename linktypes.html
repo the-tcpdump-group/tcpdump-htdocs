@@ -848,6 +848,14 @@ Ethernet frames, with a programmable Ethernet type
 between the source address field and the type/length field in the
 Ethernet header.
 </tr>
+                <tr valign=top>
+<td>LINKTYPE_ELEE<td>286<td>DLT_ELEE<td>
+Payload of lawful intercept packets using
+<a
+href="http://xml2rfc.tools.ietf.org/cgi-bin/xml2rfc.cgi?url=http://socket.hr/draft-dfranusic-opsawg-elee-00.xml&modeAsFormat=html/ascii">the
+ELEE protocol</a>.  The packet begins with the ELEE header; it does not
+include any transport-layer or lower-layer headers for protcols used to
+transport ELEE packets.</tr>
               </table>
             </div>
           </div>
