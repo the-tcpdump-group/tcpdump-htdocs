@@ -8,7 +8,8 @@ Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 12 October 2016<BR>
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_datalink_val_to_name, pcap_datalink_val_to_description - get a
+pcap_datalink_val_to_name, pcap_datalink_val_to_description,
+pcap_datalink_val_to_description_or_dlt - get a
 name or description for a link-layer header type value
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
@@ -18,6 +19,7 @@ name or description for a link-layer header type value
 </B>
 <B>const char *pcap_datalink_val_to_name(int dlt);
 const char *pcap_datalink_val_to_description(int dlt);
+const char *pcap_datalink_val_to_description_or_dlt(int dlt);
 </B></PRE>
 
 <A NAME="lbAD">&nbsp;</A>
@@ -51,6 +53,17 @@ is returned if the type value does not correspond to a known
 <B>DLT_</B>
 
 value.
+<P>
+
+<B>pcap_datalink_val_to_description_or_dlt()</B>
+
+translates a link-layer header type value to a short description of that
+link-layer header type just like pcap_datalink_val_to_description.
+If the type value does not correspond to a known
+<B>DLT_</B>
+
+value, the string &quot;DLT n&quot; is returned, where n is the value of
+the dlt argument.
 <A NAME="lbAE">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
@@ -61,6 +74,6 @@ value.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:49:41 GMT, July 19, 2018
+Time: 18:51:51 GMT, June 01, 2019
 </BODY>
 </HTML>

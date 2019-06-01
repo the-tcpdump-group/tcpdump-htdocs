@@ -27,13 +27,13 @@ be done for a live capture
 returns, on UNIX, a file descriptor number for a file descriptor on
 which one can
 do a
-<B>select(2)</B>,
+<B>select</B>(2),
 
-<B>poll(2)</B>,
+<B>poll</B>(2),
 
-<B>epoll_wait(2)</B>,
+<B>epoll_wait</B>(2),
 
-<B>kevent()</B>,
+<B><A HREF="/cgi-bin/man/man2html?2+kevent">kevent</A></B>(2),
 
 or other such call
 to wait for it to be possible to read packets without blocking, if such
@@ -44,7 +44,7 @@ if no such descriptor exists.
 <P>
 
 Some network devices opened with
-<B><A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
 
 and
 <B><A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)</B>,
@@ -59,7 +59,7 @@ FreeBSD 4.3 and 4.4, and Endace DAG devices), so
 is returned for
 those devices.  In that case, those calls must be given a timeout less
 than or equal to the timeout returned by
-<B><A HREF='/manpages/pcap_get_required_select_timeout.3pcap.html'>pcap_get_required_select_timeout</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_get_required_select_timeout.3pcap.html'><B>pcap_get_required_select_timeout</B></A>(3PCAP)
 
 for the device for which
 <B>pcap_get_selectable_fd()</B>
@@ -84,10 +84,10 @@ event loop.
 Note that a device on which a read can be done without blocking may,
 on some platforms, not have any packets to read if the packet buffer
 timeout has expired.  A call to
-<B><A HREF='/manpages/pcap_loop.3pcap.html'>pcap_dispatch</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP)
 
 or
-<B><A HREF='/manpages/pcap_next_ex.3pcap.html'>pcap_next_ex</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP)
 
 will return 0 in this case, but will not block.
 <P>
@@ -189,13 +189,16 @@ is returned.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), kqueue(2)
+<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
+
+<B>kqueue</B>(2)
+
 <P>
 
 <HR>
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 16:35:52 GMT, July 25, 2018
+Time: 18:51:54 GMT, June 01, 2019
 </BODY>
 </HTML>

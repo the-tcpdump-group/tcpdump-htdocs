@@ -12,8 +12,8 @@ SYNOPSIS
 DESCRIPTION
        pcap_get_selectable_fd() returns, on UNIX, a file descriptor number for
        a   file   descriptor  on  which  one  can  do  a  select(2),  poll(2),
-       epoll_wait(2), kevent(), or other such call to wait for it to be possi-
-       ble  to  read packets without blocking, if such a descriptor exists, or
+       epoll_wait(2), kevent(2), or other such call to wait for it to be  pos-
+       sible to read packets without blocking, if such a descriptor exists, or
        PCAP_ERROR, if no such descriptor exists.
 
        Some network devices  opened  with  pcap_create(3PCAP)  and  pcap_acti-

@@ -25,7 +25,7 @@ DESCRIPTION
        blocking'' mode.
 
        When   first   activated   with  pcap_activate(3PCAP)  or  opened  with
-       pcap_open_live(3PCAP) , a  capture  handle  is  not  in  ``non-blocking
+       pcap_open_live(3PCAP),  a  capture  handle  is  not  in  ``non-blocking
        mode'';  a  call  to  pcap_setnonblock() is required in order to put it
        into ``non-blocking'' mode.
 

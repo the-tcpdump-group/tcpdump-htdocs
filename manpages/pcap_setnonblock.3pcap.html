@@ -43,23 +43,23 @@ returned.
 In
 ``non-blocking'' mode, an attempt to read from the capture descriptor
 with
-<B><A HREF='/manpages/pcap_loop.3pcap.html'>pcap_dispatch</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP)
 
 will, if no packets are currently available to be read, return 0
 immediately rather than blocking waiting for packets to arrive.
-<B><A HREF='/manpages/pcap_loop.3pcap.html'>pcap_loop</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_loop</B></A>(3PCAP)
 
 and
-<B><A HREF='/manpages/pcap_next_ex.3pcap.html'>pcap_next</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next</B></A>(3PCAP)
 
 will not work in ``non-blocking'' mode.
 <P>
 
 When first activated with
-<B><A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
 
 or opened with
-<B><A HREF='/manpages/pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP) ,</B>
+<A HREF='/manpages/pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP)<B>,</B>
 
 a capture handle is not in ``non-blocking mode''; a call to
 <B>pcap_setnonblock()</B>
@@ -90,13 +90,18 @@ chars.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_next_ex.3pcap.html'>pcap_next_ex</A>(3PCAP), <A HREF='/manpages/pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)
+<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
+
+<A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP),
+
+<A HREF='/manpages/pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
+
 <P>
 
 <HR>
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 16:35:55 GMT, July 25, 2018
+Time: 18:52:00 GMT, June 01, 2019
 </BODY>
 </HTML>

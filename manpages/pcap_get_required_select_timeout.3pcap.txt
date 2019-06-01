@@ -12,7 +12,7 @@ SYNOPSIS
 DESCRIPTION
        pcap_get_required_select_timeout() returns, on UNIX,  a  pointer  to  a
        struct  timeval  containing  a  value  that must be used as the minimum
-       timeout in select(2), poll(2), epoll_wait(2),  and  kevent()  calls  if
+       timeout in select(2), poll(2), epoll_wait(2), and  kevent(2)  calls  if
        pcap_get_selectable_fd(3PCAP) returns PCAP_ERROR.
 
        The  timeout  that should be used in those calls must be no larger than

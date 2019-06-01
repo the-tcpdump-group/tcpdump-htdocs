@@ -28,17 +28,17 @@ returns, on UNIX, a pointer to a
 <B>struct timeval</B>
 
 containing a value that must be used as the minimum timeout in
-<B>select(2)</B>,
+<B>select</B>(2),
 
-<B>poll(2)</B>,
+<B>poll</B>(2),
 
-<B>epoll_wait(2)</B>,
+<B>epoll_wait</B>(2),
 
 and
-<B>kevent()</B>
+<B><A HREF="/cgi-bin/man/man2html?2+kevent">kevent</A></B>(2)
 
 calls if
-<B><A HREF='/manpages/pcap_get_selectable_fd.3pcap.html'>pcap_get_selectable_fd</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_get_selectable_fd.3pcap.html'><B>pcap_get_selectable_fd</B></A>(3PCAP)
 
 returns
 <B>PCAP_ERROR</B>.
@@ -59,7 +59,7 @@ returned
 <B>PCAP_ERROR</B>
 
 must be put in non-blocking mode with
-<B><A HREF='/manpages/pcap_setnonblock.3pcap.html'>pcap_setnonblock</A>(3PCAP)</B>,
+<A HREF='/manpages/pcap_setnonblock.3pcap.html'><B>pcap_setnonblock</B></A>(3PCAP),
 
 and an attempt must always be made to read packets from the device
 when the
@@ -78,10 +78,10 @@ call returns.
 Note that a device on which a read can be done without blocking may,
 on some platforms, not have any packets to read if the packet buffer
 timeout has expired.  A call to
-<B><A HREF='/manpages/pcap_loop.3pcap.html'>pcap_dispatch</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP)
 
 or
-<B><A HREF='/manpages/pcap_next_ex.3pcap.html'>pcap_next_ex</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP)
 
 will return 0 in this case, but will not block.
 <P>
@@ -120,14 +120,24 @@ returns -1.
 <A NAME="lbAG">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='/manpages/pcap_get_selectable_fd.3pcap.html'>pcap_get_selectable_fd</A>(3PCAP), select(2), poll(2),
-epoll_wait(2), kqueue(2)
+<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
+
+<A HREF='/manpages/pcap_get_selectable_fd.3pcap.html'><B>pcap_get_selectable_fd</B></A>(3PCAP),
+
+<B>select</B>(2),
+
+<B>poll</B>(2),
+
+<B>epoll_wait</B>(2),
+
+<B>kqueue</B>(2)
+
 <P>
 
 <HR>
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 06:01:45 GMT, August 23, 2018
+Time: 18:51:54 GMT, June 01, 2019
 </BODY>
 </HTML>

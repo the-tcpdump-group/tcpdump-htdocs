@@ -24,20 +24,20 @@ pcap_snapshot - get the snapshot length
 <B>pcap_snapshot()</B>
 
 returns the snapshot length specified when
-<B><A HREF='/manpages/pcap_set_snaplen.3pcap.html'>pcap_set_snaplen</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_set_snaplen.3pcap.html'><B>pcap_set_snaplen</B></A>(3PCAP)
 
 or
-<B><A HREF='/manpages/pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP)
 
 was called, for a live capture, or the snapshot length from the capture
 file, for a ``savefile''.
 <P>
 
 It must not be called on a pcap descriptor created by
-<B><A HREF='/manpages/pcap_create.3pcap.html'>pcap_create</A>(3PCAP)</B>
+<A HREF='/manpages/pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
 
 that has not yet been activated by
-<B><A HREF='/manpages/pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)</B>.
+<A HREF='/manpages/pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP).
 
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
@@ -51,13 +51,14 @@ if called on a capture handle that has been created but not activated.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'>pcap</A>(3PCAP)
+<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
 <P>
 
 <HR>
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:49:44 GMT, July 19, 2018
+Time: 18:52:00 GMT, June 01, 2019
 </BODY>
 </HTML>
