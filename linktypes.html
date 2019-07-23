@@ -855,7 +855,22 @@ Payload of lawful intercept packets using
 href="http://xml2rfc.tools.ietf.org/cgi-bin/xml2rfc.cgi?url=http://socket.hr/draft-dfranusic-opsawg-elee-00.xml&modeAsFormat=html/ascii">the
 ELEE protocol</a>.  The packet begins with the ELEE header; it does not
 include any transport-layer or lower-layer headers for protcols used to
-transport ELEE packets.</tr>
+transport ELEE packets.
+</tr>
+                <tr valign=top>
+<td>LINKTYPE_Z_WAVE_SERIAL<td>287<td>DLT_Z_WAVE_SERIAL<td>
+Serial frames transmitted between a host and a Z-Wave chip over an
+RS-232 or USB serial connection, as described in section 5 of <a
+href="https://www.silabs.com/documents/login/user-guides/INS12350-Serial-API-Host-Appl.-Prg.-Guide.pdf">the
+Z-Wave Serial API Host Application Programming Guide</a>.
+</tr>
+                <tr valign=top>
+<td>LINKTYPE_USB_2_0<td>288<td>DLT_USB_2_0<td>
+USB 2.0, 1.1, or 1.0 packet, beginning with a PID, as described by
+Chapter 8 "Protocol Layer" of the <a
+href="https://www.usb.org/document-library/usb-20-specification">the
+Universal Serial Bus Specification Revision 2.0</a>.
+</tr>
               </table>
             </div>
           </div>
