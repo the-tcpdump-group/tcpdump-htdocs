@@ -985,7 +985,9 @@ The following ICMP type field values are available: <B>icmp-echoreply</B>,
 <B>icmp-tstampreply</B>, <B>icmp-ireq</B>, <B>icmp-ireqreply</B>,
 <B>icmp-maskreq</B>, <B>icmp-maskreply</B>.
 <P>
-The following ICMPv6 type fields are available: <B>icmp6-echo</B>,
+The following ICMPv6 type fields are available: <B>icmp6-destinationrunreach</B>,
+<B>icmp6-packettoobig</B>, <B>icmp6-timeexceeded</B>,
+<B>icmp6-parameterproblem</B>, <B>icmp6-echo</B>,
 <B>icmp6-echoreply</B>, <B>icmp6-multicastlistenerquery</B>,
 <B>icmp6-multicastlistenerreportv1</B>, <B>icmp6-multicastlistenerdone</B>,
 <B>icmp6-routersolicit</B>, <B>icmp6-routeradvert</B>,
@@ -1167,6 +1169,7 @@ ping packets):
 <DL COMPACT><DT><DD>
 <PRE>
 <B>icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply</B>
+<B>icmp6[icmp6type] != icmp6-echo and icmp6[icmp6type] != icmp6-echoreply</B>
 </PRE>
 
 </DL>
@@ -1201,7 +1204,9 @@ correctly handle 802.11 data packets with both To DS and From DS set.
 should chase header chain, but at this moment it does not.
 <B>ip6 protochain</B>
 
-is supplied for this behavior.
+is supplied for this behavior.  For example, to match ipv6 fragments:
+<B>ip6 protochain 44</B>
+
 <P>
 
 Arithmetic expression against transport layer headers, like <B>tcp[0]</B>,
@@ -1213,6 +1218,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 11:01:17 GMT, December 13, 2018
+Time: 06:51:53 GMT, September 02, 2019
 </BODY>
 </HTML>

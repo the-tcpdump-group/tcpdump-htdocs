@@ -1248,8 +1248,8 @@ SEE ALSO
        stty(1),    pcap(3PCAP),     bpf(4),     nit(4P),     pcap-savefile(5),
        pcap-filter(7), pcap-tstamp(7)
 
-              http://www.iana.org/assignments/media-types/application/vnd.tcp-
-              dump.pcap
+              https://www.iana.org/assignments/media-types/applica-
+              tion/vnd.tcpdump.pcap
 
 AUTHORS
        The original authors are:

@@ -329,7 +329,7 @@ DESCRIPTION
                      set  packet buffer timeout for a not-yet-activated pcap_t
                      for live capture
 
-              pcap_set_immediatemode(3PCAP)
+              pcap_set_immediate_mode(3PCAP)
                      set immediate mode for  a  not-yet-activated  pcap_t  for
                      live capture
 

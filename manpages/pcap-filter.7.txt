@@ -669,20 +669,21 @@ DESCRIPTION
               paramprob, icmp-tstamp, icmp-tstampreply,  icmp-ireq,  icmp-ire-
               qreply, icmp-maskreq, icmp-maskreply.
 
-              The  following  ICMPv6  type  fields  are available: icmp6-echo,
-              icmp6-echoreply,  icmp6-multicastlistenerquery,  icmp6-multicas-
-              tlistenerreportv1,  icmp6-multicastlistenerdone, icmp6-routerso-
-              licit, icmp6-routeradvert, icmp6-neighborsolicit, icmp6-neighbo-
-              radvert,  icmp6-redirect,  icmp6-routerrenum, icmp6-nodeinforma-
-              tionquery, icmp6-nodeinformationresponse, icmp6-ineighbordiscov-
-              erysolicit,  icmp6-ineighbordiscoveryadvert, icmp6-multicastlis-
-              tenerreportv2, icmp6-homeagentdiscoveryrequest, icmp6-homeagent-
-              discoveryreply, icmp6-mobileprefixsolicit, icmp6-mobileprefixad-
-              vert, icmp6-certpathsolicit, icmp6-certpathadvert,  icmp6-multi-
-              castrouteradvert,  icmp6-multicastroutersolicit, icmp6-multicas-
-              trouterterm.
+              The  following  ICMPv6 type fields are available: icmp6-destina-
+              tionrunreach,      icmp6-packettoobig,       icmp6-timeexceeded,
+              icmp6-parameterproblem,  icmp6-echo, icmp6-echoreply, icmp6-mul-
+              ticastlistenerquery, icmp6-multicastlistenerreportv1, icmp6-mul-
+              ticastlistenerdone,   icmp6-routersolicit,   icmp6-routeradvert,
+              icmp6-neighborsolicit,   icmp6-neighboradvert,   icmp6-redirect,
+              icmp6-routerrenum,  icmp6-nodeinformationquery, icmp6-nodeinfor-
+              mationresponse,  icmp6-ineighbordiscoverysolicit,  icmp6-ineigh-
+              bordiscoveryadvert, icmp6-multicastlistenerreportv2, icmp6-home-
+              agentdiscoveryrequest,            icmp6-homeagentdiscoveryreply,
+              icmp6-mobileprefixsolicit, icmp6-mobileprefixadvert, icmp6-cert-
+              pathsolicit, icmp6-certpathadvert,  icmp6-multicastrouteradvert,
+              icmp6-multicastroutersolicit, icmp6-multicastrouterterm.
 
-              The following TCP flags field  values  are  available:  tcp-fin,
+              The  following  TCP  flags  field values are available: tcp-fin,
               tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg, tcp-ece, tcp-cwr.
 
        Primitives may be combined using:
@@ -695,8 +696,8 @@ DESCRIPTION
 
               Alternation (`||' or `or').
 
-       Negation  has  highest  precedence.  Alternation and concatenation have
-       equal precedence and associate left to right.  Note that  explicit  and
+       Negation has highest precedence.  Alternation  and  concatenation  have
+       equal  precedence  and associate left to right.  Note that explicit and
        tokens, not juxtaposition, are now required for concatenation.
 
        If an identifier is given without a keyword, the most recent keyword is
@@ -728,12 +729,12 @@ EXAMPLES
        local net).
               ip and not net localnet
 
-       To select the start and end packets (the SYN and FIN packets)  of  each
+       To  select  the start and end packets (the SYN and FIN packets) of each
        TCP conversation that involves a non-local host.
               tcp[tcpflags] & (tcp-syn|tcp-fin) != 0 and not src and dst net localnet
 
-       To  select  all  IPv4 HTTP packets to and from port 80, i.e. print only
-       packets that contain data, not, for example, SYN and  FIN  packets  and
+       To select all IPv4 HTTP packets to and from port 80,  i.e.  print  only
+       packets  that  contain  data, not, for example, SYN and FIN packets and
        ACK-only packets.  (IPv6 is left as an exercise for the reader.)
               tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)
 
@@ -744,30 +745,32 @@ EXAMPLES
        ernet broadcast or multicast:
               ether[0] & 1 = 0 and ip[16] >= 224
 
-       To select all ICMP packets that are not  echo  requests/replies  (i.e.,
+       To  select  all  ICMP packets that are not echo requests/replies (i.e.,
        not ping packets):
               icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply
+              icmp6[icmp6type] != icmp6-echo and icmp6[icmp6type] != icmp6-echoreply
 
 SEE ALSO
        pcap(3PCAP)
 
 BUGS
-       To  report  a  security  issue  please  send an e-mail to security@tcp-
+       To report a security issue  please  send  an  e-mail  to  security@tcp-
        dump.org.
 
-       To report bugs and other problems, contribute patches, request  a  fea-
-       ture,  provide generic feedback etc please see the file CONTRIBUTING in
+       To  report  bugs and other problems, contribute patches, request a fea-
+       ture, provide generic feedback etc please see the file CONTRIBUTING  in
        the libpcap source tree root.
 
-       Filter expressions on fields other than those  in  Token  Ring  headers
+       Filter  expressions  on  fields  other than those in Token Ring headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter  expressions  on  fields other than those in 802.11 headers will
-       not correctly handle 802.11 data packets with both To DS  and  From  DS
+       Filter expressions on fields other than those in  802.11  headers  will
+       not  correctly  handle  802.11 data packets with both To DS and From DS
        set.
 
-       ip6  proto  should  chase header chain, but at this moment it does not.
-       ip6 protochain is supplied for this behavior.
+       ip6 proto should chase header chain, but at this moment  it  does  not.
+       ip6  protochain  is  supplied for this behavior.  For example, to match
+       ipv6 fragments: ip6 protochain 44
 
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
