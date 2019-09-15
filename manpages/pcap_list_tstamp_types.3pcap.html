@@ -54,8 +54,15 @@ returns the number of time stamp types in the array on success and
 <B>PCAP_ERROR</B>
 
 on failure.
-A return value of zero means that you cannot specify a time stamp type;
-you are limited to the capture device's default time stamp type.
+A return value of one means that the only time stamp type supported is
+the one in the list, which is the capture device's default time stamp
+type.  A return value of zero means that the only time stamp type
+supported is
+<B>PCAP_TSTAMP_HOST</B>,
+
+which is the capture device's default time stamp type (only older
+versions of libpcap will return that; newer versions will always return
+one or more types).
 If
 <B>PCAP_ERROR</B>
 
@@ -92,6 +99,6 @@ type offered by a capture source is available.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:55 GMT, June 01, 2019
+Time: 14:36:27 GMT, September 15, 2019
 </BODY>
 </HTML>

@@ -23,9 +23,13 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_list_tstamp_types() returns the number of time stamp types in  the
-       array  on  success  and  PCAP_ERROR on failure.  A return value of zero
-       means that you cannot specify a time stamp type; you are limited to the
-       capture  device's  default time stamp type.  If PCAP_ERROR is returned,
+       array  on  success  and  PCAP_ERROR  on failure.  A return value of one
+       means that the only time stamp type supported is the one in  the  list,
+       which  is the capture device's default time stamp type.  A return value
+       of  zero  means  that  the  only   time   stamp   type   supported   is
+       PCAP_TSTAMP_HOST, which is the capture device's default time stamp type
+       (only older versions of libpcap will return that; newer  versions  will
+       always   return  one  or  more  types).   If  PCAP_ERROR  is  returned,
        pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called  with  p  as  an
        argument to fetch or display the error text.
 

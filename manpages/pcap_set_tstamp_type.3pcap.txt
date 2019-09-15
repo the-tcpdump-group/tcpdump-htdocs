@@ -24,7 +24,9 @@ RETURN VALUE
        ING_TSTAMP_TYPE_NOTSUP if the specified time stamp  type  is  not  sup-
        ported  by the capture device, PCAP_ERROR_ACTIVATED if called on a cap-
        ture handle that has been activated, and PCAP_ERROR_CANTSET_TSTAMP_TYPE
-       if the capture device doesn't support setting the time stamp type.
+       if the capture device doesn't support setting the time stamp type (only
+       older versions of libpcap will return that; newer versions will  always
+       allow the time stamp type to be set to the default type).
 
 BACKWARD COMPATIBILITY
        This  function  became available in libpcap release 1.2.1.  In previous
