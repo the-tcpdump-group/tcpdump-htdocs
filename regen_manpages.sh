@@ -9,7 +9,7 @@
 #
 # This script has been tested to work on the following Linux systems:
 #
-# * Fedora 24, 25
+# * Fedora 24, 25, 28, 30
 # * Ubuntu 16.04, 18.04
 #
 
