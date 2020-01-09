@@ -1,0 +1,167 @@
+          <!-- Start of LINKTYPE_LINUX_SLL section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_LINUX_SLL</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+|         Packet type       |
+|         (2 Octets)        |
++---------------------------+
+|        ARPHRD_ type       |
+|         (2 Octets)        |
++---------------------------+
+| Link-layer address length |
+|         (2 Octets)        |
++---------------------------+
+|    Link-layer address     |
+|         (8 Octets)        |
++---------------------------+
+|        Protocol type      |
+|         (2 Octets)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The packet type field is in network byte order (big-endian); it contains
+a value that is one of:
+</p>
+<ul>
+<li>0, if the packet was specifically sent to us by somebody else;</li>
+<li>1, if the packet was broadcast by somebody else;</li>
+<li>2, if the packet was multicast, but not broadcast, by somebody
+else;</li>
+<li>3, if the packet was sent to somebody else by somebody else;</li>
+<li>4, if the packet was sent by us.</li>
+</ul>
+<p>
+The ARPHRD_ type field is in network byte order; it contains a Linux
+ARPHRD_ value for the link-layer device type.
+</p>
+<p>
+The link-layer address length field is in network byte order; it
+contains the length of the link-layer address of the sender of the
+packet.  That length could be zero.
+</p>
+<p>
+The link-layer address field contains the link-layer address of the
+sender of the packet; the number of bytes of that field that are
+meaningful is specified by the link-layer address length field.  If
+there are more than 8 bytes, only the first 8 bytes are present, and
+if there are fewer than 8 bytes, there are padding bytes after the
+address to pad the field to 8 bytes.
+</p>
+<p>
+The protocol type field is in network byte order.
+</p>
+<p>
+If the ARPHRD_ type is ARPHRD_NETLINK (824), the packet data,
+including the LINKTYPE_LINUX_SLL header, is <a
+href="LINKTYPE_NETLINK.html">a LINKTYPE_NETLINK packet</a>,
+with the protocol type field being the Netlink protocol type.
+</p>
+<p>
+If the ARPHRD_ type is ARPHRD_IPGRE (778), the protocol type field
+contains a <a href="https://tools.ietf.org/html/rfc2784">GRE</a>
+protocol type.
+</p>
+<p>
+If the ARPHRD_ type is ARPHRD_IEEE80211_RADIOTAP (803), the protocol
+type field is ignored, and the payload following the LINKTYPE_LINUX_SLL
+header begins with <a href="http://www.radiotap.org/">Radiotap
+link-layer information</a> followed by an 802.11 header.
+</p>
+<p>
+Otherwise, the protocol type field contains the Ethernet protocol
+type for the packet, or one of:
+</p>
+<ul>
+<li>0x0001, if the frame is a Novell 802.3 frame without an 802.2 LLC
+header;</li>
+<li>0x0003, in some mysterious cases;</li>
+<li>0x0004, if the frame begins with an 802.2 LLC header;</li>
+<li>0x000C, if the frame is a CAN bus frame that begins with a header of
+the form</li>
+
+<pre>
++---------------------------+
+|      CAN ID and flags     |
+|         (4 Octets)        |
++---------------------------+
+|    Frame payload length   |
+|         (1 Octet)         |
++---------------------------+
+|          Padding          |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+</pre>
+
+<p>
+where the field containing the CAN ID and flags is in host byte order.
+The bottom 29 bits contain the CAN ID of the frame.  The remaining bits
+are:
+</p>
+<ul>
+<li>0x20000000 - set if the frame is an error message rather than a data
+frame.
+<li>0x40000000 - set if the frame is a remote transmission request
+frame.
+<li>0x80000000 - set if the frame is an extended 29-bit frame rather
+than a standard 11-bit frame;
+</ul>
+and the header is followed by the payload;</li>
+
+<li>0x000D, if the frame is a CAN FD (CAN with Flexible Data-Rate) frame
+that begins with a header of the form</li>
+
+<pre>
++---------------------------+
+|      CAN ID and flags     |
+|         (4 Octets)        |
++---------------------------+
+|    Frame payload length   |
+|         (1 Octet)         |
++---------------------------+
+|         FD flags          |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+</pre>
+
+<p>
+where the field containing the CAN ID and flags is in host byte order.
+The bottom 29 bits of that field contain the CAN ID of the frame.  The
+remaining bits are:
+</p>
+<ul>
+<li>0x80000000 - set if the frame is an extended 29-bit frame rather
+than a standard 11-bit frame.</li>
+</ul>
+The bits of the FD flags field are:
+<ul>
+<li>0x01 - set if the bit rate switch flag is set for the frame;</li>
+<li>0x02 - set if the error state indicator is set for the frame;</li>
+</ul>
+and the header is followed by the payload.</li>
+</ul>
+            </div>
+            <!-- End of LINKTYPE_LINUX_SLL section -->
+          </div>

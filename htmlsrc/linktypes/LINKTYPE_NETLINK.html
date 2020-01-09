@@ -1,0 +1,42 @@
+          <!-- Start of LINKTYPE_NETLINK section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_NETLINK</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+|           Unused          |
+|         (2 Octets)        |
++---------------------------+
+|        ARPHRD_ type       |
+|         (2 Octets)        |
++---------------------------+
+|           Unused          |
+|         (10 Octets)       |
++---------------------------+
+|        Protocol type      |
+|         (2 Octets)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The ARPHRD_ type field is in network byte order; it will be equal to
+the Linux ARPHRD_ value <tt>ARPHRD_NETLINK</tt>.
+</p>
+<p>The protocol type field is in network byte order; it contains an
+Netlink protocol type, such as <tt>NETLINK_ROUTE</tt>,
+<tt>NETLINK_NFLOG</tt>, <tt>NETLINK_AUDIT</tt>, etc..
+</p>
+<p>The payload begins with a Netlink header, as described in
+<a href="http://tools.ietf.org/html/rfc3549#section-2.3.2">section
+2.3.2, "Netlink Message Header", of RFC 3549</a>.
+            </div>
+            <!-- End of LINKTYPE_NETLINK section -->
+          </div>

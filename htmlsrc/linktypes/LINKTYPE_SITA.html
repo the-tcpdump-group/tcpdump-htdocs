@@ -1,0 +1,109 @@
+          <!-- Start of LINKTYPE_SITA section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_SITA</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+|            Flags          |
+|          (1 Octet)        |
++---------------------------+
+|           Signals         |
+|          (1 Octet)        |
++---------------------------+
+|          Errors 1         |
+|          (1 Octet)        |
++---------------------------+
+|          Errors 2         |
+|          (1 Octet)        |
++---------------------------+
+|          Protocol         |
+|          (1 Octet)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The bits in the Flags field are:
+</p>
+<ul>
+<li>0x01 - set if the frame was transmitted from the remote to the IOP,
+clear if the frame was received by the remote from the IOP;</li>
+<li>0x80 - set if there was a buffer failure.</li>
+</ul>
+<p>
+The Signals field shows the state of various RS-232 signals:
+</p>
+<ul>
+<li>0x01 - Data Set Ready;</li>
+<li>0x02 - Data Terminal Ready;</li>
+<li>0x04 - Clear To Send;</li>
+<li>0x08 - Request To Send;</li>
+<li>0x10 - Data Carrier Detect.</li>
+</ul>
+<p>
+The bits in the Errors 1 field are, for frames received by the remote
+from the IOP:
+</p>
+<ul>
+<li>0x01 - framing error;</li>
+<li>0x02 - parity error;</li>
+<li>0x04 - collision;</li>
+<li>0x08 - long frame received;</li>
+<li>0x10 - short frame.</li>
+</ul>
+<p>
+The Errors 1 field is unused for frames transmitted from the remote to
+the IOP.
+</p>
+<p>
+The bits in the Errors 2 field are, for frames received by the remote
+from the IOP:
+</p>
+<ul>
+<li>0x01 - non-octet-aligned frame;</li>
+<li>0x02 - abort received;</li>
+<li>0x04 - carrier lost;</li>
+<li>0x08 - DPLL error;</li>
+<li>0x10 - overrun error;</li>
+<li>0x20 - frame length violation;</li>
+<li>0x40 - CRC error;</li>
+<li>0x80 - break received.</li>
+</ul>
+<p>
+and, for frames transmitted from the remote to the IOP:
+</p>
+<ul>
+<li>0x01 - transmitter underrun;</li>
+<li>0x02 - Clear To Send lost;</li>
+<li>0x04 - UART error;</li>
+<li>0x08 - retransmit limit reached.</li>
+</ul>
+<p>
+The Protocol field indicates the protocol; the values of that field are:
+</p>
+<ul>
+<li>1 - LAPB;</li>
+<li>2 - Ethernet;</li>
+<li>3 - asynchronous (interrupt I/O);</li>
+<li>4 - asynchronous (block I/O);</li>
+<li>4 - asynchronous (block I/O);</li>
+<li>5 - IPARS/ALC (International Passenger Airline Reservation
+System/Airline Link Control);</li>
+<li>6 - UTS;</li>
+<li>7 - PPP/HDLC;</li>
+<li>8 - SDLC;</li>
+<li>9 - Token Ring;</li>
+<li>16 - I2C;</li>
+<li>17 - DPM link;</li>
+<li>18 - Frame Relay.</li>
+</ul>
+            </div>
+            <!-- End of LINKTYPE_SITA section -->
+          </div>

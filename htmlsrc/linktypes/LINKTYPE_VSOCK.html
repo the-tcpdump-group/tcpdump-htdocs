@@ -1,0 +1,175 @@
+          <!-- Start of LINKTYPE_VSOCK section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_VSOCK</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+|         Source CID        |
+|         (8 Octets)        |
++---------------------------+
+|      Destination CID      |
+|         (8 Octets)        |
++---------------------------+
+|        Source port        |
+|         (4 Octets)        |
++---------------------------+
+|      Destination port     |
+|         (4 Octets)        |
++---------------------------+
+|         Operation         |
+|         (2 Octets)        |
++---------------------------+
+|    Transport header type  |
+|         (2 Octets)        |
++---------------------------+
+|   Transport header length |
+|         (2 Octets)        |
++---------------------------+
+|      Transport header     |
+.                           .
+.                           .
+.                           .
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The source and destination CID fields are in little-endian byte order;
+they identify the source and destination vsock devices.
+</p>
+<p>
+The source and destination port fields are in little-endian byte order;
+they identify a connection or datagram flow between the source and
+destination devices.
+</p>
+<p>
+The operation field is in little-endian byte order; it contains a value
+that is one of:
+</p>
+<ul>
+<li>1, for a connect operation;</li>
+<li>2, for a disconnect operation;</li>
+<li>3, for a control operation;</li>
+<li>4, for a data transfer operation.</li>
+</ul>
+<p>
+The transport header type field is in little-endian byte order; it
+contains a value that is one of:
+</p>
+<ul>
+<li>1, if there is no transport header information;</li>
+<li>2, if there is a virtio transport header.</li>
+</ul>
+<p>
+The transport header length field is in little-endian byte order; it
+indicates how many bytes of transport header follow the length field.
+It may be non-zero even if the transport header type field has a value
+of 1; in that case, the bytes for the transport header should be
+skipped.
+</p>
+<p>
+If the transport header type field has a value of 2, the transport
+header is a virtio transport header as described below.  High-level
+information about the packet is available in the vsockmon packet header
+so parsing the transport header is only necessary for low-level packet
+analysis.  This allows applications to process packet captures even when
+the transport header type is unknown.
+</p>
+<p>
+For packets with an operation field with a value of 4, the payload
+follows the transport header.
+</p>
+                <h3>Virtio transport header structure</h3>
+<pre>
++---------------------------+
+|         Source CID        |
+|         (8 Octets)        |
++---------------------------+
+|      Destination CID      |
+|         (8 Octets)        |
++---------------------------+
+|        Source port        |
+|         (4 Octets)        |
++---------------------------+
+|      Destination port     |
+|         (4 Octets)        |
++---------------------------+
+|       Payload length      |
+|         (4 Octets)        |
++---------------------------+
+|        Socket type        |
+|         (2 Octets)        |
++---------------------------+
+|         Operation         |
+|         (2 Octets)        |
++---------------------------+
+|           Flags           |
+|         (4 Octets)        |
++---------------------------+
+|       Available Space     |
+|         (4 Octets)        |
++---------------------------+
+|       Receive Counter     |
+|         (4 Octets)        |
++---------------------------+
+</pre>
+
+                <h3>Description</h3>
+<p>
+The source and destination CID fields are in little-endian byte order;
+they identify the source and destination vsock devices.
+</p>
+<p>
+The source and destination port fields are in little-endian byte order;
+they identify a connection or datagram flow between the source and
+destination devices.
+</p>
+<p>
+The payload length field is in little-endian byte order; it indicates
+how many bytes of data comprise the payload.
+</p>
+<p>
+The socket type field is in little-endian byte order; it contains a
+value that is one of:
+</p>
+<ul>
+<li>1, for a connection-oriented, in-order, reliable stream.</li>
+</ul>
+<p>
+The operation field is in little-endian byte order; it contains a value
+that is one of:
+</p>
+<ul>
+<li>1, for a connection request;</li>
+<li>2, for a connection response;</li>
+<li>3, for a connection reset;</li>
+<li>4, for a connection shutdown;</li>
+<li>5, for a data packet;</li>
+<li>6, for a credit update;</li>
+<li>7, for a credit update request.</li>
+</ul>
+<p>
+The flags field is in little-endian byte order; its meaning depends on
+the operation field value.  If the operation is a connection shutdown
+then bit 0 indicates that no more data will be received and bit 1
+indicates that no more data will be sent.
+</p>
+<p>
+The available space field is in little-endian byte order; it indicates
+how many bytes of payload data can be received without risk of dropping
+packets.
+</p>
+<p>
+The receive counter field is in little-endian byte order; it indicates
+how many bytes of payload data have been received.
+</p>
+            </div>
+            <!-- End of LINKTYPE_VSOCK section -->
+          </div>

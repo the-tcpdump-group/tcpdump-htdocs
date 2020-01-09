@@ -1,0 +1,93 @@
+          <!-- Start of LINKTYPE_IEEE802_11_PRISM section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_IEEE802_11_PRISM</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++-------------+
+|    Msgcode  |
+|  (4 Octets) |
++-------------+
+|    Msglen   |
+|  (4 Octets) |
++-------------+
+| Device name |
+| (16 Octets) |
++------------++-----------+------------+------------+
+|     DID    |   Status   |   Length   |    Data    |
+| (4 Octets) | (2 Octets) | (2 Octets) | (n Octets) |
++------------+------------+------------+------------+
+.                                                   .
+.                                                   .
+.                                                   .
++---------------------------------------------------+
+|                      Payload                      |
+.                                                   .
+.                                                   .
+.                                                   .
+</pre>
+
+                <h3>Description</h3>
+<p>
+All fields are in the host byte order of the machine on which the
+capture was done.  (In practice, this is likely to be little-endian, but
+that's not guaranteed.)
+</p>
+<p>
+The msgcode field either has the value 0x00000041 or the value
+0x00000044.  The msglen field is the length of the entire Prism header. 
+In practice, it is almost always, if not always, 144 octets.  The device
+name is the interface name of the adapter.
+</p>
+<p>
+There could be, in theory, zero or more instances of the {DID, Status,
+Length, Data} quadruplet; in practice, there are almost always, if not
+always, 10 instances.  Each quadruplet represents the value of a
+parameter.  The DID field indicates what the parameter is.  For packets
+with the msgcode value 0x00000041, the DID field values are:
+</p>
+<ul>
+<li>0x00001041 - host time;</li>
+<li>0x00002041 - MAC time;</li>
+<li>0x00003041 - channel;</li>
+<li>0x00004041 - RSSI;</li>
+<li>0x00005041 - signal quality;</li>
+<li>0x00006041 - signal;</li>
+<li>0x00007041 - noise;</li>
+<li>0x00008041 - rate;</li>
+<li>0x00009041 - transmitted frame indicator;</li>
+<li>0x0000A041 - frame length.</li>
+</ul>
+<p>
+For packets with the msgcode value 0x00000044, the DID field values are:
+</p>
+<ul>
+<li>0x00010044 - host time;</li>
+<li>0x00020044 - MAC time;</li>
+<li>0x00030044 - channel;</li>
+<li>0x00040044 - RSSI;</li>
+<li>0x00050044 - signal quality;</li>
+<li>0x00060044 - signal;</li>
+<li>0x00070044 - noise;</li>
+<li>0x00080044 - rate;</li>
+<li>0x00090044 - transmitted frame indicator;</li>
+<li>0x000A0044 - frame length.</li>
+</ul>
+<p>
+The Status field is 0 if the value of that parameter is supplied and 1
+if it is not supplied.  The Length field indicates the length of the
+following Data field; in theory, it could have any value, but it is
+almost always, if not always, 4.  The Data field contains the value of
+the parameter.
+</p>
+<p>
+The representation of the values may differ between different network
+adapters.  There is no official specification for the Prism header; <a
+href="http://www.martin.cc/linux/prism">this person's page on the Prism
+header</a> describes what he found from examining some adapter drivers.
+</p>
+            </div>
+            <!-- End of LINKTYPE_IEEE802_11_PRISM section -->
+          </div>

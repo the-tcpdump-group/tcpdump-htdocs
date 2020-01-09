@@ -1,0 +1,75 @@
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_WATTSTOPPER_DLM</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++-------------------------+
+|        Dongle Code      |
+|        (1 Octet)        |
++-------------------------+
+|       Packet Delay      |
+|        (2 Octets)       |
++-------------------------+
+|        Preamble 1       |
+|        (1 Octet         |
++-------------------------+
+|        Preamble 2       |
+|        (1 Octet)        |
++-------------------------+
+|    Family/Address/IR    |
+|        (1 Octet)        |
++-------------------------+
+|         Payload         |
+.                         .
+.                         .
+.                         .
+|        (N Octets)       |
++-------------------------+
+</pre>
+
+<h3>Description</h3>
+<p>The WattStopper Digital Lighting Management (DLM) and
+Legrand Nitoo Open protocol share common packet structure,
+and are used in the lighting control industry.</p>
+
+<p>The Dongle Code field contains a value that is one of:</p>
+<ul>
+<li>0="No Error",</li>
+<li>1="Preamble 1 Error",</li>
+<li>2="Preamble 2 Error",</li>
+<li>3="Checksum Error",</li>
+<li>4="Timeout Error",</li>
+<li>8="Other Family Error"</li>
+</ul>
+
+<p>The Packet Delay field contains an integer value that is the
+number of milliseconds since the previous packet, in network byte order.</p>
+
+<p>The Preamble 1 and Preamble 2 fields should each contain 0xAA.</p>
+
+<p>The Family/Address/IR field contains 3-bits of family code, 2-bits of
+address mode, 2-bits of IR (infrared) routing, and 1-bit unused.
+The 8 Legrand NITOO families are</p>
+<ul>
+<li>000=CAD Filaire</li>
+<li>001=TopDog</li>
+<li>010=CAD RF</li>
+<li>011=CAD PLC</li>
+<li>100=CAD IR</li>
+<li>101=DLM</li>
+<li>110=none</li>
+<li>111=Escape/DLM Bootloader</li>
+</ul>
+<p>The Address mode bits are defined as</p>
+<ul>
+<li>00=Broadcast</li>
+<li>01=multicast</li>
+<li>10=unicast</li>
+<li>11=anonymous unicast</li>
+</ul>
+<p>The Payload varies depending on the Family.</p>
+
+            </div>
+          </div>

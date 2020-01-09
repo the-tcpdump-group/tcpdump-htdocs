@@ -1,0 +1,75 @@
+          <!-- Start of LINKTYPE_IPMB_LINUX section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_IPMB_LINUX</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++-------------------------+
+|  Bus number+event flag  |
+|        (1 Octet)        |
++-------------------------+
+|          Flags          |
+|       (4 Octets)        |
++-------------------------+
+|    Hardware address     |
+|        (1 Octet)        |
++-------------------------+
+|         Payload         |
+.                         .
+.                         .
+.                         .
+</pre>
+
+                <h3>Description</h3>
+<p>The lower 7 bits of the bus number + event flag field contain the bus
+number; the upper bit indicates whether the packet is an event or a
+regular packet - if it's set, the packet is an event.
+</p>
+<p>
+The flags are in network byte order (big-endian).  The interpretation of
+the flags depends on whether the packet is a regular packet or an event.
+</p>
+<p>
+If the packet is a regular packet, the flag bits are:
+</p>
+<ul>
+<li>0x00000001 - if set, the packet is a read.</li>
+</ul>
+<p>
+The upper 7 bits of the hardware address field contain the slave address
+for the packet.  The payload is an IPMB packet.
+</p>
+<p>
+If the packet is an event, the lower-order 16 bits indicate what type of
+event this is:
+<ul>
+<li>0x00000001 - promiscuous mode was enabled;</li>
+<li>0x00000002 - promiscuous mode was disabled;</li>
+<li>0x00000004 - the I2C controller went online;</li>
+<li>0x00000008 - the I2C controller went offline;</li>
+<li>0x00000010 - the I2C controller attached to an I2C bus;</li>
+<li>0x00000020 - the I2C controller detached from an I2C bus;</li>
+<li>0x00000040 - the promiscuous data buffer overflowed, and some data
+was lost;</li>
+<li>0x00000080 - the promiscuous data buffer is no longer full;</li>
+<li>0x00000100 - the incoming I2C data buffer overflowed, and some data was lost;</li>
+<li>0x00000200 - the incoming I2C data buffer is no longer full;</li>
+</ul>
+<p>
+For the "I2C controller went offline" error, the upper-order 16 bits
+indicate that:
+</p>
+<ul>
+<li>0x00010000 - the I2C controller is unable to drive data LO;</li>
+<li>0x00020000 - the I2C controller is unable to drive data HI;</li>
+<li>0x00040000 - the I2C controller is unable to drive clock LO;</li>
+<li>0x00080000 - the I2C controller is unable to drive clock HI;</li>
+<li>0x00100000 - the I2C controller got a clock low timeout;</li>
+<li>0x00200000 - the I2C controller was physically disconnected from the bus;</li>
+<li>0x00400000 - an undiagnosed failure occurred;</li>
+</ul>
+            </div>
+            <!-- End of LINKTYPE_IPMB_LINUX section -->
+          </div>

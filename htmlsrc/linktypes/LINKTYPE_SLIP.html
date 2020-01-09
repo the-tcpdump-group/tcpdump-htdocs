@@ -1,0 +1,52 @@
+          <!-- Start of LINKTYPE_SLIP section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_SLIP</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++-------------------------+
+|        Direction        |
+|        (1 Octet)        |
++-------------------------+
+|       Packet type       |
+|        (1 Octet)        |
++-------------------------+
+| Compression information |
+|       (14 Octets)       |
++-------------------------+
+|         Payload         |
+.                         .
+.                         .
+.                         .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The direction field contains a value that is one of:
+</p>
+<ul>
+<li>0, if the packet was received by the machine;</li>
+<li>1, if the packet was sent by the machine..</li>
+</ul>
+<p>If the uppermost bit of the packet type is set, the packet is a
+compressed TCP packet.  Otherwise, the upper 4 bits of the packet type
+are one of:
+<ul>
+<li>0x40, if the packet was an unmodified IP datagram;
+<li>0x70, if the packet was a uncompressed TCP segment.
+</ul>
+<p>
+If the packet was an uncompressed TCP segment, the lower 4 bits of the
+packet type are the connection ID.  If the packet was a compressed TCP
+segment, the packet type and compression information are the header of a
+compressed TCP/IP datagram, as per Figure 5 of
+<a href="http://tools.ietf.org/pdf/rfc1144.pdf">RFC 1144</a>.
+<p>
+The payload begins with an IP header; regardless of the value of the
+packet type, the IP and TCP headers are uncompressed.
+</p>
+            </div>
+            <!-- End of LINKTYPE_SLIP section -->
+          </div>

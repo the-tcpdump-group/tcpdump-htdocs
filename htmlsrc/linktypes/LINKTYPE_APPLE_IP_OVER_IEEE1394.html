@@ -1,0 +1,33 @@
+          <!-- Start of LINKTYPE_APPLE_IP_OVER_IEEE1394 section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_APPLE_IP_OVER_IEEE1394</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------+
+| Destination address |
+|      (8 Octets)     |
++---------------------+
+|    Source address   |
+|      (8 Octets)     |
++---------------------+
+|     Packet type     |
+|      (2 Octets)     |
++---------------------+
+|       Payload       |
+.                     .
+.                     .
+.                     .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The destination and source addresses are the EUI-64 IEEE 1394 addresses of
+the destination and source of the packet.  The packet type is an
+Ethernet type, in network byte order.
+</p>
+            </div>
+            <!-- End of LINKTYPE_APPLE_IP_OVER_IEEE1394 section -->
+          </div>

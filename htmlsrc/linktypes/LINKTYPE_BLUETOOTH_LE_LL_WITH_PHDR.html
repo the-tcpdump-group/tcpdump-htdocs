@@ -1,0 +1,51 @@
+<div class="post">
+<h2 class="title"><a name="intro">LINKTYPE_BLUETOOTH_LE_LL_WITH_PHDR</a></h2>
+<a href="http://www.whiterocker.com/bt/LINKTYPE_BLUETOOTH_LE_LL_WITH_PHDR.html">(orig)</a><br>
+<div class="entry">
+
+<h3>Packet structure</h3>
+<pre>
++---------------------------+
+|         RF Channel        |
+|         (1 Octet)         |
++---------------------------+
+|        Signal Power       |
+|         (1 Octet)         |
++---------------------------+
+|        Noise Power        |
+|         (1 Octet)         |
++---------------------------+
+|  Access Address Offenses  |
+|         (1 Octet)         |
++---------------------------+
+| Reference Access Address  |
+|        (4 Octets)         |
++---------------------------+
+|          Flags            |
+|        (2 Octets)         |
++---------------------------+
+|  LE Packet (no preamble)  |
+.                           .
+.                           .
+.                           .
+</pre>
+
+<h3>Description</h3>
+<p>All multi-octet fields are expressed in little-endian format.  Fields with a corresponding Flags bit are only considered valid when the bit is set.</p><p>The RF Channel field ranges 0 to 39.  It reflects the value described in the Bluetooth specification Volume 6, Part A, Section 2.</p><p>The Signal Power and Noise Power fields are signed integers expressing values in dBm.</p><p>The Access Address Offenses field is an unsigned integer indicating the number of deviations from the valid access address that led to the packet capture.  Access addresses are interpreted as described in Bluetooth specification Volume 6, Part B, Section 2.1.2.</p><p>The Reference Access Address field corresponds to the Access Address configured into the capture tool that led to the capture of this packet.</p><p>The Flags field represents packed bits defined as follows.
+<ul>
+<li>0x0001 indicates the LE Packet is de-whitened</li>
+<li>0x0002 indicates the Signal Power field is valid</li>
+<li>0x0004 indicates the Noise Power field is valid</li>
+<li>0x0008 indicates the LE Packet is decrypted</li>
+<li>0x0010 indicates the Reference Access Address is valid and led to this packet being captured</li>
+<li>0x0020 indicates the Access Address Offenses field contains valid data</li>
+<li>0x0040 indicates the RF Channel field is subject to aliasing</li>
+<li>0x0400 indicates the CRC portion of the LE Packet was checked</li>
+<li>0x0800 indicates the CRC portion of the LE Packet passed its check</li>
+<li>0x1000 indicates the MIC portion of the decrypted LE Packet was checked</li>
+<li>0x2000 indicates the MIC portion of the decrypted LE Packet passed its check</li>
+</ul>
+All other bit positions of the Flags field are reserved and must be zero.
+</p><p>The LE Packet follows the previous fields, and is formatted as detailed in Bluetooth specification Volume 6, Part B, Section 2, but does not include the preamble.  All multi-octet values in the LE Packet are always expressed in little-endian format, as is the normal Bluetooth practice.</p>
+</div>
+</div>

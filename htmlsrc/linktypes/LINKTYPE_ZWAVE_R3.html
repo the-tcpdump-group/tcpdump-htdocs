@@ -1,0 +1,45 @@
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_ZWAVE_R3</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------+
+|       Home ID       |
+|      (4 Octets)     |
++---------------------+
+|    Source NodeID    |
+|      (1 Octets)     |
++---------------------+
+|    Frame Control    |
+|      (2 Octets)     |
++---------------------+
+| Destination NodeID  |
+|     (0-1 Octets)    |
++---------------------+
+|       Length        |
+|      (1 Octet)      |
++---------------------+
+|      Sequence       |
+|      (1 Octet)      |
++---------------------+
+|       Payload       |
+|    (0-158 Octets)   |
++---------------------+
+|        FCS          |
+|     (2 Octes)       |
++---------------------+
+</pre>
+
+<h3>Description</h3>
+<p>
+Z-Wave is defined by <a
+href="http://www.itu.int/itu-t/recommendations/rec.aspx?rec=12399">ITU-T
+Recommendation G.9959</a>.  The MAC header format here is used
+by Type 3 devices with a supported data rate of 100 Kbps (R3); some fields have
+been moved from their locations in the MAC header for Channel
+Configuration 3, as specified by G.9959.
+</p>
+            </div>
+          </div>

@@ -1,0 +1,138 @@
+          <!-- Start of LINKTYPE_PKTAP section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_PKTAP</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+|   Length of PKTAP header  |
+|         (4 Octets)        |
++---------------------------+
+|        Record type        |
+|         (4 Octets)        |
++---------------------------+
+| DLT_ value for this packet|
+|         (4 Octets)        |
++---------------------------+
+|    ASCII interface name   |
+|        (24 Octets)        |
++---------------------------+
+|        Packet flags       |
+|         (4 Octets)        |
++---------------------------+
+|       Protocol family     |
+|         (4 Octets)        |
++---------------------------+
+|  Link-layer header length |
+|         (4 Octets)        |
++---------------------------+
+| Link-layer trailer length |
+|         (4 Octets)        |
++---------------------------+
+|         Process ID        |
+|         (4 Octets)        |
++---------------------------+
+|       Command name        |
+|        (20 Octets)        |
++---------------------------+
+|       Service class       |
+|         (4 Octets)        |
++---------------------------+
+|      Interface type       |
+|         (2 Octets)        |
++---------------------------+
+|  Unit number of interface |
+|         (2 Octets)        |
++---------------------------+
+|    Effective process ID   |
+|         (4 Octets)        |
++---------------------------+
+|   Effective command name  |
+|        (20 Octets)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+All multi-byte fields currently appear to be little-endian, but Apple
+haven't indicated whether this is by design or merely a consequence of
+all Apple machines that write this format being little-endian.
+</p>
+<p>
+The length field indicates how long the PKTAP header is; this value
+includes the length of the length field itself.  It should be
+at least 108; if it's larger, there is additional data in the header
+following the effective command name.
+</p>
+The record type field contains a value that is one of:
+</p>
+<ul>
+<li>0, if nothing follows the PKTAP header;</li>
+<li>1, if a packet follows the PKTAP header.</li>
+</ul>
+<p>
+The DLT_ value field contains an OS X DLT_ value for the packet, such as
+DLT_EN10MB for an Ethernet packet.
+</p>
+<p>
+The interface name contains a null-padded ASCII string giving the name
+of the interface on which the packet arrived.  <em>Do not</em> assume
+that there is a NUL character at the end of the name.
+</p>
+<p>
+The flags field contains a set of currently-undescribed flags for the
+packet.
+</p>
+<p>
+The protocol family field contains a currently-undescribed value.
+</p>
+<p>
+The link-layer header length field appears to contain the length of the
+packet's link-layer header.  It may be 0.
+</p>
+<p>
+The link-layer trailer length field is assumed to contain the length of
+the packet's link-layer trailer.  It may be 0.
+</p>
+<p>
+The process ID field contains the process ID of the process that sent
+the packet; it may be 0 if the process ID is unknown.
+</p>
+<p>
+The command name contains a null-padded ASCII string giving the last
+component of the path name of the executable image running in the
+process that sent the packet, truncated to 20 characters.  It may be
+a null string if the executable image name is unknown. <em>Do not</em>
+assume that there is a NUL character at the end of the name.
+</p>
+<p>
+The service class field contains a currently-undescribed value.
+</p>
+<p>
+The interface type field contains a currently-undescribed value.
+</p>
+<p>
+The "unit number of interface" field is assumed to contain the unit
+number of the interface.
+</p>
+<p>
+The effective process ID field is assumed to contain a process ID of
+some sort; it may be 0 if the process ID is unknown.
+</p>
+<p>
+
+The effective command name contains a null-padded ASCII string giving
+the last component of the path name of the executable image running in
+some process, truncated to 20 characters.  It may be a null string if
+the executable image name is unknown.  <em>Do not</em> assume that there
+is a NUL character at the end of the name.
+</p>
+            </div>
+            <!-- End of LINKTYPE_PKTAP section -->
+          </div>

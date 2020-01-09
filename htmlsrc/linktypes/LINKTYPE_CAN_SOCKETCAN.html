@@ -1,0 +1,48 @@
+          <!-- Start of LINKTYPE_CAN_SOCKETCAN section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_CAN_SOCKETCAN</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+|      CAN ID and flags     |
+|         (4 Octets)        |
++---------------------------+
+|    Frame payload length   |
+|         (1 Octet)         |
++---------------------------+
+|          Padding          |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+|      Reserved/Padding     |
+|         (1 Octet)         |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The field containing the CAN ID and flags is in network byte order
+(big-endian).  The bottom 29 bits contain the CAN ID of the frame.  The
+remaining bits are:
+</p>
+<ul>
+<li>0x20000000 - set if the frame is an error message rather than a data
+frame.
+<li>0x40000000 - set if the frame is a remote transmission request
+frame.
+<li>0x80000000 - set if the frame is an extended 29-bit frame rather
+than a standard 11-bit frame.
+frame.
+</ul>
+            </div>
+            <!-- End of LINKTYPE_CAN_SOCKETCAN section -->
+          </div>

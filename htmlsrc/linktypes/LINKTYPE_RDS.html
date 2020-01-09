@@ -1,0 +1,57 @@
+          <!-- Start of LINKTYPE_RDS section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_RDS</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+|  RDS Information Word 1   |
+|         (2 Octets)        |
++---------------------------+
+|  RDS Information Word 2   |
+|         (2 Octets)        |
++---------------------------+
+|  RDS Information Word 3   |
+|         (2 Octets)        |
++---------------------------+
+|  RDS Information Word 4   |
+|         (2 Octets)        |
++---------------------------+
+|    RDS Offset Symbol 1    |
+|         (1 Octet)         |
++---------------------------+
+|    RDS Offset Symbol 2    |
+|         (1 Octet)         |
++---------------------------+
+|    RDS Offset Symbol 3    |
+|         (1 Octet)         |
++---------------------------+
+|    RDS Offset Symbol 4    |
+|         (1 Octet)         |
++---------------------------+
+</pre>
+
+                <h3>Description</h3>
+<p>
+Each frame corresponds to a group in the RDS specification.  The
+information words from the four blocks in the group appear first, in
+big-endian byte order, followed by an encoding of the offset words
+from the four blocks in the group.
+</p>
+<p>
+The offset words contain a value that is one of:
+</p>
+<ul>
+<li>0, for offset word A;
+<li>1, for offset word B;
+<li>2, for offset word C;
+<li>3, for offset word D;
+<li>4, for offset word C' (C-TAG);
+<li>5, for offset word E (MMBS);
+<li>255, if the offset word has an invalid value.
+</ul>
+            </div>
+            <!-- End of LINKTYPE_RDS section -->
+          </div>

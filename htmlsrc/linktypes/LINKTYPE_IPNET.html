@@ -1,0 +1,84 @@
+          <!-- Start of LINKTYPE_IPNET section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_IPNET</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------------------+
+|                 Version               |
+|                (1 Octet)              |
++---------------------------------------+
+|                 Family                |
+|                (1 Octet)              |
++---------------------------------------+
+|               Hook type               |
+|               (2 Octets)              |
++---------------------------------------+
+|              Packet length            |
+|               (4 Octets)              |
++---------------------------------------+
+|            Interface index            |
+|               (4 Octets)              |
++---------------------------------------+
+|          Group interface index        |
+|               (4 Octets)              |
++---------------------------------------+
+|    Zone identifier of packet source   |
+|               (4 Octets)              |
++---------------------------------------+
+| Zone identifier of packet destination |
+|               (4 Octets)              |
++---------------------------------------+
+|                Payload                |
+.                                       .
+.                                       .
+.                                       .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The version field is 2 for the current version of the pseudo-header.
+</p>
+<p>
+The family field is a Solaris AF_ value, so it's 2 for IPv4 and 26 for
+IPv6.
+</p>
+<p>
+The hook type is in network byte order (big-endian); its value is:
+</p>
+<ul>
+<li>0 if the packet was received by the machine from another
+machine;</li>
+<li>1 if the packet was sent by the machine to another
+machine;</li>
+<li>2 if the packet was sent from the machine to itself, possibly
+between zones.</li>
+</ul>
+<p>
+The packet length is in network byte order; its value is the number of
+bytes of packet data following the pseudo-header.
+</p>
+<p>
+The interface index is in network byte order; it is the interface index
+of the interface on which the packet arrived.
+</p>
+<p>
+The group interface index is in network byte order; it is the group
+interface index number, for IPMP interfaces.
+</p>
+<p>
+The zone identifiers are in network byte order.  A zone number of 0 is
+the global zone; a zone number of 0xffffffff means that the packet
+arrived from another host on the network, not from another zone on the
+same machine.
+</p>
+<p>
+The payload is an IPv4 or IPv6 datagram, beginning with the IPP header;
+the family field indicates which it is.
+</p>
+            </div>
+            <!-- End of LINKTYPE_IPNET section -->
+          </div>
+

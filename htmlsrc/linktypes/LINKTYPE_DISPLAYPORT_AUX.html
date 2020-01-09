@@ -1,0 +1,70 @@
+          <!-- Start of LINKTYPE_DISPLAYPORT_AUX section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_DISPLAYPORT_AUX</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<p>
+(all fields are 8 Bit wide)
+</p>
+<pre>
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Packet Type          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             Payload           |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+
+                <h3>Packet Type DATA</h3>
+<pre>
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|        Type DATA(0x00)        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|  From Sink(0x00)/Source(0x01) |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|        AUX channel data       |
+</pre>
+<p>
+This is the actual Data as specified by the DisplayPort standard. It
+is preceded by the information if the Data was sent from the Sink(e.g.
+a display) or from the Source(e.g. a graphics card).
+</p>
+
+                <h3>Packet Type EVENT</h3>
+<pre>
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|        Type EVENT(0x02)       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Input Status         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+
+<p>One of the monitored input signals has changed its value.
+<p>Input status encoding:
+<ul>
+<li>Bit 0: HPD (Hot Plug Detect)
+<li>Bit 1-7: Application specific
+</ul>
+
+                <h3>Packet Type START</h3>
+<pre>
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|        Type START(0x03)       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Input Status         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+
+A monitor session was started.
+Inputs status encoding as specified in EVENT packet description.
+
+                <h3>Packet Type STOP</h3>
+<pre>
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|        Type STOP(0x04)        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+            </div>
+            <!-- End of LINKTYPE_DISPLAYPORT_AUX section -->
+          </div>

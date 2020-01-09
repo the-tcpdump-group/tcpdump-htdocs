@@ -1,0 +1,86 @@
+          <!-- Start of LINKTYPE_RTAC_SERIAL section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_RTAC_SERIAL</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+| Relative TimeStamp (Left) |
+|          (4 Bytes)        |
++---------------------------+
+| Relative TimeStamp (Right)|
+|          (4 Bytes)        |
++---------------------------+
+|     Serial Event Type     |
+|          (1 Byte)         |
++---------------------------+
+|  UART Control Line State  |
+|          (1 Byte)         |
++---------------------------+
+|          Footer           |
+|         (2 Bytes)         |
++---------------------------+
+|          Payload          |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+The Relative TimeStamp Left field gives the time stamp, in seconds since
+January 1, 1970, 00:00:00, of the packet, and the Right field gives the
+number of microseconds since that second.  This is the same time
+stamp that appears in packet headers in pcap files, and can be
+easily be calculated from the time stamp that appears in Packet Blocks
+and Enhanced Packet Blocks in pcap-NG files, and can be ignored in those
+cases.
+</p>
+<p>
+The Serial Event Type field  represents the type of packet entry in the pcap 
+file:
+</p>
+<ul>
+<li>0x00 - STATUS_CHANGE</li>
+<li>0x01 - DATA_TX_START</li>
+<li>0x02 - DATA_RX_START</li>
+<li>0x03 - DATA_TX_END</li>
+<li>0x04 - DATA_RX_END</li>
+<li>0x05 - CAPTURE_DATA_LOST</li>
+<li>0x06 - CAPTURE_COMPLETE</li>
+<li>0x07 - FRAMING_ERROR</li>
+<li>0x08 - PARITY_ERROR</li>
+<li>0x09 - SERIAL_BREAK_EVENT</li>
+<li>0x0A - SERIAL_OVERFLOW_EVENT</li>
+</ul>
+<p>
+The UART Control Line State field shows the state of the serial UART
+lines (asserted, de-asserted) at the time of the packet generation:
+</p>
+<ul>
+<li>0x01 - Clear To Send</li>
+<li>0x02 - Data Carrier Detect</li>
+<li>0x04 - Data Set Ready</li>
+<li>0x08 - Request To Send</li>
+<li>0x10 - Data Terminal Ready</li>
+<li>0x20 - RING</li>
+<li>0x40 - MBOK</li>
+</ul>
+<p>
+The Footer is reserved for future use
+</p>
+<p>
+The payload is one of: <a
+href="http://www.dnp.org/default.aspx">DNP3</a>,
+<a href="http://www.modbus.org">Modbus</a>, <a
+href="http://standards.ieee.org/findstds/standard/C37.118.1-2011.html">IEEE
+C37.118 Synchrophasor</a> or SELFM.  The packet
+does not specify which it is; a program processing these packets must
+either have the payload type specified externally or must attempt to
+determine it heuristically.
+</p>
+            </div>
+            <!-- End of LINKTYPE_RTAC_SERIAL section -->
+          </div>

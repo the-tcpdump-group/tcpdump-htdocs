@@ -1,0 +1,119 @@
+          <!-- Start of LINKTYPE_BLUETOOTH_LINUX_MONITOR section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_BLUETOOTH_LINUX_MONITOR</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------------+
+|         Adapter ID        |
+|         (2 Octets)        |
++---------------------------+
+|           Opcode          |
+|         (2 Octets)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+All fields are in network byte order (big-endian).
+</p>
+<p>
+The adapter ID field identifies the interface to which the packet
+applies. On single-interface systems, this will typically be 0.
+</p>
+<p>
+The opcode field describes the type of packet.  Its value is:
+</p>
+<uL>
+<li>0x00 - New Index Event;</li>
+<li>0x01 - Delete Index Event;</li>
+<li>0x02 - HCI Command Packet;</li>
+<li>0x03 - HCI Event Packet;</li>
+<li>0x04 - transmitted HCI ACL Data Packet;</li>
+<li>0x05 - received HCI ACL Data Packet;</li>
+<li>0x06 - transmitted HCI Synchronous Data Packet;</li>
+<li>0x07 - received HCI Synchronous Data Packet.</li>
+</ul>
+<h4>New Index Event</h4>
+<p>
+A New Index Event is a message that indicates the appearance of a new
+interface, with the adapter ID field giving the ID of the new interface.
+Its payload has the following format:
+<pre>
++---------------------------+
+|            Bus            |
+|         (1 Octet)         |
++---------------------------+
+|           Type            |
+|         (1 Octet)         |
++---------------------------+
+|          BD_ADDR          |
+|         (6 Octets)        |
++---------------------------+
+|            Name           |
+|         (8 Octets)        |
++---------------------------+
+</pre>
+<p>
+The bus field specifies the type of controller:
+</p>
+<ul>
+<li>0x00 - BR/EDR;</li>
+<li>0x01 - AMP.</li>
+</ul>
+<p>
+The type field specifies the transport type of the controller:
+</p>
+<ul>
+<li>0x00 - Virtual;</li>
+<li>0x01 - USB;</li>
+<li>0x02 - PC Card;</li>
+<li>0x03 - UART;</li>
+<li>0x04 - RS-232;</li>
+<li>0x05 - PCI;</li>
+<li>0x06 - SDIO.</li>
+</ul>
+<p>
+The BD_ADDR field contains the MAC address of the interface.
+</p>
+<p>
+The name contains the name of the interface (typically
+<tt>hci</tt><i>N</i>, for example: <tt>hci0</tt>).
+</p>
+<h4>Delete Index Event</h4>
+<p>A Delete Index Event is a message that indicates the disappearance of
+an existing interface, with the adapter ID field giving the ID of the
+interface that disappeared.  It has no payload.
+</p>
+<h4>HCI packets</h4>
+<p>
+The remaining types are HCI packets as specified by the Host Controller
+Interface Functional Specification portion of the most recent
+<a href="https://www.bluetooth.org/Technical/Specifications/adopted.htm">Bluetooth
+Core Specification</a>:
+</p>
+<p>
+The payload of an HCI Command Packet is as specified by the "HCI Command
+Packet" section of that document.
+</p>
+<p>
+The payload of an HCI ACL Data Packet is as specified by the "HCI ACL
+Data Packets" section of that document.
+</p>
+<p>
+The payload of an HCI Command Packet is as specified by the "HCI
+Synchronous Data Packets" section of that document.
+</p>
+<p>
+The payload of an HCI Command Packet is as specified by the "HCI Event
+Packet" section of that document.
+</p>
+            </div>
+            <!-- End of LINKTYPE_BLUETOOTH_LINUX_MONITOR section -->
+          </div>
