@@ -22,7 +22,7 @@ select() can be done for a live capture
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_get_required_select_timeout()</B>
+<B>pcap_get_required_select_timeout</B>()
 
 returns, on UNIX, a pointer to a
 <B>struct timeval</B>
@@ -47,13 +47,13 @@ returns
 
 The timeout that should be used in those calls must be no larger than
 the smallest of all timeouts returned by
-<B>pcap_get_required_select_timeout()</B>
+<B>pcap_get_required_select_timeout</B>()
 
 for devices from which packets will be captured.
 <P>
 
 The device for which
-<B>pcap_get_selectable_fd()</B>
+<B>pcap_get_selectable_fd</B>()
 
 returned
 <B>PCAP_ERROR</B>
@@ -63,14 +63,14 @@ must be put in non-blocking mode with
 
 and an attempt must always be made to read packets from the device
 when the
-<B>select()</B>,
+<B>select</B>(),
 
-<B>poll()</B>,
+<B>poll</B>(),
 
-<B>epoll_wait()</B>,
+<B>epoll_wait</B>(),
 
 or
-<B>kevent()</B>
+<B>kevent</B>()
 
 call returns.
 <P>
@@ -86,7 +86,7 @@ or
 will return 0 in this case, but will not block.
 <P>
 
-<B>pcap_get_required_select_timeout()</B>
+<B>pcap_get_required_select_timeout</B>()
 
 is not available on Windows.
 <A NAME="lbAE">&nbsp;</A>
@@ -104,17 +104,17 @@ is returned.
 
 This function became available in libpcap release 1.9.0.  In previous
 releases,
-<B>select()</B>,
+<B>select</B>(),
 
-<B>poll()</B>,
+<B>poll</B>(),
 
-<B>epoll_wait()</B>,
+<B>epoll_wait</B>(),
 
 and
-<B>kevent()</B>
+<B>kevent</B>()
 
 cannot be used on any capture source for which
-<B>pcap_get_selectable_fd</B>
+<B>pcap_get_selectable_fd</B>()
 
 returns -1.
 <A NAME="lbAG">&nbsp;</A>
@@ -138,6 +138,6 @@ returns -1.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:54 GMT, June 01, 2019
+Time: 23:39:58 GMT, January 10, 2020
 </BODY>
 </HTML>

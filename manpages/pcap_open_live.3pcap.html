@@ -25,7 +25,7 @@ pcap_open_live - open a device for capturing
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_open_live()</B>
+<B>pcap_open_live</B>()
 
 is used to obtain a packet capture handle to look
 at packets on the network.
@@ -61,7 +61,7 @@ for an explanation of the packet buffer timeout.)
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_open_live()</B>
+<B>pcap_open_live</B>()
 
 returns a
 <I>pcap_t *</I>
@@ -80,13 +80,13 @@ is filled in with an appropriate error message.
 <I>errbuf</I>
 
 may also be set to warning text when
-<B>pcap_open_live()</B>
+<B>pcap_open_live</B>()
 
 succeeds; to detect this case the caller should store a zero-length string in
 <I>errbuf</I>
 
 before calling
-<B>pcap_open_live()</B>
+<B>pcap_open_live</B>()
 
 and display the warning to the user if
 <I>errbuf</I>
@@ -111,6 +111,6 @@ chars.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:57 GMT, June 01, 2019
+Time: 23:40:01 GMT, January 10, 2020
 </BODY>
 </HTML>

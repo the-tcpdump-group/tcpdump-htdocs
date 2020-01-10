@@ -8,7 +8,8 @@ Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2018<BR>
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_dump_open, pcap_dump_fopen - open a file to which to write packets
+pcap_dump_open, pcap_dump_open_append, pcap_dump_fopen - open a file to
+which to write packets
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
@@ -23,7 +24,7 @@ pcap_dumper_t *pcap_dump_fopen(pcap_t *p, FILE *fp);
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_dump_open()</B>
+<B>pcap_dump_open</B>()
 
 is called to open a ``savefile'' for writing.
 <I>fname</I>
@@ -41,7 +42,7 @@ for
 
 <P>
 
-<B>pcap_dump_fopen()</B>
+<B>pcap_dump_fopen</B>()
 
 is called to write data to an existing open stream
 <I>fp</I>;
@@ -74,10 +75,10 @@ The time stamp precision, link-layer type, and snapshot length from
 are used as the link-layer type and snapshot length of the output file.
 <P>
 
-<B>pcap_dump_open_append()</B>
+<B>pcap_dump_open_append</B>()
 
 is like
-<B>pcap_dump_open()</B>
+<B>pcap_dump_open</B>()
 
 but does not create the file if it does not exist and, if it does
 already exist, and is a pcap file with the same byte order as the host
@@ -115,7 +116,7 @@ can be used to get the error text.
 <P>
 
 The
-<B>pcap_dump_open_append()</B>
+<B>pcap_dump_open_append</B>()
 
 function became available in libpcap release 1.7.2.  In previous
 releases, there is no support for appending packets to an existing
@@ -133,6 +134,6 @@ savefile.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:53 GMT, June 01, 2019
+Time: 23:39:57 GMT, January 10, 2020
 </BODY>
 </HTML>

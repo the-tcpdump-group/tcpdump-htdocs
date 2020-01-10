@@ -24,7 +24,7 @@ const u_char *pcap_next(pcap_t *p, struct pcap_pkthdr *h);
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_next_ex()</B>
+<B>pcap_next_ex</B>()
 
 reads the next packet and returns a success/failure indication.
 If the packet was read without problems, the pointer pointed to by the
@@ -42,9 +42,9 @@ argument is set to point to the data in the packet.  The
 
 and the packet data are not to be freed by the caller, and are not
 guaranteed to be valid after the next call to
-<B>pcap_next_ex()</B>,
+<B>pcap_next_ex</B>(),
 
-<B>pcap_next()</B>,
+<B>pcap_next</B>(),
 
 <A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_loop</B></A>(3PCAP),
 
@@ -54,10 +54,10 @@ or
 if the code needs them to remain valid, it must make a copy of them.
 <P>
 
-<B>pcap_next()</B>
+<B>pcap_next</B>()
 
 reads the next packet (by calling
-<B>pcap_dispatch()</B>
+<B>pcap_dispatch</B>()
 
 with a
 <I>cnt</I>
@@ -68,14 +68,14 @@ of 1) and returns a
 pointer to the data in that packet.  The
 packet data is not to be freed by the caller, and is not
 guaranteed to be valid after the next call to
-<B>pcap_next_ex()</B>,
+<B>pcap_next_ex</B>(),
 
-<B>pcap_next()</B>,
+<B>pcap_next</B>(),
 
-<B>pcap_loop()</B>,
+<B>pcap_loop</B>(),
 
 or
-<B>pcap_dispatch()</B>;
+<B>pcap_dispatch</B>();
 
 if the code needs it to remain valid, it must make a copy of it.
 The
@@ -95,15 +95,15 @@ routine when handed the
 <B>pcap_t</B>
 
 value also passed to
-<B>pcap_loop()</B>
+<B>pcap_loop</B>()
 
 or
-<B>pcap_dispatch()</B>.
+<B>pcap_dispatch</B>().
 
 <I><A HREF="https://www.tcpdump.org/linktypes.html">https://www.tcpdump.org/linktypes.html</A></I>
 
 lists the values
-<B>pcap_datalink()</B>
+<B>pcap_datalink</B>()
 
 can return and describes the packet formats that
 correspond to those values.  The value it returns will be valid for all
@@ -111,11 +111,11 @@ packets received unless and until
 <A HREF='/manpages/pcap_set_datalink.3pcap.html'><B>pcap_set_datalink</B></A>(3PCAP)
 
 is called; after a successful call to
-<B>pcap_set_datalink()</B>,
+<B>pcap_set_datalink</B>(),
 
 all subsequent packets will have a link-layer header of the type
 specified by the link-layer header type value passed to
-<B>pcap_set_datalink()</B>.
+<B>pcap_set_datalink</B>().
 
 <P>
 
@@ -138,7 +138,7 @@ for Ethernet.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_next_ex()</B>
+<B>pcap_next_ex</B>()
 
 returns 1 if the packet was read without problems, 0 if packets are
 being read from a live capture and the packet buffer timeout expired,
@@ -164,7 +164,7 @@ may be called with
 as an argument to fetch or display the error text.
 <P>
 
-<B>pcap_next()</B>
+<B>pcap_next</B>()
 
 returns a pointer to the packet data on success, and returns
 <B>NULL</B>
@@ -188,6 +188,6 @@ way to determine whether an error occurred or not.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:56 GMT, June 01, 2019
+Time: 23:40:00 GMT, January 10, 2020
 </BODY>
 </HTML>

@@ -23,7 +23,7 @@ int pcap_set_protocol_linux(pcap_t *p, int protocol);
 <H2>DESCRIPTION</H2>
 
 On network interface devices on Linux,
-<B>pcap_set_protocol_linux()</B>
+<B>pcap_set_protocol_linux</B>()
 
 sets the protocol to be used in the
 <B>socket</B>(2)
@@ -52,15 +52,15 @@ If a given network interface provides a standard link-layer header, with
 a standard packet type, but provides some packet types with a different
 socket-layer protocol type from the one in the link-layer header, that
 packet type cannot be filtered with a filter specified with
-<B>pcap_setfilter()</B>
+<B>pcap_setfilter</B>()
 
 but can be filtered by specifying the socket-layer protocol type using
-<B>pcap_set_protocol_linux()</B>.
+<B>pcap_set_protocol_linux</B>().
 
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_set_protocol_linux()</B>
+<B>pcap_set_protocol_linux</B>()
 
 returns 0 on success or
 <B>PCAP_ERROR_ACTIVATED</B>
@@ -85,6 +85,6 @@ This function became available in libpcap release 1.9.0.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:58 GMT, June 01, 2019
+Time: 23:40:02 GMT, January 10, 2020
 </BODY>
 </HTML>

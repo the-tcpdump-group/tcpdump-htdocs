@@ -30,7 +30,7 @@ int pcap_dispatch(pcap_t *p, int cnt,
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_loop()</B>
+<B>pcap_loop</B>()
 
 processes packets from a live capture or ``savefile'' until
 <I>cnt</I>
@@ -51,7 +51,7 @@ is equivalent to infinity, so that packets are processed until another
 ending condition occurs.
 <P>
 
-<B>pcap_dispatch()</B>
+<B>pcap_dispatch</B>()
 
 processes packets from a live capture or ``savefile'' until
 <I>cnt</I>
@@ -59,7 +59,7 @@ processes packets from a live capture or ``savefile'' until
 packets are processed, the end of the current bufferful of packets is
 reached when doing a live capture, the end of the ``savefile'' is
 reached when reading from a ``savefile'',
-<B>pcap_breakloop()</B>
+<B>pcap_breakloop</B>()
 
 is called, or an error occurs.
 Thus, when doing a live capture,
@@ -80,7 +80,7 @@ processed when reading a ``savefile''.
 
 Note that, when doing a live capture on some platforms, if the read
 timeout expires when there are no packets available,
-<B>pcap_dispatch()</B>
+<B>pcap_dispatch</B>()
 
 will return 0, even when not in non-blocking mode, as there are no
 packets to process.  Applications should be prepared for this to happen,
@@ -110,10 +110,10 @@ pointer which is passed in the
 <I>user</I>
 
 argument to
-<B>pcap_loop()</B>
+<B>pcap_loop</B>()
 
 or
-<B>pcap_dispatch()</B>,
+<B>pcap_dispatch</B>(),
 
 a
 <I>const struct pcap_pkthdr</I>
@@ -145,15 +145,15 @@ routine when handed the
 <B>pcap_t</B>
 
 value also passed to
-<B>pcap_loop()</B>
+<B>pcap_loop</B>()
 
 or
-<B>pcap_dispatch()</B>.
+<B>pcap_dispatch</B>().
 
 <I><A HREF="https://www.tcpdump.org/linktypes.html">https://www.tcpdump.org/linktypes.html</A></I>
 
 lists the values
-<B>pcap_datalink()</B>
+<B>pcap_datalink</B>()
 
 can return and describes the packet formats that
 correspond to those values.  The value it returns will be valid for all
@@ -161,11 +161,11 @@ packets received unless and until
 <A HREF='/manpages/pcap_set_datalink.3pcap.html'><B>pcap_set_datalink</B></A>(3PCAP)
 
 is called; after a successful call to
-<B>pcap_set_datalink()</B>,
+<B>pcap_set_datalink</B>(),
 
 all subsequent packets will have a link-layer header of the type
 specified by the link-layer header type value passed to
-<B>pcap_set_datalink()</B>.
+<B>pcap_set_datalink</B>().
 
 <P>
 
@@ -188,7 +188,7 @@ for Ethernet.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_loop()</B>
+<B>pcap_loop</B>()
 
 returns 0 if
 <I>cnt</I>
@@ -201,7 +201,7 @@ if an error occurs or
 <B>PCAP_ERROR_BREAK</B>
 
 if the loop terminated due to a call to
-<B>pcap_breakloop()</B>
+<B>pcap_breakloop</B>()
 
 before any packets were processed.
 It does
@@ -211,7 +211,7 @@ return when live packet buffer timeouts occur; instead, it attempts to
 read more packets.
 <P>
 
-<B>pcap_dispatch()</B>
+<B>pcap_dispatch</B>()
 
 returns the number of packets processed on success; this can be 0 if no
 packets were read from a live capture (if, for example, they were
@@ -227,7 +227,7 @@ if an error occurs or
 <B>PCAP_ERROR_BREAK</B>
 
 if the loop terminated due to a call to
-<B>pcap_breakloop()</B>
+<B>pcap_breakloop</B>()
 
 before any packets were processed.
 <B>
@@ -261,6 +261,6 @@ as an argument to fetch or display the error text.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:56 GMT, June 01, 2019
+Time: 23:40:00 GMT, January 10, 2020
 </BODY>
 </HTML>

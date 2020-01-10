@@ -21,7 +21,7 @@ pcap_activate - activate a capture handle
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_activate()</B>
+<B>pcap_activate</B>()
 
 is used to activate a packet capture handle to look
 at packets on the network, with the options that were set on the handle
@@ -29,7 +29,7 @@ being in effect.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_activate()</B>
+<B>pcap_activate</B>()
 
 returns 0 on success without warnings, a non-zero positive value on
 success with warnings, and a negative value on error.
@@ -102,10 +102,10 @@ The capture source device is not up.
 
 <DD>
 Another error occurred.
-<B>pcap_geterr()</B>
+<B>pcap_geterr</B>()
 
 or
-<B>pcap_perror()</B>
+<B>pcap_perror</B>()
 
 may be called with
 <I>p</I>
@@ -123,10 +123,10 @@ or
 <B>PCAP_ERROR_PERM_DENIED</B>
 
 is returned,
-<B>pcap_geterr()</B>
+<B>pcap_geterr</B>()
 
 or
-<B>pcap_perror()</B>
+<B>pcap_perror</B>()
 
 may be called with
 <I>p</I>
@@ -144,6 +144,17 @@ codes as errors.
 
 can be called, with a warning or error code as an argument, to fetch a
 message describing the warning or error code.
+<P>
+
+If
+<B>pcap_activate</B>()
+
+fails, the
+<I>pcap_t *</I>
+
+is not closed and freed; it should be closed using
+<B>pcap_close</B>().
+
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
@@ -155,6 +166,6 @@ message describing the warning or error code.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:50 GMT, June 01, 2019
+Time: 23:39:55 GMT, January 10, 2020
 </BODY>
 </HTML>

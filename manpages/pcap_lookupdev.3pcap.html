@@ -28,14 +28,14 @@ pcap_lookupdev - find the default device on which to capture
 <A HREF='/manpages/pcap_findalldevs.3pcap.html'><B>pcap_findalldevs</B></A>(3PCAP).
 
 To find a default device on which to capture, call
-<B>pcap_findalldevs()</B>
+<B>pcap_findalldevs</B>()
 
 and, if the list it returns is not empty, use the first device in the
 list.  (If the list is empty, there are no devices on which capture is
 possible.)
 <P>
 
-<B>pcap_lookupdev()</B>
+<B>pcap_lookupdev</B>()
 
 returns a pointer to a string giving the name of a network device
 suitable for use with
@@ -72,13 +72,13 @@ chars.
 <H2>BUGS</H2>
 
 The pointer returned by
-<B>pcap_lookupdev()</B>
+<B>pcap_lookupdev</B>()
 
 points to a static buffer; subsequent calls to
-<B>pcap_lookupdev()</B>
+<B>pcap_lookupdev</B>()
 
 in the same thread, or calls to
-<B>pcap_lookupdev()</B>
+<B>pcap_lookupdev</B>()
 
 in another thread, may overwrite that buffer.
 <P>
@@ -92,6 +92,6 @@ ASCII or UTF-8 string.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:55 GMT, June 01, 2019
+Time: 23:40:00 GMT, January 10, 2020
 </BODY>
 </HTML>

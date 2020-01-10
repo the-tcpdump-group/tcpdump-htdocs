@@ -25,7 +25,7 @@ void pcap_freealldevs(pcap_if_t *alldevs);
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_findalldevs()</B>
+<B>pcap_findalldevs</B>()
 
 constructs a list of network devices that can be opened with
 <A HREF='/manpages/pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
@@ -38,13 +38,13 @@ or with
 
 (Note that there may be network devices that cannot be opened by the
 process calling
-<B>pcap_findalldevs()</B>,
+<B>pcap_findalldevs</B>(),
 
 because, for example, that process does not have sufficient privileges
 to open them for capturing; if so, those devices will not appear on the
 list.)
 If
-<B>pcap_findalldevs()</B>
+<B>pcap_findalldevs</B>()
 
 succeeds, the pointer pointed to by
 <I>alldevsp</I>
@@ -73,7 +73,7 @@ for the last element of the list
 
 <DD>
 a pointer to a string giving a name for the device to pass to
-<B>pcap_open_live()</B>
+<B>pcap_open_live</B>()
 
 <DT><B>description</B>
 
@@ -253,7 +253,7 @@ which frees the list pointed to by
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_findalldevs()</B>
+<B>pcap_findalldevs</B>()
 
 returns 0 on success and
 <B>PCAP_ERROR</B>
@@ -310,6 +310,6 @@ constants became available in libpcap release 1.9.0.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:53 GMT, June 01, 2019
+Time: 23:39:58 GMT, January 10, 2020
 </BODY>
 </HTML>

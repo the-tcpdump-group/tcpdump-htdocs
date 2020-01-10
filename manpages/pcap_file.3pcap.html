@@ -21,7 +21,7 @@ pcap_file - get the standard I/O stream for a savefile being read
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_file()</B>
+<B>pcap_file</B>()
 
 returns the standard I/O stream of the ``savefile,'' if a ``savefile''
 was opened with
@@ -44,17 +44,17 @@ or with
 Note that the Packet Capture library is usually built with large file
 support, so the standard I/O stream of the ``savefile'' might refer to
 a file larger than 2 gigabytes; applications that use
-<B>pcap_file()</B>
+<B>pcap_file</B>()
 
 should, if possible, use calls that support large files on the return
 value of
-<B>pcap_file()</B>
+<B>pcap_file</B>()
 
 or the value returned by
 <B>fileno</B>(3)
 
 when passed the return value of
-<B>pcap_file()</B>.
+<B>pcap_file</B>().
 
 <A NAME="lbAE">&nbsp;</A>
 <H2>SEE ALSO</H2>
@@ -67,6 +67,6 @@ when passed the return value of
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:53 GMT, June 01, 2019
+Time: 23:39:58 GMT, January 10, 2020
 </BODY>
 </HTML>

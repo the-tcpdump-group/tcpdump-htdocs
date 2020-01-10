@@ -23,11 +23,11 @@ void pcap_free_tstamp_types(int *tstamp_types);
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_list_tstamp_types()</B>
+<B>pcap_list_tstamp_types</B>()
 
 is used to get a list of the supported time stamp types of the interface
 associated with the pcap descriptor.
-<B>pcap_list_tstamp_types()</B>
+<B>pcap_list_tstamp_types</B>()
 
 allocates an array to hold the list and sets
 <I>*tstamp_typesp</I>
@@ -40,7 +40,7 @@ for a list of all the time stamp types.
 <P>
 
 The caller is responsible for freeing the array with
-<B>pcap_free_tstamp_types()</B>,
+<B>pcap_free_tstamp_types</B>(),
 
 which frees the list pointed to by
 <I>tstamp_types</I>.
@@ -48,7 +48,7 @@ which frees the list pointed to by
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_list_tstamp_types()</B>
+<B>pcap_list_tstamp_types</B>()
 
 returns the number of time stamp types in the array on success and
 <B>PCAP_ERROR</B>
@@ -99,6 +99,6 @@ type offered by a capture source is available.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 14:36:27 GMT, September 15, 2019
+Time: 23:39:59 GMT, January 10, 2020
 </BODY>
 </HTML>

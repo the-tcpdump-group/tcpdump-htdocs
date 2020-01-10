@@ -85,10 +85,10 @@ offered for that capture device.  If the list is not empty, the
 <A HREF='/manpages/pcap_set_tstamp_type.3pcap.html'><B>pcap_set_tstamp_type</B></A>(3PCAP)
 
 routine can be used after a
-<B>pcap_create()</B>
+<B>pcap_create</B>()
 
 call and before a
-<B>pcap_activate()</B>
+<B>pcap_activate</B>()
 
 call to specify the type of time stamp to be used on the device.
 The time stamp types are listed here; the first value is the #define to
@@ -172,18 +172,18 @@ The
 <A HREF='/manpages/pcap_set_tstamp_precision.3pcap.html'><B>pcap_set_tstamp_precision</B></A>(3PCAP)
 
 routine can be used after a
-<B>pcap_create()</B>
+<B>pcap_create</B>()
 
 call and after a
-<B>pcap_activate()</B>
+<B>pcap_activate</B>()
 
 call to specify the resolution of the time stamps to get for the device.
 If the hardware or software cannot supply a higher-resolution time
 stamp, the
-<B>pcap_set_tstamp_precision()</B>
+<B>pcap_set_tstamp_precision</B>()
 
 call will fail, and the time stamps supplied after the
-<B>pcap_activate()</B>
+<B>pcap_activate</B>()
 
 call will have microsecond resolution.
 <P>
@@ -218,6 +218,6 @@ stamps in the file.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 20:39:33 GMT, November 21, 2019
+Time: 23:39:55 GMT, January 10, 2020
 </BODY>
 </HTML>

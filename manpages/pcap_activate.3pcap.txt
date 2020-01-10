@@ -76,6 +76,9 @@ RETURN VALUE
        or error code as an argument, to fetch a message describing the warning
        or error code.
 
+       If  pcap_activate()  fails,  the  pcap_t  * is not closed and freed; it
+       should be closed using pcap_close().
+
 SEE ALSO
        pcap(3PCAP)
 

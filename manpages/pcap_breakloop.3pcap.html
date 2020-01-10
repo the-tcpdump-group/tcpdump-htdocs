@@ -21,7 +21,7 @@ pcap_breakloop - force a pcap_dispatch() or pcap_loop() call to return
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_breakloop()</B>
+<B>pcap_breakloop</B>()
 
 sets a flag that will force
 <A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP)
@@ -66,10 +66,10 @@ You will need to use whatever mechanism the OS provides for
 breaking a thread out of blocking calls in order to unblock the thread,
 such as thread cancellation or thread signalling in systems that support
 POSIX threads, or
-<B>SetEvent()</B>
+<B>SetEvent</B>()
 
 on the result of
-<B>pcap_getevent()</B>
+<B>pcap_getevent</B>()
 
 on a
 <B>pcap_t</B>
@@ -83,31 +83,31 @@ will not be in an alertable state.
 <P>
 
 Note that
-<B>pcap_next()</B>
+<B>pcap_next</B>()
 
 and
-<B>pcap_next_ex()</B>
+<B>pcap_next_ex</B>()
 
 will, on some platforms, loop reading packets from the OS; that loop
 will not necessarily be terminated by a signal, so
-<B>pcap_breakloop()</B>
+<B>pcap_breakloop</B>()
 
 should be used to terminate packet processing even if
-<B>pcap_next()</B>
+<B>pcap_next</B>()
 
 or
-<B>pcap_next_ex()</B>
+<B>pcap_next_ex</B>()
 
 is being used.
 <P>
 
-<B>pcap_breakloop()</B>
+<B>pcap_breakloop</B>()
 
 does not guarantee that no further packets will be processed by
-<B>pcap_dispatch()</B>
+<B>pcap_dispatch</B>()
 
 or
-<B>pcap_loop()</B>
+<B>pcap_loop</B>()
 
 after it is called; at most one more packet might be processed.
 <P>
@@ -116,10 +116,10 @@ If
 <B>PCAP_ERROR_BREAK</B>
 
 is returned from
-<B>pcap_dispatch()</B>
+<B>pcap_dispatch</B>()
 
 or
-<B>pcap_loop()</B>,
+<B>pcap_loop</B>(),
 
 the flag is cleared, so a subsequent call will resume reading packets.
 If a positive number is returned, the flag is not cleared, so a
@@ -138,6 +138,6 @@ and clear the flag.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:50 GMT, June 01, 2019
+Time: 23:39:56 GMT, January 10, 2020
 </BODY>
 </HTML>

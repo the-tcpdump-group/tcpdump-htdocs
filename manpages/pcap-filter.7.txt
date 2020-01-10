@@ -758,8 +758,8 @@ BUGS
        dump.org.
 
        To  report  bugs and other problems, contribute patches, request a fea-
-       ture, provide generic feedback etc please see the file CONTRIBUTING  in
-       the libpcap source tree root.
+       ture, provide generic feedback etc please see the file  CONTRIBUTING.md
+       in the libpcap source tree root.
 
        Filter  expressions  on  fields  other than those in Token Ring headers
        will not correctly handle source-routed Token Ring packets.
@@ -775,4 +775,4 @@ BUGS
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                5 November 2017                 PCAP-FILTER(7)
+                                10 January 2020                 PCAP-FILTER(7)

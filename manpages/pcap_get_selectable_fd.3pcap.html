@@ -22,7 +22,7 @@ be done for a live capture
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_get_selectable_fd()</B>
+<B>pcap_get_selectable_fd</B>()
 
 returns, on UNIX, a file descriptor number for a file descriptor on
 which one can
@@ -62,7 +62,7 @@ than or equal to the timeout returned by
 <A HREF='/manpages/pcap_get_required_select_timeout.3pcap.html'><B>pcap_get_required_select_timeout</B></A>(3PCAP)
 
 for the device for which
-<B>pcap_get_selectable_fd()</B>
+<B>pcap_get_selectable_fd</B>()
 
 returned
 <B>PCAP_ERROR</B>,
@@ -72,7 +72,7 @@ the device must be put in non-blocking mode with a call to
 
 and an attempt must always be made to read packets from the device
 when the call returns.  If
-<B>pcap_get_required_select_timeout()</B>
+<B>pcap_get_required_select_timeout</B>()
 
 returns
 <B>NULL</B>,
@@ -105,24 +105,24 @@ Mac OS X prior to Mac OS X 10.7;
 </DL>
 <P>
 
-<B>select()</B>,
+<B>select</B>(),
 
-<B>poll()</B>,
+<B>poll</B>(),
 
 and
-<B>kevent()</B>
+<B>kevent</B>()
 
 do not work correctly on BPF devices;
-<B>pcap_get_selectable_fd()</B>
+<B>pcap_get_selectable_fd</B>()
 
 will return a file descriptor on most of those versions (the exceptions
 being FreeBSD 4.3 and 4.4), but a simple
-<B>select()</B>,
+<B>select</B>(),
 
-<B>poll()</B>,
+<B>poll</B>(),
 
 or
-<B>kevent()</B>
+<B>kevent</B>()
 
 call will not indicate that the descriptor is readable until a full
 buffer's worth of packets is received, even if the packet timeout
@@ -143,40 +143,40 @@ although it does no harm.)
 <P>
 
 Note also that
-<B>poll()</B>
+<B>poll</B>()
 
 and
-<B>kevent()</B>
+<B>kevent</B>()
 
 doesn't work on character special files, including BPF devices, in Mac
 OS X 10.4 and 10.5, so, while
-<B>select()</B>
+<B>select</B>()
 
 can be used on the descriptor returned by
-<B>pcap_get_selectable_fd()</B>,
+<B>pcap_get_selectable_fd</B>(),
 
-<B>poll()</B>
+<B>poll</B>()
 
 and
-<B>kevent()</B>
+<B>kevent</B>()
 
 cannot be used on it those versions of Mac OS X.
-<B>poll()</B>,
+<B>poll</B>(),
 
 but not
-<B>kevent()</B>,
+<B>kevent</B>(),
 
 works on that descriptor in Mac OS X releases prior to
 10.4;
-<B>poll()</B>
+<B>poll</B>()
 
 and
-<B>kevent()</B>
+<B>kevent</B>()
 
 work on that descriptor in Mac OS X 10.6 and later.
 <P>
 
-<B>pcap_get_selectable_fd()</B>
+<B>pcap_get_selectable_fd</B>()
 
 is not available on Windows.
 <A NAME="lbAE">&nbsp;</A>
@@ -199,6 +199,6 @@ is returned.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 21:34:56 GMT, November 04, 2019
+Time: 23:39:58 GMT, January 10, 2020
 </BODY>
 </HTML>

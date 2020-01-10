@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 10 January 2020<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -35,6 +35,12 @@ other interface on which the capture should be done, call
 
 set the appropriate options on the handle, and then activate it with
 <B>pcap_activate</B>().
+
+If
+<B>pcap_activate</B>()
+
+fails, the handle should be closed with
+<B>pcap_close</B>().
 
 <P>
 
@@ -291,7 +297,7 @@ that privilege to the user's
 <B>defaultpriv</B>
 
 key with the
-<B>usermod (8)</B>
+<B>usermod</B>(8)
 
 command.
 <DT><B>Under HP-UX with DLPI:</B>
@@ -1382,7 +1388,7 @@ To report a security issue please send an e-mail to <A HREF="mailto:security@tcp
 
 To report bugs and other problems, contribute patches, request a
 feature, provide generic feedback etc please see the file
-<I>CONTRIBUTING</I>
+<I>CONTRIBUTING.md</I>
 
 in the libpcap source tree root.
 <P>
@@ -1415,6 +1421,6 @@ in the libpcap source tree root.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 06:51:54 GMT, September 02, 2019
+Time: 23:39:55 GMT, January 10, 2020
 </BODY>
 </HTML>

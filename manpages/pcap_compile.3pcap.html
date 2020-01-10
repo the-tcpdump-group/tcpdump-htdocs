@@ -23,7 +23,7 @@ pcap_compile - compile a filter expression
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_compile()</B>
+<B>pcap_compile</B>()
 
 is used to compile the string
 <I>str</I>
@@ -38,7 +38,7 @@ is a pointer to a
 <I>bpf_program</I>
 
 struct and is filled in by
-<B>pcap_compile()</B>.
+<B>pcap_compile</B>().
 
 <I>optimize</I>
 
@@ -59,21 +59,21 @@ the filter program will be OK.
 <P>
 
 NOTE: in libpcap 1.8.0 and later,
-<B>pcap_compile()</B>
+<B>pcap_compile</B>()
 
 can be used in multiple threads within a single process.  However, in
 earlier versions of libpcap, it is
 <I>not</I>
 
 safe to use
-<B>pcap_compile()</B>
+<B>pcap_compile</B>()
 
 in multiple threads in a single process without some form of mutual
 exclusion allowing only one thread to call it at any given time.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_compile()</B>
+<B>pcap_compile</B>()
 
 returns 0 on success and
 <B>PCAP_ERROR</B>
@@ -115,6 +115,6 @@ constant became available in libpcap release 1.1.0.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:51 GMT, June 01, 2019
+Time: 23:39:56 GMT, January 10, 2020
 </BODY>
 </HTML>

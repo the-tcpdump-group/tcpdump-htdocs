@@ -29,10 +29,10 @@ pcap_t *pcap_fopen_offline_with_tstamp_precision(FILE *fp,
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_open_offline()</B>
+<B>pcap_open_offline</B>()
 
 and
-<B>pcap_open_offline_with_tstamp_precision()</B>
+<B>pcap_open_offline_with_tstamp_precision</B>()
 
 are called to open a ``savefile'' for reading.
 <P>
@@ -56,7 +56,7 @@ The name &quot;-&quot; is a synonym for
 
 <P>
 
-<B>pcap_open_offline_with_tstamp_precision()</B>
+<B>pcap_open_offline_with_tstamp_precision</B>()
 
 takes an additional
 <I>precision</I>
@@ -77,15 +77,15 @@ necessary before being supplied.
 <P>
 
 Alternatively, you may call
-<B>pcap_fopen_offline()</B>
+<B>pcap_fopen_offline</B>()
 
 or
-<B>pcap_fopen_offline_with_tstamp_precision()</B>
+<B>pcap_fopen_offline_with_tstamp_precision</B>()
 
 to read dumped data from an existing open stream
 <I>fp</I>.
 
-<B>pcap_fopen_offline_with_tstamp_precision()</B>
+<B>pcap_fopen_offline_with_tstamp_precision</B>()
 
 takes an additional
 <I>precision</I>
@@ -95,14 +95,14 @@ Note that on Windows, that stream should be opened in binary mode.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_open_offline()</B>,
+<B>pcap_open_offline</B>(),
 
-<B>pcap_open_offline_with_tstamp_precision()</B>,
+<B>pcap_open_offline_with_tstamp_precision</B>(),
 
-<B>pcap_fopen_offline()</B>,
+<B>pcap_fopen_offline</B>(),
 
 and
-<B>pcap_fopen_offline_with_tstamp_precision()</B>
+<B>pcap_fopen_offline_with_tstamp_precision</B>()
 
 return a
 <I>pcap_t *</I>
@@ -127,10 +127,10 @@ chars.
 <A NAME="lbAF">&nbsp;</A>
 <H2>BACKWARD COMPATIBILITY</H2>
 
-<B>pcap_open_offline_with_tstamp_precision</B>
+<B>pcap_open_offline_with_tstamp_precision</B>()
 
 and
-<B>pcap_fopen_offline_with_tstamp_precision</B>
+<B>pcap_fopen_offline_with_tstamp_precision</B>()
 
 became available in libpcap release 1.5.1.  In previous releases, time
 stamps from a savefile are always given in seconds and microseconds.
@@ -147,6 +147,6 @@ stamps from a savefile are always given in seconds and microseconds.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:57 GMT, June 01, 2019
+Time: 23:40:01 GMT, January 10, 2020
 </BODY>
 </HTML>

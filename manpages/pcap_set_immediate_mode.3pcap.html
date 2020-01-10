@@ -22,7 +22,7 @@ int pcap_set_immediate_mode(pcap_t *p, int immediate_mode);
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>pcap_set_immediate_mode()</B>
+<B>pcap_set_immediate_mode</B>()
 
 sets whether immediate mode should be set on a capture handle when
 the handle is activated.  In immediate mode, packets are always
@@ -34,7 +34,7 @@ is non-zero, immediate mode will be set, otherwise it will not be set.
 <A NAME="lbAE">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-<B>pcap_set_immediate_mode()</B>
+<B>pcap_set_immediate_mode</B>()
 
 returns 0 on success or
 <B>PCAP_ERROR_ACTIVATED</B>
@@ -91,7 +91,7 @@ after
 is called;
 <DT><DD>
 on Windows, immediate mode must be turned on by calling
-<B>pcap_setmintocopy()</B>
+<B>pcap_setmintocopy</B>()
 
 with a size of 0.
 </DL>
@@ -102,7 +102,7 @@ in immediate mode; however, in 1.5.0 and later, they are, by default,
 <B>not</B>
 
 in immediate mode, so if
-<B>pcap_set_immediate_mode()</B>
+<B>pcap_set_immediate_mode</B>()
 
 is available, it should be used.
 <P>
@@ -123,6 +123,6 @@ On other platforms, capture devices are always in immediate mode.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:51:57 GMT, June 01, 2019
+Time: 23:40:02 GMT, January 10, 2020
 </BODY>
 </HTML>
