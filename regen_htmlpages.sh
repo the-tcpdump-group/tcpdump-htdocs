@@ -6,6 +6,7 @@
 # This script has been tested to work on the following systems:
 #
 # * Ubuntu Linux 18.04
+# * Fedora Linux 30
 #
 
 readonly HTML_HEAD='htmlsrc/_html_head.html'
