@@ -18,3 +18,8 @@ pre {
 #indexlist tr.even {
 	background-color: #f0f0f0;
 }
+
+#indexlist td{
+	padding-left: 5px;
+	padding-right: 5px;
+}
