@@ -38,6 +38,9 @@ substitute_page_title()
 	mirrors)
 		title='Mirror sites | '
 		;;
+	pcap)
+		title='Programming with pcap'
+		;;
 	related)
 		title='Related Projects | '
 		;;
@@ -89,7 +92,7 @@ print_html_page()
 	disclosure-policy|faq|index|license|mirrors|related)
 		show_sidebar='yes'
 		;;
-	linktypes|broadcom-switch-tag|marvell-switch-tag|LINKTYPE_*)
+	linktypes|broadcom-switch-tag|marvell-switch-tag|pcap|LINKTYPE_*)
 		show_sidebar='no'
 		;;
 	*)
