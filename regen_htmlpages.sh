@@ -34,6 +34,9 @@ substitute_page_title()
 	linktypes)
 		title='Link-Layer Header Types | '
 		;;
+	mirrors)
+		title='Mirror sites | '
+		;;
 	related)
 		title='Related Projects | '
 		;;
@@ -82,7 +85,7 @@ print_html_page()
 	local readonly infile="${1:?}"
 	local show_sidebar
 	case `basename "$infile" .html` in
-	disclosure-policy|faq|index|license|related)
+	disclosure-policy|faq|index|license|mirrors|related)
 		show_sidebar='yes'
 		;;
 	linktypes|broadcom-switch-tag|marvell-switch-tag|LINKTYPE_*)
