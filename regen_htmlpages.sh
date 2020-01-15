@@ -23,8 +23,8 @@ substitute_page_title()
 	local title
 
 	case "$b" in
-	disclosure-policy)
-		title='Vulnerability Disclosure Policy | '
+	security)
+		title='Security | '
 		;;
 	faq)
 		title='FAQ | '
@@ -92,7 +92,7 @@ print_html_page()
 	local readonly infile="${1:?}"
 	local show_sidebar
 	case `basename "$infile" .html` in
-	disclosure-policy|faq|index|license|mirrors|related|old_releases)
+	security|faq|index|license|mirrors|related|old_releases)
 		show_sidebar='yes'
 		;;
 	linktypes|broadcom-switch-tag|marvell-switch-tag|pcap|LINKTYPE_*)
