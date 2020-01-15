@@ -38,6 +38,9 @@ substitute_page_title()
 	mirrors)
 		title='Mirror sites | '
 		;;
+	old_releases)
+		title='Old releases | '
+		;;
 	pcap)
 		title='Programming with pcap'
 		;;
@@ -89,7 +92,7 @@ print_html_page()
 	local readonly infile="${1:?}"
 	local show_sidebar
 	case `basename "$infile" .html` in
-	disclosure-policy|faq|index|license|mirrors|related)
+	disclosure-policy|faq|index|license|mirrors|related|old_releases)
 		show_sidebar='yes'
 		;;
 	linktypes|broadcom-switch-tag|marvell-switch-tag|pcap|LINKTYPE_*)
