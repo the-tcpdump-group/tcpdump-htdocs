@@ -8,15 +8,15 @@ Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-pcap_get_required_select_timeout - get a file descriptor on which a
-select() can be done for a live capture
+pcap_get_required_select_timeout - get a timeout to be used when doing
+select() for a live capture
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
 <PRE>
 <B>#include &lt;pcap/pcap.h&gt;
 </B>
-<B>struct timeval *pcap_get_required_select_timeout(pcap_t *p);
+<B>const struct timeval *pcap_get_required_select_timeout(pcap_t *p);
 </B></PRE>
 
 <A NAME="lbAD">&nbsp;</A>
@@ -37,32 +37,26 @@ containing a value that must be used as the minimum timeout in
 and
 <B><A HREF="/cgi-bin/man/man2html?2+kevent">kevent</A></B>(2)
 
-calls if
+calls, or
+<B>NULL</B>
+
+if there is no such timeout.
+If a
+non-<B>NULL</B>
+
+value is returned, it must be used regardless of whether
 <A HREF='/manpages/pcap_get_selectable_fd.3pcap.html'><B>pcap_get_selectable_fd</B></A>(3PCAP)
 
 returns
-<B>PCAP_ERROR</B>.
+<B>-1</B>
 
-<P>
-
-The timeout that should be used in those calls must be no larger than
-the smallest of all timeouts returned by
+for any descriptor on which those calls are being done.
 <B>pcap_get_required_select_timeout</B>()
 
-for devices from which packets will be captured.
-<P>
+should be called for all
+<B>pcap_t</B>s
 
-The device for which
-<B>pcap_get_selectable_fd</B>()
-
-returned
-<B>PCAP_ERROR</B>
-
-must be put in non-blocking mode with
-<A HREF='/manpages/pcap_setnonblock.3pcap.html'><B>pcap_setnonblock</B></A>(3PCAP),
-
-and an attempt must always be made to read packets from the device
-when the
+before a call to
 <B>select</B>(),
 
 <B>poll</B>(),
@@ -70,15 +64,83 @@ when the
 <B>epoll_wait</B>(),
 
 or
-<B>kevent</B>()
+<B>kevent</B>(),
 
-call returns.
+and any timeouts used for those calls should be updated as appropriate
+given the new value of the timeout.
+<P>
+
+For
+<B>kevent</B>(),
+
+one
+<B>EVFILT_TIMER</B>
+
+filter per selectable descriptor can be used, rather than using the
+timeout argument to
+<B>kevent</B>();
+
+if the
+<B>EVFILT_TIMER</B>
+
+event for a particular selectable descriptor signals an event,
+<B><A HREF="/cgi-bin/man/man2html?2+pcap_dispatch">pcap_dispatch</A></B>(2)
+
+should be called for the corresponding
+<B>pcap_t</B>.
+
+<P>
+
+On Linux systems with
+<B><A HREF="/cgi-bin/man/man2html?2+timerfd_create">timerfd_create</A></B>(2),
+
+one timer object created by
+<B>timerfd_create</B>()
+
+per selectable descriptor can be used, rather than using the timeout
+argument to
+<B>epoll_wait</B>();
+
+if the
+timer object for a particular selectable descriptor signals an event,
+<B><A HREF="/cgi-bin/man/man2html?2+pcap_dispatch">pcap_dispatch</A></B>(2)
+
+should be called for the corresponding
+<B>pcap_t</B>.
+
+<P>
+
+Otherwise, a timeout value no larger than
+the smallest of all timeouts returned by
+<B>pcap_get_required_select_timeout</B>()
+
+for devices from which packets will be captured and any other timeouts
+to be used in the call should be used as the timeout for the call, and,
+when the call returns,
+<B><A HREF="/cgi-bin/man/man2html?2+pcap_dispatch">pcap_dispatch</A></B>(2)
+
+should be called for all
+<B>pcap_t</B>s
+
+for which a
+non-<B>NULL</B>
+
+timeout was returned, regardless of whether it's indicated as having
+anything to read from it or not.
+<P>
+
+All devices with a
+non-NULL
+
+timeout must be put in non-blocking mode with
+<A HREF='/manpages/pcap_setnonblock.3pcap.html'><B>pcap_setnonblock</B></A>(3PCAP).
+
 <P>
 
 Note that a device on which a read can be done without blocking may,
 on some platforms, not have any packets to read if the packet buffer
 timeout has expired.  A call to
-<A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP)
+<B>pcap_dispatch</B>()
 
 or
 <A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP)
@@ -117,6 +179,38 @@ cannot be used on any capture source for which
 <B>pcap_get_selectable_fd</B>()
 
 returns -1.
+<P>
+
+In libpcap release 1.10.0 and later, the timeout value can change from
+call to call, so
+<B>pcap_get_required_select_timeout</B>()
+
+must be called before each call to
+<B>select</B>(),
+
+<B>poll</B>(),
+
+<B>epoll_wait</B>(),
+
+or
+<B>kevent</B>(),
+
+and the new value must be used to calculate timeouts for the call.  Code
+that does that will also work with libpcap 1.9.x releases, so code
+using
+<B>pcap_get_required_select_timeout</B>()
+
+should be changed to call it for each call to
+<B>select</B>(),
+
+<B>poll</B>(),
+
+<B>epoll_wait</B>(),
+
+or
+<B>kevent</B>()
+
+even if the code must also work with libpcap 1.9.x.
 <A NAME="lbAG">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
@@ -138,6 +232,6 @@ returns -1.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 23:39:58 GMT, January 10, 2020
+Time: 00:07:43 GMT, February 06, 2020
 </BODY>
 </HTML>

@@ -477,9 +477,9 @@ DESCRIPTION
        an attempt should be made to read from the device.
 
        Not    all    handles    have    such    a    descriptor     available;
-       pcap_get_selectable_fd()  will  return PCAP_ERROR if no such descriptor
-       is available.  If no such descriptor is available, this may be  because
-       the  device  must  be  polled  periodically  for packets; in that case,
+       pcap_get_selectable_fd() will return -1 if no such descriptor is avail-
+       able.  If no such descriptor is available,  this  may  be  because  the
+       device   must  be  polled  periodically  for  packets;  in  that  case,
        pcap_get_required_select_timeout() will return a pointer  to  a  struct
        timeval  whose  value can be used as a timeout in those routines.  When
        the routine returns, an attmept should be made to read packets from the
@@ -529,32 +529,31 @@ DESCRIPTION
                      in calls such as select(2) and poll(2)
 
               pcap_get_required_select_timeout(3PCAP)
-                     if no descriptor usable with  select(2)  and  poll(2)  is
-                     available for the pcap_t, attempt to get a timeout usable
-                     with those routines
+                     attempt to get a timeout required for using a  pcap_t  in
+                     calls such as select(2) and poll(2)
 
    Filters
-       In order to cause only certain packets  to  be  returned  when  reading
+       In  order  to  cause  only  certain packets to be returned when reading
        packets, a filter can be set on a handle.  For a live capture, the fil-
-       tering will be performed in kernel mode, if possible, to avoid  copying
+       tering  will be performed in kernel mode, if possible, to avoid copying
        ``uninteresting'' packets from the kernel to user mode.
 
        A filter can be specified as a text string; the syntax and semantics of
        the string are as described by pcap-filter(7).  A filter string is com-
        piled into a program in a pseudo-machine-language by pcap_compile() and
-       the resulting program can be made a filter for a handle with  pcap_set-
-       filter().   The  result  of  pcap_compile() can be freed with a call to
+       the  resulting program can be made a filter for a handle with pcap_set-
+       filter().  The result of pcap_compile() can be freed  with  a  call  to
        pcap_freecode().  pcap_compile() may require a network mask for certain
-       expressions  in the filter string; pcap_lookupnet() can be used to find
+       expressions in the filter string; pcap_lookupnet() can be used to  find
        the network address and network mask for a given capture device.
 
-       A compiled filter can also be applied directly to  a  packet  that  has
+       A  compiled  filter  can  also be applied directly to a packet that has
        been read using pcap_offline_filter().
 
        Routines
 
               pcap_compile(3PCAP)
-                     compile  filter  expression  to a pseudo-machine-language
+                     compile filter expression  to  a  pseudo-machine-language
                      code program
 
               pcap_freecode(3PCAP)
@@ -570,15 +569,15 @@ DESCRIPTION
                      apply a filter program to a packet
 
    Incoming and outgoing packets
-       By default, libpcap will attempt to capture both packets  sent  by  the
-       machine  and packets received by the machine.  To limit it to capturing
+       By  default,  libpcap  will attempt to capture both packets sent by the
+       machine and packets received by the machine.  To limit it to  capturing
        only packets received by the machine or, if possible, only packets sent
        by the machine, call pcap_setdirection().
 
        Routines
 
               pcap_setdirection(3PCAP)
-                     specify  whether  to  capture  incoming packets, outgoing
+                     specify whether to  capture  incoming  packets,  outgoing
                      packets, or both
 
    Capture statistics
@@ -591,15 +590,15 @@ DESCRIPTION
                      get capture statistics
 
    Opening a handle for writing captured packets
-       To  open  a  ``savefile`` to which to write packets, given the pathname
+       To open a ``savefile`` to which to write packets,  given  the  pathname
        the ``savefile'' should have, call pcap_dump_open().  To open a ``save-
-       file``  to  which to write packets, given the pathname the ``savefile''
-       should have, call pcap_dump_open(); to set up a handle  for  a  ``save-
-       file'',  given a FILE * referring to a file already opened for writing,
-       call pcap_dump_fopen().  They each return pointers to a  pcap_dumper_t,
-       which  is  the handle used for writing packets to the ``savefile''.  If
-       it succeeds, it will have created the file  if  it  doesn't  exist  and
-       truncated  the  file  if it does exist.  To close a pcap_dumper_t, call
+       file`` to which to write packets, given the pathname  the  ``savefile''
+       should  have,  call  pcap_dump_open(); to set up a handle for a ``save-
+       file'', given a FILE * referring to a file already opened for  writing,
+       call  pcap_dump_fopen().  They each return pointers to a pcap_dumper_t,
+       which is the handle used for writing packets to the  ``savefile''.   If
+       it  succeeds,  it  will  have  created the file if it doesn't exist and
+       truncated the file if it does exist.  To close  a  pcap_dumper_t,  call
        pcap_dump_close().
 
        Routines
@@ -614,16 +613,16 @@ DESCRIPTION
                      close a pcap_dumper_t
 
               pcap_dump_file(3PCAP)
-                     get the FILE * for a pcap_dumper_t opened for  a  ``save-
+                     get  the  FILE * for a pcap_dumper_t opened for a ``save-
                      file''
 
    Writing packets
-       To  write a packet to a pcap_dumper_t, call pcap_dump().  Packets writ-
-       ten with pcap_dump() may be buffered,  rather  than  being  immediately
-       written  to the ``savefile''.  Closing the pcap_dumper_t will cause all
+       To write a packet to a pcap_dumper_t, call pcap_dump().  Packets  writ-
+       ten  with  pcap_dump()  may  be buffered, rather than being immediately
+       written to the ``savefile''.  Closing the pcap_dumper_t will cause  all
        buffered-but-not-yet-written packets to be written to the ``savefile''.
-       To  force all packets written to the pcap_dumper_t, and not yet written
-       to the ``savefile'' because they're buffered by the  pcap_dumper_t,  to
+       To force all packets written to the pcap_dumper_t, and not yet  written
+       to  the  ``savefile'' because they're buffered by the pcap_dumper_t, to
        be written to the ``savefile'', without closing the pcap_dumper_t, call
        pcap_dump_flush().
 
@@ -633,7 +632,7 @@ DESCRIPTION
                      write packet to a pcap_dumper_t
 
               pcap_dump_flush(3PCAP)
-                     flush buffered packets written to a pcap_dumper_t to  the
+                     flush  buffered packets written to a pcap_dumper_t to the
                      ``savefile''
 
               pcap_dump_ftell(3PCAP)
@@ -653,7 +652,7 @@ DESCRIPTION
                      transmit a packet
 
    Reporting errors
-       Some  routines return error or warning status codes; to convert them to
+       Some routines return error or warning status codes; to convert them  to
        a string, use pcap_statustostr().
 
        Routines
@@ -671,29 +670,29 @@ DESCRIPTION
                      get library version string
 
 BACKWARD COMPATIBILITY
-       In  versions of libpcap prior to 1.0, the pcap.h header file was not in
-       a pcap directory on most platforms; if you are writing  an  application
-       that  must  work on versions of libpcap prior to 1.0, include <pcap.h>,
+       In versions of libpcap prior to 1.0, the pcap.h header file was not  in
+       a  pcap  directory on most platforms; if you are writing an application
+       that must work on versions of libpcap prior to 1.0,  include  <pcap.h>,
        which  will  include  <pcap/pcap.h>  for  you,  rather  than  including
        <pcap/pcap.h>.
 
-       pcap_create()  and  pcap_activate()  were  not available in versions of
-       libpcap prior to 1.0; if you are writing an application that must  work
+       pcap_create() and pcap_activate() were not  available  in  versions  of
+       libpcap  prior to 1.0; if you are writing an application that must work
        on versions of libpcap prior to 1.0, either use pcap_open_live() to get
        a handle for a live capture or, if you want to be able to use the addi-
        tional capabilities offered by using pcap_create() and pcap_activate(),
-       use an autoconf(1) script or some other configuration script  to  check
-       whether  the  libpcap  1.0 APIs are available and use them only if they
+       use  an  autoconf(1) script or some other configuration script to check
+       whether the libpcap 1.0 APIs are available and use them  only  if  they
        are.
 
 SEE ALSO
-       autoconf(1),  tcpdump(1),  tcpslice(1),  pcap-filter(7),   pfconfig(8),
+       autoconf(1),   tcpdump(1),  tcpslice(1),  pcap-filter(7),  pfconfig(8),
        usermod(8)
 
 AUTHORS
        The original authors of libpcap are:
 
-       Van  Jacobson,  Craig  Leres  and  Steven  McCanne, all of the Lawrence
+       Van Jacobson, Craig Leres and  Steven  McCanne,  all  of  the  Lawrence
        Berkeley National Laboratory, University of California, Berkeley, CA.
 
        The current version is available from "The Tcpdump Group"'s Web site at
@@ -701,11 +700,11 @@ AUTHORS
               https://www.tcpdump.org/
 
 BUGS
-       To report a security issue  please  send  an  e-mail  to  security@tcp-
+       To  report  a  security  issue  please  send an e-mail to security@tcp-
        dump.org.
 
-       To  report  bugs and other problems, contribute patches, request a fea-
-       ture, provide generic feedback etc please see the file  CONTRIBUTING.md
+       To report bugs and other problems, contribute patches, request  a  fea-
+       ture,  provide generic feedback etc please see the file CONTRIBUTING.md
        in the libpcap source tree root.
 
                                 10 January 2020                    PCAP(3PCAP)
