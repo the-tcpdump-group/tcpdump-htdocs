@@ -52,4 +52,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
 
-                                22 August 2018  PCAP_SET_IMMEDIATE_MODE(3PCAP)
+                                23 August 2018  PCAP_SET_IMMEDIATE_MODE(3PCAP)

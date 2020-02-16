@@ -1259,7 +1259,7 @@ AUTHORS
 
        It is currently being maintained by tcpdump.org.
 
-       The current version is available via http:
+       The current version is available via HTTPS:
 
               https://www.tcpdump.org/
 

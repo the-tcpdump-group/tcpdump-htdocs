@@ -40,4 +40,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
 
-                                24 August 2017  PCAP_SET_PROTOCOL_LINUX(3PCAP)
+                                22 August 2018  PCAP_SET_PROTOCOL_LINUX(3PCAP)

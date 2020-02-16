@@ -136,4 +136,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP)
 
-                                22 August 2018         PCAP_FINDALLDEVS(3PCAP)
+                                23 August 2018         PCAP_FINDALLDEVS(3PCAP)

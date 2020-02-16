@@ -58,4 +58,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP), pcap-savefile(5)
 
-                                8 January 2018        PCAP_OPEN_OFFLINE(3PCAP)
+                                23 August 2018        PCAP_OPEN_OFFLINE(3PCAP)

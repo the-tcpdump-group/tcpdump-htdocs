@@ -76,4 +76,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP), kqueue(2)
 
-                                 25 July 2018    PCAP_GET_SELECTABLE_FD(3PCAP)
+                                29 January 2020  PCAP_GET_SELECTABLE_FD(3PCAP)

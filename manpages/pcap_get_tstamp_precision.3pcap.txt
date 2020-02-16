@@ -27,4 +27,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP), pcap_set_tstamp_precision(3PCAP), pcap-tstamp(7)
 
-                               18 December 201PCAP_GET_TSTAMP_PRECISION(3PCAP)
+                                23 August 2018PCAP_GET_TSTAMP_PRECISION(3PCAP)

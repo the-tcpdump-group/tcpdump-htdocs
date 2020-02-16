@@ -41,4 +41,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_val_to_name(3PCAP), pcap-tstamp(7)
 
-                                22 August 2018   PCAP_LIST_TSTAMP_TYPES(3PCAP)
+                               8 September 2019  PCAP_LIST_TSTAMP_TYPES(3PCAP)
