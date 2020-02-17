@@ -111,7 +111,7 @@ OPTIONS
               Print the list of the network interfaces available on the system
               and on which tcpdump can  capture  packets.   For  each  network
               interface,  a number and an interface name, possibly followed by
-              a text description of the interface, is printed.  The  interface
+              a text description of the interface, are printed.  The interface
               name  or the number can be supplied to the -i flag to specify an
               interface on which to capture.
 
