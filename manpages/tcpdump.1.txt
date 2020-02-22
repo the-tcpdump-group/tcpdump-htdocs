@@ -501,7 +501,8 @@ OPTIONS
 
               See pcap-savefile(5) for a description of the file format.
 
-       -W     Used in conjunction with the -C option, this will limit the num-
+       -W filecount
+              Used in conjunction with the -C option, this will limit the num-
               ber  of  files  created to the specified number, and begin over-
               writing files from the beginning,  thus  creating  a  'rotating'
               buffer.  In addition, it will name the files with enough leading
