@@ -5,7 +5,7 @@ NAME
 
 SYNOPSIS
        tcpdump [ -AbdDefhHIJKlLnNOpqStuUvxX# ] [ -B buffer_size ]
-               [ -c count ] [ -C file_size ]
+               [ -c count ] [ --count ] [ -C file_size ]
                [ -E spi@ipaddr algo:secret,...  ]
                [ -F file ] [ -G rotate_seconds ] [ -i interface ]
                [ --immediate-mode ] [ -j tstamp_type ] [ -m module ]
@@ -88,6 +88,12 @@ OPTIONS
 
        -c count
               Exit after receiving count packets.
+
+       --count
+              Print  only  on  stderr  the  packet  count when reading capture
+              file(s) instead of parsing/printing the packets. If a filter  is
+              specified  on the command line, tcpdump counts only packets that
+              were matched by the filter expression.
 
        -C file_size
               Before  writing  a  raw  packet to a savefile, check whether the

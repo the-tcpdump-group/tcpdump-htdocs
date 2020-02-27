@@ -35,6 +35,10 @@ tcpdump - dump traffic on a network
 
 ]
 [
+<B>--count</B>
+
+]
+[
 <B>-C</B>
 
 <I>file_size</I>
@@ -326,6 +330,13 @@ units of KiB (1024 bytes).
 
 <DD>
 Exit after receiving <I>count</I> packets.
+<DT><B>--count</B>
+
+<DD>
+Print only on stderr the packet count when reading capture file(s) instead
+of parsing/printing the packets. If a filter is specified on the command
+line, <I>tcpdump</I> counts only packets that were matched by the filter
+expression.
 <DT><B>-C</B><I> file_size</I>
 
 <DD>
@@ -2525,6 +2536,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 10:19:28 GMT, February 22, 2020
+Time: 13:11:28 GMT, February 27, 2020
 </BODY>
 </HTML>
