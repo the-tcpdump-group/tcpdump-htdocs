@@ -14,6 +14,7 @@ SYNOPSIS
                [ -V file ] [ -w file ] [ -W filecount ] [ -y datalinktype ]
                [ -z postrotate-command ] [ -Z user ]
                [ --time-stamp-precision=tstamp_precision ]
+               [ --micro ] [ --nano ]
                [ expression ]
 
 DESCRIPTION
@@ -1330,4 +1331,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                 26 Feb 2020                        TCPDUMP(1)
+                                 28 Feb 2020                        TCPDUMP(1)
