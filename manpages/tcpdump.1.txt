@@ -406,16 +406,16 @@ OPTIONS
               Force packets selected by "expression"  to  be  interpreted  the
               specified  type.   Currently known types are aodv (Ad-hoc On-de-
               mand Distance Vector protocol), carp (Common Address  Redundancy
-              Protocol),  cnfp  (Cisco NetFlow protocol), lmp (Link Management
-              Protocol),  pgm   (Pragmatic   General   Multicast),   pgm_zmtp1
-              (ZMTP/1.0  inside  PGM/EPGM), ptp (Precision Time Protocol), ra-
-              dius (RADIUS), resp (REdis Serialization Protocol), rpc  (Remote
-              Procedure Call), rtcp (Real-Time Applications control protocol),
-              rtp (Real-Time Applications protocol), snmp (Simple Network Man-
-              agement Protocol), someip (SOME/IP), tftp (Trivial File Transfer
-              Protocol), vat (Visual Audio Tool),  vxlan  (Virtual  eXtensible
-              Local Area Network), wb (distributed White Board) and zmtp1 (Ze-
-              roMQ Message Transport Protocol 1.0).
+              Protocol),  cnfp  (Cisco  NetFlow protocol), domain (Domain Name
+              System), lmp (Link Management Protocol), pgm (Pragmatic  General
+              Multicast), pgm_zmtp1 (ZMTP/1.0 inside PGM/EPGM), ptp (Precision
+              Time Protocol), radius (RADIUS), resp (REdis Serialization  Pro-
+              tocol),  rpc  (Remote  Procedure Call), rtcp (Real-Time Applica-
+              tions control protocol), rtp (Real-Time Applications  protocol),
+              snmp  (Simple  Network  Management  Protocol), someip (SOME/IP),
+              tftp (Trivial File Transfer Protocol), vat (Visual Audio  Tool),
+              vxlan  (Virtual  eXtensible Local Area Network), wb (distributed
+              White Board) and zmtp1 (ZeroMQ Message Transport Protocol 1.0).
 
               Note that the pgm type above affects  UDP  interpretation  only,
               the  native  PGM is always recognised as IP protocol 113 regard-
