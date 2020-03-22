@@ -20,7 +20,9 @@ DESCRIPTION
 
        snaplen specifies the snapshot length to be set on the handle.
 
-       promisc specifies if the interface is to be put into promiscuous mode.
+       promisc  specifies  whether the interface is to be put into promiscuous
+       mode.  If promisc is non-zero, promiscuous mode will be set,  otherwise
+       it will not be set.
 
        to_ms  specifies the packet buffer timeout, as a non-negative value, in
        milliseconds.  (See pcap(3PCAP) for an explanation of the packet buffer
