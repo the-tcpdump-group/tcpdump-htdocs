@@ -19,9 +19,9 @@ DESCRIPTION
        by pcap_datalink().  The names for those values begin with LINKTYPE_.
 
        The  link-layer  header  types  supported  by  libpcap are described at
-       https://www.tcpdump.org/linktypes.html.
+       https://www.tcpdump.org/linktypes.html .
 
 SEE ALSO
        pcap(3PCAP)
 
-                                 7 April 2014                 PCAP-LINKTYPE(7)
+                                 6 April 2020                 PCAP-LINKTYPE(7)
