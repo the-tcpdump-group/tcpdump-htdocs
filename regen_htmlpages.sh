@@ -76,8 +76,13 @@ rewrite_URLs()
 		sed 's#<link href="style.css#<link href="../style.css#' | \
 		sed 's#<img src="images/#<img src="../images/#' | \
 		sed 's#<a href="index.html#<a href="../index.html#' | \
+		sed 's#<a href="security.html#<a href="../security.html#' | \
+		sed 's#<a href="faq.html#<a href="../faq.html#' | \
+		sed 's#<a href="linktypes.html#<a href="../linktypes.html#' | \
 		sed 's#<a href="related.html#<a href="../related.html#' | \
-		sed 's#<a href="linktypes.html#<a href="../linktypes.html#'
+		sed 's#<a href="license.html#<a href="../license.html#' | \
+		sed 's#<a href="old_releases.html#<a href="../old_releases.html#' | \
+		sed 's#<a href="mirrors.html#<a href="../mirrors.html#'
 	fi
 }
 
