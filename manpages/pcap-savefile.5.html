@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP-SAVEFILE</H1>
-Section: File Formats (5)<BR>Updated: 8 March 2015<BR>
+Section: File Formats (5)<BR>Updated: 24 April 2020<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -40,6 +40,9 @@ start with a per-file header.  The format of the per-file header is:
 
 </DL>
 
+<P>
+
+The per-file header length is 24 octets.
 <P>
 
 All fields in the per-file header are in the byte order of the host
@@ -119,6 +122,9 @@ raw packet data.  The format of the per-packet header is:
 
 <P>
 
+The per-packet header length is 16 octets.
+<P>
+
 All fields in the per-packet header are in the byte order of the host
 writing the file.  The per-packet header begins with a time stamp giving
 the approximate time the packet was captured; the time stamp consists of
@@ -141,6 +147,6 @@ equal to the snapshot length.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 09:49:39 GMT, July 19, 2018
+Time: 08:40:06 GMT, April 24, 2020
 </BODY>
 </HTML>
