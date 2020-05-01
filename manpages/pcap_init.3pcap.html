@@ -1,0 +1,111 @@
+<HTML><HEAD><TITLE>Manpage of PCAP_INIT</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+</HEAD><BODY>
+<H1>Manpage of PCAP_INIT</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 11 April 2020<BR>
+<A HREF="/manpages">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_init - initialize the library
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>int pcap_init(unsigned int opts, char *errbuf);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_init</B>()
+
+is used to initialize the Packet Capture library.
+<I>opts</I>
+
+specifies options for the library;
+currently, the options are:
+<DL COMPACT>
+<DT><B>PCAP_CHAR_ENC_LOCAL</B>
+
+<DD>
+Treat all strings supplied as arguments, and return all strings to the
+caller, as being in the local character encoding.
+<DT><B>PCAP_CHAR_ENC_UTF_8</B>
+
+<DD>
+Treat all strings supplied as arguments, and return all strings to the
+caller, as being in UTF-8.
+</DL>
+<P>
+
+On UNIX-like systems, the local character encoding is assumed to be
+UTF-8, so no character encoding transformations are done.
+<P>
+
+On Windows, the local character encoding is the local ANSI code page.
+<P>
+
+If
+<B>pcap_init</B>()
+
+is not called, strings are treated as being in the local ANSI code page
+on Windows,
+<A HREF='/manpages/pcap_lookupdev.3pcap.html'><B>pcap_lookupdev</B></A>(3PCAP)
+
+will succeed if there is a device on which to capture, and
+<A HREF='/manpages/pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+
+makes an attempt to check whether the string passed as an argument is a
+UTF-16LE string - note that this attempt is unsafe, as it may run past
+the end of the string - to handle
+<B>pcap_lookupdev</B>()
+
+returning a UTF-16LE string. Programs that don't call
+<B>pcap_init</B>()
+
+should, on Windows, call
+<B>pcap_wsockinit</B>()
+
+to initialize Winsock; this is not necessary if
+<B>pcap_init</B>()
+
+is called, as
+<B>pcap_init</B>()
+
+will initialize Winsock itself on Windows.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_init</B>()
+
+returns 0 on success and -1 on failure.
+If -1 is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<I>errbuf</I>
+
+is assumed to be able to hold at least
+<B>PCAP_ERRBUF_SIZE</B>
+
+chars.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 08:44:20 GMT, May 01, 2020
+</BODY>
+</HTML>

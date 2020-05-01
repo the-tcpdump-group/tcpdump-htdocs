@@ -151,6 +151,7 @@ pcap_geterr
 pcap_getnonblock						pcap_setnonblock
 pcap_get_selectable_fd
 pcap_get_tstamp_precision
+pcap_init
 pcap_inject
 pcap_is_swapped
 pcap_lib_version
