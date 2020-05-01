@@ -35,6 +35,16 @@ list.  (If the list is empty, there are no devices on which capture is
 possible.)
 <P>
 
+<B>If</B>
+
+<A HREF='/manpages/pcap_init.3pcap.html'><B>pcap_init</B></A>(3PCAP)
+
+<B>has been called, this interface always returns</B>
+
+<B>NULL</B>.
+
+<P>
+
 <B>pcap_lookupdev</B>()
 
 returns a pointer to a string giving the name of a network device
@@ -51,6 +61,10 @@ and with
 <A HREF='/manpages/pcap_lookupnet.3pcap.html'><B>pcap_lookupnet</B></A>(3PCAP).
 
 If there is an error,
+or if
+<A HREF='/manpages/pcap_init.3pcap.html'><B>pcap_init</B></A>(3PCAP)
+
+has been called,
 <B>NULL</B>
 
 is returned and
@@ -92,6 +106,6 @@ ASCII or UTF-8 string.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 23:40:00 GMT, January 10, 2020
+Time: 21:32:08 GMT, May 01, 2020
 </BODY>
 </HTML>

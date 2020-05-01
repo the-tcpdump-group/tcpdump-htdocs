@@ -13,6 +13,42 @@ DESCRIPTION
        saving captured packets to a ``savefile'', and reading packets  from  a
        ``savefile''.
 
+   Initializing
+       pcap_init()  initializes  the  library.   It  takes  an argument giving
+       options; currently, the options are:
+
+       PCAP_CHAR_ENC_LOCAL
+              Treat all strings supplied as arguments, and return all  strings
+              to the caller, as being in the local character encoding.
+
+       PCAP_CHAR_ENC_UTF_8
+              Treat  all strings supplied as arguments, and return all strings
+              to the caller, as being in UTF-8.
+
+       On UNIX-like systems, the local character encoding  is  assumed  to  be
+       UTF-8, so no character encoding transformations are done.
+
+       On Windows, the local character encoding is the local ANSI code page.
+
+       If  pcap_init()  is  called,  the  deprecated  pcap_lookupdev() routine
+       always fails, so it should not be used, and, on Windows,  pcap_create()
+       does not attempt to handle UTF-16LE strings.
+
+       If pcap_init() is not called, strings are treated as being in the local
+       ANSI code page on Windows, pcap_lookupdev() will succeed if there is  a
+       device on which to capture, and pcap_create() makes an attempt to check
+       whether the string passed as an argument is a UTF-16LE  string  -  note
+       that this attempt is unsafe, as it may run past the end of the string -
+       to handle pcap_lookupdev() returning a UTF-16LE string.  Programs  that
+       don't  call  pcap_init()  should,  on Windows, call pcap_wsockinit() to
+       initialize Winsock; this is not necessary if pcap_init() is called,  as
+       pcap_init() will initialize Winsock itself on Windows.
+
+       Routines
+
+              pcap_init(3PCAP)
+                     initialize the library
+
    Opening a capture handle for reading
        To  open  a handle for a live capture, given the name of the network or
        other interface on which the capture should  be  done,  call  pcap_cre-
@@ -258,9 +294,9 @@ DESCRIPTION
        Do NOT assume that the packets for a given capture or ``savefile`` will
        have any given link-layer header type, such as DLT_EN10MB for Ethernet.
        For example, the "any" device on Linux will have  a  link-layer  header
-       type of DLT_LINUX_SLL even if all devices on the system at the time the
-       "any" device is  opened  have  some  other  data  link  type,  such  as
-       DLT_EN10MB for Ethernet.
+       type of DLT_LINUX_SLL or DLT_LINUX_SLL2 even if all devices on the sys-
+       tem at the time the "any" device is opened have some  other  data  link
+       type, such as DLT_EN10MB for Ethernet.
 
        To  obtain  the  FILE *  corresponding to a pcap_t opened for a ``save-
        file'', call pcap_file().

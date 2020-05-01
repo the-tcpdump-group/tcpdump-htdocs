@@ -44,9 +44,9 @@ DESCRIPTION
        Do NOT assume that the packets for a given capture or ``savefile`` will
        have any given link-layer header type, such as DLT_EN10MB for Ethernet.
        For  example,  the  "any" device on Linux will have a link-layer header
-       type of DLT_LINUX_SLL even if all devices on the system at the time the
-       "any"  device  is  opened  have  some  other  data  link  type, such as
-       DLT_EN10MB for Ethernet.
+       type of DLT_LINUX_SLL or DLT_LINUX_SLL2 even if all devices on the sys-
+       tem  at  the  time the "any" device is opened have some other data link
+       type, such as DLT_EN10MB for Ethernet.
 
 RETURN VALUE
        pcap_next_ex() returns 1 if the packet was read without problems, 0  if

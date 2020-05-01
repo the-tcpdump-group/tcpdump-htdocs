@@ -27,6 +27,88 @@ through this mechanism.
 It also supports saving captured packets to a ``savefile'', and reading
 packets from a ``savefile''.
 <A NAME="lbAE">&nbsp;</A>
+<H3>Initializing</H3>
+
+<B>pcap_init</B>()
+
+initializes the library.  It takes an argument giving options;
+currently, the options are:
+<DL COMPACT>
+<DT><B>PCAP_CHAR_ENC_LOCAL</B>
+
+<DD>
+Treat all strings supplied as arguments, and return all strings to the
+caller, as being in the local character encoding.
+<DT><B>PCAP_CHAR_ENC_UTF_8</B>
+
+<DD>
+Treat all strings supplied as arguments, and return all strings to the
+caller, as being in UTF-8.
+</DL>
+<P>
+
+On UNIX-like systems, the local character encoding is assumed to be
+UTF-8, so no character encoding transformations are done.
+<P>
+
+On Windows, the local character encoding is the local ANSI code page.
+<P>
+
+If
+<B>pcap_init</B>()
+
+is called, the deprecated
+<B>pcap_lookupdev</B>()
+
+routine always fails, so it should not be used, and, on Windows,
+<B>pcap_create</B>()
+
+does not attempt to handle UTF-16LE strings.
+<P>
+
+If
+<B>pcap_init</B>()
+
+is not called, strings are treated as being in the local ANSI code page
+on Windows,
+<B>pcap_lookupdev</B>()
+
+will succeed if there is a device on which to capture, and
+<B>pcap_create</B>()
+
+makes an attempt to check whether the string passed as an argument is a
+UTF-16LE string - note that this attempt is unsafe, as it may run past
+the end of the string - to handle
+<B>pcap_lookupdev</B>()
+
+returning a UTF-16LE string. Programs that don't call
+<B>pcap_init</B>()
+
+should, on Windows, call
+<B>pcap_wsockinit</B>()
+
+to initialize Winsock; this is not necessary if
+<B>pcap_init</B>()
+
+is called, as
+<B>pcap_init</B>()
+
+will initialize Winsock itself on Windows.
+<DL COMPACT>
+<DT><B>Routines</B>
+
+<DD>
+<DL COMPACT><DT><DD>
+<DL COMPACT>
+<DT><A HREF='/manpages/pcap_init.3pcap.html'><B>pcap_init</B></A>(3PCAP)
+
+<DD>
+initialize the library
+</DL>
+</DL>
+
+</DL>
+<A NAME="lbAF">&nbsp;</A>
 <H3>Opening a capture handle for reading</H3>
 
 To open a handle for a live capture, given the name of the network or
@@ -389,6 +471,9 @@ for Ethernet.  For example, the &quot;any&quot; device on Linux will have a
 link-layer header type of
 <B>DLT_LINUX_SLL</B>
 
+or
+<B>DLT_LINUX_SLL2</B>
+
 even if all devices on the system at the time the &quot;any&quot; device is opened
 have some other data link type, such as
 <B>DLT_EN10MB</B>
@@ -624,7 +709,7 @@ get the major and minor version of the file format version for a
 </DL>
 
 </DL>
-<A NAME="lbAF">&nbsp;</A>
+<A NAME="lbAG">&nbsp;</A>
 <H3>Selecting a link-layer header type for a live capture</H3>
 
 Some devices may provide more than one link-layer header type.  To
@@ -677,7 +762,7 @@ get link-layer header type corresponding to a name
 </DL>
 
 </DL>
-<A NAME="lbAG">&nbsp;</A>
+<A NAME="lbAH">&nbsp;</A>
 <H3>Reading packets</H3>
 
 Packets are read with
@@ -979,7 +1064,7 @@ and
 </DL>
 
 </DL>
-<A NAME="lbAH">&nbsp;</A>
+<A NAME="lbAI">&nbsp;</A>
 <H3>Filters</H3>
 
 In order to cause only certain packets to be returned when reading
@@ -1050,7 +1135,7 @@ apply a filter program to a packet
 </DL>
 
 </DL>
-<A NAME="lbAI">&nbsp;</A>
+<A NAME="lbAJ">&nbsp;</A>
 <H3>Incoming and outgoing packets</H3>
 
 By default, libpcap will attempt to capture both packets sent by the
@@ -1073,7 +1158,7 @@ specify whether to capture incoming packets, outgoing packets, or both
 </DL>
 
 </DL>
-<A NAME="lbAJ">&nbsp;</A>
+<A NAME="lbAK">&nbsp;</A>
 <H3>Capture statistics</H3>
 
 To get statistics about packets received and dropped in a live capture,
@@ -1094,7 +1179,7 @@ get capture statistics
 </DL>
 
 </DL>
-<A NAME="lbAK">&nbsp;</A>
+<A NAME="lbAL">&nbsp;</A>
 <H3>Opening a handle for writing captured packets</H3>
 
 To open a ``savefile`` to which to write packets, given the pathname the
@@ -1165,7 +1250,7 @@ opened for a ``savefile''
 </DL>
 
 </DL>
-<A NAME="lbAL">&nbsp;</A>
+<A NAME="lbAM">&nbsp;</A>
 <H3>Writing packets</H3>
 
 To write a packet to a
@@ -1224,7 +1309,7 @@ get current file position for a
 </DL>
 
 </DL>
-<A NAME="lbAM">&nbsp;</A>
+<A NAME="lbAN">&nbsp;</A>
 <H3>Injecting packets</H3>
 
 If you have the required privileges, you can inject packets onto a
@@ -1258,7 +1343,7 @@ transmit a packet
 </DL>
 
 </DL>
-<A NAME="lbAN">&nbsp;</A>
+<A NAME="lbAO">&nbsp;</A>
 <H3>Reporting errors</H3>
 
 Some routines return error or warning status codes; to convert them to a
@@ -1279,7 +1364,7 @@ get a string for an error or warning status code
 </DL>
 
 </DL>
-<A NAME="lbAO">&nbsp;</A>
+<A NAME="lbAP">&nbsp;</A>
 <H3>Getting library version information</H3>
 
 To get a string giving version information about libpcap, call
@@ -1299,7 +1384,7 @@ get library version string
 </DL>
 
 </DL>
-<A NAME="lbAP">&nbsp;</A>
+<A NAME="lbAQ">&nbsp;</A>
 <H2>BACKWARD COMPATIBILITY</H2>
 
 <P>
@@ -1344,7 +1429,7 @@ use an
 
 script or some other configuration script to check whether the libpcap
 1.0 APIs are available and use them only if they are.
-<A NAME="lbAQ">&nbsp;</A>
+<A NAME="lbAR">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
 <B>autoconf</B>(1),
@@ -1359,7 +1444,7 @@ script or some other configuration script to check whether the libpcap
 
 <B>usermod</B>(8)
 
-<A NAME="lbAR">&nbsp;</A>
+<A NAME="lbAS">&nbsp;</A>
 <H2>AUTHORS</H2>
 
 The original authors of libpcap are:
@@ -1379,7 +1464,7 @@ The current version is available from &quot;The Tcpdump Group&quot;'s Web site a
 
 </DL>
 
-<A NAME="lbAS">&nbsp;</A>
+<A NAME="lbAT">&nbsp;</A>
 <H2>BUGS</H2>
 
 To report a security issue please send an e-mail to <A HREF="mailto:security@tcpdump.org">security@tcpdump.org</A>.
@@ -1399,27 +1484,28 @@ in the libpcap source tree root.
 <DT><A HREF="#lbAC">SYNOPSIS</A><DD>
 <DT><A HREF="#lbAD">DESCRIPTION</A><DD>
 <DL>
-<DT><A HREF="#lbAE">Opening a capture handle for reading</A><DD>
-<DT><A HREF="#lbAF">Selecting a link-layer header type for a live capture</A><DD>
-<DT><A HREF="#lbAG">Reading packets</A><DD>
-<DT><A HREF="#lbAH">Filters</A><DD>
-<DT><A HREF="#lbAI">Incoming and outgoing packets</A><DD>
-<DT><A HREF="#lbAJ">Capture statistics</A><DD>
-<DT><A HREF="#lbAK">Opening a handle for writing captured packets</A><DD>
-<DT><A HREF="#lbAL">Writing packets</A><DD>
-<DT><A HREF="#lbAM">Injecting packets</A><DD>
-<DT><A HREF="#lbAN">Reporting errors</A><DD>
-<DT><A HREF="#lbAO">Getting library version information</A><DD>
+<DT><A HREF="#lbAE">Initializing</A><DD>
+<DT><A HREF="#lbAF">Opening a capture handle for reading</A><DD>
+<DT><A HREF="#lbAG">Selecting a link-layer header type for a live capture</A><DD>
+<DT><A HREF="#lbAH">Reading packets</A><DD>
+<DT><A HREF="#lbAI">Filters</A><DD>
+<DT><A HREF="#lbAJ">Incoming and outgoing packets</A><DD>
+<DT><A HREF="#lbAK">Capture statistics</A><DD>
+<DT><A HREF="#lbAL">Opening a handle for writing captured packets</A><DD>
+<DT><A HREF="#lbAM">Writing packets</A><DD>
+<DT><A HREF="#lbAN">Injecting packets</A><DD>
+<DT><A HREF="#lbAO">Reporting errors</A><DD>
+<DT><A HREF="#lbAP">Getting library version information</A><DD>
 </DL>
-<DT><A HREF="#lbAP">BACKWARD COMPATIBILITY</A><DD>
-<DT><A HREF="#lbAQ">SEE ALSO</A><DD>
-<DT><A HREF="#lbAR">AUTHORS</A><DD>
-<DT><A HREF="#lbAS">BUGS</A><DD>
+<DT><A HREF="#lbAQ">BACKWARD COMPATIBILITY</A><DD>
+<DT><A HREF="#lbAR">SEE ALSO</A><DD>
+<DT><A HREF="#lbAS">AUTHORS</A><DD>
+<DT><A HREF="#lbAT">BUGS</A><DD>
 </DL>
 <HR>
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 22:32:33 GMT, February 16, 2020
+Time: 21:32:02 GMT, May 01, 2020
 </BODY>
 </HTML>
