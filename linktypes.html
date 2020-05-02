@@ -183,8 +183,8 @@ or Frame Check Sequence fields, and with only the first ISU of the
 Destination Identifier.  For most packet types, ARCNET Trade Association
 draft standard <a href="http://www.arcnet.com/resources/ata8782.pdf">ATA
 878.2</a> is also used.  See also <a
-href="http://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a
-href="http://tools.ietf.org/html/rfc1201">RFC 1201</a>; for RFC 1051
+href="https://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a
+href="https://tools.ietf.org/html/rfc1201">RFC 1201</a>; for RFC 1051
 frames, ATA 878.2 is not used.
                 <tr valign=top>
 <td>LINKTYPE_SLIP<td>8<td>DLT_SLIP<td>
@@ -193,9 +193,9 @@ SLIP, encapsulated with
                 <tr valign=top>
 <td>LINKTYPE_PPP<td>9<td>DLT_PPP<td>
 PPP, as per
-<a href="http://tools.ietf.org/html/rfc1661">RFC 1661</a>
+<a href="https://tools.ietf.org/html/rfc1661">RFC 1661</a>
 and
-<a href="http://tools.ietf.org/html/rfc1662">RFC 1662</a>; if
+<a href="https://tools.ietf.org/html/rfc1662">RFC 1662</a>; if
 the first 2 bytes are 0xff and 0x03, it's PPP in HDLC-like
 framing, with the PPP header following those two bytes, otherwise it's
 PPP without framing, and the packet begins with the PPP header.  The
@@ -206,9 +206,9 @@ FDDI, as specified by ANSI INCITS 239-1994.
                 <tr valign=top>
 <td>LINKTYPE_PPP_HDLC<td>50<td>DLT_PPP_SERIAL<td>
 PPP in HDLC-like framing, as per
-<a href="http://tools.ietf.org/html/rfc1662"> RFC 1662</a>,
+<a href="https://tools.ietf.org/html/rfc1662"> RFC 1662</a>,
 or Cisco PPP with HDLC
-framing, as per <a href="http://tools.ietf.org/html/rfc1547#section-4.3.1">
+framing, as per <a href="https://tools.ietf.org/html/rfc1547#section-4.3.1">
 section 4.3.1 of RFC 1547</a>; the first byte will be 0xFF
 for PPP in HDLC-like framing, and will be 0x0F or 0x8F for Cisco PPP
 with HDLC framing.  The data in the frame is not octet-stuffed or
@@ -216,10 +216,10 @@ bit-stuffed.
                 <tr valign=top>
 <td>LINKTYPE_PPP_ETHER<td>51<td>DLT_PPP_ETHER<td>
 PPPoE; the packet begins with a PPPoE header, as per
-<a href="http://tools.ietf.org/html/rfc2516">RFC 2516</a>.
+<a href="https://tools.ietf.org/html/rfc2516">RFC 2516</a>.
                 <tr valign=top>
 <td>LINKTYPE_ATM_RFC1483<td>100<td>DLT_ATM_RFC1483<td>
-<a href="http://tools.ietf.org/html/rfc1483">RFC 1483</a>
+<a href="https://tools.ietf.org/html/rfc1483">RFC 1483</a>
 LLC/SNAP-encapsulated ATM; the packet begins with an
 <a href="https://www.iso.org/standard/30174.html">ISO 8802-2</a>
 (formerly known as IEEE 802.2) LLC header.
@@ -231,16 +231,16 @@ header.
                 <tr valign=top>
 <td>LINKTYPE_C_HDLC<td>104<td>DLT_C_HDLC<td>
 Cisco PPP with HDLC framing, as per
-<a href="http://tools.ietf.org/html/rfc1547#section-4.3.1">
+<a href="https://tools.ietf.org/html/rfc1547#section-4.3.1">
 section 4.3.1 of RFC 1547</a>.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_11<td>105<td>DLT_IEEE802_11<td>
-<a href="http://ieeexplore.ieee.org/document/7786995/">IEEE 802.11</a>
+<a href="https://ieeexplore.ieee.org/document/7786995/">IEEE 802.11</a>
 wireless LAN.
                 <tr valign=top>
 <td>LINKTYPE_FRELAY<td>107<td>DLT_FRELAY<td>
 Frame Relay LAPF frames, beginning with a <a
-href="http://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
+href="https://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
 Q.922</a> LAPF header starting with the address field, and without an
 FCS at the end of the frame.
                 <tr valign=top>
@@ -275,7 +275,7 @@ that structure is.)
 information</a> followed by an 802.11 header.
                 <tr valign=top>
 <td>LINKTYPE_IP_OVER_FC<td>122<td>DLT_IP_OVER_FC<td>
-<a href="http://tools.ietf.org/html/rfc2625">RFC 2625</a>
+<a href="https://tools.ietf.org/html/rfc2625">RFC 2625</a>
 IP-over-Fibre Channel, with the link-layer header being the
 Network_Header as described in that RFC.
                 <tr valign=top>
@@ -299,8 +299,8 @@ Trade Association draft standard
 <a href="http://www.arcnet.com/resources/ata8782.pdf">ATA 878.2</a> is
 also used; however, no exception frames are supplied, and reassembled
 frames, rather than fragments, are supplied.  See also <a
-href="http://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a
-href="http://tools.ietf.org/html/rfc1201">RFC 1201</a>; for RFC 1051
+href="https://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a
+href="https://tools.ietf.org/html/rfc1201">RFC 1201</a>; for RFC 1051
 frames, ATA 878.2 is not used.
                 <tr valign=top>
 <td>LINKTYPE_APPLE_IP_OVER_IEEE1394<td>138<td>DLT_APPLE_IP_OVER_IEEE1394<td>
@@ -309,28 +309,28 @@ IP-over-IEEE 1394 cooked header</a>.
                 <tr valign=top>
 <td>LINKTYPE_MTP2_WITH_PHDR<td>139<td>DLT_MTP2_WITH_PHDR<td>
 Signaling System 7 Message Transfer Part Level 2, as specified by <a
-href="http://www.itu.int/rec/T-REC-Q.703/en/">ITU-T Recommendation
+href="https://www.itu.int/rec/T-REC-Q.703/en/">ITU-T Recommendation
 Q.703</a>, preceded by a pseudo-header.
                 <tr valign=top>
 <td>LINKTYPE_MTP2<td>140<td>DLT_MTP2<td>
 Signaling System 7 Message Transfer Part Level 2, as specified by <a
-href="http://www.itu.int/rec/T-REC-Q.703/en/">ITU-T Recommendation
+href="https://www.itu.int/rec/T-REC-Q.703/en/">ITU-T Recommendation
 Q.703</a>.
                 <tr valign=top>
 <td>LINKTYPE_MTP3<td>141<td>DLT_MTP3<td>
 Signaling System 7 Message Transfer Part Level 3, as specified by <a
-href="http://www.itu.int/rec/T-REC-Q.704/en/">ITU-T Recommendation
+href="https://www.itu.int/rec/T-REC-Q.704/en/">ITU-T Recommendation
 Q.704</a>, with no MTP2 header preceding the MTP3 packet.
                 <tr valign=top>
 <td>LINKTYPE_SCCP<td>142<td>DLT_SCCP<td>
 Signaling System 7 Signalling Connection Control Part, as specified by
-<a href="http://www.itu.int/rec/T-REC-Q.711/en/">ITU-T Recommendation
+<a href="https://www.itu.int/rec/T-REC-Q.711/en/">ITU-T Recommendation
 Q.711</a>,
-<a href="http://www.itu.int/rec/T-REC-Q.712/en/">ITU-T Recommendation
+<a href="https://www.itu.int/rec/T-REC-Q.712/en/">ITU-T Recommendation
 Q.712</a>,
-<a href="http://www.itu.int/rec/T-REC-Q.713/en/">ITU-T Recommendation
+<a href="https://www.itu.int/rec/T-REC-Q.713/en/">ITU-T Recommendation
 Q.713</a>, and
-<a href="http://www.itu.int/rec/T-REC-Q.714/en/">ITU-T Recommendation
+<a href="https://www.itu.int/rec/T-REC-Q.714/en/">ITU-T Recommendation
 Q.714</a>, with no MTP3 or MTP2 headers preceding the SCCP packet.
                 <tr valign=top>
 <td>LINKTYPE_DOCSIS<td>143<td>DLT_DOCSIS<td>
@@ -345,7 +345,7 @@ Linux-IrDA packets, with a
 header</a>,
 with the payload for IrDA frames beginning with by the IrLAP header as
 defined by
-<a href="http://www.irda.org/displaycommon.cfm?an=1&amp;subarticlenbr=7#Data">IrDA
+<a href="https://www.irda.org/library-of-specs">IrDA
 Data Specifications</a>, including the IrDA Link Access Protocol
 specification.
                 <tr valign=top>
@@ -372,24 +372,24 @@ and 0x01 for outgoing.
                 <tr valign=top>
 <td>LINKTYPE_GPRS_LLC<td>169<td>DLT_GPRS_LLC<td>
 General Packet Radio Service Logical Link Control, as defined by <a
-href="http://www.3gpp.org/ftp/Specs/html-info/0464.htm">3GPP TS 04.64</a>.
+href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=224">3GPP TS 04.64</a>.
                 <tr valign=top>
 <td>LINKTYPE_GPF_T<td>170<td>DLT_GPF_T<td>
 Transparent-mapped generic framing procedure, as specified by
-<a href="http://www.itu.int/rec/T-REC-G.7041/en">ITU-T
+<a href="https://www.itu.int/rec/T-REC-G.7041/en">ITU-T
 Recommendation G.7041/Y.1303</a>.
                 <tr valign=top>
 <td>LINKTYPE_GPF_F<td>171<td>DLT_GPF_F<td>
 Frame-mapped generic framing procedure, as specified by
-<a href="http://www.itu.int/rec/T-REC-G.7041/en">ITU-T
+<a href="https://www.itu.int/rec/T-REC-G.7041/en">ITU-T
 Recommendation G.7041/Y.1303</a>.
                 <tr valign=top>
 <td>LINKTYPE_LINUX_LAPD<td>177<td>DLT_LINUX_LAPD<td>
 Link Access Procedures on the D Channel (LAPD) frames, as specified by
-<a href="http://www.itu.int/rec/T-REC-Q.920/en">ITU-T
+<a href="https://www.itu.int/rec/T-REC-Q.920/en">ITU-T
 Recommendation Q.920</a>
 and
-<a href="http://www.itu.int/rec/T-REC-Q.921/en">ITU-T
+<a href="https://www.itu.int/rec/T-REC-Q.921/en">ITU-T
 Recommendation Q.921</a>, captured via vISDN, with a
 <a href="linktypes/LINKTYPE_LINUX_LAPD.html">LINKTYPE_LINUX_LAPD
 header</a>, followed by the Q.921 frame, starting with the address
@@ -430,14 +430,14 @@ Per-Packet Information Header Specification</a>,  followed by a packet
 with the LINKTYPE_ value specified by the pph_dlt field of that header.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_WITHFCS<td>195<td>DLT_IEEE802_15_4_WITHFCS<td>
-<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE
+<a href="https://ieeexplore.ieee.org/document/7460875/">IEEE
 802.15.4</a> Low-Rate Wireless Networks, with each packet having the FCS
 at the end of the frame.
                 <tr valign=top>
 <td>LINKTYPE_SITA<td>196<td>DLT_SITA<td>
 Various link-layer types, with
 <a href="linktypes/LINKTYPE_SITA.html">a pseudo-header</a>,
-for <a href="http://www.sita.aero">SITA</a>.
+for <a href="https://www.sita.aero">SITA</a>.
                 <tr valign=top>
 <td>LINKTYPE_ERF<td>197<td>DLT_ERF<td>
 Various link-layer types, with a pseudo-header, for Endace DAG cards;
@@ -463,18 +463,18 @@ containing a type indicator.
                 <tr valign=top>
 <td>LINKTYPE_LAPD<td>203<td>DLT_LAPD<td>
 Link Access Procedures on the D Channel (LAPD) frames, as specified by
-<a href="http://www.itu.int/rec/T-REC-Q.920/en">ITU-T
+<a href="https://www.itu.int/rec/T-REC-Q.920/en">ITU-T
 Recommendation Q.920</a>
 and
-<a href="http://www.itu.int/rec/T-REC-Q.921/en">ITU-T
+<a href="https://www.itu.int/rec/T-REC-Q.921/en">ITU-T
 Recommendation Q.921</a>, starting with the address field, with no
 pseudo-header.
                 <tr valign=top>
 <td>LINKTYPE_PPP_WITH_DIR<td>204<td>DLT_PPP_WITH_DIR<td>
 PPP, as per
-<a href="http://tools.ietf.org/html/rfc1661">RFC 1661</a>
+<a href="https://tools.ietf.org/html/rfc1661">RFC 1661</a>
 and
-<a href="http://tools.ietf.org/html/rfc1662">RFC 1662</a>,
+<a href="https://tools.ietf.org/html/rfc1662">RFC 1662</a>,
 preceded with a one-byte pseudo-header with a zero value meaning
 "received by this host" and a non-zero value meaning "sent by this
 host"; if the first 2 bytes are 0xff and 0x03, it's PPP in HDLC-like
@@ -484,7 +484,7 @@ data in the frame is not octet-stuffed or bit-stuffed.
                 <tr valign=top>
 <td>LINKTYPE_C_HDLC_WITH_DIR<td>205<td>DLT_C_HDLC_WITH_DIR<td>
 Cisco PPP with HDLC framing, as per
-<a href="http://tools.ietf.org/html/rfc1547#section-4.3.1">
+<a href="https://tools.ietf.org/html/rfc1547#section-4.3.1">
 section 4.3.1 of RFC 1547</a>,
 preceded with a one-byte pseudo-header with a zero value meaning
 "received by this host" and a non-zero value meaning "sent by this
@@ -494,13 +494,13 @@ host".
 Frame Relay LAPF frames, beginning with a one-byte pseudo-header with a
 zero value meaning "received by this host" (DCE->DTE) and a non-zero
 value meaning "sent by this host" (DTE->DCE), followed by an <a
-href="http://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
+href="https://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
 Q.922</a> LAPF header starting with the address field, and without an
 FCS at the end of the frame.
                 <tr valign=top>
 <td>LINKTYPE_LAPB_WITH_DIR<td>207<td>DLT_LAPB_WITH_DIR<td>
 Link Access Procedure, Balanced (LAPB), as specified by
-<a href="http://www.itu.int/rec/T-REC-X.25/en">ITU-T
+<a href="https://www.itu.int/rec/T-REC-X.25/en">ITU-T
 Recommendation X.25</a>, preceded with a one-byte pseudo-header with a
 zero value meaning "received by this host" (DCE->DTE) and a non-zero
 value meaning "sent by this host" (DTE->DCE).
@@ -508,13 +508,13 @@ value meaning "sent by this host" (DTE->DCE).
 <td>LINKTYPE_IPMB_LINUX<td>209<td>DLT_IPMB_LINUX<td>
 <a href="https://www.intel.com/content/www/us/en/products/docs/servers/ipmi/ipmi-second-gen-interface-spec-v2-rev1-1.html">IPMB</a>
 over an
-<a href="http://www.nxp.com/documents/user_manual/UM10204.pdf">I2C</a>
+<a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">I2C</a>
 circuit, with
 <a href="linktypes/LINKTYPE_IPMB_LINUX.html">a Linux-specific
 pseudo-header</a>.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_NONASK_PHY<td>215<td>DLT_IEEE802_15_4_NONASK_PHY<td>
-<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE 802.15.4</a>
+<a href="https://ieeexplore.ieee.org/document/7460875/">IEEE 802.15.4</a>
 Low-Rate Wireless Networks, with each packet having the FCS at the end
 of the frame, and with the PHY-level data for the O-QPSK, BPSK, GFSK,
 MSK, and RCC DSS BPSK PHYs (4 octets of 0 as preamble, one octet of SFD,
@@ -564,21 +564,21 @@ Raw IPv4; the packet begins with an IPv4 header.
 Raw IPv6; the packet begins with an IPv6 header.
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_NOFCS<td>230<td>DLT_IEEE802_15_4_NOFCS<td>
-<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE 802.15.4</a>
+<a href="https://ieeexplore.ieee.org/document/7460875/">IEEE 802.15.4</a>
 Low-Rate Wireless Network, without the FCS at the end of the frame.
                 <tr valign=top>
 <td>LINKTYPE_DBUS<td>231<td>DLT_DBUS<td>
 Raw <a href="http://www.freedesktop.org/wiki/Software/dbus">D-Bus</a>
-<a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages">
+<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages">
 messages</a>, starting with the endianness flag, followed by the message
 type, etc., but without the
-<a href="http://dbus.freedesktop.org/doc/dbus-specification.html#auth-protocol">
+<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#auth-protocol">
 authentication handshake</a> before the message sequence.
                 <tr valign=top>
 <td>LINKTYPE_DVB_CI<td>235<td>DLT_DVB_CI<td>
 DVB-CI (DVB Common Interface for communication between a PC Card module
 and a DVB receiver), with the message format specified by
-<a href="http://www.kaiser.cx/pcap-dvbci.html">the PCAP format for
+<a href="https://www.kaiser.cx/pcap-dvbci.html">the PCAP format for
 DVB-CI specification</a>.
                 <tr valign=top>
 <td>LINKTYPE_MUX27010<td>236<td>DLT_MUX27010<td>
@@ -610,11 +610,11 @@ and ending with the FCS.
                 <tr valign=top>
 <td>LINKTYPE_IPOIB<td>242<td>DLT_IPOIB<td>
 IP-over-InfiniBand, as specified by <a
-href="http://tools.ietf.org/html/rfc4391#section-6">RFC 4391 section 6</a>.
+href="https://tools.ietf.org/html/rfc4391#section-6">RFC 4391 section 6</a>.
                 <tr valign=top>
 <td>LINKTYPE_MPEG_2_TS<td>243<td>DLT_MPEG_2_TS<td>
 MPEG-2 Transport Stream transport packets, as specified by ISO
-13818-1/<a href="http://www.itu.int/rec/T-REC-H.222.0">ITU-T
+13818-1/<a href="https://www.itu.int/rec/T-REC-H.222.0">ITU-T
 Recommendation H.222.0</a> (see table 2-2 of section 2.4.3.2 "Transport
 Stream packet layer").
                 <tr valign=top>
@@ -624,10 +624,10 @@ UMTS Iub/Iur-over-ATM and Iub/Iur-over-IP format as used by their ng40
 protocol tester</a>, followed by frames for the Frame Protocol as specified by
 <a href="http://www.3gpp.org/ftp/Specs/html-info/25427.htm">3GPP TS
 25.427</a> for dedicated channels and <a
-href="http://www.3gpp.org/ftp/Specs/html-info/25435.htm">3GPP TS
+href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=1207">3GPP TS
 25.435</a> for common/shared channels in the case of ATM AAL2 or UDP
 traffic, by SSCOP packets as specified by <a
-href="http://www.itu.int/rec/T-REC-Q.2110-199407-I/en">ITU-T
+href="https://www.itu.int/rec/T-REC-Q.2110-199407-I/en">ITU-T
 Recommendation Q.2110</a> for ATM AAL5 traffic, and by NBAP packets for
 SCTP traffic.
                 <tr valign=top>
@@ -646,11 +646,11 @@ Specifications</a>.
                 <tr valign=top>
 <td>LINKTYPE_SCTP<td>248<td>DLT_SCTP<td>
 SCTP packets, as defined by <a
-href="http://tools.ietf.org/html/rfc4960">RFC 4960</a>, with no
+href="https://tools.ietf.org/html/rfc4960">RFC 4960</a>, with no
 lower-level protocols such as IPv4 or IPv6.
                 <tr valign=top>
 <td>LINKTYPE_USBPCAP<td>249<td>DLT_USBPCAP<td>
-USB packets, beginning with <a href="http://desowin.org/usbpcap/captureformat.html">a USBPcap
+USB packets, beginning with <a href="https://desowin.org/usbpcap/captureformat.html">a USBPcap
 header</a>.
                 <tr valign=top>
 <td>LINKTYPE_RTAC_SERIAL<td>250<td>DLT_RTAC_SERIAL<td>
@@ -694,7 +694,7 @@ encapsulation</a>.
 Ethernet-over-passive-optical-network packets, starting with the last 6
 octets of the modified preamble as specified by 65.1.3.2 "Transmit" in
 Clause 65 of Section 5 of
-<a href="http://ieeexplore.ieee.org/document/7428776/">IEEE
+<a href="https://ieeexplore.ieee.org/document/7428776/">IEEE
 802.3</a>, followed immediately by an Ethernet frame.
                 <tr valign=top>
 <td>LINKTYPE_IPMI_HPM_2<td>260<td>DLT_IPMI_HPM_2<td>
@@ -708,14 +708,14 @@ the Trace Data Blocks.
 <td>LINKTYPE_ZWAVE_R1_R2</td><td>261</td><td>DLT_ZWAVE_R1_R2</td><td>
 <a href="linktypes/LINKTYPE_ZWAVE_R1_R2.html">Z-Wave RF profile R1 and
 R2 packets</a>, as specified by <a
-href="http://www.itu.int/rec/T-REC-G.9959/en">ITU-T Recommendation
+href="https://www.itu.int/rec/T-REC-G.9959/en">ITU-T Recommendation
 G.9959</a>, with some MAC layer fields moved.
 </td>
                 <tr valign=top>
 <td>LINKTYPE_ZWAVE_R3</td><td>262</td><td>DLT_ZWAVE_R3</td><td>
 <a href="linktypes/LINKTYPE_ZWAVE_R3.html">Z-Wave RF profile R3
 packets</a>, as specified by <a
-href="http://www.itu.int/rec/T-REC-G.9959/en">ITU-T Recommendation
+href="https://www.itu.int/rec/T-REC-G.9959/en">ITU-T Recommendation
 G.9959</a>, with some MAC layer fields moved.
 </td>
                 <tr valign=top>
@@ -730,7 +730,7 @@ packet structure captures.
 Messages between ISO 14443 contactless smartcards (Proximity Integrated
 Circuit Card, PICC) and card readers (Proximity Coupling Device, PCD),
 with the message format specified by <a
-href="http://www.kaiser.cx/pcap-iso14443.html">the PCAP format for
+href="https://www.kaiser.cx/pcap-iso14443.html">the PCAP format for
 ISO14443 specification</a>.
 </td>
 </tr>
@@ -759,7 +759,7 @@ information units (PIUs) as the payload.
 <a href="https://github.com/eriknl/LoRaTap/blob/master/README.md">LoRaTap
 pseudo-header</a>, followed by the payload, which is typically the
 PHYPayload from the <a
-href="https://www.lora-alliance.org/lorawan-for-developers">LoRaWan
+href="https://lora-alliance.org/lorawan-for-developers">LoRaWan
 specification</a>.
 </td>
                 <tr valign=top>
@@ -782,7 +782,7 @@ pseudo-header giving metadata about the packet</a>.
                 <tr valign=top>
 <td>LINKTYPE_ETHERNET_MPACKET<td>274<td>DLT_ETHERNET_MPACKET<td>
 mPackets, as specified by
-<a href="http://ieeexplore.ieee.org/document/7900321/">IEEE 802.3br</a>
+<a href="https://ieeexplore.ieee.org/document/7900321/">IEEE 802.3br</a>
 Figure 99-4, starting with the preamble and always ending with a CRC
 field.
 </td>
@@ -808,7 +808,7 @@ Capture and Replay (EBHSCR) format</a>.
 </tr>
                 <tr valign=top>
 <td>LINKTYPE_VPP_DISPATCH<td>280<td>DLT_VPP_DISPATCH<td>
-Records in traces from the <a href="http://fd.io">http://fd.io</a> VPP
+Records in traces from the <a href="https://fd.io">http://fd.io</a> VPP
 graph dispatch tracer, in the <a
 href="https://fdio-vpp.readthedocs.io/en/latest/gettingstarted/developers/vnet.html#graph-dispatcher-pcap-tracing">the
 graph dispatcher trace format</a>.
@@ -828,7 +828,7 @@ before the destination address in the Ethernet header.
 </tr>
                 <tr valign=top>
 <td>LINKTYPE_IEEE802_15_4_TAP<td>283<td>DLT_IEEE802_15_4_TAP<td>
-<a href="http://ieeexplore.ieee.org/document/7460875/">IEEE
+<a href="https://ieeexplore.ieee.org/document/7460875/">IEEE
 802.15.4</a> Low-Rate Wireless Networks, with a
 <a
 href="https://github.com/jkcko/ieee802.15.4-tap/blob/master/IEEE%20802.15.4%20TAP%20Link%20Type%20Specification.pdf">pseudo-header
@@ -875,7 +875,7 @@ Universal Serial Bus Specification Revision 2.0</a>.
 <td>LINKTYPE_ATSC_ALP<td>289<td>DLT_ATSC_ALP<td>
 ATSC Link-Layer Protocol frames, as described in section 5 of the A/330
 Link-Layer Protocol specification, found at
-<a href="https://www.atsc.org/standards/atsc-3-0-standards/">the
+<a href="https://www.atsc.org/atsc-documents/type/3-0-standards/">the
 ATSC 3.0 standards page</a>, beginning with a Base Header.
 </tr>
               </table>
