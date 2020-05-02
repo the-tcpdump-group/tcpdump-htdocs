@@ -58,35 +58,9 @@ s/^using the manual pages.<BR>$/using the manual pages from "The Tcpdump Group" 
 ENDOFFILE
 
 	# Convert links to non-local pages to plain text.
-	while read mansection mantopic; do
+	printNonLocalManPages | while read mansection mantopic; do
 		echo "s@<A HREF=\"$MAN2HTML_PFX?${mansection}+${mantopic}\">$mantopic</A>@$mantopic@g"
-	done <<ENDOFLIST
-4P	tcp
-4P	udp
-4P	ip
-4	pf
-8	pfconfig
-2	select
-2	poll
-1	autoconf
-8	usermod
-3	strerror
-1	kill
-1	stty
-1	ps
-3	strftime
-4	bpf
-4P	nit
-2	epoll_wait
-2	kqueue
-2	socket
-1	date
-3	isatty
-3	fileno
-1	ECT
-2	ioctl
-7	packetfilter
-ENDOFLIST
+	done
 
 	# Fixup links to local pages, part 1.
 	while read mantopic manfile; do
@@ -192,6 +166,37 @@ pcap_strerror
 pcap_tstamp_type_name_to_val
 pcap_tstamp_type_val_to_description				pcap_tstamp_type_val_to_name
 pcap_tstamp_type_val_to_name
+ENDOFLIST
+}
+
+printNonLocalManPages()
+{
+	cat <<ENDOFLIST
+4P	tcp
+4P	udp
+4P	ip
+4	pf
+8	pfconfig
+2	select
+2	poll
+1	autoconf
+8	usermod
+3	strerror
+1	kill
+1	stty
+1	ps
+3	strftime
+4	bpf
+4P	nit
+2	epoll_wait
+2	kqueue
+2	socket
+1	date
+3	isatty
+3	fileno
+1	ECT
+2	ioctl
+7	packetfilter
 ENDOFLIST
 }
 
