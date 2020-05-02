@@ -24,23 +24,24 @@ DESCRIPTION
        For  kevent(), one EVFILT_TIMER filter per selectable descriptor can be
        used, rather than using  the  timeout  argument  to  kevent();  if  the
        EVFILT_TIMER  event  for  a particular selectable descriptor signals an
-       event, pcap_dispatch(2) should be called for the corresponding pcap_t.
+       event, pcap_dispatch(3PCAP) should  be  called  for  the  corresponding
+       pcap_t.
 
-       On Linux systems with timerfd_create(2), one timer  object  created  by
-       timerfd_create()  per  selectable  descriptor  can be used, rather than
-       using the timeout argument to epoll_wait(); if the timer object  for  a
-       particular  selectable  descriptor  signals  an event, pcap_dispatch(2)
+       On  Linux  systems  with timerfd_create(2), one timer object created by
+       timerfd_create() per selectable descriptor can  be  used,  rather  than
+       using  the  timeout argument to epoll_wait(); if the timer object for a
+       particular selectable descriptor signals an event, pcap_dispatch(3PCAP)
        should be called for the corresponding pcap_t.
 
-       Otherwise, a timeout value no larger than the smallest of all  timeouts
-       returned  by  pcap_get_required_select_timeout() for devices from which
-       packets will be captured and any other timeouts to be used in the  call
+       Otherwise,  a timeout value no larger than the smallest of all timeouts
+       returned by pcap_get_required_select_timeout() for devices  from  which
+       packets  will be captured and any other timeouts to be used in the call
        should be used as the timeout for the call, and, when the call returns,
-       pcap_dispatch(2) should be called for all pcap_ts for which a  non-NULL
-       timeout  was  returned,  regardless of whether it's indicated as having
-       anything to read from it or not.
+       pcap_dispatch(3PCAP)  should be called for all pcap_ts for which a non-
+       NULL timeout was returned, regardless of whether it's indicated as hav-
+       ing anything to read from it or not.
 
-       All devices with a non-NULL timeout must be put  in  non-blocking  mode
+       All  devices  with  a non-NULL timeout must be put in non-blocking mode
        with pcap_setnonblock(3PCAP).
 
        Note that a device on which a read can be done without blocking may, on
@@ -51,25 +52,25 @@ DESCRIPTION
        pcap_get_required_select_timeout() is not available on Windows.
 
 RETURN VALUE
-       A pointer to a struct timeval is returned if the timeout  is  required;
+       A  pointer  to a struct timeval is returned if the timeout is required;
        otherwise NULL is returned.
 
 BACKWARD COMPATIBILITY
-       This  function  became available in libpcap release 1.9.0.  In previous
-       releases, select(), poll(), epoll_wait(), and kevent() cannot  be  used
+       This function became available in libpcap release 1.9.0.   In  previous
+       releases,  select(),  poll(), epoll_wait(), and kevent() cannot be used
        on any capture source for which pcap_get_selectable_fd() returns -1.
 
-       In  libpcap release 1.10.0 and later, the timeout value can change from
-       call to call,  so  pcap_get_required_select_timeout()  must  be  called
-       before  each  call  to select(), poll(), epoll_wait(), or kevent(), and
-       the new value must be used to calculate timeouts for  the  call.   Code
-       that  does  that  will  also  work with libpcap 1.9.x releases, so code
-       using pcap_get_required_select_timeout() should be changed to  call  it
-       for  each  call  to select(), poll(), epoll_wait(), or kevent() even if
+       In libpcap release 1.10.0 and later, the timeout value can change  from
+       call  to  call,  so  pcap_get_required_select_timeout()  must be called
+       before each call to select(), poll(), epoll_wait(),  or  kevent(),  and
+       the  new  value  must be used to calculate timeouts for the call.  Code
+       that does that will also work with  libpcap  1.9.x  releases,  so  code
+       using  pcap_get_required_select_timeout()  should be changed to call it
+       for each call to select(), poll(), epoll_wait(), or  kevent()  even  if
        the code must also work with libpcap 1.9.x.
 
 SEE ALSO
-       pcap(3PCAP),   pcap_get_selectable_fd(3PCAP),    select(2),    poll(2),
+       pcap(3PCAP),    pcap_get_selectable_fd(3PCAP),    select(2),   poll(2),
        epoll_wait(2), kqueue(2)
 
                                 29 JanuPCAP_GET_REQUIRED_SELECT_TIMEOUT(3PCAP)
