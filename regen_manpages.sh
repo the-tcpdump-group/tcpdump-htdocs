@@ -197,6 +197,8 @@ printNonLocalManPages()
 1	ECT
 2	ioctl
 7	packetfilter
+2	kevent
+2	timerfd_create
 ENDOFLIST
 }
 
