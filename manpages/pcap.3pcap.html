@@ -396,15 +396,11 @@ setuid to root.
 
 <DD>
 You must be root or the application capturing packets must be installed
-setuid to root (unless your distribution has a kernel
+setuid to root, unless your distribution has a kernel
 that supports capability bits such as CAP_NET_RAW and code to allow
 those capability bits to be given to particular accounts and to cause
 those bits to be set on a user's initial processes when they log in, in
-which case you  must have CAP_NET_RAW in order to capture and
-CAP_NET_ADMIN to enumerate network devices with, for example, the
-<B>-D</B>
-
-flag).
+which case you must have CAP_NET_RAW in order to capture.
 <DT><B>Under ULTRIX and Digital UNIX/Tru64 UNIX:</B>
 
 <DD>
@@ -1506,6 +1502,6 @@ in the libpcap source tree root.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 21:32:02 GMT, May 01, 2020
+Time: 23:30:46 GMT, May 16, 2020
 </BODY>
 </HTML>

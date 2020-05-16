@@ -204,10 +204,12 @@ OPTIONS
 
        -i interface
        --interface=interface
-              Listen  on interface.  If unspecified, tcpdump searches the sys-
-              tem interface list for the lowest numbered, configured up inter-
-              face  (excluding  loopback), which may turn out to be, for exam-
-              ple, ``eth0''.
+              Listen,  report the list of link-layer types, report the list of
+              time stamp types, or report the results of  compiling  a  filter
+              expression  on  interface.  If unspecified, tcpdump searches the
+              system interface list for the  lowest  numbered,  configured  up
+              interface  (excluding  loopback),  which may turn out to be, for
+              example, ``eth0''.
 
               On Linux systems with 2.2 or later kernels, an  interface  argu-
               ment  of  ``any'' can be used to capture packets from all inter-
