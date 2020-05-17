@@ -6,7 +6,9 @@
 # This script has been tested to work on the following systems:
 #
 # * Ubuntu Linux 18.04
+# * Ubuntu Linux 20.04
 # * Fedora Linux 30
+# * Fedora Linux 32
 # * Devuan Linux
 #
 

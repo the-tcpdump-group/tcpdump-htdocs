@@ -9,9 +9,16 @@
 #
 # This script has been tested to work on the following Linux systems:
 #
-# * Fedora 24, 25, 28, 30
-# * Ubuntu 16.04, 18.04
+# * Fedora 24, 25, 28, 30, 32
+# * Ubuntu 16.04, 18.04, 20.04
 #
+# Please mind that the generated contents of the .txt files may change much
+# more than respective source man pages, sometimes even when the source man
+# pages didn't change at all. Specifically, the amount of whitespace and
+# hyphenation may fluctuate for no obvious reason when this script runs on a
+# different distribution or a different version of the same distribution or
+# even on the same system as the previous time! Do not worry about it as long
+# as the source man pages are the newest you can get from git.
 
 readonly MAN2HTML_PFX=/cgi-bin/man/man2html
 readonly WEBSITE_PFX=/manpages
@@ -221,7 +228,7 @@ produceHTML()
 		return
 	}
 	git diff $outfile | tail --lines +5 | egrep '^[-+]' | egrep -q -v '^[-+]Time: ' || {
-		git checkout $outfile
+		git checkout --quiet $outfile
 		return
 	}
 	echo "Updated: $outfile"
