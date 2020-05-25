@@ -147,14 +147,16 @@ OPTIONS
                      calls.  This  feature  only  available  if  tcpslice  was
                      linked  against  Aymeric  Moizard's  GNU oSIP library; if
                      not,  install  the  latest  version  of   libosip2   from
-                     http://www.osip.org/ and recompile tcpslice.
+                     https://www.gnu.org/software/osip/   and  recompile  tcp-
+                     slice.
 
-              h323   track  H.323-based  VoIP calls, which may enable tracking
-                     of TCP connections but only the ones that are related  to
+              h323   track H.323-based VoIP calls, which may  enable  tracking
+                     of  TCP connections but only the ones that are related to
                      H.323 calls.  This feature only available if tcpslice was
-                     linked against Objective Systems' Open H.323 library  for
-                     C;  if not, install the latest version of libooh323c from
-                     http://ooh323c.sourceforge.net/ and recompile tcpslice.
+                     linked  against Objective Systems' Open H.323 library for
+                     C; if not, install the latest version of libooh323c  from
+                     https://sourceforge.net/projects/ooh323c/  and  recompile
+                     tcpslice.
 
               Session tracking altogether is only available  if  tcpslice  was
               linked against a recent version (>1.20) of Rafal Wojtczuk's Net-
@@ -183,7 +185,7 @@ AUTHORS
        Vern Paxson, of Lawrence Berkeley Laboratory, University of California,
        Berkeley, CA.
 
-       It is currently being maintained by tcpdump.org.
+       It is currently being maintained by The Tcpdump Group.
 
        The current version is available at:
 
@@ -191,7 +193,7 @@ AUTHORS
 
        The original distribution is available via anonymous ftp:
 
-              ftp://ftp.ee.lbl.gov/old/tcpslice-1.2a1.tar.gz
+              ftp://ftp.ee.lbl.gov/old/tcpslice-1.2a2.tar.gz
 
 BUGS
        Please send problems, bugs, questions, desirable enhancements, etc. to:
@@ -201,7 +203,7 @@ BUGS
        Please  send source code contributions as git pull requests through the
        project page above.
 
-       An input filename that beings with a digit or a  `+'  can  be  confused
+       An input filename that begins with a digit or a  `+'  can  be  confused
        with  a start/end time.  Such filenames can be specified with a leading
        `./';   for   example,   specify   the    file    `04Jul76.trace'    as
        `./04Jul76.trace'.
