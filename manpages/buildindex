@@ -1,0 +1,13 @@
+#!/bin/sh
+
+OUT=index.html.new
+sed -n -e'1,/%START-HERE%/p' index.html >$OUT
+for f in *.html
+do
+        basename=$(basename $f .html)
+        echo "<li> <a href=\"$f\">$basename</a> (<a href=\"$basename.txt\">txt</a>) </li>" >>$OUT
+done
+sed -e'1,/%END-HERE%/d' index.html   >>$OUT
+mv $OUT index.html
+
+
