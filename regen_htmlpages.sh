@@ -72,7 +72,7 @@ substitute_page_title()
 # before committing the changes and deploying them to the web-server.
 rewrite_URLs()
 {
-	if [ "${1:?}" = "${1#linktypes/}" ]; then
+	if [ "${1:?}" = "${1#linktypes/}" ] && [ "${1:?}" = "${1#manpages/}" ]; then
 		cat
 	else
 		sed 's#<link href="style.css#<link href="../style.css#' | \
