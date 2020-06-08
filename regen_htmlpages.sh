@@ -198,7 +198,7 @@ file_differs_from_repository()
 regenerate_pages()
 {
 	local f_in f_out
-	for f_in in htmlsrc/[^_]*.html htmlsrc/linktypes/*.html; do
+	for f_in in htmlsrc/[^_]*.html htmlsrc/linktypes/*.html htmlsrc/manpages/index.html; do
 		f_out="${f_in#htmlsrc/}"
 		file_exists_in_repository "$f_in" || echo "Warning: input file $f_in does not exist in git" >&2
 		if file_exists_in_repository "$f_out"; then
