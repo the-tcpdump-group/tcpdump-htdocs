@@ -17,12 +17,18 @@ DESCRIPTION
        takes  it  out  of ``non-blocking'' mode, depending on whether the non-
        block argument is non-zero or zero.  It has no effect on ``savefiles''.
        If  there  is  an error, PCAP_ERROR is returned and errbuf is filled in
-       with an appropriate error message; otherwise, 0 is returned.  In ``non-
-       blocking''  mode,  an  attempt to read from the capture descriptor with
-       pcap_dispatch(3PCAP) will, if no packets are currently available to  be
-       read,  return 0 immediately rather than blocking waiting for packets to
-       arrive.  pcap_loop(3PCAP) and pcap_next(3PCAP) will not work in  ``non-
-       blocking'' mode.
+       with an appropriate error message; otherwise, 0 is returned.
+
+       In ``non-blocking'' mode, an attempt to read from the capture  descrip-
+       tor with pcap_dispatch(3PCAP) and pcap_next_ex(3PCAP) will, if no pack-
+       ets are currently available to be read,  return  0  immediately  rather
+       than blocking waiting for packets to arrive.
+
+       pcap_loop(3PCAP)  will loop forever, consuming CPU time when no packets
+       are  currently  available;  pacp_dispatch()  should  be  used  instead.
+       pcap_next(3PCAP)  will  return  NULL  if there are no packets currently
+       available  to  read;  this  is  indistinguishable  from  an  error,  so
+       pcap_next_ex() should be used instead.
 
        When   first   activated   with  pcap_activate(3PCAP)  or  opened  with
        pcap_open_live(3PCAP),  a  capture  handle  is  not  in  ``non-blocking

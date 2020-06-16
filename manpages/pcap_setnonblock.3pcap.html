@@ -40,19 +40,34 @@ is returned and
 
 is filled in with an appropriate error message; otherwise, 0 is
 returned.
+<P>
+
 In
 ``non-blocking'' mode, an attempt to read from the capture descriptor
 with
 <A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP)
 
+and
+<A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP)
+
 will, if no packets are currently available to be read, return 0
 immediately rather than blocking waiting for packets to arrive.
+<P>
+
 <A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_loop</B></A>(3PCAP)
 
-and
+will loop forever, consuming CPU time when no packets are currently
+available;
+<B>pacp_dispatch</B>()
+
+should be used instead.
 <A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next</B></A>(3PCAP)
 
-will not work in ``non-blocking'' mode.
+will return NULL if there are no packets currently available to read;
+this is indistinguishable from an error, so
+<B>pcap_next_ex</B>()
+
+should be used instead.
 <P>
 
 When first activated with
@@ -102,6 +117,6 @@ chars.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 23:40:02 GMT, January 10, 2020
+Time: 22:50:14 GMT, June 16, 2020
 </BODY>
 </HTML>

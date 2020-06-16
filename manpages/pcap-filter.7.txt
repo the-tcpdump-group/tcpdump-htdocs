@@ -260,8 +260,8 @@ DESCRIPTION
 
        ether proto protocol
               True if the packet is of ether type protocol.  Protocol can be a
-              number or one of the names ip, ip6, arp, rarp, atalk, aarp, dec-
-              net,  sca,  lat,  mopdl, moprc, iso, stp, ipx, or netbeui.  Note
+              number or one of the names aarp, arp, atalk,  decnet,  ip,  ip6,
+              ipx,  iso,  lat,  mopdl, moprc, netbeui, rarp, sca or stp.  Note
               these identifiers are also keywords  and  must  be  escaped  via
               backslash (\).
 
