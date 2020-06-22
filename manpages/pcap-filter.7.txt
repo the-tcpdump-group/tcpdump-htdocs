@@ -14,7 +14,7 @@ DESCRIPTION
        ifiers.  There are three different kinds of qualifier:
 
        type   type qualifiers say what kind of thing the  id  name  or  number
-              refers  to.   Possible types are host, net , port and portrange.
+              refers  to.   Possible  types are host, net, port and portrange.
               E.g., `host foo', `net 128.3', `port 20', `portrange 6000-6008'.
               If there is no type qualifier, host is assumed.
 
@@ -660,8 +660,8 @@ DESCRIPTION
               Some  offsets  and field values may be expressed as names rather
               than as numeric values.  The  following  protocol  header  field
               offsets  are  available:  icmptype  (ICMP type field), icmp6type
-              (ICMP v6 type field) icmpcode (ICMP code field), icmp6code (ICMP
-              v6 code field), and tcpflags (TCP flags field).
+              (ICMPv6 type  field),  icmpcode  (ICMP  code  field),  icmp6code
+              (ICMPv6 code field) and tcpflags (TCP flags field).
 
               The following ICMP type field values are available: icmp-echore-
               ply, icmp-unreach, icmp-sourcequench, icmp-redirect,  icmp-echo,
@@ -775,4 +775,4 @@ BUGS
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                10 January 2020                 PCAP-FILTER(7)
+                                 20 June 2020                   PCAP-FILTER(7)
