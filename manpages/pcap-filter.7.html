@@ -1129,6 +1129,18 @@ TCP conversation that involves a non-local host.
 
 <P>
 
+To select the TCP packets with flags RST and ACK both set.
+(i.e. select only the RST and ACK flags in the flags field, and if the result
+is &quot;RST and ACK both set&quot;, match)
+<DL COMPACT><DT><DD>
+<PRE>
+<B>tcp[tcpflags] &amp; (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)</B>
+</PRE>
+
+</DL>
+
+<P>
+
 To select all IPv4 HTTP packets to and from port 80, i.e. print only
 packets that contain data, not, for example, SYN and FIN packets and
 ACK-only packets.  (IPv6 is left as an exercise for the reader.)
@@ -1218,6 +1230,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 20:51:45 GMT, June 22, 2020
+Time: 11:58:22 GMT, June 27, 2020
 </BODY>
 </HTML>
