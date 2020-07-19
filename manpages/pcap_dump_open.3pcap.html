@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of PCAP_DUMP_OPEN</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 23 August 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 July 2020<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -36,6 +36,8 @@ the same format as those used by
 and
 <B><A HREF="/manpages/tcpslice.1.html">tcpslice</A></B>(1).
 
+If the file does not exist, it will be created; if the file exists, it
+will be truncated and overwritten.
 The name &quot;-&quot; is a synonym
 for
 <B>stdout</B>.
@@ -50,6 +52,9 @@ is called to write data to an existing open stream
 this stream will be closed by a subsequent call to
 <A HREF='/manpages/pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP).
 
+The stream is assumped to be at the beginning of a file that has been
+newly created or truncated, so that writes will start at the beginning
+of the file.
 Note that on Windows, that stream should be opened in binary mode.
 <P>
 
@@ -80,10 +85,9 @@ are used as the link-layer type and snapshot length of the output file.
 is like
 <B>pcap_dump_open</B>()
 
-but does not create the file if it does not exist and, if it does
-already exist, and is a pcap file with the same byte order as the host
-opening the file, and has the same time stamp precision, link-layer
-header type, and snapshot length as
+but, if the file already exists, and is a pcap file with the same byte
+order as the host opening the file, and has the same time stamp
+precision, link-layer header type, and snapshot length as
 <I>p</I>,
 
 it will write new packets at the end of the file.
@@ -134,6 +138,6 @@ savefile.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 22:32:35 GMT, February 16, 2020
+Time: 16:40:31 GMT, July 19, 2020
 </BODY>
 </HTML>
