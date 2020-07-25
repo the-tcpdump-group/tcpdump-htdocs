@@ -8,7 +8,7 @@ Section: User Commands  (1)<BR>Updated: 28 May 2020<BR><A HREF="#index">Index</A
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-tcpslice - extract pieces of and/or merge together tcpdump files
+tcpslice - extract pieces of and/or merge together pcap files
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
@@ -68,7 +68,8 @@ tcpslice - extract pieces of and/or merge together tcpdump files
 <I>Tcpslice</I>
 
 is a program for extracting portions of packet-trace files generated using
-<I><A HREF="/manpages/tcpdump.1.html">tcpdump</A>(1)</I>'s
+<B><A HREF="/manpages/tcpdump.1.html">tcpdump</A></B>(1)'s
+
 <B>-w</B>
 
 flag.
@@ -122,7 +123,7 @@ for PDT times, but when displaying times and interpreting times symbolically
 as discussed below,
 <I>tcpslice</I>
 
-uses the local timezone, regardless of the timezone in which the <I>tcpdump</I>
+uses the local timezone, regardless of the timezone in which the pcap
 file was generated.  The daylight-savings setting used is that which is
 appropriate for the local timezone at the date in question.  For example,
 times associated with summer months will usually include daylight-savings
@@ -280,7 +281,7 @@ option to suppress any discarding of duplicates.
 <P>
 
 If any of
-<B>-R,</B>
+<B>-R</B>,
 
 <B>-r</B>
 
@@ -303,7 +304,7 @@ Do not discard duplicate packets seen when merging multiple trace files.
 Dump the start and end times specified by the given range and
 exit.  This option is useful for checking that the given range actually
 specifies the times you think it does.  If one of
-<B>-R,</B>
+<B>-R</B>,
 
 <B>-r</B>
 
@@ -311,7 +312,7 @@ or
 <B>-t</B>
 
 has been specified then the times are dumped in the corresponding
-format; otherwise, raw format (<B> -R</B>) is used.
+format; otherwise, raw format (<B>-R</B>) is used.
 <DT><B>-e</B>
 
 <DD>
@@ -331,7 +332,7 @@ Specify the name
 <I>format</I>
 
 of PCAP files to which each session will be extracted (default: NULL = do
-<BR>&nbsp;not&nbsp;extract&nbsp;sessions&nbsp;to&nbsp;separate&nbsp;files).&nbsp;This&nbsp;is&nbsp;only&nbsp;effective&nbsp;when&nbsp;the
+not extract sessions to separate files). This is only effective when the
 <B>-s</B>
 
 option is used to track sessions.
@@ -367,7 +368,9 @@ Same as
 <B>-R</B>
 
 except the timestamps are dumped in human-readable format, similar
-to that used by <I> date(1)</I>.
+to that used by
+<B>date</B>(1).
+
 <DT><B>-s</B>
 
 <DD>
@@ -430,10 +433,8 @@ format discussed above.
 <DT><B>-v</B>
 
 <DD>
-Turn on verbose mode. Currently this only affects session tracking (
-<B>-s</B>
-
-) messages: if specified at least once, sessions openings and closings
+Turn on verbose mode. Currently this only affects session tracking (<B>-s</B>)
+messages: if specified at least once, sessions openings and closings
 are displayed regardless of the time (by default the closings are only
 displayed past
 <I>end-time</I>
@@ -448,7 +449,8 @@ Direct the output to <I>file</I> rather than <I>stdout</I>.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF="/manpages/tcpdump.1.html">tcpdump</A>(1)
+<B><A HREF="/manpages/tcpdump.1.html">tcpdump</A></B>(1)
+
 <A NAME="lbAG">&nbsp;</A>
 <H2>AUTHORS</H2>
 
@@ -513,7 +515,10 @@ to rummage through its input files.
 <I>tcpslice</I>
 
 refuses to write to its output if it is a terminal
-(as indicated by <I>isatty(3)</I>).  This is not a bug but a feature,
+(as indicated by
+<B>isatty</B>(3)
+
+).  This is not a bug but a feature,
 to prevent it from spraying binary data to the user's terminal.
 Note that this means you must either redirect <I>stdout</I> or specify an
 output file via <B>-w</B>.
@@ -521,7 +526,7 @@ output file via <B>-w</B>.
 
 <I>tcpslice</I>
 
-will not work properly on <I>tcpdump</I> files spanning more than one year;
+will not work properly on pcap files spanning more than one year;
 with files containing portions of packets whose original length was
 more than 65,535 bytes; nor with files containing fewer than two packets.
 Such files result in
@@ -577,6 +582,6 @@ supported more general editing of trace files.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 19:59:38 GMT, May 28, 2020
+Time: 17:36:20 GMT, July 25, 2020
 </BODY>
 </HTML>
