@@ -173,7 +173,7 @@ OPTIONS
        -v     Turn on verbose mode. Currently this only affects session track-
               ing (-s) messages: if specified at least once, sessions openings
               and  closings  are  displayed regardless of the time (by default
-              the closings are only displayed past end-time ); if specified at
+              the closings are only displayed past end-time); if specified  at
               least  twice, subsessions (sessions initiated by other sessions)
               openings and closings are also displayed.
 
@@ -215,7 +215,7 @@ BUGS
        to rummage through its input files.
 
        tcpslice refuses to write to its output if it is a terminal  (as  indi-
-       cated  by  isatty(3) ).  This is not a bug but a feature, to prevent it
+       cated  by  isatty(3)).   This is not a bug but a feature, to prevent it
        from spraying binary data to the user's terminal.  Note that this means
        you must either redirect stdout or specify an output file via -w.
 

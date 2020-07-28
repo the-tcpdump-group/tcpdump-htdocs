@@ -37,7 +37,7 @@ Configuration file
        rpcapd to execute the commands, you have to restart it on  Win32,  i.e.
        the initialization file is parsed only at the beginning). The UNIX ver-
        sion of rpcapd will reread the configuration file when receiving a  HUP
-       signel.  In  that  case,  all the existing connections remain in place,
+       signal.  In  that  case,  all the existing connections remain in place,
        while the new connections will be created according to the new  parame-
        ters.
 
