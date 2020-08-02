@@ -55,12 +55,12 @@ DESCRIPTION
        value taken from either first time (if the starting time is being spec-
        ified)  or  the  starting time (if the ending time is being specified).
        If the omitted field is a unit less than that of  the  first  specified
-       field,  then  it defaults to zero.  For example, suppose that the input
-       file has a first time of the Unix timestamp mentioned above,  i.e.,  38
-       seconds  and 765,400 microseconds after 8:51PM PDT, Sept. 25, 1990.  To
-       specify 9:36PM PDT (exactly) on the same date we could use 21h36m.   To
-       specify  a  range  from  9:36PM  PDT through 1:54AM PDT the next day we
-       could use 21h36m 26d1h54m.
+       field,  then  it  defaults  to zero (1 for days).  For example, suppose
+       that the input file has a first time of the  Unix  timestamp  mentioned
+       above,  i.e.,  38  seconds  and  765,400 microseconds after 8:51PM PDT,
+       Sept. 25, 1990.  To specify 9:36PM PDT (exactly) on the  same  date  we
+       could  use  21h36m.   To specify a range from 9:36PM PDT through 1:54AM
+       PDT the next day we could use 21h36m 26d1h54m.
 
        Relative times can also be specified when  using  the  ymdhmsu  format.
        Omitted  fields  then  default to 0 if the unit of the field is greater
@@ -147,7 +147,7 @@ OPTIONS
 
               sip    track SIP-based VoIP calls, which may enable tracking  of
                      TCP connections but only the ones that are related to SIP
-                     calls.  This  feature  only  available  if  tcpslice  was
+                     calls.  This feature is only available  if  tcpslice  was
                      linked  against  Aymeric  Moizard's  GNU oSIP library; if
                      not,  install  the  latest  version  of   libosip2   from
                      https://www.gnu.org/software/osip/   and  recompile  tcp-
@@ -155,11 +155,11 @@ OPTIONS
 
               h323   track H.323-based VoIP calls, which may  enable  tracking
                      of  TCP connections but only the ones that are related to
-                     H.323 calls.  This feature only available if tcpslice was
-                     linked  against Objective Systems' Open H.323 library for
-                     C; if not, install the latest version of libooh323c  from
-                     https://sourceforge.net/projects/ooh323c/  and  recompile
-                     tcpslice.
+                     H.323 calls.  This feature is only available if  tcpslice
+                     was  linked against Objective Systems' Open H.323 library
+                     for C; if not, install the latest version  of  libooh323c
+                     from https://sourceforge.net/projects/ooh323c/ and recom-
+                     pile tcpslice.
 
               Session tracking altogether is only available  if  tcpslice  was
               linked against a recent version (>1.20) of Rafal Wojtczuk's Net-
@@ -206,38 +206,41 @@ BUGS
        Please  send source code contributions as git pull requests through the
        project page above.
 
-       An input filename that begins with a digit or a  `+'  can  be  confused
-       with  a start/end time.  Such filenames can be specified with a leading
-       `./';   for   example,   specify   the    file    `04Jul76.trace'    as
-       `./04Jul76.trace'.
+       An input filename that exactly  matches  the  sssssssss.uuuuuu  or  the
+       ymdhmsu  format  discussed  above can be confused with a start/end time
+       (regardless if the date and the time are valid  in  the  latter  case).
+       Such filenames can be specified with a leading `./'; for example, spec-
+       ify  the  file  `1976y07m04d'  as  `./1976y07m04d'  and  `00000123'  as
+       `./00000123'.   Alternatively, renaming the files to `1976y07m04d.pcap'
+       and `00000123.pcap' respectively would resolve this ambiguity.
 
-       tcpslice  cannot read its input from stdin, since it uses random-access
+       tcpslice cannot read its input from stdin, since it uses  random-access
        to rummage through its input files.
 
-       tcpslice refuses to write to its output if it is a terminal  (as  indi-
-       cated  by  isatty(3)).   This is not a bug but a feature, to prevent it
+       tcpslice  refuses  to write to its output if it is a terminal (as indi-
+       cated by isatty(3)).  This is not a bug but a feature,  to  prevent  it
        from spraying binary data to the user's terminal.  Note that this means
        you must either redirect stdout or specify an output file via -w.
 
-       tcpslice  will  not  work properly on pcap files spanning more than one
-       year; with files containing portions of packets whose  original  length
-       was  more  than  65,535 bytes; nor with files containing fewer than two
-       packets.  Such files result in the error message: `couldn't find  final
-       packet  in  file'.   These problems are due to the interpolation scheme
-       used by tcpslice to greatly speed up its processing when  dealing  with
-       large  trace  files.  Note that tcpslice can efficiently extract slices
-       from the middle of trace files of any size,  and  can  also  work  with
-       truncated  trace files (i.e., the final packet in the file is only par-
+       tcpslice will not work properly on pcap files spanning  more  than  one
+       year;  with  files containing portions of packets whose original length
+       was more than 65,535 bytes; nor with files containing  fewer  than  two
+       packets.   Such files result in the error message: `couldn't find final
+       packet in file'.  These problems are due to  the  interpolation  scheme
+       used  by  tcpslice to greatly speed up its processing when dealing with
+       large trace files.  Note that tcpslice can efficiently  extract  slices
+       from  the  middle  of  trace  files of any size, and can also work with
+       truncated trace files (i.e., the final packet in the file is only  par-
        tially present, typically due to tcpdump being ungracefully killed).
 
        Adding -l has broken some compatibility with older versions, since tcp-
-       slice  now merges its input files, rather than (approximately) concate-
+       slice now merges its input files, rather than (approximately)  concate-
        nating them together as it did previously.
 
        It would sometimes be convenient if you could specify a clock offset to
        use with the -l option.
 
-       It  would  be  nice if tcpslice supported more general editing of trace
+       It would be nice if tcpslice supported more general  editing  of  trace
        files.
 
-                                  28 May 2020                      TCPSLICE(1)
+                                 30 July 2020                      TCPSLICE(1)

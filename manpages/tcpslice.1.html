@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of TCPSLICE</H1>
-Section: User Commands  (1)<BR>Updated: 28 May 2020<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 30 July 2020<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -177,7 +177,7 @@ the corresponding value taken from either
 If the omitted field is a unit
 <I>less</I>
 
-than that of the first specified field, then it defaults to zero.
+than that of the first specified field, then it defaults to zero (1 for days).
 For example, suppose that the input file has a
 <I>first time</I>
 
@@ -389,7 +389,7 @@ track all TCP connections
 <DD>
 track SIP-based VoIP calls, which may enable tracking of TCP
 connections but only the ones that are related to SIP calls.
-This feature only available if tcpslice was linked against
+This feature is only available if tcpslice was linked against
 Aymeric Moizard's GNU oSIP library; if not, install the latest
 version of
 <I>libosip2</I>
@@ -400,7 +400,7 @@ from <A HREF="https://www.gnu.org/software/osip/">https://www.gnu.org/software/o
 <DD>
 track H.323-based VoIP calls, which may enable tracking of TCP
 connections but only the ones that are related to H.323 calls.
-This feature only available if tcpslice was linked against
+This feature is only available if tcpslice was linked against
 Objective Systems' Open H.323 library for C; if not, install the
 latest version of
 <I>libooh323c</I>
@@ -500,10 +500,18 @@ Please send source code contributions as git pull requests through the
 project page above.
 <P>
 
-An input filename that begins with a digit or a `+' can be confused
-with a start/end time.  Such filenames can be specified with a
-leading `./'; for example, specify the file `04Jul76.trace' as
-`./04Jul76.trace'.
+An input filename that exactly matches the
+<I>sssssssss.uuuuuu</I>
+
+or the
+<I>ymdhmsu</I>
+
+format discussed above can be confused with a start/end time (regardless if
+the date and the time are valid in the latter case).  Such filenames can be
+specified with a leading `./'; for example, specify the file `1976y07m04d'
+as `./1976y07m04d' and `00000123' as `./00000123'.  Alternatively, renaming
+the files to `1976y07m04d.pcap' and `00000123.pcap' respectively would
+resolve this ambiguity.
 <P>
 
 <I>tcpslice</I>
@@ -582,6 +590,6 @@ supported more general editing of trace files.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 22:50:33 GMT, July 28, 2020
+Time: 23:41:30 GMT, August 02, 2020
 </BODY>
 </HTML>
