@@ -13,21 +13,6 @@ body {
 	color: #737373;
 }
 
-form {
-	margin: 0;
-	padding: 0;
-}
-
-input, textarea {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1em;
-	color: #000000;
-}
-
-h1, h2, h3 {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
 h1 {
 	font-size: 3em;
 }
@@ -45,15 +30,10 @@ p, ul, ol {
 	line-height: 160%;
 }
 
-ul, ol {
-}
 /* Don't have extra leading in paragraphs in table entries. */
 td p {
 	margin-bottom: 0;
 	line-height: normal;
-}
-
-blockquote {
 }
 
 a {
@@ -129,36 +109,9 @@ hr {
 	width: 960px;
 	height: 15px;
 	margin: 0 auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	border-bottom: 2px solid #3F3F3F;
-	color: #414141;
-}
-
-#logo h1, #logo h2 {
-	margin: 0;
-	padding: 0 20px;
-}
-
-#logo h1 {
-	float: left;
-	padding-top: 30px;
-	letter-spacing: -3px;
-	text-transform: uppercase;
-	font-size: 3em;
-}
-
-#logo h2 {
-	float: right;
-	padding-top: 49px;
-	letter-spacing: -1px;
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 16px;
-}
-
-#logo a {
-	text-decoration: none;
 	color: #414141;
 }
 
@@ -208,30 +161,6 @@ hr {
 	padding: 10px 20px;
 }
 
-.post .meta {
-	height: 26px;
-	background: #F5F5F5;
-	border-top: 1px solid #E9E9E9;
-	text-decoration: none;
-	text-transform: uppercase;
-	font-size: smaller;
-}
-
-.post .posted {
-	float: left;
-	height: 16px;
-	padding: 5px 20px;
-}
-
-.post .permalink, .post .comments {
-	float: right;
-	height: 16px;
-	padding: 5px 20px;
-}
-
-.post .permalink {
-}
-
 /* Sidebar */
 
 #sidebar {
@@ -260,10 +189,6 @@ hr {
 	background: url(images/img04.gif) no-repeat left 50%;
 }
 
-#sidebar p {
-	padding: 0 20px;
-}
-
 #sidebar h2 {
 	height: 20px;
 	margin: 0;
@@ -273,20 +198,6 @@ hr {
 	font-size: 14px;
 	font-weight: bold;
 	color: #000000;
-}
-
-/* Search */
-
-#search form {
-	padding: 20px;
-}
-
-#search br {
-	display: none;
-}
-
-#search #s {
-	width: 135px;
 }
 
 /* Footer */
