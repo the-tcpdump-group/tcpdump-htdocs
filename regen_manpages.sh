@@ -9,8 +9,14 @@
 #
 # This script has been tested to work on the following Linux systems:
 #
-# * Fedora 24, 25, 28, 30, 32
-# * Ubuntu 16.04, 18.04, 20.04
+# * Fedora 24
+# * Fedora 25
+# * Fedora 28
+# * Fedora 30
+# * Fedora 32 <--- please use this one
+# * Ubuntu 16.04
+# * Ubuntu 18.04 <--- or this one
+# * Ubuntu 20.04
 #
 # Please mind that the generated contents of the .txt files may change much
 # more than respective source man pages, sometimes even when the source man
