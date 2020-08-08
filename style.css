@@ -217,3 +217,22 @@ hr {
 	text-align: center;
 	line-height: normal;
 }
+
+table.linktypedlt tr:nth-child(even) {
+	background-color: #f0f0f0;
+}
+
+table.linktypedlt td, table.linktypedlt th {
+	padding: 2px;
+	text-align: left;
+	vertical-align: top;
+}
+
+table.linktypedlt td.symbol {
+	font-family: monospace;
+}
+
+table.linktypedlt td.number {
+	font-family: monospace;
+	text-align: right;
+}

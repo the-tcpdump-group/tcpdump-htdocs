@@ -86,15 +86,19 @@ link-layer header type for them.
               <a name="project-list">Link-layer header type values</a>
             </h2>
             <div class="entry">
-              <table cellspacing=10>
+              <table class=linktypedlt>
                 <tr>
-                  <th>LINKTYPE_ name
-                  <th>LINKTYPE_ value
-                  <th>Corresponding DLT_ name
-                  <th>Description
+                  <th>LINKTYPE_ name</th>
+                  <th>LINKTYPE_ value</th>
+                  <th>Corresponding DLT_ name</th>
+                  <th>Description</th>
                 </tr>
-                <tr valign=top>
-<td>LINKTYPE_NULL<td>0<td>DLT_NULL<td>
+
+<tr>
+<td class="symbol">LINKTYPE_NULL</td>
+<td class="number">0</td>
+<td class="symbol">DLT_NULL</td>
+<td>
 BSD loopback encapsulation; the link layer header is a 4-byte field, in
 host byte order, containing a value of 2 for IPv4 packets, a value of
 either 24, 28, or 30 for IPv6 packets, a value of 7 for OSI packets, or
@@ -105,21 +109,45 @@ which the packets are captured; if a live capture is being done, ``host
 byte order'' is the byte order of the machine capturing the packets, but
 if a ``savefile'' is being read, the byte order is not necessarily that
 of the machine reading the capture file.
-                <tr valign=top>
-<td>LINKTYPE_ETHERNET<td>1<td>DLT_EN10MB<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_ETHERNET</td>
+<td class="number">1</td>
+<td class="symbol">DLT_EN10MB</td>
+<td>
 <a href="https://ieeexplore.ieee.org/document/7428776/">IEEE
 802.3</a> Ethernet (10Mb, 100Mb, 1000Mb, and up); the 10MB in the
 DLT_ name is historical.
-                <tr valign=top>
-<td>LINKTYPE_AX25<td>3<td>DLT_AX25<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_AX25</td>
+<td class="number">3</td>
+<td class="symbol">DLT_AX25</td>
+<td>
 <a href="http://www.ax25.net/AX25.2.2-Jul%2098-2.pdf">AX.25</a> packet,
 with nothing preceding it.
-                <tr valign=top>
-<td>LINKTYPE_IEEE802_5<td>6<td>DLT_IEEE802<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_5</td>
+<td class="number">6</td>
+<td class="symbol">DLT_IEEE802</td>
+<td>
 IEEE 802.5 Token Ring; the IEEE802, without _5, in the DLT_ name is
 historical.
-                <tr valign=top>
-<td>LINKTYPE_ARCNET_BSD<td>7<td>DLT_ARCNET<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_ARCNET_BSD</td>
+<td class="number">7</td>
+<td class="symbol">DLT_ARCNET</td>
+<td>
 ARCNET Data Packets, as described by the ARCNET Trade Association
 standard <a href="https://web.archive.org/web/20100414154838/http://www.arcnet.com/resources/ata8781.pdf">ATA
 878.1-1999</a>, but without the Starting Delimiter, Information Length,
@@ -130,12 +158,24 @@ draft standard <a href="https://web.archive.org/web/20100414154914/http://www.ar
 href="https://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a
 href="https://tools.ietf.org/html/rfc1201">RFC 1201</a>; for RFC 1051
 frames, ATA 878.2 is not used.
-                <tr valign=top>
-<td>LINKTYPE_SLIP<td>8<td>DLT_SLIP<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_SLIP</td>
+<td class="number">8</td>
+<td class="symbol">DLT_SLIP</td>
+<td>
 SLIP, encapsulated with
 <a href="linktypes/LINKTYPE_SLIP.html">a LINKTYPE_SLIP header</a>.
-                <tr valign=top>
-<td>LINKTYPE_PPP<td>9<td>DLT_PPP<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PPP</td>
+<td class="number">9</td>
+<td class="symbol">DLT_PPP</td>
+<td>
 PPP, as per
 <a href="https://tools.ietf.org/html/rfc1661">RFC 1661</a>
 and
@@ -144,11 +184,23 @@ the first 2 bytes are 0xff and 0x03, it's PPP in HDLC-like
 framing, with the PPP header following those two bytes, otherwise it's
 PPP without framing, and the packet begins with the PPP header.  The
 data in the frame is not octet-stuffed or bit-stuffed.
-                <tr valign=top>
-<td>LINKTYPE_FDDI<td>10<td>DLT_FDDI<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_FDDI</td>
+<td class="number">10</td>
+<td class="symbol">DLT_FDDI</td>
+<td>
 FDDI, as specified by ANSI INCITS 239-1994.
-                <tr valign=top>
-<td>LINKTYPE_PPP_HDLC<td>50<td>DLT_PPP_SERIAL<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PPP_HDLC</td>
+<td class="number">50</td>
+<td class="symbol">DLT_PPP_SERIAL</td>
+<td>
 PPP in HDLC-like framing, as per
 <a href="https://tools.ietf.org/html/rfc1662"> RFC 1662</a>,
 or Cisco PPP with HDLC
@@ -157,82 +209,172 @@ section 4.3.1 of RFC 1547</a>; the first byte will be 0xFF
 for PPP in HDLC-like framing, and will be 0x0F or 0x8F for Cisco PPP
 with HDLC framing.  The data in the frame is not octet-stuffed or
 bit-stuffed.
-                <tr valign=top>
-<td>LINKTYPE_PPP_ETHER<td>51<td>DLT_PPP_ETHER<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PPP_ETHER</td>
+<td class="number">51</td>
+<td class="symbol">DLT_PPP_ETHER</td>
+<td>
 PPPoE; the packet begins with a PPPoE header, as per
 <a href="https://tools.ietf.org/html/rfc2516">RFC 2516</a>.
-                <tr valign=top>
-<td>LINKTYPE_ATM_RFC1483<td>100<td>DLT_ATM_RFC1483<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_ATM_RFC1483</td>
+<td class="number">100</td>
+<td class="symbol">DLT_ATM_RFC1483</td>
+<td>
 <a href="https://tools.ietf.org/html/rfc1483">RFC 1483</a>
 LLC/SNAP-encapsulated ATM; the packet begins with an
 <a href="https://www.iso.org/standard/30174.html">ISO 8802-2</a>
 (formerly known as IEEE 802.2) LLC header.
-                <tr valign=top>
-<td>LINKTYPE_RAW<td>101<td>DLT_RAW<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_RAW</td>
+<td class="number">101</td>
+<td class="symbol">DLT_RAW</td>
+<td>
 Raw IP; the packet begins with an IPv4 or IPv6 header, with the
 "version" field of the header indicating whether it's an IPv4 or IPv6
 header.
-                <tr valign=top>
-<td>LINKTYPE_C_HDLC<td>104<td>DLT_C_HDLC<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_C_HDLC</td>
+<td class="number">104</td>
+<td class="symbol">DLT_C_HDLC</td>
+<td>
 Cisco PPP with HDLC framing, as per
 <a href="https://tools.ietf.org/html/rfc1547#section-4.3.1">
 section 4.3.1 of RFC 1547</a>.
-                <tr valign=top>
-<td>LINKTYPE_IEEE802_11<td>105<td>DLT_IEEE802_11<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_11</td>
+<td class="number">105</td>
+<td class="symbol">DLT_IEEE802_11</td>
+<td>
 <a href="https://ieeexplore.ieee.org/document/7786995/">IEEE 802.11</a>
 wireless LAN.
-                <tr valign=top>
-<td>LINKTYPE_FRELAY<td>107<td>DLT_FRELAY<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_FRELAY</td>
+<td class="number">107</td>
+<td class="symbol">DLT_FRELAY</td>
+<td>
 Frame Relay LAPF frames, beginning with a <a
 href="https://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
 Q.922</a> LAPF header starting with the address field, and without an
 FCS at the end of the frame.
-                <tr valign=top>
-<td>LINKTYPE_LOOP<td>108<td>DLT_LOOP<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LOOP</td>
+<td class="number">108</td>
+<td class="symbol">DLT_LOOP</td>
+<td>
 OpenBSD loopback encapsulation; the link-layer header is a 4-byte field,
 in <em>network</em> byte order, containing a value of 2 for IPv4
 packets, a value of either 24, 28, or 30 for IPv6 packets, a value of 7
 for OSI packets, or a value of 23 for IPX packets.  All of the IPv6
 values correspond to IPv6 packets; code reading files should check for
 all of them.
-                <tr valign=top>
-<td>LINKTYPE_LINUX_SLL<td>113<td>DLT_LINUX_SLL<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LINUX_SLL</td>
+<td class="number">113</td>
+<td class="symbol">DLT_LINUX_SLL</td>
+<td>
 <a href="linktypes/LINKTYPE_LINUX_SLL.html">Linux "cooked" capture
 encapsulation</a>.
-                <tr valign=top>
-<td>LINKTYPE_LTALK<td>114<td>DLT_LTALK<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LTALK</td>
+<td class="number">114</td>
+<td class="symbol">DLT_LTALK</td>
+<td>
 Apple LocalTalk; the packet begins with an AppleTalk LocalTalk Link
 Access Protocol header, as described in chapter 1 of <a
 href="https://web.archive.org/web/20040719034527/http://developer.apple.com:80/macos/opentransport/docs/dev/Inside_AppleTalk.pdf">Inside
 AppleTalk, Second Edition</a>.
-                <tr valign=top>
-<td>LINKTYPE_PFLOG<td>117<td>DLT_PFLOG<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PFLOG</td>
+<td class="number">117</td>
+<td class="symbol">DLT_PFLOG</td>
+<td>
 OpenBSD pflog; the link-layer header contains a
 "struct pfloghdr"
 structure, as defined by the host on which the file was saved.  (This
 differs from operating system to operating system and release to
 release; there is nothing in the file to indicate what the layout of
 that structure is.)
-                <tr valign=top>
-<td>LINKTYPE_IEEE802_11_PRISM<td>119<td>DLT_PRISM_HEADER<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_11_PRISM</td>
+<td class="number">119</td>
+<td class="symbol">DLT_PRISM_HEADER</td>
+<td>
 <a href="linktypes/LINKTYPE_IEEE802_11_PRISM.html">Prism monitor mode
 information</a> followed by an 802.11 header.
-                <tr valign=top>
-<td>LINKTYPE_IP_OVER_FC<td>122<td>DLT_IP_OVER_FC<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IP_OVER_FC</td>
+<td class="number">122</td>
+<td class="symbol">DLT_IP_OVER_FC</td>
+<td>
 <a href="https://tools.ietf.org/html/rfc2625">RFC 2625</a>
 IP-over-Fibre Channel, with the link-layer header being the
 Network_Header as described in that RFC.
-                <tr valign=top>
-<td>LINKTYPE_SUNATM<td>123<td>DLT_SUNATM<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_SUNATM</td>
+<td class="number">123</td>
+<td class="symbol">DLT_SUNATM</td>
+<td>
 ATM traffic, encapsulated as per
 <a href="linktypes/LINKTYPE_SUNATM.html">the scheme used by SunATM
 devices</a>.
-                <tr valign=top>
-<td>LINKTYPE_IEEE802_11_RADIOTAP<td>127<td>DLT_IEEE802_11_RADIO<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_11_RADIOTAP</td>
+<td class="number">127</td>
+<td class="symbol">DLT_IEEE802_11_RADIO</td>
+<td>
 <a href="http://www.radiotap.org/">Radiotap link-layer information</a>
 followed by an 802.11 header.
-                <tr valign=top>
-<td>LINKTYPE_ARCNET_LINUX<td>129<td>DLT_ARCNET_LINUX<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_ARCNET_LINUX</td>
+<td class="number">129</td>
+<td class="symbol">DLT_ARCNET_LINUX</td>
+<td>
 ARCNET Data Packets, as described by the ARCNET Trade Association
 standard <a href="https://web.archive.org/web/20100414154838/http://www.arcnet.com/resources/ata8781.pdf">ATA
 878.1-1999</a>, but without the Starting Delimiter, Information Length,
@@ -246,27 +388,57 @@ frames, rather than fragments, are supplied.  See also <a
 href="https://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a
 href="https://tools.ietf.org/html/rfc1201">RFC 1201</a>; for RFC 1051
 frames, ATA 878.2 is not used.
-                <tr valign=top>
-<td>LINKTYPE_APPLE_IP_OVER_IEEE1394<td>138<td>DLT_APPLE_IP_OVER_IEEE1394<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_APPLE_IP_OVER_IEEE1394</td>
+<td class="number">138</td>
+<td class="symbol">DLT_APPLE_IP_OVER_IEEE1394</td>
+<td>
 <a href="linktypes/LINKTYPE_APPLE_IP_OVER_IEEE1394.html">Apple
 IP-over-IEEE 1394 cooked header</a>.
-                <tr valign=top>
-<td>LINKTYPE_MTP2_WITH_PHDR<td>139<td>DLT_MTP2_WITH_PHDR<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_MTP2_WITH_PHDR</td>
+<td class="number">139</td>
+<td class="symbol">DLT_MTP2_WITH_PHDR</td>
+<td>
 Signaling System 7 Message Transfer Part Level 2, as specified by <a
 href="https://www.itu.int/rec/T-REC-Q.703/en/">ITU-T Recommendation
 Q.703</a>, preceded by a pseudo-header.
-                <tr valign=top>
-<td>LINKTYPE_MTP2<td>140<td>DLT_MTP2<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_MTP2</td>
+<td class="number">140</td>
+<td class="symbol">DLT_MTP2</td>
+<td>
 Signaling System 7 Message Transfer Part Level 2, as specified by <a
 href="https://www.itu.int/rec/T-REC-Q.703/en/">ITU-T Recommendation
 Q.703</a>.
-                <tr valign=top>
-<td>LINKTYPE_MTP3<td>141<td>DLT_MTP3<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_MTP3</td>
+<td class="number">141</td>
+<td class="symbol">DLT_MTP3</td>
+<td>
 Signaling System 7 Message Transfer Part Level 3, as specified by <a
 href="https://www.itu.int/rec/T-REC-Q.704/en/">ITU-T Recommendation
 Q.704</a>, with no MTP2 header preceding the MTP3 packet.
-                <tr valign=top>
-<td>LINKTYPE_SCCP<td>142<td>DLT_SCCP<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_SCCP</td>
+<td class="number">142</td>
+<td class="symbol">DLT_SCCP</td>
+<td>
 Signaling System 7 Signalling Connection Control Part, as specified by
 <a href="https://www.itu.int/rec/T-REC-Q.711/en/">ITU-T Recommendation
 Q.711</a>,
@@ -276,14 +448,26 @@ Q.712</a>,
 Q.713</a>, and
 <a href="https://www.itu.int/rec/T-REC-Q.714/en/">ITU-T Recommendation
 Q.714</a>, with no MTP3 or MTP2 headers preceding the SCCP packet.
-                <tr valign=top>
-<td>LINKTYPE_DOCSIS<td>143<td>DLT_DOCSIS<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_DOCSIS</td>
+<td class="number">143</td>
+<td class="symbol">DLT_DOCSIS</td>
+<td>
 DOCSIS MAC frames, as described by <a
 href="https://apps.cablelabs.com/specification/CM-SP-MULPIv3.1">the
 DOCSIS 3.1 MAC and Upper Layer Protocols Interface Specification</a> or
 earlier specifications for MAC frames.
-                <tr valign=top>
-<td>LINKTYPE_LINUX_IRDA<td>144<td>DLT_LINUX_IRDA<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LINUX_IRDA</td>
+<td class="number">144</td>
+<td class="symbol">DLT_LINUX_IRDA</td>
+<td>
 Linux-IrDA packets, with a
 <a href="linktypes/LINKTYPE_LINUX_IRDA.html">LINKTYPE_LINUX_IRDA
 header</a>,
@@ -292,15 +476,33 @@ defined by
 <a href="https://www.irda.org/library-of-specs">IrDA
 Data Specifications</a>, including the IrDA Link Access Protocol
 specification.
-                <tr valign=top>
-<td>LINKTYPE_USER0-LINKTYPE-USER15<td>147-162<td>DLT_USER0-DLT_USER15<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_USER0-LINKTYPE-USER15</td>
+<td class="number">147-162</td>
+<td class="symbol">DLT_USER0-DLT_USER15</td>
+<td>
 Reserved for private use; see above.
-                <tr valign=top>
-<td>LINKTYPE_IEEE802_11_AVS<td>163<td>DLT_IEEE802_11_RADIO_AVS<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_11_AVS</td>
+<td class="number">163</td>
+<td class="symbol">DLT_IEEE802_11_RADIO_AVS</td>
+<td>
 <a href="http://web.archive.org/web/20040803232023/http://www.shaftnet.org/~pizza/software/capturefrm.txt">AVS monitor mode
 information</a> followed by an 802.11 header.
-                <tr valign=top>
-<td>LINKTYPE_BACNET_MS_TP<td>165<td>DLT_BACNET_MS_TP<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_BACNET_MS_TP</td>
+<td class="number">165</td>
+<td class="symbol">DLT_BACNET_MS_TP</td>
+<td>
 BACnet MS/TP frames, as specified by section 9.3 <b>MS/TP Frame
 Format</b> of
 <a
@@ -308,27 +510,57 @@ href="http://www.ashrae.org/resources--publications/bookstore/standard-135">ANSI
 Standard 135, BACnet&reg; - A Data Communication Protocol for Building
 Automation and Control Networks</a>, including the preamble and, if
 present, the Data CRC.
-                <tr valign=top>
-<td>LINKTYPE_PPP_PPPD<td>166<td>DLT_PPP_PPPD<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PPP_PPPD</td>
+<td class="number">166</td>
+<td class="symbol">DLT_PPP_PPPD</td>
+<td>
 PPP in HDLC-like encapsulation, like LINKTYPE_PPP_HDLC, but with the
 0xff address byte replaced by a direction indication - 0x00 for incoming
 and 0x01 for outgoing.
-                <tr valign=top>
-<td>LINKTYPE_GPRS_LLC<td>169<td>DLT_GPRS_LLC<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_GPRS_LLC</td>
+<td class="number">169</td>
+<td class="symbol">DLT_GPRS_LLC</td>
+<td>
 General Packet Radio Service Logical Link Control, as defined by <a
 href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=224">3GPP TS 04.64</a>.
-                <tr valign=top>
-<td>LINKTYPE_GPF_T<td>170<td>DLT_GPF_T<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_GPF_T</td>
+<td class="number">170</td>
+<td class="symbol">DLT_GPF_T</td>
+<td>
 Transparent-mapped generic framing procedure, as specified by
 <a href="https://www.itu.int/rec/T-REC-G.7041/en">ITU-T
 Recommendation G.7041/Y.1303</a>.
-                <tr valign=top>
-<td>LINKTYPE_GPF_F<td>171<td>DLT_GPF_F<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_GPF_F</td>
+<td class="number">171</td>
+<td class="symbol">DLT_GPF_F</td>
+<td>
 Frame-mapped generic framing procedure, as specified by
 <a href="https://www.itu.int/rec/T-REC-G.7041/en">ITU-T
 Recommendation G.7041/Y.1303</a>.
-                <tr valign=top>
-<td>LINKTYPE_LINUX_LAPD<td>177<td>DLT_LINUX_LAPD<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LINUX_LAPD</td>
+<td class="number">177</td>
+<td class="symbol">DLT_LINUX_LAPD</td>
+<td>
 Link Access Procedures on the D Channel (LAPD) frames, as specified by
 <a href="https://www.itu.int/rec/T-REC-Q.920/en">ITU-T
 Recommendation Q.920</a>
@@ -338,14 +570,26 @@ Recommendation Q.921</a>, captured via vISDN, with a
 <a href="linktypes/LINKTYPE_LINUX_LAPD.html">LINKTYPE_LINUX_LAPD
 header</a>, followed by the Q.921 frame, starting with the address
 field.
-                <tr valign=top>
-<td>LINKTYPE_MFR<td>182<td>DLT_MFR<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_MFR</td>
+<td class="number">182</td>
+<td class="symbol">DLT_MFR</td>
+<td>
 <a href="https://web.archive.org/web/20160427004354/https://www.broadband-forum.org/technical/download/FRF.16/frf16.1.pdf">FRF.16.1</a>
 Multi-Link Frame Relay frames, beginning with an
 <a href="https://web.archive.org/web/20181021041543/https://www.broadband-forum.org/technical/download/FRF.12/frf12.pdf">FRF.12</a>
 Interface fragmentation format fragmentation header.
-                <tr valign=top>
-<td>LINKTYPE_BLUETOOTH_HCI_H4<td>187<td>DLT_BLUETOOTH_HCI_H4<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_BLUETOOTH_HCI_H4</td>
+<td class="number">187</td>
+<td class="symbol">DLT_BLUETOOTH_HCI_H4</td>
+<td>
 Bluetooth HCI UART transport layer; the frame contains an HCI packet
 indicator byte, as specified by the UART Transport Layer portion of the
 most recent
@@ -354,8 +598,14 @@ Bluetooth Core specification</a>, followed by an HCI packet of the
 specified packet type, as specified by the Host Controller Interface
 Functional Specification portion of the most recent Bluetooth Core
 Specification.
-                <tr valign=top>
-<td>LINKTYPE_USB_LINUX<td>189<td>DLT_USB_LINUX<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_USB_LINUX</td>
+<td class="number">189</td>
+<td class="symbol">DLT_USB_LINUX</td>
+<td>
 USB packets, beginning with a Linux USB header, as specified by the
 <tt>struct usbmon_packet</tt> in the
 <tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree.
@@ -366,28 +616,58 @@ are captured.  When reading a pcap file, the byte order is the byte
 order for the file, as specified by the file's magic number; when
 reading a pcapng file, the byte order is the byte order for the section
 of the pcapng file, as specified by the Section Header Block.
-                <tr valign=top>
-<td>LINKTYPE_PPI<td>192<td>DLT_PPI<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PPI</td>
+<td class="number">192</td>
+<td class="symbol">DLT_PPI</td>
+<td>
 Per-Packet Information information, as specified by <a
 href="https://web.archive.org/web/20160328114748/http://www.cacetech.com/documents/PPI%20Header%20format%201.0.7.pdf">the
 Per-Packet Information Header Specification</a>,  followed by a packet
 with the LINKTYPE_ value specified by the pph_dlt field of that header.
-                <tr valign=top>
-<td>LINKTYPE_IEEE802_15_4_WITHFCS<td>195<td>DLT_IEEE802_15_4_WITHFCS<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_15_4_WITHFCS</td>
+<td class="number">195</td>
+<td class="symbol">DLT_IEEE802_15_4_WITHFCS</td>
+<td>
 <a href="https://ieeexplore.ieee.org/document/7460875/">IEEE
 802.15.4</a> Low-Rate Wireless Networks, with each packet having the FCS
 at the end of the frame.
-                <tr valign=top>
-<td>LINKTYPE_SITA<td>196<td>DLT_SITA<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_SITA</td>
+<td class="number">196</td>
+<td class="symbol">DLT_SITA</td>
+<td>
 Various link-layer types, with
 <a href="linktypes/LINKTYPE_SITA.html">a pseudo-header</a>,
 for <a href="https://www.sita.aero">SITA</a>.
-                <tr valign=top>
-<td>LINKTYPE_ERF<td>197<td>DLT_ERF<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_ERF</td>
+<td class="number">197</td>
+<td class="symbol">DLT_ERF</td>
+<td>
 Various link-layer types, with a pseudo-header, for Endace DAG cards;
 encapsulates Endace ERF records.
-                <tr valign=top>
-<td>LINKTYPE_BLUETOOTH_HCI_H4_WITH_PHDR<td>201<td>DLT_BLUETOOTH_HCI_H4_WITH_PHDR<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_BLUETOOTH_HCI_H4_WITH_PHDR</td>
+<td class="number">201</td>
+<td class="symbol">DLT_BLUETOOTH_HCI_H4_WITH_PHDR</td>
+<td>
 Bluetooth HCI UART transport layer; the frame contains a 4-byte
 direction field, in network byte order (big-endian), the low-order bit
 of which is set if the frame was sent from the host to the controller
@@ -399,13 +679,25 @@ Bluetooth Core specification</a>, followed by an HCI packet of the
 specified packet type, as specified by the Host Controller Interface
 Functional Specification portion of the most recent Bluetooth Core
 Specification.
-                <tr valign=top>
-<td>LINKTYPE_AX25_KISS<td>202<td>DLT_AX25_KISS<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_AX25_KISS</td>
+<td class="number">202</td>
+<td class="symbol">DLT_AX25_KISS</td>
+<td>
 <a href="http://www.ax25.net/AX25.2.2-Jul%2098-2.pdf">AX.25</a> packet,
 with a 1-byte <a href="http://www.ax25.net/kiss.aspx">KISS</a> header
 containing a type indicator.
-                <tr valign=top>
-<td>LINKTYPE_LAPD<td>203<td>DLT_LAPD<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LAPD</td>
+<td class="number">203</td>
+<td class="symbol">DLT_LAPD</td>
+<td>
 Link Access Procedures on the D Channel (LAPD) frames, as specified by
 <a href="https://www.itu.int/rec/T-REC-Q.920/en">ITU-T
 Recommendation Q.920</a>
@@ -413,8 +705,14 @@ and
 <a href="https://www.itu.int/rec/T-REC-Q.921/en">ITU-T
 Recommendation Q.921</a>, starting with the address field, with no
 pseudo-header.
-                <tr valign=top>
-<td>LINKTYPE_PPP_WITH_DIR<td>204<td>DLT_PPP_WITH_DIR<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PPP_WITH_DIR</td>
+<td class="number">204</td>
+<td class="symbol">DLT_PPP_WITH_DIR</td>
+<td>
 PPP, as per
 <a href="https://tools.ietf.org/html/rfc1661">RFC 1661</a>
 and
@@ -425,47 +723,83 @@ host"; if the first 2 bytes are 0xff and 0x03, it's PPP in HDLC-like
 framing, with the PPP header following those two bytes, otherwise it's
 PPP without framing, and the packet begins with the PPP header.  The
 data in the frame is not octet-stuffed or bit-stuffed.
-                <tr valign=top>
-<td>LINKTYPE_C_HDLC_WITH_DIR<td>205<td>DLT_C_HDLC_WITH_DIR<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_C_HDLC_WITH_DIR</td>
+<td class="number">205</td>
+<td class="symbol">DLT_C_HDLC_WITH_DIR</td>
+<td>
 Cisco PPP with HDLC framing, as per
 <a href="https://tools.ietf.org/html/rfc1547#section-4.3.1">
 section 4.3.1 of RFC 1547</a>,
 preceded with a one-byte pseudo-header with a zero value meaning
 "received by this host" and a non-zero value meaning "sent by this
 host".
-                <tr valign=top>
-<td>LINKTYPE_FRELAY_WITH_DIR<td>206<td>DLT_FRELAY_WITH_DIR<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_FRELAY_WITH_DIR</td>
+<td class="number">206</td>
+<td class="symbol">DLT_FRELAY_WITH_DIR</td>
+<td>
 Frame Relay LAPF frames, beginning with a one-byte pseudo-header with a
 zero value meaning "received by this host" (DCE->DTE) and a non-zero
 value meaning "sent by this host" (DTE->DCE), followed by an <a
 href="https://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
 Q.922</a> LAPF header starting with the address field, and without an
 FCS at the end of the frame.
-                <tr valign=top>
-<td>LINKTYPE_LAPB_WITH_DIR<td>207<td>DLT_LAPB_WITH_DIR<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LAPB_WITH_DIR</td>
+<td class="number">207</td>
+<td class="symbol">DLT_LAPB_WITH_DIR</td>
+<td>
 Link Access Procedure, Balanced (LAPB), as specified by
 <a href="https://www.itu.int/rec/T-REC-X.25/en">ITU-T
 Recommendation X.25</a>, preceded with a one-byte pseudo-header with a
 zero value meaning "received by this host" (DCE->DTE) and a non-zero
 value meaning "sent by this host" (DTE->DCE).
-                <tr valign=top>
-<td>LINKTYPE_IPMB_LINUX<td>209<td>DLT_IPMB_LINUX<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IPMB_LINUX</td>
+<td class="number">209</td>
+<td class="symbol">DLT_IPMB_LINUX</td>
+<td>
 <a href="https://www.intel.com/content/www/us/en/products/docs/servers/ipmi/ipmi-second-gen-interface-spec-v2-rev1-1.html">IPMB</a>
 over an
 <a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">I2C</a>
 circuit, with
 <a href="linktypes/LINKTYPE_IPMB_LINUX.html">a Linux-specific
 pseudo-header</a>.
-                <tr valign=top>
-<td>LINKTYPE_IEEE802_15_4_NONASK_PHY<td>215<td>DLT_IEEE802_15_4_NONASK_PHY<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_15_4_NONASK_PHY</td>
+<td class="number">215</td>
+<td class="symbol">DLT_IEEE802_15_4_NONASK_PHY</td>
+<td>
 <a href="https://ieeexplore.ieee.org/document/7460875/">IEEE 802.15.4</a>
 Low-Rate Wireless Networks, with each packet having the FCS at the end
 of the frame, and with the PHY-level data for the O-QPSK, BPSK, GFSK,
 MSK, and RCC DSS BPSK PHYs (4 octets of 0 as preamble, one octet of SFD,
 one octet of frame length + reserved bit) preceding the MAC-layer data
 (starting with the frame control field).
-                <tr valign=top>
-<td>LINKTYPE_USB_LINUX_MMAPPED<td>220<td>DLT_USB_LINUX_MMAPPED<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_USB_LINUX_MMAPPED</td>
+<td class="number">220</td>
+<td class="symbol">DLT_USB_LINUX_MMAPPED</td>
+<td>
 USB packets, beginning with a Linux USB header, as specified by the
 <tt>struct usbmon_packet</tt> in the
 <tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree.
@@ -478,11 +812,23 @@ byte order is the byte order for the section of the pcapng file, as
 specified by the Section Header Block.  For isochronous transfers, the
 <tt>ndesc</tt> field specifies the number of isochronous descriptors
 that follow.
-                <tr valign=top>
-<td>LINKTYPE_FC_2<td>224<td>DLT_FC_2<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_FC_2</td>
+<td class="number">224</td>
+<td class="symbol">DLT_FC_2</td>
+<td>
 Fibre Channel FC-2 frames, beginning with a Frame_Header.
-                <tr valign=top>
-<td>LINKTYPE_FC_2_WITH_FRAME_DELIMS<td>225<td>DLT_FC_2_WITH_FRAME_DELIMS<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_FC_2_WITH_FRAME_DELIMS</td>
+<td class="number">225</td>
+<td class="symbol">DLT_FC_2_WITH_FRAME_DELIMS</td>
+<td>
 Fibre Channel FC-2 frames, beginning an encoding of the SOF, followed by
 a Frame_Header, and ending with an encoding of the SOF.
 <p>
@@ -491,78 +837,168 @@ representing the corresponding ordered sets, with K28.5 represented as
 0xBC, and the D symbols as the corresponding byte values; for example,
 SOFi2, which is K28.5 - D21.5 - D1.2 - D21.2, is represented as 0xBC
 0xB5 0x55 0x55.
-                <tr valign=top>
-<td>LINKTYPE_IPNET<td>226<td>DLT_IPNET<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IPNET</td>
+<td class="number">226</td>
+<td class="symbol">DLT_IPNET</td>
+<td>
 <a href="linktypes/LINKTYPE_IPNET.html">Solaris ipnet pseudo-header</a>,
 followed by an IPv4 or IPv6 datagram.
-                <tr valign=top>
-<td>LINKTYPE_CAN_SOCKETCAN<td>227<td>DLT_CAN_SOCKETCAN<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_CAN_SOCKETCAN</td>
+<td class="number">227</td>
+<td class="symbol">DLT_CAN_SOCKETCAN</td>
+<td>
 CAN (Controller Area Network) frames, with <a
 href="linktypes/LINKTYPE_CAN_SOCKETCAN.html">a pseudo-header</a>
 followed by the frame payload.
-                <tr valign=top>
-<td>LINKTYPE_IPV4<td>228<td>DLT_IPV4<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IPV4</td>
+<td class="number">228</td>
+<td class="symbol">DLT_IPV4</td>
+<td>
 Raw IPv4; the packet begins with an IPv4 header.
-                <tr valign=top>
-<td>LINKTYPE_IPV6<td>229<td>DLT_IPV6<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IPV6</td>
+<td class="number">229</td>
+<td class="symbol">DLT_IPV6</td>
+<td>
 Raw IPv6; the packet begins with an IPv6 header.
-                <tr valign=top>
-<td>LINKTYPE_IEEE802_15_4_NOFCS<td>230<td>DLT_IEEE802_15_4_NOFCS<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_15_4_NOFCS</td>
+<td class="number">230</td>
+<td class="symbol">DLT_IEEE802_15_4_NOFCS</td>
+<td>
 <a href="https://ieeexplore.ieee.org/document/7460875/">IEEE 802.15.4</a>
 Low-Rate Wireless Network, without the FCS at the end of the frame.
-                <tr valign=top>
-<td>LINKTYPE_DBUS<td>231<td>DLT_DBUS<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_DBUS</td>
+<td class="number">231</td>
+<td class="symbol">DLT_DBUS</td>
+<td>
 Raw <a href="http://www.freedesktop.org/wiki/Software/dbus">D-Bus</a>
 <a href="https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages">
 messages</a>, starting with the endianness flag, followed by the message
 type, etc., but without the
 <a href="https://dbus.freedesktop.org/doc/dbus-specification.html#auth-protocol">
 authentication handshake</a> before the message sequence.
-                <tr valign=top>
-<td>LINKTYPE_DVB_CI<td>235<td>DLT_DVB_CI<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_DVB_CI</td>
+<td class="number">235</td>
+<td class="symbol">DLT_DVB_CI</td>
+<td>
 DVB-CI (DVB Common Interface for communication between a PC Card module
 and a DVB receiver), with the message format specified by
 <a href="https://www.kaiser.cx/pcap-dvbci.html">the PCAP format for
 DVB-CI specification</a>.
-                <tr valign=top>
-<td>LINKTYPE_MUX27010<td>236<td>DLT_MUX27010<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_MUX27010</td>
+<td class="number">236</td>
+<td class="symbol">DLT_MUX27010</td>
+<td>
 <a href="linktypes/LINKTYPE_MUX27010.html">Variant of 3GPP TS 27.010
 multiplexing protocol</a> (similar to, but <em>not</em> the same as,
 27.010).
-                <tr valign=top>
-<td>LINKTYPE_STANAG_5066_D_PDU<td>237<td>DLT_STANAG_5066_D_PDU<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_STANAG_5066_D_PDU</td>
+<td class="number">237</td>
+<td class="symbol">DLT_STANAG_5066_D_PDU</td>
+<td>
 D_PDUs as described by NATO standard STANAG 5066, starting
 with the synchronization sequence, and including both header and data
 CRCs.  The current version of STANAG 5066 is backwards-compatible with
 <a href="https://web.archive.org/web/20051004082010/http://www.armymars.net/ArmyMARS/HF-Email/resources/stanag5066.pdf">
 the 1.0.2 version</a>, although newer versions are classified.
-                <tr valign=top>
-<td>LINKTYPE_NFLOG<td>239<td>DLT_NFLOG<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_NFLOG</td>
+<td class="number">239</td>
+<td class="symbol">DLT_NFLOG</td>
+<td>
 <a href="linktypes/LINKTYPE_NFLOG.html">Linux netlink NETLINK NFLOG
 socket log messages.</a>
-                <tr valign=top>
-<td>LINKTYPE_NETANALYZER<td>240<td>DLT_NETANALYZER<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_NETANALYZER</td>
+<td class="number">240</td>
+<td class="symbol">DLT_NETANALYZER</td>
+<td>
 <a href="linktypes/LINKTYPE_NETANALYZER.html">Pseudo-header for Hilscher
 Gesellschaft f&uuml;r Systemautomation mbH netANALYZER devices</a>, followed
 by an Ethernet frame, beginning with the MAC header and ending with the FCS.
-                <tr valign=top>
-<td>LINKTYPE_NETANALYZER_TRANSPARENT<td>241<td>DLT_NETANALYZER_TRANSPARENT<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_NETANALYZER_TRANSPARENT</td>
+<td class="number">241</td>
+<td class="symbol">DLT_NETANALYZER_TRANSPARENT</td>
+<td>
 <a href="linktypes/LINKTYPE_NETANALYZER.html">Pseudo-header for Hilscher
 Gesellschaft f&uuml;r Systemautomation mbH netANALYZER devices</a>, followed
 by an Ethernet frame, beginning with the preamble, SFD, and MAC header,
 and ending with the FCS.
-                <tr valign=top>
-<td>LINKTYPE_IPOIB<td>242<td>DLT_IPOIB<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IPOIB</td>
+<td class="number">242</td>
+<td class="symbol">DLT_IPOIB</td>
+<td>
 IP-over-InfiniBand, as specified by <a
 href="https://tools.ietf.org/html/rfc4391#section-6">RFC 4391 section 6</a>.
-                <tr valign=top>
-<td>LINKTYPE_MPEG_2_TS<td>243<td>DLT_MPEG_2_TS<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_MPEG_2_TS</td>
+<td class="number">243</td>
+<td class="symbol">DLT_MPEG_2_TS</td>
+<td>
 MPEG-2 Transport Stream transport packets, as specified by ISO
 13818-1/<a href="https://www.itu.int/rec/T-REC-H.222.0">ITU-T
 Recommendation H.222.0</a> (see table 2-2 of section 2.4.3.2 "Transport
 Stream packet layer").
-                <tr valign=top>
-<td>LINKTYPE_NG40<td>244<td>DLT_NG40<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_NG40</td>
+<td class="number">244</td>
+<td class="symbol">DLT_NG40</td>
+<td>
 <a href="linktypes/LINKTYPE_NG40.html">Pseudo-header for ng4T GmbH's
 UMTS Iub/Iur-over-ATM and Iub/Iur-over-IP format as used by their ng40
 protocol tester</a>, followed by frames for the Frame Protocol as specified by
@@ -574,103 +1010,206 @@ traffic, by SSCOP packets as specified by <a
 href="https://www.itu.int/rec/T-REC-Q.2110-199407-I/en">ITU-T
 Recommendation Q.2110</a> for ATM AAL5 traffic, and by NBAP packets for
 SCTP traffic.
-                <tr valign=top>
-<td>LINKTYPE_NFC_LLCP<td>245<td>DLT_NFC_LLCP<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_NFC_LLCP</td>
+<td class="number">245</td>
+<td class="symbol">DLT_NFC_LLCP</td>
+<td>
 <a href="linktypes/LINKTYPE_NFC_LLCP.html">Pseudo-header for NFC LLCP
 packet captures</a>, followed by frame data for the LLCP Protocol as
 specified by
 <a href="http://www.nfc-forum.org/specs/spec_list/">NFCForum-TS-LLCP_1.1</a>.
-                <tr valign=top>
-<td>LINKTYPE_INFINIBAND<td>247<td>DLT_INFINIBAND<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_INFINIBAND</td>
+<td class="number">247</td>
+<td class="symbol">DLT_INFINIBAND</td>
+<td>
 Raw InfiniBand frames, starting with the Local Routing Header, as
 specified in Chapter 5 "Data packet format" of <a
 href="https://www.afs.enea.it/asantoro/V1r1_2_1.Release_12062007.pdf">InfiniBand&#8482;
 Architectural Specification Release 1.2.1 Volume 1 - General
 Specifications</a>.
-                <tr valign=top>
-<td>LINKTYPE_SCTP<td>248<td>DLT_SCTP<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_SCTP</td>
+<td class="number">248</td>
+<td class="symbol">DLT_SCTP</td>
+<td>
 SCTP packets, as defined by <a
 href="https://tools.ietf.org/html/rfc4960">RFC 4960</a>, with no
 lower-level protocols such as IPv4 or IPv6.
-                <tr valign=top>
-<td>LINKTYPE_USBPCAP<td>249<td>DLT_USBPCAP<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_USBPCAP</td>
+<td class="number">249</td>
+<td class="symbol">DLT_USBPCAP</td>
+<td>
 USB packets, beginning with <a href="https://desowin.org/usbpcap/captureformat.html">a USBPcap
 header</a>.
-                <tr valign=top>
-<td>LINKTYPE_RTAC_SERIAL<td>250<td>DLT_RTAC_SERIAL<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_RTAC_SERIAL</td>
+<td class="number">250</td>
+<td class="symbol">DLT_RTAC_SERIAL</td>
+<td>
 <a href="linktypes/LINKTYPE_RTAC_SERIAL.html">Serial-line packet header
 for the Schweitzer Engineering Laboratories "RTAC" product</a>, followed
 by a payload for one of a number of industrial control protocols.
-                <tr valign=top>
-<td>LINKTYPE_BLUETOOTH_LE_LL<td>251<td>DLT_BLUETOOTH_LE_LL<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_BLUETOOTH_LE_LL</td>
+<td class="number">251</td>
+<td class="symbol">DLT_BLUETOOTH_LE_LL</td>
+<td>
 Bluetooth Low Energy air interface Link Layer packets, in the format
 described in section 2.1 "PACKET FORMAT" of volume 6 of the <a
 href="https://www.bluetooth.org/docman/handlers/downloaddoc.ashx?doc_id=229737">Bluetooth
 Specification Version 4.0</a> (see PDF page 2200), but without the
 Preamble.
-                <tr valign=top>
-<td>LINKTYPE_NETLINK<td>253<td>DLT_NETLINK<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_NETLINK</td>
+<td class="number">253</td>
+<td class="symbol">DLT_NETLINK</td>
+<td>
 <a href="linktypes/LINKTYPE_NETLINK.html">Linux Netlink capture
 encapsulation</a>.
-                <tr valign=top>
-<td>LINKTYPE_BLUETOOTH_LINUX_MONITOR<td>254<td>DLT_BLUETOOTH_LINUX_MONITOR<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_BLUETOOTH_LINUX_MONITOR</td>
+<td class="number">254</td>
+<td class="symbol">DLT_BLUETOOTH_LINUX_MONITOR</td>
+<td>
 <a href="linktypes/LINKTYPE_BLUETOOTH_LINUX_MONITOR.html">Bluetooth
 Linux Monitor encapsulation of traffic for the BlueZ stack</a>.
-                <tr valign=top>
-<td>LINKTYPE_BLUETOOTH_BREDR_BB<td>255<td>DLT_BLUETOOTH_BREDR_BB<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_BLUETOOTH_BREDR_BB</td>
+<td class="number">255</td>
+<td class="symbol">DLT_BLUETOOTH_BREDR_BB</td>
+<td>
 <a href="http://www.whiterocker.com/bt/LINKTYPE_BLUETOOTH_BREDR_BB.html">Bluetooth
 Basic Rate and Enhanced Data Rate baseband packets</a>.
-                <tr valign=top>
-<td>LINKTYPE_BLUETOOTH_LE_LL_WITH_PHDR<td>256<td>DLT_BLUETOOTH_LE_LL_WITH_PHDR<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_BLUETOOTH_LE_LL_WITH_PHDR</td>
+<td class="number">256</td>
+<td class="symbol">DLT_BLUETOOTH_LE_LL_WITH_PHDR</td>
+<td>
 <a href="linktypes/LINKTYPE_BLUETOOTH_LE_LL_WITH_PHDR.html">Bluetooth
 Low Energy link-layer packets</a>.
-                <tr valign=top>
-<td>LINKTYPE_PROFIBUS_DL<td>257<td>DLT_PROFIBUS_DL<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PROFIBUS_DL</td>
+<td class="number">257</td>
+<td class="symbol">DLT_PROFIBUS_DL</td>
+<td>
 PROFIBUS data link layer packets, as specified by IEC standard
 61158-4-3, beginning with the start delimiter, ending with the end
 delimiter, and including all octets between them.
-                <tr valign=top>
-<td>LINKTYPE_PKTAP<td>258<td>DLT_PKTAP<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PKTAP</td>
+<td class="number">258</td>
+<td class="symbol">DLT_PKTAP</td>
+<td>
 <a href="linktypes/LINKTYPE_PKTAP.html">Apple PKTAP capture
 encapsulation</a>.
-                <tr valign=top>
-<td>LINKTYPE_EPON<td>259<td>DLT_EPON<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_EPON</td>
+<td class="number">259</td>
+<td class="symbol">DLT_EPON</td>
+<td>
 Ethernet-over-passive-optical-network packets, starting with the last 6
 octets of the modified preamble as specified by 65.1.3.2 "Transmit" in
 Clause 65 of Section 5 of
 <a href="https://ieeexplore.ieee.org/document/7428776/">IEEE
 802.3</a>, followed immediately by an Ethernet frame.
-                <tr valign=top>
-<td>LINKTYPE_IPMI_HPM_2<td>260<td>DLT_IPMI_HPM_2<td>
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IPMI_HPM_2</td>
+<td class="number">260</td>
+<td class="symbol">DLT_IPMI_HPM_2</td>
+<td>
 IPMI trace packets, as specified by Table 3-20 "Trace Data Block Format"
 in
 <a href="http://www.picmg.org/v2internal/specifications2.cfm?thetype=One&thebusid=12">the PICMG HPM.2 specification</a>.
 The time stamps for packets in this format must match the time stamps in
 the Trace Data Blocks.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_ZWAVE_R1_R2</td><td>261</td><td>DLT_ZWAVE_R1_R2</td><td>
+
+<tr>
+<td class="symbol">LINKTYPE_ZWAVE_R1_R2</td>
+<td class="number">261</td>
+<td class="symbol">DLT_ZWAVE_R1_R2</td>
+<td>
 <a href="linktypes/LINKTYPE_ZWAVE_R1_R2.html">Z-Wave RF profile R1 and
 R2 packets</a>, as specified by <a
 href="https://www.itu.int/rec/T-REC-G.9959/en">ITU-T Recommendation
 G.9959</a>, with some MAC layer fields moved.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_ZWAVE_R3</td><td>262</td><td>DLT_ZWAVE_R3</td><td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_ZWAVE_R3</td>
+<td class="number">262</td>
+<td class="symbol">DLT_ZWAVE_R3</td>
+<td>
 <a href="linktypes/LINKTYPE_ZWAVE_R3.html">Z-Wave RF profile R3
 packets</a>, as specified by <a
 href="https://www.itu.int/rec/T-REC-G.9959/en">ITU-T Recommendation
 G.9959</a>, with some MAC layer fields moved.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_WATTSTOPPER_DLM</td><td>263</td><td>DLT_WATTSTOPPER_DLM</td><td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_WATTSTOPPER_DLM</td>
+<td class="number">263</td>
+<td class="symbol">DLT_WATTSTOPPER_DLM</td>
+<td>
 Formats for <a href="linktypes/LINKTYPE_WATTSTOPPER_DLM.html">WattStopper
 Digital Lighting Management</a> (DLM) and Legrand Nitoo Open protocol common
 packet structure captures.
 </td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_ISO_14443</td><td>264</td><td>DLT_ISO_14443</td><td>
+
+<tr>
+<td class="symbol">LINKTYPE_ISO_14443</td>
+<td class="number">264</td>
+<td class="symbol">DLT_ISO_14443</td>
+<td>
 Messages between ISO 14443 contactless smartcards (Proximity Integrated
 Circuit Card, PICC) and card readers (Proximity Coupling Device, PCD),
 with the message format specified by <a
@@ -678,19 +1217,33 @@ href="https://www.kaiser.cx/pcap-iso14443.html">the PCAP format for
 ISO14443 specification</a>.
 </td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_RDS</td><td>265</td><td>DLT_RDS</td><td>
+
+<tr>
+<td class="symbol">LINKTYPE_RDS</td>
+<td class="number">265</td>
+<td class="symbol">DLT_RDS</td>
+<td>
 Radio data system (RDS) groups, as per IEC 62106, encapsulated in <a
 href="linktypes/LINKTYPE_RDS.html">this form</a>.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_USB_DARWIN<td>266<td>DLT_USB_DARWIN<td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_USB_DARWIN</td>
+<td class="number">266</td>
+<td class="symbol">DLT_USB_DARWIN</td>
+<td>
 USB packets, beginning with a
 <a href="linktypes/LINKTYPE_USB_DARWIN.html">Darwin (macOS, etc.) USB
 header</a>.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_SDLC<td>268<td>DLT_SDLC<td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_SDLC</td>
+<td class="number">268</td>
+<td class="symbol">DLT_SDLC</td>
+<td>
 SDLC packets, as specified by Chapter 1, "DLC Links", section
 "Synchronous Data Link Control (SDLC)" of <a
 href="https://publibfp.dhe.ibm.com/epubs/pdf/d50a5007.pdf">Systems
@@ -698,129 +1251,225 @@ Network Architecture Formats, GA27-3136-20</a>, without the flag fields,
 zero-bit insertion, or Frame Check Sequence field, containing SNA path
 information units (PIUs) as the payload.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_LORATAP<td>270<td>DLT_LORATAP<td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LORATAP</td>
+<td class="number">270</td>
+<td class="symbol">DLT_LORATAP</td>
+<td>
 <a href="https://github.com/eriknl/LoRaTap/blob/master/README.md">LoRaTap
 pseudo-header</a>, followed by the payload, which is typically the
 PHYPayload from the <a
 href="https://lora-alliance.org/lorawan-for-developers">LoRaWan
 specification</a>.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_VSOCK<td>271<td>DLT_VSOCK<td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_VSOCK</td>
+<td class="number">271</td>
+<td class="symbol">DLT_VSOCK</td>
+<td>
 <a href="linktypes/LINKTYPE_VSOCK.html">Protocol for communication
 between host and guest machines in VMware and KVM hypervisors.</a>
 </td>
-                <tr valign=top>
-<td>LINKTYPE_NORDIC_BLE<td>272<td>DLT_NORDIC_BLE<td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_NORDIC_BLE</td>
+<td class="number">272</td>
+<td class="symbol">DLT_NORDIC_BLE</td>
+<td>
 Messages to and from a Nordic Semiconductor nRF Sniffer for Bluetooth LE
 packets, beginning with <a href="linktypes/LINKTYPE_NORDIC_BLE.html">a
 pseudo-header</a>.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_DOCSIS31_XRA31<td>273<td>DLT_DOCSIS31_XRA31<td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_DOCSIS31_XRA31</td>
+<td class="number">273</td>
+<td class="symbol">DLT_DOCSIS31_XRA31</td>
+<td>
 DOCSIS packets and bursts, preceded by <a
 href="https://support.excentis.com/index.php?/Knowledgebase/Article/View/159">a
 pseudo-header giving metadata about the packet</a>.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_ETHERNET_MPACKET<td>274<td>DLT_ETHERNET_MPACKET<td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_ETHERNET_MPACKET</td>
+<td class="number">274</td>
+<td class="symbol">DLT_ETHERNET_MPACKET</td>
+<td>
 mPackets, as specified by
 <a href="https://ieeexplore.ieee.org/document/7900321/">IEEE 802.3br</a>
 Figure 99-4, starting with the preamble and always ending with a CRC
 field.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_DISPLAYPORT_AUX</td><td>275</td><td>DLT_DISPLAYPORT_AUX</td><td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_DISPLAYPORT_AUX</td>
+<td class="number">275</td>
+<td class="symbol">DLT_DISPLAYPORT_AUX</td>
+<td>
 DisplayPort AUX channel monitoring data as specified by VESA
 DisplayPort(DP) Standard preceeded by a
 <a href="linktypes/LINKTYPE_DISPLAYPORT_AUX.html">pseudo-header</a>.
 </td>
-                <tr valign=top>
-<td>LINKTYPE_LINUX_SLL2<td>276<td>DLT_LINUX_SLL2<td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LINUX_SLL2</td>
+<td class="number">276</td>
+<td class="symbol">DLT_LINUX_SLL2</td>
+<td>
 <a href="linktypes/LINKTYPE_LINUX_SLL2.html">Linux "cooked" capture
 encapsulation v2</a>.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_OPENVIZSLA<td>278<td>DLT_OPENVIZSLA<td>
+
+<tr>
+<td class="symbol">LINKTYPE_OPENVIZSLA</td>
+<td class="number">278</td>
+<td class="symbol">DLT_OPENVIZSLA</td>
+<td>
 <a href="linktypes/LINKTYPE_OPENVIZSLA.html">Openvizsla FPGA-based USB sniffer</a>.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_EBHSCR<td>279<td>DLT_EBHSCR<td>
+
+<tr>
+<td class="symbol">LINKTYPE_EBHSCR</td>
+<td class="number">279</td>
+<td class="symbol">DLT_EBHSCR</td>
+<td>
 <a href="https://web.archive.org/web/20200502132428/https://d23rjziej2pu9i.cloudfront.net/wp-content/uploads/2019/03/04164842/EB_High_Speed_Capture_Replay_protocol.pdf">Elektrobit High Speed
 Capture and Replay (EBHSCR) format</a>.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_VPP_DISPATCH<td>280<td>DLT_VPP_DISPATCH<td>
+
+<tr>
+<td class="symbol">LINKTYPE_VPP_DISPATCH</td>
+<td class="number">280</td>
+<td class="symbol">DLT_VPP_DISPATCH</td>
+<td>
 Records in traces from the <a href="https://fd.io">http://fd.io</a> VPP
 graph dispatch tracer, in the <a
 href="https://fdio-vpp.readthedocs.io/en/latest/gettingstarted/developers/vnet.html#graph-dispatcher-pcap-tracing">the
 graph dispatcher trace format</a>.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_DSA_TAG_BRCM<td>281<td>DLT_DSA_TAG_BRCM<td>
+
+<tr>
+<td class="symbol">LINKTYPE_DSA_TAG_BRCM</td>
+<td class="number">281</td>
+<td class="symbol">DLT_DSA_TAG_BRCM</td>
+<td>
 Ethernet frames, with a
 <a href="linktypes/LINKTYPE_DSA_TAG_BRCM.html">switch tag</a> inserted
 between the source address field and the type/length field in the
 Ethernet header.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_DSA_TAG_BRCM_PREPEND<td>282<td>DLT_DSA_TAG_BRCM_PREPEND<td>
+
+<tr>
+<td class="symbol">LINKTYPE_DSA_TAG_BRCM_PREPEND</td>
+<td class="number">282</td>
+<td class="symbol">DLT_DSA_TAG_BRCM_PREPEND</td>
+<td>
 Ethernet frames, with a
 <a href="linktypes/LINKTYPE_DSA_TAG_BRCM_PREPEND.html">switch tag</a> inserted
 before the destination address in the Ethernet header.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_IEEE802_15_4_TAP<td>283<td>DLT_IEEE802_15_4_TAP<td>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_15_4_TAP</td>
+<td class="number">283</td>
+<td class="symbol">DLT_IEEE802_15_4_TAP</td>
+<td>
 <a href="https://ieeexplore.ieee.org/document/7460875/">IEEE
 802.15.4</a> Low-Rate Wireless Networks, with a
 <a
 href="https://github.com/jkcko/ieee802.15.4-tap/blob/master/IEEE%20802.15.4%20TAP%20Link%20Type%20Specification.pdf">pseudo-header
 containing TLVs with metadata</a> preceding the 802.15.4 header.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_DSA_TAG_DSA<td>284<td>DLT_DSA_TAG_DSA<td>
+
+<tr>
+<td class="symbol">LINKTYPE_DSA_TAG_DSA</td>
+<td class="number">284</td>
+<td class="symbol">DLT_DSA_TAG_DSA</td>
+<td>
 Ethernet frames, with a
 <a href="linktypes/LINKTYPE_DSA_TAG_DSA.html">switch tag</a> inserted
 between the source address field and the type/length field in the
 Ethernet header.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_DSA_TAG_EDSA<td>285<td>DLT_DSA_TAG_EDSA<td>
+
+<tr>
+<td class="symbol">LINKTYPE_DSA_TAG_EDSA</td>
+<td class="number">285</td>
+<td class="symbol">DLT_DSA_TAG_EDSA</td>
+<td>
 Ethernet frames, with a programmable Ethernet type
 <a href="linktypes/LINKTYPE_DSA_TAG_EDSA.html">switch tag</a> inserted
 between the source address field and the type/length field in the
 Ethernet header.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_ELEE<td>286<td>DLT_ELEE<td>
+
+<tr>
+<td class="symbol">LINKTYPE_ELEE</td>
+<td class="number">286</td>
+<td class="symbol">DLT_ELEE</td>
+<td>
 Payload of lawful intercept packets using
 <a
 href="http://xml2rfc.tools.ietf.org/cgi-bin/xml2rfc.cgi?url=http://socket.hr/draft-dfranusic-opsawg-elee-00.xml&modeAsFormat=html/ascii">the
 ELEE protocol</a>.  The packet begins with the ELEE header; it does not
 include any transport-layer or lower-layer headers for protcols used to
 transport ELEE packets.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_Z_WAVE_SERIAL<td>287<td>DLT_Z_WAVE_SERIAL<td>
+
+<tr>
+<td class="symbol">LINKTYPE_Z_WAVE_SERIAL</td>
+<td class="number">287</td>
+<td class="symbol">DLT_Z_WAVE_SERIAL</td>
+<td>
 Serial frames transmitted between a host and a Z-Wave chip over an
 RS-232 or USB serial connection, as described in section 5 of <a
 href="https://www.silabs.com/documents/login/user-guides/INS12350-Serial-API-Host-Appl.-Prg.-Guide.pdf">the
 Z-Wave Serial API Host Application Programming Guide</a>.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_USB_2_0<td>288<td>DLT_USB_2_0<td>
+
+<tr>
+<td class="symbol">LINKTYPE_USB_2_0</td>
+<td class="number">288</td>
+<td class="symbol">DLT_USB_2_0</td>
+<td>
 USB 2.0, 1.1, or 1.0 packet, beginning with a PID, as described by
 Chapter 8 "Protocol Layer" of the <a
 href="https://www.usb.org/document-library/usb-20-specification">the
 Universal Serial Bus Specification Revision 2.0</a>.
+</td>
 </tr>
-                <tr valign=top>
-<td>LINKTYPE_ATSC_ALP<td>289<td>DLT_ATSC_ALP<td>
+
+<tr>
+<td class="symbol">LINKTYPE_ATSC_ALP</td>
+<td class="number">289</td>
+<td class="symbol">DLT_ATSC_ALP</td>
+<td>
 ATSC Link-Layer Protocol frames, as described in section 5 of the A/330
 Link-Layer Protocol specification, found at
 <a href="https://www.atsc.org/atsc-documents/type/3-0-standards/">the
 ATSC 3.0 standards page</a>, beginning with a Base Header.
+</td>
 </tr>
               </table>
             </div>
