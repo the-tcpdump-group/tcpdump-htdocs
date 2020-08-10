@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Manpage of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 2 Mar 2020<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 10 Aug 2020<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -364,6 +364,43 @@ not 1,048,576 bytes).
 <DD>
 Dump the compiled packet-matching code in a human readable form to
 standard output and stop.
+<DT><DD>
+Please mind that although code compilation is always DLT-specific,
+typically it is impossible (and unnecessary) to specify which DLT to use
+for the dump because <I>tcpdump</I> uses either the DLT of the input pcap
+file specified with
+<B>-r</B>,
+
+or the default DLT of the network interface specified with
+<B>-i</B>,
+
+or the particular DLT of the network interface specified with
+<B>-y</B>
+
+and
+<B>-i</B>
+
+respectively. In these cases the dump shows the same exact code that
+would filter the input file or the network interface without
+<B>-d</B>.
+
+<DT><DD>
+However, when neither
+<B>-r</B>
+
+nor
+<B>-i</B>
+
+is specified, specifying
+<B>-d</B>
+
+prevents <I>tcpdump</I> from guessing a suitable network interface (see
+<B>-i</B>).
+
+In this case the DLT defaults to EN10MB and can be set to another valid
+value manually with
+<B>-y</B>.
+
 <DT><B>-dd</B>
 
 <DD>
@@ -528,7 +565,10 @@ Attempt to detect 802.11s draft mesh headers.
 
 Listen, report the list of link-layer types, report the list of time
 stamp types, or report the results of compiling a filter expression on
-<I>interface</I>.  If unspecified, <I>tcpdump</I> searches the system
+<I>interface</I>.  If unspecified and if the
+<B>-d</B>
+
+flag is not given, <I>tcpdump</I> searches the system
 interface list for the lowest numbered, configured up interface
 (excluding loopback), which may turn out to be, for example, ``eth0''.
 <DT><DD>
@@ -1099,7 +1139,13 @@ its link level header, in hex and ASCII.
 
 <DD>
 
-Set the data link type to use while capturing packets to <I>datalinktype</I>.
+Set the data link type to use while capturing packets (see
+<B>-L</B>)
+
+or just compiling and dumping packet-matching code (see
+<B>-d</B>)
+
+to <I>datalinktype</I>.
 <DT><B>-z</B><I> postrotate-command</I>
 
 <DD>
@@ -2574,6 +2620,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 22:50:32 GMT, July 28, 2020
+Time: 11:08:54 GMT, August 10, 2020
 </BODY>
 </HTML>
