@@ -4,8 +4,11 @@
 # tcpslice man pages for the www.tcpdump.org web-site. It is intended to be
 # run in tcpdump-htdocs git repository clone with the source man pages
 # available in ../tcpdump, ../libpcap and ../tcpslice git clones respectively.
-# To make the source man pages available it is sufficient to have ./configure
-# run successfully in each of those directories.
+#
+# A number of man pages in the tcpdump and libpcap repositories require
+# autotools processing, so if you have just updated any .in files there,
+# remember to run ./config.status (or even ./configure for complex changes) in
+# that working tree before running this script in this working tree.
 #
 # This script has been tested to work on the following Linux systems:
 #
