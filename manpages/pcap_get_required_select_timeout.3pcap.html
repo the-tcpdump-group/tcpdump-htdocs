@@ -130,7 +130,7 @@ anything to read from it or not.
 <P>
 
 All devices with a
-non-NULL
+non-<B>NULL</B>
 
 timeout must be put in non-blocking mode with
 <A HREF='/manpages/pcap_setnonblock.3pcap.html'><B>pcap_setnonblock</B></A>(3PCAP).
@@ -145,7 +145,10 @@ timeout has expired.  A call to
 or
 <A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP)
 
-will return 0 in this case, but will not block.
+will return
+<B>0</B>
+
+in this case, but will not block.
 <P>
 
 <B>pcap_get_required_select_timeout</B>()
@@ -178,7 +181,9 @@ and
 cannot be used on any capture source for which
 <B>pcap_get_selectable_fd</B>()
 
-returns -1.
+returns
+<B>-1</B>.
+
 <P>
 
 In libpcap release 1.10.0 and later, the timeout value can change from
@@ -232,6 +237,6 @@ even if the code must also work with libpcap 1.9.x.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 12:35:57 GMT, May 02, 2020
+Time: 18:53:47 GMT, August 21, 2020
 </BODY>
 </HTML>

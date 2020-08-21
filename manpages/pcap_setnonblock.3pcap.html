@@ -38,8 +38,10 @@ If there is an error,
 is returned and
 <I>errbuf</I>
 
-is filled in with an appropriate error message; otherwise, 0 is
-returned.
+is filled in with an appropriate error message; otherwise,
+<B>0</B>
+
+is returned.
 <P>
 
 In
@@ -50,7 +52,9 @@ with
 and
 <A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP)
 
-will, if no packets are currently available to be read, return 0
+will, if no packets are currently available to be read, return
+<B>0</B>
+
 immediately rather than blocking waiting for packets to arrive.
 <P>
 
@@ -63,7 +67,10 @@ available;
 should be used instead.
 <A HREF='/manpages/pcap_next_ex.3pcap.html'><B>pcap_next</B></A>(3PCAP)
 
-will return NULL if there are no packets currently available to read;
+will return
+<B>NULL</B>
+
+if there are no packets currently available to read;
 this is indistinguishable from an error, so
 <B>pcap_next_ex</B>()
 
@@ -86,7 +93,10 @@ is required in order to put it into ``non-blocking'' mode.
 <B>pcap_getnonblock</B>()
 
 returns the current ``non-blocking'' state of the capture descriptor; it
-always returns 0 on ``savefiles''.
+always returns
+<B>0</B>
+
+on ``savefiles''.
 If there is an error,
 <B>PCAP_ERROR</B>
 
@@ -117,6 +127,6 @@ chars.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 22:50:14 GMT, June 16, 2020
+Time: 18:53:49 GMT, August 21, 2020
 </BODY>
 </HTML>

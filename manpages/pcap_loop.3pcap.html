@@ -44,7 +44,13 @@ It does
 <B>not</B>
 
 return when live packet buffer timeouts occur.
-A value of -1 or 0 for
+A value of
+<B>-1</B>
+
+or
+<B>0</B>
+
+for
 <I>cnt</I>
 
 is equivalent to infinity, so that packets are processed until another
@@ -70,7 +76,13 @@ a minimum number; when reading a live capture, only one
 bufferful of packets is read at a time, so fewer than
 <I>cnt</I>
 
-packets may be processed. A value of -1 or 0 for
+packets may be processed. A value of
+<B>-1</B>
+
+or
+<B>0</B>
+
+for
 <I>cnt</I>
 
 causes all the packets received in one buffer to be processed when
@@ -90,9 +102,18 @@ but must not rely on it happening.
 <B>
 (In older versions of libpcap, the behavior when
 </B><I>cnt</I>
-was 0 was undefined; different platforms and devices behaved
+was
+<B>0</B>
+
+was undefined; different platforms and devices behaved
 differently, so code that must work with older versions of libpcap
-should use -1, not 0, as the value of
+should use
+<B>-1</B>,
+
+not
+<B>0</B>,
+
+as the value of
 <I>cnt</I>.)
 
 <P>
@@ -193,7 +214,10 @@ for Ethernet.
 
 <B>pcap_loop</B>()
 
-returns 0 if
+returns
+<B>0</B>
+
+if
 <I>cnt</I>
 
 is exhausted or if, when reading from a ``savefile'', no more packets
@@ -264,6 +288,6 @@ as an argument to fetch or display the error text.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 08:49:50 GMT, May 01, 2020
+Time: 18:53:47 GMT, August 21, 2020
 </BODY>
 </HTML>

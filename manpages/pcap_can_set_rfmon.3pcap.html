@@ -31,8 +31,13 @@ the handle is activated.
 
 <B>pcap_can_set_rfmon</B>()
 
-returns 0 if monitor mode could not be set,
-1 if monitor mode could be set, and a negative value on error.
+returns
+<B>0</B>
+
+if monitor mode could not be set,
+<B>1</B>
+
+if monitor mode could be set, and a negative value on error.
 A negative return value indicates what error condition occurred.
 The possible error values are:
 <DL COMPACT>
@@ -67,7 +72,12 @@ as an argument to fetch or display a message describing the error.
 <P>
 
 Additional error codes may be added in the future; a program should
-check for 0, 1, and negative, return codes, and treat all negative
+check for
+<B>0</B>,
+
+<B>1</B>,
+
+and negative, return codes, and treat all negative
 return codes as errors.
 <A HREF='/manpages/pcap_statustostr.3pcap.html'><B>pcap_statustostr</B></A>(3PCAP)
 
@@ -90,6 +100,6 @@ message describing the warning or error code.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 23:39:56 GMT, January 10, 2020
+Time: 18:53:46 GMT, August 21, 2020
 </BODY>
 </HTML>

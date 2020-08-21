@@ -23,12 +23,12 @@ pcap_is_swapped - find out whether a savefile has the native byte order
 
 <B>pcap_is_swapped</B>()
 
-returns true (1) if
+returns true (<B>1</B>) if
 <I>p</I>
 
 refers to a ``savefile'' that uses a different byte order
 than the current system.  For a live capture, it always returns false
-(0).
+(<B>0</B>).
 <P>
 
 It must not be called on a pcap descriptor created by
@@ -42,7 +42,7 @@ that has not yet been activated by
 
 <B>pcap_is_swapped</B>()
 
-returns true (1) or false (0) on success and
+returns true (<B>1</B>) or false (<B>0</B>) on success and
 <B>PCAP_ERROR_NOT_ACTIVATED</B>
 
 if called on a capture handle that has been created but not activated.
@@ -57,6 +57,6 @@ if called on a capture handle that has been created but not activated.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 23:39:59 GMT, January 10, 2020
+Time: 18:53:47 GMT, August 21, 2020
 </BODY>
 </HTML>
