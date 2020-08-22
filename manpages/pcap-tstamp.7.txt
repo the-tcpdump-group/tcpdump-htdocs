@@ -48,7 +48,7 @@ DESCRIPTION
               incremented for a leap second, so that the  fraction-of-a-second
               part  of the time stamp might roll over past zero but the second
               part would not change, or the  clock  might  run  slightly  more
-              slowly for a pariod before the leap second.
+              slowly for a period before the leap second.
 
        For these reasons, time differences between packet time stamps will not
        necessarily accurately reflect the time differences between the receipt

@@ -16,7 +16,7 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_datalink_name_to_val() returns  the  type  value  on  success  and
-       PCAP_ERROR if the name is not a known type name..
+       PCAP_ERROR if the name is not a known type name.
 
 SEE ALSO
        pcap(3PCAP)

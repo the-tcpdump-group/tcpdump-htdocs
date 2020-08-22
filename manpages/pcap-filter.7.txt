@@ -266,7 +266,7 @@ DESCRIPTION
               backslash (\).
 
               [In the case of FDDI (e.g., `fddi proto arp'), Token Ring (e.g.,
-              `tr proto arp'), and IEEE  802.11  wireless  LANS  (e.g.,  `wlan
+              `tr proto arp'), and IEEE  802.11  wireless  LANs  (e.g.,  `wlan
               proto arp'), for most of those protocols, the protocol identifi-
               cation comes from the 802.2 Logical Link Control  (LLC)  header,
               which  is  usually  layered  on  top of the FDDI, Token Ring, or
@@ -322,16 +322,16 @@ DESCRIPTION
               tocols.
 
        decnet src host
-              True  if  the  DECNET  source  address  is host, which may be an
-              address of the form ``10.123'', or a DECNET host name.   [DECNET
+              True  if  the  DECnet  source  address  is host, which may be an
+              address of the form ``10.123'', or a DECnet host name.   [DECnet
               host  name  support is only available on ULTRIX systems that are
-              configured to run DECNET.]
+              configured to run DECnet.]
 
        decnet dst host
-              True if the DECNET destination address is host.
+              True if the DECnet destination address is host.
 
        decnet host host
-              True if either the DECNET source or destination address is host.
+              True if either the DECnet source or destination address is host.
 
        llc    True if the packet has an 802.2 LLC header.  This includes:
 
