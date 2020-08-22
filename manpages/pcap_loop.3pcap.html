@@ -1,8 +1,8 @@
-<HTML><HEAD><TITLE>Manpage of PCAP_LOOP</TITLE>
+<HTML><HEAD><TITLE>Man page of PCAP_LOOP</TITLE>
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
-<H1>Manpage of PCAP_LOOP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
+<H1>Man page of PCAP_LOOP</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2020<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -97,25 +97,6 @@ timeout expires when there are no packets available,
 will return 0, even when not in non-blocking mode, as there are no
 packets to process.  Applications should be prepared for this to happen,
 but must not rely on it happening.
-<P>
-
-<B>
-(In older versions of libpcap, the behavior when
-</B><I>cnt</I>
-was
-<B>0</B>
-
-was undefined; different platforms and devices behaved
-differently, so code that must work with older versions of libpcap
-should use
-<B>-1</B>,
-
-not
-<B>0</B>,
-
-as the value of
-<I>cnt</I>.)
-
 <P>
 
 <I>callback</I>
@@ -278,6 +259,27 @@ may be called with
 
 as an argument to fetch or display the error text.
 <A NAME="lbAF">&nbsp;</A>
+<H2>BACKWARD COMPATIBILITY</H2>
+
+<P>
+
+In libpcap versions before 1.5.0, the behavior when
+<I>cnt</I>
+
+was
+<B>0</B>
+
+was undefined; different platforms and devices behaved differently,
+so code that must work with these versions of libpcap should use
+<B>-1</B>,
+
+not
+<B>0</B>,
+
+as the value of
+<I>cnt</I>.
+
+<A NAME="lbAG">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
 <A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
@@ -288,6 +290,6 @@ as an argument to fetch or display the error text.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 18:53:47 GMT, August 21, 2020
+Time: 10:53:05 GMT, August 22, 2020
 </BODY>
 </HTML>
