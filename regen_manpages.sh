@@ -66,9 +66,9 @@ printSedFile()
 	cat <<ENDOFFILE
 s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX">Return to Main Contents</A>@g
 s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
-s@^<HTML><HEAD><TITLE>Man page of @<HTML><HEAD><TITLE>Manpage of @
+s@^<HTML><HEAD><TITLE>Manpage of @<HTML><HEAD><TITLE>Man page of @
 s@</HEAD><BODY>@<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">\n</HEAD><BODY>@
-s@<H1>@<H1>Manpage of @
+s@<H1>@<H1>Man page of @
 s@<A HREF="file://\(.*\)">\(.*\)</A>@\2@g
 s/^using the manual pages.<BR>$/using the manual pages from "The Tcpdump Group" git repositories.<BR>/
 ENDOFFILE
