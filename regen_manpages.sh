@@ -45,7 +45,7 @@ stripContentTypeHeader()
 stripIndexSection()
 {
 	local readonly infile=${1:?}
-	case `basename "$infile"` in
+	case $(basename "$infile") in
 	tcpdump.1|tcpslice.1|pcap.3pcap)
 		cat
 		;;
@@ -74,12 +74,12 @@ s/^using the manual pages.<BR>$/using the manual pages from "The Tcpdump Group" 
 ENDOFFILE
 
 	# Convert links to non-local pages to plain text.
-	printNonLocalManPages | while read mansection mantopic; do
+	printNonLocalManPages | while read -r mansection mantopic; do
 		echo "s@<A HREF=\"$MAN2HTML_PFX?${mansection}+${mantopic}\">$mantopic</A>@$mantopic@g"
 	done
 
 	# Fixup links to local pages, part 1.
-	while read mantopic manfile; do
+	while read -r mantopic manfile; do
 		echo "s@<A HREF=\"${MAN2HTML_PFX}?${mantopic}\"@<A HREF=\"$manfile\"@g"
 	done <<ENDOFLIST
 7+pcap-linktype		$WEBSITE_PFX/pcap-linktype.7.html
@@ -93,7 +93,7 @@ ENDOFFILE
 ENDOFLIST
 
 	# Fixup links to local pages, part 2.
-	print3PCAPMap | while read mantopic manfile; do
+	print3PCAPMap | while read -r mantopic manfile; do
 		manfile="${WEBSITE_PFX}/${manfile:-$mantopic}.3pcap.html"
 		# Two substitutions below make up for the new smartness added
 		# in man2html-1.6-13.g.fc20.
@@ -223,21 +223,21 @@ produceHTML()
 	local readonly infile=${1:?}
 	local readonly sedfile="${2:?}"
 	local readonly outfile=${3:?}
-	[ -s $infile ] || {
+	[ -s "$infile" ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
 	}
 	# A possible alternative: mandoc -T html $infile > $outfile
-	man2html -M $MAN2HTML_PFX $infile | stripContentTypeHeader | \
-		stripIndexSection $infile | sed --file="$sedfile" > $outfile
+	man2html -M $MAN2HTML_PFX "$infile" | stripContentTypeHeader | \
+		stripIndexSection "$infile" | sed --file="$sedfile" > "$outfile"
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
-	git show $outfile >/dev/null 2>&1 || {
+	git show "$outfile" >/dev/null 2>&1 || {
 		echo "Updated but not in repository: $outfile"
 		return
 	}
-	git diff $outfile | tail --lines +5 | egrep '^[-+]' | egrep -q -v '^[-+]Time: ' || {
-		git checkout --quiet $outfile
+	git diff "$outfile" | tail --lines +5 | grep -E '^[-+]' | grep -E -q -v '^[-+]Time: ' || {
+		git checkout --quiet "$outfile"
 		return
 	}
 	echo "Updated: $outfile"
@@ -247,19 +247,19 @@ produceTXT()
 {
 	local readonly infile=${1:?}
 	local readonly outfile=${2:?}
-	[ -s $infile ] || {
+	[ -s "$infile" ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
 	}
-	man -E ascii $infile > $outfile
-	git diff $outfile | egrep -q '^[-+]' && echo "Updated: $outfile"
+	man -E ascii "$infile" > "$outfile"
+	git diff "$outfile" | grep -E -q '^[-+]' && echo "Updated: $outfile"
 }
 
 known3PCAPFile()
 {
-	local readonly f=`basename ${1:?} .3pcap`
+	local readonly f=$(basename "${1:?}" .3pcap)
 	local manfile mantopic
-	print3PCAPMap | while read mantopic manfile; do
+	print3PCAPMap | while read -r mantopic manfile; do
 		if [ "${manfile:-$mantopic}" = "$f" ]; then
 			# Cannot just return 0 or 1 because the while end of
 			# the pipe may be in a sub-shell.
@@ -278,13 +278,13 @@ updateOutputFiles()
 	}
 
 	# $COLUMNS doesn't always work
-	local readonly cols=`stty size | cut -d' ' -f2`
+	local readonly cols=$(stty size | cut -d' ' -f2)
 	if [ "$cols" != "80" ]; then
 		echo "This terminal must be 80 ($cols right now) columns wide"
 		exit 1
 	fi
 
-	local readonly sedfile="`mktemp --tmpdir manpages_sedfile.XXXXXX`"
+	local readonly sedfile=$(mktemp --tmpdir manpages_sedfile.XXXXXX)
 	printSedFile > "$sedfile"
 
 	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
@@ -302,12 +302,12 @@ updateOutputFiles()
 	produceHTML ../libpcap/rpcapd/rpcapd-config.manfile "$sedfile" manpages/rpcapd-config.5.html
 
 	for f in ../libpcap/*.3pcap; do
-		[ "`known3PCAPFile $f`" = 'no' ] && echo "WARNING: file $f is not in the 3PCAP map"
+		[ "$(known3PCAPFile "$f")" = 'no' ] && echo "WARNING: file $f is not in the 3PCAP map"
 	done
 
 	for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
-		produceTXT $f manpages/`basename $f`.txt
-		produceHTML $f "$sedfile" manpages/`basename $f`.html
+		produceTXT "$f" "manpages/$(basename "$f").txt"
+		produceHTML "$f" "$sedfile" "manpages/$(basename "$f").html"
 	done
 
 	rm -f "$sedfile"
