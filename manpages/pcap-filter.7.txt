@@ -261,9 +261,9 @@ DESCRIPTION
        ether proto protocol
               True if the packet is of ether type protocol.  Protocol can be a
               number or one of the names aarp, arp, atalk,  decnet,  ip,  ip6,
-              ipx,  iso,  lat,  mopdl, moprc, netbeui, rarp, sca or stp.  Note
-              these identifiers are also keywords  and  must  be  escaped  via
-              backslash (\).
+              ipx,  iso,  lat,  loopback,  mopdl, moprc, netbeui, rarp, sca or
+              stp.  Note these identifiers (except loopback) are also keywords
+              and must be escaped via backslash (\).
 
               [In the case of FDDI (e.g., `fddi proto arp'), Token Ring (e.g.,
               `tr proto arp'), and IEEE  802.11  wireless  LANs  (e.g.,  `wlan
@@ -780,4 +780,4 @@ BUGS
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                 20 June 2020                   PCAP-FILTER(7)
+                                28 August 2020                  PCAP-FILTER(7)
