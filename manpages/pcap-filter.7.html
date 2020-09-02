@@ -2,7 +2,7 @@
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 28 August 2020<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 2 September 2020<BR>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -57,7 +57,7 @@ Possible types are
 and
 <B>portrange</B>.
 
-E.g., `host foo', `net 128.3', `port 20', `portrange 6000-6008'.
+E.g., `<B>host</B> foo', `<B>net</B> 128.3', `<B>port</B> 20', `<B>portrange</B> 6000-6008'.
 If there is no type
 qualifier,
 <B>host</B>
@@ -91,12 +91,9 @@ Possible directions are
 and
 <B>addr4</B>.
 
-E.g., `src foo', `dst net 128.3', `src or dst port ftp-data'.
+E.g., `<B>src</B> foo', `<B>dst net</B> 128.3', `<B>src or dst port</B> ftp-data'.
 If
-there is no dir qualifier,
-<B>src or dst</B>
-
-is assumed.
+there is no dir qualifier, `<B>src or dst</B>' is assumed.
 The
 <B>ra</B>,
 
@@ -141,20 +138,21 @@ protos are:
 and
 <B>udp</B>.
 
-E.g., `ether src foo', `arp net 128.3', `tcp port 21', `udp portrange
-7000-7009', `wlan addr2 0:2:3:4:5:6'.
+E.g., `<B>ether src</B> foo', `<B>arp net</B> 128.3', `<B>tcp port</B> 21',
+`<B>udp portrange</B> 7000-7009', `<B>wlan addr2</B> 0:2:3:4:5:6'.
 If there is
 no proto qualifier, all protocols consistent with the type are
 assumed.
-E.g., `src foo' means `(ip or arp or rarp) src foo'
-(except the latter is not legal syntax), `net bar' means `(ip or
-arp or rarp) net bar' and `port 53' means `(tcp or udp) port 53'.
+E.g., `<B>src</B> foo' means `<B>(ip or arp or rarp) src</B> foo'
+(except the latter is not legal syntax), `<B>net</B> bar' means `<B>(ip or
+arp or rarp) net</B> bar' and `<B>port</B> 53' means `<B>(tcp or udp)
+port</B> 53'.
 </DL>
 <P>
 
-[`fddi' is actually an alias for `ether'; the parser treats them
+[<B>fddi</B> is actually an alias for <B>ether</B>; the parser treats them
 identically as meaning ``the data link level used on the specified
-network interface.''  FDDI headers contain Ethernet-like source
+network interface''.  FDDI headers contain Ethernet-like source
 and destination addresses, and often contain Ethernet-like packet
 types, so you can filter on these FDDI fields just as with the
 analogous Ethernet fields.
@@ -162,7 +160,7 @@ FDDI headers also contain other fields,
 but you cannot name them explicitly in a filter expression.
 <P>
 
-Similarly, `tr' and `wlan' are aliases for `ether'; the previous
+Similarly, <B>tr</B> and <B>wlan</B> are aliases for <B>ether</B>; the previous
 paragraph's statements about FDDI headers also apply to Token Ring
 and 802.11 wireless LAN headers.  For 802.11 headers, the destination
 address is the DA field and the source address is the SA field; the
@@ -191,12 +189,13 @@ More complex filter expressions are built up by using the words
 and
 <B>not</B>
 
+(or equivalently: `<B>&amp;&amp;</B>', `<B>||</B>' and `<B>!</B>' respectively)
 to combine primitives.
-E.g., `host foo and not port ftp and not port ftp-data'.
+E.g., `<B>host</B> foo <B>and not port</B> ftp <B>and not port</B> ftp-data'.
 To save typing, identical qualifier lists can be omitted.
 E.g.,
-`tcp dst port ftp or ftp-data or domain' is exactly the same as
-`tcp dst port ftp or tcp dst port ftp-data or tcp dst port domain'.
+`<B>tcp dst port</B> ftp <B>or</B> ftp-data <B>or</B> domain' is exactly the same as
+`<B>tcp dst port</B> ftp <B>or tcp dst port</B> ftp-data <B>or tcp dst port</B> domain'.
 <P>
 
 Allowable primitives are:
@@ -220,11 +219,11 @@ Any of the above host expressions can be prepended with the keywords,
 which is equivalent to:
 
 <PRE>
-<B>ether proto </B><I>\ip</I><B> and host </B><I>host</I>
+<B>ether proto \ip and host </B><I>host</I>
 </PRE>
 
 
-If <I>host</I> is a name with multiple IP addresses, each address will
+If <I>host</I> is a name with multiple IPv4 addresses, each address will
 be checked for a match.
 <DT><B>ether dst </B><I>ehost</I><DD>
 True if the Ethernet destination address is <I>ehost</I>.
@@ -283,26 +282,26 @@ True if the IPv4/v6 address matches <I>net</I> with a netmask <I>len</I>
 bits wide.
 May be qualified with <B>src</B> or <B>dst</B>.
 <DT><B>dst port </B><I>port</I><DD>
-True if the packet is ip/tcp, ip/udp, ip6/tcp or ip6/udp and has a
+True if the packet is IPv4 TCP, IPv4 UDP, IPv6 TCP or IPv6 UDP and has a
 destination port value of <I>port</I>.
 The <I>port</I> can be a number or a name used in /etc/services (see
-<I>tcp</I>(4P)
+<B>tcp</B>(4P)
 
 and
-<I>udp</I>(4P)).
+<B>udp</B>(4P)).
 
 If a name is used, both the port
 number and protocol are checked.
 If a number or ambiguous name is used,
-only the port number is checked (e.g., <B>dst port 513</B> will print both
-tcp/login traffic and udp/who traffic, and <B>port domain</B> will print
+only the port number is checked (e.g., `<B>dst port</B> 513' will print both
+tcp/login traffic and udp/who traffic, and `<B>port domain</B>' will print
 both tcp/domain and udp/domain traffic).
 <DT><B>src port </B><I>port</I><DD>
 True if the packet has a source port value of <I>port</I>.
 <DT><B>port </B><I>port</I><DD>
 True if either the source or destination port of the packet is <I>port</I>.
-<DT><B>dst portrange </B><I>port1</I><B>-</B><I>port2</I><DD>
-True if the packet is ip/tcp, ip/udp, ip6/tcp or ip6/udp and has a
+<DT><B>dst portrange </B><I>port1-port2</I><DD>
+True if the packet is IPv4 TCP, IPv4 UDP, IPv6 TCP or IPv6 UDP and has a
 destination port value between <I>port1</I> and <I>port2</I>.
 <I>port1</I>
 
@@ -315,10 +314,10 @@ are interpreted in the same fashion as the
 parameter for
 <B>port</B>.
 
-<DT><B>src portrange </B><I>port1</I><B>-</B><I>port2</I><DD>
+<DT><B>src portrange </B><I>port1-port2</I><DD>
 True if the packet has a source port value between <I>port1</I> and
 <I>port2</I>.
-<DT><B>portrange </B><I>port1</I><B>-</B><I>port2</I><DD>
+<DT><B>portrange </B><I>port1-port2</I><DD>
 True if either the source or destination port of the packet is between
 <I>port1</I> and <I>port2</I>.
 <DT><DD>
@@ -330,13 +329,13 @@ the keywords, <B>tcp</B> or <B>udp</B>, as in:
 </PRE>
 
 
-which matches only tcp packets whose source port is <I>port</I>.
+which matches only TCP packets whose source port is <I>port</I>.
 <DT><B>less </B><I>length</I><DD>
 True if the packet has a length less than or equal to <I>length</I>.
 This is equivalent to:
 
 <PRE>
-<B>len &lt;= </B><I>length</I>.
+<B>len &lt;= </B><I>length</I>
 </PRE>
 
 
@@ -345,13 +344,13 @@ True if the packet has a length greater than or equal to <I>length</I>.
 This is equivalent to:
 
 <PRE>
-<B>len &gt;= </B><I>length</I>.
+<B>len &gt;= </B><I>length</I>
 </PRE>
 
 
 <DT><B>ip proto </B><I>protocol</I><DD>
 True if the packet is an IPv4 packet (see
-<I>ip</I>(4P))
+<B>ip</B>(4P))
 
 of protocol type <I>protocol</I>.
 <I>Protocol</I> can be a number or one of the names
@@ -371,11 +370,11 @@ header chain.
 Abbreviations for:
 
 <PRE>
-<B>proto </B><I>p</I><B>
+<B>proto \</B><I>protocol</I><B>
 </B></PRE>
 
 
-where <I>p</I> is one of the above protocols.
+where <I>protocol</I> is one of the above protocols.
 <DT><B>ip6 protochain </B><I>protocol</I><DD>
 True if the packet is IPv6 packet,
 and contains protocol header with type <I>protocol</I>
@@ -383,7 +382,7 @@ in its protocol header chain.
 For example,
 
 <PRE>
-<B>ip6 protochain 6</B>
+<B>ip6 protochain</B> 6
 </PRE>
 
 
@@ -403,7 +402,7 @@ True if the packet is an IPv4 or IPv6 packet of protocol type
 header chain.
 <DT><B>ether broadcast</B><DD>
 True if the packet is an Ethernet broadcast packet.
-The <I>ether</I>
+The <B>ether</B>
 keyword is optional.
 <DT><B>ip broadcast</B><DD>
 True if the packet is an IPv4 broadcast packet.
@@ -420,7 +419,7 @@ check will not work correctly.
 True if the packet is an Ethernet multicast packet.
 The <B>ether</B>
 keyword is optional.
-This is shorthand for `<B>ether[0] &amp; 1 != 0</B>'.
+This is shorthand for `<B>ether[</B>0<B>] &amp; </B>1<B> != </B>0'.
 <DT><B>ip multicast</B><DD>
 True if the packet is an IPv4 multicast packet.
 <DT><B>ip6 multicast</B><DD>
@@ -434,9 +433,9 @@ True if the packet is of ether type <I>protocol</I>.
 Note these identifiers (except <B>loopback</B>) are also keywords
 and must be escaped via backslash (\).
 <DT><DD>
-[In the case of FDDI (e.g., `<B>fddi proto arp</B>'), Token Ring
-(e.g., `<B>tr proto arp</B>'), and IEEE 802.11 wireless LANs (e.g.,
-`<B>wlan proto arp</B>'), for most of those protocols, the
+[In the case of FDDI (e.g., `<B>fddi proto \arp</B>'), Token Ring
+(e.g., `<B>tr proto \arp</B>'), and IEEE 802.11 wireless LANs (e.g.,
+`<B>wlan proto \arp</B>'), for most of those protocols, the
 protocol identification comes from the 802.2 Logical Link Control (LLC)
 header, which is usually layered on top of the FDDI, Token Ring, or
 802.11 header.
@@ -485,20 +484,20 @@ IPX, and the IPX etype in a SNAP frame.
 Abbreviations for:
 
 <PRE>
-<B>ether proto </B><I>p</I>
+<B>ether proto \</B><I>protocol</I>
 </PRE>
 
 
-where <I>p</I> is one of the above protocols.
+where <I>protocol</I> is one of the above protocols.
 <DT><B>lat</B>, <B>moprc</B>, <B>mopdl</B><DD>
 Abbreviations for:
 
 <PRE>
-<B>ether proto </B><I>p</I>
+<B>ether proto \</B><I>protocol</I>
 </PRE>
 
 
-where <I>p</I> is one of the above protocols.
+where <I>protocol</I> is one of the above protocols.
 Note that not all applications using
 <A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
@@ -532,7 +531,7 @@ Token Ring packets (no check is done for LLC frames);
 FDDI packets (no check is done for LLC frames);
 <DT><DD>
 LLC-encapsulated ATM packets, for SunATM on Solaris.
-<DT><B>llc</B> Fitype<DD>
+<DT><B>llc</B> <I>type</I><DD>
 True if the packet has an 802.2 LLC header and has the specified
 <I>type</I>.
 
@@ -766,46 +765,46 @@ Valid directions are:
 or a numeric value.
 <DT><B>vlan </B><I>[vlan_id]</I><DD>
 True if the packet is an IEEE 802.1Q VLAN packet.
-If <I>[vlan_id]</I> is specified, only true if the packet has the specified
+If the optional <I>vlan_id</I> is specified, only true if the packet has the specified
 <I>vlan_id</I>.
-Note that the first <B>vlan</B> keyword encountered in <I>expression</I>
-changes the decoding offsets for the remainder of <I>expression</I> on
-the assumption that the packet is a VLAN packet.  The <B>vlan
-</B><I>[vlan_id]</I> expression may be used more than once, to filter on VLAN
-hierarchies.  Each use of that expression increments the filter offsets
+Note that the first <B>vlan</B> keyword encountered in an expression
+changes the decoding offsets for the remainder of the expression on
+the assumption that the packet is a VLAN packet.  The `<B>vlan
+</B><I>[vlan_id]</I>` keyword may be used more than once, to filter on VLAN
+hierarchies.  Each use of that keyword increments the filter offsets
 by 4.
 <DT><DD>
 For example:
 
 <PRE>
-<B>vlan 100 &amp;&amp; vlan 200</B>
+<B>vlan</B> 100 <B>&amp;&amp; vlan</B> 200
 </PRE>
 
 
 filters on VLAN 200 encapsulated within VLAN 100, and
 
 <PRE>
-<B>vlan &amp;&amp; vlan 300 &amp;&amp; ip</B>
+<B>vlan &amp;&amp; vlan </B>300 <B>&amp;&amp; ip</B>
 </PRE>
 
 
-filters IPv4 protocols encapsulated in VLAN 300 encapsulated within any
+filters IPv4 protocol encapsulated in VLAN 300 encapsulated within any
 higher order VLAN.
 <DT><B>mpls </B><I>[label_num]</I><DD>
 True if the packet is an MPLS packet.
-If <I>[label_num]</I> is specified, only true is the packet has the specified
+If the optional <I>label_num</I> is specified, only true if the packet has the specified
 <I>label_num</I>.
-Note that the first <B>mpls</B> keyword encountered in <I>expression</I>
-changes the decoding offsets for the remainder of <I>expression</I> on
+Note that the first <B>mpls</B> keyword encountered in an expression
+changes the decoding offsets for the remainder of the expression on
 the assumption that the packet is a MPLS-encapsulated IP packet.  The
-<B>mpls </B><I>[label_num]</I> expression may be used more than once, to
-filter on MPLS hierarchies.  Each use of that expression increments the
+`<B>mpls </B><I>[label_num]</I>` keyword may be used more than once, to
+filter on MPLS hierarchies.  Each use of that keyword increments the
 filter offsets by 4.
 <DT><DD>
 For example:
 
 <PRE>
-<B>mpls 100000 &amp;&amp; mpls 1024</B>
+<B>mpls</B> 100000 <B>&amp;&amp; mpls</B> 1024
 </PRE>
 
 
@@ -813,7 +812,7 @@ filters packets with an outer label of 100000 and an inner label of
 1024, and
 
 <PRE>
-<B>mpls &amp;&amp; mpls 1024 &amp;&amp; host 192.9.200.1</B>
+<B>mpls &amp;&amp; mpls</B> 1024 <B>&amp;&amp; host</B> 192.9.200.1
 </PRE>
 
 
@@ -825,36 +824,36 @@ type 0x8863).
 <DT><B>pppoes </B><I>[session_id]</I><DD>
 True if the packet is a PPP-over-Ethernet Session packet (Ethernet
 type 0x8864).
-If <I>[session_id]</I> is specified, only true if the packet has the specified
+If the optional <I>session_id</I> is specified, only true if the packet has the specified
 <I>session_id</I>.
-Note that the first <B>pppoes</B> keyword encountered in <I>expression</I>
-changes the decoding offsets for the remainder of <I>expression</I> on
+Note that the first <B>pppoes</B> keyword encountered in an expression
+changes the decoding offsets for the remainder of the expression on
 the assumption that the packet is a PPPoE session packet.
 <DT><DD>
 For example:
 
 <PRE>
-<B>pppoes 0x27 &amp;&amp; ip</B>
+<B>pppoes</B> 0x27 <B>&amp;&amp; ip</B>
 </PRE>
 
 
-filters IPv4 protocols encapsulated in PPPoE session id 0x27.
+filters IPv4 protocol encapsulated in PPPoE session id 0x27.
 <DT><B>geneve </B><I>[vni]</I><DD>
-True if the packet is a Geneve packet (UDP port 6081). If <I>[vni]</I>
+True if the packet is a Geneve packet (UDP port 6081). If the optional <I>vni</I>
 is specified, only true if the packet has the specified <I>vni</I>.
 Note that when the <B>geneve</B> keyword is encountered in
-<I>expression</I>, it changes the decoding offsets for the remainder of
-<I>expression</I> on the assumption that the packet is a Geneve packet.
+an expression, it changes the decoding offsets for the remainder of
+the expression on the assumption that the packet is a Geneve packet.
 <DT><DD>
 For example:
 
 <PRE>
-<B>geneve 0xb &amp;&amp; ip</B>
+<B>geneve</B> 0xb <B>&amp;&amp; ip</B>
 </PRE>
 
 
-filters IPv4 protocols encapsulated in Geneve with VNI 0xb. This will
-match both IP directly encapsulated in Geneve as well as IP contained
+filters IPv4 protocol encapsulated in Geneve with VNI 0xb. This will
+match both IPv4 directly encapsulated in Geneve as well as IPv4 contained
 inside an Ethernet frame.
 <DT><B>iso proto </B><I>protocol</I><DD>
 True if the packet is an OSI packet of protocol type <I>protocol</I>.
@@ -864,11 +863,11 @@ True if the packet is an OSI packet of protocol type <I>protocol</I>.
 Abbreviations for:
 
 <PRE>
-<B>iso proto </B><I>p</I>
+<B>iso proto \</B><I>protocol</I>
 </PRE>
 
 
-where <I>p</I> is one of the above protocols.
+where <I>protocol</I> is one of the above protocols.
 <DT><B>l1</B>, <B>l2</B>, <B>iih</B>, <B>lsp</B>, <B>snp</B>, <B>csnp</B>, <B>psnp</B><DD>
 Abbreviations for IS-IS PDU types.
 <DT><B>vpi</B> <I>n</I><DD>
@@ -884,8 +883,8 @@ virtual channel identifier of
 <DT><B>lane</B><DD>
 True if the packet is an ATM packet, for SunATM on Solaris, and is
 an ATM LANE packet.
-Note that the first <B>lane</B> keyword encountered in <I>expression</I>
-changes the tests done in the remainder of <I>expression</I>
+Note that the first <B>lane</B> keyword encountered in an expression
+changes the tests done in the remainder of the expression
 on the assumption that the packet is either a LANE emulated Ethernet
 packet or a LANE LE Control packet.  If <B>lane</B> isn't specified, the
 tests are done under the assumption that the packet is an
@@ -949,7 +948,7 @@ indicates the protocol layer for the index operation.
 (<B>ether, fddi, wlan, tr, ppp, slip</B> and <B>link</B> all refer to the
 link layer. <B>radio</B> refers to the &quot;radio header&quot; added to some
 802.11 captures.)
-Note that <I>tcp, udp</I> and other upper-layer protocol types only
+Note that <B>tcp</B>, <B>udp</B> and other upper-layer protocol types only
 apply to IPv4, not IPv6 (this will be fixed in the future).
 The byte offset, relative to the indicated protocol layer, is
 given by <I>expr</I>.
@@ -958,16 +957,16 @@ field of interest; it can be either one, two, or four, and defaults to one.
 The length operator, indicated by the keyword <B>len</B>, gives the
 length of the packet.
 <P>
-For example, `<B>ether[0] &amp; 1 != 0</B>' catches all multicast traffic.
-The expression `<B>ip[0] &amp; 0xf != 5</B>'
+For example, `<B>ether[</B>0<B>] &amp;</B> 1 <B>!=</B> 0' catches all multicast traffic.
+The expression `<B>ip[</B>0<B>] &amp;</B> 0xf <B>!=</B> 5'
 catches all IPv4 packets with options.
 The expression
-`<B>ip[6:2] &amp; 0x1fff = 0</B>'
+`<B>ip[</B>6:2<B>] &amp;</B> 0x1fff <B>=</B> 0'
 catches only unfragmented IPv4 datagrams and frag zero of fragmented
 IPv4 datagrams.
 This check is implicitly applied to the <B>tcp</B> and <B>udp</B>
 index operations.
-For instance, <B>tcp[0]</B> always means the first
+For instance, <B>tcp[</B>0<B>]</B> always means the first
 byte of the TCP <I>header</I>, and never means the first byte of an
 intervening fragment.
 <P>
@@ -1021,7 +1020,7 @@ Alternation (`<B>||</B>' or `<B>or</B>').
 </DL>
 <P>
 
-Negation has highest precedence.
+Negation has the highest precedence.
 Alternation and concatenation have equal precedence and associate
 left to right.
 Note that explicit <B>and</B> tokens, not juxtaposition,
@@ -1033,21 +1032,21 @@ is assumed.
 For example,
 
 <PRE>
-<B>not host vs and ace</B>
+<B>not host</B> vs <B>and</B> ace
 </PRE>
 
 
 is short for
 
 <PRE>
-<B>not host vs and host ace</B>
+<B>not host</B> vs <B>and host</B> ace
 </PRE>
 
 
 which should not be confused with
 
 <PRE>
-<B>not ( host vs or ace )</B>
+<B>not (host </B>vs<B> or </B>ace<B>)</B>
 </PRE>
 
 
@@ -1056,30 +1055,30 @@ which should not be confused with
 
 <P>
 
-To select all packets arriving at or departing from <I>sundown</I>:
+To select all packets arriving at or departing from `sundown':
 <DL COMPACT><DT><DD>
 <PRE>
-<B>host sundown</B>
+<B>host</B> sundown
 </PRE>
 
 </DL>
 
 <P>
 
-To select traffic between <I>helios</I> and either <I>hot</I> or <I>ace</I>:
+To select traffic between `helios' and either `hot' or `ace':
 <DL COMPACT><DT><DD>
 <PRE>
-<B>host helios and \( hot or ace \)</B>
+<B>host</B> helios <B>and (</B>hot <B>or</B> ace<B>)</B>
 </PRE>
 
 </DL>
 
 <P>
 
-To select all IP packets between <I>ace</I> and any host except <I>helios</I>:
+To select all IPv4 packets between `ace' and any host except `helios':
 <DL COMPACT><DT><DD>
 <PRE>
-<B>ip host ace and not helios</B>
+<B>ip host</B> ace <B>and not</B> helios
 </PRE>
 
 </DL>
@@ -1089,29 +1088,29 @@ To select all IP packets between <I>ace</I> and any host except <I>helios</I>:
 To select all traffic between local hosts and hosts at Berkeley:
 <DL COMPACT><DT><DD>
 <PRE>
-<B>net ucb-ether</B>
+<B>net</B> ucb-ether
 </PRE>
 
 </DL>
 
 <P>
 
-To select all ftp traffic through internet gateway <I>snup</I>:
+To select all FTP traffic through Internet gateway `snup':
 <DL COMPACT><DT><DD>
 <PRE>
-<B>gateway snup and (port ftp or ftp-data)</B>
+<B>gateway</B> snup <B>and (port</B> ftp <B>or</B> ftp-data<B>)</B>
 </PRE>
 
 </DL>
 
 <P>
 
-To select traffic neither sourced from nor destined for local hosts
+To select IPv4 traffic neither sourced from nor destined for local hosts
 (if you gateway to one other net, this stuff should never make it
 onto your local net).
 <DL COMPACT><DT><DD>
 <PRE>
-<B>ip and not net </B><I>localnet</I>
+<B>ip and not net </B>localnet
 </PRE>
 
 </DL>
@@ -1122,7 +1121,7 @@ To select the start and end packets (the SYN and FIN packets) of each
 TCP conversation that involves a non-local host.
 <DL COMPACT><DT><DD>
 <PRE>
-<B>tcp[tcpflags] &amp; (tcp-syn|tcp-fin) != 0 and not src and dst net </B><I>localnet</I>
+<B>tcp[tcpflags] &amp; (tcp-syn|tcp-fin) !=</B> 0 <B>and not src and dst net</B> localnet
 </PRE>
 
 </DL>
@@ -1146,30 +1145,30 @@ packets that contain data, not, for example, SYN and FIN packets and
 ACK-only packets.  (IPv6 is left as an exercise for the reader.)
 <DL COMPACT><DT><DD>
 <PRE>
-<B>tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)</B>
-</PRE>
+<B>tcp port</B> 80 <B>and (((ip[</B>2:2<B>] - ((ip[</B>0<B>]&amp;</B>0xf<B>)&lt;&lt;</B>2<B>)) - ((tcp[</B>12<B>]&amp;</B>0xf0<B>)&gt;&gt;</B>2<B>)) != </B>0<B>)
+</B></PRE>
 
 </DL>
 
 <P>
 
-To select IP packets longer than 576 bytes sent through gateway <I>snup</I>:
+To select IPv4 packets longer than 576 bytes sent through gateway `snup':
 <DL COMPACT><DT><DD>
 <PRE>
-<B>gateway snup and ip[2:2] &gt; 576</B>
+<B>gateway</B> snup <B>and ip[</B>2:2<B>] &gt;</B> 576
 </PRE>
 
 </DL>
 
 <P>
 
-To select IP broadcast or multicast packets that were
+To select IPv4 broadcast or multicast packets that were
 <I>not</I>
 
 sent via Ethernet broadcast or multicast:
 <DL COMPACT><DT><DD>
 <PRE>
-<B>ether[0] &amp; 1 = 0 and ip[16] &gt;= 224</B>
+<B>ether[</B>0<B>] &amp;</B> 1 <B>=</B> 0 <B>and ip[</B>16<B>] &gt;=</B> 224
 </PRE>
 
 </DL>
@@ -1212,14 +1211,11 @@ Filter expressions on fields other than those in 802.11 headers will not
 correctly handle 802.11 data packets with both To DS and From DS set.
 <P>
 
-<B>ip6 proto</B>
-
+`<B>ip6 proto</B>'
 should chase header chain, but at this moment it does not.
-<B>ip6 protochain</B>
-
-is supplied for this behavior.  For example, to match ipv6 fragments:
-<B>ip6 protochain 44</B>
-
+`<B>ip6 protochain</B>'
+is supplied for this behavior.  For example, to match IPv6 fragments:
+`<B>ip6 protochain</B> 44'
 <P>
 
 Arithmetic expression against transport layer headers, like <B>tcp[0]</B>,
@@ -1231,6 +1227,6 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 19:54:43 GMT, August 28, 2020
+Time: 23:38:56 GMT, September 02, 2020
 </BODY>
 </HTML>
