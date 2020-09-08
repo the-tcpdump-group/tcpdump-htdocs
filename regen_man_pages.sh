@@ -70,8 +70,11 @@ s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX">Ret
 s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
 s@^<HTML><HEAD><TITLE>Manpage of @<HTML><HEAD><TITLE>Man page of @
 s@</HEAD><BODY>@<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">\n</HEAD><BODY>@
+s@</HEAD><BODY>@<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\n</HEAD><BODY>@
 s@<H1>@<H1>Man page of @
 s@<A HREF="file://\(.*\)">\(.*\)</A>@\2@g
+s@</BODY>@<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>\n\0@
+s@</BODY>@<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>\n\0@
 s/^using the manual pages.<BR>$/using the manual pages from "The Tcpdump Group" git repositories.<BR>/
 ENDOFFILE
 
