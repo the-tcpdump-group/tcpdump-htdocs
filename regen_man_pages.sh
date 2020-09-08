@@ -32,11 +32,13 @@
 readonly MAN2HTML_PFX=/cgi-bin/man/man2html
 readonly WEBSITE_PFX=/manpages
 
-# Fedora man2html prepends its HTML output with a Content-type header.
-# Ubuntu man2html in addition to that adds the <!DOCTYPE ...> XML tag
-# before the HTML. For portability strip both variants of the preamble.
+# Both Fedora and Ubuntu man2html versions prepend their output with a
+# Content-type header. Only the Ubuntu version generates a document type
+# declaration. For consistent and valid results replace everything before
+# the <HTML> tag with an explicit hard-coded <!DOCTYPE ...> line.
 stripContentTypeHeader()
 {
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'
 	sed -n '/^<HTML><HEAD><TITLE>/,$p'
 }
 
