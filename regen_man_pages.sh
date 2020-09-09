@@ -122,6 +122,7 @@ pcap_create
 pcap_datalink
 pcap_datalink_name_to_val
 pcap_datalink_val_to_description				pcap_datalink_val_to_name
+pcap_datalink_val_to_description_or_dlt				pcap_datalink_val_to_name
 pcap_datalink_val_to_name
 pcap_dispatch							pcap_loop
 pcap_dump
