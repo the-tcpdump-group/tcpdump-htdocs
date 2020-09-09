@@ -25,9 +25,9 @@ DESCRIPTION
 
        pcap_datalink_val_to_description_or_dlt()   translates   a   link-layer
        header type value to a short description of that link-layer header type
-       just like pcap_datalink_val_to_description.  If the type value does not
-       correspond to a known DLT_ value, the string "DLT n" is returned, where
-       n is the value of the dlt argument.
+       just  like  pcap_datalink_val_to_description().  If the type value does
+       not correspond to a known DLT_ value, the string "DLT n"  is  returned,
+       where n is the value of the dlt argument.
 
 SEE ALSO
        pcap(3PCAP)

@@ -439,6 +439,7 @@ DESCRIPTION
                      get name for a link-layer header type
 
               pcap_datalink_val_to_description(3PCAP)
+              pcap_datalink_val_to_description_or_dlt(3PCAP)
                      get description for a link-layer header type
 
               pcap_datalink_name_to_val(3PCAP)
@@ -742,4 +743,4 @@ BUGS
        ture, provide generic feedback etc please see the file  CONTRIBUTING.md
        in the libpcap source tree root.
 
-                                29 January 2020                    PCAP(3PCAP)
+                               9 September 2020                    PCAP(3PCAP)
