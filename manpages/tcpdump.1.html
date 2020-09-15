@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 29 Aug 2020<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 15 September 2020<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -1018,7 +1018,10 @@ When writing to a file with the
 option and at the same time not reading from a file with the
 <B>-r</B>
 
-option, report, once per second, the number of packets captured.
+option, report to stderr, once per second, the number of packets captured. In
+Solaris, FreeBSD and possibly other operating systems this periodic update
+currently can cause loss of captured packets on their way from the kernel to
+tcpdump.
 <DT><B>-vv</B>
 
 <DD>
@@ -2625,7 +2628,7 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 22:39:04 GMT, September 08, 2020
+Time: 11:54:02 GMT, September 15, 2020
 <a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
 <a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
 </BODY>

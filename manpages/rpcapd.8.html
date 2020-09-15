@@ -116,7 +116,10 @@ Rpcapd can run in two modes: passive mode (default) and active mode.
 In passive mode, the client (e.g., a network sniffer) connects to
 <B>rpcapd</B>.
 
-It then sends hem the appropriate commands to start the capture.
+The client then sends the appropriate commands to
+<B>rpcapd</B>
+
+to start the capture.
 <P>
 
 In active mode,
@@ -143,17 +146,27 @@ the same way in both active and passive mode.
 
 <P>
 
-The user can create a configuration file in the same folder of the
+The user can create a configuration file in the same directory as the
 executable, and put the configuration commands in there. In order for
-rpcapd to execute the commands, you have to restart it on Win32, i.e.
-the initialization file is parsed only at the beginning). The UNIX
-version of rpcapd will reread the configuration file when receiving a
+<B>rpcapd</B>
+
+to execute the commands, it needs to be restarted on Win32, i.e.
+the configuration file is parsed only at the beginning. The UNIX
+version of
+<B>rpcapd</B>
+
+will reread the configuration file upon receiving a
 HUP signal. In that case, all the existing connections remain in place,
 while the new connections will be created according to the new parameters.
 <P>
 
 In case a user does not want to create the configuration file manually,
-they can launch rpcapd with the requested parameters plus &quot;-s filename&quot;.
+they can launch
+<B>rpcapd</B>
+
+with the desired flags plus
+<B>-s filename</B>.
+
 Rpcapd will parse all the parameters and save them into the specified
 configuration file.
 <A NAME="lbAF">&nbsp;</A>
@@ -162,11 +175,14 @@ configuration file.
 <P>
 
 The remote daemon is installed automatically when installing WinPcap.
-The installation process places the rpcapd file into the WinPcap folder.
+The installation process places the
+<B>rpcapd</B>
+
+executable file into the WinPcap folder.
 This file can be executed either from the command line, or as a service.
 For instance, the installation process updates the list of available
 services list and it creates a new item (Remote Packet Capture Protocol
-v.0 (experimental) ).  To avoid security problems, the service is
+v.0 (experimental)).  To avoid security problems, the service is
 inactive and it has to be started manually (control panel -
 administrative tools - services - start).
 <P>
@@ -184,7 +200,10 @@ flag.
 
 <P>
 
-The rpcapd executable can be launched directly, i.e.  it can run in the
+The
+<B>rpcapd</B>
+
+executable can be launched directly, i.e.  it can run in the
 foreground as well (not as a daemon/service).  The procedure is quite
 simple: you have to invoke the executable from the command line with all
 the requested parameters except for the
@@ -282,8 +301,8 @@ it accepts passive connections as well.
 <DT><B>-d</B>
 
 <DD>
-Run in daemon mode (UNIX only) or as a service (Win32 only)
-Warning (Win32): this switch is provided automatically when
+Run in daemon mode (UNIX only) or as a service (Win32 only).
+Warning (Win32): this flag is specified automatically when
 the service is started from the control panel.
 <DT><B>-i</B>
 
@@ -309,9 +328,9 @@ Load the current configuration from
 <I>config_file</I>
 
 in the format specified by
-<B><A HREF="/manpages/rpcapd-config.5.html">rpcapd-config</A></B>(5);
+<B><A HREF="/manpages/rpcapd-config.5.html">rpcapd-config</A></B>(5)
 
-all switches specified from the command line are ignored.
+and ignore all flags specified on the command line.
 <DT><B>-h</B>
 
 <DD>
@@ -319,7 +338,10 @@ Print this help screen.
 </DL>
 <P>
 
-If rpcapd was compiled with SSL support, these options are also
+If
+<B>rpcapd</B>
+
+was compiled with SSL support, the following options are also
 available:
 <DL COMPACT>
 <DT><B>-S</B>
@@ -366,7 +388,7 @@ as the SSL certificate file.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 22:39:01 GMT, September 08, 2020
+Time: 11:53:58 GMT, September 15, 2020
 <a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
 <a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
 </BODY>
