@@ -200,8 +200,8 @@ OPTIONS
               specified by -w which should include a time format as defined by
               strftime(3).  If no time format is specified, each new file will
               overwrite the previous.  Whenever a generated  filename  is  not
-              unique, tcpdump will overwrite the preexisting data; providing a
-              time specification that is coarser than the  capture  period  is
+              unique,  tcpdump will overwrite the pre-existing data; providing
+              a time specification that is coarser than the capture period  is
               therefore not advised.
 
               If  used  in conjunction with the -C option, filenames will take
@@ -733,12 +733,12 @@ OUTPUT FORMAT
 
        ARP/RARP Packets
 
-       Arp/rarp output shows the type of request and its arguments.  The  for-
+       ARP/RARP output shows the type of request and its arguments.  The  for-
        mat  is  intended to be self explanatory.  Here is a short sample taken
        from the start of an `rlogin' from host rtsg to host csam:
               arp who-has csam tell rtsg
               arp reply csam is-at CSAM
-       The first line says that rtsg sent an arp packet asking for the  Ether-
+       The first line says that rtsg sent an ARP packet asking for the  Ether-
        net  address  of  internet  host  csam.  Csam replies with its Ethernet
        address (in this example, Ethernet addresses are in caps  and  internet
        addresses in lower case).
@@ -822,14 +822,14 @@ OUTPUT FORMAT
        login on csam.  The S indicates that the SYN flag was set.  The  packet
        sequence  number was 768512 and it contained no data.  (The notation is
        `first:last' which means `sequence numbers first up to but not  includ-
-       ing  last'.)  There was no piggy-backed ack, the available receive win-
+       ing  last'.)  There was no piggy-backed ACK, the available receive win-
        dow was 4096 bytes and there was a max-segment-size  option  requesting
-       an mss of 1024 bytes.
+       an MSS of 1024 bytes.
 
        Csam  replies  with  a similar packet except it includes a piggy-backed
-       ack for rtsg's SYN.  Rtsg then acks csam's SYN.  The `.' means the  ACK
+       ACK for rtsg's SYN.  Rtsg then ACKs csam's SYN.  The `.' means the  ACK
        flag  was  set.   The  packet  contained  no  data  so there is no data
-       sequence number or length.  Note that the  ack  sequence  number  is  a
+       sequence number or length.  Note that the  ACK  sequence  number  is  a
        small  integer  (1).  The first time tcpdump sees a TCP `conversation',
        it prints the sequence number from the packet.  On  subsequent  packets
        of  the  conversation,  the  difference  between  the  current packet's
@@ -1019,7 +1019,7 @@ OUTPUT FORMAT
 
        UDP format is illustrated by this rwho packet:
               actinide.who > broadcast.who: udp 84
-       This says that port who on host actinide sent a udp  datagram  to  port
+       This says that port who on host actinide sent a UDP  datagram  to  port
        who on host broadcast, the Internet broadcast address.  The packet con-
        tained 84 bytes of user data.
 
@@ -1142,7 +1142,7 @@ OUTPUT FORMAT
        on  the filter expression used).  Because the -v flag is given, some of
        the file attributes (which are returned in addition to the  file  data)
        are  printed:  the file type (``REG'', for regular file), the file mode
-       (in octal), the uid and gid, and the file size.
+       (in octal), the UID and GID, and the file size.
 
        If the -v flag is given more than once, even more details are printed.
 
@@ -1273,7 +1273,7 @@ OUTPUT FORMAT
        Helios responds with 8 512-byte packets.  The  `:digit'  following  the
        transaction  id gives the packet sequence number in the transaction and
        the number in parens is the amount of data in the packet, excluding the
-       atp header.  The `*' on packet 7 indicates that the EOM bit was set.
+       ATP header.  The `*' on packet 7 indicates that the EOM bit was set.
 
        Jssmag.209  then  requests that packets 3 & 5 be retransmitted.  Helios
        resends them then jssmag.209 releases the transaction.   Finally,  jss-
@@ -1311,7 +1311,7 @@ BUGS
        security@tcpdump.org.
 
        To  report  bugs and other problems, contribute patches, request a fea-
-       ture, provide generic feedback etc please see the file CONTRIBUTING  in
+       ture, provide generic feedback etc. please see the file CONTRIBUTING in
        the tcpdump source tree root.
 
        NIT doesn't let you watch your own outbound traffic, BPF will.  We rec-
@@ -1327,9 +1327,9 @@ BUGS
 
               all of a packet, not just the part that's  within  the  snapshot
               length,  will be copied from the kernel (the 2.0[.x] packet cap-
-              ture mechanism, if asked to copy only part of a packet to  user-
-              land,  will not report the true length of the packet; this would
-              cause most IP packets to get an error from tcpdump);
+              ture mechanism, if asked to  copy  only  part  of  a  packet  to
+              userspace,  will  not report the true length of the packet; this
+              would cause most IP packets to get an error from tcpdump);
 
               capturing on some PPP devices won't work correctly.
 
