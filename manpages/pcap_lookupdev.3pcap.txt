@@ -35,7 +35,7 @@ BUGS
        subsequent calls to pcap_lookupdev() in the same thread,  or  calls  to
        pcap_lookupdev() in another thread, may overwrite that buffer.
 
-       In  WinPcap,  this  function  may return a UTF-16 string rather than an
-       ASCII or UTF-8 string.
+       In  WinPcap  and Npcap, this function may return a UTF-16 string rather
+       than an ASCII or UTF-8 string.
 
                                8 September 2017          PCAP_LOOKUPDEV(3PCAP)

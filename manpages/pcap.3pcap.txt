@@ -678,8 +678,8 @@ DESCRIPTION
        If you have the required privileges, you can inject packets onto a net-
        work  with  a  pcap_t  for  a  live  capture,  using  pcap_inject()  or
        pcap_sendpacket().  (The two routines exist for compatibility with both
-       OpenBSD and WinPcap; they perform the same function, but have different
-       return values.)
+       OpenBSD and WinPcap/Npcap; they perform the  same  function,  but  have
+       different return values.)
 
        Routines
 

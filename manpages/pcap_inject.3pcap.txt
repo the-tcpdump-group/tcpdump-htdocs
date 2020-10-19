@@ -35,8 +35,8 @@ DESCRIPTION
 
        pcap_sendpacket() is like pcap_inject(), but it returns 0  on  success,
        rather  than  returning  the  number  of bytes written.  (pcap_inject()
-       comes from OpenBSD; pcap_sendpacket() comes  from  WinPcap.   Both  are
-       provided for compatibility.)
+       comes from OpenBSD; pcap_sendpacket() comes from  WinPcap/Npcap.   Both
+       are provided for compatibility.)
 
 RETURN VALUE
        pcap_inject()  returns  the  number  of  bytes  written  on success and
