@@ -1,0 +1,154 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates <http://www.freecsstemplates.org>
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html>
+
+    <!-- HEAD -->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>LINKTYPE_ETW | TCPDUMP/LIBPCAP public repository</title>
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="canonical" href="https://www.tcpdump.org">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../related.html">Related Projects</a></li>
+                <li><a href="../license.html">Licenses</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+                <li><a href="../mirrors.html">Mirrors</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_ETW section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_ETW</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+                <pre>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/                                                               /
+/                        EVENT_HEADER                           /
+/                                                               /
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 80 bytes
+|                      ETW_BUFFER_CONTEXT                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                        UserDataLength                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      MessageLength                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      ProviderNameLength                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/                          UserData                             /
+/              variable length, padded to 32 bits               /
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/                          Message                              /
+/              variable length, padded to 32 bits               /
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/                          ProviderName                         /
+/              variable length, padded to 32 bits               /
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+
+                <h3>Description</h3>
+<p>
+All multi-byte numerical fields are little-endian. All primitive types in this document are from Windows and their size can be found on <a href="https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=msvc-160">this MSDN page</a>.
+</p>
+<p>
+EVENT_HEADER is 80 bytes long data struct defined by Microsoft. It is declared on <a href="https://docs.microsoft.com/en-us/windows/win32/api/evntcons/ns-evntcons-event_header">this MSDN page</a>.
+</p>
+<p>
+The bit values of Flags in EVENT_HEADER are
+</p>
+<pre>
+#define EVENT_HEADER_FLAG_EXTENDED_INFO         0x0001
+#define EVENT_HEADER_FLAG_PRIVATE_SESSION       0x0002
+#define EVENT_HEADER_FLAG_STRING_ONLY           0x0004
+#define EVENT_HEADER_FLAG_TRACE_MESSAGE         0x0008
+#define EVENT_HEADER_FLAG_NO_CPUTIME            0x0010
+#define EVENT_HEADER_FLAG_32_BIT_HEADER         0x0020
+#define EVENT_HEADER_FLAG_64_BIT_HEADER         0x0040
+#define EVENT_HEADER_FLAG_CLASSIC_HEADER        0x0100
+</pre>
+<p>
+The bit values of EventProperty in EVENT_HEADER are
+</p>
+<pre>
+#define EVENT_HEADER_PROPERTY_XML               0x0001
+#define EVENT_HEADER_PROPERTY_FORWARDED_XML     0x0002
+#define EVENT_HEADER_PROPERTY_LEGACY_EVENTLOG   0x0004
+</pre>
+<p>
+ETW_BUFFER_CONTEXT is 4 bytes long data struct defined by Microsoft. It is declared on <a href="https://docs.microsoft.com/en-us/windows/win32/api/relogger/ns-relogger-etw_buffer_context">this MSDN page</a>.
+</p>
+<p>
+UserDataLength is the length of UserData, the UserDataLength doesn't include the padding bytes of UserData.
+<p>
+MessageLength is the length of Message, the MessageLength doesn't include the padding bytes of Message.
+</p>
+<p>
+ProviderNameLength is the length of ProviderName, the ProviderNameLength doesn't include the padding bytes of ProviderName.
+</p>
+<p>
+UserData is specific event data of the provider, its format is defined by the provider.
+</p>
+<p>
+Message is a null-terminated UTF-16 string that contains the event message string.
+</p>
+<p>
+Providername is a null-terminated UTF-16 string that contains the event provider name string.
+</p>
+            </div>
+            <!-- End of LINKTYPE_ETW section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                &copy; 2010-2020 The Tcpdump Group. Designed by
+                <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
+                based on a template by <a href="http://www.freecsstemplates.org/">
+                Free CSS Templates</a>.
+                <a href="https://validator.w3.org/check?uri=referer">[Valid HTML
+                4.01]</a> <a href="https://jigsaw.w3.org/css-validator/check/referer">
+                [Valid CSS]</a>
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
