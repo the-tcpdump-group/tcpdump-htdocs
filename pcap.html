@@ -331,7 +331,7 @@ of using loops.  For this we use pcap_next().
 <p>The first argument is our session handler. The second argument is a 
 pointer to a structure that holds general information about the packet, 
 specifically the time in which it was sniffed, the length of this packet, and 
-the length of his specific portion (incase it is fragmented, for example.) 
+the length of his specific portion (in case it is fragmented, for example.) 
 pcap_next() returns a u_char pointer to the packet that is described by this 
 structure. We'll discuss the technique for actually reading the packet 
 itself later.

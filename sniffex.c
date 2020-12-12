@@ -159,7 +159,7 @@
  * Code Comments
  *
  * This section contains additional information and explanations regarding
- * comments in the source code. It serves as documentaion and rationale
+ * comments in the source code. It serves as documentation and rationale
  * for why the code is written as it is without hindering readability, as it
  * might if it were placed along with the actual code inline. References in
  * the code appear as footnote notation (e.g. [1]).
