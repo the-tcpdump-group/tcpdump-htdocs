@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 15 September 2020<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 21 December 2020<BR><A HREF="#index">Index</A>
 <A HREF="/manpages">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -1114,6 +1114,10 @@ bytes will be printed.  Note that this is the entire link-layer
 packet, so for link layers that pad (e.g. Ethernet), the padding bytes
 will also be printed when the higher layer packet is shorter than the
 required padding.
+In the current implementation this flag may have the same effect as
+<B>-xx</B>
+
+if the packet is truncated.
 <DT><B>-xx</B>
 
 <DD>
@@ -1130,6 +1134,10 @@ When parsing and printing,
 in addition to printing the headers of each packet, print the data of
 each packet (minus its link level header) in hex and ASCII.
 This is very handy for analysing new protocols.
+In the current implementation this flag may have the same effect as
+<B>-XX</B>
+
+if the packet is truncated.
 <DT><B>-XX</B>
 
 <DD>
@@ -2628,7 +2636,7 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 16:58:46 GMT, October 17, 2020
+Time: 02:49:50 GMT, December 21, 2020
 <a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
 <a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
 </BODY>
