@@ -56,6 +56,16 @@ are supported, this will return the file offset without truncation.
 
 is returned on error.
 <A NAME="lbAE">&nbsp;</A>
+<H2>BACKWARD COMPATIBILITY</H2>
+
+The function
+<B>pcap_dump_ftell64</B>()
+
+became available in libpcap release 1.9.0.  In previous releases, there
+was no mechanism to obtain a file offset that is too large to fit in a
+<B>long</B>.
+
+<A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
 <A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
@@ -66,7 +76,7 @@ is returned on error.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 22:39:02 GMT, September 08, 2020
+Time: 13:35:07 GMT, December 21, 2020
 <a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
 <a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
 </BODY>

@@ -21,6 +21,11 @@ DESCRIPTION
        that  fit  in a int64_t are supported, this will return the file offset
        without truncation.  PCAP_ERROR is returned on error.
 
+BACKWARD COMPATIBILITY
+       The function pcap_dump_ftell64() became available  in  libpcap  release
+       1.9.0.   In  previous releases, there was no mechanism to obtain a file
+       offset that is too large to fit in a long.
+
 SEE ALSO
        pcap(3PCAP)
 

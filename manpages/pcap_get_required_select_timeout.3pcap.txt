@@ -69,6 +69,11 @@ BACKWARD COMPATIBILITY
        for each call to select(), poll(), epoll_wait(), or  kevent()  even  if
        the code must also work with libpcap 1.9.x.
 
+BACKWARD COMPATIBILITY
+       This  function  became available in libpcap release 1.9.0.  In previous
+       releases, select(), poll(), epoll_wait(), and  kevent()  could  not  be
+       used for devices that don't provide a selectable file descriptor.
+
 SEE ALSO
        pcap(3PCAP),    pcap_get_selectable_fd(3PCAP),    select(2),   poll(2),
        epoll_wait(2), kqueue(2)

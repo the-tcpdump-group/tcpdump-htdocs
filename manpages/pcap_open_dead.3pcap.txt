@@ -31,6 +31,12 @@ DESCRIPTION
        written have time stamps in seconds and nanoseconds.   Its  value  does
        not affect pcap_compile(3PCAP).
 
+BACKWARD COMPATIBILITY
+       The pcap_open_dead_with_tstamp_precision() function became available in
+       libpcap release 1.5.1.  In previous releases, there was no mechanism to
+       open  a  savefile  for  writing  with  time stamps given in seconds and
+       nanoseconds.
+
 SEE ALSO
        pcap(3PCAP), pcap-linktype(7)
 
