@@ -236,3 +236,15 @@ table.linktypedlt td.number {
 	font-family: monospace;
 	text-align: right;
 }
+
+table.byte_array {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+table.byte_array th, table.byte_array td {
+	border: 1px solid black;
+	padding: 12px;
+}
+table.byte_array_8 th:nth-last-child(-n+8), table.byte_array_8 td:nth-last-child(-n+8) {
+	width: 12.5%;
+}
