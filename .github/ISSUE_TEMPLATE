@@ -1,0 +1,9 @@
+Please mind that most .html files in this repository are auto-generated, and
+that most new .html files should be auto-generated too. Hence if you want to
+make simple changes, most likely you need to make them in the `htmlsrc`
+directory first and then to run the `regen_html_pages.sh` script to get a
+complete changeset ready for the live web-site (and a commit).
+
+Likewise, any corrections to the man pages must be made in respective git
+repository first, then the `regen_man_pages.sh` can regenerate the .html and
+.txt versions of the man pages. See the script code for detailed comments.
