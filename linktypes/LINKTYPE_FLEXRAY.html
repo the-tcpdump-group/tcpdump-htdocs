@@ -56,7 +56,10 @@ Original license : Creative Commons Attribution 2.5 License
 
 <p>This document is based on <a href="https://gitlab.com/wireshark/wireshark/-/issues/12033">Add a dissector for FlexRay</a> ticket in WireShark</p>
 
-<p>There are two different types of FlexRay Packets - FlexRay Frame Data Packets and FlexRay Symbol Packets.</p>
+<p>
+There are two different types of FlexRay Packets - FlexRay Frame Data
+Packets and FlexRay Symbol Packets.
+</p>
 
 <ul>
 	<li>FlexRay Frame Data Packet
@@ -67,8 +70,7 @@ Original license : Creative Commons Attribution 2.5 License
 			<tr>
 				<td>Measurement Header (1 byte)</td>
 				<td>Error Flags (1 byte)</td>
-				<td>Frame Header (5 bytes)</td>
-				<td>Frame Payload (0 … 254 bytes)</td>
+				<td>FlexRay Frame (5 bytes + 0-254 bytes)</td>
 			</tr>
 		</table>
 	</li>
@@ -159,128 +161,23 @@ TSSVIOL: TSS violation
 </pre>
 
 <h4>FlexRay Frame (5 bytes + 0..254 bytes)</h4>
-<p>Extra low-level bits (TSS, FSS, BSS, FES) are not included in the frame. But a measurement device may set according error bits in the Error Flags if an error occurred during decoding of these bits (Bits CODERR, TSSVIOL, FESERR in Error Flags).</p>
-<p>Also the Frame CRC is not included. If the Frame CRC is wrong the error bit FCRCERR in Error Flags shall be set.</p>
-<p>Please do not assume that only whole FlexRay Frames are contained in the log file – a measurement device may also produce truncated frames if errors occur. Truncation may happen at each byte boundary!</p>
-<p>Bits 39 through 32 appear in the first octet, Bits 31 through 24 in the second octet., Bits 23 through 16 in the third octet, and so on. In the octet bits with bits 39-32 bit 39 is the high order bit and bit 32 is the low order bit, all further bits use the same bit counting policy.</p>
-
-<h4>Frame Header (5 bytes)</h4>
-<table class="byte_array byte_array_8">
-<thead>
-	<tr>
-		<th></th>
-		<th>7</th>
-		<th>6</th>
-		<th>5</th>
-		<th>4</th>
-		<th>3</th>
-		<th>2</th>
-		<th>1</th>
-		<th>0</th>
-	</tr>
-</thead>
-<tbody>
-	<tr>
-		<th>0</th>
-		<td>-</td>
-		<td>PPI</td>
-		<td>NFI</td>
-		<td>SFI</td>
-		<td>STFI</td>
-		<td>FID10</td>
-		<td>FID9</td>
-		<td>FID8</td>
-	</tr>
-	<tr>
-		<th>1</th>
-		<td>FID7</td>
-		<td>FID6</td>
-		<td>FID5</td>
-		<td>FID4</td>
-		<td>FID3</td>
-		<td>FID2</td>
-		<td>FID1</td>
-		<td>FID0</td>
-	</tr>
-	<tr>
-		<th>2</th>
-		<td>PL6</td>
-		<td>PL5</td>
-		<td>PL4</td>
-		<td>PL3</td>
-		<td>PL2</td>
-		<td>PL1</td>
-		<td>PL0</td>
-		<td>HCRC10</td>
-	</tr>
-	<tr>
-		<th>3</th>
-		<td>HCRC9</td>
-		<td>HCRC8</td>
-		<td>HCRC7</td>
-		<td>HCRC6</td>
-		<td>HCRC5</td>
-		<td>HCRC4</td>
-		<td>HCRC3</td>
-		<td>HCRC2</td>
-	</tr>
-	<tr>
-		<th>4</th>
-		<td>HCRC1</td>
-		<td>HCRC0</td>
-		<td>CC5</td>
-		<td>CC4</td>
-		<td>CC3</td>
-		<td>CC2</td>
-		<td>CC1</td>
-		<td>CC0</td>
-	</tr>
-</tbody>
-</table>
-<pre>
-PPI: Payload preamble indicator
-	static segment: If this bit is set the first 0 to 12 bytes of the payload may optionally be used as a network management vector;
-	dynamic segment: If this bit is set the first two bytes of the payload may optionally be used as a message ID field.
-	If the frame is a NULL frame, the PPI is always 0.
-
-NFI: Null frame indicator
-	indicates whether or not the frame is a NULL frame
-	0: payload segment contains no valid data
-	1: payload segment contains data
-	Attention: Logic is inverted
-
-SFI: Sync frame indicator … indicates whether or not the frame is a SYNC frame
-	0: no receiving node shall consider the frame for synchronization
-	1: all receiving nodes shall use the frame for synchronization
-	Sync frames are only sent in the static segment!
-	Each node is only allowed to send one single frame as a sync frame!
-
-STFI: Startup frame indicator indicates whether or not a frame is a STARTUP frame
-	0: frame is not a startup frame<
-	1: frame is a startup frame
-	A startup frame must always be a sync frame!
-
-FID[0..10]: Frame ID
-	Values between 1 and 2047
-	FID10 is the most significant bit, FID0 is the least significant bit (big endian)
-	Frame ID 0 is an invalid frame ID!
-
-PL[0..6]: Payload length in words (2 bytes)
-	Values between 0 and 127
-
-HCRC[0..10] – Header CRC
-	Values between 0 and 2047.
-	HCRC10 is the most significant bit. HCRC0 is the least significant bit (big endian)
-
-CC[0..5]: Cycle count … Values between 0 and 63
-</pre>
-
-<h4>Frame Payload (0..254 bytes)</h4>
-<p>The Data 0 through Data n bytes appear as octets frame header.<br>
-The number of bytes may be calculated by multiplying the payload length information (PL) with 2.<br>
-However, the actual number of bytes in data may be tismaller than the calculated value because of truncation (e.g. because of an error on the bus).<br>
-No padding is added after the data bytes.</p>
-
+<p>
+A FlexRay frame, as described by section 8 "Frame Format" of <a
+href="https://www.iso.org/standard/59806.html">ISO 17458-2:2013</a>. 
+The Frame CRC is not included.  If the Frame CRC is incorrect, the error
+bit FCRCERR in Error Flags shall be set. 
+</p>
+<p>
+Extra low-level bits (TSS, FSS, BSS, FES) are not included in the
+frame.  But a measurement device may set according error bits in the
+Error Flags if an error occurred during decoding of these bits (Bits
+CODERR, TSSVIOL, FESERR in Error Flags).
+</p>
+<p>
+Do not assume that only whole FlexRay Frames are contained in the
+log file – a measurement device may also produce truncated frames if
+errors occur.  Truncation may happen at each byte boundary!
+</p>
 
 <h3><strong>FlexRay Symbol Packet</strong></h3>
 <p>Through the symbol length can be determined, which symbol was transmitted.</p>
