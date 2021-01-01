@@ -2,11 +2,11 @@
  * sniffex.c
  *
  * Sniffer example of TCP/IP packet capture using libpcap.
- * 
+ *
  * Version 0.1.1 (2005-07-05)
  * Copyright (c) 2005 The Tcpdump Group
  *
- * This software is intended to be used as a practical example and 
+ * This software is intended to be used as a practical example and
  * demonstration of the libpcap library; available at:
  * http://www.tcpdump.org/
  *
@@ -14,15 +14,15 @@
  *
  * This software is a modification of Tim Carstens' "sniffer.c"
  * demonstration source code, released as follows:
- * 
+ *
  * sniffer.c
  * Copyright (c) 2002 Tim Carstens
  * 2002-01-07
  * Demonstration of using libpcap
  * timcarst -at- yahoo -dot- com
- * 
+ *
  * "sniffer.c" is distributed under these terms:
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -74,7 +74,7 @@
  * TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE
  * PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
  * REPAIR OR CORRECTION.
- * 
+ *
  * IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
  * WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
  * REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,
@@ -85,7 +85,7 @@
  * PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGES.
  * <end of "sniffex.c" terms>
- * 
+ *
  ****************************************************************************
  *
  * Below is an excerpt from an email from Guy Harris on the tcpdump-workers
@@ -93,16 +93,16 @@
  * payload?" Guy Harris' slightly snipped response (edited by him to
  * speak of the IPv4 header length and TCP data offset without referring
  * to bitfield structure members) is reproduced below:
- * 
+ *
  * The Ethernet size is always 14 bytes.
- * 
+ *
  * <snip>...</snip>
  *
- * In fact, you *MUST* assume the Ethernet header is 14 bytes, *and*, if 
- * you're using structures, you must use structures where the members 
- * always have the same size on all platforms, because the sizes of the 
- * fields in Ethernet - and IP, and TCP, and... - headers are defined by 
- * the protocol specification, not by the way a particular platform's C 
+ * In fact, you *MUST* assume the Ethernet header is 14 bytes, *and*, if
+ * you're using structures, you must use structures where the members
+ * always have the same size on all platforms, because the sizes of the
+ * fields in Ethernet - and IP, and TCP, and... - headers are defined by
+ * the protocol specification, not by the way a particular platform's C
  * compiler works.)
  *
  * The IP header size, in bytes, is the value of the IP header length,
@@ -118,15 +118,15 @@
  * If that value is less than 20 - i.e., if the value extracted with
  * "TH_OFF()" is less than 5 - you have a malformed TCP segment.
  *
- * So, to find the IP header in an Ethernet packet, look 14 bytes after 
- * the beginning of the packet data.  To find the TCP header, look 
+ * So, to find the IP header in an Ethernet packet, look 14 bytes after
+ * the beginning of the packet data.  To find the TCP header, look
  * "IP_HL(ip)*4" bytes after the beginning of the IP header.  To find the
  * TCP payload, look "TH_OFF(tcp)*4" bytes after the beginning of the TCP
  * header.
- * 
+ *
  * To find out how much payload there is:
  *
- * Take the IP *total* length field - "ip_len" in "struct sniff_ip" 
+ * Take the IP *total* length field - "ip_len" in "struct sniff_ip"
  * - and, first, check whether it's less than "IP_HL(ip)*4" (after
  * you've checked whether "IP_HL(ip)" is >= 5).  If it is, you have
  * a malformed IP datagram.
@@ -139,21 +139,21 @@
  * Otherwise, subtract "TH_OFF(tcp)*4" from it; that gives you the
  * length of the TCP payload.
  *
- * Note that you also need to make sure that you don't go past the end 
- * of the captured data in the packet - you might, for example, have a 
- * 15-byte Ethernet packet that claims to contain an IP datagram, but if 
- * it's 15 bytes, it has only one byte of Ethernet payload, which is too 
- * small for an IP header.  The length of the captured data is given in 
- * the "caplen" field in the "struct pcap_pkthdr"; it might be less than 
- * the length of the packet, if you're capturing with a snapshot length 
+ * Note that you also need to make sure that you don't go past the end
+ * of the captured data in the packet - you might, for example, have a
+ * 15-byte Ethernet packet that claims to contain an IP datagram, but if
+ * it's 15 bytes, it has only one byte of Ethernet payload, which is too
+ * small for an IP header.  The length of the captured data is given in
+ * the "caplen" field in the "struct pcap_pkthdr"; it might be less than
+ * the length of the packet, if you're capturing with a snapshot length
  * other than a value >= the maximum packet size.
  * <end of response>
- * 
+ *
  ****************************************************************************
- * 
+ *
  * Example compiler command-line for GCC:
  *   gcc -Wall -o sniffex sniffex.c -lpcap
- * 
+ *
  ****************************************************************************
  *
  * Code Comments
@@ -168,7 +168,7 @@
  * explicitly with "#define". Since some compilers might pad structures to a
  * multiple of 4 bytes - some versions of GCC for ARM may do this -
  * "sizeof (struct sniff_ethernet)" isn't used.
- * 
+ *
  * 2. Check the link-layer type of the device that's being opened to make
  * sure it's Ethernet, since that's all we handle in this example. Other
  * link-layer types may have different length headers (see [1]).
@@ -328,7 +328,7 @@ print_hex_ascii_line(const u_char *payload, int len, int offset)
 
 	/* offset */
 	printf("%05d   ", offset);
-	
+
 	/* hex */
 	ch = payload;
 	for(i = 0; i < len; i++) {
@@ -341,7 +341,7 @@ print_hex_ascii_line(const u_char *payload, int len, int offset)
 	/* print space to handle line less than 8 bytes */
 	if (len < 8)
 		printf(" ");
-	
+
 	/* fill hex gap with spaces if not full line */
 	if (len < 16) {
 		gap = 16 - len;
@@ -350,7 +350,7 @@ print_hex_ascii_line(const u_char *payload, int len, int offset)
 		}
 	}
 	printf("   ");
-	
+
 	/* ascii (if printable) */
 	ch = payload;
 	for(i = 0; i < len; i++) {
@@ -419,7 +419,7 @@ got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *packet)
 {
 
 	static int count = 1;                   /* packet counter */
-	
+
 	/* declare pointers to packet headers */
 	const struct sniff_ethernet *ethernet;  /* The ethernet header [1] */
 	const struct sniff_ip *ip;              /* The IP header */
@@ -429,13 +429,13 @@ got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *packet)
 	int size_ip;
 	int size_tcp;
 	int size_payload;
-	
+
 	printf("\nPacket number %d:\n", count);
 	count++;
-	
+
 	/* define ethernet header */
 	ethernet = (struct sniff_ethernet*)(packet);
-	
+
 	/* define/compute ip header offset */
 	ip = (struct sniff_ip*)(packet + SIZE_ETHERNET);
 	size_ip = IP_HL(ip)*4;
@@ -447,8 +447,8 @@ got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *packet)
 	/* print source and destination IP addresses */
 	printf("       From: %s\n", inet_ntoa(ip->ip_src));
 	printf("         To: %s\n", inet_ntoa(ip->ip_dst));
-	
-	/* determine protocol */	
+
+	/* determine protocol */
 	switch(ip->ip_p) {
 		case IPPROTO_TCP:
 			printf("   Protocol: TCP\n");
@@ -466,11 +466,11 @@ got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *packet)
 			printf("   Protocol: unknown\n");
 			return;
 	}
-	
+
 	/*
 	 *  OK, this packet is TCP.
 	 */
-	
+
 	/* define/compute tcp header offset */
 	tcp = (struct sniff_tcp*)(packet + SIZE_ETHERNET + size_ip);
 	size_tcp = TH_OFF(tcp)*4;
@@ -478,16 +478,16 @@ got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *packet)
 		printf("   * Invalid TCP header length: %u bytes\n", size_tcp);
 		return;
 	}
-	
+
 	printf("   Src port: %d\n", ntohs(tcp->th_sport));
 	printf("   Dst port: %d\n", ntohs(tcp->th_dport));
-	
+
 	/* define/compute tcp payload (segment) offset */
 	payload = (u_char *)(packet + SIZE_ETHERNET + size_ip + size_tcp);
-	
+
 	/* compute tcp payload (segment) size */
 	size_payload = ntohs(ip->ip_len) - (size_ip + size_tcp);
-	
+
 	/*
 	 * Print payload data; it might be binary, so don't just
 	 * treat it as a string.
@@ -533,7 +533,7 @@ int main(int argc, char **argv)
 			exit(EXIT_FAILURE);
 		}
 	}
-	
+
 	/* get network number and mask associated with capture device */
 	if (pcap_lookupnet(dev, &net, &mask, errbuf) == -1) {
 		fprintf(stderr, "Couldn't get netmask for device %s: %s\n",
