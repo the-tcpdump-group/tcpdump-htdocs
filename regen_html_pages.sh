@@ -10,6 +10,7 @@
 # * Fedora Linux 30
 # * Fedora Linux 32
 # * Devuan Linux
+# * FreeBSD 12
 #
 
 readonly HTML_HEAD='htmlsrc/_html_head.html'
@@ -60,7 +61,7 @@ substitute_page_title()
 		;;
 	*)
 		echo "Internal error: cannot tell page title for $f" >&2
-		exit 1
+		exit 10
 	esac
 	sed "s#%PAGE_TITLE%#${title}TCPDUMP/LIBPCAP public repository#"
 }
@@ -107,7 +108,7 @@ print_html_page()
 		;;
 	*)
 		echo "Internal error: cannot tell if $infile should have sidebar" >&2
-		exit 1
+		exit 11
 		;;
 	esac
 
@@ -218,15 +219,16 @@ regenerate_pages()
 		fi
 		file_differs_from_repository "$f_out" && echo "Regenerated: $f_out"
 	done
+	return 0
 }
 
 which git >/dev/null 2>&1 || {
-	echo "git must be installed to proceed"
-	exit 1
+	echo "git must be installed to proceed" >&2
+	exit 12
 }
 which sed >/dev/null 2>&1 || {
-	echo "sed must be installed to proceed"
-	exit 1
+	echo "sed must be installed to proceed" >&2
+	exit 13
 }
 regenerate_pages
 
