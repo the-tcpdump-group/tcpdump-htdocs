@@ -1,0 +1,11 @@
+language: shell
+os: linux
+dist: focal
+
+git:
+  quiet: true
+  depth: 3
+
+script:
+  - ./regen_html_pages.sh
+  - test "$(git status --porcelain | wc -l)" -eq 0
