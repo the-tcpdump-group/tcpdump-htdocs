@@ -283,12 +283,11 @@ updateOutputFiles()
 		exit 1
 	}
 
-	# $COLUMNS doesn't always work
+	# The .txt version of a man page assumes an 80 columns wide terminal,
+	# which used to be the default in PC text mode console, xterm etc.
+	# Use stty because $COLUMNS doesn't always work.
 	local readonly cols=$(stty size | cut -d' ' -f2)
-	if [ "$cols" != "80" ]; then
-		echo "This terminal must be 80 ($cols right now) columns wide"
-		exit 1
-	fi
+	[ "$cols" -ne 80 ] && stty columns 80
 
 	local readonly sedfile=$(mktemp --tmpdir manpages_sedfile.XXXXXX)
 	printSedFile > "$sedfile"
@@ -317,6 +316,8 @@ updateOutputFiles()
 	done
 
 	rm -f "$sedfile"
+	[ "$cols" -ne 80 ] && stty columns "$cols"
+	return 0
 }
 
 updateOutputFiles
