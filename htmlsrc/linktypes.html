@@ -49,9 +49,12 @@ Also, do not use them if somebody might send you a capture using them
 for <em>their</em> private type and tools using them for <em>your</em>
 private type would have to read them.
 </p>
+
 <li>All other values are reserved for current or future uses.  If you
 need a value for a particular set of link-layer headers, you must
-request one; to do so, send a mail message to <a
+  request one;
+  <ul>
+    <li> to do so, send a mail message to <a
 href="mailto:tcpdump-workers@lists.tcpdump.org">tcpdump-workers@lists.tcpdump.org</a>.
 <p>
 Please include either an indication of the standard that describes the
@@ -60,6 +63,10 @@ or a detailed description of the link-layer headers.  If the headers do
 not exactly match the description in a standard or standards - for
 example, if fields are added, removed, or reordered, or have their size
 or format changed, please describe the changes in detail.
+</p>
+    <li> Send a pull request with the new value,
+      see: <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/doc/DLT_ALLOCATE_HOWTO.md">DLT_ALLOCATE_HOWTO.md</a>
+  </ul>
 </p>
 <p>
 Do <strong>NOT</strong> add new values to this list without asking
@@ -787,7 +794,7 @@ pseudo-header</a>.
 <td class="symbol">DLT_FLEXRAY</td>
 <td>
 <a href="https://www.iso.org/standard/59806.html">FlexRay</a>
-automotive bus frames or symbols, preceded by a 
+automotive bus frames or symbols, preceded by a
 <a href="linktypes/LINKTYPE_FLEXRAY.html">pseudo-header</a>.
 </td>
 </tr>

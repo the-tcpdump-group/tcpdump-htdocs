@@ -98,6 +98,7 @@ Also, do not use them if somebody might send you a capture using them
 for <em>their</em> private type and tools using them for <em>your</em>
 private type would have to read them.
 </p>
+
 <li>All other values are reserved for current or future uses.  If you
 need a value for a particular set of link-layer headers, you must
   request one;
@@ -115,7 +116,7 @@ or format changed, please describe the changes in detail.
     <li> Send a pull request with the new value,
       see: <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/doc/DLT_ALLOCATE_HOWTO.md">DLT_ALLOCATE_HOWTO.md</a>
   </ul>
-
+</p>
 <p>
 Do <strong>NOT</strong> add new values to this list without asking
 tcpdump-workers@lists.tcpdump.org for a value.  Otherwise, you run the
@@ -842,7 +843,7 @@ pseudo-header</a>.
 <td class="symbol">DLT_FLEXRAY</td>
 <td>
 <a href="https://www.iso.org/standard/59806.html">FlexRay</a>
-automotive bus frames or symbols, preceded by a 
+automotive bus frames or symbols, preceded by a
 <a href="linktypes/LINKTYPE_FLEXRAY.html">pseudo-header</a>.
 </td>
 </tr>
