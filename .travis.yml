@@ -8,4 +8,4 @@ git:
 
 script:
   - ./regen_html_pages.sh
-  - if test "$(git status --porcelain | wc -l)" -eq 0; then git status; exit 1; fi
+  - if test "$(git status --porcelain | wc -l)" -ne 0; then git status; exit 1; fi
