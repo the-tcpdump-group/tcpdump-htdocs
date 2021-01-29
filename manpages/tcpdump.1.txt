@@ -1094,9 +1094,8 @@ OUTPUT FORMAT
        gory details.
 
        For  information on SMB packet formats and what all the fields mean see
-       www.cifs.org  or  the  pub/samba/specs/  directory  on  your   favorite
-       samba.org mirror site.  The SMB patches were written by Andrew Tridgell
-       (tridge@samba.org).
+       https://download.samba.org/pub/samba/specs/ and other online resources.
+       The SMB patches were written by Andrew Tridgell (tridge@samba.org).
 
        NFS Requests and Replies
 
@@ -1116,42 +1115,42 @@ OUTPUT FORMAT
        ation  was  a  readlink  (read  symbolic  link)  on  file  handle  (fh)
        21,24/10.731657119.  (If one is lucky, as in this case, the file handle
        can be interpreted as a major,minor device number pair, followed by the
-       inode  number  and  generation number.) In the second line, wrl replies
+       inode number and generation number.) In the second  line,  wrl  replies
        `ok' with the same transaction id and the contents of the link.
 
-       In the third line, sushi asks (using  a  new  transaction  id)  wrl  to
-       lookup  the  name  `xcolors'  in  directory file 9,74/4096.6878. In the
+       In  the  third  line,  sushi  asks  (using a new transaction id) wrl to
+       lookup the name `xcolors' in  directory  file  9,74/4096.6878.  In  the
        fourth line, wrl sends a reply with the respective transaction id.
 
-       Note that the data printed depends on the operation type.   The  format
-       is  intended  to be self explanatory if read in conjunction with an NFS
-       protocol spec.  Also note that older versions of  tcpdump  printed  NFS
-       packets  in a slightly different format: the transaction id (xid) would
+       Note  that  the data printed depends on the operation type.  The format
+       is intended to be self explanatory if read in conjunction with  an  NFS
+       protocol  spec.   Also  note that older versions of tcpdump printed NFS
+       packets in a slightly different format: the transaction id (xid)  would
        be printed instead of the non-NFS port number of the packet.
 
-       If the -v (verbose) flag is given, additional information  is  printed.
+       If  the  -v (verbose) flag is given, additional information is printed.
        For example:
               sushi.1023 > wrl.nfs: NFS request xid 79658
                    148 read fh 21,11/12.195 8192 bytes @ 24576
               wrl.nfs > sushi.1023: NFS reply xid 79658
                    reply ok 1472 read REG 100664 ids 417/0 sz 29388
-       (-v  also  prints  the  IP  header  TTL,  ID, length, and fragmentation
+       (-v also prints the  IP  header  TTL,  ID,  length,  and  fragmentation
        fields, which have been omitted from this example.)  In the first line,
-       sushi  asks wrl to read 8192 bytes from file 21,11/12.195, at byte off-
-       set 24576.  Wrl replies `ok'; the packet shown on the  second  line  is
+       sushi asks wrl to read 8192 bytes from file 21,11/12.195, at byte  off-
+       set  24576.   Wrl  replies `ok'; the packet shown on the second line is
        the first fragment of the reply, and hence is only 1472 bytes long (the
        other bytes will follow in subsequent fragments, but these fragments do
        not have NFS or even UDP headers and so might not be printed, depending
-       on the filter expression used).  Because the -v flag is given, some  of
-       the  file  attributes (which are returned in addition to the file data)
-       are printed: the file type (``REG'', for regular file), the  file  mode
+       on  the filter expression used).  Because the -v flag is given, some of
+       the file attributes (which are returned in addition to the  file  data)
+       are  printed:  the file type (``REG'', for regular file), the file mode
        (in octal), the UID and GID, and the file size.
 
        If the -v flag is given more than once, even more details are printed.
 
-       NFS  reply  packets  do  not  explicitly  identify  the  RPC operation.
-       Instead, tcpdump keeps track of ``recent'' requests, and  matches  them
-       to  the  replies using the transaction ID.  If a reply does not closely
+       NFS reply  packets  do  not  explicitly  identify  the  RPC  operation.
+       Instead,  tcpdump  keeps track of ``recent'' requests, and matches them
+       to the replies using the transaction ID.  If a reply does  not  closely
        follow the corresponding request, it might not be parsable.
 
        AFS Requests and Replies
@@ -1166,58 +1165,58 @@ OUTPUT FORMAT
                    new fid 536876964/1/1 ".newsrc"
               pike.afsfs > elvis.7001: rx data fs reply rename
        In the first line, host elvis sends a RX packet to pike.  This was a RX
-       data  packet to the fs (fileserver) service, and is the start of an RPC
-       call.  The RPC call was a rename, with the old  directory  file  id  of
+       data packet to the fs (fileserver) service, and is the start of an  RPC
+       call.   The  RPC  call  was a rename, with the old directory file id of
        536876964/1/1 and an old filename of `.newsrc.new', and a new directory
-       file id of 536876964/1/1 and a new filename  of  `.newsrc'.   The  host
-       pike  responds  with a RPC reply to the rename call (which was success-
+       file  id  of  536876964/1/1  and a new filename of `.newsrc'.  The host
+       pike responds with a RPC reply to the rename call (which  was  success-
        ful, because it was a data packet and not an abort packet).
 
-       In general, all AFS RPCs are decoded at least by RPC call  name.   Most
-       AFS  RPCs  have  at least some of the arguments decoded (generally only
+       In  general,  all AFS RPCs are decoded at least by RPC call name.  Most
+       AFS RPCs have at least some of the arguments  decoded  (generally  only
        the `interesting' arguments, for some definition of interesting).
 
-       The format is intended to be self-describing, but it will probably  not
-       be  useful  to people who are not familiar with the workings of AFS and
+       The  format is intended to be self-describing, but it will probably not
+       be useful to people who are not familiar with the workings of  AFS  and
        RX.
 
-       If the -v (verbose) flag is given twice,  acknowledgement  packets  and
-       additional  header information is printed, such as the RX call ID, call
+       If  the  -v  (verbose) flag is given twice, acknowledgement packets and
+       additional header information is printed, such as the RX call ID,  call
        number, sequence number, serial number, and the RX packet flags.
 
-       If the -v flag is given twice, additional information is printed,  such
-       as  the  RX  call  ID, serial number, and the RX packet flags.  The MTU
+       If  the -v flag is given twice, additional information is printed, such
+       as the RX call ID, serial number, and the RX  packet  flags.   The  MTU
        negotiation information is also printed from RX ack packets.
 
-       If the -v flag is given three times, the security index and service  id
+       If  the -v flag is given three times, the security index and service id
        are printed.
 
-       Error  codes  are printed for abort packets, with the exception of Ubik
-       beacon packets (because abort packets are used to signify  a  yes  vote
+       Error codes are printed for abort packets, with the exception  of  Ubik
+       beacon  packets  (because  abort packets are used to signify a yes vote
        for the Ubik protocol).
 
-       AFS  reply  packets  do  not  explicitly  identify  the  RPC operation.
-       Instead, tcpdump keeps track of ``recent'' requests, and  matches  them
-       to  the  replies using the call number and service ID.  If a reply does
+       AFS reply  packets  do  not  explicitly  identify  the  RPC  operation.
+       Instead,  tcpdump  keeps track of ``recent'' requests, and matches them
+       to the replies using the call number and service ID.  If a  reply  does
        not closely follow the corresponding request, it might not be parsable.
 
        KIP AppleTalk (DDP in UDP)
 
        AppleTalk DDP packets encapsulated in UDP datagrams are de-encapsulated
        and dumped as DDP packets (i.e., all the UDP header information is dis-
-       carded).  The file /etc/atalk.names is used to translate AppleTalk  net
+       carded).   The file /etc/atalk.names is used to translate AppleTalk net
        and node numbers to names.  Lines in this file have the form
               number    name
 
               1.254          ether
               16.1      icsd-net
               1.254.110 ace
-       The  first  two  lines give the names of AppleTalk networks.  The third
-       line gives the name of a particular host (a host is distinguished  from
-       a  net  by  the  3rd  octet  in the number - a net number must have two
-       octets and a host number must have three octets.)  The number and  name
-       should   be   separated   by   whitespace   (blanks   or   tabs).   The
-       /etc/atalk.names file may contain blank lines or comment  lines  (lines
+       The first two lines give the names of AppleTalk  networks.   The  third
+       line  gives the name of a particular host (a host is distinguished from
+       a net by the 3rd octet in the number -  a  net  number  must  have  two
+       octets  and a host number must have three octets.)  The number and name
+       should  be   separated   by   whitespace   (blanks   or   tabs).    The
+       /etc/atalk.names  file  may contain blank lines or comment lines (lines
        starting with a `#').
 
        AppleTalk addresses are printed in the form
@@ -1226,18 +1225,18 @@ OUTPUT FORMAT
               144.1.209.2 > icsd-net.112.220
               office.2 > icsd-net.112.220
               jssmag.149.235 > icsd-net.2
-       (If  the /etc/atalk.names doesn't exist or doesn't contain an entry for
+       (If the /etc/atalk.names doesn't exist or doesn't contain an entry  for
        some AppleTalk host/net number, addresses are printed in numeric form.)
        In the first example, NBP (DDP port 2) on net 144.1 node 209 is sending
-       to whatever is listening on port 220 of net icsd node 112.  The  second
-       line  is  the  same  except  the  full name of the source node is known
-       (`office').  The third line is a send from port 235 on net jssmag  node
-       149  to  broadcast  on  the  icsd-net NBP port (note that the broadcast
+       to  whatever is listening on port 220 of net icsd node 112.  The second
+       line is the same except the full name  of  the  source  node  is  known
+       (`office').   The third line is a send from port 235 on net jssmag node
+       149 to broadcast on the icsd-net NBP  port  (note  that  the  broadcast
        address (255) is indicated by a net name with no host number - for this
-       reason  it's  a  good idea to keep node names and net names distinct in
+       reason it's a good idea to keep node names and net  names  distinct  in
        /etc/atalk.names).
 
-       NBP (name binding protocol) and ATP  (AppleTalk  transaction  protocol)
+       NBP  (name  binding  protocol) and ATP (AppleTalk transaction protocol)
        packets have their contents interpreted.  Other protocols just dump the
        protocol name (or number if no name is registered for the protocol) and
        packet size.
@@ -1246,12 +1245,12 @@ OUTPUT FORMAT
               icsd-net.112.220 > jssmag.2: nbp-lkup 190: "=:LaserWriter@*"
               jssmag.209.2 > icsd-net.112.220: nbp-reply 190: "RM1140:LaserWriter@*" 250
               techpit.2 > icsd-net.112.220: nbp-reply 190: "techpit:LaserWriter@*" 186
-       The  first  line  is a name lookup request for laserwriters sent by net
-       icsd host 112 and broadcast on net jssmag.  The nbp id for  the  lookup
-       is  190.   The second line shows a reply for this request (note that it
-       has the same id) from host jssmag.209 saying that it has a  laserwriter
-       resource  named  "RM1140"  registered  on  port 250.  The third line is
-       another reply to the same request saying host techpit  has  laserwriter
+       The first line is a name lookup request for laserwriters  sent  by  net
+       icsd  host  112 and broadcast on net jssmag.  The nbp id for the lookup
+       is 190.  The second line shows a reply for this request (note  that  it
+       has  the same id) from host jssmag.209 saying that it has a laserwriter
+       resource named "RM1140" registered on port  250.   The  third  line  is
+       another  reply  to the same request saying host techpit has laserwriter
        "techpit" registered on port 186.
 
        ATP packet formatting is demonstrated by the following example:
@@ -1269,22 +1268,22 @@ OUTPUT FORMAT
               helios.132 > jssmag.209.165: atp-resp 12266:5 (512) 0xae040000
               jssmag.209.165 > helios.132: atp-rel  12266<0-7> 0xae030001
               jssmag.209.133 > helios.132: atp-req* 12267<0-7> 0xae030002
-       Jssmag.209  initiates transaction id 12266 with host helios by request-
-       ing up to 8 packets (the `<0-7>').  The hex number at the  end  of  the
+       Jssmag.209 initiates transaction id 12266 with host helios by  request-
+       ing  up  to  8 packets (the `<0-7>').  The hex number at the end of the
        line is the value of the `userdata' field in the request.
 
-       Helios  responds  with  8 512-byte packets.  The `:digit' following the
-       transaction id gives the packet sequence number in the transaction  and
+       Helios responds with 8 512-byte packets.  The  `:digit'  following  the
+       transaction  id gives the packet sequence number in the transaction and
        the number in parens is the amount of data in the packet, excluding the
        ATP header.  The `*' on packet 7 indicates that the EOM bit was set.
 
-       Jssmag.209 then requests that packets 3 & 5 be  retransmitted.   Helios
-       resends  them  then jssmag.209 releases the transaction.  Finally, jss-
-       mag.209 initiates the next request.  The `*' on the  request  indicates
+       Jssmag.209  then  requests that packets 3 & 5 be retransmitted.  Helios
+       resends them then jssmag.209 releases the transaction.   Finally,  jss-
+       mag.209  initiates  the next request.  The `*' on the request indicates
        that XO (`exactly once') was not set.
 
 SEE ALSO
-       stty(1),     pcap(3PCAP),     bpf(4),     nit(4P),    pcap-savefile(5),
+       stty(1),    pcap(3PCAP),     bpf(4),     nit(4P),     pcap-savefile(5),
        pcap-filter(7), pcap-tstamp(7)
 
               https://www.iana.org/assignments/media-types/applica-
@@ -1293,7 +1292,7 @@ SEE ALSO
 AUTHORS
        The original authors are:
 
-       Van  Jacobson,  Craig  Leres  and  Steven  McCanne, all of the Lawrence
+       Van Jacobson, Craig Leres and  Steven  McCanne,  all  of  the  Lawrence
        Berkeley National Laboratory, University of California, Berkeley, CA.
 
        It is currently being maintained by tcpdump.org.
@@ -1306,14 +1305,14 @@ AUTHORS
 
               ftp://ftp.ee.lbl.gov/old/tcpdump.tar.Z
 
-       IPv6/IPsec support is added by WIDE/KAME project.   This  program  uses
+       IPv6/IPsec  support  is  added by WIDE/KAME project.  This program uses
        OpenSSL/LibreSSL, under specific configurations.
 
 BUGS
-       To    report    a   security   issue   please   send   an   e-mail   to
+       To   report   a   security   issue   please   send   an    e-mail    to
        security@tcpdump.org.
 
-       To report bugs and other problems, contribute patches, request  a  fea-
+       To  report  bugs and other problems, contribute patches, request a fea-
        ture, provide generic feedback etc. please see the file CONTRIBUTING in
        the tcpdump source tree root.
 
@@ -1325,41 +1324,41 @@ BUGS
               packets on the loopback device will be seen twice;
 
               packet filtering cannot be done in the kernel, so that all pack-
-              ets must be copied from the kernel in order to  be  filtered  in
+              ets  must  be  copied from the kernel in order to be filtered in
               user mode;
 
-              all  of  a  packet, not just the part that's within the snapshot
-              length, will be copied from the kernel (the 2.0[.x] packet  cap-
-              ture  mechanism,  if  asked  to  copy  only  part of a packet to
-              userspace, will not report the true length of the  packet;  this
+              all of a packet, not just the part that's  within  the  snapshot
+              length,  will be copied from the kernel (the 2.0[.x] packet cap-
+              ture mechanism, if asked to  copy  only  part  of  a  packet  to
+              userspace,  will  not report the true length of the packet; this
               would cause most IP packets to get an error from tcpdump);
 
               capturing on some PPP devices won't work correctly.
 
        We recommend that you upgrade to a 2.2 or later kernel.
 
-       Some  attempt should be made to reassemble IP fragments or, at least to
+       Some attempt should be made to reassemble IP fragments or, at least  to
        compute the right length for the higher level protocol.
 
        Name server inverse queries are not dumped correctly: the (empty) ques-
-       tion  section  is printed rather than real query in the answer section.
-       Some believe that inverse queries are themselves a bug  and  prefer  to
+       tion section is printed rather than real query in the  answer  section.
+       Some  believe  that  inverse queries are themselves a bug and prefer to
        fix the program generating them rather than tcpdump.
 
-       A  packet  trace  that crosses a daylight savings time change will give
+       A packet trace that crosses a daylight savings time  change  will  give
        skewed time stamps (the time change is ignored).
 
-       Filter expressions on fields other than those  in  Token  Ring  headers
+       Filter  expressions  on  fields  other than those in Token Ring headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter  expressions  on  fields other than those in 802.11 headers will
-       not correctly handle 802.11 data packets with both To DS  and  From  DS
+       Filter expressions on fields other than those in  802.11  headers  will
+       not  correctly  handle  802.11 data packets with both To DS and From DS
        set.
 
-       ip6  proto  should  chase header chain, but at this moment it does not.
+       ip6 proto should chase header chain, but at this moment  it  does  not.
        ip6 protochain is supplied for this behavior.
 
-       Arithmetic expression against transport  layer  headers,  like  tcp[0],
+       Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
                                21 December 2020                     TCPDUMP(1)
