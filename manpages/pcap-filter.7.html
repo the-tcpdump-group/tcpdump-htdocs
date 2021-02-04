@@ -304,7 +304,7 @@ True if the packet has a source port value of <I>port</I>.
 True if either the source or destination port of the packet is <I>port</I>.
 <DT><B>dst portrange </B><I>port1-port2</I><DD>
 True if the packet is IPv4 TCP, IPv4 UDP, IPv6 TCP or IPv6 UDP and has a
-destination port value between <I>port1</I> and <I>port2</I>.
+destination port value between <I>port1</I> and <I>port2</I> (inclusive).
 <I>port1</I>
 
 and
@@ -318,10 +318,10 @@ parameter for
 
 <DT><B>src portrange </B><I>port1-port2</I><DD>
 True if the packet has a source port value between <I>port1</I> and
-<I>port2</I>.
+<I>port2</I> (inclusive).
 <DT><B>portrange </B><I>port1-port2</I><DD>
 True if either the source or destination port of the packet is between
-<I>port1</I> and <I>port2</I>.
+<I>port1</I> and <I>port2</I> (inclusive).
 <DT><DD>
 Any of the above port or port range expressions can be prepended with
 the keywords, <B>tcp</B> or <B>udp</B>, as in:
@@ -429,11 +429,11 @@ True if the packet is an IPv6 multicast packet.
 <DT><B>ether proto </B><I>protocol</I><DD>
 True if the packet is of ether type <I>protocol</I>.
 <I>Protocol</I> can be a number or one of the names
-<B>aarp</B>, <B>arp</B>, <B>atalk</B>, <B>ctp</B>, <B>decnet</B>, <B>ip</B>, <B>ip6</B>,
-<B>ipx</B>, <B>iso</B>, <B>lat</B>, <B>mopdl</B>, <B>moprc</B>, <B>netbeui</B>,
+<B>aarp</B>, <B>arp</B>, <B>atalk</B>, <B>decnet</B>, <B>ip</B>, <B>ip6</B>,
+<B>ipx</B>, <B>iso</B>, <B>lat</B>, <B>loopback</B>, <B>mopdl</B>, <B>moprc</B>, <B>netbeui</B>,
 <B>rarp</B>, <B>sca</B> or <B>stp</B>.
-Note these identifiers are also keywords and must be escaped via backslash (\).
-(<B>ether proto loopback</B> is an old alias for <B>ether proto ctp</B>.)
+Note these identifiers (except <B>loopback</B>) are also keywords
+and must be escaped via backslash (\).
 <DT><DD>
 [In the case of FDDI (e.g., `<B>fddi proto \arp</B>'), Token Ring
 (e.g., `<B>tr proto \arp</B>'), and IEEE 802.11 wireless LANs (e.g.,
@@ -1229,7 +1229,7 @@ It only looks at IPv4 packets.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 01:01:37 GMT, January 29, 2021
+Time: 00:38:13 GMT, February 04, 2021
 <a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
 <a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
 </BODY>
