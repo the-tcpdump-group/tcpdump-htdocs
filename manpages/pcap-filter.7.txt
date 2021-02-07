@@ -160,17 +160,17 @@ DESCRIPTION
 
        dst portrange port1-port2
               True if the packet is IPv4 TCP, IPv4 UDP, IPv6 TCP or  IPv6  UDP
-              and has a destination port value between port1 and port2 (inclu-
-              sive).  port1 and port2 are interpreted in the same  fashion  as
-              the port parameter for port.
+              and  has  a destination port value between port1 and port2 (both
+              inclusive).  port1 and port2 are interpreted in the same fashion
+              as the port parameter for port.
 
        src portrange port1-port2
               True  if  the  packet  has a source port value between port1 and
-              port2 (inclusive).
+              port2 (both inclusive).
 
        portrange port1-port2
               True if either the source or destination port of the  packet  is
-              between port1 and port2 (inclusive).
+              between port1 and port2 (both inclusive).
 
               Any of the above port or port range expressions can be prepended
               with the keywords, tcp or udp, as in:
@@ -782,4 +782,4 @@ BUGS
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                               2 September 2020                 PCAP-FILTER(7)
+                                6 February 2021                 PCAP-FILTER(7)
