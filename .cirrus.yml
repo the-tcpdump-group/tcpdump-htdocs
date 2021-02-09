@@ -1,0 +1,16 @@
+env:
+  CIRRUS_CLONE_DEPTH: 3
+
+task:
+  container:
+    image: ubuntu:20.04
+    cpu: 1
+    memory: 512M
+  env:
+    DEBIAN_FRONTEND: noninteractive
+  script:
+    - apt-get -qy update
+    - apt-get -qy install git
+    - ./regen_html_pages.sh
+    - git status
+    - test "$(git status --porcelain | wc -l)" -eq 0
