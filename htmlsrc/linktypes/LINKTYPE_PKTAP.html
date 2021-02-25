@@ -58,7 +58,7 @@ PKTAP version 1:
 |           Flow ID         |
 |         (4 Octets)        |
 +---------------------------+
-|        pth_ipproto        |
+|        IP protocol        |
 |         (4 Octets)        |
 +---------------------------+
 |    Time stamp, seconds    |
@@ -113,7 +113,7 @@ PKTAP version 2:
 |             Interface type             |
 |               (2 Octets)               |
 +----------------------------------------+
-|            pth_ipproto                 |
+|              IP protocol               |
 |               (2 Octets)               |
 +----------------------------------------+
 |            Protocol family             |
@@ -207,7 +207,11 @@ The flags field is at the same offset in the version 1 and version 2
 headers; it should be checked for the "version 2 PKTAP header" flag
 before any other fields, including the length, are interpreted.
 <p>
-The protocol family field contains a currently-undescribed value.
+The protocol family field contains a value indicating the address
+family of the packet.  It may be 0 for "unknown", 2 for IPv4, or 30 for
+IPv6.  It may also be another macOS AF_ value; note that those values do
+not necesarily correspond to the AF_ value of the operating system on
+the host reading a capture.
 </p>
 <p>
 The link-layer header length field appears to contain the length of the
@@ -229,10 +233,28 @@ a null string if the executable image name is unknown. <em>Do not</em>
 assume that there is a NUL character at the end of the name.
 </p>
 <p>
-The service class field contains a currently-undescribed value.
+The service class field contains one of the following values:
+</p>
+<ul>
+<li>0, for "best effort",
+<li>100, for "background system-initiated";
+<li>200, for "background user-initiated";
+<li>300, for "responsive data";
+<li>400, for "operations, administration, and management";
+<li>500, for "multimedia audio/video streaming";
+<li>600, for "responsive multimedia audio/video";
+<li>700, for "interactive video";
+<li>800, for "interactive voice";
+<li>900, for "network control".
+</ul>
+<p>
+Note that these are priorities for which there is a total order; they
+have different delay tolerance, loss tolerance, etc. characteristics.
 </p>
 <p>
-The interface type field contains a currently-undescribed value.
+<p>
+The interface type field contains an SNMP ifType value for the
+interface.
 </p>
 <p>
 The "unit number of interface" field is assumed to contain the unit
@@ -250,10 +272,17 @@ the executable image name is unknown.  <em>Do not</em> assume that there
 is a NUL character at the end of the name.
 </p>
 <p>
+The flow ID field contains a hash value computed for the flow to which
+the packet belongs; it is 0 if there is no flow ID.
+</p>
+<p>
+The IP protocol field contains a macOS IPPROTO_ value for the packet; it
+may be IPPROTO_RAW if the packet was written to a raw socket.
+</p>
+<p>
 All fields following the effective command name field are optional; the
 length field indicates how many fields are present.
 </p>
-
 <p>
 In the PKTAP version 2 header:
 <p>
@@ -264,36 +293,38 @@ following the effective command name.
 </p>
 <p>
 The "offset of UUID" field is 0 if the UUID field is not present;
-otherwise, it's the offset from XXX of the UUID field.
+otherwise, it's the offset from the beginning of the PKTAP header
+of the UUID field.
 </p>
 <p>
 The "offset of effective UUID" field is 0 if the effective UUID field is
-not present; otherwise, it's the offset from XXX of the effective UUID
-field.
+not present; otherwise, it's the offset from the beginning of the PKTAP
+header of the effective UUID field.
 </p>
 <p>
 The "offset of interface name" field is 0 if the interface name field is
-not present; otherwise, it's the offset from XXX of the interface name
-field.
+not present; otherwise, it's the offset from the beginning of the PKTAP
+header of the interface name field.
 </p>
 <p>
 The "offset of interface name" field is 0 if the interface name field is
-not present; otherwise, it's the offset from XXX of the interface name
-field.
+not present; otherwise, it's the offset from the beginning of the PKTAP
+header of the interface name field.
 </p>
 <p>
 The "offset of effective interface name" field is 0 if the effective
-interface name field is not present; otherwise, it's the offset from XXX
-of the effective interface name field.
+interface name field is not present; otherwise, it's the offset from the
+beginning of the PKTAP header of the effective interface name field.
 </p>
 <p>
 The "offset of command name" field is 0 if the command name field is not
-present; otherwise, it's the offset from XXX of the command name field.
+present; otherwise, it's the offset from the beginning of the PKTAP
+header of the command name field.
 </p>
 <p>
 The "offset of effective command name" field is 0 if the effective
-command name field is not present; otherwise, it's the offset from XXX
-of the effective command name field. 
+command name field is not present; otherwise, it's the offset from the
+beginning of the PKTAP header of the effective command name field. 
 </p>
 <p>
 The DLT_ value field contains a macOS DLT_ value for the packet, such as
@@ -308,16 +339,42 @@ The link-layer trailer length field is assumed to contain the length of
 the packet's link-layer trailer.  It may be 0.
 </p>
 <p>
-The interface type field contains a currently-undescribed value.
+The interface type field contains an SNMP ifType value for the
+interface.
 </p>
 <p>
-The protocol family field contains a currently-undescribed value.
+The IP protocol field contains a macOS IPPROTO_ value for the packet; it
+may be IPPROTO_RAW if the packet was written to a raw socket.
 </p>
 <p>
-The service class field contains a currently-undescribed value.
+The protocol family field contains a value indicating the address
+family of the packet.  It may be 0 for "unknown", 2 for IPv4, or 30 for
+IPv6.  It may also be another macOS AF_ value; note that those values do
+not necesarily correspond to the AF_ value of the operating system on
+the host reading a capture.
 </p>
 <p>
-The flow ID field contains XXX.
+The service class field contains one of the following values:
+</p>
+<ul>
+<li>0, for "best effort",
+<li>100, for "background system-initiated";
+<li>200, for "background user-initiated";
+<li>300, for "responsive data";
+<li>400, for "operations, administration, and management";
+<li>500, for "multimedia audio/video streaming";
+<li>600, for "responsive multimedia audio/video";
+<li>700, for "interactive video";
+<li>800, for "interactive voice";
+<li>900, for "network control".
+</ul>
+<p>
+Note that these are priorities for which there is a total order; they
+have different delay tolerance, loss tolerance, etc. characteristics.
+</p>
+<p>
+The flow ID field contains a hash value computed for the flow to which
+the packet belongs; it is 0 if there is no flow ID.
 </p>
 <p>
 The process ID field contains the process ID of the process that sent
@@ -349,23 +406,20 @@ headers; it should be checked for the "version 2 PKTAP header" flag
 before any other fields, including the length, are interpreted.
 </p>
 <p>
-The interface name contains a null-padded ASCII string giving the name
-of the interface on which the packet arrived.  <em>Do not</em> assume
-that there is a NUL character at the end of the name.
+The interface name contains a null-terminated ASCII string giving the name
+of the interface on which the packet arrived.
 </p>
 <p>
-The command name contains a null-padded ASCII string giving the last
+The command name contains a null-terminated ASCII string giving the last
 component of the path name of the executable image running in the
 process that sent the packet, truncated to 20 characters.  It may be
-a null string if the executable image name is unknown. <em>Do not</em>
-assume that there is a NUL character at the end of the name.
+a null string if the executable image name is unknown.
 </p>
 <p>
-The effective command name contains a null-padded ASCII string giving
-the last component of the path name of the executable image running in
-some process, truncated to 20 characters.  It may be a null string if
-the executable image name is unknown.  <em>Do not</em> assume that there
-is a NUL character at the end of the name.
+The effective command name contains a null-terminated ASCII string
+giving the last component of the path name of the executable image
+running in some process, truncated to 20 characters.  It may be a
+null string if the executable image name is unknown.
 </p>
             </div>
             <!-- End of LINKTYPE_PKTAP section -->
