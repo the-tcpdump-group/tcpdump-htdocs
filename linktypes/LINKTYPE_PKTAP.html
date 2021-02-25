@@ -212,6 +212,7 @@ all Apple machines that write this format being little-endian.
 </p>
 <p>
 In the PKTAP version 1 header:
+</p>
 <p>
 The length field indicates how long the PKTAP header is; this value
 includes the length of the length field itself.  It should be
@@ -221,10 +222,12 @@ following the effective command name.
 <p>
 The record type field contains a value that is one of:
 </p>
+<p>
 <ul>
 <li>0, if nothing follows the PKTAP header;</li>
 <li>1, if a packet follows the PKTAP header.</li>
 </ul>
+</p>
 <p>
 The DLT_ value field contains a macOS DLT_ value for the packet, such as
 DLT_EN10MB for an Ethernet packet.
@@ -237,6 +240,7 @@ that there is a NUL character at the end of the name.
 <p>
 The flags field contains a set of flags for the packet:
 </p>
+<p>
 <ul>
 <li>0x00000001 - packet is an incoming packet</li>
 <li>0x00000002 - packet is an outgoing packet</li>
@@ -284,6 +288,7 @@ assume that there is a NUL character at the end of the name.
 <p>
 The service class field contains one of the following values:
 </p>
+<p>
 <ul>
 <li>0, for "best effort",
 <li>100, for "background system-initiated";
@@ -296,6 +301,7 @@ The service class field contains one of the following values:
 <li>800, for "interactive voice";
 <li>900, for "network control".
 </ul>
+</p>
 <p>
 Note that these are priorities for which there is a total order; they
 have different delay tolerance, loss tolerance, etc. characteristics.
@@ -334,6 +340,7 @@ length field indicates how many fields are present.
 </p>
 <p>
 In the PKTAP version 2 header:
+</p>
 <p>
 The length field indicates how long the PKTAP header is; this value
 includes the length of the length field itself.  It should be
@@ -405,6 +412,7 @@ the host reading a capture.
 <p>
 The service class field contains one of the following values:
 </p>
+<p>
 <ul>
 <li>0, for "best effort",
 <li>100, for "background system-initiated";
@@ -417,6 +425,7 @@ The service class field contains one of the following values:
 <li>800, for "interactive voice";
 <li>900, for "network control".
 </ul>
+</p>
 <p>
 Note that these are priorities for which there is a total order; they
 have different delay tolerance, loss tolerance, etc. characteristics.
@@ -435,7 +444,6 @@ some sort; it may be 0 if the process ID is unknown.
 </p>
 <p>
 The flags field contains a set of flags for the packet:
-</p>
 <ul>
 <li>0x00000001 - packet is an incoming packet</li>
 <li>0x00000002 - packet is an outgoing packet</li>
@@ -449,6 +457,7 @@ The flags field contains a set of flags for the packet:
 <li>0x00040000 - packet is on a nexus channel</li>
 <li>0x00080000 - this packet has a version 2 PKTAP header</li>
 </ul>
+</p>
 <p>
 The flags field is at the same offset in the version 1 and version 2
 headers; it should be checked for the "version 2 PKTAP header" flag
