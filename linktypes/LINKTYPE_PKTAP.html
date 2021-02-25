@@ -54,6 +54,9 @@ Original license : Creative Commons Attribution 2.5 License
             </h2>
             <div class="entry">
                 <h3>Packet structure</h3>
+<p>
+PKTAP version 1:
+</p>
 <pre>
 +---------------------------+
 |   Length of PKTAP header  |
@@ -101,10 +104,104 @@ Original license : Creative Commons Attribution 2.5 License
 |   Effective command name  |
 |        (20 Octets)        |
 +---------------------------+
+|           Flow ID         |
+|         (4 Octets)        |
++---------------------------+
+|        pth_ipproto        |
+|         (4 Octets)        |
++---------------------------+
+|    Time stamp, seconds    |
+|         (4 Octets)        |
++---------------------------+
+|  Time stamp, microseconds |
+|         (4 Octets)        |
++---------------------------+
+|            UUID           |
+|        (16 Octets)        |
++---------------------------+
+|      Effective UUID       |
+|        (16 Octets)        |
++---------------------------+
 |           Payload         |
 .                           .
 .                           .
 .                           .
+</pre>
+<p>
+PKTAP version 2:
+</p>
+<pre>
++----------------------------------------+
+|         Length of PKTAP header         |
+|                (1 Octet)               |
++----------------------------------------+
+|             Offset of UUID             |
+|                (1 Octet)               |
+-----------------------------------------+
+|         Offset of effective UUID       |
+|                (1 Octet)               |
++----------------------------------------+
+|         Offset of interface name       |
+|                (1 Octet)               |
++----------------------------------------+
+|          Offset of command name        |
+|                (1 Octet)               |
++----------------------------------------+
+|      Offset of effective command name  |
+|                (1 Octet)               |
++----------------------------------------+
+|       DLT_ value for this packet       |
+|               (2 Octets)               |
++----------------------------------------+
+|        Link-layer header length        |
+|               (2 Octets)               |
++----------------------------------------+
+|        Link-layer trailer length       |
+|               (2 Octets)               |
++----------------------------------------+
+|             Interface type             |
+|               (2 Octets)               |
++----------------------------------------+
+|            pth_ipproto                 |
+|               (2 Octets)               |
++----------------------------------------+
+|            Protocol family             |
+|               (4 Octets)               |
++----------------------------------------+
+|              Service class             |
+|               (4 Octets)               |
++----------------------------------------+
+|                 Flow ID                |
+|               (4 Octets)               |
++----------------------------------------+
+|               Process ID               |
+|               (4 Octets)               |
++----------------------------------------+
+|          Effective process ID          |
+|               (4 Octets)               |
++----------------------------------------+
+|              Packet flags              |
+|               (4 Octets)               |
++----------------------------------------+
+|                  UUID                  |
+|             (0-16 Octets)              |
++----------------------------------------+
+|            Effective UUID              |
+|             (0-16 Octets)              |
++----------------------------------------+
+|          ASCII interface name          |
+|             (0-24 Octets)              |
++----------------------------------------+
+|              Command name              |
+|             (0-17 Octets)              |
++----------------------------------------+
+|         Effective command name         |
+|             (0-17 Octets)              |
++----------------------------------------+
+|                Payload                 |
+.                                        .
+.                                        .
+.                                        .
 </pre>
 
                 <h3>Description</h3>
@@ -114,11 +211,14 @@ haven't indicated whether this is by design or merely a consequence of
 all Apple machines that write this format being little-endian.
 </p>
 <p>
+In the PKTAP version 1 header:
+<p>
 The length field indicates how long the PKTAP header is; this value
 includes the length of the length field itself.  It should be
 at least 108; if it's larger, there is additional data in the header
 following the effective command name.
 </p>
+<p>
 The record type field contains a value that is one of:
 </p>
 <ul>
@@ -126,7 +226,7 @@ The record type field contains a value that is one of:
 <li>1, if a packet follows the PKTAP header.</li>
 </ul>
 <p>
-The DLT_ value field contains an OS X DLT_ value for the packet, such as
+The DLT_ value field contains a macOS DLT_ value for the packet, such as
 DLT_EN10MB for an Ethernet packet.
 </p>
 <p>
@@ -135,9 +235,26 @@ of the interface on which the packet arrived.  <em>Do not</em> assume
 that there is a NUL character at the end of the name.
 </p>
 <p>
-The flags field contains a set of currently-undescribed flags for the
-packet.
+The flags field contains a set of flags for the packet:
 </p>
+<ul>
+<li>0x00000001 - packet is an incoming packet</li>
+<li>0x00000002 - packet is an outgoing packet</li>
+<li>0x00000004 - process is delegated</li>
+<li>0x00000008 - interface is delegated</li>
+<li>0x00002000 - header has a time stamp</li>
+<li>0x00004000 - packet is from a new flow</li>
+<li>0x00008000 - packet is a retransmission</li>
+<li>0x00010000 - packet is a keep-alive packet</li>
+<li>0x00020000 - packet is on a socket</li>
+<li>0x00040000 - packet is on a nexus channel</li>
+<li>0x00080000 - this packet has a version 2 PKTAP header</li>
+</ul>
+</p>
+<p>
+The flags field is at the same offset in the version 1 and version 2
+headers; it should be checked for the "version 2 PKTAP header" flag
+before any other fields, including the length, are interpreted.
 <p>
 The protocol family field contains a currently-undescribed value.
 </p>
@@ -175,7 +292,124 @@ The effective process ID field is assumed to contain a process ID of
 some sort; it may be 0 if the process ID is unknown.
 </p>
 <p>
+The effective command name contains a null-padded ASCII string giving
+the last component of the path name of the executable image running in
+some process, truncated to 20 characters.  It may be a null string if
+the executable image name is unknown.  <em>Do not</em> assume that there
+is a NUL character at the end of the name.
+</p>
+<p>
+All fields following the effective command name field are optional; the
+length field indicates how many fields are present.
+</p>
 
+<p>
+In the PKTAP version 2 header:
+<p>
+The length field indicates how long the PKTAP header is; this value
+includes the length of the length field itself.  It should be
+at least 108; if it's larger, there is additional data in the header
+following the effective command name.
+</p>
+<p>
+The "offset of UUID" field is 0 if the UUID field is not present;
+otherwise, it's the offset from XXX of the UUID field.
+</p>
+<p>
+The "offset of effective UUID" field is 0 if the effective UUID field is
+not present; otherwise, it's the offset from XXX of the effective UUID
+field.
+</p>
+<p>
+The "offset of interface name" field is 0 if the interface name field is
+not present; otherwise, it's the offset from XXX of the interface name
+field.
+</p>
+<p>
+The "offset of interface name" field is 0 if the interface name field is
+not present; otherwise, it's the offset from XXX of the interface name
+field.
+</p>
+<p>
+The "offset of effective interface name" field is 0 if the effective
+interface name field is not present; otherwise, it's the offset from XXX
+of the effective interface name field.
+</p>
+<p>
+The "offset of command name" field is 0 if the command name field is not
+present; otherwise, it's the offset from XXX of the command name field.
+</p>
+<p>
+The "offset of effective command name" field is 0 if the effective
+command name field is not present; otherwise, it's the offset from XXX
+of the effective command name field. 
+</p>
+<p>
+The DLT_ value field contains a macOS DLT_ value for the packet, such as
+DLT_EN10MB for an Ethernet packet.
+</p>
+<p>
+The link-layer header length field appears to contain the length of the
+packet's link-layer header.  It may be 0.
+</p>
+<p>
+The link-layer trailer length field is assumed to contain the length of
+the packet's link-layer trailer.  It may be 0.
+</p>
+<p>
+The interface type field contains a currently-undescribed value.
+</p>
+<p>
+The protocol family field contains a currently-undescribed value.
+</p>
+<p>
+The service class field contains a currently-undescribed value.
+</p>
+<p>
+The flow ID field contains XXX.
+</p>
+<p>
+The process ID field contains the process ID of the process that sent
+the packet; it may be 0 if the process ID is unknown.
+</p>
+<p>
+The effective process ID field is assumed to contain a process ID of
+some sort; it may be 0 if the process ID is unknown.
+</p>
+<p>
+The flags field contains a set of flags for the packet:
+</p>
+<ul>
+<li>0x00000001 - packet is an incoming packet</li>
+<li>0x00000002 - packet is an outgoing packet</li>
+<li>0x00000004 - process is delegated</li>
+<li>0x00000008 - interface is delegated</li>
+<li>0x00002000 - header has a time stamp</li>
+<li>0x00004000 - packet is from a new flow</li>
+<li>0x00008000 - packet is a retransmission</li>
+<li>0x00010000 - packet is a keep-alive packet</li>
+<li>0x00020000 - packet is on a socket</li>
+<li>0x00040000 - packet is on a nexus channel</li>
+<li>0x00080000 - this packet has a version 2 PKTAP header</li>
+</ul>
+<p>
+The flags field is at the same offset in the version 1 and version 2
+headers; it should be checked for the "version 2 PKTAP header" flag
+before any other fields, including the length, are interpreted.
+</p>
+<p>
+The interface name contains a null-padded ASCII string giving the name
+of the interface on which the packet arrived.  <em>Do not</em> assume
+that there is a NUL character at the end of the name.
+</p>
+<p>
+The command name contains a null-padded ASCII string giving the last
+component of the path name of the executable image running in the
+process that sent the packet, truncated to 20 characters.  It may be
+a null string if the executable image name is unknown. <em>Do not</em>
+assume that there is a NUL character at the end of the name.
+</p>
+<p>
 The effective command name contains a null-padded ASCII string giving
 the last component of the path name of the executable image running in
 some process, truncated to 20 characters.  It may be a null string if
