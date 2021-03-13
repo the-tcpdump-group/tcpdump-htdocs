@@ -155,34 +155,110 @@
               current development versions of tcpdump and libpcap:
             </p>
               <ul>
-                <li><a href='https://cirrus-ci.com/github/the-tcpdump-group/tcpdump'>
-                  Cirrus CI: tcpdump {AMD64} &times; {Linux, macOS, FreeBSD}
-                  <img alt='status badge' src='https://api.cirrus-ci.com/github/the-tcpdump-group/tcpdump.svg?branch=master'></a></li>
-                <li><a href='https://cirrus-ci.com/github/the-tcpdump-group/libpcap'>
-                  Cirrus CI: libpcap {AMD64} &times; {Linux, macOS, FreeBSD}
-                  <img alt='status badge' src='https://api.cirrus-ci.com/github/the-tcpdump-group/libpcap.svg?branch=master'></a></li>
-                <li><a href='https://cirrus-ci.com/github/the-tcpdump-group/tcpslice'>
-                  Cirrus CI: tcpslice {AMD64} &times; {Linux, macOS, FreeBSD}
-                  <img alt='status badge' src='https://api.cirrus-ci.com/github/the-tcpdump-group/tcpslice.svg?branch=master'></a></li>
-                <li><a href='https://buildfarm.opencsw.org/buildbot/waterfall?category=tcpdump'>
-                  OpenCSW: tcpdump {AMD64, i386, SPARC, SPARC V9} &times; {Solaris 10}</a></li>
-                <li><a href='https://buildfarm.opencsw.org/buildbot/waterfall?category=libpcap'>
-                  OpenCSW: libpcap {AMD64, i386, SPARC, SPARC V9} &times; {Solaris 10}</a></li>
-                <li><a href='https://ci.appveyor.com/project/guyharris/tcpdump'>
-                  AppVeyor CI: tcpdump {AMD64} &times; {Windows}
-                  <img alt='status badge' src='https://ci.appveyor.com/api/projects/status/github/the-tcpdump-group/tcpdump?branch=master&amp;svg=true'></a></li>
-                <li><a href='https://ci.appveyor.com/project/guyharris/libpcap'>
-                  AppVeyor CI: libpcap {AMD64} &times; {Windows}
-                  <img alt='status badge' src='https://ci.appveyor.com/api/projects/status/github/the-tcpdump-group/libpcap?branch=master&amp;svg=true'></a></li>
-                <li><a href='https://ci.tcpdump.org/#/builders/tcpdump'>
-                  The Tcpdump Group CI: tcpdump {aarch64} &times; {Linux}
-                  <img alt='status badge' src='https://ci.tcpdump.org/badges/tcpdump.svg'></a></li>
-                <li><a href='https://ci.tcpdump.org/#/builders/libpcap'>
-                  The Tcpdump Group CI: libpcap {aarch64} &times; {Linux}
-                  <img alt='status badge' src='https://ci.tcpdump.org/badges/libpcap.svg'></a></li>
-                <li><a href='https://ci.tcpdump.org/#/builders/tcpslice'>
-                  The Tcpdump Group CI: tcpslice {aarch64} &times; {Linux}
-                  <img alt='status badge' src='https://ci.tcpdump.org/badges/tcpslice.svg'></a></li>
+                <li>Cirrus CI
+                  <ul>
+                    <li><a href='https://cirrus-ci.com/github/the-tcpdump-group/tcpdump'>
+                      tcpdump {AMD64} &times; {Linux, macOS, FreeBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://api.cirrus-ci.com/github/the-tcpdump-group/tcpdump.svg?branch=master'>
+                      </a>
+                    </li>
+                    <li><a href='https://cirrus-ci.com/github/the-tcpdump-group/libpcap'>
+                      libpcap {AMD64} &times; {Linux, macOS, FreeBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://api.cirrus-ci.com/github/the-tcpdump-group/libpcap.svg?branch=master'>
+                      </a>
+                    </li>
+                    <li><a href='https://cirrus-ci.com/github/the-tcpdump-group/tcpslice'>
+                      tcpslice {AMD64} &times; {Linux, macOS, FreeBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://api.cirrus-ci.com/github/the-tcpdump-group/tcpslice.svg?branch=master'>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>OpenCSW Buildbot
+                  <ul>
+                    <li><a href='https://buildfarm.opencsw.org/buildbot/waterfall?category=tcpdump'>
+                      tcpdump {AMD64, i386, SPARC, SPARC V9} &times; {Solaris 10}</a></li>
+                    <li><a href='https://buildfarm.opencsw.org/buildbot/waterfall?category=libpcap'>
+                      libpcap {AMD64, i386, SPARC, SPARC V9} &times; {Solaris 10}</a></li>
+                  </ul>
+                </li>
+                <li>AppVeyor CI
+                  <ul>
+                    <li><a href='https://ci.appveyor.com/project/guyharris/tcpdump'>
+                      tcpdump {AMD64} &times; {Windows}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.appveyor.com/api/projects/status/github/the-tcpdump-group/tcpdump?branch=master&amp;svg=true'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.appveyor.com/project/guyharris/libpcap'>
+                      libpcap {AMD64} &times; {Windows}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.appveyor.com/api/projects/status/github/the-tcpdump-group/libpcap?branch=master&amp;svg=true'>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li>The Tcpdump Group Buildbot
+                  <ul>
+                    <li><a href='https://ci.tcpdump.org/#/builders/9'>
+                      tcpdump {aarch64} &times; {Linux}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/9.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/4'>
+                      tcpdump {aarch64} &times; {NetBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/4.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/5'>
+                      tcpdump {aarch64} &times; {FreeBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/5.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/8'>
+                      libpcap {aarch64} &times; {Linux}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/8.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/12'>
+                      libpcap {aarch64} &times; {NetBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/12.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/6'>
+                      libpcap {aarch64} &times; {FreeBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/6.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/11'>
+                      tcpslice {aarch64} &times; {Linux}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/11.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/10'>
+                      tcpslice {aarch64} &times; {NetBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/10.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/7'>
+                      tcpslice {aarch64} &times; {FreeBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/7.svg'>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
               </ul>
           </div>
         </div>

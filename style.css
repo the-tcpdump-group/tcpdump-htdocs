@@ -30,6 +30,10 @@ p, ul, ol {
 	line-height: 160%;
 }
 
+li ul {
+	margin-bottom: initial;
+}
+
 /* Don't have extra leading in paragraphs in table entries. */
 td p {
 	margin-bottom: 0;
@@ -247,4 +251,10 @@ table.byte_array th, table.byte_array td {
 }
 table.byte_array_8 th:nth-last-child(-n+8), table.byte_array_8 td:nth-last-child(-n+8) {
 	width: 12.5%;
+}
+
+img.cibadge {
+	vertical-align: middle;
+	margin-top: 1px;
+	margin-bottom: 1px;
 }
