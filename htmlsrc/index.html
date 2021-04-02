@@ -223,30 +223,12 @@
                   </ul>
                 </li> <!-- OSU OSL IBM Z CI -->
 
-                <li>The Tcpdump Group Buildbot
+                <li>The Tcpdump Group Buildbot (own infrastructure)
                   <ul>
-                    <li><a href='https://ci.tcpdump.org/#/builders/tcpdump-linux-aarch64'>
-                      tcpdump {AArch64} &times; {Linux}
-                      <img alt='status badge' class='cibadge'
-                        src='https://ci.tcpdump.org/badges/tcpdump-linux-aarch64.svg'>
-                      </a>
-                    </li>
                     <li><a href='https://ci.tcpdump.org/#/builders/tcpdump-linux-armv7l'>
                       tcpdump {ARMv7} &times; {Linux}
                       <img alt='status badge' class='cibadge'
                         src='https://ci.tcpdump.org/badges/tcpdump-linux-armv7l.svg'>
-                      </a>
-                    </li>
-                    <li><a href='https://ci.tcpdump.org/#/builders/tcpdump-netbsd-aarch64'>
-                      tcpdump {AArch64} &times; {NetBSD}
-                      <img alt='status badge' class='cibadge'
-                        src='https://ci.tcpdump.org/badges/tcpdump-netbsd-aarch64.svg'>
-                      </a>
-                    </li>
-                    <li><a href='https://ci.tcpdump.org/#/builders/tcpdump-freebsd-aarch64'>
-                      tcpdump {AArch64} &times; {FreeBSD}
-                      <img alt='status badge' class='cibadge'
-                        src='https://ci.tcpdump.org/badges/tcpdump-freebsd-aarch64.svg'>
                       </a>
                     </li>
                     <li><a href='https://ci.tcpdump.org/#/builders/tcpdump-openbsd-aarch64'>
@@ -267,28 +249,10 @@
                         src='https://ci.tcpdump.org/badges/tcpdump-openbsd-amd64.svg'>
                       </a>
                     </li>
-                    <li><a href='https://ci.tcpdump.org/#/builders/libpcap-linux-aarch64'>
-                      libpcap {AArch64} &times; {Linux}
-                      <img alt='status badge' class='cibadge'
-                        src='https://ci.tcpdump.org/badges/libpcap-linux-aarch64.svg'>
-                      </a>
-                    </li>
                     <li><a href='https://ci.tcpdump.org/#/builders/libpcap-linux-armv7l'>
                       libpcap {ARMv7} &times; {Linux}
                       <img alt='status badge' class='cibadge'
                         src='https://ci.tcpdump.org/badges/libpcap-linux-armv7l.svg'>
-                      </a>
-                    </li>
-                    <li><a href='https://ci.tcpdump.org/#/builders/libpcap-netbsd-aarch64'>
-                      libpcap {AArch64} &times; {NetBSD}
-                      <img alt='status badge' class='cibadge'
-                        src='https://ci.tcpdump.org/badges/libpcap-netbsd-aarch64.svg'>
-                      </a>
-                    </li>
-                    <li><a href='https://ci.tcpdump.org/#/builders/libpcap-freebsd-aarch64'>
-                      libpcap {AArch64} &times; {FreeBSD}
-                      <img alt='status badge' class='cibadge'
-                        src='https://ci.tcpdump.org/badges/libpcap-freebsd-aarch64.svg'>
                       </a>
                     </li>
                     <li><a href='https://ci.tcpdump.org/#/builders/libpcap-openbsd-aarch64'>
@@ -309,16 +273,63 @@
                         src='https://ci.tcpdump.org/badges/libpcap-openbsd-amd64.svg'>
                       </a>
                     </li>
-                    <li><a href='https://ci.tcpdump.org/#/builders/tcpslice-linux-aarch64'>
-                      tcpslice {AArch64} &times; {Linux}
-                      <img alt='status badge' class='cibadge'
-                        src='https://ci.tcpdump.org/badges/tcpslice-linux-aarch64.svg'>
-                      </a>
-                    </li>
                     <li><a href='https://ci.tcpdump.org/#/builders/tcpslice-linux-armv7l'>
                       tcpslice {ARMv7} &times; {Linux}
                       <img alt='status badge' class='cibadge'
                         src='https://ci.tcpdump.org/badges/tcpslice-linux-armv7l.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/tcpslice-netbsd-amd64'>
+                      tcpslice {AMD64} &times; {NetBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/tcpslice-netbsd-amd64.svg'>
+                      </a>
+                    </li>
+                  </ul>
+                </li> <!-- The Tcpdump Group Buildbot (self-hosted) -->
+                <li>The Tcpdump Group Buildbot (infrastructure sponsored by
+								  <a href='https://www.sysmocom.de/'>sysmocom</a>)
+                  <ul>
+                    <li><a href='https://ci.tcpdump.org/#/builders/tcpdump-linux-aarch64'>
+                      tcpdump {AArch64} &times; {Linux}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/tcpdump-linux-aarch64.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/tcpdump-netbsd-aarch64'>
+                      tcpdump {AArch64} &times; {NetBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/tcpdump-netbsd-aarch64.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/tcpdump-freebsd-aarch64'>
+                      tcpdump {AArch64} &times; {FreeBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/tcpdump-freebsd-aarch64.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/libpcap-linux-aarch64'>
+                      libpcap {AArch64} &times; {Linux}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/libpcap-linux-aarch64.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/libpcap-netbsd-aarch64'>
+                      libpcap {AArch64} &times; {NetBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/libpcap-netbsd-aarch64.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/libpcap-freebsd-aarch64'>
+                      libpcap {AArch64} &times; {FreeBSD}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/libpcap-freebsd-aarch64.svg'>
+                      </a>
+                    </li>
+                    <li><a href='https://ci.tcpdump.org/#/builders/tcpslice-linux-aarch64'>
+                      tcpslice {AArch64} &times; {Linux}
+                      <img alt='status badge' class='cibadge'
+                        src='https://ci.tcpdump.org/badges/tcpslice-linux-aarch64.svg'>
                       </a>
                     </li>
                     <li><a href='https://ci.tcpdump.org/#/builders/tcpslice-netbsd-aarch64'>
@@ -333,14 +344,8 @@
                         src='https://ci.tcpdump.org/badges/tcpslice-freebsd-aarch64.svg'>
                       </a>
                     </li>
-                    <li><a href='https://ci.tcpdump.org/#/builders/tcpslice-netbsd-amd64'>
-                      tcpslice {AMD64} &times; {NetBSD}
-                      <img alt='status badge' class='cibadge'
-                        src='https://ci.tcpdump.org/badges/tcpslice-netbsd-amd64.svg'>
-                      </a>
-                    </li>
                   </ul>
-                </li> <!-- The Tcpdump Group Buildbot -->
+                </li> <!-- The Tcpdump Group Buildbot (sysmocom) -->
 
               </ul>
           </div>
