@@ -1031,7 +1031,7 @@ OUTPUT FORMAT
        lar,  Domain  Name  service  requests (RFC-1034/1035) and Sun RPC calls
        (RFC-1050) to NFS.
 
-       UDP Name Server Requests
+       TCP or UDP Name Server Requests
 
        (N.B.:The following description assumes  familiarity  with  the  Domain
        Service  protocol  described in RFC-1035.  If you are not familiar with
@@ -1044,11 +1044,11 @@ OUTPUT FORMAT
        Host  h2opolo  asked  the domain server on helios for an address record
        (qtype=A) associated with the name ucbvax.berkeley.edu.  The  query  id
        was  `3'.   The  `+' indicates the recursion desired flag was set.  The
-       query length was 37 bytes, not including the UDP and IP protocol  head-
-       ers.   The  query  operation was the normal one, Query, so the op field
-       was omitted.  If the op had been anything  else,  it  would  have  been
-       printed  between  the  `3'  and the `+'.  Similarly, the qclass was the
-       normal one, C_IN, and  omitted.   Any  other  qclass  would  have  been
+       query length was 37 bytes, excluding the TCP or  UDP  and  IP  protocol
+       headers.   The  query  operation  was  the normal one, Query, so the op
+       field was omitted.  If the op had been anything  else,  it  would  have
+       been  printed  between  the `3' and the `+'.  Similarly, the qclass was
+       the normal one, C_IN, and omitted.  Any other qclass  would  have  been
        printed immediately after the `A'.
 
        A  few anomalies are checked and may result in extra fields enclosed in
@@ -1059,7 +1059,7 @@ OUTPUT FORMAT
        zero' bits are set in bytes two and three, `[b2&3=x]' is printed, where
        x is the hex value of header bytes two and three.
 
-       UDP Name Server Responses
+       TCP or UDP Name Server Responses
 
        Name server responses are formatted as
               src > dst:  id op rcode flags a/n/au type class data (len)
@@ -1069,8 +1069,8 @@ OUTPUT FORMAT
        answer records, 3 name server records and 7  additional  records.   The
        first  answer  record  is  type  A  (address)  and its data is internet
        address 128.32.137.3.  The total size of the response  was  273  bytes,
-       excluding  UDP and IP headers.  The op (Query) and response code (NoEr-
-       ror) were omitted, as was the class (C_IN) of the A record.
+       excluding  TCP or UDP and IP headers.  The op (Query) and response code
+       (NoError) were omitted, as was the class (C_IN) of the A record.
 
        In the second example, helios responds to query 2 with a response  code
        of  non-existent domain (NXDomain) with no answers, one name server and
