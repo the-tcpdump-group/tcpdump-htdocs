@@ -11,8 +11,8 @@ SYNOPSIS
        [DEPRECATED] char *pcap_lookupdev(char *errbuf);
 
 DESCRIPTION
-       This  interface  is  obsoleted  by  pcap_findalldevs(3PCAP).  To find a
-       default device on which to capture, call pcap_findalldevs() and, if the
+       This  interface is obsoleted by pcap_findalldevs(3PCAP).  To find a de-
+       fault device on which to capture, call pcap_findalldevs() and,  if  the
        list  it  returns  is not empty, use the first device in the list.  (If
        the list is empty, there are no devices on which capture is possible.)
 
@@ -23,9 +23,9 @@ DESCRIPTION
        network  device  suitable   for   use   with   pcap_create(3PCAP)   and
        pcap_activate(3PCAP),   or   with   pcap_open_live(3PCAP),   and   with
        pcap_lookupnet(3PCAP).  If there is an error,  or  if  pcap_init(3PCAP)
-       has  been  called,  NULL  is  returned  and errbuf is filled in with an
-       appropriate error message.  errbuf is assumed to be  able  to  hold  at
-       least PCAP_ERRBUF_SIZE chars.
+       has  been  called, NULL is returned and errbuf is filled in with an ap-
+       propriate error message.  errbuf is assumed to be able to hold at least
+       PCAP_ERRBUF_SIZE chars.
 
 SEE ALSO
        pcap(3PCAP)

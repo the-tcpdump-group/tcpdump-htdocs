@@ -16,8 +16,8 @@ DESCRIPTION
 RETURN VALUE
        pcap_can_set_rfmon()  returns  0 if monitor mode could not be set, 1 if
        monitor mode could be set, and a negative value on error.   A  negative
-       return  value  indicates  what  error condition occurred.  The possible
-       error values are:
+       return value indicates what error condition occurred.  The possible er-
+       ror values are:
 
        PCAP_ERROR_NO_SUCH_DEVICE
               The capture source specified when the handle was created doesn't
@@ -36,13 +36,13 @@ RETURN VALUE
               or display a message describing the error.
 
        Additional error codes may be added in the  future;  a  program  should
-       check  for  0,  1,  and  negative, return codes, and treat all negative
-       return codes as errors.  pcap_statustostr(3PCAP) can be called, with  a
+       check  for 0, 1, and negative, return codes, and treat all negative re-
+       turn codes as errors.  pcap_statustostr(3PCAP) can be  called,  with  a
        warning or error code as an argument, to fetch a message describing the
        warning or error code.
 
 SEE ALSO
-       pcap(3PCAP),         pcap_create(3PCAP),          pcap_activate(3PCAP),
-       pcap_set_rfmon(3PCAP)
+       pcap(3PCAP),  pcap_create(3PCAP),  pcap_activate(3PCAP),   pcap_set_rf-
+       mon(3PCAP)
 
                                  31 July 2016        PCAP_CAN_SET_RFMON(3PCAP)

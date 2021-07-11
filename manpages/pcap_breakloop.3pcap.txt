@@ -25,8 +25,8 @@ DESCRIPTION
        after a signal, and calling pcap_breakloop() in the signal handler, you
        must specify, when catching those signals, that system calls should NOT
        be restarted by that signal.  Otherwise, if the  signal  interrupted  a
-       call  reading  packets  in  a  live  capture,  when your signal handler
-       returns after calling pcap_breakloop(), the call will be restarted, and
+       call  reading  packets  in a live capture, when your signal handler re-
+       turns after calling pcap_breakloop(), the call will be  restarted,  and
        the loop will not terminate until more packets arrive and the call com-
        pletes.
 

@@ -16,8 +16,8 @@ DESCRIPTION
 RETURN VALUE
        pcap_activate() returns 0 on success without warnings, a non-zero posi-
        tive value on success with warnings, and a negative value on error.   A
-       non-zero  return  value  indicates  what  warning  or  error  condition
-       occurred.
+       non-zero  return  value  indicates  what warning or error condition oc-
+       curred.
 
        The possible warning values are:
 
@@ -60,13 +60,13 @@ RETURN VALUE
 
        PCAP_ERROR
               Another error occurred.  pcap_geterr() or pcap_perror()  may  be
-              called  with  p  as  an  argument  to fetch or display a message
-              describing the error.
+              called  with  p as an argument to fetch or display a message de-
+              scribing the error.
 
-       If    PCAP_WARNING_PROMISC_NOTSUP,    PCAP_ERROR_NO_SUCH_DEVICE,     or
-       PCAP_ERROR_PERM_DENIED  is returned, pcap_geterr() or pcap_perror() may
-       be called with p as an argument to fetch or display an  message  giving
-       additional details about the problem that might be useful for debugging
+       If PCAP_WARNING_PROMISC_NOTSUP, PCAP_ERROR_NO_SUCH_DEVICE, or  PCAP_ER-
+       ROR_PERM_DENIED  is  returned,  pcap_geterr()  or  pcap_perror() may be
+       called with p as an argument to fetch or display an message giving  ad-
+       ditional  details  about the problem that might be useful for debugging
        the problem if it's unexpected.
 
        Additional warning and error codes may be added in the future;  a  pro-

@@ -12,8 +12,8 @@ SYNOPSIS
 DESCRIPTION
        pcap_dump()   outputs   a   packet  to  the  ``savefile''  opened  with
        pcap_dump_open(3PCAP).  Note that its calling  arguments  are  suitable
-       for  use  with  pcap_dispatch(3PCAP)  or  pcap_loop(3PCAP).   If called
-       directly, the user parameter is of type pcap_dumper_t  as  returned  by
+       for  use  with pcap_dispatch(3PCAP) or pcap_loop(3PCAP).  If called di-
+       rectly, the user parameter is of  type  pcap_dumper_t  as  returned  by
        pcap_dump_open().
 
 SEE ALSO

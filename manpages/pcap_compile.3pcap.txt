@@ -14,14 +14,14 @@ DESCRIPTION
        See pcap-filter(7) for the syntax of that string.  program is a pointer
        to  a  bpf_program struct and is filled in by pcap_compile().  optimize
        controls whether optimization on the resulting code is performed.  net-
-       mask  specifies  the  IPv4  netmask of the network on which packets are
-       being captured; it is  used  only  when  checking  for  IPv4  broadcast
-       addresses  in  the  filter  program.   If the netmask of the network on
-       which packets are being captured isn't known  to  the  program,  or  if
-       packets are being captured on the Linux "any" pseudo-interface that can
-       capture on more than one network, a value of  PCAP_NETMASK_UNKNOWN  can
-       be  supplied;  tests for IPv4 broadcast addresses will fail to compile,
-       but all other tests in the filter program will be OK.
+       mask specifies the IPv4 netmask of the network on which packets are be-
+       ing captured; it is used only when  checking  for  IPv4  broadcast  ad-
+       dresses  in the filter program.  If the netmask of the network on which
+       packets are being captured isn't known to the program,  or  if  packets
+       are being captured on the Linux "any" pseudo-interface that can capture
+       on more than one network, a value of PCAP_NETMASK_UNKNOWN can  be  sup-
+       plied; tests for IPv4 broadcast addresses will fail to compile, but all
+       other tests in the filter program will be OK.
 
        NOTE: in libpcap 1.8.0 and later, pcap_compile() can be used in  multi-
        ple  threads  within a single process.  However, in earlier versions of

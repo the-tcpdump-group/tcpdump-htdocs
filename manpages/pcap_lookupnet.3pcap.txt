@@ -19,8 +19,8 @@ DESCRIPTION
 RETURN VALUE
        pcap_lookupnet()  returns  0  on  success and PCAP_ERROR on failure. If
        PCAP_ERROR is returned, errbuf is filled in with an  appropriate  error
-       message.    errbuf   is   assumed   to   be   able  to  hold  at  least
-       PCAP_ERRBUF_SIZE chars.
+       message.   errbuf  is  assumed  to  be  able  to hold at least PCAP_ER-
+       RBUF_SIZE chars.
 
 SEE ALSO
        pcap(3PCAP)

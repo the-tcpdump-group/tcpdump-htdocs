@@ -19,8 +19,8 @@ DESCRIPTION
        port  sending  packets; as pcap_open_live(3PCAP) doesn't have a flag to
        indicate whether to open for capturing, sending, or capturing and send-
        ing,  you  cannot request an open that supports sending and be notified
-       at open time whether sending will be possible.   Note  also  that  some
-       devices might not support sending packets.
+       at open time whether sending will be possible.  Note also that some de-
+       vices might not support sending packets.
 
        Note  that,  on  some  platforms,  the  link-layer header of the packet
        that's sent might not be the same  as  the  link-layer  header  of  the
@@ -30,8 +30,8 @@ DESCRIPTION
        doesn't support sending completely raw  and  unchanged  packets.   Even
        worse,  some drivers on some platforms might change the link-layer type
        field to whatever value libpcap used when attaching to the device, even
-       on  platforms  that  do  nominally  support  sending completely raw and
-       unchanged packets.
+       on  platforms  that do nominally support sending completely raw and un-
+       changed packets.
 
        pcap_sendpacket() is like pcap_inject(), but it returns 0  on  success,
        rather  than  returning  the  number  of bytes written.  (pcap_inject()

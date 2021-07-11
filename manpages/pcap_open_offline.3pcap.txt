@@ -46,8 +46,8 @@ RETURN VALUE
        pcap_open_offline(),         pcap_open_offline_with_tstamp_precision(),
        pcap_fopen_offline(),  and   pcap_fopen_offline_with_tstamp_precision()
        return a pcap_t * on success and NULL on failure.  If NULL is returned,
-       errbuf is filled in with  an  appropriate  error  message.   errbuf  is
-       assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
+       errbuf is filled in with an appropriate error message.  errbuf  is  as-
+       sumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
 
 BACKWARD COMPATIBILITY
        pcap_open_offline_with_tstamp_precision()      and      pcap_fopen_off-

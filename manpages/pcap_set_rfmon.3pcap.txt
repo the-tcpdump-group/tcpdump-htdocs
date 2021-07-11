@@ -19,7 +19,7 @@ RETURN VALUE
        on a capture handle that has been activated.
 
 SEE ALSO
-       pcap(3PCAP),          pcap_create(3PCAP),         pcap_activate(3PCAP),
-       pcap_can_set_rfmon(3PCAP)
+       pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP), pcap_can_set_rf-
+       mon(3PCAP)
 
                                 3 January 2014           PCAP_SET_RFMON(3PCAP)

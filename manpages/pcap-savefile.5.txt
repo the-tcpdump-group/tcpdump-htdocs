@@ -74,9 +74,9 @@ DESCRIPTION
               the  capture; see pcap-linktype(7) for the LINKTYPE_ values that
               can appear in this field.
 
-       Following the per-file header are zero or  more  packets;  each  packet
-       begins  with  a per-packet header, which is immediately followed by the
-       raw packet data.  The format of the per-packet header is:
+       Following the per-file header are zero or more packets; each packet be-
+       gins with a per-packet header, which is immediately followed by the raw
+       packet data.  The format of the per-packet header is:
 
               +----------------------------------------------+
               |          Time stamp, seconds value           |
@@ -93,8 +93,8 @@ DESCRIPTION
        writing  the file.  The per-packet header begins with a time stamp giv-
        ing the approximate time the packet was captured; the time  stamp  con-
        sists  of  a  4-byte value, giving the time in seconds since January 1,
-       1970, 00:00:00 UTC, followed by a 4-byte  value,  giving  the  time  in
-       microseconds  or  nanoseconds since that second, depending on the magic
+       1970, 00:00:00 UTC, followed by a 4-byte value, giving the time in  mi-
+       croseconds  or  nanoseconds  since  that second, depending on the magic
        number in the file header.  Following that are a  4-byte  value  giving
        the  number of bytes of captured data that follow the per-packet header
        and a 4-byte value giving the number of  bytes  that  would  have  been

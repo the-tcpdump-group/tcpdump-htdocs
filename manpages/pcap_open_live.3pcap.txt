@@ -15,8 +15,8 @@ DESCRIPTION
        pcap_open_live()  is  used to obtain a packet capture handle to look at
        packets on the network.  device is a string that specifies the  network
        device  to  open;  on Linux systems with 2.2 or later kernels, a device
-       argument of "any" or NULL can be  used  to  capture  packets  from  all
-       interfaces.
+       argument of "any" or NULL can be used to capture packets from  all  in-
+       terfaces.
 
        snaplen specifies the snapshot length to be set on the handle.
 

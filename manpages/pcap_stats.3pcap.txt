@@ -9,8 +9,8 @@ SYNOPSIS
        int pcap_stats(pcap_t *p, struct pcap_stat *ps);
 
 DESCRIPTION
-       pcap_stats()  fills  in  the  struct pcap_stat pointed to by its second
-       argument.  The values represent packet statistics from the start of the
+       pcap_stats() fills in the struct pcap_stat pointed to by its second ar-
+       gument.  The values represent packet statistics from the start  of  the
        run to the time of the call.
 
        pcap_stats()  is supported only on live captures, not on ``savefiles'';
@@ -49,8 +49,8 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_stats() returns 0 on success and returns PCAP_ERROR if there is an
-       error  or  if  p  doesn't  support  packet statistics. If PCAP_ERROR is
-       returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p
+       error  or  if p doesn't support packet statistics. If PCAP_ERROR is re-
+       turned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called  with  p
        as an argument to fetch or display the error text.
 
 SEE ALSO

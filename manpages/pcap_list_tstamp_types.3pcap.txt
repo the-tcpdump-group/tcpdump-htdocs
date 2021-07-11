@@ -30,8 +30,8 @@ RETURN VALUE
        PCAP_TSTAMP_HOST, which is the capture device's default time stamp type
        (only older versions of libpcap will return that; newer  versions  will
        always   return  one  or  more  types).   If  PCAP_ERROR  is  returned,
-       pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called  with  p  as  an
-       argument to fetch or display the error text.
+       pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p as an ar-
+       gument to fetch or display the error text.
 
 BACKWARD COMPATIBILITY
        These functions became available in libpcap release 1.2.1.  In previous

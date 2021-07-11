@@ -11,8 +11,8 @@ SYNOPSIS
        int pcap_get_tstamp_precision(pcap_t *p);
 
 DESCRIPTION
-       pcap_get_tstamp_precision() returns the precision  of  the  time  stamp
-       returned in packet captures on the pcap descriptor.
+       pcap_get_tstamp_precision() returns the precision of the time stamp re-
+       turned in packet captures on the pcap descriptor.
 
 RETURN VALUE
        pcap_get_tstamp_precision()   returns   PCAP_TSTAMP_PRECISION_MICRO  or

@@ -33,8 +33,8 @@ DESCRIPTION
        snapshot length from p are used as the  link-layer  type  and  snapshot
        length of the output file.
 
-       pcap_dump_open_append()  is  like  pcap_dump_open()  but,  if  the file
-       already exists, and is a pcap file with the same byte order as the host
+       pcap_dump_open_append()  is  like pcap_dump_open() but, if the file al-
+       ready exists, and is a pcap file with the same byte order as  the  host
        opening  the  file,  and  has the same time stamp precision, link-layer
        header type, and snapshot length as p, it will write new packets at the
        end of the file.
@@ -46,8 +46,8 @@ RETURN VALUES
        pcap_geterr(3PCAP) can be used to get the error text.
 
 BACKWARD COMPATIBILITY
-       The  pcap_dump_open_append()  function  became  available  in   libpcap
-       release 1.7.2.  In previous releases, there is no support for appending
+       The pcap_dump_open_append() function became available  in  libpcap  re-
+       lease  1.7.2.   In previous releases, there is no support for appending
        packets to an existing savefile.
 
 SEE ALSO

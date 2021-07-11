@@ -16,10 +16,11 @@
 # * Fedora 25
 # * Fedora 28
 # * Fedora 30
-# * Fedora 32 <--- please use this one
+# * Fedora 32
+# * Fedora 34 <--- please use this one
 # * Ubuntu 16.04
-# * Ubuntu 18.04 <--- or this one
-# * Ubuntu 20.04
+# * Ubuntu 18.04
+# * Ubuntu 20.04 <--- or this one
 #
 # Please mind that the generated contents of the .txt files may change much
 # more than respective source man pages, sometimes even when the source man

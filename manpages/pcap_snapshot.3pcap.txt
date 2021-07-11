@@ -19,9 +19,9 @@ DESCRIPTION
        pcap_activate(3PCAP).
 
 RETURN VALUE
-       pcap_snapshot()  returns   the   snapshot   length   on   success   and
-       PCAP_ERROR_NOT_ACTIVATED  if  called  on a capture handle that has been
-       created but not activated.
+       pcap_snapshot() returns the snapshot length  on  success  and  PCAP_ER-
+       ROR_NOT_ACTIVATED  if  called on a capture handle that has been created
+       but not activated.
 
 SEE ALSO
        pcap(3PCAP)

@@ -9,8 +9,8 @@ SYNOPSIS
        void pcap_close(pcap_t *p);
 
 DESCRIPTION
-       pcap_close()  closes  the  files  associated  with  p  and  deallocates
-       resources.
+       pcap_close()  closes  the  files  associated with p and deallocates re-
+       sources.
 
 SEE ALSO
        pcap(3PCAP)

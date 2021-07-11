@@ -9,8 +9,8 @@ SYNOPSIS
        int pcap_fileno(pcap_t *p);
 
 DESCRIPTION
-       If  p  refers  to  a  network device that was opened for a live capture
-       using a combination of pcap_create(3PCAP) and pcap_activate(3PCAP),  or
+       If  p refers to a network device that was opened for a live capture us-
+       ing a combination of pcap_create(3PCAP)  and  pcap_activate(3PCAP),  or
        using  pcap_open_live(3PCAP), pcap_fileno() returns the file descriptor
        from which captured packets are read.
 

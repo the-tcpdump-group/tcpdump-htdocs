@@ -16,8 +16,8 @@ DESCRIPTION
 
        Rpcapd can run in two modes: passive mode (default) and active mode.
 
-       In  passive  mode,  the  client  (e.g.,  a network sniffer) connects to
-       rpcapd.  The client then sends the appropriate commands  to  rpcapd  to
+       In  passive  mode, the client (e.g., a network sniffer) connects to rp-
+       capd.  The client then sends the  appropriate  commands  to  rpcapd  to
        start the capture.
 
        In  active  mode,  rpcapd  tries  to  establish a connection toward the
@@ -57,8 +57,8 @@ Installing rpcapd on Win32
        trol panel - administrative tools - services - start).
 
        The  service  has  a  set of "standard" parameters, i.e. it is launched
-       with the -d flag (in order to make it run as  a  service)  and  the  -f
-       rpcapd.ini flag.
+       with the -d flag (in order to make it run as a service) and the -f  rp-
+       capd.ini flag.
 
 Starting rpcapd on Win32
        The rpcapd executable can be launched directly, i.e.  it can run in the
@@ -91,8 +91,8 @@ OPTIONS
 
        -l host_list
               Only allow hosts specified in the host_list argument to  connect
-              to  this  server.   host_list  is  a  list  of  host names or IP
-              addresses, separated by commas.  We suggest that  you  use  host
+              to  this  server.   host_list  is a list of host names or IP ad-
+              dresses, separated by commas.  We  suggest  that  you  use  host
               names  rather  than literal IP addresses in order to avoid prob-
               lems with different address families.
 

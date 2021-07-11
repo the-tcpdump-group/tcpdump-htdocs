@@ -10,8 +10,8 @@ SYNOPSIS
 
 DESCRIPTION
        Tcpslice  is  a  program  for extracting portions of packet-trace files
-       generated using tcpdump(1)'s -w flag.  It can also  be  used  to  merge
-       together several such files, as discussed below.
+       generated using tcpdump(1)'s -w flag.  It can also be used to merge to-
+       gether several such files, as discussed below.
 
        The  basic  operation of tcpslice is to copy to stdout all packets from
        its input file(s) whose timestamps fall  within  a  given  range.   The
@@ -44,9 +44,9 @@ DESCRIPTION
        the first time through 500 seconds after the first time.
 
        Times  may  also  be  specified in terms of years (y), months (m), days
-       (d), hours (h), minutes (m), seconds  (s),  and  microseconds(u).   For
-       example,  the  Unix timestamp 654321098.7654 discussed above could also
-       be expressed as 1990y9m25d20h51m38s765400u.  2 or 4 digit years may  be
+       (d), hours (h), minutes (m), seconds (s), and microseconds(u).  For ex-
+       ample,  the Unix timestamp 654321098.7654 discussed above could also be
+       expressed as 1990y9m25d20h51m38s765400u.  2 or 4  digit  years  may  be
        used; 2 digits can specify years from 1970 to 2069.
 
        When specifying times using this style, fields that are omitted default
@@ -95,8 +95,8 @@ DESCRIPTION
        work to generate true replicates of packets, and for systems  that  can
        return  the  same timestamp for multiple packets, these can be mistaken
        for duplicates and discarded.  Accordingly, tcpslice will  not  discard
-       duplicates  in  the  same  trace file.  In addition, you can use the -D
-       option to suppress any discarding of duplicates.
+       duplicates in the same trace file.  In addition, you can use the -D op-
+       tion to suppress any discarding of duplicates.
 
 OPTIONS
        If any of -R, -r or -t are specified then tcpslice  reports  the  time-
