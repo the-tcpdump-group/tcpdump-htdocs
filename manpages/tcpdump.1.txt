@@ -101,9 +101,13 @@ OPTIONS
               file  is  currently  larger than file_size and, if so, close the
               current savefile and open a new one.  Savefiles after the  first
               savefile  will  have the name specified with the -w flag, with a
-              number after it, starting at 1 and continuing upward.  The units
-              of  file_size  are  millions  of  bytes  (1,000,000  bytes,  not
-              1,048,576 bytes).
+              number after it, starting at 1 and continuing upward.   The  de-
+              fault  unit  of file_size is millions of bytes (1,000,000 bytes,
+              not 1,048,576 bytes).
+
+              By adding a suffix of k/K, m/M or g/G to the value, the unit can
+              be  changed  to  1,024  (KiB), 1,048,576 (MiB), or 1,073,741,824
+              (GiB) respectively.
 
        -d     Dump the compiled packet-matching code in a human readable  form
               to standard output and stop.
