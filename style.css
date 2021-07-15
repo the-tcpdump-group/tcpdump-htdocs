@@ -258,3 +258,13 @@ img.cibadge {
 	margin-top: 1px;
 	margin-bottom: 1px;
 }
+
+table.byte_array_32 th:nth-last-child(-n+32), table.byte_array_32 td:nth-last-child(-n+32) {
+	width: 3.125%;
+}
+
+table.byte_array_32 th, table.byte_array_32 td {
+	text-align: center;
+	padding: 9px;
+}
+
