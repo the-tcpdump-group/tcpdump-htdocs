@@ -99,7 +99,7 @@
 	<tr>
 		<td>msg_format_rev</td>
 		<td>8</td>
-		<td>LIN Message Format Revision</td>
+		<td>LIN Message Format Revision, this field must always be set to 1, 0 is invalid value</td>
 	</tr>
 	<tr>
 		<td>payload_length</td>
@@ -114,7 +114,11 @@
 	<tr>
 		<td>checksum_type</td>
 		<td>2</td>
-		<td>Checksummentyp (0=unknown/error, 1=classic, 2=enhanced, 3=undefined)</td>
+		<td>
+			Checksummentyp (0=unknown/error, 1=classic, 2=enhanced, 3=undefined)<br>
+			unknown/error means that either the checksum is incorrect (usually the case) or that a checksum algorithm we do not know has been used (should not happen).
+			Since we detect which checksum variant has been used and we cannot say that for sure if the checksum is incorrect, we have introduced this value.
+		</td>
 	</tr>
 	<tr>
 		<td>PID</td>
@@ -163,7 +167,7 @@
 	<tr>
 		<td>e_overflow</td>
 		<td>0x20</td>
-		<td>Overflow Error</td>
+		<td>Overflow Error, we have lost at least one message during reception because there was no space in the receiving controller's buffer</td>
 	</tr>
 	<tr>
 		<td>e_invalidid</td>
@@ -183,7 +187,7 @@
 	<tr>
 		<td>e_framing</td>
 		<td>0x02</td>
-		<td>Framing Error</td>
+		<td>Framing Error, low-level transmissions/reception error</td>
 	</tr>
 	<tr>
 		<td>e_noslaveresp</td>
@@ -199,7 +203,7 @@ If a message is a LIN-Event, the following rules apply:
 <ul>
 	<li>payload_length is always 4.</li>
 	<li>The fields checksum_type, PID, checksum and errors are set to 0 and must be ignored.</li>
-	<li>The payload bytes 1-4 contain the type of the LIN event</li>
+	<li>The payload bytes 1-4 contain the type of the LIN event (big endian)</li>
 </ul>
 
 <h4>Event Types</h4>
