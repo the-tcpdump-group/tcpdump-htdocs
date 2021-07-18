@@ -1,0 +1,302 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates <http://www.freecsstemplates.org>
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html>
+
+    <!-- HEAD -->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>LINKTYPE_LIN | TCPDUMP/LIBPCAP public repository</title>
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="canonical" href="https://www.tcpdump.org">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../related.html">Related Projects</a></li>
+                <li><a href="../license.html">Licenses</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+                <li><a href="../mirrors.html">Mirrors</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_LIN section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_LIN</a>
+            </h2>
+            <div class="entry">
+
+<p>This document is based on email conversation with Hannes Kaelber</p>
+<p>Hannes Kaelber translated the original documentation from German</p>
+
+<h3><strong>Frame Format</strong></h3>
+<table class="byte_array byte_array_32">
+<thead>
+	<tr>
+		<td rowspan="2"></td>
+		<th colspan="8">0</th>
+		<th colspan="8">1</th>
+		<th colspan="8">2</th>
+		<th colspan="8">3</th>
+	</tr>
+	<tr>
+		<th>7</th>
+		<th>6</th>
+		<th>5</th>
+		<th>4</th>
+		<th>3</th>
+		<th>2</th>
+		<th>1</th>
+		<th>0</th>
+
+		<th>7</th>
+		<th>6</th>
+		<th>5</th>
+		<th>4</th>
+		<th>3</th>
+		<th>2</th>
+		<th>1</th>
+		<th>0</th>
+
+		<th>7</th>
+		<th>6</th>
+		<th>5</th>
+		<th>4</th>
+		<th>3</th>
+		<th>2</th>
+		<th>1</th>
+		<th>0</th>
+
+		<th>7</th>
+		<th>6</th>
+		<th>5</th>
+		<th>4</th>
+		<th>3</th>
+		<th>2</th>
+		<th>1</th>
+		<th>0</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<th rowspan="2">Header</td>
+		<td colspan="8">msg_format_rev</td>
+		<td colspan="24">reserved</td>
+	</tr>
+	<tr>
+		<td colspan="4">payload_length</td>
+		<td colspan="2" style="padding: 3px;">message type</td>
+		<td colspan="2" style="padding: 3px;">checksum type</td>
+		<td colspan="8">PID</td>
+		<td colspan="8">checksum</td>
+		<td colspan="8">errors</td>
+	</tr>
+	<tr>
+		<th rowspan="2">Payload</td>
+		<td colspan="8">payload1</td>
+		<td colspan="8">payload2</td>
+		<td colspan="8">payload3</td>
+		<td colspan="8">payload4</td>
+	</tr>
+	<tr>
+		<td colspan="8">payload5</td>
+		<td colspan="8">payload6</td>
+		<td colspan="8">payload7</td>
+		<td colspan="8">payload8</td>
+	</tr>
+</tbody>
+</table>
+
+<h4>Fields</h4>
+<table class="byte_array">
+<thead>
+	<tr>
+		<th>Field</th>
+		<th>Length in Bits</th>
+		<th>Meaning</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>msg_format_rev</td>
+		<td>8</td>
+		<td>LIN Message Format Revision, this field must always be set to 1, 0 is invalid value</td>
+	</tr>
+	<tr>
+		<td>payload_length</td>
+		<td>4</td>
+		<td>Number of LIN payload bytes</td>
+	</tr>
+	<tr>
+		<td>message_type</td>
+		<td>2</td>
+		<td>Message type (0=LIN-Frame, 3=LIN-Event, 1 and 2=undefined)</td>
+	</tr>
+	<tr>
+		<td>checksum_type</td>
+		<td>2</td>
+		<td>
+			Checksummentyp (0=unknown/error, 1=classic, 2=enhanced, 3=undefined)<br>
+			unknown/error means that either the checksum is incorrect (usually the case) or that a checksum algorithm we do not know has been used (should not happen).
+			Since we detect which checksum variant has been used and we cannot say that for sure if the checksum is incorrect, we have introduced this value.
+		</td>
+	</tr>
+	<tr>
+		<td>PID</td>
+		<td>8</td>
+		<td>Protected Identifier</td>
+	</tr>
+	<tr>
+		<td>checksum</td>
+		<td>8</td>
+		<td>Checksum</td>
+	</tr>
+	<tr>
+		<td>errors</td>
+		<td>8</td>
+		<td>Error Bits (see below)</td>
+	</tr>
+	<tr>
+		<td>payload[n]</td>
+		<td>8</td>
+		<td>Payload Byte n. Payload 5-8 exists only if payload_length is larger than 4</td>
+	</tr>
+</tbody>
+</table>
+
+<h4>Error Bits</h4>
+<p>The Error Bits are as follows:</p>
+<table class="byte_array">
+<thead>
+	<tr>
+		<th>Error Bit</th>
+		<th>Bits Bitmask</th>
+		<th>Meaning</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>reserved</td>
+		<td>0x80</td>
+		<td>Reserved</td>
+	</tr>
+	<tr>
+		<td>reserved</td>
+		<td>0x40</td>
+		<td>Reserved </td>
+	</tr>
+	<tr>
+		<td>e_overflow</td>
+		<td>0x20</td>
+		<td>Overflow Error, we have lost at least one message during reception because there was no space in the receiving controller's buffer</td>
+	</tr>
+	<tr>
+		<td>e_invalidid</td>
+		<td>0x10</td>
+		<td>Invalid ID, i.e. a frame ID of 0x3E or 0x3F has been received</td>
+	</tr>
+	<tr>
+		<td>e_cksum</td>
+		<td>0x08</td>
+		<td>Checksum Error</td>
+	</tr>
+	<tr>
+		<td>e_parity</td>
+		<td>0x04</td>
+		<td>Parity Error</td>
+	</tr>
+	<tr>
+		<td>e_framing</td>
+		<td>0x02</td>
+		<td>Framing Error, low-level transmissions/reception error</td>
+	</tr>
+	<tr>
+		<td>e_noslaveresp</td>
+		<td>0x01</td>
+		<td>No Slave Response Error</td>
+	</tr>
+</tbody>
+</table>
+
+
+<h3><strong>LIN Event</strong></h3>
+If a message is a LIN-Event, the following rules apply:
+<ul>
+	<li>payload_length is always 4.</li>
+	<li>The fields checksum_type, PID, checksum and errors are set to 0 and must be ignored.</li>
+	<li>The payload bytes 1-4 contain the type of the LIN event (big endian)</li>
+</ul>
+
+<h4>Event Types</h4>
+<table class="byte_array">
+<thead>
+	<tr>
+		<th>Payload</th>
+		<th>Event Type</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>0xB0B00001</td>
+		<td>Go-to-Sleep Event caused by a Go-to-Sleep Frame</td>
+	</tr>
+	<tr>
+		<td>0xB0B00002</td>
+		<td>Go-to-Sleep Event caused by bus inactivity for more than 4s</td>
+	</tr>
+	<tr>
+		<td>0xB0B00004</td>
+		<td>Wake-up Event caused by a Wake-up Signal</td>
+	</tr>
+</tbody>
+</table>
+
+</div>
+<!-- End of LINKTYPE_LIN section -->
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                &copy; 2010-2021 The Tcpdump Group. Designed by
+                <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
+                based on a template by <a href="https://templated.co/">TEMPLATED</a>.
+                <a href="https://validator.w3.org/check?uri=referer">[Valid HTML
+                4.01]</a> <a href="https://jigsaw.w3.org/css-validator/check/referer">
+                [Valid CSS]</a>
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
