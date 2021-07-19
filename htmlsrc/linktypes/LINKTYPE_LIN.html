@@ -115,7 +115,7 @@
 		<td>checksum_type</td>
 		<td>2</td>
 		<td>
-			Checksummentyp (0=unknown/error, 1=classic, 2=enhanced, 3=undefined)<br>
+			Checksum type (0=unknown/error, 1=classic, 2=enhanced, 3=undefined)<br>
 			unknown/error means that either the checksum is incorrect (usually the case) or that a checksum algorithm we do not know has been used (should not happen).
 			Since we detect which checksum variant has been used and we cannot say that for sure if the checksum is incorrect, we have introduced this value.
 		</td>
@@ -123,12 +123,12 @@
 	<tr>
 		<td>PID</td>
 		<td>8</td>
-		<td>Protected Identifier</td>
+		<td>Protected Identifier, as described in section 5.2.2.5 "PID field" of ISO 17987-3:2016</td>
 	</tr>
 	<tr>
 		<td>checksum</td>
 		<td>8</td>
-		<td>Checksum</td>
+		<td>Checksum, as described in section 5.2.2.7 "Checksum" of ISO 17987-3:2016</td>
 	</tr>
 	<tr>
 		<td>errors</td>
@@ -182,7 +182,7 @@
 	<tr>
 		<td>e_parity</td>
 		<td>0x04</td>
-		<td>Parity Error</td>
+		<td>Parity Error in the Protected Identifier field</td>
 	</tr>
 	<tr>
 		<td>e_framing</td>
@@ -192,11 +192,16 @@
 	<tr>
 		<td>e_noslaveresp</td>
 		<td>0x01</td>
-		<td>No Slave Response Error</td>
+		<td>No Slave Response Error; no slave wrote the Response
+		part of the frame, as per section 4.2.2 "Frames" of ISO 17987-3:2016</td>
 	</tr>
 </tbody>
 </table>
 
+
+<h3><strong>LIN Frame</strong></h3>
+If a message is a LIN-Frame, the payload is a LIN N_PDU, as described in
+section 7.4 "Transport layer protocol data units" of ISO 17987-2.
 
 <h3><strong>LIN Event</strong></h3>
 If a message is a LIN-Event, the following rules apply:
