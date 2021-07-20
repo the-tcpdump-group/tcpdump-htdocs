@@ -95,8 +95,13 @@ type for the packet, or one of:
 header;</li>
 <li>0x0003, in some mysterious cases;</li>
 <li>0x0004, if the frame begins with an 802.2 LLC header;</li>
-<li>0x000C, if the frame is a CAN bus frame that begins with a header of
-the form</li>
+<li>0x000C, if the frame is a CAN bus frame;
+<li>0x000D, if the frame is a CAN FD (CAN with Flexible Data-Rate)
+frame.
+</ul>
+
+<p>
+A CAN bus frame begins with a header of the form</li>
 
 <pre>
 +---------------------------+
@@ -130,10 +135,18 @@ frame.
 <li>0x80000000 - set if the frame is an extended 29-bit frame rather
 than a standard 11-bit frame;
 </ul>
-and the header is followed by the payload;</li>
+and the header is followed by the CAN bus payload.
+</p>
 
-<li>0x000D, if the frame is a CAN FD (CAN with Flexible Data-Rate) frame
-that begins with a header of the form</li>
+<p>
+For a data frame, the CAN bus payload is the data field of the packet. 
+It is absent for error frames.  (XXX - what about remote transmission
+requests? As I read the spec, it indicates that they have no data.)
+</p>
+
+<p>
+A CAN FD frame begins with a header of the form
+</p>
 
 <pre>
 +---------------------------+
@@ -168,8 +181,14 @@ The bits of the FD flags field are:
 <li>0x01 - set if the bit rate switch flag is set for the frame;</li>
 <li>0x02 - set if the error state indicator is set for the frame;</li>
 </ul>
-and the header is followed by the payload.</li>
-</ul>
+and the header is followed by the CAN FD payload.
+</p>
+
+<p>
+For a data frame, the CAN FD payload is the data field of the packet. 
+It is absent for error frames.  (XXX - what about remote transmission
+requests? As I read the spec, it indicates that they have no data.)
+</p>
             </div>
             <!-- End of LINKTYPE_LINUX_SLL section -->
           </div>
