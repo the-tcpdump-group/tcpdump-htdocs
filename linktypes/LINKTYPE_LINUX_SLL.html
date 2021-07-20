@@ -188,12 +188,6 @@ and the header is followed by the CAN bus payload.
 </p>
 
 <p>
-For a data frame, the CAN bus payload is the data field of the packet. 
-It is absent for error frames.  (XXX - what about remote transmission
-requests? As I read the spec, it indicates that they have no data.)
-</p>
-
-<p>
 A CAN FD frame begins with a header of the form
 </p>
 
@@ -234,9 +228,39 @@ and the header is followed by the CAN FD payload.
 </p>
 
 <p>
-For a data frame, the CAN FD payload is the data field of the packet. 
-It is absent for error frames.  (XXX - what about remote transmission
-requests? As I read the spec, it indicates that they have no data.)
+For a CAN or CAN FD data frame, the payload is the data field of the
+packet.
+</p>
+
+<p>
+For a CAN or CAN FD error message, the payload is always 8 bytes.  The
+lower bits of the CAN ID field contain an error class value, with bits
+specified by the first set of CAN_ERR_ values in <a
+href="https://github.com/torvalds/linux/blob/master/include/uapi/linux/can/error.h">the
+Linux uapi/can/error.h header</a>.  The bytes in the payload are:
+<ul>
+<li>first byte - if arbitration was lost, the bit number in the bitstream in which it was lost;
+otherwise 0. 
+<li>second byte - the error status of the CAN controller, with bits
+specified by the CAN_ERR_CRTL_ bits in the Linux uapi/can/error.h
+header.
+<li>third byte - flags indicating a CAN protocol error type, with bits
+specified by the CAN_ERR_PROT_ bits in the Linux uapi/can/error.h
+header.
+<li>fourth byte - flags indicating a CAN protocol error location, with
+bits specified by the CAN_ERR_LOC_ bits in the Linux uapi/can/error.h
+header.
+<li>fifth byte - the error status of the CAN transceiver, with values
+specified by the CAN_ERR_TRX_ values in the Linux uapi/can/error.h
+header.
+<li>sixth, seventh, and eighth bytes - controller-specific additional
+information.
+</ul>
+</p>
+
+<p>
+(XXX - what about remote transmission requests? As I read the spec, it
+indicates that they have no data.)
 </p>
             </div>
             <!-- End of LINKTYPE_LINUX_SLL section -->
