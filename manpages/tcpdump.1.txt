@@ -1364,4 +1364,4 @@ BUGS
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                               21 December 2020                     TCPDUMP(1)
+                                 10 July 2021                       TCPDUMP(1)
