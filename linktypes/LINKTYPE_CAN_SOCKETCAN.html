@@ -90,8 +90,17 @@ frame.
 frame.
 <li>0x80000000 - set if the frame is an extended 29-bit frame rather
 than a standard 11-bit frame.
-frame.
 </ul>
+
+<p>
+The frame payload length indicates the number of bytes of payload.
+</p>
+
+<p>
+For a data frame, the payload is the data field of the packet.  It is
+absent for error frames. (XXX - what about remote transmission requests?
+As I read the spec, it indicates that they have no data.)
+</p>
             </div>
             <!-- End of LINKTYPE_CAN_SOCKETCAN section -->
           </div>
