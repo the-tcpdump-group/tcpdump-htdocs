@@ -102,6 +102,11 @@ packet.
 <p>
 
 <p>
+For a retransmission request, the length must be 0, so the payload is
+empty.
+<p>
+
+<p>
 For an error message, the payload is always 8 bytes.  The lower bits of
 the CAN ID field contain an error class value, with bits specified by
 the first set of CAN_ERR_ values in <a
@@ -125,11 +130,6 @@ header.
 <li>sixth, seventh, and eighth bytes - controller-specific additional
 information.
 </ul>
-</p>
-
-<p>
-(XXX - what about remote transmission requests? As I read the spec, it
-indicates that they have no data.)
 </p>
             </div>
             <!-- End of LINKTYPE_CAN_SOCKETCAN section -->
