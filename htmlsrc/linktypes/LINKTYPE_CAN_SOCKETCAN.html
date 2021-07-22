@@ -10,10 +10,10 @@
 |      CAN ID and flags     |
 |         (4 Octets)        |
 +---------------------------+
-|    Frame payload length   |
+|       Payload length      |
 |         (1 Octet)         |
 +---------------------------+
-|          Padding          |
+|          FD Flags         |
 |         (1 Octet)         |
 +---------------------------+
 |      Reserved/Padding     |
@@ -28,19 +28,42 @@
 .                           .
 </pre>
 
-                <h3>Description</h3>
+<h3>Frame Size & CAN-FD<h3>
 <p>
-The field containing the CAN ID and flags is in network byte order
-(big-endian).  The bottom 29 bits contain the CAN ID of the frame.  The
-remaining bits are:
+  Originally in Linux, socket CAN frames have two frame sizes (MTU)
 </p>
 <ul>
-<li>0x20000000 - set if the frame is an error message rather than a data
-frame.
-<li>0x40000000 - set if the frame is a remote transmission request
-frame.
-<li>0x80000000 - set if the frame is an extended 29-bit frame rather
-than a standard 11-bit frame.
+  <li>CAN_MTU: 16 - size for classic CAN</li>
+  <li>CANFD_MTU: 72 - size for CAN-FD</li>
+</ul>
+<p>
+  This means that applications that receive the frame had to check for received frame size to know if the Frame was CAN or CAN-FD.<br>
+  The CANFD_FDF flag that indicates if the frame is a CAN-FD frame was introduced later on, and is not actually used by the Linux kernel.<br>
+
+  Applications that only limit frame size to available payload (strip trailing padding bytes), must manually set the CANFD_FDF flag after checking the original MTU.
+</p>
+
+<h3>CAN ID</h3>
+<p>
+  The field containing the CAN ID and flags is in network byte order (big-endian).
+  The bottom 29 bits contain the CAN ID of the frame.
+  The remaining bits are:
+</p>
+<ul>
+  <li>0x20000000 - set if the frame is an error message rather than a data frame.</li>
+  <li>0x40000000 - set if the frame is a remote transmission request frame.</li>
+  <li>0x80000000 - set if the frame is an extended 29-bit frame rather than a standard 11-bit frame.</li>
+</ul>
+
+<h3>CAN-FD</h3>
+<p>
+  The field containing the CAN-FD specific bits, for CAN frames, this field is 0.
+  The FD bits are:
+</p>
+<ul>
+  <li>CANFD_BRS: 0x01 - bit rate switch (second bitrate for payload data).</li>
+  <li>CANFD_ESI: 0x02 - error state indicator of the transmitting node.</li>
+  <li>CANFD_FDF: 0x04 - mark CAN FD for dual use of CAN format.</li>
 </ul>
 
 <p>
@@ -53,7 +76,7 @@ packet.
 <p>
 
 <p>
-For a retransmission request, the length must be 0, so the payload is
+For a remote retransmission request, the length must be 0, so the payload is
 empty.
 <p>
 
