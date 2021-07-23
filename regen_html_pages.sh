@@ -9,20 +9,22 @@
 # * Ubuntu Linux 20.04
 # * Fedora Linux 30
 # * Fedora Linux 32
+# * Fedora Linux 34
 # * Devuan Linux
 # * FreeBSD 12
+# * FreeBSD 13
 #
 
-readonly HTML_HEAD='htmlsrc/_html_head.html'
-readonly TOP_MENU='htmlsrc/_top_menu.html'
-readonly BODY_HEADER='htmlsrc/_body_header.html'
-readonly SIDEBAR='htmlsrc/_sidebar.html'
-readonly BODY_FOOTER='htmlsrc/_body_footer.html'
+HTML_HEAD='htmlsrc/_html_head.html'
+TOP_MENU='htmlsrc/_top_menu.html'
+BODY_HEADER='htmlsrc/_body_header.html'
+SIDEBAR='htmlsrc/_sidebar.html'
+BODY_FOOTER='htmlsrc/_body_footer.html'
 
 substitute_page_title()
 {
-	local readonly f="${1:?}"
-	local readonly b=$(basename "$f" .html)
+	local f="${1:?}"
+	local b=$(basename "$f" .html)
 	local title
 
 	case "$b" in
@@ -91,13 +93,13 @@ rewrite_URLs()
 
 highlight_top_menu()
 {
-	local readonly f="${1:?}"
+	local f="${1:?}"
 	sed "s#<li><a href=\"${f}\">#<li class=\"current_page_item\"><a href=\"${f}\">#"
 }
 
 print_html_page()
 {
-	local readonly infile="${1:?}"
+	local infile="${1:?}"
 	local show_sidebar
 	case $(basename "$infile" .html) in
 	security|faq|index|license|mirrors|related|old_releases)
@@ -208,11 +210,16 @@ regenerate_pages()
 			echo "Warning: output file $f_out does not exist in git" >&2
 		fi
 
+		# None of the functions below read from $f_out, they only need to know
+		# what the filename is.
+		# shellcheck disable=SC2094
 		print_html_page "$f_in" | \
 		substitute_page_title "$f_out" | \
 		highlight_top_menu "$f_out" | \
 		rewrite_URLs "$f_out" > "$f_out"
 
+		# The pipeline is too long to fit into the "if" nicely.
+		# shellcheck disable=SC2181
 		if [ $? -ne 0 ]; then
 			echo "Error: failed to overwrite output file $f_out" >&2
 			continue
@@ -222,11 +229,11 @@ regenerate_pages()
 	return 0
 }
 
-which git >/dev/null 2>&1 || {
+command -v git >/dev/null 2>&1 || {
 	echo "git must be installed to proceed" >&2
 	exit 12
 }
-which sed >/dev/null 2>&1 || {
+command -v sed >/dev/null 2>&1 || {
 	echo "sed must be installed to proceed" >&2
 	exit 13
 }

@@ -30,8 +30,8 @@
 # even on the same system as the previous time! Do not worry about it as long
 # as the source man pages are the newest you can get from git.
 
-readonly MAN2HTML_PFX=/cgi-bin/man/man2html
-readonly WEBSITE_PFX=/manpages
+MAN2HTML_PFX=/cgi-bin/man/man2html
+WEBSITE_PFX=/manpages
 
 # Both Fedora and Ubuntu man2html versions prepend their output with a
 # Content-type header. Only the Ubuntu version generates a document type
@@ -47,7 +47,7 @@ stripContentTypeHeader()
 # "Index" section near EOF.
 stripIndexSection()
 {
-	local readonly infile=${1:?}
+	local infile=${1:?}
 	case $(basename "$infile") in
 	tcpdump.1|tcpslice.1|pcap.3pcap)
 		cat
@@ -227,9 +227,9 @@ ENDOFLIST
 
 produceHTML()
 {
-	local readonly infile=${1:?}
-	local readonly sedfile="${2:?}"
-	local readonly outfile=${3:?}
+	local infile=${1:?}
+	local sedfile="${2:?}"
+	local outfile=${3:?}
 	[ -s "$infile" ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
@@ -252,8 +252,8 @@ produceHTML()
 
 produceTXT()
 {
-	local readonly infile=${1:?}
-	local readonly outfile=${2:?}
+	local infile=${1:?}
+	local outfile=${2:?}
 	[ -s "$infile" ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
@@ -264,7 +264,7 @@ produceTXT()
 
 known3PCAPFile()
 {
-	local readonly f=$(basename "${1:?}" .3pcap)
+	local f=$(basename "${1:?}" .3pcap)
 	local manfile mantopic
 	print3PCAPMap | while read -r mantopic manfile; do
 		if [ "${manfile:-$mantopic}" = "$f" ]; then
@@ -279,7 +279,7 @@ known3PCAPFile()
 
 updateOutputFiles()
 {
-	which man2html >/dev/null 2>&1 || {
+	command -v man2html >/dev/null 2>&1 || {
 		echo "man2html must be installed to proceed"
 		exit 1
 	}
@@ -287,10 +287,10 @@ updateOutputFiles()
 	# The .txt version of a man page assumes an 80 columns wide terminal,
 	# which used to be the default in PC text mode console, xterm etc.
 	# Use stty because $COLUMNS doesn't always work.
-	local readonly cols=$(stty size | cut -d' ' -f2)
+	local cols=$(stty size | cut -d' ' -f2)
 	[ "$cols" -ne 80 ] && stty columns 80
 
-	local readonly sedfile=$(mktemp --tmpdir manpages_sedfile.XXXXXX)
+	local sedfile=$(mktemp --tmpdir manpages_sedfile.XXXXXX)
 	printSedFile > "$sedfile"
 
 	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
