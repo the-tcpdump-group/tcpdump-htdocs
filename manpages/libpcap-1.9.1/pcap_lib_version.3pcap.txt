@@ -1,0 +1,19 @@
+PCAP_LIB_VERSION(3PCAP)                                PCAP_LIB_VERSION(3PCAP)
+
+NAME
+       pcap_lib_version - get the version information for libpcap
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       const char *pcap_lib_version(void);
+
+DESCRIPTION
+       pcap_lib_version()  returns  a  pointer  to a string giving information
+       about the version of the libpcap library being used; note that it  con-
+       tains more information than just a version number.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                3 January 2014         PCAP_LIB_VERSION(3PCAP)

@@ -1,0 +1,24 @@
+PCAP_SET_PROMISC(3PCAP)                                PCAP_SET_PROMISC(3PCAP)
+
+NAME
+       pcap_set_promisc - set promiscuous mode for a not-yet-activated capture
+       handle
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_promisc(pcap_t *p, int promisc);
+
+DESCRIPTION
+       pcap_set_promisc() sets whether promiscuous mode should  be  set  on  a
+       capture  handle  when the handle is activated.  If promisc is non-zero,
+       promiscuous mode will be set, otherwise it will not be set.
+
+RETURN VALUE
+       pcap_set_promisc() returns 0  on  success  or  PCAP_ERROR_ACTIVATED  if
+       called on a capture handle that has been activated.
+
+SEE ALSO
+       pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
+
+                                3 January 2014         PCAP_SET_PROMISC(3PCAP)

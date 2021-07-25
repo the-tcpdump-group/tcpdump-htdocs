@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP_DATALINK</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_DATALINK</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 7 April 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_datalink - get the link-layer header type
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_datalink(pcap_t *p);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_datalink()</B>
+
+returns the link-layer header type for the live capture or ``savefile''
+specified by
+<I>p</I>.
+
+<P>
+
+It must not be called on a pcap descriptor created by
+<B><A HREF='./pcap_create.3pcap.html'>pcap_create</A>(3PCAP)</B>
+
+that has not yet been activated by
+<B><A HREF='./pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)</B>.
+
+<P>
+
+<I><A HREF="https://www.tcpdump.org/linktypes.html">https://www.tcpdump.org/linktypes.html</A></I>
+
+lists the values
+<B>pcap_datalink()</B>
+
+can return and describes the packet formats that
+correspond to those values.
+<P>
+
+Do
+<B>NOT</B>
+
+assume that the packets for a given capture or ``savefile`` will have
+any given link-layer header type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.  For example, the &quot;any&quot; device on Linux will have a
+link-layer header type of
+<B>DLT_LINUX_SLL</B>
+
+even if all devices on the system at the time the &quot;any&quot; device is opened
+have some other data link type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_datalink()</B>
+
+returns the link-layer header type on success and
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+if called on a capture handle that has been created but not activated.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF="./pcap-linktype.7.html">pcap-linktype</A>(7)
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 16:20:08 GMT, July 25, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

@@ -1,0 +1,24 @@
+PCAP_SETFILTER(3PCAP)                                    PCAP_SETFILTER(3PCAP)
+
+NAME
+       pcap_setfilter - set the filter
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_setfilter(pcap_t *p, struct bpf_program *fp);
+
+DESCRIPTION
+       pcap_setfilter()  is used to specify a filter program.  fp is a pointer
+       to  a  bpf_program  struct,  usually  the   result   of   a   call   to
+       pcap_compile(3PCAP).
+
+RETURN VALUE
+       pcap_setfilter()  returns  0  on  success and PCAP_ERROR on failure. If
+       PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be
+       called with p as an argument to fetch or display the error text.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                 25 July 2018            PCAP_SETFILTER(3PCAP)

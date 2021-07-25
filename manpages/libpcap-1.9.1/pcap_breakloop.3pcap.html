@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP_BREAKLOOP</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_BREAKLOOP</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_breakloop - force a pcap_dispatch() or pcap_loop() call to return
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>void pcap_breakloop(pcap_t *);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_breakloop()</B>
+
+sets a flag that will force
+<B><A HREF='./pcap_loop.3pcap.html'>pcap_dispatch</A>(3PCAP)</B>
+
+or
+<B><A HREF='./pcap_loop.3pcap.html'>pcap_loop</A>(3PCAP)</B>
+
+to return rather than looping; they will return the number of packets
+that have been processed so far, or
+<B>PCAP_ERROR_BREAK</B>
+
+if no packets have been processed so far.
+<P>
+
+This routine is safe to use inside a signal handler on UNIX or a console
+control handler on Windows, as it merely sets a flag that is checked
+within the loop.
+<P>
+
+The flag is checked in loops reading packets from the OS - a signal by
+itself will not necessarily terminate those loops - as well as in loops
+processing a set of packets returned by the OS.
+<B>
+Note that if you are catching signals on UNIX systems that support
+restarting system calls after a signal, and calling pcap_breakloop()
+in the signal handler, you must specify, when catching those signals,
+that system calls should NOT be restarted by that signal.  Otherwise,
+if the signal interrupted a call reading packets in a live capture,
+when your signal handler returns after calling pcap_breakloop(), the
+call will be restarted, and the loop will not terminate until more
+packets arrive and the call completes.
+</B>
+<P>
+
+<B>
+Note also that, in a multi-threaded application, if one thread is
+blocked in pcap_dispatch(), pcap_loop(), <A HREF='./pcap_next_ex.3pcap.html'>pcap_next</A>(3PCAP), or <A HREF='./pcap_next_ex.3pcap.html'>pcap_next_ex</A>(3PCAP),
+a call to pcap_breakloop() in a different thread will not unblock that
+thread.
+</B>
+You will need to use whatever mechanism the OS provides for
+breaking a thread out of blocking calls in order to unblock the thread,
+such as thread cancellation or thread signalling in systems that support
+POSIX threads, or
+<B>SetEvent()</B>
+
+on the result of
+<B>pcap_getevent()</B>
+
+on a
+<B>pcap_t</B>
+
+on which the thread is blocked on Windows.  Asynchronous procedure calls
+will not work on Windows, as a thread blocked on a
+<B>pcap_t</B>
+
+will not be in an alertable state.
+
+<P>
+
+Note that
+<B>pcap_next()</B>
+
+and
+<B>pcap_next_ex()</B>
+
+will, on some platforms, loop reading packets from the OS; that loop
+will not necessarily be terminated by a signal, so
+<B>pcap_breakloop()</B>
+
+should be used to terminate packet processing even if
+<B>pcap_next()</B>
+
+or
+<B>pcap_next_ex()</B>
+
+is being used.
+<P>
+
+<B>pcap_breakloop()</B>
+
+does not guarantee that no further packets will be processed by
+<B>pcap_dispatch()</B>
+
+or
+<B>pcap_loop()</B>
+
+after it is called; at most one more packet might be processed.
+<P>
+
+If
+<B>PCAP_ERROR_BREAK</B>
+
+is returned from
+<B>pcap_dispatch()</B>
+
+or
+<B>pcap_loop()</B>,
+
+the flag is cleared, so a subsequent call will resume reading packets.
+If a positive number is returned, the flag is not cleared, so a
+subsequent call will return
+<B>PCAP_ERROR_BREAK</B>
+
+and clear the flag.
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP)
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 16:20:08 GMT, July 25, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

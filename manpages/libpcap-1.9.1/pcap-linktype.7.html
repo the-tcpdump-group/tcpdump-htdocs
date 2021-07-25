@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP-LINKTYPE</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP-LINKTYPE</H1>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 7 April 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap-linktype - link-layer header types supported by libpcap
+<A NAME="lbAC">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+For a live capture or ``savefile'', libpcap supplies, as the return
+value of the
+<A HREF='./pcap_datalink.3pcap.html'><B>pcap_datalink</B></A>(3PCAP)
+
+routine, a value that indicates the type of link-layer header at the
+beginning of the packets it provides.  This is not necessarily the type
+of link-layer header that the packets being captured have on the network
+from which they're being captured; for example, packets from an IEEE
+802.11 network might be provided by libpcap with Ethernet headers that
+the network adapter or the network adapter driver generates from the
+802.11 headers.  The names for those values begin with
+<B>DLT_</B>,
+
+so they are sometimes called &quot;DLT_ values&quot;.
+<P>
+
+The values stored in the link-layer header type field in the savefile
+header are, in most but not all cases, the same as the values returned
+by
+<B>pcap_datalink()</B>.
+
+The names for those values begin with
+<B>LINKTYPE_</B>.
+
+<P>
+
+The link-layer header types supported by libpcap are described at
+<A HREF="https://www.tcpdump.org/linktypes.html.">https://www.tcpdump.org/linktypes.html.</A>
+<A NAME="lbAD">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP)
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 16:20:07 GMT, July 25, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

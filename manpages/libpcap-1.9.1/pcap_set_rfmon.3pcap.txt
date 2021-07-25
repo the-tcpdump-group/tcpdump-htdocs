@@ -1,0 +1,25 @@
+PCAP_SET_RFMON(3PCAP)                                    PCAP_SET_RFMON(3PCAP)
+
+NAME
+       pcap_set_rfmon  - set monitor mode for a not-yet-activated capture han-
+       dle
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_rfmon(pcap_t *p, int rfmon);
+
+DESCRIPTION
+       pcap_set_rfmon() sets whether monitor mode should be set on  a  capture
+       handle  when  the  handle  is activated.  If rfmon is non-zero, monitor
+       mode will be set, otherwise it will not be set.
+
+RETURN VALUE
+       pcap_set_rfmon() returns 0 on success or PCAP_ERROR_ACTIVATED if called
+       on a capture handle that has been activated.
+
+SEE ALSO
+       pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP), pcap_can_set_rf-
+       mon(3PCAP)
+
+                                3 January 2014           PCAP_SET_RFMON(3PCAP)

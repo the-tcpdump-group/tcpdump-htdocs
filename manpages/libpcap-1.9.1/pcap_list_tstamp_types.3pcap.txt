@@ -1,0 +1,44 @@
+PCAP_LIST_TSTAMP_TYPES(3PCAP)                    PCAP_LIST_TSTAMP_TYPES(3PCAP)
+
+NAME
+       pcap_list_tstamp_types,  pcap_free_tstamp_types  -  get  a list of time
+       stamp types supported by a capture device, and free that list
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_list_tstamp_types(pcap_t *p, int **tstamp_typesp);
+       void pcap_free_tstamp_types(int *tstamp_types);
+
+DESCRIPTION
+       pcap_list_tstamp_types() is used to get a list of  the  supported  time
+       stamp  types  of  the  interface  associated  with the pcap descriptor.
+       pcap_list_tstamp_types() allocates an array to hold the list  and  sets
+       *tstamp_typesp to point to the array.  See pcap-tstamp(7) for a list of
+       all the time stamp types.
+
+       The   caller   is   responsible   for   freeing    the    array    with
+       pcap_free_tstamp_types(),   which   frees   the   list  pointed  to  by
+       tstamp_types.
+
+RETURN VALUE
+       pcap_list_tstamp_types() returns the number of time stamp types in  the
+       array  on  success  and  PCAP_ERROR  on failure.  A return value of one
+       means that the only time stamp type supported is the one in  the  list,
+       which  is the capture device's default time stamp type.  A return value
+       of  zero  means  that  the  only   time   stamp   type   supported   is
+       PCAP_TSTAMP_HOST, which is the capture device's default time stamp type
+       (only older versions of libpcap will return that; newer  versions  will
+       always   return  one  or  more  types).   If  PCAP_ERROR  is  returned,
+       pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p as an ar-
+       gument to fetch or display the error text.
+
+BACKWARD COMPATIBILITY
+       These functions became available in libpcap release 1.2.1.  In previous
+       releases, the time stamp type cannot be  set;  only  the  default  time
+       stamp type offered by a capture source is available.
+
+SEE ALSO
+       pcap(3PCAP), pcap_tstamp_type_val_to_name(3PCAP), pcap-tstamp(7)
+
+                                22 August 2018   PCAP_LIST_TSTAMP_TYPES(3PCAP)

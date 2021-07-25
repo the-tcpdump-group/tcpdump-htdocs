@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP_ACTIVATE</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_ACTIVATE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 31 July 2016<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_activate - activate a capture handle
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_activate(pcap_t *p);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_activate()</B>
+
+is used to activate a packet capture handle to look
+at packets on the network, with the options that were set on the handle
+being in effect.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_activate()</B>
+
+returns 0 on success without warnings, a non-zero positive value on
+success with warnings, and a negative value on error.
+A non-zero return value indicates what warning or error condition
+occurred.
+<P>
+
+The possible warning values are:
+<DL COMPACT>
+<DT><B>PCAP_WARNING_PROMISC_NOTSUP</B>
+
+<DD>
+Promiscuous mode was requested, but the capture source doesn't support
+promiscuous mode.
+<DT><B>PCAP_WARNING_TSTAMP_TYPE_NOTSUP</B>
+
+<DD>
+The time stamp type specified in a previous
+<B><A HREF='./pcap_set_tstamp_type.3pcap.html'>pcap_set_tstamp_type</A>(3PCAP)</B>
+
+call isn't supported by the capture source (the time stamp type is
+left as the default),
+<DT><B>PCAP_WARNING</B>
+
+<DD>
+Another warning condition occurred;
+<B><A HREF='./pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)</B>
+
+or
+<B><A HREF='./pcap_geterr.3pcap.html'>pcap_perror</A>(3PCAP)</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display a message describing the warning
+condition.
+</DL>
+<P>
+
+The possible error values are:
+<DL COMPACT>
+<DT><B>PCAP_ERROR_ACTIVATED</B>
+
+<DD>
+The handle has already been activated.
+<DT><B>PCAP_ERROR_NO_SUCH_DEVICE</B>
+
+<DD>
+The capture source specified when the handle was created doesn't
+exist.
+<DT><B>PCAP_ERROR_PERM_DENIED</B>
+
+<DD>
+The process doesn't have permission to open the capture source.
+<DT><B>PCAP_ERROR_PROMISC_PERM_DENIED</B>
+
+<DD>
+The process has permission to open the capture source but doesn't
+have permission to put it into promiscuous mode.
+<DT><B>PCAP_ERROR_RFMON_NOTSUP</B>
+
+<DD>
+Monitor mode was specified but the capture source doesn't support
+monitor mode.
+<DT><B>PCAP_ERROR_IFACE_NOT_UP</B>
+
+<DD>
+The capture source device is not up.
+<DT><B>PCAP_ERROR</B>
+
+<DD>
+Another error occurred.
+<B>pcap_geterr()</B>
+
+or
+<B>pcap_perror()</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display a message describing the error.
+</DL>
+<P>
+
+If
+<B>PCAP_WARNING_PROMISC_NOTSUP</B>,
+
+<B>PCAP_ERROR_NO_SUCH_DEVICE</B>,
+
+or
+<B>PCAP_ERROR_PERM_DENIED</B>
+
+is returned,
+<B>pcap_geterr()</B>
+
+or
+<B>pcap_perror()</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display an message giving additional details
+about the problem that might be useful for debugging the problem if it's
+unexpected.
+<P>
+
+Additional warning and error codes may be added in the future; a program
+should check for positive, negative, and zero return codes, and treat
+all positive return codes as warnings and all negative return
+codes as errors.
+<B><A HREF='./pcap_statustostr.3pcap.html'>pcap_statustostr</A>(3PCAP)</B>
+
+can be called, with a warning or error code as an argument, to fetch a
+message describing the warning or error code.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP)
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 16:20:08 GMT, July 25, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

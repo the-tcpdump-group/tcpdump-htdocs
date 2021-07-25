@@ -1,0 +1,599 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of TCPSLICE</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of TCPSLICE</H1>
+Section: User Commands  (1)<BR>Updated: 30 July 2020<BR><A HREF="#index">Index</A>
+<A HREF="./">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+tcpslice - extract pieces of and/or merge together pcap files
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+
+<B>tcpslice</B>
+
+[
+<B>-DdlhRrtv</B>
+
+] [
+<B>-w</B>
+
+<I>file</I>
+
+]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>-s</B>
+
+<I>types</I>
+
+[
+<B>-e</B>
+
+<I>seconds</I>
+
+] [
+<B>-f</B>
+
+<I>format</I>
+
+] ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<I>start-time</I>
+
+[
+<I>end-time</I>
+
+] ]
+<I>file ...</I>
+
+<BR>
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<P>
+
+<I>Tcpslice</I>
+
+is a program for extracting portions of packet-trace files generated using
+<B><A HREF="./tcpdump.1.html">tcpdump</A></B>(1)'s
+
+<B>-w</B>
+
+flag.
+It can also be used to merge together several such files, as discussed
+below.
+<P>
+
+The basic operation of
+<I>tcpslice</I>
+
+is to copy to
+<I>stdout</I>
+
+all packets from its input file(s) whose timestamps fall
+within a given range.  The starting and ending times of the range
+may be specified on the command line.  All ranges are inclusive.
+The starting time defaults
+to the earliest time of the first packet in
+any of the input files; we call
+this the
+<I>first time.</I>
+
+The ending time defaults to ten years after the starting time.
+Thus, the command
+<I>tcpslice trace-file</I>
+
+simply copies
+<I>trace-file</I>
+
+to <I>stdout</I> (assuming the file does not include more than
+ten years' worth of data).
+<P>
+
+There are a number of ways to specify times.  The first is using
+Unix timestamps of the form
+<I>sssssssss.uuuuuu</I>
+
+(this is the format specified by <I>tcpdump</I>'s
+<B>-tt</B>
+
+flag).
+For example,
+<B>654321098.7654</B>
+
+specifies 38 seconds and 765,400 microseconds
+after 8:51PM PDT, Sept. 25, 1990.
+<P>
+
+All examples in this manual are given
+for PDT times, but when displaying times and interpreting times symbolically
+as discussed below,
+<I>tcpslice</I>
+
+uses the local timezone, regardless of the timezone in which the pcap
+file was generated.  The daylight-savings setting used is that which is
+appropriate for the local timezone at the date in question.  For example,
+times associated with summer months will usually include daylight-savings
+effects, and those with winter months will not.
+<P>
+
+Times may also be specified relative
+to either the
+<I>first time</I>
+
+(when specifying a starting time)
+or the starting time (when specifying an ending time)
+by preceding a numeric value in seconds with a `+'.
+For example, a starting time of
+<B>+200</B>
+
+indicates 200 seconds after the
+<I>first time,</I>
+
+and the two arguments
+<B>+200 +300</B>
+
+indicate from 200 seconds after the
+<I>first time</I>
+
+through 500 seconds after the
+<I>first time.</I>
+
+<P>
+
+Times may also be specified in terms of years (y), months (m), days (d),
+hours (h), minutes (m), seconds (s), and microseconds(u).  For example,
+the Unix timestamp 654321098.7654 discussed above could also be expressed
+as
+<B>1990y9m25d20h51m38s765400u.</B>
+
+2 or 4 digit years may be used; 2 digits can specify years from 1970 to
+2069.
+<P>
+
+When specifying times using this style, fields that are omitted default
+as follows.  If the omitted field is a unit
+<I>greater</I>
+
+than that of the first specified field, then its value defaults to
+the corresponding value taken from either
+<I>first time</I>
+
+(if the starting time is being specified) or the starting time
+(if the ending time is being specified).
+If the omitted field is a unit
+<I>less</I>
+
+than that of the first specified field, then it defaults to zero (1 for days).
+For example, suppose that the input file has a
+<I>first time</I>
+
+of the Unix timestamp mentioned above, i.e., 38 seconds and 765,400 microseconds
+after 8:51PM PDT, Sept. 25, 1990.  To specify 9:36PM PDT (exactly) on the
+same date we could use
+<B>21h36m.</B>
+
+To specify a range from 9:36PM PDT through 1:54AM PDT the next day we
+could use
+<B>21h36m 26d1h54m.</B>
+
+<P>
+
+Relative times can also be specified when using the
+<I>ymdhmsu</I>
+
+format.  Omitted fields then default to 0 if the unit of the field is
+<I>greater</I>
+
+than that of the first specified field, and to the corresponding value
+taken from either the
+<I>first time</I>
+
+or the starting time if the omitted field's unit is
+<I>less</I>
+
+than that of the first specified field.  Given a
+<I>first time</I>
+
+of the Unix timestamp mentioned above,
+<B>22h +1h10m</B>
+
+specifies a range from 10:00PM PDT on that date through 11:10PM PDT, and
+<B>+1h +1h10m</B>
+
+specifies a range from 38.7654 seconds after 9:51PM PDT through 38.7654
+seconds after 11:01PM PDT.  The first hour of the file could be extracted
+using
+<B>+0 +1h.</B>
+
+<P>
+
+Note that with the
+<I>ymdhmsu</I>
+
+format there is an ambiguity between using
+<I>m</I>
+
+for `month' or for `minute'.  The ambiguity is resolved as follows: if an
+<I>m</I>
+
+field is followed by a
+<I>d</I>
+
+field then it is interpreted as specifying months; otherwise it
+specifies minutes.
+<P>
+
+If more than one input file is specified then
+<I>tcpslice</I>
+
+merges the packets from the various input files into the single
+output file.  Normally, this merge is done based on the
+value of the time stamps in the packets in the individual files.
+(Tcpslice assumes that
+<I>within</I>
+
+each input file, packets are in time stamp order.)
+If the
+<B>-l</B>
+
+option is used, the value used for ordering is the time stamp of
+a given packet minus the time stamp of the first packet in the
+input file in which the given packet occurs.
+<P>
+
+When merging files, by default
+<I>tcpslice</I>
+
+will discard any
+<I>duplicate</I>
+
+packet it finds in more than one file.  A duplicate is a packet
+that has an identical timestamp (either relative or absolute) and
+identical packet contents (for as much as was captured) as another
+packet previously seen in a different file.  Note that it is possible
+for the network to generate true replicates of packets, and for
+systems that can return the same timestamp for multiple packets,
+these can be mistaken for duplicates and discarded.  Accordingly,
+<I>tcpslice</I>
+
+will not discard duplicates in the same trace file.  In addition,
+you can use the
+<B>-D</B>
+
+option to suppress any discarding of duplicates.
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<P>
+
+If any of
+<B>-R</B>,
+
+<B>-r</B>
+
+or
+<B>-t</B>
+
+are specified then
+<I>tcpslice</I>
+
+reports the timestamps of the first and last packets in each input file
+and exits.  Only one of these three options may be specified.
+<DL COMPACT>
+<DT><B>-D</B>
+
+<DD>
+Do not discard duplicate packets seen when merging multiple trace files.
+<DT><B>-d</B>
+
+<DD>
+Dump the start and end times specified by the given range and
+exit.  This option is useful for checking that the given range actually
+specifies the times you think it does.  If one of
+<B>-R</B>,
+
+<B>-r</B>
+
+or
+<B>-t</B>
+
+has been specified then the times are dumped in the corresponding
+format; otherwise, raw format (<B>-R</B>) is used.
+<DT><B>-e</B>
+
+<DD>
+Specify a number of
+<I>seconds</I>
+
+to wait after the last packet was seen before considering a session
+to be expired (default: 0 = do not expire inactive sessions). This
+is only effective when the
+<B>-s</B>
+
+option is used to track sessions.
+<DT><B>-f</B>
+
+<DD>
+Specify the name
+<I>format</I>
+
+of PCAP files to which each session will be extracted (default: NULL = do
+not extract sessions to separate files). This is only effective when the
+<B>-s</B>
+
+option is used to track sessions.
+<DT><B>-h</B>
+
+<DD>
+Print the tcpslice and libpcap version strings, print a usage message, and exit.
+<DT><B>-l</B>
+
+<DD>
+When merging more than one file, merge on the basis of
+relative time, rather than absolute time.
+Normally, when merging
+files is done, packets are merged based on absolute time stamps.  With
+<B>-l</B>
+
+packets are merged based on the relative time between
+the start of the file in which the packet is found and the time stamp
+of the packet itself.
+The time stamp of packets in the output file is calculated
+as the relative time for the packet within its file plus
+<I>first time.</I>
+
+<DT><B>-R</B>
+
+<DD>
+Dump the timestamps of the first and last packets in each input file
+as raw timestamps (i.e., in the form <I> sssssssss.uuuuuu</I>).
+<DT><B>-r</B>
+
+<DD>
+Same as
+<B>-R</B>
+
+except the timestamps are dumped in human-readable format, similar
+to that used by
+<B>date</B>(1).
+
+<DT><B>-s</B>
+
+<DD>
+Enable session tracking for the specified
+<I>types</I>
+
+which is a comma-separated list of the following:
+<DL COMPACT><DT><DD>
+<DL COMPACT>
+<DT><B>tcp</B>
+
+<DD>
+track all TCP connections
+<DT><B>sip</B>
+
+<DD>
+track SIP-based VoIP calls, which may enable tracking of TCP
+connections but only the ones that are related to SIP calls.
+This feature is only available if tcpslice was linked against
+Aymeric Moizard's GNU oSIP library; if not, install the latest
+version of
+<I>libosip2</I>
+
+from <A HREF="https://www.gnu.org/software/osip/">https://www.gnu.org/software/osip/</A> and recompile tcpslice.
+<DT><B>h323</B>
+
+<DD>
+track H.323-based VoIP calls, which may enable tracking of TCP
+connections but only the ones that are related to H.323 calls.
+This feature is only available if tcpslice was linked against
+Objective Systems' Open H.323 library for C; if not, install the
+latest version of
+<I>libooh323c</I>
+
+from <A HREF="https://sourceforge.net/projects/ooh323c/">https://sourceforge.net/projects/ooh323c/</A> and recompile tcpslice.
+</DL>
+<P>
+
+Session tracking altogether is only available if tcpslice was linked
+against a recent version (&gt;1.20) of Rafal Wojtczuk's Network Intrusion
+Detection System library; if not, install the latest version of
+<I>libnids</I>
+
+from <A HREF="http://libnids.sourceforge.net/">http://libnids.sourceforge.net/</A> and recompile tcpslice.
+</DL>
+
+<DT><B>-t</B>
+
+<DD>
+Same as
+<B>-R</B>
+
+except the timestamps are dumped in
+<I>tcpslice</I>
+
+format, i.e., in the
+<I>ymdhmsu</I>
+
+format discussed above.
+<DT><B>-v</B>
+
+<DD>
+Turn on verbose mode. Currently this only affects session tracking (<B>-s</B>)
+messages: if specified at least once, sessions openings and closings
+are displayed regardless of the time (by default the closings are only
+displayed past
+<I>end-time</I>);
+
+if specified at least twice, subsessions (sessions initiated by other
+sessions) openings and closings are also displayed.
+<DT><B>-w</B>
+
+<DD>
+Direct the output to <I>file</I> rather than <I>stdout</I>.
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="./tcpdump.1.html">tcpdump</A></B>(1)
+
+<A NAME="lbAG">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+The original author was:
+<P>
+
+Vern Paxson, of
+Lawrence Berkeley Laboratory, University of California, Berkeley, CA.
+<P>
+
+It is currently being maintained by The Tcpdump Group.
+<P>
+
+The current version is available at:
+<P>
+
+<DL COMPACT><DT><DD>
+<I><A HREF="https://github.com/the-tcpdump-group/tcpslice">https://github.com/the-tcpdump-group/tcpslice</A></I>
+
+</DL>
+
+<P>
+
+<P>
+
+The original distribution is available via anonymous ftp:
+<P>
+
+<DL COMPACT><DT><DD>
+<I><A HREF="ftp://ftp.ee.lbl.gov/tcpslice-1.2a3.tar.gz">ftp://ftp.ee.lbl.gov/tcpslice-1.2a3.tar.gz</A></I>
+
+</DL>
+
+<A NAME="lbAH">&nbsp;</A>
+<H2>BUGS</H2>
+
+Please send problems, bugs, questions, desirable enhancements, etc. to:
+<P>
+
+<DL COMPACT><DT><DD>
+<A HREF="mailto:tcpdump-workers@lists.tcpdump.org">tcpdump-workers@lists.tcpdump.org</A>
+</DL>
+
+<P>
+
+Please send source code contributions as git pull requests through the
+project page above.
+<P>
+
+An input filename that exactly matches the
+<I>sssssssss.uuuuuu</I>
+
+or the
+<I>ymdhmsu</I>
+
+format discussed above can be confused with a start/end time (regardless if
+the date and the time are valid in the latter case).  Such filenames can be
+specified with a leading `./'; for example, specify the file `1976y07m04d'
+as `./1976y07m04d' and `00000123' as `./00000123'.  Alternatively, renaming
+the files to `1976y07m04d.pcap' and `00000123.pcap' respectively would
+resolve this ambiguity.
+<P>
+
+<I>tcpslice</I>
+
+cannot read its input from <I>stdin</I>, since it uses random-access
+to rummage through its input files.
+<P>
+
+<I>tcpslice</I>
+
+refuses to write to its output if it is a terminal
+(as indicated by
+<B>isatty</B>(3)).
+
+This is not a bug but a feature,
+to prevent it from spraying binary data to the user's terminal.
+Note that this means you must either redirect <I>stdout</I> or specify an
+output file via <B>-w</B>.
+<P>
+
+<I>tcpslice</I>
+
+will not work properly on pcap files spanning more than one year;
+with files containing portions of packets whose original length was
+more than 65,535 bytes; nor with files containing fewer than two packets.
+Such files result in
+the error message: `couldn't find final packet in file'.  These problems
+are due to the interpolation scheme used by
+<I>tcpslice</I>
+
+to greatly speed up its processing when dealing with large trace files.
+Note that
+<I>tcpslice</I>
+
+can efficiently extract slices from the middle of trace files of any
+size, and can also work with truncated trace files (i.e., the final packet
+in the file is only partially present, typically due to <I>tcpdump</I>
+being ungracefully killed).
+<P>
+
+Adding
+<B>-l</B>
+
+has broken some compatibility with older versions, since
+<I>tcpslice</I>
+
+now merges its input files, rather than (approximately) concatenating
+them together as it did previously.
+<P>
+
+It would sometimes be convenient if you could specify a clock offset
+to use with the
+<B>-l</B>
+
+option.
+<P>
+
+It would be nice if
+<I>tcpslice</I>
+
+supported more general editing of trace files.
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+<DT><A HREF="#lbAG">AUTHORS</A><DD>
+<DT><A HREF="#lbAH">BUGS</A><DD>
+</DL>
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 16:20:11 GMT, July 25, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

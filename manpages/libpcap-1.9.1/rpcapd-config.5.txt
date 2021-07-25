@@ -1,0 +1,43 @@
+RPCAPD-CONFIG(5)              File Formats Manual             RPCAPD-CONFIG(5)
+
+NAME
+       rpcapd-config - rpcapd configuration file format
+
+DESCRIPTION
+       An rpcapd configuration file allows parameters to be set for rpcapd(8).
+
+       A  #  introduces  a  comment  that  runs to the end of the line.  Blank
+       lines, and lines with only a comment, are ignored.  Leading and  trail-
+       ing white space on a line are also ignored.
+
+       Lines that set a parameter are of the form
+
+              parameter=value
+
+       Whitespace preceding or following the = is ignored.
+
+       The parameters are:
+
+       ActiveClient
+              value  is a host name or IP addresse, followed by a comma, semi-
+              colon, or space, followed by a port name and address or DEFAULT.
+              DEFAULT  specifies the default active mode port for rpcapd, port
+              2003.  Each ActiveClient line adds the host and port to the list
+              of clients to which the server should connect in active mode.
+
+       PassiveClient
+              value  is a host name or IP addresse, followed by a comma, semi-
+              colon, or space, followed by a port name and address or DEFAULT.
+              DEFAULT specifies the default passive mode port for rpcapd, port
+              2002.  Each PassiveClient line adds the host  and  port  to  the
+              list  of clients addresses and ports that are allowed to connect
+              to the server in passive mode.
+
+       NullAuthPermit
+              value is either YES or NO.  YES means that  null  authentication
+              is permitted; No means that it is not permitted.
+
+SEE ALSO
+       rpcapd(8)
+
+                                6 January 2019                RPCAPD-CONFIG(5)

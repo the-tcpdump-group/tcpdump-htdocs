@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP_COMPILE</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_COMPILE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2018<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_compile - compile a filter expression
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_compile(pcap_t *p, struct bpf_program *fp,
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const char *str, int optimize, bpf_u_int32 netmask);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_compile()</B>
+
+is used to compile the string
+<I>str</I>
+
+into a filter program.  See
+<B><A HREF="./pcap-filter.7.html">pcap-filter</A></B>(7)
+
+for the syntax of that string.
+<I>program</I>
+
+is a pointer to a
+<I>bpf_program</I>
+
+struct and is filled in by
+<B>pcap_compile()</B>.
+
+<I>optimize</I>
+
+controls whether optimization on the resulting code is performed.
+<I>netmask</I>
+
+specifies the IPv4 netmask of the network on which packets are being
+captured; it is used only when checking for IPv4 broadcast addresses in
+the filter program.  If the netmask of the network on which packets are
+being captured isn't known to the program, or if packets are being
+captured on the Linux &quot;any&quot; pseudo-interface that can capture on more
+than one network, a value of
+<B>PCAP_NETMASK_UNKNOWN</B>
+
+can be supplied; tests
+for IPv4 broadcast addresses will fail to compile, but all other tests in
+the filter program will be OK.
+<P>
+
+NOTE: in libpcap 1.8.0 and later,
+<B>pcap_compile()</B>
+
+can be used in multiple threads within a single process.  However, in
+earlier versions of libpcap, it is
+<I>not</I>
+
+safe to use
+<B>pcap_compile()</B>
+
+in multiple threads in a single process without some form of mutual
+exclusion allowing only one thread to call it at any given time.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_compile()</B>
+
+returns 0 on success and
+<B>PCAP_ERROR</B>
+
+on failure. If
+<B>PCAP_ERROR</B>
+
+is returned,
+<B><A HREF='./pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)</B>
+
+or
+<B><A HREF='./pcap_geterr.3pcap.html'>pcap_perror</A>(3PCAP)</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display the error text.
+<A NAME="lbAF">&nbsp;</A>
+<H2>BACKWARD COMPATIBILITY</H2>
+
+<P>
+
+The
+<B>PCAP_NETMASK_UNKNOWN</B>
+
+constant became available in libpcap release 1.1.0.
+<A NAME="lbAG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='./pcap_setfilter.3pcap.html'>pcap_setfilter</A>(3PCAP), <A HREF='./pcap_freecode.3pcap.html'>pcap_freecode</A>(3PCAP),
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 16:20:08 GMT, July 25, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>
