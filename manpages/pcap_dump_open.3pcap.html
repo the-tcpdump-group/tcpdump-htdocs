@@ -5,7 +5,7 @@
 </HEAD><BODY>
 <H1>Man page of PCAP_DUMP_OPEN</H1>
 Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 July 2020<BR>
-<A HREF="/manpages/">Return to Main Contents</A><HR>
+<A HREF="./">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
@@ -33,10 +33,10 @@ is called to open a ``savefile'' for writing.
 
 specifies the name of the file to open. The file will have
 the same format as those used by
-<B><A HREF="/manpages/tcpdump.1.html">tcpdump</A></B>(1)
+<B><A HREF="./tcpdump.1.html">tcpdump</A></B>(1)
 
 and
-<B><A HREF="/manpages/tcpslice.1.html">tcpslice</A></B>(1).
+<B><A HREF="./tcpslice.1.html">tcpslice</A></B>(1).
 
 If the file does not exist, it will be created; if the file exists, it
 will be truncated and overwritten.
@@ -52,7 +52,7 @@ is called to write data to an existing open stream
 <I>fp</I>;
 
 this stream will be closed by a subsequent call to
-<A HREF='/manpages/pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP).
+<A HREF='./pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP).
 
 The stream is assumed to be at the beginning of a file that has been
 newly created or truncated, so that writes will start at the beginning
@@ -63,18 +63,18 @@ Note that on Windows, that stream should be opened in binary mode.
 <I>p</I>
 
 is a capture or ``savefile'' handle returned by an earlier call to
-<A HREF='/manpages/pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
 
 and activated by an earlier call to
-<A HREF='/manpages/pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP),
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP),
 
 or returned by an earlier call to
-<A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_open_offline</B></A>(3PCAP),
+<A HREF='./pcap_open_offline.3pcap.html'><B>pcap_open_offline</B></A>(3PCAP),
 
-<A HREF='/manpages/pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP),
+<A HREF='./pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP),
 
 or
-<A HREF='/manpages/pcap_open_dead.3pcap.html'><B>pcap_open_dead</B></A>(3PCAP).
+<A HREF='./pcap_open_dead.3pcap.html'><B>pcap_open_dead</B></A>(3PCAP).
 
 The time stamp precision, link-layer type, and snapshot length from
 <I>p</I>
@@ -100,10 +100,10 @@ A pointer to a
 <B>pcap_dumper_t</B>
 
 structure to use in subsequent
-<A HREF='/manpages/pcap_dump.3pcap.html'><B>pcap_dump</B></A>(3PCAP)
+<A HREF='./pcap_dump.3pcap.html'><B>pcap_dump</B></A>(3PCAP)
 
 and
-<A HREF='/manpages/pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP)
+<A HREF='./pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP)
 
 calls is returned on success.
 <B>NULL</B>
@@ -113,7 +113,7 @@ If
 <B>NULL</B>
 
 is returned,
-<A HREF='/manpages/pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
 
 can be used to get the error text.
 <A NAME="lbAF">&nbsp;</A>
@@ -130,9 +130,9 @@ savefile.
 <A NAME="lbAG">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
 
-<B><A HREF="/manpages/pcap-savefile.5.html">pcap-savefile</A></B>(5)
+<B><A HREF="./pcap-savefile.5.html">pcap-savefile</A></B>(5)
 
 <P>
 
@@ -140,7 +140,7 @@ savefile.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 01:01:38 GMT, January 29, 2021
+Time: 16:27:32 GMT, July 25, 2021
 <a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
 <a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
 </BODY>

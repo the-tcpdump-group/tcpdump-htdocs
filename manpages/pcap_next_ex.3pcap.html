@@ -5,7 +5,7 @@
 </HEAD><BODY>
 <H1>Man page of PCAP_NEXT_EX</H1>
 Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
-<A HREF="/manpages/">Return to Main Contents</A><HR>
+<A HREF="./">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
@@ -48,10 +48,10 @@ guaranteed to be valid after the next call to
 
 <B>pcap_next</B>(),
 
-<A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_loop</B></A>(3PCAP),
+<A HREF='./pcap_loop.3pcap.html'><B>pcap_loop</B></A>(3PCAP),
 
 or
-<A HREF='/manpages/pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP);
+<A HREF='./pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP);
 
 if the code needs them to remain valid, it must make a copy of them.
 <P>
@@ -91,7 +91,7 @@ is filled in with the appropriate values for the packet.
 
 The bytes of data from the packet begin with a link-layer header.  The
 format of the link-layer header is indicated by the return value of the
-<A HREF='/manpages/pcap_datalink.3pcap.html'><B>pcap_datalink</B></A>(3PCAP)
+<A HREF='./pcap_datalink.3pcap.html'><B>pcap_datalink</B></A>(3PCAP)
 
 routine when handed the
 <B>pcap_t</B>
@@ -110,7 +110,7 @@ lists the values
 can return and describes the packet formats that
 correspond to those values.  The value it returns will be valid for all
 packets received unless and until
-<A HREF='/manpages/pcap_set_datalink.3pcap.html'><B>pcap_set_datalink</B></A>(3PCAP)
+<A HREF='./pcap_set_datalink.3pcap.html'><B>pcap_set_datalink</B></A>(3PCAP)
 
 is called; after a successful call to
 <B>pcap_set_datalink</B>(),
@@ -164,10 +164,10 @@ from the savefile.  If
 <B>PCAP_ERROR</B>
 
 is returned,
-<A HREF='/manpages/pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
 
 or
-<A HREF='/manpages/pcap_geterr.3pcap.html'><B>pcap_perror</B></A>(3PCAP)
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_perror</B></A>(3PCAP)
 
 may be called with
 <I>p</I>
@@ -191,7 +191,7 @@ way to determine whether an error occurred or not.
 <A NAME="lbAF">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
 <P>
 
@@ -199,7 +199,7 @@ way to determine whether an error occurred or not.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 01:01:39 GMT, January 29, 2021
+Time: 16:27:33 GMT, July 25, 2021
 <a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
 <a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
 </BODY>

@@ -5,7 +5,7 @@
 </HEAD><BODY>
 <H1>Man page of PCAP-TSTAMP</H1>
 Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 14 July 2020<BR>
-<A HREF="/manpages/">Return to Main Contents</A><HR>
+<A HREF="./">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
@@ -90,19 +90,19 @@ system may also apply to time stamps supplied by the capture device.
 
 Depending on the capture device and the software on the host, libpcap
 might allow different types of time stamp to be used.  The
-<A HREF='/manpages/pcap_list_tstamp_types.3pcap.html'><B>pcap_list_tstamp_types</B></A>(3PCAP)
+<A HREF='./pcap_list_tstamp_types.3pcap.html'><B>pcap_list_tstamp_types</B></A>(3PCAP)
 
 routine provides, for a packet capture handle created by
-<A HREF='/manpages/pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
 
 but not yet activated by
-<A HREF='/manpages/pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP),
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP),
 
 a list of time stamp types supported by the capture device for that
 handle.
 The list might be empty, in which case no choice of time stamp type is
 offered for that capture device.  If the list is not empty, the
-<A HREF='/manpages/pcap_set_tstamp_type.3pcap.html'><B>pcap_set_tstamp_type</B></A>(3PCAP)
+<A HREF='./pcap_set_tstamp_type.3pcap.html'><B>pcap_set_tstamp_type</B></A>(3PCAP)
 
 routine can be used after a
 <B>pcap_create</B>()
@@ -113,10 +113,10 @@ call and before a
 call to specify the type of time stamp to be used on the device.
 The time stamp types are listed here; the first value is the #define to
 use in code, the second value is the value returned by
-<A HREF='/manpages/pcap_tstamp_type_val_to_name.3pcap.html'><B>pcap_tstamp_type_val_to_name</B></A>(3PCAP)
+<A HREF='./pcap_tstamp_type_val_to_name.3pcap.html'><B>pcap_tstamp_type_val_to_name</B></A>(3PCAP)
 
 and accepted by
-<A HREF='/manpages/pcap_tstamp_type_name_to_val.3pcap.html'><B>pcap_tstamp_type_name_to_val</B></A>(3PCAP)<B>.</B>
+<A HREF='./pcap_tstamp_type_name_to_val.3pcap.html'><B>pcap_tstamp_type_name_to_val</B></A>(3PCAP)<B>.</B>
 
 <DL COMPACT><DT><DD>
 <DL COMPACT>
@@ -189,7 +189,7 @@ discarded.
 <P>
 
 The
-<A HREF='/manpages/pcap_set_tstamp_precision.3pcap.html'><B>pcap_set_tstamp_precision</B></A>(3PCAP)
+<A HREF='./pcap_set_tstamp_precision.3pcap.html'><B>pcap_set_tstamp_precision</B></A>(3PCAP)
 
 routine can be used after a
 <B>pcap_create</B>()
@@ -209,10 +209,10 @@ call will have microsecond resolution.
 <P>
 
 When opening a savefile, the
-<A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_open_offline_with_tstamp_precision</B></A>(3PCAP)
+<A HREF='./pcap_open_offline.3pcap.html'><B>pcap_open_offline_with_tstamp_precision</B></A>(3PCAP)
 
 and
-<A HREF='/manpages/pcap_open_offline.3pcap.html'><B>pcap_fopen_offline_with_tstamp_precision</B></A>(3PCAP)
+<A HREF='./pcap_open_offline.3pcap.html'><B>pcap_fopen_offline_with_tstamp_precision</B></A>(3PCAP)
 
 routines can be used to specify the resolution of time stamps to be read
 from the file; if the time stamps in the file have a lower resolution,
@@ -221,7 +221,7 @@ the specified resolution.
 <P>
 
 The
-<A HREF='/manpages/pcap_get_tstamp_precision.3pcap.html'><B>pcap_get_tstamp_precision</B></A>(3PCAP)
+<A HREF='./pcap_get_tstamp_precision.3pcap.html'><B>pcap_get_tstamp_precision</B></A>(3PCAP)
 
 routine returns the resolution of time stamps that will be supplied;
 when capturing packets, this does not reflect the actual precision of
@@ -231,7 +231,7 @@ stamps in the file.
 <A NAME="lbAD">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<A HREF='/manpages/pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
 <P>
 
@@ -239,7 +239,7 @@ stamps in the file.
 This document was created by
 man2html,
 using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 01:01:37 GMT, January 29, 2021
+Time: 16:27:30 GMT, July 25, 2021
 <a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
 <a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
 </BODY>

@@ -31,7 +31,7 @@
 # as the source man pages are the newest you can get from git.
 
 MAN2HTML_PFX=/cgi-bin/man/man2html
-WEBSITE_PFX=/manpages
+WEBSITE_PFX=.
 
 # Both Fedora and Ubuntu man2html versions prepend their output with a
 # Content-type header. Only the Ubuntu version generates a document type
