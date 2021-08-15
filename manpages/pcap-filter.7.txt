@@ -620,12 +620,12 @@ DESCRIPTION
 
        expr relop expr
               True  if the relation holds, where relop is one of >, <, >=, <=,
-              =, !=, and expr is an arithmetic expression composed of  integer
-              constants  (expressed  in  standard C syntax), the normal binary
-              operators [+, -, *, /, %, &, |, ^, <<, >>], a  length  operator,
-              and  special  packet  data accessors.  Note that all comparisons
-              are unsigned, so that, for example,  0x80000000  and  0xffffffff
-              are > 0.
+              = or ==, !=, and expr is an arithmetic  expression  composed  of
+              integer  constants  (expressed in standard C syntax), the normal
+              binary operators [+, -, *, /, %, &, |, ^, <<, >>], a length  op-
+              erator,  and  special packet data accessors.  Note that all com-
+              parisons are unsigned, so  that,  for  example,  0x80000000  and
+              0xffffffff are > 0.
 
               The % and ^ operators are currently only supported for filtering
               in the kernel on Linux with 3.7 and later kernels; on all  other
