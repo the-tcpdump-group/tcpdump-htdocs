@@ -47,8 +47,7 @@ stripContentTypeHeader()
 # "Index" section near EOF.
 stripIndexSection()
 {
-	local infile=${1:?}
-	case $(basename "$infile") in
+	case $(basename "${1:?}") in
 	tcpdump.1|tcpslice.1|pcap.3pcap)
 		cat
 		;;
@@ -60,8 +59,6 @@ stripIndexSection()
 
 printSedFile()
 {
-	local mansection mantopic manfile
-
 	# Fixup custom links.
 	# Suppress some output difference between Fedora and Ubuntu versions of man2html.
 	# Convert file:// schema hyperlinks to plain text.
@@ -227,16 +224,16 @@ ENDOFLIST
 
 produceHTML()
 {
-	local infile=${1:?}
-	local sedfile="${2:?}"
-	local outfile=${3:?}
+	infile=${1:?}
+	html_sedfile="${2:?}"
+	outfile=${3:?}
 	[ -s "$infile" ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
 	}
 	# A possible alternative: mandoc -T html $infile > $outfile
 	man2html -M $MAN2HTML_PFX "$infile" | stripContentTypeHeader | \
-		stripIndexSection "$infile" | sed --file="$sedfile" > "$outfile"
+		stripIndexSection "$infile" | sed --file="$html_sedfile" > "$outfile"
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
 	git show "$outfile" >/dev/null 2>&1 || {
@@ -252,8 +249,8 @@ produceHTML()
 
 produceTXT()
 {
-	local infile=${1:?}
-	local outfile=${2:?}
+	infile=${1:?}
+	outfile=${2:?}
 	[ -s "$infile" ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
@@ -264,10 +261,9 @@ produceTXT()
 
 known3PCAPFile()
 {
-	local f=$(basename "${1:?}" .3pcap)
-	local manfile mantopic
+	basename=$(basename "${1:?}" .3pcap)
 	print3PCAPMap | while read -r mantopic manfile; do
-		if [ "${manfile:-$mantopic}" = "$f" ]; then
+		if [ "${manfile:-$mantopic}" = "$basename" ]; then
 			# Cannot just return 0 or 1 because the while end of
 			# the pipe may be in a sub-shell.
 			echo 'yes'
@@ -287,10 +283,10 @@ updateOutputFiles()
 	# The .txt version of a man page assumes an 80 columns wide terminal,
 	# which used to be the default in PC text mode console, xterm etc.
 	# Use stty because $COLUMNS doesn't always work.
-	local cols=$(stty size | cut -d' ' -f2)
+	cols=$(stty size | cut -d' ' -f2)
 	[ "$cols" -ne 80 ] && stty columns 80
 
-	local sedfile=$(mktemp --tmpdir manpages_sedfile.XXXXXX)
+	sedfile=$(mktemp --tmpdir manpages_sedfile.XXXXXX)
 	printSedFile > "$sedfile"
 
 	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
