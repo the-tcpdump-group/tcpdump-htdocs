@@ -23,11 +23,10 @@ BODY_FOOTER='htmlsrc/_body_footer.html'
 
 substitute_page_title()
 {
-	local f="${1:?}"
-	local b=$(basename "$f" .html)
-	local title
+	infile="${1:?}"
+	basename=$(basename "$infile" .html)
 
-	case "$b" in
+	case "$basename" in
 	security)
 		title='Security | '
 		;;
@@ -59,10 +58,10 @@ substitute_page_title()
 		title='Marvell switch tag | '
 		;;
 	LINKTYPE_*)
-		title="$b | "
+		title="$basename | "
 		;;
 	*)
-		echo "Internal error: cannot tell page title for $f" >&2
+		echo "Internal error: cannot tell page title for $infile" >&2
 		exit 10
 	esac
 	sed "s#%PAGE_TITLE%#${title}TCPDUMP/LIBPCAP public repository#"
@@ -93,14 +92,13 @@ rewrite_URLs()
 
 highlight_top_menu()
 {
-	local f="${1:?}"
-	sed "s#<li><a href=\"${f}\">#<li class=\"current_page_item\"><a href=\"${f}\">#"
+	infile="${1:?}"
+	sed "s#<li><a href=\"${infile}\">#<li class=\"current_page_item\"><a href=\"${infile}\">#"
 }
 
 print_html_page()
 {
-	local infile="${1:?}"
-	local show_sidebar
+	infile="${1:?}"
 	case $(basename "$infile" .html) in
 	security|faq|index|license|mirrors|related|old_releases)
 		show_sidebar='yes'
@@ -200,7 +198,6 @@ file_differs_from_repository()
 
 regenerate_pages()
 {
-	local f_in f_out
 	for f_in in htmlsrc/[!_]*.html htmlsrc/linktypes/*.html; do
 		f_out="${f_in#htmlsrc/}"
 		file_exists_in_repository "$f_in" || echo "Warning: input file $f_in does not exist in git" >&2
