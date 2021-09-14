@@ -473,7 +473,7 @@ DESCRIPTION
               probe-resp, beacon, atim, disassoc, auth and deauth.
 
               If the specified wlan_type is ctl, then valid wlan_subtypes are:
-              ps-poll, rts, cts, ack, cf-end and cf-end-ack.
+              bar, ba, ps-poll, rts, cts, ack, cf-end and cf-end-ack.
 
               If  the  specified  wlan_type  is data, then valid wlan_subtypes
               are: data, data-cf-ack,  data-cf-poll,  data-cf-ack-poll,  null,
