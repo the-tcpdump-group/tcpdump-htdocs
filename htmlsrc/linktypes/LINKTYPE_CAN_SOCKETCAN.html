@@ -13,7 +13,7 @@
 |       Payload length      |
 |         (1 Octet)         |
 +---------------------------+
-|          FD Flags         |
+|          FD flags         |
 |         (1 Octet)         |
 +---------------------------+
 |      Reserved/Padding     |
@@ -28,26 +28,12 @@
 .                           .
 </pre>
 
-<h3>Frame Size & CAN-FD<h3>
-<p>
-  Originally in Linux, socket CAN frames have two frame sizes (MTU)
-</p>
-<ul>
-  <li>CAN_MTU: 16 - size for classic CAN</li>
-  <li>CANFD_MTU: 72 - size for CAN-FD</li>
-</ul>
-<p>
-  This means that applications that receive the frame had to check for received frame size to know if the Frame was CAN or CAN-FD.<br>
-  The CANFD_FDF flag that indicates if the frame is a CAN-FD frame was introduced later on, and is not actually used by the Linux kernel.<br>
+                <h3>Description</h3>
 
-  Applications that only limit frame size to available payload (strip trailing padding bytes), must manually set the CANFD_FDF flag after checking the original MTU.
-</p>
-
-<h3>CAN ID</h3>
 <p>
-  The field containing the CAN ID and flags is in network byte order (big-endian).
-  The bottom 29 bits contain the CAN ID of the frame.
-  The remaining bits are:
+The CAN ID and flags field is in network byte order (big-endian).
+The bottom 29 bits contain the CAN ID of the frame.
+The remaining bits are:
 </p>
 <ul>
   <li>0x20000000 - set if the frame is an error message rather than a data frame.</li>
@@ -55,16 +41,33 @@
   <li>0x80000000 - set if the frame is an extended 29-bit frame rather than a standard 11-bit frame.</li>
 </ul>
 
-<h3>CAN-FD</h3>
 <p>
-  The field containing the CAN-FD specific bits, for CAN frames, this field is 0.
-  The FD bits are:
+The FD flags field contains CAN-FD specific flags; for CAN frames, this
+field is 0.  The bits are:
 </p>
 <ul>
   <li>CANFD_BRS: 0x01 - bit rate switch (second bitrate for payload data).</li>
   <li>CANFD_ESI: 0x02 - error state indicator of the transmitting node.</li>
-  <li>CANFD_FDF: 0x04 - mark CAN FD for dual use of CAN format.</li>
+  <li>CANFD_FDF: 0x04 - if set, the frame is a CAN-FD frame; if not set,
+the frame may be a CAN frame or a CAN-FD frame.</li>
 </ul>
+
+<p>
+Older software and firmware writing packets with this link type did not
+use the CANFD_FDF flag, and always set it to 0, even for CAN-FD frames,
+so if the CANFD_FDF flag is not set, the frame is not guaranteed to be
+a CAN frame.  If that flag is not set:
+<ul>
+  <li>if the frame size is 16 (CAN_MTU, in Linux), it's a CAN frame;
+  <li>if the frame size is 72 (CANFD_MTU, in Linux), it's a CAN-FD frame.
+</ul>
+</p>
+
+<p>
+Applications that only limit frame size to available payload (strip
+trailing padding bytes), must manually set the CANFD_FDF flag after
+checking the original MTU. 
+</p>
 
 <p>
 The frame payload length indicates the number of bytes of payload.
