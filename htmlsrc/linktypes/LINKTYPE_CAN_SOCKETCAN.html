@@ -26,6 +26,11 @@
 .                           .
 .                           .
 .                           .
++---------------------------+
+|           Padding         |
+.                           .
+.                           .
+.                           .
 </pre>
 
                 <h3>Description</h3>
@@ -58,8 +63,10 @@ use the CANFD_FDF flag, and always set it to 0, even for CAN-FD frames,
 so if the CANFD_FDF flag is not set, the frame is not guaranteed to be
 a CAN frame.  If that flag is not set:
 <ul>
-  <li>if the frame size is 16 (CAN_MTU, in Linux), it's a CAN frame;
-  <li>if the frame size is 72 (CANFD_MTU, in Linux), it's a CAN-FD frame.
+  <li>if the frame size (including the header and padding) is 16, it's
+   a CAN frame;
+  <li>if the frame size (including the header and padding) is 72, it's
+   a CAN-FD frame.
 </ul>
 </p>
 
@@ -70,7 +77,8 @@ checking the original MTU.
 </p>
 
 <p>
-The frame payload length indicates the number of bytes of payload.
+The frame payload length indicates the number of bytes of payload.  All
+packet bytes after those bytes of payload are padding.
 </p>
 
 <p>
