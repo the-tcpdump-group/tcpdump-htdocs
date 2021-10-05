@@ -222,6 +222,37 @@ printNonLocalManPages()
 ENDOFLIST
 }
 
+detectProject()
+{
+	project_dir=$(dirname "${1:?}")
+	project_name=$(basename "$project_dir")
+	[ "$project_name" = rpcapd ] && project_dir="$project_dir/.."
+	project_version=$(cat "$project_dir/VERSION")
+}
+
+printHTMLBoilerplate()
+{
+	detectProject "${1:?}"
+cat <<ENDOFTEXT
+<DIV class=version_boilerplate>
+<H4>This man page documents ${project_name} version ${project_version}.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+ENDOFTEXT
+}
+
+insertHTMLBoilerplate()
+{
+	HBTMP=$(mktemp --tmpdir html_boilerplate.XXXXXX)
+	printHTMLBoilerplate "${1:?}" >"$HBTMP"
+	sed -E "/<A HREF=\".+\">Return to Main Contents<\/A><HR>/r $HBTMP"
+	rm -f "$HBTMP"
+}
+
 produceHTML()
 {
 	infile=${1:?}
@@ -233,6 +264,7 @@ produceHTML()
 	}
 	# A possible alternative: mandoc -T html $infile > $outfile
 	man2html -M $MAN2HTML_PFX "$infile" | stripContentTypeHeader | \
+		insertHTMLBoilerplate "$infile" | \
 		stripIndexSection "$infile" | sed --file="$html_sedfile" > "$outfile"
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
@@ -247,6 +279,27 @@ produceHTML()
 	echo "Updated: $outfile"
 }
 
+printTXTBoilerplate()
+{
+	detectProject "${1:?}"
+	echo '+----------------------------------------------------------------------------+'
+	while read -r line; do
+		printf '| %-74s |\n' "$line"
+	done <<ENDOFTEXT
+
+This man page documents ${project_name} version ${project_version}.
+
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+
+ENDOFTEXT
+	echo '+----------------------------------------------------------------------------+'
+	echo
+}
+
 produceTXT()
 {
 	infile=${1:?}
@@ -255,7 +308,8 @@ produceTXT()
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
 	}
-	man -E ascii "$infile" > "$outfile"
+	printTXTBoilerplate "$infile" > "$outfile"
+	man -E ascii "$infile" >> "$outfile"
 	git diff "$outfile" | grep -E -q '^[-+]' && echo "Updated: $outfile"
 }
 

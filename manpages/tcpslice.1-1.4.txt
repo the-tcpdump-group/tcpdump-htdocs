@@ -1,3 +1,15 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents tcpslice version 1.4.                              |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
 TCPSLICE(1)                 General Commands Manual                TCPSLICE(1)
 
 NAME
