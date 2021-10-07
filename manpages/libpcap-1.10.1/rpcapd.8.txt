@@ -1,0 +1,156 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents rpcapd version 1.10.1.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+RPCAPD(8)                   System Manager's Manual                  RPCAPD(8)
+
+NAME
+       rpcapd  -  capture daemon to be controlled by a remote libpcap applica-
+       tion
+
+SYNOPSIS
+       rpcapd [ -b address ] [ -p port ] [ -4 ] [ -l host_list ]
+               [ -a host,port ] [ -n ] [ -v ] [ -d ] [ -i ]
+               [ -D ] [ -s config_file ] [ -f config_file ] [ -S ]
+               [ -K ssl_keyfile ] [ -X ssl_certfile ] [ -C ]
+
+DESCRIPTION
+       Rpcapd is a daemon (Unix) or service (Win32) that  allows  the  capture
+       and filter part of libpcap to be run on a remote system.
+
+       Rpcapd can run in two modes: passive mode (default) and active mode.
+
+       In  passive  mode, the client (e.g., a network sniffer) connects to rp-
+       capd.  The client then sends the  appropriate  commands  to  rpcapd  to
+       start the capture.
+
+       In  active  mode,  rpcapd  tries  to  establish a connection toward the
+       client (e.g., a network sniffer). The client then sends the appropriate
+       commands to rpcapd to start the capture.
+
+       Active  mode is useful in case rpcapd is run behind a firewall and can-
+       not receive connections from the external world. In this  case,  rpcapd
+       can  be  configured  to establish the connection to a given host, which
+       has to be configured in order to wait for that connection. After estab-
+       lishing  the  connection,  the protocol continues its job in almost the
+       same way in both active and passive mode.
+
+Configuration file
+       The user can create a configuration file in the same directory  as  the
+       executable,  and  put the configuration commands in there. In order for
+       rpcapd to execute the commands, it needs to be restarted on Win32, i.e.
+       the  configuration  file is parsed only at the beginning. The UNIX ver-
+       sion of rpcapd will reread the configuration file upon receiving a  HUP
+       signal.  In  that  case,  all the existing connections remain in place,
+       while the new connections will be created according to the new  parame-
+       ters.
+
+       In case a user does not want to create the configuration file manually,
+       they can launch rpcapd with the desired flags plus -s filename.  Rpcapd
+       will parse all the parameters and save them into the specified configu-
+       ration file.
+
+Installing rpcapd on Win32
+       The remote daemon is installed automatically when  installing  WinPcap.
+       The  installation  process  places  the rpcapd executable file into the
+       WinPcap folder.  This file can be  executed  either  from  the  command
+       line,  or as a service.  For instance, the installation process updates
+       the list of available services list and it creates a new  item  (Remote
+       Packet  Capture  Protocol v.0 (experimental)).  To avoid security prob-
+       lems, the service is inactive and it has to be started  manually  (con-
+       trol panel - administrative tools - services - start).
+
+       The  service  has  a  set of "standard" parameters, i.e. it is launched
+       with the -d flag (in order to make it run as a service) and the -f  rp-
+       capd.ini flag.
+
+Starting rpcapd on Win32
+       The rpcapd executable can be launched directly, i.e.  it can run in the
+       foreground as well (not as a daemon/service).  The procedure  is  quite
+       simple:  you  have  to invoke the executable from the command line with
+       all the requested parameters except  for  the  -d  flag.   The  capture
+       server will start in the foreground.
+
+Installing rpcapd on Unix-like systems
+       TBD
+
+Starting rpcapd on Unix-like systems
+       rpcapd needs sufficient privileges to perform packet capture, e.g.  run
+       as root or be owned by root and have suid set. Most  operating  systems
+       provide  more  elegant  solutions when run as user than the above solu-
+       tions, all of them different.
+
+OPTIONS
+       -b address
+              Bind to the IP address specified by address (either  numeric  or
+              literal).   By  default, rpcapd binds to all local IPv4 and IPv6
+              addresses.
+
+       -p port
+              Bind to the port specified by port.  By default, rpcapd binds to
+              port 2002.
+
+       -4     Listen  only  on  IPv4 addresses.  By default, rpcapd listens on
+              both IPv4 and IPv6 addresses.
+
+       -l host_list
+              Only allow hosts specified in the host_list argument to  connect
+              to  this  server.   host_list  is a list of host names or IP ad-
+              dresses, separated by commas.  We  suggest  that  you  use  host
+              names  rather  than literal IP addresses in order to avoid prob-
+              lems with different address families.
+
+       -n     Permit NULL authentication (usually used with -l).
+
+       -a host,port
+              Run in active mode, connecting to host host on  port  port.   In
+              case port is omitted, the default port (2003) is used.
+
+       -v     Run  in active mode only; by default, if -a is specified, rpcapd
+              it accepts passive connections as well.
+
+       -d     Run in daemon mode (UNIX only) or as  a  service  (Win32  only).
+              Warning  (Win32):  this flag is specified automatically when the
+              service is started from the control panel.
+
+       -i     Run in inetd mode (UNIX only).
+
+       -D     Log debugging messages.
+
+       -s config_file
+              Save the current configuration  to  config_file  in  the  format
+              specified by rpcapd-config(5).
+
+       -f config_file
+              Load  the  current  configuration from config_file in the format
+              specified by rpcapd-config(5) and ignore all flags specified  on
+              the command line.
+
+       -h     Print this help screen.
+
+       If rpcapd was compiled with SSL support, the following options are also
+       available:
+
+       -S     Require that SSL be used on connections.
+
+       -C     With SSL enabled, XXX - I'm not sure how *fetching* the list  of
+              compression mechanisms does anything to compression.
+
+       -S     ssl_keyfile  With  SSL  enabled,  use ssl_keyfile as the SSL key
+              file.
+
+       -X     ssl_certfile With SSL enabled, use ssl_certfile as the SSL  cer-
+              tificate file.
+
+SEE ALSO
+       pcap(3PCAP), rpcapd-config(5)
+
+                                13 January 2019                      RPCAPD(8)

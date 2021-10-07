@@ -1,0 +1,39 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.1.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_MAJOR_VERSION(3PCAP)                            PCAP_MAJOR_VERSION(3PCAP)
+
+NAME
+       pcap_major_version,  pcap_minor_version  -  get the version number of a
+       savefile
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_major_version(pcap_t *p);
+       int pcap_minor_version(pcap_t *p);
+
+DESCRIPTION
+       If p refers to a ``savefile'', pcap_major_version() returns  the  major
+       number  of the file format of the ``savefile'' and pcap_minor_version()
+       returns the minor number of the file format of the  ``savefile''.   The
+       version  number is stored in the ``savefile''; note that the meaning of
+       its values depends on the type of ``savefile'' (for  example,  pcap  or
+       pcapng).
+
+       If  p  refers to a live capture, the values returned by pcap_major_ver-
+       sion() and pcap_minor_version() are not meaningful.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                8 January 2018       PCAP_MAJOR_VERSION(3PCAP)

@@ -1,0 +1,55 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.1.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_SET_PROTOCOL_LINUX(3PCAP)                  PCAP_SET_PROTOCOL_LINUX(3PCAP)
+
+NAME
+       pcap_set_protocol_linux  - set capture protocol for a not-yet-activated
+       capture handle
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_protocol_linux(pcap_t *p, int protocol);
+
+DESCRIPTION
+       On network interface devices on Linux,  pcap_set_protocol_linux()  sets
+       the  protocol  to  be  used  in  the socket(2) call to create a capture
+       socket when the handle is activated.  The argument is a link-layer pro-
+       tocol  value, such as the values in the <linux/if_ether.h> header file,
+       specified in host byte order.  If protocol is non-zero, packets of that
+       protocol  will be captured when the handle is activated, otherwise, all
+       packets will be captured.  This function is  only  provided  on  Linux,
+       and,  if  it  is  used on any device other than a network interface, it
+       will have no effect.
+
+       It should not be used in portable code; instead,  a  filter  should  be
+       specified with pcap_setfilter(3PCAP).
+
+       If  a  given  network  interface provides a standard link-layer header,
+       with a standard packet type, but provides some packet types with a dif-
+       ferent  socket-layer  protocol  type  from  the  one  in the link-layer
+       header, that packet type cannot be filtered  with  a  filter  specified
+       with  pcap_setfilter()  but  can  be filtered by specifying the socket-
+       layer protocol type using pcap_set_protocol_linux().
+
+RETURN VALUE
+       pcap_set_protocol_linux() returns 0 on success or  PCAP_ERROR_ACTIVATED
+       if called on a capture handle that has been activated.
+
+BACKWARD COMPATIBILITY
+       This function became available in libpcap release 1.9.0.
+
+SEE ALSO
+       pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
+
+                                22 August 2018  PCAP_SET_PROTOCOL_LINUX(3PCAP)

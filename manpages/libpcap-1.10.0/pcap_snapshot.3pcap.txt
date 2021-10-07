@@ -1,0 +1,41 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.0.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_SNAPSHOT(3PCAP)                                      PCAP_SNAPSHOT(3PCAP)
+
+NAME
+       pcap_snapshot - get the snapshot length
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_snapshot(pcap_t *p);
+
+DESCRIPTION
+       pcap_snapshot()    returns   the   snapshot   length   specified   when
+       pcap_set_snaplen(3PCAP) or pcap_open_live(3PCAP) was called, for a live
+       capture,  or  the  snapshot length from the capture file, for a ``save-
+       file''.
+
+       It  must  not   be   called   on   a   pcap   descriptor   created   by
+       pcap_create(3PCAP)    that    has    not    yet   been   activated   by
+       pcap_activate(3PCAP).
+
+RETURN VALUE
+       pcap_snapshot() returns the snapshot length  on  success  and  PCAP_ER-
+       ROR_NOT_ACTIVATED  if  called on a capture handle that has been created
+       but not activated.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                 7 April 2014             PCAP_SNAPSHOT(3PCAP)

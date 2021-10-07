@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP_FILENO</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_FILENO</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 7 April 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.9.0.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_fileno - get the file descriptor for a live capture
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_fileno(pcap_t *p);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+If
+<I>p</I>
+
+refers to a network device that was opened for a live capture using
+a combination of
+<B>pcap_create()</B>
+
+and
+<B>pcap_activate()</B>,
+
+or using
+<B>pcap_open_live()</B>,
+
+<B>pcap_fileno()</B>
+
+returns the file descriptor from which captured packets are read.
+<P>
+
+If
+<I>p</I>
+
+refers to a ``savefile'' that was opened using functions such as
+<B>pcap_open_offline()</B>
+
+or
+<B>pcap_fopen_offline()</B>,
+
+a ``dead''
+<B>pcap_t</B>
+
+opened using
+<B>pcap_open_dead()</B>,
+
+or a
+<B>pcap_t</B>
+
+that was created with
+<B>pcap_create()</B>
+
+but that has not yet been activated with
+<B>pcap_activate()</B>,
+
+it returns -1.
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='./pcap_create.3pcap.html'>pcap_create</A>(3PCAP), <A HREF='./pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP),
+<A HREF='./pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP), <A HREF='./pcap_open_offline.3pcap.html'>pcap_open_offline</A>(3PCAP),
+<A HREF='./pcap_open_offline.3pcap.html'>pcap_fopen_offline</A>(3PCAP), <A HREF='./pcap_open_dead.3pcap.html'>pcap_open_dead</A>(3PCAP)
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 12:21:40 GMT, October 07, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP_OFFLINE_FILTER</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_OFFLINE_FILTER</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 7 April 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.9.0.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_offline_filter - check whether a filter matches a packet
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_offline_filter(const struct bpf_program *fp,
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const struct pcap_pkthdr *h, const u_char *pkt)
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_offline_filter()</B>
+
+checks whether a filter matches a packet.
+<I>fp</I>
+
+is a pointer to a
+<I>bpf_program</I>
+
+struct, usually the result of a call to
+<B>pcap_compile()</B>.
+
+<I>h</I>
+
+points to the
+<I>pcap_pkthdr</I>
+
+structure for the packet, and
+<I>pkt</I>
+
+points to the data in the packet.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_offline_filter()</B>
+
+returns the return value of the filter program.  This will be zero if
+the packet doesn't match the filter and non-zero if the packet matches
+the filter.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='./pcap_compile.3pcap.html'>pcap_compile</A>(3PCAP)
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 12:21:41 GMT, October 07, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP_SNAPSHOT</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_SNAPSHOT</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 7 April 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.1.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_snapshot - get the snapshot length
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_snapshot(pcap_t *p);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_snapshot</B>()
+
+returns the snapshot length specified when
+<A HREF='./pcap_set_snaplen.3pcap.html'><B>pcap_set_snaplen</B></A>(3PCAP)
+
+or
+<A HREF='./pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP)
+
+was called, for a live capture, or the snapshot length from the capture
+file, for a ``savefile''.
+<P>
+
+It must not be called on a pcap descriptor created by
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+
+that has not yet been activated by
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP).
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_snapshot</B>()
+
+returns the snapshot length on success and
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+if called on a capture handle that has been created but not activated.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 12:26:16 GMT, October 07, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

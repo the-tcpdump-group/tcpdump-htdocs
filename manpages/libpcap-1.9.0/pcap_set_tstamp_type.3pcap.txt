@@ -1,0 +1,45 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.9.0.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_SET_TSTAMP_TYPE(3PCAP)                        PCAP_SET_TSTAMP_TYPE(3PCAP)
+
+NAME
+       pcap_set_tstamp_type  - set the time stamp type to be used by a capture
+       device
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_tstamp_type(pcap_t *p, int tstamp_type);
+
+DESCRIPTION
+       pcap_set_tstamp_type() sets the type of time stamp desired for  packets
+       captured  on  the pcap descriptor to the type specified by tstamp_type.
+       It must be called on a pcap descriptor created  by  pcap_create()  that
+       has      not     yet     been     activated     by     pcap_activate().
+       pcap_list_tstamp_types() will give a list of the time stamp types  sup-
+       ported by a given capture device.  See pcap-tstamp(7) for a list of all
+       the time stamp types.
+
+RETURN VALUE
+       pcap_set_tstamp_type() returns 0 on success if the specified time stamp
+       type  is  expected  to  be  supported by the capture device, PCAP_WARN-
+       ING_TSTAMP_TYPE_NOTSUP if the specified time stamp  type  is  not  sup-
+       ported  by the capture device, PCAP_ERROR_ACTIVATED if called on a cap-
+       ture handle that has been activated, and PCAP_ERROR_CANTSET_TSTAMP_TYPE
+       if the capture device doesn't support setting the time stamp type.
+
+SEE ALSO
+       pcap(3PCAP),                             pcap_list_tstamp_types(3PCAP),
+       pcap_tstamp_type_name_to_val(3PCAP), pcap-tstamp(7)
+
+                                5 December 2014    PCAP_SET_TSTAMP_TYPE(3PCAP)

@@ -1,0 +1,36 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.9.0.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_SET_IMMEDIATE_MODE(3PCAP)                  PCAP_SET_IMMEDIATE_MODE(3PCAP)
+
+NAME
+       pcap_set_immediate_mode  -  set  immediate mode for a not-yet-activated
+       capture handle
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_immediate_mode(pcap_t *p, int immediate_mode);
+
+DESCRIPTION
+       pcap_set_immediate_mode() sets whether immediate mode should be set  on
+       a  capture  handle  when the handle is activated.  If immediate_mode is
+       non-zero, immediate mode will be set, otherwise it will not be set.
+
+RETURN VALUE
+       pcap_set_immediate_mode() returns 0 on success or  PCAP_ERROR_ACTIVATED
+       if called on a capture handle that has been activated.
+
+SEE ALSO
+       pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
+
+                                5 December 2013 PCAP_SET_IMMEDIATE_MODE(3PCAP)

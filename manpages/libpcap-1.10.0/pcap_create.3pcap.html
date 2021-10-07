@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP_CREATE</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_CREATE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 January 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.0.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_create - create a live capture handle
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>pcap_t *pcap_create(const char *source, char *errbuf);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_create</B>()
+
+is used to create a packet capture handle to look
+at packets on the network.
+<I>source</I>
+
+is a string that specifies the network device to open; on Linux systems
+with 2.2 or later kernels, a
+<I>source</I>
+
+argument of &quot;any&quot; or
+<B>NULL</B>
+
+can be used to capture packets from all interfaces.
+<P>
+
+The returned handle must be activated with
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
+
+before packets can be captured
+with it; options for the capture, such as promiscuous mode, can be set
+on the handle before activating it.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_create</B>()
+
+returns a
+<I>pcap_t *</I>
+
+on success and
+<B>NULL</B>
+
+on failure.
+If
+<B>NULL</B>
+
+is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<I>errbuf</I>
+
+is assumed to be able to hold at least
+<B>PCAP_ERRBUF_SIZE</B>
+
+chars.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 12:27:44 GMT, October 07, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

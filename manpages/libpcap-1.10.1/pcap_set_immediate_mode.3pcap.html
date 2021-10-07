@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML><HEAD><TITLE>Man page of PCAP_SET_IMMEDIATE_MODE</TITLE>
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_SET_IMMEDIATE_MODE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 23 August 2018<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.1.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+pcap_set_immediate_mode - set immediate mode for a not-yet-activated capture
+handle
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+
+int pcap_set_immediate_mode(pcap_t *p, int immediate_mode);
+</B></PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<B>pcap_set_immediate_mode</B>()
+
+sets whether immediate mode should be set on a capture handle when
+the handle is activated.  In immediate mode, packets are always
+delivered as soon as they arrive, with no buffering.
+If
+<I>immediate_mode</I>
+
+is non-zero, immediate mode will be set, otherwise it will not be set.
+<A NAME="lbAE">&nbsp;</A>
+<H2>RETURN VALUE</H2>
+
+<B>pcap_set_immediate_mode</B>()
+
+returns
+<B>0</B>
+
+on success or
+<B>PCAP_ERROR_ACTIVATED</B>
+
+if called on a capture handle that has been activated.
+<A NAME="lbAF">&nbsp;</A>
+<H2>BACKWARD COMPATIBILITY</H2>
+
+<P>
+
+This function became available in libpcap release 1.5.0.  In previous
+releases, if immediate delivery of packets is required:
+<DL COMPACT>
+<DT><DD>
+on FreeBSD, NetBSD, OpenBSD, DragonFly BSD, macOS, and Solaris 11,
+immediate mode must be turned on with a
+<B>BIOCIMMEDIATE</B>
+
+<B>ioctl</B>(2),
+
+as documented in
+<B>bpf</B>(4),
+
+on the descriptor returned by
+<A HREF='./pcap_fileno.3pcap.html'><B>pcap_fileno</B></A>(3PCAP),
+
+after
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
+
+is called;
+<DT><DD>
+on Solaris 10 and earlier versions of Solaris, immediate mode must be
+turned on by using a read timeout of 0 when opening the device (this
+will not provide immediate delivery of packets on other platforms, so
+don't assume it's sufficient);
+<DT><DD>
+on Digital UNIX/Tru64 UNIX, immediate mode must be turned on by doing a
+<B>BIOCMBIC</B>
+
+<B>ioctl</B>,
+
+as documented in
+<B>packetfilter</B>(7),
+
+to clear the
+<B>ENBATCH</B>
+
+flag on the descriptor returned by
+<A HREF='./pcap_fileno.3pcap.html'><B>pcap_fileno</B></A>(3PCAP),
+
+after
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
+
+is called;
+<DT><DD>
+on Windows, immediate mode must be turned on by calling
+<B>pcap_setmintocopy</B>()
+
+with a size of 0.
+</DL>
+<P>
+
+On Linux, with previous releases of libpcap, capture devices are always
+in immediate mode; however, in 1.5.0 and later, they are, by default,
+<B>not</B>
+
+in immediate mode, so if
+<B>pcap_set_immediate_mode</B>()
+
+is available, it should be used.
+<P>
+
+On other platforms, capture devices are always in immediate mode.
+<A NAME="lbAG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
+
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP),
+
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
+
+<P>
+
+<HR>
+This document was created by
+man2html,
+using the manual pages from "The Tcpdump Group" git repositories.<BR>
+Time: 12:26:16 GMT, October 07, 2021
+<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
+<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+</BODY>
+</HTML>

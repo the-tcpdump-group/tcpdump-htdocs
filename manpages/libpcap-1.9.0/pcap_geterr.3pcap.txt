@@ -1,0 +1,36 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.9.0.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_GETERR(3PCAP)                                          PCAP_GETERR(3PCAP)
+
+NAME
+       pcap_geterr, pcap_perror - get or print libpcap error message text
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       char *pcap_geterr(pcap_t *p);
+       void pcap_perror(pcap_t *p, const char *prefix);
+
+DESCRIPTION
+       pcap_geterr()  returns  the  error text pertaining to the last pcap li-
+       brary error.  NOTE: the pointer it returns will no longer  point  to  a
+       valid error message string after the pcap_t passed to it is closed; you
+       must use or copy the string before closing the pcap_t.
+
+       pcap_perror() prints the text of the last pcap library error on stderr,
+       prefixed by prefix.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                15 January 2016             PCAP_GETERR(3PCAP)

@@ -1,0 +1,37 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.9.0.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+
+PCAP_GET_TSTAMP_PRECISION(3PCAP)              PCAP_GET_TSTAMP_PRECISION(3PCAP)
+
+NAME
+       pcap_get_tstamp_precision  -  get  the time stamp precision returned in
+       captures
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_get_tstamp_precision(pcap_t *p);
+
+DESCRIPTION
+       pcap_get_tstamp_precision() returns the precision of the time stamp re-
+       turned in packet captures on the pcap descriptor.
+
+RETURN VALUE
+       pcap_get_tstamp_precision()   returns   PCAP_TSTAMP_PRECISION_MICRO  or
+       PCAP_TSTAMP_PRECISION_NANO, which indicates that pcap captures contains
+       time stamps in microseconds or nanoseconds respectively.
+
+SEE ALSO
+       pcap(3PCAP), pcap_set_tstamp_precision(3PCAP), pcap-tstamp(7)
+
+                               18 December 201PCAP_GET_TSTAMP_PRECISION(3PCAP)
