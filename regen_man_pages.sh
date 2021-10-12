@@ -230,17 +230,19 @@ detectProject()
 	project_version=$(cat "$project_dir/VERSION")
 }
 
+BOILERPLATE_BODY='Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.'
+
 printHTMLBoilerplate()
 {
 	detectProject "${1:?}"
 cat <<ENDOFTEXT
 <DIV class=version_boilerplate>
 <H4>This man page documents ${project_name} version ${project_version}.</H4>
-Your system may have a different version installed, possibly with some
-local modifications.  To achieve the best results, please make sure this
-version of this man page suits your needs.  If necessary, try to look for
-a different version on this web site or in the man pages available in your
-installation.
+$BOILERPLATE_BODY
 </DIV>
 ENDOFTEXT
 }
@@ -289,11 +291,7 @@ printTXTBoilerplate()
 
 This man page documents ${project_name} version ${project_version}.
 
-Your system may have a different version installed, possibly with some
-local modifications.  To achieve the best results, please make sure this
-version of this man page suits your needs.  If necessary, try to look for
-a different version on this web site or in the man pages available in your
-installation.
+$BOILERPLATE_BODY
 
 ENDOFTEXT
 	echo '+----------------------------------------------------------------------------+'
