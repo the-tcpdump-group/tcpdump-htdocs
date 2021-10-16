@@ -110,7 +110,7 @@ the frame may be a CAN frame or a CAN FD frame.</li>
 Older software and firmware writing packets with this link type did not
 use the CANFD_FDF flag, and always set it to 0, even for CAN FD frames,
 so if the CANFD_FDF flag is not set, the frame is not guaranteed to be
-a CAN frame.  If that flag is not set:
+a CAN frame. If that flag is not set:
 <ul>
   <li>if the frame size (including the header and padding) is 16, it's
    a CAN frame;
@@ -120,9 +120,16 @@ a CAN frame.  If that flag is not set:
 </p>
 
 <p>
-Applications that only limit frame size to available payload (strip
-trailing padding bytes), must manually set the CANFD_FDF flag after
-checking the original MTU. 
+Applications that generate LINKTYPE_CAN_SOCKETCAN frames:
+<ul>
+  <li>Must check the frame MTU when receiving frames from the Linux kernel in order to classify them as classic CAN frames or CAN FD frames</li>
+  <li>Must make the "FD flags" field 0 for classic CAN frames.</li>
+  <li>Must set the CANFD_FDF bit of the "FD flags" field in CAN FD frames, 
+    and don't set any bits in that field other than the CANFD_BRS and CANFD_ESI bits
+    unless and until Linux assigns them a meaning.</li>
+  <li>Must make the "Reserved/Padding" fields 0 unless and until Linux assigns it a meaning.</li>
+  <li>May strip trailing padding bytes to save disk space if all above statements are satisfied</li>
+</ul>
 </p>
 
 <p>
