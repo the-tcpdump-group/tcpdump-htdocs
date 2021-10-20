@@ -39,9 +39,6 @@ substitute_page_title()
 	linktypes)
 		title='Link-Layer Header Types | '
 		;;
-	mirrors)
-		title='Mirror sites | '
-		;;
 	old_releases)
 		title='Old releases | '
 		;;
@@ -85,8 +82,7 @@ rewrite_URLs()
 		sed 's#<a href="linktypes.html#<a href="../linktypes.html#' | \
 		sed 's#<a href="related.html#<a href="../related.html#' | \
 		sed 's#<a href="license.html#<a href="../license.html#' | \
-		sed 's#<a href="old_releases.html#<a href="../old_releases.html#' | \
-		sed 's#<a href="mirrors.html#<a href="../mirrors.html#'
+		sed 's#<a href="old_releases.html#<a href="../old_releases.html#'
 	fi
 }
 
@@ -100,7 +96,7 @@ print_html_page()
 {
 	infile="${1:?}"
 	case $(basename "$infile" .html) in
-	security|faq|index|license|mirrors|related|old_releases)
+	security|faq|index|license|related|old_releases)
 		show_sidebar='yes'
 		;;
 	linktypes|broadcom-switch-tag|marvell-switch-tag|pcap|LINKTYPE_*)
