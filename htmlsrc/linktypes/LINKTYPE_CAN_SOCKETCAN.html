@@ -47,6 +47,12 @@ The remaining bits are:
 </ul>
 
 <p>
+The frame payload length indicates the number of bytes of payload
+following the header.  All packet bytes after those bytes of payload are
+padding.
+</p>
+
+<p>
 The FD flags field contains CAN FD specific flags; for CAN frames, this
 field is 0.  The bits are:
 </p>
@@ -105,18 +111,13 @@ Software that generates LINKTYPE_CAN_SOCKETCAN frames:
 </p>
 
 <p>
-The frame payload length indicates the number of bytes of payload.  All
-packet bytes after those bytes of payload are padding.
-</p>
-
-<p>
 For a data frame, the payload is the data field of the CAN or CAN FD
 packet.
 <p>
 
 <p>
-For a remote retransmission request, the length must be 0, so the payload is
-empty.
+For a remote retransmission request, the payload length must be 0, so
+the payload is empty.
 <p>
 
 <p>
