@@ -108,9 +108,9 @@ the frame may be a CAN frame or a CAN FD frame.</li>
 
 <p>
 Older software and firmware writing packets with this link type did not
-use the CANFD_FDF flag, and always set it to 0, even for CAN FD frames,
-so if the CANFD_FDF flag is not set, the frame is not guaranteed to be
-a CAN frame. If that flag is not set:
+use the CANFD_FDF flag for CAN FD frames, so if the CANFD_FDF flag is
+not set, the frame is not guaranteed to be a CAN frame.  If that flag is
+not set:
 <ul>
   <li>if the frame size (including the header and padding) is 16, it's
    a CAN frame;
@@ -120,7 +120,28 @@ a CAN frame. If that flag is not set:
 </p>
 
 <p>
-Applications that generate LINKTYPE_CAN_SOCKETCAN frames:
+In addition, older software and firmware may not have explicitly set
+that field, so that the bit corresponding to the CANFD_FDF flag might be
+set even for classic CAN frames.  Therefore, code that reads
+LINKTYPE_CAN_SOCKETCAN frames must perform some heuristic checks to make
+sure that it doesn't incorrectly interpret a classic CAN frame as a CAN
+FD frame, and code that generates LINKTYPE_CAN_SOCKETCAN frames must
+follow certain rules to make sure that those checks don't cause
+software that reads those fromes to treat a CAN FD frame as a classic
+CAN frame.
+</p>
+
+<p>
+Software that reads LINKTYPE_CAN_SOCKETCAN frames must not treat a frame
+with the CANFD_FDF bit set as a CAN FD frame if any bits other than
+CANFD_BRS and CANFD_ESI are set in that field, or if either of the
+Reserved/Padding fields are non-zero, as that is an indication that the
+header fields might not have been explicitly set, and the CANFD_FDF flag
+might happen to be set even thugh the frame is not a CAN FD frame. 
+</p>
+
+<p>
+Software that generates LINKTYPE_CAN_SOCKETCAN frames:
 <ul>
   <li>Must check the frame MTU when receiving frames from the Linux kernel in order to classify them as classic CAN frames or CAN FD frames</li>
   <li>Must make the "FD flags" field 0 for classic CAN frames.</li>
