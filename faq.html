@@ -72,6 +72,7 @@ Original license : Creative Commons Attribution 2.5 License
                           <li> <a href="#q9">Why do my time stamps on Linux have only 100ms
 		                    resolution?</a> </li>
                           <li> <a href="#q10">Why are my time stamps on Windows 95/98/Me wrong?</a> </li>
+                          <li> <a href="#q11">How to update the man pages?</a> </li>
                         </ul>
                     </div>
                 </div>
@@ -501,6 +502,92 @@ Original license : Creative Commons Attribution 2.5 License
                 </div>
                 <!-- End of QUESTION #10 section -->
 
+                <!-- Start of QUESTION #11 section -->
+                <div class="post">
+                    <h2 class="title">
+                        <a name="q11">How to update the man pages?</a>
+                    </h2>
+                    <div class="entry">
+                        <p>
+                            <span class=initial>A:</span>
+                            All man pages for libpcap, tcpdump and tcpslice come from the same git
+                            repository as the software they document. Most man pages are stored in
+                            their original format (e.g. <span class=filename>pcap-config.1</span>,
+                            <span class=filename>pcap_strerror.3pcap</span>,
+                            <span class=filename>tcpslice.1</span>). Some man pages depend on
+                            particulars handled by a build system. In such case there is a
+                            corresponding source <span class=filename>.in</span> file in the
+                            repository, which the build system converts to an output file in the
+                            working copy (with GNU Autoconf this can be done again later by
+                            running <span class=filename>./config.status</span>), e.g:
+                        </p>
+
+                        <ul>
+                            <li><span class=filename>tcpdump.1.in</span> &rarr;
+                                <span class=filename>tcpdump.1</span></li>
+                            <li><span class=filename>pcap-filter.manmisc.in</span> &rarr;
+                                <span class=filename>pcap-filter.manmisc</span></li>
+                            <li><span class=filename>pcap_dump_open.3pcap.in</span> &rarr;
+                                <span class=filename>pcap_dump_open.3pcap</span></li>
+                        </ul>
+
+                        <p>
+                            The man pages use a mixture of formatting languages. When making
+                            changes, please try to keep the style consistent. Below are a few
+                            examples of common use cases.
+                        </p>
+
+                        <div class=code>
+.\" Add a comment.
+
+.\" Start a new paragraph.
+.PP
+
+.\" Use a bold font for the rest of the line, including any
+.\" punctuation marks.
+.B \-\-list\-interfaces
+.B \-\-help
+.B 21h36m 26d1h54m.
+
+.\" Idem, italics.
+.I tcpdump
+.I libpcap
+.I snaplen
+
+.\" Use a bold font for the first word and regular font for
+.\" the second word, including any punctuation marks.
+.BR date (1).
+.BR "ifconfig\-a" );
+
+.\" Refer to a special constant, e.g. input or output of a
+.\" C function.
+.B PCAP_ERROR_IFACE_NOT_UP
+.BR NULL ,
+.B \-1
+.B DLT_EN10MB
+
+.\" Refer to another man page for the first time in this page.
+.BR pcap_dump (3PCAP)
+.BR select (2)
+.BR pcap-filter (@MAN_MISC_INFO@)
+
+.\" The 2nd and subsequent times.
+.BR pcap_dump ()
+.BR select ()
+.BR pcap-filter ()
+
+.\" Prevent a long word (a man page name, an e-mail address
+.\" or an URL), especially one that contains dashes, from
+.\" hyphenation. This keeps the plain text output readable.
+.BR \%pcap-tstamp (7);
+.BR \%pcap-savefile (@MAN_FILE_FORMATS@)
+.BR \%pcap_open_offline_with_tstamp_precision (3PCAP)
+Example web site is \%https://example.org/
+Example e-mail is \%nobody@example.org.
+                        </div>
+                    </div>
+                </div>
+                <!-- End of QUESTION #11 section -->
 
             </div>
             <!-- RIGHT HAND SIDE PAGE CONTENTS -->

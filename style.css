@@ -169,6 +169,16 @@ hr {
 	font-weight: bold;
 }
 
+.post .filename {
+	font-family: monospace;
+	font-weight: bold;
+}
+
+.post .code {
+	font-family: monospace;
+	white-space: pre;
+}
+
 /* Sidebar */
 
 #sidebar {
