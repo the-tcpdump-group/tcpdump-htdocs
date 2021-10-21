@@ -37,7 +37,8 @@
                     </h2>
                     <div class="entry">
                         <span class=initial>A:</span>
-                        You need to install FLEX. AT&amp;T lex has some parameter set
+                        You need to install <span class=filename>flex</span>. AT&amp;T
+                        <span class=filename>lex</span> has some parameter set
                         too low. See <a href="https://web.archive.org/web/20010129094200/http://www.tcpdump.org:80/lists/workers/2000/msg00404.html">
                         the thread</a> <a href="https://web.archive.org/web/20010126233700/http://www.tcpdump.org/lists/workers/2000/msg00677.html">
                         summmary</a>
@@ -62,7 +63,7 @@
 
                         <p>
                         <span class=initial>A:</span>
-                        Run it with -S.  Otherwise, tcpdump keeps track of all the
+                        Run it with <span class=filename>-S</span>.  Otherwise, tcpdump keeps track of all the
                         connections it has seen so it can generate relative sequence numbers
                         rather than absolute sequence numbers.  This looks like a leak, but is
                         in fact just state accumulation.
@@ -90,7 +91,7 @@
                                 <span class=initial>A:</span>
                                 This might be because the interface on which you're capturing is plugged
                                 into a switch; on a switched network, unicast traffic between two ports
-                                will not necessarily appear on other ports - only broadcast and
+                                will not necessarily appear on other ports&mdash;only broadcast and
                                 multicast traffic will be sent to all ports.
                             </p>
 
@@ -225,8 +226,8 @@
                             packets to or from your machine, and broadcast and multicast packets; a
                             switch will normally send to a port only unicast traffic sent to the MAC
                             address for the interface on that port, and broadcast and multicast
-                            traffic - it won't send to that port unicast traffic sent to a MAC
-                            address for some other interface - and a network interface not in
+                            traffic&mdash;it won't send to that port unicast traffic sent to a MAC
+                            address for some other interface&mdash;and a network interface not in
                             promiscuous mode will receive only unicast traffic sent to the MAC
                             address for that interface, broadcast traffic, and multicast traffic
                             sent to a multicast MAC address the interface is set up to receive.
@@ -235,7 +236,7 @@
                         <p>
                             TCP doesn't use broadcast or multicast, so you will only see your own
                             TCP traffic, but UDP services may use broadcast or multicast so you'll
-                            see some UDP traffic - however, this is not a problem with TCP traffic,
+                            see some UDP traffic&mdash;however, this is not a problem with TCP traffic,
                             it's a problem with unicast traffic, as you also won't see all UDP
                             traffic between other machines.
                         </p>
@@ -300,13 +301,13 @@
                                 the form of promiscuous mode that libpcap (the library that
                                 programs such as tcpdump use to do packet capture)
                                 turns on will <strong>not</strong> necessarily be shown if you run
-                                <tt>ifconfig</tt> on the interface on a UNIX system;
+                                <span class=filename>ifconfig</span> on the interface on a UNIX system;
                             </li>
 
 
                             <li>
                                 some network interfaces might not support promiscuous mode, and some
-                                drivers might not allow promiscuous mode to be turned on - see <a
+                                drivers might not allow promiscuous mode to be turned on&mdash;see <a
                                 href="#q4">this earlier question</a> for more information on
                                 that;
                             </li>
@@ -315,7 +316,7 @@
                                 the fact that you're not seeing any traffic, or are only seeing
                                 broadcast traffic, or aren't seeing any non-broadcast traffic other than
                                 traffic to or from the machine running tcpdump, does not mean that
-                                promiscuous mode isn't on - see <a href="#q4">this earlier
+                                promiscuous mode isn't on&mdash;see <a href="#q4">this earlier
                                 question</a> for more information on that.
                             </li>
 
@@ -351,8 +352,8 @@
                         <p>
                             <span class=initial>A:</span>
                             Tcpdump gets time stamps from libpcap, and libpcap gets them from the OS
-                            kernel, so tcpdump - and any other program using libpcap, such as
-                            Wireshark or snoop - is at the mercy of the time stamping code in the OS
+                            kernel, so tcpdump&mdash;and any other program using libpcap, such as
+                            Wireshark or snoop&mdash;is at the mercy of the time stamping code in the OS
                             for time stamps.
                         </p>
 
@@ -363,8 +364,8 @@
                             time stamped at the instant that it arrives at the network interface;
                             after the packet arrives at the network interface, there will be a delay
                             until an interrupt is delivered or the network interface is polled
-                            (i.e., the network interface might not interrupt the host immediately -
-                            the driver may be set up to poll the interface if network traffic is
+                            (i.e., the network interface might not interrupt the host immediately&mdash;the
+                            driver may be set up to poll the interface if network traffic is
                             heavy, to reduce the number of interrupts and process more packets per
                             interrupt), and there will be a further delay between the point at which
                             the interrupt starts being processed and the time stamp is generated.
@@ -443,7 +444,7 @@
                         <p>
                             <span class=initial>A:</span>
                             This is due to a bug in WinPcap.  The bug should be fixed in the WinPcap
-                            3.0 beta release - note that it's an beta release, so it may be
+                            3.0 beta release&mdash;note that it's an beta release, so it may be
                             buggier than the current production release of WinPcap; please report
                             those bugs to the WinPcap developers, and help them try to track down
                             the problem, so that they can fix it for the final release.
@@ -508,7 +509,7 @@
 .\" Use a bold font for the first word and regular font for
 .\" the second word, including any punctuation marks.
 .BR date (1).
-.BR "ifconfig\-a" );
+.BR "ifconfig \-a" );
 
 .\" Refer to a special constant, e.g. input or output of a
 .\" C function.
