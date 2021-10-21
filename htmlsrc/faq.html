@@ -35,6 +35,7 @@
                         <a name="q2">How come I can not compile on Solaris?</a>
                     </h2>
                     <div class="entry">
+                        <span class=initial>A:</span>
                         You need to install FLEX. AT&amp;T lex has some parameter set
                         too low. See <a href="https://web.archive.org/web/20010129094200/http://www.tcpdump.org:80/lists/workers/2000/msg00404.html">
                         the thread</a> <a href="https://web.archive.org/web/20010126233700/http://www.tcpdump.org/lists/workers/2000/msg00677.html">
@@ -51,14 +52,16 @@
                     </h2>
                     <div class="entry">
                         <p>
-                        Q: A tcpdump command that's been running for a long time seems to be
+                        <span class=initial>Q:</span>
+                        A tcpdump command that's been running for a long time seems to be
                         leaking memory; its address space size seems to be increasing steadily
                         over time.  Why is this happening, and how can I keep it from leaking
                         memory?
                         </p>
 
                         <p>
-                        A: Run it with -S.  Otherwise, tcpdump keeps track of all the
+                        <span class=initial>A:</span>
+                        Run it with -S.  Otherwise, tcpdump keeps track of all the
                         connections it has seen so it can generate relative sequence numbers
                         rather than absolute sequence numbers.  This looks like a leak, but is
                         in fact just state accumulation.
@@ -75,13 +78,15 @@
                     <div class="entry">
 
                             <p>
-                                Q: When I use tcpdump to capture packets, why do I see
+                                <span class=initial>Q:</span>
+                                When I use tcpdump to capture packets, why do I see
                                 only packets to or from my machine, or why do I not see all the traffic
                                 I'm expecting to see from or to the machine I'm trying to
                                 monitor?
                             </p>
 
                             <p>
+                                <span class=initial>A:</span>
                                 This might be because the interface on which you're capturing is plugged
                                 into a switch; on a switched network, unicast traffic between two ports
                                 will not necessarily appear on other ports - only broadcast and
@@ -208,11 +213,13 @@
                     </h2>
                     <div class="entry">
                         <p>
-                            Q: Why can't I see any TCP packets other than packets to or from my
+                            <span class=initial>Q:</span>
+                            Why can't I see any TCP packets other than packets to or from my
                             machine, even though another sniffer on the network sees those packets?
                         </p>
 
                         <p>
+                            <span class=initial>A:</span>
                             You're probably not seeing <em>any</em> packets other than unicast
                             packets to or from your machine, and broadcast and multicast packets; a
                             switch will normally send to a port only unicast traffic sent to the MAC
@@ -248,11 +255,13 @@
                     </h2>
                     <div class="entry">
                         <p>
-                            Q: I'm trying to capture traffic on my network; why am I only seeing ARP
+                            <span class=initial>Q:</span>
+                            I'm trying to capture traffic on my network; why am I only seeing ARP
                             packets?
                         </p>
 
                         <p>
+                            <span class=initial>A:</span>
                             You're probably on a switched network, and running tcpdump on a machine
                             that's not sending traffic to the switch and not being sent any traffic
                             from other machines on the switch.  ARP packets are often broadcast
@@ -275,11 +284,13 @@
                     </h2>
                     <div class="entry">
                         <p>
-                            Q: I'm trying to capture all the traffic on my network; how do I put my
+                            <span class=initial>Q:</span>
+                            I'm trying to capture all the traffic on my network; how do I put my
                             interface into promiscuous mode?
                         </p>
 
                         <p>
+                            <span class=initial>A:</span>
                             By not disabling promiscuous mode when running tcpdump. Note, however, that:
                         </p>
 
@@ -332,10 +343,12 @@
                     </h2>
                     <div class="entry">
                         <p>
-                            Q: When is a packet time-stamped?  How accurate are the time stamps?
+                            <span class=initial>Q:</span>
+                            When is a packet time-stamped?  How accurate are the time stamps?
                         </p>
 
                         <p>
+                            <span class=initial>A:</span>
                             Tcpdump gets time stamps from libpcap, and libpcap gets them from the OS
                             kernel, so tcpdump - and any other program using libpcap, such as
                             Wireshark or snoop - is at the mercy of the time stamping code in the OS
@@ -381,11 +394,13 @@
                     </h2>
                     <div class="entry">
                         <p>
-                            Q: I'm running tcpdump on Linux; why do my time stamps have
+                            <span class=initial>Q:</span>
+                            I'm running tcpdump on Linux; why do my time stamps have
                             only 100ms resolution, rather than 1us resolution?
                         </p>
 
                         <p>
+                            <span class=initial>A:</span>
                             At least on x86-based machines, Linux can get high-resolution time
                             stamps on newer processors with the Time Stamp Counter (TSC) register;
                             for example, Intel x86 processors, starting with the Pentium Pro, and
@@ -420,10 +435,12 @@
                     </h2>
                     <div class="entry">
                         <p>
-                            Q: I'm capturing packets on Windows, why are the time stamps on packets wrong?
+                            <span class=initial>Q:</span>
+                            I'm capturing packets on Windows, why are the time stamps on packets wrong?
                         </p>
 
                         <p>
+                            <span class=initial>A:</span>
                             This is due to a bug in WinPcap.  The bug should be fixed in the WinPcap
                             3.0 beta release - note that it's an beta release, so it may be
                             buggier than the current production release of WinPcap; please report

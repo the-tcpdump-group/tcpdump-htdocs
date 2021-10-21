@@ -164,6 +164,11 @@ hr {
 	padding: 10px 20px;
 }
 
+.post .initial {
+	font-size: 120%;
+	font-weight: bold;
+}
+
 /* Sidebar */
 
 #sidebar {
