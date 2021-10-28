@@ -1,8 +1,14 @@
 Options +Indexes
+
+# not intended to be delivered from the web server
 RedirectMatch 404 /\.git
-Redirect permanent "/htmlsrc" "/"
-# Redirect "/old" "/new" does not work on this server for some reason -- Denis
-Redirect permanent "/tcpdump_man.html" "https://www.tcpdump.org/manpages/tcpdump.1.html"
-Redirect permanent "/pcap3_man.html" "https://www.tcpdump.org/manpages/pcap.3pcap.html"
-Redirect permanent "/pcap.htm" "https://www.tcpdump.org/pcap.html"
-Redirect permanent "/mirrors.html" "https://www.tcpdump.org/"
+Redirect permanent /htmlsrc /
+
+# legacy locations of a few current documents
+Redirect permanent /tcpdump_man.html /manpages/tcpdump.1.html
+Redirect permanent /pcap3_man.html /manpages/pcap.3pcap.html
+Redirect permanent /pcap.htm /pcap.html
+Redirect permanent /tcpdump-workers.asc /release/signing-key.asc
+
+# removed
+Redirect permanent /mirrors.html /
