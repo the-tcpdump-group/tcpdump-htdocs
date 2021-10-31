@@ -2,7 +2,7 @@ Options +Indexes
 
 # not intended to be delivered from the web server
 RedirectMatch 404 /\.git
-Redirect permanent /htmlsrc /
+RedirectMatch 404 /htmlsrc
 
 # legacy locations of a few current documents
 Redirect permanent /tcpdump_man.html /manpages/tcpdump.1.html
