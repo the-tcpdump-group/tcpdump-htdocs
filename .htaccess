@@ -12,3 +12,9 @@ Redirect permanent /tcpdump-workers.asc /release/signing-key.asc
 
 # removed
 Redirect permanent /mirrors.html /
+
+# Serve a PNG file (via symlink) with the correct Content-Type (via ForceType)
+# and no HTTP redirects when a client asks for the default "/favicon.ico".
+<Files "/favicon.ico">
+	ForceType image/png
+</Files>
