@@ -1,5 +1,5 @@
 # requires "AllowOverride Indexes" in Apache httpd config
 IndexStyleSheet "../style_manpages.css"
-IndexOptions -FancyIndexing +HTMLTable +SuppressSize +SuppressDescription +IgnoreClient
+IndexOptions +SuppressSize +IgnoreClient
 IndexIgnore broadcom-switch-tag.html
 IndexIgnore marvell-switch-tag.html

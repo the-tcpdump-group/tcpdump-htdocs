@@ -1,4 +1,5 @@
 Options +Indexes
+IndexOptions -FancyIndexing +HTMLTable +SuppressDescription +SuppressLastModified
 
 # not intended to be delivered from the web server
 RedirectMatch 404 /\.git
