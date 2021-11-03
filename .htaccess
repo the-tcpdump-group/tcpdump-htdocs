@@ -14,6 +14,12 @@ Redirect permanent /tcpdump-workers.asc /release/signing-key.asc
 # removed
 Redirect permanent /mirrors.html /
 
+# These replace manual copies with the master branch revisions.
+Redirect permanent /libpcap-changes.txt https://git.tcpdump.org/libpcap/blob/HEAD:/CHANGES
+Redirect permanent /libpcap-credits.txt https://git.tcpdump.org/libpcap/blob/HEAD:/CREDITS
+Redirect permanent /tcpdump-changes.txt https://git.tcpdump.org/tcpdump/blob/HEAD:/CHANGES
+Redirect permanent /tcpdump-credits.txt https://git.tcpdump.org/tcpdump/blob/HEAD:/CREDITS
+
 # Serve a PNG file (via symlink) with the correct Content-Type (via ForceType)
 # and no HTTP redirects when a client asks for the default "/favicon.ico".
 <Files "/favicon.ico">
