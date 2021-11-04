@@ -54,6 +54,9 @@ substitute_page_title()
 	marvell-switch-tag)
 		title='Marvell switch tag | '
 		;;
+	season-of-docs)
+		title='Season of Docs | '
+		;;
 	LINKTYPE_*)
 		title="$basename | "
 		;;
@@ -99,7 +102,7 @@ print_html_page()
 	security|faq|index|license|related|old_releases)
 		show_sidebar='yes'
 		;;
-	linktypes|broadcom-switch-tag|marvell-switch-tag|pcap|LINKTYPE_*)
+	linktypes|broadcom-switch-tag|marvell-switch-tag|pcap|season-of-docs|LINKTYPE_*)
 		show_sidebar='no'
 		;;
 	*)
