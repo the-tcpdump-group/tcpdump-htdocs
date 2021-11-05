@@ -82,6 +82,7 @@ rewrite_URLs()
 		sed 's#<a href="index.html#<a href="../index.html#' | \
 		sed 's#<a href="security.html#<a href="../security.html#' | \
 		sed 's#<a href="faq.html#<a href="../faq.html#' | \
+		sed 's#<a href="manpages/#<a href="../manpages/#' | \
 		sed 's#<a href="linktypes.html#<a href="../linktypes.html#' | \
 		sed 's#<a href="related.html#<a href="../related.html#' | \
 		sed 's#<a href="license.html#<a href="../license.html#' | \
