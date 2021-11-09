@@ -33,7 +33,7 @@ substitute_page_title()
 	faq)
 		title='FAQ | '
 		;;
-	index|license)
+	index)
 		title=''
 		;;
 	linktypes)
@@ -85,7 +85,6 @@ rewrite_URLs()
 		sed 's#<a href="manpages/#<a href="../manpages/#' | \
 		sed 's#<a href="linktypes.html#<a href="../linktypes.html#' | \
 		sed 's#<a href="related.html#<a href="../related.html#' | \
-		sed 's#<a href="license.html#<a href="../license.html#' | \
 		sed 's#<a href="old_releases.html#<a href="../old_releases.html#'
 	fi
 }
@@ -100,7 +99,7 @@ print_html_page()
 {
 	infile="${1:?}"
 	case $(basename "$infile" .html) in
-	security|faq|index|license|related|old_releases)
+	security|faq|index|related|old_releases)
 		show_sidebar='yes'
 		;;
 	linktypes|broadcom-switch-tag|marvell-switch-tag|pcap|season-of-docs|LINKTYPE_*)

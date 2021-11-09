@@ -13,6 +13,8 @@ Redirect permanent /tcpdump-workers.asc /release/signing-key.asc
 
 # removed
 Redirect permanent /mirrors.html /
+# merged
+Redirect permanent /license.html /#license
 
 # These replace manual copies with the master branch revisions.
 Redirect permanent /libpcap-changes.txt https://git.tcpdump.org/libpcap/blob/HEAD:/CHANGES
