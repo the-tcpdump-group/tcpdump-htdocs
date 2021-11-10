@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates (later "TEMPLATED")
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html>
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>LINKTYPE_ZBOSS_NCP | TCPDUMP/LIBPCAP public repository</title>
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link rel="canonical" href="https://www.tcpdump.org">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../manpages/">Man Pages</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../related.html">Related Projects</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_ZBOSS_NCP section -->
+          <div class="post">
+            <h2 class="title">
+                <a name="intro">LINKTYPE_ZBOSS_NCP</a>
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+                <pre>
++---------------------------+
+|         Signature         |
+|         (5 Octets)        |
++---------------------------+
+|          Version          |
+|         (1 Octet)         |
++---------------------------+
+|           Type            |
+|         (1 Octet)         |
++---------------------------+
+|          Options          |
+|    (1 Octet, bitfield)    |
++---------------------------+
+|          Payload          |
+|     (Variable length)     |
++---------------------------+
+</pre>
+                <h3>Description</h3>
+<p>
+All multi-byte numerical fields are little-endian.
+</p>
+<p>
+The signature field contains ASCII string "ZBNCP"
+</p>
+<p>
+The version field is set to 0 (only this value is defined now)
+</p>
+<p>
+The type field is set to 6
+</p>
+<h4>Options bitfield</h4>
+
+<pre>
+     7   6   5   4   3   2   1   0
+   .   .   .   .   .   .   .   .   .
+ 0 +---+---+---+---+---+---+---+---+
+   |     reserved      |b02|b01|b00|
++1 +---+---+---+---+---+---+---+---+
+</pre>
+<ul>
+    <li>
+        b00 is set to 1 if transmitting from device to host, else 0
+    </li>
+    <li>
+        b01 is set to 1 if host interrupt occurs
+    </li>
+    <li>
+        b02 is set to 1 if both sides are transmitting at the same time
+    </li>
+    <li>
+        b03 - b07 are reserved for future use
+    </li>
+</ul>
+</pre>
+            </div>
+            <!-- End of LINKTYPE_ZBOSS_NCP section -->
+            </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                &copy; 2010&ndash;2021 The Tcpdump Group. Designed by
+                <a href="http://www.aldabaknocking.com/">Luis MartinGarcia</a>;
+                based on a template by TEMPLATED.
+                <a href="https://validator.w3.org/check?uri=referer">[Valid HTML
+                4.01]</a> <a href="https://jigsaw.w3.org/css-validator/check/referer">
+                [Valid CSS]</a>
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
