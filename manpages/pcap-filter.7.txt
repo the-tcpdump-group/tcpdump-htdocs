@@ -772,8 +772,8 @@ SEE ALSO
        pcap(3PCAP)
 
 BUGS
-       To  report  a  security  issue  please  send an e-mail to security@tcp-
-       dump.org.
+       To    report    a   security   issue   please   send   an   e-mail   to
+       security@tcpdump.org.
 
        To report bugs and other problems, contribute patches, request  a  fea-
        ture,  provide generic feedback etc please see the file CONTRIBUTING.md
