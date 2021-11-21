@@ -77,15 +77,15 @@ rewrite_URLs()
 	if [ "${1:?}" = "${1#linktypes/}" ]; then
 		cat
 	else
-		sed 's#<link href="style.css#<link href="../style.css#' | \
-		sed 's#<img src="images/#<img src="../images/#' | \
-		sed 's#<a href="index.html#<a href="../index.html#' | \
-		sed 's#<a href="security.html#<a href="../security.html#' | \
-		sed 's#<a href="faq.html#<a href="../faq.html#' | \
-		sed 's#<a href="manpages/#<a href="../manpages/#' | \
-		sed 's#<a href="linktypes.html#<a href="../linktypes.html#' | \
-		sed 's#<a href="related.html#<a href="../related.html#' | \
-		sed 's#<a href="old_releases.html#<a href="../old_releases.html#'
+		sed 's#<link href="style.css#<link href="../style.css#' |
+			sed 's#<img src="images/#<img src="../images/#' |
+			sed 's#<a href="index.html#<a href="../index.html#' |
+			sed 's#<a href="security.html#<a href="../security.html#' |
+			sed 's#<a href="faq.html#<a href="../faq.html#' |
+			sed 's#<a href="manpages/#<a href="../manpages/#' |
+			sed 's#<a href="linktypes.html#<a href="../linktypes.html#' |
+			sed 's#<a href="related.html#<a href="../related.html#' |
+			sed 's#<a href="old_releases.html#<a href="../old_releases.html#'
 	fi
 }
 
@@ -209,10 +209,10 @@ regenerate_pages()
 		# None of the functions below read from $f_out, they only need to know
 		# what the filename is.
 		# shellcheck disable=SC2094
-		print_html_page "$f_in" | \
-		substitute_page_title "$f_out" | \
-		highlight_top_menu "$f_out" | \
-		rewrite_URLs "$f_out" > "$f_out"
+		print_html_page "$f_in" |
+			substitute_page_title "$f_out" |
+			highlight_top_menu "$f_out" |
+			rewrite_URLs "$f_out" > "$f_out"
 
 		# The pipeline is too long to fit into the "if" nicely.
 		# shellcheck disable=SC2181
