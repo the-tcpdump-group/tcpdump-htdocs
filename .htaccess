@@ -1,8 +1,13 @@
 Options +Indexes
 IndexOptions -FancyIndexing +HTMLTable +SuppressDescription +SuppressLastModified
+IndexStyleSheet /style.css
+HeaderName /autoindex_header.html
+ReadmeName /autoindex_footer.html
 
 # not intended to be delivered from the web server
 RedirectMatch 404 /\.git
+# A side effect of the directive below is that ReadmeName cannot access any
+# files in htmlsrc directly, but using a symlink works.
 RedirectMatch 404 /htmlsrc
 
 # legacy locations of a few current documents

@@ -26,6 +26,10 @@ substitute_page_title()
 	basename=$(basename "${1:?}" .html)
 
 	case "$basename" in
+	autoindex_header)
+		cat
+		return
+		;;
 	security)
 		title='Security | '
 		;;
@@ -73,9 +77,7 @@ substitute_page_title()
 # before committing the changes and deploying them to the web-server.
 rewrite_URLs()
 {
-	if [ "${1:?}" = "${1#linktypes/}" ]; then
-		cat
-	else
+	if [ "${1:?}" != "${1#linktypes/}" ]; then
 		sed 's#<link href="style.css#<link href="../style.css#' |
 			sed 's#<img src="images/#<img src="../images/#' |
 			sed 's#<a href="index.html#<a href="../index.html#' |
@@ -85,6 +87,17 @@ rewrite_URLs()
 			sed 's#<a href="linktypes.html#<a href="../linktypes.html#' |
 			sed 's#<a href="related.html#<a href="../related.html#' |
 			sed 's#<a href="old_releases.html#<a href="../old_releases.html#'
+	elif [ "$1" = autoindex_header.html ]; then
+		sed 's#<img src="images/#<img src="/images/#' |
+			sed 's#<a href="index.html#<a href="/index.html#' |
+			sed 's#<a href="security.html#<a href="/security.html#' |
+			sed 's#<a href="faq.html#<a href="/faq.html#' |
+			sed 's#<a href="manpages/#<a href="/manpages/#' |
+			sed 's#<a href="linktypes.html#<a href="/linktypes.html#' |
+			sed 's#<a href="related.html#<a href="/related.html#' |
+			sed 's#<a href="old_releases.html#<a href="/old_releases.html#'
+	else
+		cat
 	fi
 }
 
@@ -97,6 +110,10 @@ print_html_page()
 {
 	infile="${1:?}"
 	case $(basename "$infile" .html) in
+	_top_menu)
+		cat "$infile" htmlsrc/_body_header.html
+		return
+		;;
 	security|faq|index|related|old_releases)
 		show_sidebar='yes'
 		;;
@@ -193,34 +210,41 @@ file_differs_from_repository()
 	! git diff --quiet -- "${1:?}"
 }
 
+regenerate_page()
+{
+	f_in=${1:?}
+	f_out=${2:?}
+	file_exists_in_repository "$f_in" || echo "Warning: input file $f_in does not exist in git" >&2
+	if file_exists_in_repository "$f_out"; then
+		file_differs_from_repository "$f_out" && echo "Warning: unsaved changes to $f_out were lost" >&2
+	else
+		echo "Warning: output file $f_out does not exist in git" >&2
+	fi
+
+	# None of the functions below read from $f_out, they only need to know
+	# what the filename is.
+	# shellcheck disable=SC2094
+	print_html_page "$f_in" |
+		substitute_page_title "$f_out" |
+		highlight_top_menu "$f_out" |
+		rewrite_URLs "$f_out" > "$f_out"
+
+	# The pipeline is too long to fit into the "if" nicely.
+	# shellcheck disable=SC2181
+	if [ $? -ne 0 ]; then
+		echo "Error: failed to overwrite output file $f_out" >&2
+		continue
+	fi
+	file_differs_from_repository "$f_out" && echo "Regenerated: $f_out"
+	return 0
+}
+
 regenerate_pages()
 {
 	for f_in in htmlsrc/[!_]*.html htmlsrc/linktypes/*.html; do
-		f_out="${f_in#htmlsrc/}"
-		file_exists_in_repository "$f_in" || echo "Warning: input file $f_in does not exist in git" >&2
-		if file_exists_in_repository "$f_out"; then
-			file_differs_from_repository "$f_out" && echo "Warning: unsaved changes to $f_out were lost" >&2
-		else
-			echo "Warning: output file $f_out does not exist in git" >&2
-		fi
-
-		# None of the functions below read from $f_out, they only need to know
-		# what the filename is.
-		# shellcheck disable=SC2094
-		print_html_page "$f_in" |
-			substitute_page_title "$f_out" |
-			highlight_top_menu "$f_out" |
-			rewrite_URLs "$f_out" > "$f_out"
-
-		# The pipeline is too long to fit into the "if" nicely.
-		# shellcheck disable=SC2181
-		if [ $? -ne 0 ]; then
-			echo "Error: failed to overwrite output file $f_out" >&2
-			continue
-		fi
-		file_differs_from_repository "$f_out" && echo "Regenerated: $f_out"
+		regenerate_page "$f_in" "${f_in#htmlsrc/}"
 	done
-	return 0
+	regenerate_page htmlsrc/_top_menu.html autoindex_header.html
 }
 
 command -v git >/dev/null 2>&1 || {

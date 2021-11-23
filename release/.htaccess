@@ -1,2 +1,0 @@
-# requires "AllowOverride Indexes" in Apache httpd config
-IndexStyleSheet "../style_manpages.css"
