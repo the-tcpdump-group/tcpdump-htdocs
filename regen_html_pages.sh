@@ -23,8 +23,7 @@ BODY_FOOTER='htmlsrc/_body_footer.html'
 
 substitute_page_title()
 {
-	infile="${1:?}"
-	basename=$(basename "$infile" .html)
+	basename=$(basename "${1:?}" .html)
 
 	case "$basename" in
 	security)
@@ -61,7 +60,7 @@ substitute_page_title()
 		title="$basename | "
 		;;
 	*)
-		echo "Internal error: cannot tell page title for $infile" >&2
+		echo "Internal error: cannot tell page title for $1" >&2
 		exit 10
 	esac
 	sed "s#%PAGE_TITLE%#${title}TCPDUMP/LIBPCAP public repository#"
@@ -91,8 +90,7 @@ rewrite_URLs()
 
 highlight_top_menu()
 {
-	infile="${1:?}"
-	sed "s#<li><a href=\"${infile}\">#<li class=\"current_page_item\"><a href=\"${infile}\">#"
+	sed "s#<li><a href=\"${1:?}\">#<li class=\"current_page_item\"><a href=\"${1}\">#"
 }
 
 print_html_page()
