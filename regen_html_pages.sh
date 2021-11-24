@@ -111,7 +111,7 @@ print_html_page()
 	infile="${1:?}"
 	case $(basename "$infile" .html) in
 	_top_menu)
-		cat "$infile" htmlsrc/_body_header.html
+		cat "$infile" "$BODY_HEADER"
 		return
 		;;
 	security|faq|index|related|old_releases)
@@ -244,7 +244,7 @@ regenerate_pages()
 	for f_in in htmlsrc/[!_]*.html htmlsrc/linktypes/*.html; do
 		regenerate_page "$f_in" "${f_in#htmlsrc/}"
 	done
-	regenerate_page htmlsrc/_top_menu.html autoindex_header.html
+	regenerate_page "$TOP_MENU" autoindex_header.html
 }
 
 command -v git >/dev/null 2>&1 || {
