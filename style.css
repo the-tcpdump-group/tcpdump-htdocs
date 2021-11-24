@@ -6,7 +6,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0;
 	padding: 0;
-	background: #FFFFFF url(images/img01.gif) repeat-x;
+	background: #FFFFFF url(images/img01.png) repeat-x;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
 	color: #737373;
@@ -64,14 +64,14 @@ hr {
 	height: 45px;
 	margin: 0;
 	padding: 0;
-	background: url(images/img03.gif) no-repeat;
+	background: url(images/img03.png) no-repeat;
 	list-style: none;
 }
 
 #menu li {
 	float: left;
 	height: 45px;
-	background: url(images/img03.gif) no-repeat right top;
+	background: url(images/img03.png) no-repeat right top;
 }
 
 #menu a {
@@ -87,7 +87,7 @@ hr {
 }
 
 #menu a:hover {
-	background: url(images/img02.gif) repeat-x;
+	background: url(images/img02.png) repeat-x;
 	color: #FFFFFF;
 	height: 45px;
 }
