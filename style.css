@@ -186,25 +186,8 @@ hr {
 	width: 250px;
 }
 
-#sidebar ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
 #sidebar li {
-	margin-bottom: 20px;
-}
-
-#sidebar li ul {
-	padding: 20px;
-}
-
-#sidebar li li {
-	margin: 0;
-	padding-left: 10px;
 	padding-bottom: 5px;
-	background: url(images/img04.gif) no-repeat left 50%;
 }
 
 #sidebar h2 {
