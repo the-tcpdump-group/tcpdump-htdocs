@@ -8,25 +8,11 @@ body {
 	padding: 0;
 	background: #FFFFFF url(images/img01.png) repeat-x;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 13px;
 	color: #737373;
 }
 
-h1 {
-	font-size: 3em;
-}
-
-h2 {
-	font-size: 2em;
-}
-
-h3 {
-	font-size: 1em;
-}
-
 p, ul, ol {
-	margin-bottom: 1.8em;
-	line-height: 160%;
+	line-height: 140%;
 }
 
 li ul {
@@ -133,17 +119,13 @@ hr {
 	width: 680px;
 }
 
-.post {
-	padding-bottom: 20px;
-}
-
 .post .title {
 	margin: 0;
-	padding: 5px 20px;
-	letter-spacing: -2px;
+	padding-left: 20px;
+	padding-right: 20px;
+	letter-spacing: -1px;
 	border-bottom: 1px dashed #B9B9B9;
 	text-transform: uppercase;
-	font-size: 24px;
 }
 
 .post .title a {
@@ -152,27 +134,30 @@ hr {
 
 .post .subtitle {
 	margin: 0;
-	padding: 5px 20px;
-	font-size: 20px;
+	padding-top: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .post .entry {
-	padding: 10px 20px;
+	padding: 5px 20px;
 }
 
 .post .initial {
-	font-size: 120%;
+	font-size: large;
 	font-weight: bold;
 }
 
 .post .filename {
 	font-family: monospace;
 	font-weight: bold;
+	font-size: large;
 }
 
 .post .code {
 	font-family: monospace;
 	white-space: pre;
+	font-size: large;
 }
 
 /* Sidebar */
@@ -192,7 +177,7 @@ hr {
 	padding: 6px 0 0 20px;
 	border-bottom: 1px dashed #B9B9B9;
 	text-transform: uppercase;
-	font-size: 14px;
+	font-size: small;
 	font-weight: bold;
 	color: #000000;
 }
