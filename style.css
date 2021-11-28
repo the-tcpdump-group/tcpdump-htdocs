@@ -148,16 +148,21 @@ hr {
 	font-weight: bold;
 }
 
-.post .filename {
-	font-family: monospace;
-	font-weight: bold;
+.post tt, pre {
 	font-size: large;
+	/* Pad the sides to keep the inline <tt> clear of any adjacent punctuation marks. */
+	padding: 0px 5px;
+	border-radius: 3px;
+	color: #414141;
 }
 
-.post .code {
-	font-family: monospace;
-	white-space: pre;
-	font-size: large;
+.post tt {
+	white-space: nowrap;
+	background-color: #d8d8d8;
+}
+
+.post pre {
+	background-color: #f0f0f0;
 }
 
 /* Sidebar */
