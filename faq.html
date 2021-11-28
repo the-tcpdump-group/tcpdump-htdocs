@@ -165,9 +165,9 @@ Original license : Creative Commons Attribution 2.5 License
                                 a single port so that you can plug your analyzer into that single port to
                                 sniff all traffic.  You would have to check the documentation for the
                                 switch to see if this is possible and, if so, to see how to do this.
-                                See <a href="http://wiki.wireshark.org/SwitchReference">the switch
-                                reference page</a> on <a href="http://wiki.wireshark.org/">the Wireshark
-                                Wiki</a> for information on some switches. (Note that it's a Wiki, so
+                                See <a href="https://gitlab.com/wireshark/wireshark/-/wikis/SwitchReference">
+                                the switch reference page</a> on the Wireshark
+                                Wiki for information on some switches. (Note that it's a Wiki, so
                                 you can update or fix that information, or add additional information on
                                 those switches or information on new switches, yourself.)
                             </p>
@@ -239,7 +239,7 @@ Original license : Creative Commons Attribution 2.5 License
                                 Windows, may require you to enable promiscuous mode in order to capture
                                 in promiscuous mode.  Ask the vendor of the card how to do this, or see,
                                 for example, <a
-                                href="http://www.madge.com/_assets/downloads/lsshelp8.0/LSSHelp/AdvFeat/Promisc/Promisc2.htm">this
+                                href="https://web.archive.org/web/20100415164103/http://www.madge.com/_assets/downloads/lsshelp8.0/LSSHelp/AdvFeat/Promisc/Promisc2.htm">this
                                 information on promiscuous mode on some Madge token ring adapters</a>
                                 (note that those cards can have promiscuous mode disabled permanently,
                                 in which case you <em>can't</em> enable it).
@@ -449,7 +449,7 @@ Original license : Creative Commons Attribution 2.5 License
                         <p>
                             <span class=initial>Q:</span>
                             I'm running tcpdump on Linux; why do my time stamps have
-                            only 100ms resolution, rather than 1us resolution?
+                            only 100ms resolution, rather than 1&micro;s resolution?
                         </p>
 
                         <p>
@@ -471,8 +471,10 @@ Original license : Creative Commons Attribution 2.5 License
                         <p>
                             In addition, some Linux distributions may have bugs in their versions of
                             the kernel that cause packets not to be given high-resolution time
-                            stamps even if the TSC is enabled.  See, for example, bug 61111 for Red
-                            Hat Linux 7.2.  If your distribution has a bug such as this, you may
+                            stamps even if the TSC is enabled.  See, for example,
+                            <a href="https://bugzilla.redhat.com/show_bug.cgi?id=61111">
+                            bug 61111 for Red Hat Linux 7.2</a>.
+                            If your distribution has a bug such as this, you may
                             have to run a standard kernel from kernel.org in order to get
                             high-resolution time stamps.
                         </p>
