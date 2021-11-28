@@ -134,11 +134,12 @@
                 <a href="release/signing-key.asc">key</a>)
             </p>
             <p>
-              This release contains initial work to redo how buffer overruns
+              This release contains work in progress to redo how buffer overruns
               are handled.
-              The next major release will be 5.0, and will have all the legacy
-              ND_CHECK* macros removed, but this is taking longer than planned.
-              No new code with ND_CHECK* will be accepted.
+              The next major release will be 5.0, and will aim to replace all of
+              ND_TCHECK_ and most of ND_TTEST_ legacy macros with
+              the new GET_ macros, but this is taking longer than planned.
+              Meanwhile no new code with the legacy macros will be accepted.
             </p>
             <p>
               We maintain a list of <a href="public-cve-list.txt">public CVE information</a>.
