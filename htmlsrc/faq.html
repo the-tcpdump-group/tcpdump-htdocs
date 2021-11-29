@@ -24,6 +24,7 @@
 		                    resolution?</a> </li>
                           <li> <a href="#q10">Why are my time stamps on Windows 95/98/Me wrong?</a> </li>
                           <li> <a href="#q11">How to update the man pages?</a> </li>
+                          <li> <a href="#q12">How to decode a protocol on a non-standard port?</a> </li>
                         </ul>
                     </div>
                 </div>
@@ -544,5 +545,34 @@ Example e-mail is \%nobody@example.org.
                     </div>
                 </div>
                 <!-- End of QUESTION #11 section -->
+
+                <!-- Start of QUESTION #12 section -->
+                <div class="post">
+                    <h2 class="title">
+                        <a name="q12">How to decode a protocol on a non-standard port?</a>
+                    </h2>
+                    <div class="entry">
+                        <p>
+                            <span class=initial>A:</span>
+                            This may be possible under certain conditions.  First of all, the
+                            network protocol of interest must be one of the protocols supported by
+                            the <tt>-T</tt> flag of tcpdump.  You can find the complete list in the
+                            <a href="manpages/tcpdump.1.html">man page</a> (most of these protocols
+                            are UDP-based).
+                        </p>
+                        <p>
+                            If the protocol is supported, keep in mind that using <tt>-T type</tt>
+                            will usually override the protocol detection for many unrelated packets
+                            as well.  For the best results you would need to apply a packet filter
+                            to leave only the correct packets in scope.  For example, to decode
+                            RADIUS authentication packets on non-standard port 21812, you would need
+                            to run tcpdump in a way similar to the following:
+                        </p>
+<pre>
+tcpdump -T radius -nv udp port 21812
+</pre>
+                    </div>
+                </div>
+                <!-- End of QUESTION #12 section -->
 
             </div>
