@@ -103,7 +103,7 @@ OPTIONS
               Exit after receiving count packets.
 
        --count
-              Print  only  on  stderr  the  packet  count when reading capture
+              Print  only  on  stdout  the  packet  count when reading capture
               file(s) instead of parsing/printing the packets. If a filter  is
               specified  on the command line, tcpdump counts only packets that
               were matched by the filter expression.
@@ -1377,4 +1377,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                 10 July 2021                       TCPDUMP(1)
+                               29 November 2021                     TCPDUMP(1)
