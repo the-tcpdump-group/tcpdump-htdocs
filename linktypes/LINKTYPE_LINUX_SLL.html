@@ -149,7 +149,8 @@ frame.
 </ul>
 
 <p>
-A CAN bus frame begins with a header of the form</li>
+A CAN bus frame begins with a header of the form
+</p>
 
 <pre>
 +---------------------------+
@@ -183,6 +184,7 @@ frame.
 <li>0x80000000 - set if the frame is an extended 29-bit frame rather
 than a standard 11-bit frame;
 </ul>
+<p>
 and the header is followed by the CAN bus payload.
 </p>
 
@@ -223,6 +225,7 @@ The bits of the FD flags field are:
 <li>0x01 - set if the bit rate switch flag is set for the frame;</li>
 <li>0x02 - set if the error state indicator is set for the frame;</li>
 </ul>
+<p>
 and the header is followed by the CAN FD payload.
 </p>
 
@@ -242,6 +245,7 @@ lower bits of the CAN ID field contain an error class value, with bits
 specified by the first set of CAN_ERR_ values in <a
 href="https://github.com/torvalds/linux/blob/master/include/uapi/linux/can/error.h">the
 Linux uapi/can/error.h header</a>.  The bytes in the payload are:
+</p>
 <ul>
 <li>first byte - if arbitration was lost, the bit number in the bitstream in which it was lost;
 otherwise 0. 
@@ -260,7 +264,6 @@ header.
 <li>sixth, seventh, and eighth bytes - controller-specific additional
 information.
 </ul>
-</p>
             </div>
             <!-- End of LINKTYPE_LINUX_SLL section -->
           </div>

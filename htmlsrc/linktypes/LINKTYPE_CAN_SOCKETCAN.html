@@ -68,13 +68,13 @@ Older software and firmware writing packets with this link type did not
 use the CANFD_FDF flag for CAN FD frames, so if the CANFD_FDF flag is
 not set, the frame is not guaranteed to be a CAN frame.  If that flag is
 not set:
+</p>
 <ul>
   <li>if the frame size (including the header and padding) is 16, it's
    a CAN frame;
   <li>if the frame size (including the header and padding) is 72, it's
    a CAN FD frame.
 </ul>
-</p>
 
 <p>
 In addition, older software and firmware may not have explicitly set
@@ -99,6 +99,7 @@ might happen to be set even thugh the frame is not a CAN FD frame.
 
 <p>
 Software that generates LINKTYPE_CAN_SOCKETCAN frames:
+</p>
 <ul>
   <li>Must check the frame MTU when receiving frames from the Linux kernel in order to classify them as classic CAN frames or CAN FD frames</li>
   <li>Must make the "FD flags" field 0 for classic CAN frames.</li>
@@ -108,7 +109,6 @@ Software that generates LINKTYPE_CAN_SOCKETCAN frames:
   <li>Must make the "Reserved/Padding" fields 0 unless and until Linux assigns it a meaning.</li>
   <li>May strip trailing padding bytes to save disk space if all above statements are satisfied</li>
 </ul>
-</p>
 
 <p>
 For a data frame, the payload is the data field of the CAN or CAN FD
@@ -126,6 +126,7 @@ the CAN ID field contain an error class value, with bits specified by
 the first set of CAN_ERR_ values in <a
 href="https://github.com/torvalds/linux/blob/master/include/uapi/linux/can/error.h">the
 Linux uapi/can/error.h header</a>.  The bytes in the payload are:
+</p>
 <ul>
 <li>first byte - if arbitration was lost, the bit number in the bitstream in which it was lost;
 otherwise 0. 
@@ -144,7 +145,6 @@ header.
 <li>sixth, seventh, and eighth bytes - controller-specific additional
 information.
 </ul>
-</p>
             </div>
             <!-- End of LINKTYPE_CAN_SOCKETCAN section -->
           </div>

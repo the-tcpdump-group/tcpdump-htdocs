@@ -197,7 +197,7 @@ For isochronous endpoints:
 sequence of "number of isochronous frames following" isochronous frames. 
 Each isochronous frame begins with 0-3 bytes of padding to put the
 data following it on a 4-byte boundary.  After that is a header of the
-form:</li>
+form:
 <pre>
 +----------------------------------------+
 |             Length of header           |
@@ -229,7 +229,6 @@ frame.
 <p>
 The frame status field contains a status value for the frame.  It is in
 the same format as the returned status field in the packet header.
-</p>
 </p>
 <p>
 The frame number field is the frame number, from the Start-of-Frame
