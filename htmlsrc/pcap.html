@@ -1,5 +1,6 @@
-      <div id="post">
-<h1>Programming with pcap</h1>
+      <div class="post">
+        <h1 class="title">Programming with pcap</h1>
+        <div class="entry">
 Tim Carstens<br>
 timcarst <b>at</b> yahoo <b>dot</b> com<br>
 Further editing and development by Guy Harris<br>
@@ -12,7 +13,12 @@ be sure to describe concepts in greater detail. Additionally, some basic
 understanding of networking might help, given that this is a packet sniffer and 
 all. All of the code examples presented here have been tested on FreeBSD 
 4.3 with a default kernel.
-<h2>Getting Started: The format of a pcap application</h2>
+        </div>
+      </div>
+
+      <div class="post">
+        <h2 class="title">Getting Started: The format of a pcap application</h2>
+        <div class="entry">
 <p>The first thing to understand is the 
 general layout of a pcap sniffer. The flow of code is as follows:
 <ol>
@@ -46,7 +52,12 @@ general layout of a pcap sniffer. The flow of code is as follows:
 simple process. Five steps total, one of which is optional (step 3,
 in case you were wondering.) Let's take a look at each of the steps and how 
 to implement them.
-<h2>Setting the device</h2>
+        </div>
+      </div>
+
+      <div class="post">
+        <h2 class="title">Setting the device</h2>
+        <div class="entry">
 <p>This is terribly simple. There are two techniques 
 for setting the device that we wish to sniff on.
 <p>The first is that we can 
@@ -64,7 +75,7 @@ simply have the user tell us. Consider the following program:
 	}
 </pre>
 <p>The user specifies the device by passing the name of it as the first argument to 
-the program. Now the string &quot;dev&quot; holds the name of the interface that we 
+the program. Now the string <code>dev</code> holds the name of the interface that we
 will sniff on in a format that pcap can understand (assuming, of course, the 
 user gave us a real interface).
 <p>The other technique is 
@@ -87,31 +98,36 @@ equally simple. Look at this program:
 	}
 </pre>
 <p>In this case, pcap just sets the device on its own. &quot;But wait, Tim,&quot; you 
-say. &quot;What is the deal with the errbuf string?&quot; Most of the pcap 
+say. &quot;What is the deal with the <code>errbuf</code> string?&quot; Most of the pcap
 commands allow us to pass them a string as an argument. The purpose of 
 this string? In the event that the command fails, it will populate the 
-string with a description of the error. In this case, if pcap_lookupdev() 
-fails, it will store an error message in errbuf. Nifty, isn't it? 
+string with a description of the error. In this case, if <code>pcap_lookupdev()</code>
+fails, it will store an error message in <code>errbuf</code>. Nifty, isn't it?
 And that's how we set our device.
-<h2>Opening the device for sniffing</h2>
+        </div>
+      </div>
+
+      <div class="post">
+        <h2 class="title">Opening the device for sniffing</h2>
+        <div class="entry">
 <p>The task of creating a sniffing session is really quite 
-simple. For this, we use pcap_open_live(). The prototype of this 
-function (from the pcap man page) is as follows:
+simple. For this, we use <code>pcap_open_live()</code>. The prototype of this
+function (from the <a href="manpages/pcap_open_live.3pcap.html">man page</a>) is as follows:
 <pre>
 	pcap_t *pcap_open_live(char *device, int snaplen, int promisc, int to_ms,
 	    char *ebuf)
 </pre>
 <p>The first argument is the device that we specified in the previous
-section.  snaplen is an integer which defines the maximum number of
-bytes to be captured by pcap.  promisc, when set to true, brings the
+section.  <code>snaplen</code> is an integer which defines the maximum number of
+bytes to be captured by pcap.  <code>promisc</code>, when set to true, brings the
 interface into promiscuous mode (however, even if it is set to false, it
 is possible under specific cases for the interface to be in promiscuous
-mode, anyway).  to_ms is the read time out in milliseconds (a value of 0
+mode, anyway).  <code>to_ms</code> is the read time out in milliseconds (a value of 0
 means no time out; on at least some platforms, this means that you may
 wait until a sufficient number of packets arrive before seeing any
-packets, so you should use a non-zero timeout).  Lastly, ebuf is a
+packets, so you should use a non-zero timeout).  Lastly, <code>ebuf</code> is a
 string we can store any error messages within (as we did above with
-errbuf).  The function returns our session handler.
+<code>errbuf</code>).  The function returns our session handler.
 <p>To demonstrate, consider this code snippet:
 <pre>
 	 #include &lt;pcap.h&gt;
@@ -124,10 +140,10 @@ errbuf).  The function returns our session handler.
 		 return(2);
 	 }
 </pre>
-<p>This code fragment opens the device stored in the strong &quot;dev&quot;, tells it to 
-read however many bytes are specified in BUFSIZ (which is defined in pcap.h). 
+<p>This code fragment opens the device stored in the strong <code>dev</code>, tells it to
+read however many bytes are specified in <code>BUFSIZ</code> (which is defined in <code>pcap.h</code>).
 We are telling it to put the device into promiscuous mode, to sniff until an 
-error occurs, and if there is an error, store it in the string errbuf; it
+error occurs, and if there is an error, store it in the string <code>errbuf</code>; it
 uses that string to print an error message.
 
 <p>A note about promiscuous vs. non-promiscuous sniffing: The two
@@ -168,36 +184,40 @@ by the device, it has to give up; this would be done with code such as
 </pre>
 <p>which fails if the device doesn't supply Ethernet headers.  This
 would be appropriate for the code below, as it assumes Ethernet headers.
+        </div>
+      </div>
 
-<h2>Filtering traffic</h2>
+      <div class="post">
+        <h2 class="title">Filtering traffic</h2>
+        <div class="entry">
 <p>Often times our sniffer may only be interested in specific 
 traffic. For instance, there may be times when all we want is to sniff on 
 port 23 (telnet) in search of passwords. Or perhaps we want to highjack a 
 file being sent over port 21 (FTP). Maybe we only want DNS traffic (port 
 53 UDP). Whatever the case, rarely do we just want to blindly sniff <i>all</i> 
-network traffic. Enter pcap_compile() and pcap_setfilter().
+network traffic. Enter <code>pcap_compile()</code> and <code>pcap_setfilter()</code>.
 
 <p>The process is quite simple.  After we have already called
-pcap_open_live() and have a working sniffing session, we can apply our
-filter.  Why not just use our own if/else if statements? Two reasons. 
+<code>pcap_open_live()</code> and have a working sniffing session, we can apply our
+filter.  Why not just use our own <code>if</code>/<code>else if</code> statements? Two reasons.
 First, pcap's filter is far more efficient, because it does it directly
 with the BPF filter; we eliminate numerous steps by having the BPF
 driver do it directly.  Second, this is a <em>lot</em> easier :)
 
 <p>Before applying our filter, we must &quot;compile&quot; it.  The
-filter expression is kept in a regular string (char array).  The syntax
-is documented quite well in the man page for tcpdump; I leave you to
+filter expression is kept in a regular string (<code>char</code> array).  The syntax
+is documented quite well in the <a href="manpages/pcap-filter.7.html">man page</a>; I leave you to
 read it on your own.  However, we will use simple test expressions, so
 perhaps you are sharp enough to figure it out from my
 examples.
 
-<p>To compile the program we call pcap_compile(). The
+<p>To compile the program we call <code>pcap_compile()</code>. The
 prototype defines it as:
 <pre>
 	int pcap_compile(pcap_t *p, struct bpf_program *fp, char *str, int optimize, 
 	    bpf_u_int32 netmask)
 </pre>
-<p>The first argument is our session handle (pcap_t *handle in our
+<p>The first argument is our session handle (<code>pcap_t *handle</code> in our
 previous example).  Following that is a reference to the place we will
 store the compiled version of our filter.  Then comes the expression
 itself, in regular string format.  Next is an integer that decides if
@@ -207,14 +227,14 @@ network the filter applies to.  The function returns -1 on failure; all
 other values imply success.
 
 <p>After the expression has been compiled, it is time to apply 
-it. Enter pcap_setfilter(). Following our format of explaining pcap, 
-we shall look at the pcap_setfilter() prototype:
+it. Enter <code>pcap_setfilter()</code>. Following our format of explaining pcap,
+we shall look at the <code>pcap_setfilter()</code> prototype:
 <pre>
 	int pcap_setfilter(pcap_t *p, struct bpf_program *fp)
 </pre>
 <p>This is very straightforward. The first argument is our session handler, 
 the second is a reference to the compiled version of the expression (presumably 
-the same variable as the second argument to pcap_compile()).
+the same variable as the second argument to <code>pcap_compile()</code>).
 
 <p>Perhaps another code sample would help to better understand:
 <pre>
@@ -251,7 +271,7 @@ the same variable as the second argument to pcap_compile()).
 23, in promiscuous mode, on the device rl0.
 
 <p>You may notice that the previous example contains a function that we
-have not yet discussed.  pcap_lookupnet() is a function that, given the
+have not yet discussed.  <code>pcap_lookupnet()</code> is a function that, given the
 name of a device, returns one of its IPv4 network numbers and
 corresponding network mask (the network number is the IPv4 address ANDed
 with the network mask, so it contains only the network part of the
@@ -263,8 +283,12 @@ Miscellaneous section at the end of the document.
 operating systems.  In my test environment, I found that OpenBSD 2.9
 with a default kernel does support this type of filter, but FreeBSD 4.3
 with a default kernel does not.  Your mileage may vary.
+        </div>
+      </div>
 
-<h2>The actual sniffing</h2>
+      <div class="post">
+        <h2 class="title">The actual sniffing</h2>
+        <div class="entry">
 <p>At this point we have learned how to define a device, 
 prepare it for sniffing, and apply filters about what we should and should not 
 sniff for. Now it is time to actually capture some packets.
@@ -273,9 +297,9 @@ sniff for. Now it is time to actually capture some packets.
 capture a single packet at a time, or we can enter a loop that waits for
 <i>n</i> number of packets to be sniffed before being done.  We will
 begin by looking at how to capture a single packet, then look at methods
-of using loops.  For this we use pcap_next().
+of using loops.  For this we use <code>pcap_next()</code>.
 
-<p>The prototype for pcap_next() is fairly simple:
+<p>The prototype for <code>pcap_next()</code> is fairly simple:
 <pre>
 	u_char *pcap_next(pcap_t *p, struct pcap_pkthdr *h)
 </pre>
@@ -283,11 +307,11 @@ of using loops.  For this we use pcap_next().
 pointer to a structure that holds general information about the packet, 
 specifically the time in which it was sniffed, the length of this packet, and 
 the length of his specific portion (in case it is fragmented, for example.) 
-pcap_next() returns a u_char pointer to the packet that is described by this 
+<code>pcap_next()</code> returns a <code>u_char</code> pointer to the packet that is described by this
 structure. We'll discuss the technique for actually reading the packet 
 itself later.
 
-<p>Here is a simple demonstration of using pcap_next() to sniff a 
+<p>Here is a simple demonstration of using <code>pcap_next()</code> to sniff a
 packet.
 <pre>
 	 #include &lt;pcap.h&gt;
@@ -341,16 +365,16 @@ packet.
 		return(0);
 	 }
 </pre>
-<p>This application sniffs on whatever device is returned by pcap_lookupdev() by 
+<p>This application sniffs on whatever device is returned by <code>pcap_lookupdev()</code> by
 putting it into promiscuous mode. It finds the first packet to come across 
 port 23 (telnet) and tells the user the size of the packet (in bytes). 
-Again, this program includes a new call, pcap_close(), which we will discuss 
+Again, this program includes a new call, <code>pcap_close()</code>, which we will discuss
 later (although it really is quite self explanatory).
 
 <p>The other technique we can use is more complicated, and 
-probably more useful. Few sniffers (if any) actually use pcap_next(). 
-More often than not, they use pcap_loop() or pcap_dispatch() (which then 
-themselves use pcap_loop()). To understand the use of these two functions, 
+probably more useful. Few sniffers (if any) actually use <code>pcap_next()</code>.
+More often than not, they use <code>pcap_loop()</code> or <code>pcap_dispatch()</code> (which then
+themselves use <code>pcap_loop()</code>). To understand the use of these two functions,
 you must understand the idea of a callback function.
 
 <p>Callback functions are not anything new, and are very common in many
@@ -363,39 +387,39 @@ utilizing is a callback function.  Every time the user presses a key, my
 program will call the callback function.  Callbacks are used in pcap,
 but instead of being called when a user presses a key, they are called
 when pcap sniffs a packet.  The two functions that one can use to define
-their callback is pcap_loop() and pcap_dispatch().  pcap_loop() and
-pcap_dispatch() are very similar in their usage of callbacks.  Both of
+their callback is <code>pcap_loop()</code> and <code>pcap_dispatch()</code>.  <code>pcap_loop()</code> and
+<code>pcap_dispatch()</code> are very similar in their usage of callbacks.  Both of
 them call a callback function every time a packet is sniffed that meets
 our filter requirements (if any filter exists, of course.  If not, then
 <i>all</i> packets that are sniffed are sent to the callback.)
 
-<p>The prototype for pcap_loop() is below:
+<p>The prototype for <code>pcap_loop()</code> is below:
 <pre>
 	int pcap_loop(pcap_t *p, int cnt, pcap_handler callback, u_char *user)
 </pre>
 <p>The first argument is our session handle.  Following that is an
-integer that tells pcap_loop() how many packets it should sniff for
+integer that tells <code>pcap_loop()</code> how many packets it should sniff for
 before returning (a negative value means it should sniff until an error
 occurs).  The third argument is the name of the callback function (just
 its identifier, no parentheses).  The last argument is useful in some
-applications, but many times is simply set as NULL.  Suppose we have
+applications, but many times is simply set as <code>NULL</code>.  Suppose we have
 arguments of our own that we wish to send to our callback function, in
-addition to the arguments that pcap_loop() sends.  This is where we do
-it.  Obviously, you must typecast to a u_char pointer to ensure the
+addition to the arguments that <code>pcap_loop()</code> sends.  This is where we do
+it.  Obviously, you must typecast to a <code>u_char</code> pointer to ensure the
 results make it there correctly; as we will see later, pcap makes use of
 some very interesting means of passing information in the form of a
-u_char pointer.  After we show an example of how pcap does it, it should
+<code>u_char</code> pointer.  After we show an example of how pcap does it, it should
 be obvious how to do it here.  If not, consult your local C reference
 text, as an explanation of pointers is beyond the scope of this
-document.  pcap_dispatch() is almost identical in usage.  The only
-difference between pcap_dispatch() and pcap_loop() is that
-pcap_dispatch() will only process the first batch of packets that it
-receives from the system, while pcap_loop() will continue processing
+document.  <code>pcap_dispatch()</code> is almost identical in usage.  The only
+difference between <code>pcap_dispatch()</code> and <code>pcap_loop()</code> is that
+<code>pcap_dispatch()</code> will only process the first batch of packets that it
+receives from the system, while <code>pcap_loop()</code> will continue processing
 packets or batches of packets until the count of packets runs out.  For
-a more in depth discussion of their differences, see the pcap man page.
+a more in depth discussion of their differences, see the <a href="manpages/pcap_loop.3pcap.html">man page</a>.
 <p>Before we can provide an example of using 
-pcap_loop(), we must examine the format of our callback function. We 
-cannot arbitrarily define our callback's prototype; otherwise, pcap_loop() would 
+<code>pcap_loop()</code>, we must examine the format of our callback function. We
+cannot arbitrarily define our callback's prototype; otherwise, <code>pcap_loop()</code> would
 not know how to use the function. So we use this format as the prototype 
 for our callback function:
 <pre>
@@ -403,13 +427,13 @@ for our callback function:
 	    const u_char *packet);
 </pre>
 <p>Let's examine this in more detail. First, you'll notice that the function 
-has a void return type. This is logical, because pcap_loop() wouldn't know 
+has a <code>void</code> return type. This is logical, because <code>pcap_loop()</code> wouldn't know
 how to handle a return value anyway. The first argument corresponds to the 
-last argument of pcap_loop(). Whatever value is passed as the last 
-argument to pcap_loop() is passed to the first argument of our callback function 
+last argument of <code>pcap_loop()</code>. Whatever value is passed as the last
+argument to <code>pcap_loop()</code> is passed to the first argument of our callback function
 every time the function is called. The second argument is the pcap header, 
 which contains information about when the packet was sniffed, how large it is, 
-etc. The pcap_pkthdr structure is defined in pcap.h as:
+etc. The <code>pcap_pkthdr</code> structure is defined in <code>pcap.h</code> as:
 <pre>
 	struct pcap_pkthdr {
 		struct timeval ts; /* time stamp */
@@ -419,16 +443,16 @@ etc. The pcap_pkthdr structure is defined in pcap.h as:
 </pre>
 <p>These values should be fairly self explanatory.  The last argument is
 the most interesting of them all, and the most confusing to the average
-novice pcap programmer.  It is another pointer to a u_char, and it
+novice pcap programmer.  It is another pointer to a <code>u_char</code>, and it
 points to the first byte of a chunk of data containing the entire
-packet, as sniffed by pcap_loop().
+packet, as sniffed by <code>pcap_loop()</code>.
 
-<p>But how do you make use of this variable (named &quot;packet&quot; in
+<p>But how do you make use of this variable (named <code>packet</code> in
 our prototype)? A packet contains many attributes, so as you can
 imagine, it is not really a string, but actually a collection of
 structures (for instance, a TCP/IP packet would have an Ethernet header,
 an IP header, a TCP header, and lastly, the packet's payload).  This
-u_char pointer points to the serialized version of these structures.  To
+<code>u_char</code> pointer points to the serialized version of these structures.  To
 make any use of it, we must do some interesting typecasting.
 
 <p>First, we must have the actual structures 
@@ -447,7 +471,7 @@ definitions that I use to describe a TCP/IP packet over Ethernet.
 
 	/* IP header */
 	struct sniff_ip {
-		u_char ip_vhl;		/* version << 4 | header length >> 2 */
+		u_char ip_vhl;		/* version &lt;&lt; 4 | header length &gt;&gt; 2 */
 		u_char ip_tos;		/* type of service */
 		u_short ip_len;		/* total length */
 		u_short ip_id;		/* identification */
@@ -461,8 +485,8 @@ definitions that I use to describe a TCP/IP packet over Ethernet.
 		u_short ip_sum;		/* checksum */
 		struct in_addr ip_src,ip_dst; /* source and dest address */
 	};
-	#define IP_HL(ip)		(((ip)->ip_vhl) & 0x0f)
-	#define IP_V(ip)		(((ip)->ip_vhl) >> 4)
+	#define IP_HL(ip)		(((ip)-&gt;ip_vhl) &amp; 0x0f)
+	#define IP_V(ip)		(((ip)-&gt;ip_vhl) &gt;&gt; 4)
 
 	/* TCP header */
 	typedef u_int tcp_seq;
@@ -473,7 +497,7 @@ definitions that I use to describe a TCP/IP packet over Ethernet.
 		tcp_seq th_seq;		/* sequence number */
 		tcp_seq th_ack;		/* acknowledgement number */
 		u_char th_offx2;	/* data offset, rsvd */
-	#define TH_OFF(th)	(((th)->th_offx2 & 0xf0) >> 4)
+	#define TH_OFF(th)	(((th)-&gt;th_offx2 &amp; 0xf0) &gt; 4)
 		u_char th_flags;
 	#define TH_FIN 0x01
 	#define TH_SYN 0x02
@@ -490,7 +514,7 @@ definitions that I use to describe a TCP/IP packet over Ethernet.
 };
 </pre>
 
-<p>So how does all of this relate to pcap and our mysterious u_char
+<p>So how does all of this relate to pcap and our mysterious <code>u_char</code>
 pointer? Well, those structures define the headers that appear in the
 data for the packet.  So how can we break it apart? Be prepared to
 witness one of the most practical uses of pointers (for all of those new
@@ -520,13 +544,13 @@ deconstruct the packet data.
 	ethernet = (struct sniff_ethernet*)(packet);
 	ip = (struct sniff_ip*)(packet + SIZE_ETHERNET);
 	size_ip = IP_HL(ip)*4;
-	if (size_ip < 20) {
+	if (size_ip &lt; 20) {
 		printf("   * Invalid IP header length: %u bytes\n", size_ip);
 		return;
 	}
 	tcp = (struct sniff_tcp*)(packet + SIZE_ETHERNET + size_ip);
 	size_tcp = TH_OFF(tcp)*4;
-	if (size_tcp < 20) {
+	if (size_tcp &lt; 20) {
 		printf("   * Invalid TCP header length: %u bytes\n", size_tcp);
 		return;
 	}
@@ -534,15 +558,15 @@ deconstruct the packet data.
 </pre>
 
 <p>How does this work? Consider the layout of the packet data in memory. 
-The u_char pointer is really just a variable containing an address in
+The <code>u_char</code> pointer is really just a variable containing an address in
 memory.  That's what a pointer is; it points to a location in memory.
 
 <p>For the sake of simplicity, we'll say that the address this pointer is
 set to is the value X.  Well, if our three structures are just sitting
-in line, the first of them (sniff_ethernet) being located in memory at
+in line, the first of them (<code>sniff_ethernet</code>) being located in memory at
 the address X, then we can easily find the address of the structure
 after it; that address is X plus the length of the Ethernet header,
-which is 14, or SIZE_ETHERNET.
+which is 14, or <code>SIZE_ETHERNET</code>.
 
 <p>Similarly if we have the address of that header, the address of the
 structure after it is the address of that header plus the length of that
@@ -559,34 +583,34 @@ and its minimum length is also 20 bytes.
 <p>So let's make a chart:
 
 <p>
-<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+<table class=byte_array>
   <tr>
-    <td width="50%" align="center"><b>Variable</b></td>
-    <td width="50%" align="center"><b>Location (in bytes)</b></td>
+    <th>Variable</th>
+    <th>Location (in bytes)</th>
   </tr>
   <tr>
-    <td width="50%">sniff_ethernet</td>
-    <td width="50%">X</td>
+    <td><code>sniff_ethernet</code></td>
+    <td>X</td>
   </tr>
   <tr>
-    <td width="50%">sniff_ip</td>
-    <td width="50%">X + SIZE_ETHERNET</td>
+    <td><code>sniff_ip</code></td>
+    <td>X + <code>SIZE_ETHERNET</code></td>
   </tr>
   <tr>
-    <td width="50%">sniff_tcp</td>
-    <td width="50%">X + SIZE_ETHERNET + {IP header length}</td>
+    <td><code>sniff_tcp</code></td>
+    <td>X + <code>SIZE_ETHERNET</code> + {IP header length}</td>
   </tr>
   <tr>
-    <td width="50%">payload</td>
-    <td width="50%">X + SIZE_ETHERNET + {IP header length} + {TCP header length}</td>
+    <td><code>payload</code></td>
+    <td>X + <code>SIZE_ETHERNET</code> + {IP header length} + {TCP header length}</td>
   </tr>
 </table>
 
-<p>The sniff_ethernet structure, being the first in line, is simply at
-location X.  sniff_ip, who follows directly after sniff_ethernet, is at
+<p>The <code>sniff_ethernet</code> structure, being the first in line, is simply at
+location X.  <code>sniff_ip</code>, who follows directly after <code>sniff_ethernet</code>, is at
 the location X, plus however much space the Ethernet header consumes (14
-bytes, or SIZE_ETHERNET).  sniff_tcp is after both sniff_ip and
-sniff_ethernet, so it is location at X plus the sizes of the Ethernet
+bytes, or <code>SIZE_ETHERNET</code>).  <code>sniff_tcp</code> is after both <code>sniff_ip</code> and
+<code>sniff_ethernet</code>, so it is location at X plus the sizes of the Ethernet
 and IP headers (14 bytes, and 4 times the IP header length,
 respectively).  Lastly, the payload (which doesn't have a single
 structure corresponding to it, as its contents depends on the protocol
@@ -598,7 +622,12 @@ has been sniffed. It's now the time you have been waiting for: writing a
 useful packet sniffer. Because of the length of the source code, I'm not 
 going to include it in the body of this document. Simply download
 <a href="sniffex.c">sniffex.c</a> and try it out.
-<h2>Wrapping Up</h2>
+        </div>
+      </div>
+
+      <div class="post">
+        <h2 class="title">Wrapping Up</h2>
+        <div class="entry">
 <p>At this point you should be able to write a 
 sniffer using pcap. You have learned the basic concepts behind opening a 
 pcap session, learning general attributes about it, sniffing packets, applying 
@@ -615,4 +644,5 @@ conditions.
 promote products derived from this document without specific prior written 
 permission.</ol>
 /* Insert 'wh00t' for the BSD license here */
+        </div>
       </div>
