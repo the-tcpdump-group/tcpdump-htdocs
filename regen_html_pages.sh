@@ -127,13 +127,13 @@ print_html_page()
 	esac
 
 	cat <<ENDOFTEXT
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <!--
 Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
 Original design  : "Collaboration" by Free CSS Templates (later "TEMPLATED")
 Original license : Creative Commons Attribution 2.5 License
 -->
-<html>
+<html lang="en">
 
     <!-- HEAD -->
 ENDOFTEXT
