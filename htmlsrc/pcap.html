@@ -63,16 +63,16 @@ for setting the device that we wish to sniff on.
 <p>The first is that we can 
 simply have the user tell us. Consider the following program:
 <pre>
-	#include &lt;stdio.h&gt;
-	#include &lt;pcap.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;pcap.h&gt;
 
-	int main(int argc, char *argv[])
-	{
-		 char *dev = argv[1];
+int main(int argc, char *argv[])
+{
+	char *dev = argv[1];
 
-		 printf(&quot;Device: %s\n&quot;, dev);
-		 return(0);
-	}
+	printf(&quot;Device: %s\n&quot;, dev);
+	return(0);
+}
 </pre>
 <p>The user specifies the device by passing the name of it as the first argument to 
 the program. Now the string <code>dev</code> holds the name of the interface that we
@@ -81,21 +81,21 @@ user gave us a real interface).
 <p>The other technique is 
 equally simple. Look at this program:
 <pre>
-	#include &lt;stdio.h&gt;
-	#include &lt;pcap.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;pcap.h&gt;
 
-	int main(int argc, char *argv[])
-	{
-		char *dev, errbuf[PCAP_ERRBUF_SIZE];
+int main(int argc, char *argv[])
+{
+	char *dev, errbuf[PCAP_ERRBUF_SIZE];
 
-		dev = pcap_lookupdev(errbuf);
-		if (dev == NULL) {
-			fprintf(stderr, &quot;Couldn't find default device: %s\n&quot;, errbuf);
-			return(2);
-		}
-		printf(&quot;Device: %s\n&quot;, dev);
-		return(0);
+	dev = pcap_lookupdev(errbuf);
+	if (dev == NULL) {
+		fprintf(stderr, &quot;Couldn't find default device: %s\n&quot;, errbuf);
+		return(2);
 	}
+	printf(&quot;Device: %s\n&quot;, dev);
+	return(0);
+}
 </pre>
 <p>In this case, pcap just sets the device on its own. &quot;But wait, Tim,&quot; you 
 say. &quot;What is the deal with the <code>errbuf</code> string?&quot; Most of the pcap
@@ -114,8 +114,8 @@ And that's how we set our device.
 simple. For this, we use <code>pcap_open_live()</code>. The prototype of this
 function (from the <a href="manpages/pcap_open_live.3pcap.html">man page</a>) is as follows:
 <pre>
-	pcap_t *pcap_open_live(char *device, int snaplen, int promisc, int to_ms,
-	    char *ebuf)
+pcap_t *pcap_open_live(char *device, int snaplen, int promisc, int to_ms,
+    char *ebuf)
 </pre>
 <p>The first argument is the device that we specified in the previous
 section.  <code>snaplen</code> is an integer which defines the maximum number of
@@ -130,18 +130,19 @@ string we can store any error messages within (as we did above with
 <code>errbuf</code>).  The function returns our session handler.
 <p>To demonstrate, consider this code snippet:
 <pre>
-	 #include &lt;pcap.h&gt;
-	 ...
-	 pcap_t *handle;
+#include &lt;pcap.h&gt;
+...
+pcap_t *handle;
 
-	 handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
-	 if (handle == NULL) {
-		 fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, dev, errbuf);
-		 return(2);
-	 }
+handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
+if (handle == NULL) {
+	fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, dev, errbuf);
+	return(2);
+}
 </pre>
-<p>This code fragment opens the device stored in the strong <code>dev</code>, tells it to
-read however many bytes are specified in <code>BUFSIZ</code> (which is defined in <code>pcap.h</code>).
+<p>This code fragment opens the device stored in the string <code>dev</code>, tells it to
+read however many bytes are specified in <code>BUFSIZ</code> (which is usually defined in
+<code>/usr/include/stdio.h</code> via <code>pcap.h</code>).
 We are telling it to put the device into promiscuous mode, to sniff until an 
 error occurs, and if there is an error, store it in the string <code>errbuf</code>; it
 uses that string to print an error message.
@@ -177,10 +178,10 @@ values in that list.
 <p>If your program doesn't support the link-layer header type provided
 by the device, it has to give up; this would be done with code such as
 <pre>
-	if (pcap_datalink(handle) != DLT_EN10MB) {
-		fprintf(stderr, &quot;Device %s doesn't provide Ethernet headers - not supported\n&quot;, dev);
-		return(2);
-	}
+if (pcap_datalink(handle) != DLT_EN10MB) {
+	fprintf(stderr, &quot;Device %s doesn't provide Ethernet headers - not supported\n&quot;, dev);
+	return(2);
+}
 </pre>
 <p>which fails if the device doesn't supply Ethernet headers.  This
 would be appropriate for the code below, as it assumes Ethernet headers.
@@ -214,8 +215,8 @@ examples.
 <p>To compile the program we call <code>pcap_compile()</code>. The
 prototype defines it as:
 <pre>
-	int pcap_compile(pcap_t *p, struct bpf_program *fp, char *str, int optimize, 
-	    bpf_u_int32 netmask)
+int pcap_compile(pcap_t *p, struct bpf_program *fp, char *str, int optimize,
+    bpf_u_int32 netmask)
 </pre>
 <p>The first argument is our session handle (<code>pcap_t *handle</code> in our
 previous example).  Following that is a reference to the place we will
@@ -230,7 +231,7 @@ other values imply success.
 it. Enter <code>pcap_setfilter()</code>. Following our format of explaining pcap,
 we shall look at the <code>pcap_setfilter()</code> prototype:
 <pre>
-	int pcap_setfilter(pcap_t *p, struct bpf_program *fp)
+int pcap_setfilter(pcap_t *p, struct bpf_program *fp)
 </pre>
 <p>This is very straightforward. The first argument is our session handler, 
 the second is a reference to the compiled version of the expression (presumably 
@@ -238,34 +239,34 @@ the same variable as the second argument to <code>pcap_compile()</code>).
 
 <p>Perhaps another code sample would help to better understand:
 <pre>
-	 #include &lt;pcap.h&gt;
-	 ...
-	 pcap_t *handle;		/* Session handle */
-	 char dev[] = &quot;rl0&quot;;		/* Device to sniff on */
-	 char errbuf[PCAP_ERRBUF_SIZE];	/* Error string */
-	 struct bpf_program fp;		/* The compiled filter expression */
-	 char filter_exp[] = &quot;port 23&quot;;	/* The filter expression */
-	 bpf_u_int32 mask;		/* The netmask of our sniffing device */
-	 bpf_u_int32 net;		/* The IP of our sniffing device */
+#include &lt;pcap.h&gt;
+...
+pcap_t *handle;		/* Session handle */
+char dev[] = &quot;rl0&quot;;		/* Device to sniff on */
+char errbuf[PCAP_ERRBUF_SIZE];	/* Error string */
+struct bpf_program fp;		/* The compiled filter expression */
+char filter_exp[] = &quot;port 23&quot;;	/* The filter expression */
+bpf_u_int32 mask;		/* The netmask of our sniffing device */
+bpf_u_int32 net;		/* The IP of our sniffing device */
 
-	 if (pcap_lookupnet(dev, &amp;net, &amp;mask, errbuf) == -1) {
-		 fprintf(stderr, &quot;Can't get netmask for device %s\n&quot;, dev);
-		 net = 0;
-		 mask = 0;
-	 }
-	 handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
-	 if (handle == NULL) {
-		 fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, dev, errbuf);
-		 return(2);
-	 }
-	 if (pcap_compile(handle, &amp;fp, filter_exp, 0, net) == -1) {
-		 fprintf(stderr, &quot;Couldn't parse filter %s: %s\n&quot;, filter_exp, pcap_geterr(handle));
-		 return(2);
-	 }
-	 if (pcap_setfilter(handle, &amp;fp) == -1) {
-		 fprintf(stderr, &quot;Couldn't install filter %s: %s\n&quot;, filter_exp, pcap_geterr(handle));
-		 return(2);
-	 }
+if (pcap_lookupnet(dev, &amp;net, &amp;mask, errbuf) == -1) {
+	fprintf(stderr, &quot;Can't get netmask for device %s\n&quot;, dev);
+	net = 0;
+	mask = 0;
+}
+handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
+if (handle == NULL) {
+	fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, dev, errbuf);
+	return(2);
+}
+if (pcap_compile(handle, &amp;fp, filter_exp, 0, net) == -1) {
+	fprintf(stderr, &quot;Couldn't parse filter %s: %s\n&quot;, filter_exp, pcap_geterr(handle));
+	return(2);
+}
+if (pcap_setfilter(handle, &amp;fp) == -1) {
+	fprintf(stderr, &quot;Couldn't install filter %s: %s\n&quot;, filter_exp, pcap_geterr(handle));
+	return(2);
+}
 </pre>
 <p>This program preps the sniffer to sniff all traffic coming from or going to port 
 23, in promiscuous mode, on the device rl0.
@@ -301,12 +302,12 @@ of using loops.  For this we use <code>pcap_next()</code>.
 
 <p>The prototype for <code>pcap_next()</code> is fairly simple:
 <pre>
-	u_char *pcap_next(pcap_t *p, struct pcap_pkthdr *h)
+u_char *pcap_next(pcap_t *p, struct pcap_pkthdr *h)
 </pre>
 <p>The first argument is our session handler. The second argument is a 
 pointer to a structure that holds general information about the packet, 
 specifically the time in which it was sniffed, the length of this packet, and 
-the length of his specific portion (in case it is fragmented, for example.) 
+the length of this specific portion (in case it is fragmented, for example).
 <code>pcap_next()</code> returns a <code>u_char</code> pointer to the packet that is described by this
 structure. We'll discuss the technique for actually reading the packet 
 itself later.
@@ -314,56 +315,56 @@ itself later.
 <p>Here is a simple demonstration of using <code>pcap_next()</code> to sniff a
 packet.
 <pre>
-	 #include &lt;pcap.h&gt;
-	 #include &lt;stdio.h&gt;
+#include &lt;pcap.h&gt;
+#include &lt;stdio.h&gt;
 
-	 int main(int argc, char *argv[])
-	 {
-		pcap_t *handle;			/* Session handle */
-		char *dev;			/* The device to sniff on */
-		char errbuf[PCAP_ERRBUF_SIZE];	/* Error string */
-		struct bpf_program fp;		/* The compiled filter */
-		char filter_exp[] = &quot;port 23&quot;;	/* The filter expression */
-		bpf_u_int32 mask;		/* Our netmask */
-		bpf_u_int32 net;		/* Our IP */
-		struct pcap_pkthdr header;	/* The header that pcap gives us */
-		const u_char *packet;		/* The actual packet */
+int main(int argc, char *argv[])
+{
+	pcap_t *handle;			/* Session handle */
+	char *dev;			/* The device to sniff on */
+	char errbuf[PCAP_ERRBUF_SIZE];	/* Error string */
+	struct bpf_program fp;		/* The compiled filter */
+	char filter_exp[] = &quot;port 23&quot;;	/* The filter expression */
+	bpf_u_int32 mask;		/* Our netmask */
+	bpf_u_int32 net;		/* Our IP */
+	struct pcap_pkthdr header;	/* The header that pcap gives us */
+	const u_char *packet;		/* The actual packet */
 
-		/* Define the device */
-		dev = pcap_lookupdev(errbuf);
-		if (dev == NULL) {
-			fprintf(stderr, &quot;Couldn't find default device: %s\n&quot;, errbuf);
-			return(2);
-		}
-		/* Find the properties for the device */
-		if (pcap_lookupnet(dev, &amp;net, &amp;mask, errbuf) == -1) {
-			fprintf(stderr, &quot;Couldn't get netmask for device %s: %s\n&quot;, dev, errbuf);
-			net = 0;
-			mask = 0;
-		}
-		/* Open the session in promiscuous mode */
-		handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
-		if (handle == NULL) {
-			fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, dev, errbuf);
-			return(2);
-		}
-		/* Compile and apply the filter */
-		if (pcap_compile(handle, &amp;fp, filter_exp, 0, net) == -1) {
-			fprintf(stderr, &quot;Couldn't parse filter %s: %s\n&quot;, filter_exp, pcap_geterr(handle));
-			return(2);
-		}
-		if (pcap_setfilter(handle, &amp;fp) == -1) {
-			fprintf(stderr, &quot;Couldn't install filter %s: %s\n&quot;, filter_exp, pcap_geterr(handle));
-			return(2);
-		}
-		/* Grab a packet */
-		packet = pcap_next(handle, &amp;header);
-		/* Print its length */
-		printf(&quot;Jacked a packet with length of [%d]\n&quot;, header.len);
-		/* And close the session */
-		pcap_close(handle);
-		return(0);
-	 }
+	/* Define the device */
+	dev = pcap_lookupdev(errbuf);
+	if (dev == NULL) {
+		fprintf(stderr, &quot;Couldn't find default device: %s\n&quot;, errbuf);
+		return(2);
+	}
+	/* Find the properties for the device */
+	if (pcap_lookupnet(dev, &amp;net, &amp;mask, errbuf) == -1) {
+		fprintf(stderr, &quot;Couldn't get netmask for device %s: %s\n&quot;, dev, errbuf);
+		net = 0;
+		mask = 0;
+	}
+	/* Open the session in promiscuous mode */
+	handle = pcap_open_live(dev, BUFSIZ, 1, 1000, errbuf);
+	if (handle == NULL) {
+		fprintf(stderr, &quot;Couldn't open device %s: %s\n&quot;, dev, errbuf);
+		return(2);
+	}
+	/* Compile and apply the filter */
+	if (pcap_compile(handle, &amp;fp, filter_exp, 0, net) == -1) {
+		fprintf(stderr, &quot;Couldn't parse filter %s: %s\n&quot;, filter_exp, pcap_geterr(handle));
+		return(2);
+	}
+	if (pcap_setfilter(handle, &amp;fp) == -1) {
+		fprintf(stderr, &quot;Couldn't install filter %s: %s\n&quot;, filter_exp, pcap_geterr(handle));
+		return(2);
+	}
+	/* Grab a packet */
+	packet = pcap_next(handle, &amp;header);
+	/* Print its length */
+	printf(&quot;Jacked a packet with length of [%d]\n&quot;, header.len);
+	/* And close the session */
+	pcap_close(handle);
+	return(0);
+}
 </pre>
 <p>This application sniffs on whatever device is returned by <code>pcap_lookupdev()</code> by
 putting it into promiscuous mode. It finds the first packet to come across 
@@ -395,7 +396,7 @@ our filter requirements (if any filter exists, of course.  If not, then
 
 <p>The prototype for <code>pcap_loop()</code> is below:
 <pre>
-	int pcap_loop(pcap_t *p, int cnt, pcap_handler callback, u_char *user)
+int pcap_loop(pcap_t *p, int cnt, pcap_handler callback, u_char *user)
 </pre>
 <p>The first argument is our session handle.  Following that is an
 integer that tells <code>pcap_loop()</code> how many packets it should sniff for
@@ -423,8 +424,8 @@ cannot arbitrarily define our callback's prototype; otherwise, <code>pcap_loop()
 not know how to use the function. So we use this format as the prototype 
 for our callback function:
 <pre>
-	void got_packet(u_char *args, const struct pcap_pkthdr *header,
-	    const u_char *packet);
+void got_packet(u_char *args, const struct pcap_pkthdr *header,
+    const u_char *packet);
 </pre>
 <p>Let's examine this in more detail. First, you'll notice that the function 
 has a <code>void</code> return type. This is logical, because <code>pcap_loop()</code> wouldn't know
@@ -435,11 +436,11 @@ every time the function is called. The second argument is the pcap header,
 which contains information about when the packet was sniffed, how large it is, 
 etc. The <code>pcap_pkthdr</code> structure is defined in <code>pcap.h</code> as:
 <pre>
-	struct pcap_pkthdr {
-		struct timeval ts; /* time stamp */
-		bpf_u_int32 caplen; /* length of portion present */
-		bpf_u_int32 len; /* length this packet (off wire) */
-	};
+struct pcap_pkthdr {
+	struct timeval ts; /* time stamp */
+	bpf_u_int32 caplen; /* length of portion present */
+	bpf_u_int32 len; /* length this packet (off wire) */
+};
 </pre>
 <p>These values should be fairly self explanatory.  The last argument is
 the most interesting of them all, and the most confusing to the average
@@ -456,61 +457,61 @@ an IP header, a TCP header, and lastly, the packet's payload).  This
 make any use of it, we must do some interesting typecasting.
 
 <p>First, we must have the actual structures 
-define before we can typecast to them. The following are the structure 
+defined before we can typecast to them. The following are the structure
 definitions that I use to describe a TCP/IP packet over Ethernet.
 <pre>
 /* Ethernet addresses are 6 bytes */
 #define ETHER_ADDR_LEN	6
 
-	/* Ethernet header */
-	struct sniff_ethernet {
-		u_char ether_dhost[ETHER_ADDR_LEN]; /* Destination host address */
-		u_char ether_shost[ETHER_ADDR_LEN]; /* Source host address */
-		u_short ether_type; /* IP? ARP? RARP? etc */
-	};
+/* Ethernet header */
+struct sniff_ethernet {
+	u_char ether_dhost[ETHER_ADDR_LEN]; /* Destination host address */
+	u_char ether_shost[ETHER_ADDR_LEN]; /* Source host address */
+	u_short ether_type; /* IP? ARP? RARP? etc */
+};
 
-	/* IP header */
-	struct sniff_ip {
-		u_char ip_vhl;		/* version &lt;&lt; 4 | header length &gt;&gt; 2 */
-		u_char ip_tos;		/* type of service */
-		u_short ip_len;		/* total length */
-		u_short ip_id;		/* identification */
-		u_short ip_off;		/* fragment offset field */
-	#define IP_RF 0x8000		/* reserved fragment flag */
-	#define IP_DF 0x4000		/* don't fragment flag */
-	#define IP_MF 0x2000		/* more fragments flag */
-	#define IP_OFFMASK 0x1fff	/* mask for fragmenting bits */
-		u_char ip_ttl;		/* time to live */
-		u_char ip_p;		/* protocol */
-		u_short ip_sum;		/* checksum */
-		struct in_addr ip_src,ip_dst; /* source and dest address */
-	};
-	#define IP_HL(ip)		(((ip)-&gt;ip_vhl) &amp; 0x0f)
-	#define IP_V(ip)		(((ip)-&gt;ip_vhl) &gt;&gt; 4)
+/* IP header */
+struct sniff_ip {
+	u_char ip_vhl;		/* version &lt;&lt; 4 | header length &gt;&gt; 2 */
+	u_char ip_tos;		/* type of service */
+	u_short ip_len;		/* total length */
+	u_short ip_id;		/* identification */
+	u_short ip_off;		/* fragment offset field */
+#define IP_RF 0x8000		/* reserved fragment flag */
+#define IP_DF 0x4000		/* don't fragment flag */
+#define IP_MF 0x2000		/* more fragments flag */
+#define IP_OFFMASK 0x1fff	/* mask for fragmenting bits */
+	u_char ip_ttl;		/* time to live */
+	u_char ip_p;		/* protocol */
+	u_short ip_sum;		/* checksum */
+	struct in_addr ip_src,ip_dst; /* source and dest address */
+};
+#define IP_HL(ip)		(((ip)-&gt;ip_vhl) &amp; 0x0f)
+#define IP_V(ip)		(((ip)-&gt;ip_vhl) &gt;&gt; 4)
 
-	/* TCP header */
-	typedef u_int tcp_seq;
+/* TCP header */
+typedef u_int tcp_seq;
 
-	struct sniff_tcp {
-		u_short th_sport;	/* source port */
-		u_short th_dport;	/* destination port */
-		tcp_seq th_seq;		/* sequence number */
-		tcp_seq th_ack;		/* acknowledgement number */
-		u_char th_offx2;	/* data offset, rsvd */
-	#define TH_OFF(th)	(((th)-&gt;th_offx2 &amp; 0xf0) &gt; 4)
-		u_char th_flags;
-	#define TH_FIN 0x01
-	#define TH_SYN 0x02
-	#define TH_RST 0x04
-	#define TH_PUSH 0x08
-	#define TH_ACK 0x10
-	#define TH_URG 0x20
-	#define TH_ECE 0x40
-	#define TH_CWR 0x80
-	#define TH_FLAGS (TH_FIN|TH_SYN|TH_RST|TH_ACK|TH_URG|TH_ECE|TH_CWR)
-		u_short th_win;		/* window */
-		u_short th_sum;		/* checksum */
-		u_short th_urp;		/* urgent pointer */
+struct sniff_tcp {
+	u_short th_sport;	/* source port */
+	u_short th_dport;	/* destination port */
+	tcp_seq th_seq;		/* sequence number */
+	tcp_seq th_ack;		/* acknowledgement number */
+	u_char th_offx2;	/* data offset, rsvd */
+#define TH_OFF(th)	(((th)-&gt;th_offx2 &amp; 0xf0) &gt; 4)
+	u_char th_flags;
+#define TH_FIN 0x01
+#define TH_SYN 0x02
+#define TH_RST 0x04
+#define TH_PUSH 0x08
+#define TH_ACK 0x10
+#define TH_URG 0x20
+#define TH_ECE 0x40
+#define TH_CWR 0x80
+#define TH_FLAGS (TH_FIN|TH_SYN|TH_RST|TH_ACK|TH_URG|TH_ECE|TH_CWR)
+	u_short th_win;		/* window */
+	u_short th_sum;		/* checksum */
+	u_short th_urp;		/* urgent pointer */
 };
 </pre>
 
@@ -530,31 +531,31 @@ deconstruct the packet data.
 /* ethernet headers are always exactly 14 bytes */
 #define SIZE_ETHERNET 14
 
-	const struct sniff_ethernet *ethernet; /* The ethernet header */
-	const struct sniff_ip *ip; /* The IP header */
-	const struct sniff_tcp *tcp; /* The TCP header */
-	const char *payload; /* Packet payload */
+const struct sniff_ethernet *ethernet; /* The ethernet header */
+const struct sniff_ip *ip; /* The IP header */
+const struct sniff_tcp *tcp; /* The TCP header */
+const char *payload; /* Packet payload */
 
-	u_int size_ip;
-	u_int size_tcp;
+u_int size_ip;
+u_int size_tcp;
 </pre><p>
 
 <p>And now we do our magical typecasting:
 <pre>
-	ethernet = (struct sniff_ethernet*)(packet);
-	ip = (struct sniff_ip*)(packet + SIZE_ETHERNET);
-	size_ip = IP_HL(ip)*4;
-	if (size_ip &lt; 20) {
-		printf("   * Invalid IP header length: %u bytes\n", size_ip);
-		return;
-	}
-	tcp = (struct sniff_tcp*)(packet + SIZE_ETHERNET + size_ip);
-	size_tcp = TH_OFF(tcp)*4;
-	if (size_tcp &lt; 20) {
-		printf("   * Invalid TCP header length: %u bytes\n", size_tcp);
-		return;
-	}
-	payload = (u_char *)(packet + SIZE_ETHERNET + size_ip + size_tcp);
+ethernet = (struct sniff_ethernet*)(packet);
+ip = (struct sniff_ip*)(packet + SIZE_ETHERNET);
+size_ip = IP_HL(ip)*4;
+if (size_ip &lt; 20) {
+	printf("   * Invalid IP header length: %u bytes\n", size_ip);
+	return;
+}
+tcp = (struct sniff_tcp*)(packet + SIZE_ETHERNET + size_ip);
+size_tcp = TH_OFF(tcp)*4;
+if (size_tcp &lt; 20) {
+	printf("   * Invalid TCP header length: %u bytes\n", size_tcp);
+	return;
+}
+payload = (u_char *)(packet + SIZE_ETHERNET + size_ip + size_tcp);
 </pre>
 
 <p>How does this work? Consider the layout of the packet data in memory. 
