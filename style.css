@@ -126,10 +126,7 @@ hr {
 	letter-spacing: -1px;
 	border-bottom: 1px dashed #B9B9B9;
 	text-transform: uppercase;
-}
-
-.post .title a {
-	text-decoration: none;
+	color: #414141;
 }
 
 .post .subtitle {
