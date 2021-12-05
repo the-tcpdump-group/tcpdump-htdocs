@@ -39,8 +39,8 @@
                     <div class="entry">
                         <p>
                         <span class=initial>A:</span>
-                        You need to install <tt>flex</tt>. AT&amp;T
-                        <tt>lex</tt> has some parameter set
+                        You need to install <code>flex</code>. AT&amp;T
+                        <code>lex</code> has some parameter set
                         too low. See <a href="https://web.archive.org/web/20010129094200/http://www.tcpdump.org:80/lists/workers/2000/msg00404.html">
                         the thread</a> <a href="https://web.archive.org/web/20010126233700/http://www.tcpdump.org/lists/workers/2000/msg00677.html">
                         summmary</a>
@@ -66,7 +66,7 @@
 
                         <p>
                         <span class=initial>A:</span>
-                        Run it with <tt>-S</tt>.  Otherwise, tcpdump keeps track of all the
+                        Run it with <code>-S</code>.  Otherwise, tcpdump keeps track of all the
                         connections it has seen so it can generate relative sequence numbers
                         rather than absolute sequence numbers.  This looks like a leak, but is
                         in fact just state accumulation.
@@ -166,7 +166,7 @@
                                 Most network interfaces can also be put in "promiscuous" mode, in which
                                 they supply to the host all network packets they see.  Tcpdump will try
                                 to put the interface on which it's capturing into promiscuous mode
-                                unless the <tt>-p</tt> option was specified.  However, some network
+                                unless the <code>-p</code> option was specified.  However, some network
                                 interfaces don't support promiscuous mode, and some OSes might not allow
                                 interfaces to be put into promiscuous mode.
                             </p>
@@ -304,7 +304,7 @@
                                 the form of promiscuous mode that libpcap (the library that
                                 programs such as tcpdump use to do packet capture)
                                 turns on will <strong>not</strong> necessarily be shown if you run
-                                <tt>ifconfig</tt> on the interface on a UNIX system;
+                                <code>ifconfig</code> on the interface on a UNIX system;
                             </li>
 
 
@@ -415,7 +415,7 @@
                         </p>
 
                         <p>
-                            The Linux kernel must be configured with the <tt>CONFIG_X86_TSC</tt> option
+                            The Linux kernel must be configured with the <code>CONFIG_X86_TSC</code> option
                             enabled in order to use the TSC.  Make sure this option is enabled in
                             your kernel.
                         </p>
@@ -469,23 +469,23 @@
                             <span class=initial>A:</span>
                             All man pages for libpcap, tcpdump and tcpslice come from the same git
                             repository as the software they document. Most man pages are stored in
-                            their original format (e.g. <tt>pcap-config.1</tt>,
-                            <tt>pcap_strerror.3pcap</tt>,
-                            <tt>tcpslice.1</tt>). Some man pages depend on
+                            their original format (e.g. <code>pcap-config.1</code>,
+                            <code>pcap_strerror.3pcap</code>,
+                            <code>tcpslice.1</code>). Some man pages depend on
                             particulars handled by a build system. In such case there is a
-                            corresponding source <tt>.in</tt> file in the
+                            corresponding source <code>.in</code> file in the
                             repository, which the build system converts to an output file in the
                             working copy (with GNU Autoconf this can be done again later by
-                            running <tt>./config.status</tt>), e.g:
+                            running <code>./config.status</code>), e.g:
                         </p>
 
                         <ul>
-                            <li><tt>tcpdump.1.in</tt> &rarr;
-                                <tt>tcpdump.1</tt></li>
-                            <li><tt>pcap-filter.manmisc.in</tt> &rarr;
-                                <tt>pcap-filter.manmisc</tt></li>
-                            <li><tt>pcap_dump_open.3pcap.in</tt> &rarr;
-                                <tt>pcap_dump_open.3pcap</tt></li>
+                            <li><code>tcpdump.1.in</code> &rarr;
+                                <code>tcpdump.1</code></li>
+                            <li><code>pcap-filter.manmisc.in</code> &rarr;
+                                <code>pcap-filter.manmisc</code></li>
+                            <li><code>pcap_dump_open.3pcap.in</code> &rarr;
+                                <code>pcap_dump_open.3pcap</code></li>
                         </ul>
 
                         <p>
@@ -556,12 +556,12 @@ Example e-mail is \%nobody@example.org.
                             <span class=initial>A:</span>
                             This may be possible under certain conditions.  First of all, the
                             network protocol of interest must be one of the protocols supported by
-                            the <tt>-T</tt> flag of tcpdump.  You can find the complete list in the
+                            the <code>-T</code> flag of tcpdump.  You can find the complete list in the
                             <a href="manpages/tcpdump.1.html">man page</a> (most of these protocols
                             are UDP-based).
                         </p>
                         <p>
-                            If the protocol is supported, keep in mind that using <tt>-T type</tt>
+                            If the protocol is supported, keep in mind that using <code>-T type</code>
                             will usually override the protocol detection for many unrelated packets
                             as well.  For the best results you would need to apply a packet filter
                             to leave only the correct packets in scope.  For example, to decode

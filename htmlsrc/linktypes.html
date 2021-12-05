@@ -6,14 +6,14 @@
             <div class="entry">
 <p>
 This is a list of link-layer header types used in pcap and pcap-ng
-capture files.  The <tt>LINKTYPE_</tt> name is the name given to that
-link-layer header type, and the <tt>LINKTYPE_</tt> value is the numerical
-value used in capture files.  The <tt>DLT_</tt> name is the name
+capture files.  The <code>LINKTYPE_</code> name is the name given to that
+link-layer header type, and the <code>LINKTYPE_</code> value is the numerical
+value used in capture files.  The <code>DLT_</code> name is the name
 corresponding to the value returned by
-<a href="manpages/pcap_datalink.3pcap.html"><tt>pcap_datalink()</tt></a>
-and <tt>pcap_datalink_ex()</tt>; in most cases, the <tt>LINKTYPE_</tt>
-value and <tt>DLT_</tt> value are the same, but, in some cases, they differ,
-for reasons of binary compatibility, with the <tt>DLT_</tt> value being
+<a href="manpages/pcap_datalink.3pcap.html"><code>pcap_datalink()</code></a>
+and <code>pcap_datalink_ex()</code>; in most cases, the <code>LINKTYPE_</code>
+value and <code>DLT_</code> value are the same, but, in some cases, they differ,
+for reasons of binary compatibility, with the <code>DLT_</code> value being
 different on different platforms.
 </p>
 <p>
@@ -96,9 +96,9 @@ link-layer header type for them.
             <div class="entry">
               <table class=linktypedlt>
                 <tr>
-                  <th><tt>LINKTYPE_</tt> name</th>
-                  <th><tt>LINKTYPE_</tt> value</th>
-                  <th>Corresponding <tt>DLT_</tt> name</th>
+                  <th><code>LINKTYPE_</code> name</th>
+                  <th><code>LINKTYPE_</code> value</th>
+                  <th>Corresponding <code>DLT_</code> name</th>
                   <th>Description</th>
                 </tr>
 
@@ -108,10 +108,10 @@ link-layer header type for them.
 <td class="symbol">DLT_NULL</td>
 <td>
 BSD loopback encapsulation; the link layer header is a 4-byte field, in
-host byte order, containing a value of <tt>2</tt> for IPv4 packets, a
-value of either <tt>24</tt>, <tt>28</tt>, or <tt>30</tt> for IPv6 packets,
-a value of<tt>7</tt> for OSI packets, or
-a value of <tt>23</tt> for IPX packets.  All of the IPv6 values correspond to
+host byte order, containing a value of <code>2</code> for IPv4 packets, a
+value of either <code>24</code>, <code>28</code>, or <code>30</code> for IPv6 packets,
+a value of<code>7</code> for OSI packets, or
+a value of <code>23</code> for IPX packets.  All of the IPv6 values correspond to
 IPv6 packets; code reading files should check for all of them.
 <p>Note that ``host byte order'' is the byte order of the machine on
 which the packets are captured; if a live capture is being done, ``host
@@ -127,8 +127,8 @@ of the machine reading the capture file.
 <td class="symbol">DLT_EN10MB</td>
 <td>
 <a href="https://ieeexplore.ieee.org/document/7428776/">IEEE
-802.3</a> Ethernet (10Mb, 100Mb, 1000Mb, and up); the <tt>10MB</tt> in the
-<tt>DLT_</tt> name is historical.
+802.3</a> Ethernet (10Mb, 100Mb, 1000Mb, and up); the <code>10MB</code> in the
+<code>DLT_</code> name is historical.
 </td>
 </tr>
 
@@ -147,8 +147,8 @@ with nothing preceding it.
 <td class="number">6</td>
 <td class="symbol">DLT_IEEE802</td>
 <td>
-IEEE 802.5 Token Ring; the <tt>IEEE802</tt>, without <tt>_5</tt>,
-in the <tt>DLT_</tt> name is historical.
+IEEE 802.5 Token Ring; the <code>IEEE802</code>, without <code>_5</code>,
+in the <code>DLT_</code> name is historical.
 </td>
 </tr>
 
@@ -189,7 +189,7 @@ PPP, as per
 <a href="https://tools.ietf.org/html/rfc1661">RFC 1661</a>
 and
 <a href="https://tools.ietf.org/html/rfc1662">RFC 1662</a>; if
-the first 2 bytes are <tt>0xff</tt> and <tt>0x03</tt>, it's PPP in HDLC-like
+the first 2 bytes are <code>0xff</code> and <code>0x03</code>, it's PPP in HDLC-like
 framing, with the PPP header following those two bytes, otherwise it's
 PPP without framing, and the packet begins with the PPP header.  The
 data in the frame is not octet-stuffed or bit-stuffed.
@@ -214,8 +214,8 @@ PPP in HDLC-like framing, as per
 <a href="https://tools.ietf.org/html/rfc1662"> RFC 1662</a>,
 or Cisco PPP with HDLC
 framing, as per <a href="https://tools.ietf.org/html/rfc1547#section-4.3.1">
-section 4.3.1 of RFC 1547</a>; the first byte will be <tt>0xFF</tt>
-for PPP in HDLC-like framing, and will be <tt>0x0F</tt> or <tt>0x8F</tt> for Cisco PPP
+section 4.3.1 of RFC 1547</a>; the first byte will be <code>0xFF</code>
+for PPP in HDLC-like framing, and will be <code>0x0F</code> or <code>0x8F</code> for Cisco PPP
 with HDLC framing.  The data in the frame is not octet-stuffed or
 bit-stuffed.
 </td>
@@ -249,7 +249,7 @@ LLC/SNAP-encapsulated ATM; the packet begins with an
 <td class="symbol">DLT_RAW</td>
 <td>
 Raw IP; the packet begins with an IPv4 or IPv6 header, with the
-<tt>version</tt> field of the header indicating whether it's an IPv4 or IPv6
+<code>version</code> field of the header indicating whether it's an IPv4 or IPv6
 header.
 </td>
 </tr>
@@ -293,10 +293,10 @@ FCS at the end of the frame.
 <td class="symbol">DLT_LOOP</td>
 <td>
 OpenBSD loopback encapsulation; the link-layer header is a 4-byte field,
-in <em>network</em> byte order, containing a value of <tt>2</tt> for IPv4
-packets, a value of either <tt>24</tt>, <tt>28</tt>, or <tt>30</tt> for
-IPv6 packets, a value of <tt>7</tt> for OSI packets, or a value of
-<tt>23</tt> for IPX packets.  All of the IPv6
+in <em>network</em> byte order, containing a value of <code>2</code> for IPv4
+packets, a value of either <code>24</code>, <code>28</code>, or <code>30</code> for
+IPv6 packets, a value of <code>7</code> for OSI packets, or a value of
+<code>23</code> for IPX packets.  All of the IPv6
 values correspond to IPv6 packets; code reading files should check for
 all of them.
 </td>
@@ -330,7 +330,7 @@ AppleTalk, Second Edition</a>.
 <td class="symbol">DLT_PFLOG</td>
 <td>
 OpenBSD pflog; the link-layer header contains a
-<tt>struct pfloghdr</tt>
+<code>struct pfloghdr</code>
 structure, as defined by the host on which the file was saved.  (This
 differs from operating system to operating system and release to
 release; there is nothing in the file to indicate what the layout of
@@ -355,7 +355,7 @@ information</a> followed by an 802.11 header.
 <td>
 <a href="https://tools.ietf.org/html/rfc2625">RFC 2625</a>
 IP-over-Fibre Channel, with the link-layer header being the
-<tt>Network_Header</tt> as described in that RFC.
+<code>Network_Header</code> as described in that RFC.
 </td>
 </tr>
 
@@ -389,7 +389,7 @@ ARCNET Data Packets, as described by the ARCNET Trade Association
 standard <a href="https://web.archive.org/web/20100414154838/http://www.arcnet.com/resources/ata8781.pdf">ATA
 878.1-1999</a>, but without the Starting Delimiter, Information Length,
 or Frame Check Sequence fields, with only the first ISU of the
-Destination Identifier, and with an extra two-ISU <tt>offset</tt> field
+Destination Identifier, and with an extra two-ISU <code>offset</code> field
 following the Destination Identifier.  For most packet types, ARCNET
 Trade Association draft standard
 <a href="https://web.archive.org/web/20100414154914/http://www.arcnet.com/resources/ata8782.pdf">ATA 878.2</a> is
@@ -479,7 +479,7 @@ earlier specifications for MAC frames.
 <td class="symbol">DLT_LINUX_IRDA</td>
 <td>
 Linux-IrDA packets, with a
-<a href="linktypes/LINKTYPE_LINUX_IRDA.html"><tt>LINKTYPE_LINUX_IRDA</tt>
+<a href="linktypes/LINKTYPE_LINUX_IRDA.html"><code>LINKTYPE_LINUX_IRDA</code>
 header</a>,
 with the payload for IrDA frames beginning with by the IrLAP header as
 defined by
@@ -529,8 +529,8 @@ present, the Data CRC.
 <td class="symbol">DLT_PPP_PPPD</td>
 <td>
 PPP in HDLC-like encapsulation, like LINKTYPE_PPP_HDLC, but with the
-0xff address byte replaced by a direction indication - <tt>0x00</tt>
-for incoming and <tt>0x01</tt> for outgoing.
+0xff address byte replaced by a direction indication - <code>0x00</code>
+for incoming and <code>0x01</code> for outgoing.
 </td>
 </tr>
 
@@ -577,7 +577,7 @@ Recommendation Q.920</a>
 and
 <a href="https://www.itu.int/rec/T-REC-Q.921/en">ITU-T
 Recommendation Q.921</a>, captured via vISDN, with a
-<a href="linktypes/LINKTYPE_LINUX_LAPD.html"><tt>LINKTYPE_LINUX_LAPD</tt>
+<a href="linktypes/LINKTYPE_LINUX_LAPD.html"><code>LINKTYPE_LINUX_LAPD</code>
 header</a>, followed by the Q.921 frame, starting with the address
 field.
 </td>
@@ -617,8 +617,8 @@ Specification.
 <td class="symbol">DLT_USB_LINUX</td>
 <td>
 USB packets, beginning with a Linux USB header, as specified by the
-<tt>struct usbmon_packet</tt> in the
-<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree.
+<code>struct usbmon_packet</code> in the
+<code>Documentation/usb/usbmon.txt</code> file in the Linux source tree.
 Only the first 48 bytes of that header are present.  All fields in the
 header are in host byte order.  When performing a live capture, the
 host byte order is the byte order of the machine on which the packets
@@ -637,7 +637,7 @@ of the pcapng file, as specified by the Section Header Block.
 Per-Packet Information information, as specified by <a
 href="https://web.archive.org/web/20160328114748/http://www.cacetech.com/documents/PPI%20Header%20format%201.0.7.pdf">the
 Per-Packet Information Header Specification</a>,  followed by a packet
-with the <tt>LINKTYPE_</tt> value specified by the <tt>pph_dlt</tt> field of that header.
+with the <code>LINKTYPE_</code> value specified by the <code>pph_dlt</code> field of that header.
 </td>
 </tr>
 
@@ -729,7 +729,7 @@ and
 <a href="https://tools.ietf.org/html/rfc1662">RFC 1662</a>,
 preceded with a one-byte pseudo-header with a zero value meaning
 "received by this host" and a non-zero value meaning "sent by this
-host"; if the first 2 bytes are <tt>0xff</tt> and <tt>0x03</tt>, it's PPP in HDLC-like
+host"; if the first 2 bytes are <code>0xff</code> and <code>0x03</code>, it's PPP in HDLC-like
 framing, with the PPP header following those two bytes, otherwise it's
 PPP without framing, and the packet begins with the PPP header.  The
 data in the frame is not octet-stuffed or bit-stuffed.
@@ -833,8 +833,8 @@ one octet of frame length + reserved bit) preceding the MAC-layer data
 <td class="symbol">DLT_USB_LINUX_MMAPPED</td>
 <td>
 USB packets, beginning with a Linux USB header, as specified by the
-<tt>struct usbmon_packet</tt> in the
-<tt>Documentation/usb/usbmon.txt</tt> file in the Linux source tree.
+<code>struct usbmon_packet</code> in the
+<code>Documentation/usb/usbmon.txt</code> file in the Linux source tree.
 All 64 bytes of the header are present.  All fields in the header are in
 host byte order.  When performing a live capture, the host byte order is
 the byte order of the machine on which the packets are captured.  When
@@ -842,7 +842,7 @@ reading a pcap file, the byte order is the byte order for the file, as
 specified by the file's magic number; when reading a pcapng file, the
 byte order is the byte order for the section of the pcapng file, as
 specified by the Section Header Block.  For isochronous transfers, the
-<tt>ndesc</tt> field specifies the number of isochronous descriptors
+<code>ndesc</code> field specifies the number of isochronous descriptors
 that follow.
 </td>
 </tr>
@@ -852,7 +852,7 @@ that follow.
 <td class="number">224</td>
 <td class="symbol">DLT_FC_2</td>
 <td>
-Fibre Channel FC-2 frames, beginning with a <tt>Frame_Header</tt>.
+Fibre Channel FC-2 frames, beginning with a <code>Frame_Header</code>.
 </td>
 </tr>
 
@@ -862,13 +862,13 @@ Fibre Channel FC-2 frames, beginning with a <tt>Frame_Header</tt>.
 <td class="symbol">DLT_FC_2_WITH_FRAME_DELIMS</td>
 <td>
 Fibre Channel FC-2 frames, beginning an encoding of the SOF, followed by
-a <tt>Frame_Header</tt>, and ending with an encoding of the SOF.
+a <code>Frame_Header</code>, and ending with an encoding of the SOF.
 <p>
 The encodings represent the frame delimiters as 4-byte sequences
 representing the corresponding ordered sets, with K28.5 represented as
-<tt>0xBC</tt>, and the D symbols as the corresponding byte values; for example,
-SOFi2, which is K28.5 - D21.5 - D1.2 - D21.2, is represented as <tt>0xBC
-0xB5 0x55 0x55</tt>.
+<code>0xBC</code>, and the D symbols as the corresponding byte values; for example,
+SOFi2, which is K28.5 - D21.5 - D1.2 - D21.2, is represented as <code>0xBC
+0xB5 0x55 0x55</code>.
 </td>
 </tr>
 
