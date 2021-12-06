@@ -60,6 +60,9 @@ substitute_page_title()
 	season-of-docs)
 		title='Season of Docs | '
 		;;
+	ci)
+		title='Continuous integration | '
+		;;
 	LINKTYPE_*)
 		title="$basename | "
 		;;
@@ -84,6 +87,7 @@ rewrite_URLs()
 			sed 's#<a href="security.html#<a href="../security.html#' |
 			sed 's#<a href="faq.html#<a href="../faq.html#' |
 			sed 's#<a href="manpages/#<a href="../manpages/#' |
+			sed 's#<a href="ci.html#<a href="../ci.html#' |
 			sed 's#<a href="linktypes.html#<a href="../linktypes.html#' |
 			sed 's#<a href="related.html#<a href="../related.html#' |
 			sed 's#<a href="old_releases.html#<a href="../old_releases.html#'
@@ -93,6 +97,7 @@ rewrite_URLs()
 			sed 's#<a href="security.html#<a href="/security.html#' |
 			sed 's#<a href="faq.html#<a href="/faq.html#' |
 			sed 's#<a href="manpages/#<a href="/manpages/#' |
+			sed 's#<a href="ci.html#<a href="/ci.html#' |
 			sed 's#<a href="linktypes.html#<a href="/linktypes.html#' |
 			sed 's#<a href="related.html#<a href="/related.html#' |
 			sed 's#<a href="old_releases.html#<a href="/old_releases.html#'
