@@ -114,15 +114,11 @@ print_html_page()
 		cat "$infile" "$BODY_HEADER"
 		return
 		;;
-	security|faq|index|related|old_releases)
+	index)
 		show_sidebar='yes'
 		;;
-	linktypes|broadcom-switch-tag|marvell-switch-tag|pcap|season-of-docs|LINKTYPE_*)
-		show_sidebar='no'
-		;;
 	*)
-		echo "Internal error: cannot tell if $infile should have sidebar" >&2
-		exit 11
+		show_sidebar='no'
 		;;
 	esac
 
