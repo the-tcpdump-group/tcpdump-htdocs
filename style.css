@@ -140,6 +140,14 @@ hr {
 	padding: 5px 20px;
 }
 
+.post .entry dt {
+	font-weight: bold;
+}
+
+.post .entry dd {
+	margin-bottom: 1em;
+}
+
 .post .initial {
 	font-size: large;
 	font-weight: bold;
