@@ -1,9 +1,0 @@
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-
-iQCVAwUAS5mi9YqHRg3pndX9AQI2+QP8CUvD7lEv7tE4DUUYVuP2YoqGs041sn6K
-hZ6GY5jumZzs5/NHGxPCtagEzG4fqcb7pzJd+Q/5UdcYUd2EJ/u0ZlzswAYHmTzo
-Js1onBedE7mzymlU+NJYoKbK8LDdZgwLFIgnphUFFvcoNvaDQRYJqnzrvSh6z6h0
-SUIVMDyVIvI=
-=BpRA
------END PGP SIGNATURE-----

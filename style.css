@@ -255,6 +255,10 @@ table.byte_array_32 th, table.byte_array_32 td {
 	margin: auto;
 }
 
+#indexlist tr.indexhead {
+	text-align: left;
+}
+
 #indexlist td.indexcolicon {
 	width: 20px;
 }

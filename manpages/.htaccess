@@ -1,1 +1,3 @@
 IndexOptions +SuppressSize +IgnoreClient
+# In this context this symlink is only a distractor.
+IndexIgnore images
