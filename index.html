@@ -85,7 +85,6 @@ Original license : Creative Commons Attribution 2.5 License
               distributions are best to check the
               <a href="wpcap.html">Windows PCAP</a> page for
               references to WinDUMP. What follows are the man pages
-              formatted in HTML (using man2html)
               and some tutorials written by external contributors.
             </p>
             <ul>
@@ -120,9 +119,10 @@ Original license : Creative Commons Attribution 2.5 License
                 <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/README.md">README</a> and
                 <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/INSTALL.md">installation notes</a>.
               </li>
-              <li><a href="pcap.html">Programming with pcap </a> by Tim Carstens.</li>
+              <li><a href="pcap.html">Programming with pcap</a> by Tim Carstens.</li>
 
-              <li><a href="https://sharkfestus.wireshark.org/sharkfest.11/presentations/McCanne-Sharkfest'11_Keynote_Address.pdf">libpcap: An Architecture and Optimization Methodology for Packet Capture</a> Steve McCanne, CTO Riverbed Technology - Sharkfest'11.</li>
+              <li><a href="https://sharkfestus.wireshark.org/sharkfest.11/presentations/McCanne-Sharkfest'11_Keynote_Address.pdf">libpcap: An Architecture and Optimization Methodology for Packet Capture</a>
+                    by Steve McCanne, CTO Riverbed Technology (Sharkfest'11).</li>
 
               <li><a href="https://eecs.wsu.edu/~sshaikot/docs/lbpcap/libpcap-tutorial.pdf">
                     Packet Capture With libpcap and other Low Level
@@ -136,15 +136,15 @@ Original license : Creative Commons Attribution 2.5 License
               </li>
 
               <li><a href="papers/ethereal-tcpdump.pdf">
-                    Tcpdump filters</a>, by Marios Iliofotou.
+                    Tcpdump filters</a> by Marios Iliofotou.
               </li>
 
               <li><a href="http://recursos.aldabaknocking.com/libpcapHakin9LuisMartinGarcia.pdf">
                     Programming with Libpcap - Sniffing the network
-                    from our own application</a> by Luis MartinGarcia.
-                Hakin9 Magazine. Issue 2/2008.
-                [<a href="http://www.programming-pcap.aldabaknocking.com/">Code
-                    Samples</a>]
+                    from our own application</a>
+                by Luis MartinGarcia (Hakin9 Magazine, issue 2/2008).
+                [<a href="http://www.programming-pcap.aldabaknocking.com/">code
+                    samples</a>]
               </li>
 
               <li><a href="https://wizardzines.com/zines/tcpdump/">
@@ -274,38 +274,25 @@ git clone https://github.com/the-tcpdump-group/libpcap
           </h2>
           <div class="entry">
             <p>
-              Bugs and patches are tracked through
-              <a href="https://github.com/the-tcpdump-group/">GitHub</a>.
-              Please submit them using the following resources:
+              Please use
+              <a href="https://github.com/the-tcpdump-group/">GitHub</a>
+              as follows:
             </p>
-            <p>
-              For <b>libpcap</b> (please read the
-              <a href='https://github.com/the-tcpdump-group/libpcap/blob/master/CONTRIBUTING.md'>
-              guidelines for contributing</a> first):
-            </p>
-              <ul>
-                <li>Submit bugs and feature requests on the
-                  <a href="https://github.com/the-tcpdump-group/libpcap/issues">issue tracker</a>.
-                </li>
-                <li>Submit patches by forking the repository at
-                  <a href="https://github.com/the-tcpdump-group/libpcap">GitHub: libpcap</a>
-                  and issuing a pull request.
-                </li>
-              </ul>
-            <p>
-              For <b>tcpdump</b> (please read the
-              <a href='https://github.com/the-tcpdump-group/tcpdump/blob/master/CONTRIBUTING'>
-              guidelines for contributing</a> first):
-            </p>
-              <ul>
-                <li>Submit bugs and feature requests on the
-                  <a href="https://github.com/the-tcpdump-group/tcpdump/issues">issue tracker</a>.
-                </li>
-                <li>Submit patches by forking the repository at
-                  <a href="https://github.com/the-tcpdump-group/tcpdump">GitHub: tcpdump</a>
-                  and issuing a pull request.
-                </li>
-              </ul>
+            <ul>
+              <li>Read the guidelines for contributing
+                (<a href="https://github.com/the-tcpdump-group/tcpdump/blob/master/CONTRIBUTING">tcpdump</a>,
+                <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/CONTRIBUTING.md">libpcap</a>).
+              </li>
+              <li>Submit bug reports and feature requests using the issue tracker
+                (<a href="https://github.com/the-tcpdump-group/tcpdump/issues">tcpdump</a>,
+                <a href="https://github.com/the-tcpdump-group/libpcap/issues">libpcap</a>).
+              </li>
+              <li>Submit patches by forking the repository
+                (<a href="https://github.com/the-tcpdump-group/tcpdump">tcpdump</a>,
+                <a href="https://github.com/the-tcpdump-group/libpcap">libpcap</a>)
+                and opening a pull request.
+              </li>
+            </ul>
           </div>
         </div>
         <!-- End of PATCHES, BUGS, AND FEATURE REQUESTS section -->
@@ -327,7 +314,7 @@ git clone https://github.com/the-tcpdump-group/libpcap
                 and <em>tcpdump</em> on your platform</li>
                 <li>contributing code</li>
                 <li>proofreading the documentation and the man pages</li>
-                <li>providing .pcap files for protocols or protocol
+                <li>providing <code>.pcap</code> files for protocols or protocol
                 features that tcpdump supports, but does not test yet</li>
               </ul>
 
