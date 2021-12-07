@@ -243,6 +243,8 @@ regenerate_page()
 regenerate_pages()
 {
 	for f_in in htmlsrc/[!_]*.html htmlsrc/linktypes/*.html; do
+		# Skip editor backup files.
+		[ "$f_in" != "${f_in#\~}" ] && continue
 		regenerate_page "$f_in" "${f_in#htmlsrc/}"
 	done
 	regenerate_page "$TOP_MENU" autoindex_header.html
