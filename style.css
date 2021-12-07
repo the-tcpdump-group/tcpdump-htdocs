@@ -233,7 +233,30 @@ table.byte_array_8 th:nth-last-child(-n+8), table.byte_array_8 td:nth-last-child
 	width: 12.5%;
 }
 
-img.cibadge {
+table.cidigest {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table.cidigest th {
+	text-align: left;
+	padding-top: 1em;
+}
+
+table.cidigest tr.even {
+	background-color: #f0f0f0;
+}
+
+table.cidigest span.cibadge {
+	background-color: #525252;
+	color: #f9f9f9;
+	padding: 3px 7px;
+	border-radius: 3px;
+	font-size: small;
+	white-space: nowrap;
+}
+
+table.cidigest img.cibadge {
 	vertical-align: middle;
 	margin-top: 1px;
 	margin-bottom: 1px;
