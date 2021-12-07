@@ -15,6 +15,7 @@ Redirect permanent /tcpdump_man.html /manpages/tcpdump.1.html
 Redirect permanent /pcap3_man.html /manpages/pcap.3pcap.html
 Redirect permanent /pcap.htm /pcap.html
 Redirect permanent /tcpdump-workers.asc /release/signing-key.asc
+Redirect permanent /sniffex.c /other/sniffex.c
 
 # removed
 Redirect permanent /mirrors.html /
