@@ -569,6 +569,15 @@ Example e-mail is \%nobody@example.org.
 <pre>
 tcpdump -T radius -nv udp port 21812
 </pre>
+                        <p>
+                            If this approach does not solve the problem, you can consider
+                            <a href="index.html#patches">contributing code</a> to extend tcpdump
+                            or using a different packet analyzer. For example,
+                            <a href="https://mta.openssl.org/pipermail/openssl-users/2017-April/005624.html">this
+                            mailing list post</a> explains how to use <code>tshark</code> to examine
+                            the SSL protocol exchange of an FTPS connection that uses a non-standard
+                            TCP port.
+                        </p>
                     </div>
                 </div>
                 <!-- End of QUESTION #12 section -->
