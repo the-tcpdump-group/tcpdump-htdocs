@@ -32,3 +32,7 @@ Redirect permanent /tcpdump-credits.txt https://git.tcpdump.org/tcpdump/blob/HEA
 <Files "/favicon.ico">
 	ForceType image/png
 </Files>
+
+ExpiresActive On
+ExpiresByType text/css "access plus 1 hour"
+ExpiresByType text/html "access plus 24 hours"
