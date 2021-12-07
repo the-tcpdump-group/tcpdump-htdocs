@@ -253,6 +253,7 @@ table.byte_array_32 th, table.byte_array_32 td {
 #indexlist {
 	width: 960px;
 	margin: auto;
+	border-collapse: collapse;
 }
 
 #indexlist tr.indexhead {
