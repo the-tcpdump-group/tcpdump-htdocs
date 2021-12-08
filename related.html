@@ -9,7 +9,7 @@ Original license : Creative Commons Attribution 2.5 License
     <!-- HEAD -->
     <head>
         <meta charset="utf-8">
-        <title>Related Projects | TCPDUMP/LIBPCAP public repository</title>
+        <title>Related Resources | TCPDUMP/LIBPCAP public repository</title>
         <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
         <meta name="description" content="Web site of Tcpdump and Libpcap">
         <link href="style.css" rel="stylesheet" type="text/css" media="screen">
@@ -29,7 +29,7 @@ Original license : Creative Commons Attribution 2.5 License
                 <li><a href="manpages/">Man Pages</a></li>
                 <li><a href="ci.html">CI</a></li>
                 <li><a href="linktypes.html">Link-Layer Header Types</a></li>
-                <li class="current_page_item"><a href="related.html">Related Projects</a></li>
+                <li class="current_page_item"><a href="related.html">See Also</a></li>
                 <li><a href="old_releases.html">Old Releases</a></li>
             </ul>
         </div>
@@ -47,34 +47,56 @@ Original license : Creative Commons Attribution 2.5 License
         <!-- PAGE CONTENTS -->
         <div id="page">
 
-               <!-- Start of RELATED PROJECTS section -->
+                <!-- Start of RELATED DOCUMENTS section -->
+                <div class="post">
+                    <h2 class="title">
+                        Related Documents
+                    </h2>
+                    <div class="entry">
+                        <dl>
+
+                            <dt>
+                                <a href="papers/sigcomm99bpf+.ps.gz">
+                                BPF+: Exploiting Global Data-flow Optimization in
+                                a Generalized Packet Filter Architecture</a>
+                            </dt>
+                            <dd>
+                                By Andrew Begel, Steven McCanne, and Susan Graham.
+                            </dd>
+
+                            <dt>
+                                <a href="https://pdos.csail.mit.edu/~engler/dpf.html">DPF</a>
+                            </dt>
+                            <dd>
+                                A paper presented at SIGCOMM '96 on an enhanced version of BPF.
+                            </dd>
+
+                            <dt>
+                                <a href="wpcap.html">Win32 info</a>
+                            </dt>
+                            <dd>
+                                An extract of a message from Guy Harris on state of WinPcap and WinDump.
+                            </dd>
+
+                        </dl>
+                    </div>
+                </div>
+                <!-- End of RELATED DOCUMENTS section -->
+
+                <!-- Start of RELATED PROJECTS section -->
                 <div class="post">
                     <h2 class="title">
                         Related Projects
                     </h2>
                     <div class="entry">
                         <p>
-                            This pages lists a few projects that are related
-                            to tcpdump or libpcap in some way. The list is not
-                            very complete. If you think your project should be
-                            added to this list, please subscribe to the
-                            <a href="index.html#mailing-lists">mailing list</a>
-                            and send a request with the name of the project, a
-                            brief (between 200 and 500 characters) description
-                            and a link to the project page.
+                            Below you can find a few projects that are related to tcpdump or libpcap
+                            in some way. If you think some project should be in this list, please
+                            subscribe to the <a href="index.html#mailing-lists">mailing list</a> and
+                            send a request with the name of the project, a brief (between 200 and
+                            500 characters) description and a link to the project page.
                         </p>
-                    </div>
-                </div>
-                <!-- End of RELATED PROJECTS section -->
-
-
-                <!-- Start of PROJECT LIST section -->
-                <div class="post">
-                    <h2 class="title">
-                        Project List
-                    </h2>
-                    <div class="entry">
-                       <dl>
+                        <dl>
 
                             <dt>
                                 <a href="https://code.google.com/archive/p/socket-sentry">Socket Sentry</a>
@@ -85,7 +107,6 @@ Original license : Creative Commons Attribution 2.5 License
                                 tools like iftop and netstat.
                                 <br>
                                 <strong>Submitted by: </strong>Rob Hasselbaum
-                                {rob at hasselbaum.net}
                             </dd>
 
                             <dt>
@@ -130,9 +151,7 @@ Original license : Creative Commons Attribution 2.5 License
                                 can combine multiple trace files, and/or extract
                                 portions of one or more traces based on time.
                                 TCPslice originally comes from LBL and now is
-                                maintained by tcpdump.org. We have not
-                                made formal releases of it as yet, although
-                                there have been some updates to it.
+                                maintained by The Tcpdump Group.
                             </dd>
 
                             <dt>
@@ -193,7 +212,7 @@ Original license : Creative Commons Attribution 2.5 License
                                 sending invalid frames, injecting your
                                 own 802.11 frames, combining technics
                                 (VLAN hopping+ARP cache poisoning,
-                                VOIP decoding on WEP encrypted
+                                VoIP decoding on WEP encrypted
                                 channel, &hellip;), etc.
                             </dd>
                             <dt>
@@ -278,60 +297,6 @@ Original license : Creative Commons Attribution 2.5 License
                             </dd>
 
                             <dt>
-                                <a href="papers/bpf-usenix93.ps.Z">Usenix 93 paper on BPF</a>
-                            </dt>
-                            <dd>
-                                The libpcap interface supports a filtering mechanism based on the
-                                architecture in the BSD packet filter.  BPF is described in the 1993
-                                Winter Usenix paper ``The BSD Packet Filter: A New Architecture for
-                                User-level Packet Capture''.
-                                <ul>
-                                    <li>
-                                        The original is at:
-                                        <a href="ftp://ftp.ee.lbl.gov/papers/bpf-usenix93.ps.Z">
-                                        ftp://ftp.ee.lbl.gov/papers/bpf-usenix93.ps.Z</a>
-                                    </li>
-
-                                    <li>
-                                        A copy is here:
-                                        <a href="papers/bpf-usenix93.ps.Z">compressed PostScript</a>
-                                        (144K),
-                                        <a href="papers/bpf-usenix93.ps.gz">gzip'ed PostScript</a>
-                                        (100K).
-                                    </li>
-
-                                    <li>
-                                        For the PostScript-impaired, here is some
-                                        <a href="papers/bpf-usenix93.pdf">PDF</a> (135K).
-                                    </li>
-                                </ul>
-                            </dd>
-
-                            <dt>
-                                <a href="papers/sigcomm99bpf+.ps.gz">
-                                BPF+: Exploiting Global Data-flow Optimization in
-                                a Generalized Packet Filter Architecture</a>
-                            </dt>
-                            <dd>
-                                By Andrew Begel, Steven McCanne, and Susan Graham, originally at:
-                                <a href="http://www.cs.berkeley.edu/~abegel/sigcomm99/bpf+.ps">http://www.cs.berkeley.edu/~abegel/sigcomm99/bpf+.ps</a>
-                            </dd>
-
-                            <dt>
-                                <a href="https://pdos.csail.mit.edu/~engler/dpf.html">DPF</a>
-                            </dt>
-                            <dd>
-                                A paper presented at SIGCOMM '96 on an enhanced version of BPF.
-                            </dd>
-
-                            <dt>
-                                <a href="wpcap.html">Win32 info</a>
-                            </dt>
-                            <dd>
-                                An extract of a message from Guy Harris on state of WinPcap and WinDump.
-                            </dd>
-
-                            <dt>
                                 <a href="http://www.xplot.org/">Xplot</a>
                             </dt>
                             <dd>
@@ -353,7 +318,8 @@ Original license : Creative Commons Attribution 2.5 License
                             <dd>
                                 netsniff-ng is a free, performant Linux
                                 network analyzer and networking toolkit.
-                                <br>                                <strong>Submitted by: </strong>Daniel Borkmann
+                                <br>
+                                <strong>Submitted by: </strong>Daniel Borkmann
                             </dd>
 
                             <dt>
@@ -367,7 +333,8 @@ Original license : Creative Commons Attribution 2.5 License
                                 common network protocols, send them on
                                 the wire, capture them and match requests
                                 and replies.
-                                <br>                                <strong>Submitted by: </strong>Esteban Pellegrino
+                                <br>
+                                <strong>Submitted by: </strong>Esteban Pellegrino
                             </dd>
 
                             <dt>
@@ -393,7 +360,7 @@ Original license : Creative Commons Attribution 2.5 License
                             </dt>
                             <dd>
                                 A multiplatform C++ network sniffing, packet parsing and crafting framework. 
-                                It provide a lightweight, easy-to-use and efficient C++ wrapper for 
+                                It provides a lightweight, easy-to-use and efficient C++ wrapper for
                                 libpcap and WinPcap.
                             </dd>
 
@@ -407,7 +374,7 @@ Original license : Creative Commons Attribution 2.5 License
                         </dl>
                     </div>
                 </div>
-                <!-- End of PROJECT LIST section -->
+                <!-- End of RELATED PROJECTS section -->
         </div>
         <!-- END OF PAGE CONTENTS -->
 
