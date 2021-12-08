@@ -48,6 +48,9 @@ substitute_page_title()
 	pcap)
 		title='Programming with pcap | '
 		;;
+	wpcap)
+		title='Information on WinPcap and WinDump | '
+		;;
 	related)
 		title='See also | '
 		;;
