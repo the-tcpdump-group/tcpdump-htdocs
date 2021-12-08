@@ -1,3 +1,4 @@
 IndexOptions +SuppressSize +IgnoreClient
-# In this context this symlink is only a distractor.
+# In this context these symlinks are only distractors.
 IndexIgnore images
+IndexIgnore style_manpages.css
