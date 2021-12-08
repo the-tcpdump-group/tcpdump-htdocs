@@ -49,7 +49,7 @@ substitute_page_title()
 		title='Programming with pcap'
 		;;
 	related)
-		title='Related Resources | '
+		title='See Also | '
 		;;
 	broadcom-switch-tag)
 		title='Broadcom switch tag | '
