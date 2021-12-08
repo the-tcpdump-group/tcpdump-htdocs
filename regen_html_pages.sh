@@ -37,19 +37,19 @@ substitute_page_title()
 		title='FAQ | '
 		;;
 	index)
-		title=''
+		title='Home | '
 		;;
 	linktypes)
-		title='Link-Layer Header Types | '
+		title='Link-layer header types | '
 		;;
 	old_releases)
 		title='Old releases | '
 		;;
 	pcap)
-		title='Programming with pcap'
+		title='Programming with pcap | '
 		;;
 	related)
-		title='See Also | '
+		title='See also | '
 		;;
 	broadcom-switch-tag)
 		title='Broadcom switch tag | '
@@ -70,7 +70,7 @@ substitute_page_title()
 		echo "Internal error: cannot tell page title for $1" >&2
 		exit 10
 	esac
-	sed "s#%PAGE_TITLE%#${title}TCPDUMP/LIBPCAP public repository#"
+	sed "s#%PAGE_TITLE%#${title}TCPDUMP \&amp; LIBPCAP#"
 }
 
 # Instead of using absolute hyperlinks in all .html files use relative ones
