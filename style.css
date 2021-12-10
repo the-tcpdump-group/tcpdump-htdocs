@@ -33,6 +33,11 @@ a:hover {
 	text-decoration: none;
 }
 
+a.away {
+	padding-right: 16px;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAPElEQVQoz2NgoDlgxCL2H1mOiZAmFiy6/mNTgND3H8qDKmPCaj8jQgMTkQ5HtReZx0QoHAgqYMFhCT0BABl1CRdcYiPjAAAAAElFTkSuQmCC") center right no-repeat;
+}
+
 hr {
 	display: none;
 }
