@@ -159,10 +159,10 @@ link-layer header type for them.
 <td class="symbol">DLT_NULL</td>
 <td>
 BSD loopback encapsulation; the link layer header is a 4-byte field, in
-host byte order, containing a value of <code>2</code> for IPv4 packets, a
-value of either <code>24</code>, <code>28</code>, or <code>30</code> for IPv6 packets,
-a value of<code>7</code> for OSI packets, or
-a value of <code>23</code> for IPX packets.  All of the IPv6 values correspond to
+host byte order, containing a value of 2 for IPv4 packets, a
+value of either 24, 28, or 30 for IPv6 packets,
+a value of 7 for OSI packets, or
+a value of 23 for IPX packets.  All of the IPv6 values correspond to
 IPv6 packets; code reading files should check for all of them.
 <p>Note that ``host byte order'' is the byte order of the machine on
 which the packets are captured; if a live capture is being done, ``host
@@ -227,7 +227,7 @@ frames, ATA 878.2 is not used.
 <td class="symbol">DLT_SLIP</td>
 <td>
 SLIP, encapsulated with
-<a href="linktypes/LINKTYPE_SLIP.html">a LINKTYPE_SLIP header</a>.
+<a href="linktypes/LINKTYPE_SLIP.html">a <code>LINKTYPE_SLIP</code> header</a>.
 </td>
 </tr>
 
@@ -300,7 +300,7 @@ LLC/SNAP-encapsulated ATM; the packet begins with an
 <td class="symbol">DLT_RAW</td>
 <td>
 Raw IP; the packet begins with an IPv4 or IPv6 header, with the
-<code>version</code> field of the header indicating whether it's an IPv4 or IPv6
+version field of the header indicating whether it's an IPv4 or IPv6
 header.
 </td>
 </tr>
@@ -344,10 +344,10 @@ FCS at the end of the frame.
 <td class="symbol">DLT_LOOP</td>
 <td>
 OpenBSD loopback encapsulation; the link-layer header is a 4-byte field,
-in <em>network</em> byte order, containing a value of <code>2</code> for IPv4
-packets, a value of either <code>24</code>, <code>28</code>, or <code>30</code> for
-IPv6 packets, a value of <code>7</code> for OSI packets, or a value of
-<code>23</code> for IPX packets.  All of the IPv6
+in <em>network</em> byte order, containing a value of 2 for IPv4
+packets, a value of either 24, 28, or 30 for
+IPv6 packets, a value of 7 for OSI packets, or a value of
+23 for IPX packets.  All of the IPv6
 values correspond to IPv6 packets; code reading files should check for
 all of them.
 </td>
@@ -406,7 +406,7 @@ information</a> followed by an 802.11 header.
 <td>
 <a class=away href="https://tools.ietf.org/html/rfc2625">RFC 2625</a>
 IP-over-Fibre Channel, with the link-layer header being the
-<code>Network_Header</code> as described in that RFC.
+Network_Header as described in that RFC.
 </td>
 </tr>
 
@@ -440,13 +440,13 @@ ARCNET Data Packets, as described by the ARCNET Trade Association
 standard <a class=away href="https://web.archive.org/web/20100414154838/http://www.arcnet.com/resources/ata8781.pdf">ATA
 878.1-1999</a>, but without the Starting Delimiter, Information Length,
 or Frame Check Sequence fields, with only the first ISU of the
-Destination Identifier, and with an extra two-ISU <code>offset</code> field
+Destination Identifier, and with an extra two-ISU offset field
 following the Destination Identifier.  For most packet types, ARCNET
 Trade Association draft standard
 <a class=away href="https://web.archive.org/web/20100414154914/http://www.arcnet.com/resources/ata8782.pdf">ATA 878.2</a> is
 also used; however, no exception frames are supplied, and reassembled
-frames, rather than fragments, are supplied.  See also <a
-href="https://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a
+frames, rather than fragments, are supplied.  See also <a class=away
+href="https://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a class=away
 href="https://tools.ietf.org/html/rfc1201">RFC 1201</a>; for RFC 1051
 frames, ATA 878.2 is not used.
 </td>
@@ -579,8 +579,8 @@ present, the Data CRC.
 <td class="number">166</td>
 <td class="symbol">DLT_PPP_PPPD</td>
 <td>
-PPP in HDLC-like encapsulation, like LINKTYPE_PPP_HDLC, but with the
-0xff address byte replaced by a direction indication - <code>0x00</code>
+PPP in HDLC-like encapsulation, like <code>LINKTYPE_PPP_HDLC</code>, but with the
+<code>0xff</code> address byte replaced by a direction indication&mdash;<code>0x00</code>
 for incoming and <code>0x01</code> for outgoing.
 </td>
 </tr>
@@ -685,7 +685,7 @@ of the pcapng file, as specified by the Section Header Block.
 <td class="number">192</td>
 <td class="symbol">DLT_PPI</td>
 <td>
-Per-Packet Information information, as specified by <a
+Per-Packet Information information, as specified by <a class=away
 href="https://web.archive.org/web/20160328114748/http://www.cacetech.com/documents/PPI%20Header%20format%201.0.7.pdf">the
 Per-Packet Information Header Specification</a>,  followed by a packet
 with the <code>LINKTYPE_</code> value specified by the <code>pph_dlt</code> field of that header.
@@ -903,7 +903,7 @@ that follow.
 <td class="number">224</td>
 <td class="symbol">DLT_FC_2</td>
 <td>
-Fibre Channel FC-2 frames, beginning with a <code>Frame_Header</code>.
+Fibre Channel FC-2 frames, beginning with a Frame_Header.
 </td>
 </tr>
 
@@ -913,7 +913,7 @@ Fibre Channel FC-2 frames, beginning with a <code>Frame_Header</code>.
 <td class="symbol">DLT_FC_2_WITH_FRAME_DELIMS</td>
 <td>
 Fibre Channel FC-2 frames, beginning an encoding of the SOF, followed by
-a <code>Frame_Header</code>, and ending with an encoding of the SOF.
+a Frame_Header, and ending with an encoding of the SOF.
 <p>
 The encodings represent the frame delimiters as 4-byte sequences
 representing the corresponding ordered sets, with K28.5 represented as
@@ -1399,7 +1399,7 @@ field.
 <td class="symbol">DLT_DISPLAYPORT_AUX</td>
 <td>
 DisplayPort AUX channel monitoring data as specified by VESA
-DisplayPort(DP) Standard preceded by a
+DisplayPort (DP) Standard preceded by a
 <a href="linktypes/LINKTYPE_DISPLAYPORT_AUX.html">pseudo-header</a>.
 </td>
 </tr>
