@@ -49,21 +49,21 @@
 
 		<p>The Flags field represents packed bits defined as follows:</p>
 		<ul>
-			<li>0x0001 indicates the LE Packet is de-whitened</li>
-			<li>0x0002 indicates the Signal Power field is valid</li>
-			<li>0x0004 indicates the Noise Power field is valid</li>
-			<li>0x0008 indicates the LE Packet is decrypted</li>
-			<li>0x0010 indicates the Reference Access Address is valid and led to this packet being captured</li>
-			<li>0x0020 indicates the Access Address Offenses field contains valid data</li>
-			<li>0x0040 indicates the RF Channel field is subject to aliasing</li>
-			<li>0x0380 is an integer bit field indicating the LE Packet PDU type</li>
-			<li>0x0400 indicates the CRC portion of the LE Packet was checked</li>
-			<li>0x0800 indicates the CRC portion of the LE Packet passed its check</li>
-			<li>0x3000 is a PDU type dependent field</li>
-			<li>0xC000 is an integer bit field indicating the LE PHY mode</li>
+			<li><code>0x0001</code> indicates the LE Packet is de-whitened</li>
+			<li><code>0x0002</code> indicates the Signal Power field is valid</li>
+			<li><code>0x0004</code> indicates the Noise Power field is valid</li>
+			<li><code>0x0008</code> indicates the LE Packet is decrypted</li>
+			<li><code>0x0010</code> indicates the Reference Access Address is valid and led to this packet being captured</li>
+			<li><code>0x0020</code> indicates the Access Address Offenses field contains valid data</li>
+			<li><code>0x0040</code> indicates the RF Channel field is subject to aliasing</li>
+			<li><code>0x0380</code> is an integer bit field indicating the LE Packet PDU type</li>
+			<li><code>0x0400</code> indicates the CRC portion of the LE Packet was checked</li>
+			<li><code>0x0800</code> indicates the CRC portion of the LE Packet passed its check</li>
+			<li><code>0x3000</code> is a PDU type dependent field</li>
+			<li><code>0xC000</code> is an integer bit field indicating the LE PHY mode</li>
 		</ul>
 
-		<p>The PDU types indicated by flag bit field 0x0380 are defined as follows:</p>
+		<p>The PDU types indicated by flag bit field <code>0x0380</code> are defined as follows:</p>
 		<ol start="0">
 			<li>Advertising or Data (Unspecified Direction)</li>
 			<li>Auxiliary Advertising</li>
@@ -76,23 +76,23 @@
 		</ol>
 
 		<p>For PDU types other than type 1 (auxiliary advertising), the PDU type dependent field
-		(using flag bits 0x3000) indicates the checked status of the MIC portion of the decrypted
+		(using flag bits <code>0x3000</code>) indicates the checked status of the MIC portion of the decrypted
 		packet:</p>
 		<ul>
-			<li>0x1000 indicates the MIC portion of the decrypted LE Packet was checked</li>
-			<li>0x2000 indicates the MIC portion of the decrypted LE Packet passed its check</li>
+			<li><code>0x1000</code> indicates the MIC portion of the decrypted LE Packet was checked</li>
+			<li><code>0x2000</code> indicates the MIC portion of the decrypted LE Packet passed its check</li>
 		</ul>
 
 		<p>For PDU type 1 (auxiliary advertising), the PDU type dependent field (using flag bits
-		0x3000) is an integer bit field indicating the auxiliary advertisement type:</p>
+		<code>0x3000</code>) is an integer bit field indicating the auxiliary advertisement type:</p>
 		<ol start="0">
-			<li>AUX_ADV_IND</li>
-			<li>AUX_CHAIN_IND</li>
-			<li>AUX_SYNC_IND</li>
-			<li>AUX_SCAN_RSP</li>
+			<li><code>AUX_ADV_IND</code></li>
+			<li><code>AUX_CHAIN_IND</code></li>
+			<li><code>AUX_SYNC_IND</code></li>
+			<li><code>AUX_SCAN_RSP</code></li>
 		</ol>
 
-		<p>The LE PHY modes indicated by flag bit field 0xC000 are defined as follows:</p>
+		<p>The LE PHY modes indicated by flag bit field <code>0xC000</code> are defined as follows:</p>
 		<ol start="0">
 			<li>LE 1M</li>
 			<li>LE 2M</li>

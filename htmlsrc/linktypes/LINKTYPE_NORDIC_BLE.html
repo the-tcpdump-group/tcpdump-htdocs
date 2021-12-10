@@ -60,30 +60,30 @@ detect missing packets.
 The packet type field contains a value that is one of:
 </p>
 <ul>
-<li>0x00, for a REQ_FOLLOW message sent from the host to the Sniffer to
+<li><code>0x00</code>, for a REQ_FOLLOW message sent from the host to the Sniffer to
 only send packets received from a specific address;</li>
-<li>0x01, for an EVENT_FOLLOW message sent from the Sniffer to the host
+<li><code>0x01</code>, for an EVENT_FOLLOW message sent from the Sniffer to the host
 to indicate that it has entered the FOLLOW state;</li>
-<li>0x05, for an EVENT_CONNECT message sent from the Sniffer to the host
+<li><code>0x05</code>, for an EVENT_CONNECT message sent from the Sniffer to the host
 to indicate that someone has connected to the unit we are
 following;</li>
-<li>0x06, for an EVENT_PACKET message sent from the Sniffer to the host,
+<li><code>0x06</code>, for an EVENT_PACKET message sent from the Sniffer to the host,
 containing a Bluetooth LE packet captured by the Sniffer;</li>
-<li>0x07, for a REQ_SCAN_CONT message sent from the host to the Sniffer,
+<li><code>0x07</code>, for a REQ_SCAN_CONT message sent from the host to the Sniffer,
 telling it to scan continuously and hand over the packets ASAP;</li>
-<li>0x09, for a EVENT_DISCONNECT message sent from the Sniffer to the
+<li><code>0x09</code>, for a EVENT_DISCONNECT message sent from the Sniffer to the
 host, telling it that the connected address we were following has
 received a disconnect packet;</li>
-<li>0x0C, for a SET_TEMPORARY_KEY message, specifying a temporary key to
+<li><code>0x0C</code>, for a SET_TEMPORARY_KEY message, specifying a temporary key to
 use on encryption (for OOB and passkey);</li>
-<li>0x0D, for a PING_REQ message;</li>
-<li>0x0E, for a PING_RESP message;</li>
-<li>0x13, for a SWITCH_BAUD_RATE_REQ message;</li>
-<li>0x14, for a SWITCH_BAUD_RATE_RESP message;</li>
-<li>0x17, for a SET_ADV_CHANNEL_HOP_SEQ message sent from the host to
+<li><code>0x0D</code>, for a PING_REQ message;</li>
+<li><code>0x0E</code>, for a PING_RESP message;</li>
+<li><code>0x13</code>, for a SWITCH_BAUD_RATE_REQ message;</li>
+<li><code>0x14</code>, for a SWITCH_BAUD_RATE_RESP message;</li>
+<li><code>0x17</code>, for a SET_ADV_CHANNEL_HOP_SEQ message sent from the host to
 the Sniffer, telling it which order to cycle through the channels when
 following an advertiser;</li>
-<li>0xFE, for a GO_IDLE sent from the host to the Sniffer, telling it to
+<li><code>0xFE</code>, for a GO_IDLE sent from the host to the Sniffer, telling it to
 stop sending UART traffic and listen for new commands.</li>
 </ul>
 <p>
@@ -125,9 +125,9 @@ header field.
 The flags field contains the following flag bits:
 </p>
 <ul>
-<li>0x00000001 - the packet checksum is OK;</li>
-<li>0x00000010 - the packet is from the master to the slave;</li>
-<li>0x00000100 - the packet is encrypted.</li>
+<li><code>0x00000001</code> - the packet checksum is OK;</li>
+<li><code>0x00000010</code> - the packet is from the master to the slave;</li>
+<li><code>0x00000100</code> - the packet is encrypted.</li>
 </ul>
 <p>
 The channel field contains the Bluetooth LE channel index of the channel

@@ -101,14 +101,14 @@ Packets and FlexRay Symbol Packets.
 </thead>
 <tbody>
 	<tr>
-		<td>CH</td>
-		<td>TI6</td>
-		<td>TI5</td>
-		<td>TI4</td>
-		<td>TI3</td>
-		<td>TI2</td>
-		<td>TI1</td>
-		<td>TI0</td>
+		<td><code>CH</code></td>
+		<td><code>TI6</code></td>
+		<td><code>TI5</code></td>
+		<td><code>TI4</code></td>
+		<td><code>TI3</code></td>
+		<td><code>TI2</code></td>
+		<td><code>TI1</code></td>
+		<td><code>TI0</code></td>
 	</tr>
 </tbody>
 </table>
@@ -142,11 +142,11 @@ TI[0..6]: Type Index
 		<td>-</td>
 		<td>-</td>
 		<td>-</td>
-		<td>FCRCERR</td>
-		<td>HCRCERR</td>
-		<td>FESERR</td>
-		<td>CODERR</td>
-		<td>TSSVIOL</td>
+		<td><code>FCRCERR</code></td>
+		<td><code>HCRCERR</code></td>
+		<td><code>FESERR</code></td>
+		<td><code>CODERR</code></td>
+		<td><code>TSSVIOL</code></td>
 	</tr>
 </tbody>
 
@@ -165,13 +165,13 @@ TSSVIOL: TSS violation
 A FlexRay frame, as described by section 8 "Frame Format" of <a class=away
 href="https://www.iso.org/standard/59806.html">ISO 17458-2:2013</a>. 
 The Frame CRC is not included.  If the Frame CRC is incorrect, the error
-bit FCRCERR in Error Flags shall be set. 
+bit <code>FCRCERR</code> in Error Flags shall be set.
 </p>
 <p>
 Extra low-level bits (TSS, FSS, BSS, FES) are not included in the
 frame.  But a measurement device may set according error bits in the
 Error Flags if an error occurred during decoding of these bits (Bits
-CODERR, TSSVIOL, FESERR in Error Flags).
+<code>CODERR</code>, <code>TSSVIOL</code>, <code>FESERR</code> in Error Flags).
 </p>
 <p>
 Do not assume that only whole FlexRay Frames are contained in the
@@ -197,13 +197,13 @@ errors occur.  Truncation may happen at each byte boundary!
 <tbody>
 	<tr>
 		<td>-</td>
-		<td>SL6</td>
-		<td>SL5</td>
-		<td>SL4</td>
-		<td>SL3</td>
-		<td>SL2</td>
-		<td>SL1</td>
-		<td>SL0</td>
+		<td><code>SL6</code></td>
+		<td><code>SL5</code></td>
+		<td><code>SL4</code></td>
+		<td><code>SL3</code></td>
+		<td><code>SL2</code></td>
+		<td><code>SL1</code></td>
+		<td><code>SL0</code></td>
 	</tr>
 </tbody>
 </table>

@@ -79,7 +79,7 @@ Original license : Creative Commons Attribution 2.5 License
 
                 <h3>Description</h3>
 <p>
-The address family is a Linux AF_ value, so it's 2 for IPv4 and 10 for
+The address family is a Linux <code>AF_</code> value, so it's 2 for IPv4 and 10 for
 IPv6.
 </p>
 <p>
@@ -100,15 +100,15 @@ The type values are, as per the Linux
 <code>linux/netfilter/nfnetlink_log.h</code> header:
 <ul>
 <li>1, for a packet header structure;</li>
-<li>2, for the 32-bit packet mark value from the skbuff for the packet;</li>
+<li>2, for the 32-bit packet mark value from the <code>skbuff</code> for the packet;</li>
 <li>3, for a packet time stamp structure;</li>
-<li>4, for the 32-bit ifindex of the device on which the packet was
+<li>4, for the 32-bit <code>ifindex</code> of the device on which the packet was
 received, which could be a bridge group;</li>
-<li>5, for the 32-bit ifindex of the device on which the packet was
+<li>5, for the 32-bit <code>ifindex</code> of the device on which the packet was
 sent, which could be a bridge group;</li>
-<li>6, for the 32-bit ifindex of the physical device on which the packet
+<li>6, for the 32-bit <code>ifindex</code> of the physical device on which the packet
 was received, which is not a bridge group;</li>
-<li>7, for the 32-bit ifindex of the physical device on which the packet
+<li>7, for the 32-bit <code>ifindex</code> of the physical device on which the packet
 was sent, which is not a bridge group;</li>
 <li>8, for a hardware address structure;</li>
 <li>9, for the packet payload following the link-layer header;</li>
@@ -122,8 +122,8 @@ devices;</li>
 <li>14, for the 32-bit group ID that owned the socket on which the packet
 was sent or received;</li>
 <li>15, for the 32-bit Linux <code>ARPHRD_</code> value for the device
-associated with the skbuff for the packet;</li>
-<li>16, for the MAC-layer header for the skbuff for the packet;</li>
+associated with the <code>skbuff</code> for the packet;</li>
+<li>16, for the MAC-layer header for the <code>skbuff</code> for the packet;</li>
 <li>17, for the length of the MAC-layer header.</li>
 </ul>
 <p>

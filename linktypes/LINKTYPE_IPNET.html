@@ -91,7 +91,7 @@ Original license : Creative Commons Attribution 2.5 License
 The version field is 2 for the current version of the pseudo-header.
 </p>
 <p>
-The family field is a Solaris AF_ value, so it's 2 for IPv4 and 26 for
+The family field is a Solaris <code>AF_</code> value, so it's 2 for IPv4 and 26 for
 IPv6.
 </p>
 <p>
@@ -119,7 +119,7 @@ interface index number, for IPMP interfaces.
 </p>
 <p>
 The zone identifiers are in network byte order.  A zone number of 0 is
-the global zone; a zone number of 0xffffffff means that the packet
+the global zone; a zone number of <code>0xffffffff</code> means that the packet
 arrived from another host on the network, not from another zone on the
 same machine.
 </p>

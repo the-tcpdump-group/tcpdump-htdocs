@@ -36,8 +36,8 @@ capture was done.  (In practice, this is likely to be little-endian, but
 that's not guaranteed.)
 </p>
 <p>
-The msgcode field either has the value 0x00000041 or the value
-0x00000044.  The msglen field is the length of the entire Prism header. 
+The msgcode field either has the value <code>0x00000041</code> or the value
+<code>0x00000044</code>.  The msglen field is the length of the entire Prism header.
 In practice, it is almost always, if not always, 144 octets.  The device
 name is the interface name of the adapter.
 </p>
@@ -46,34 +46,34 @@ There could be, in theory, zero or more instances of the {DID, Status,
 Length, Data} quadruplet; in practice, there are almost always, if not
 always, 10 instances.  Each quadruplet represents the value of a
 parameter.  The DID field indicates what the parameter is.  For packets
-with the msgcode value 0x00000041, the DID field values are:
+with the msgcode value <code>0x00000041</code>, the DID field values are:
 </p>
 <ul>
-<li>0x00001041 - host time;</li>
-<li>0x00002041 - MAC time;</li>
-<li>0x00003041 - channel;</li>
-<li>0x00004041 - RSSI;</li>
-<li>0x00005041 - signal quality;</li>
-<li>0x00006041 - signal;</li>
-<li>0x00007041 - noise;</li>
-<li>0x00008041 - rate;</li>
-<li>0x00009041 - transmitted frame indicator;</li>
-<li>0x0000A041 - frame length.</li>
+<li><code>0x00001041</code> - host time;</li>
+<li><code>0x00002041</code> - MAC time;</li>
+<li><code>0x00003041</code> - channel;</li>
+<li><code>0x00004041</code> - RSSI;</li>
+<li><code>0x00005041</code> - signal quality;</li>
+<li><code>0x00006041</code> - signal;</li>
+<li><code>0x00007041</code> - noise;</li>
+<li><code>0x00008041</code> - rate;</li>
+<li><code>0x00009041</code> - transmitted frame indicator;</li>
+<li><code>0x0000A041</code> - frame length.</li>
 </ul>
 <p>
 For packets with the msgcode value 0x00000044, the DID field values are:
 </p>
 <ul>
-<li>0x00010044 - host time;</li>
-<li>0x00020044 - MAC time;</li>
-<li>0x00030044 - channel;</li>
-<li>0x00040044 - RSSI;</li>
-<li>0x00050044 - signal quality;</li>
-<li>0x00060044 - signal;</li>
-<li>0x00070044 - noise;</li>
-<li>0x00080044 - rate;</li>
-<li>0x00090044 - transmitted frame indicator;</li>
-<li>0x000A0044 - frame length.</li>
+<li><code>0x00010044</code> - host time;</li>
+<li><code>0x00020044</code> - MAC time;</li>
+<li><code>0x00030044</code> - channel;</li>
+<li><code>0x00040044</code> - RSSI;</li>
+<li><code>0x00050044</code> - signal quality;</li>
+<li><code>0x00060044</code> - signal;</li>
+<li><code>0x00070044</code> - noise;</li>
+<li><code>0x00080044</code> - rate;</li>
+<li><code>0x00090044</code> - transmitted frame indicator;</li>
+<li><code>0x000A0044</code> - frame length.</li>
 </ul>
 <p>
 The Status field is 0 if the value of that parameter is supplied and 1

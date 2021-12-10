@@ -41,9 +41,9 @@ The bottom 29 bits contain the CAN ID of the frame.
 The remaining bits are:
 </p>
 <ul>
-  <li>0x20000000 - set if the frame is an error message rather than a data frame.</li>
-  <li>0x40000000 - set if the frame is a remote transmission request frame.</li>
-  <li>0x80000000 - set if the frame is an extended 29-bit frame rather than a standard 11-bit frame.</li>
+  <li><code>0x20000000</code> - set if the frame is an error message rather than a data frame.</li>
+  <li><code>0x40000000</code> - set if the frame is a remote transmission request frame.</li>
+  <li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather than a standard 11-bit frame.</li>
 </ul>
 
 <p>
@@ -57,15 +57,15 @@ The FD flags field contains CAN FD specific flags; for CAN frames, this
 field is 0.  The bits are:
 </p>
 <ul>
-  <li>CANFD_BRS: 0x01 - bit rate switch (second bitrate for payload data).</li>
-  <li>CANFD_ESI: 0x02 - error state indicator of the transmitting node.</li>
-  <li>CANFD_FDF: 0x04 - if set, the frame is a CAN FD frame; if not set,
+  <li><code>CANFD_BRS</code> (<code>0x01</code>) - bit rate switch (second bitrate for payload data).</li>
+  <li><code>CANFD_ESI</code> (<code>0x02</code>) - error state indicator of the transmitting node.</li>
+  <li><code>CANFD_FDF</code> (<code>0x04</code>) - if set, the frame is a CAN FD frame; if not set,
 the frame may be a CAN frame or a CAN FD frame.</li>
 </ul>
 
 <p>
 Older software and firmware writing packets with this link type did not
-use the CANFD_FDF flag for CAN FD frames, so if the CANFD_FDF flag is
+use the <code>CANFD_FDF</code> flag for CAN FD frames, so if the <code>CANFD_FDF</code> flag is
 not set, the frame is not guaranteed to be a CAN frame.  If that flag is
 not set:
 </p>
@@ -78,33 +78,33 @@ not set:
 
 <p>
 In addition, older software and firmware may not have explicitly set
-that field, so that the bit corresponding to the CANFD_FDF flag might be
+that field, so that the bit corresponding to the <code>CANFD_FDF</code> flag might be
 set even for classic CAN frames.  Therefore, code that reads
-LINKTYPE_CAN_SOCKETCAN frames must perform some heuristic checks to make
+<code>LINKTYPE_CAN_SOCKETCAN</code> frames must perform some heuristic checks to make
 sure that it doesn't incorrectly interpret a classic CAN frame as a CAN
-FD frame, and code that generates LINKTYPE_CAN_SOCKETCAN frames must
+FD frame, and code that generates <code>LINKTYPE_CAN_SOCKETCAN</code> frames must
 follow certain rules to make sure that those checks don't cause
 software that reads those fromes to treat a CAN FD frame as a classic
 CAN frame.
 </p>
 
 <p>
-Software that reads LINKTYPE_CAN_SOCKETCAN frames must not treat a frame
-with the CANFD_FDF bit set as a CAN FD frame if any bits other than
-CANFD_BRS and CANFD_ESI are set in that field, or if either of the
+Software that reads <code>LINKTYPE_CAN_SOCKETCAN</code> frames must not treat a frame
+with the <code>CANFD_FDF</code> bit set as a CAN FD frame if any bits other than
+<code>CANFD_BRS</code> and <code>CANFD_ESI</code> are set in that field, or if either of the
 Reserved/Padding fields are non-zero, as that is an indication that the
-header fields might not have been explicitly set, and the CANFD_FDF flag
+header fields might not have been explicitly set, and the <code>CANFD_FDF</code> flag
 might happen to be set even thugh the frame is not a CAN FD frame. 
 </p>
 
 <p>
-Software that generates LINKTYPE_CAN_SOCKETCAN frames:
+Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> frames:
 </p>
 <ul>
   <li>Must check the frame MTU when receiving frames from the Linux kernel in order to classify them as classic CAN frames or CAN FD frames</li>
   <li>Must make the "FD flags" field 0 for classic CAN frames.</li>
-  <li>Must set the CANFD_FDF bit of the "FD flags" field in CAN FD frames, 
-    and don't set any bits in that field other than the CANFD_BRS and CANFD_ESI bits
+  <li>Must set the <code>CANFD_FDF</code> bit of the "FD flags" field in CAN FD frames,
+    and don't set any bits in that field other than the <code>CANFD_BRS</code> and <code>CANFD_ESI</code> bits
     unless and until Linux assigns them a meaning.</li>
   <li>Must make the "Reserved/Padding" fields 0 unless and until Linux assigns it a meaning.</li>
   <li>May strip trailing padding bytes to save disk space if all above statements are satisfied</li>
@@ -123,24 +123,24 @@ the payload is empty.
 <p>
 For an error message, the payload is always 8 bytes.  The lower bits of
 the CAN ID field contain an error class value, with bits specified by
-the first set of CAN_ERR_ values in <a class=away
+the first set of <code>CAN_ERR_</code> values in <a class=away
 href="https://github.com/torvalds/linux/blob/master/include/uapi/linux/can/error.h">the
-Linux uapi/can/error.h header</a>.  The bytes in the payload are:
+Linux <code>uapi/can/error.h</code> header</a>.  The bytes in the payload are:
 </p>
 <ul>
 <li>first byte - if arbitration was lost, the bit number in the bitstream in which it was lost;
 otherwise 0. 
 <li>second byte - the error status of the CAN controller, with bits
-specified by the CAN_ERR_CRTL_ bits in the Linux uapi/can/error.h
+specified by the <code>CAN_ERR_CRTL_</code> bits in the Linux <code>uapi/can/error.h</code>
 header.
 <li>third byte - flags indicating a CAN protocol error type, with bits
-specified by the CAN_ERR_PROT_ bits in the Linux uapi/can/error.h
+specified by the <code>CAN_ERR_PROT_</code> bits in the Linux <code>uapi/can/error.h</code>
 header.
 <li>fourth byte - flags indicating a CAN protocol error location, with
-bits specified by the CAN_ERR_LOC_ bits in the Linux uapi/can/error.h
+bits specified by the <code>CAN_ERR_LOC_</code> bits in the Linux <code>uapi/can/error.h</code>
 header.
 <li>fifth byte - the error status of the CAN transceiver, with values
-specified by the CAN_ERR_TRX_ values in the Linux uapi/can/error.h
+specified by the <code>CAN_ERR_TRX_</code> values in the Linux <code>uapi/can/error.h</code>
 header.
 <li>sixth, seventh, and eighth bytes - controller-specific additional
 information.

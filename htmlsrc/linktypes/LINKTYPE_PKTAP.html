@@ -178,8 +178,8 @@ The record type field contains a value that is one of:
 <li>1, if a packet follows the PKTAP header.</li>
 </ul>
 <p>
-The DLT_ value field contains a macOS DLT_ value for the packet, such as
-DLT_EN10MB for an Ethernet packet.
+The <code>DLT_</code> value field contains a macOS <code>DLT_</code> value for the packet, such as
+<code>DLT_EN10MB</code> for an Ethernet packet.
 </p>
 <p>
 The interface name contains a null-padded ASCII string giving the name
@@ -190,17 +190,17 @@ that there is a NUL character at the end of the name.
 The flags field contains a set of flags for the packet:
 </p>
 <ul>
-<li>0x00000001 - packet is an incoming packet</li>
-<li>0x00000002 - packet is an outgoing packet</li>
-<li>0x00000004 - process is delegated</li>
-<li>0x00000008 - interface is delegated</li>
-<li>0x00002000 - header has a time stamp</li>
-<li>0x00004000 - packet is from a new flow</li>
-<li>0x00008000 - packet is a retransmission</li>
-<li>0x00010000 - packet is a keep-alive packet</li>
-<li>0x00020000 - packet is on a socket</li>
-<li>0x00040000 - packet is on a nexus channel</li>
-<li>0x00080000 - this packet has a version 2 PKTAP header</li>
+<li><code>0x00000001</code> - packet is an incoming packet</li>
+<li><code>0x00000002</code> - packet is an outgoing packet</li>
+<li><code>0x00000004</code> - process is delegated</li>
+<li><code>0x00000008</code> - interface is delegated</li>
+<li><code>0x00002000</code> - header has a time stamp</li>
+<li><code>0x00004000</code> - packet is from a new flow</li>
+<li><code>0x00008000</code> - packet is a retransmission</li>
+<li><code>0x00010000</code> - packet is a keep-alive packet</li>
+<li><code>0x00020000</code> - packet is on a socket</li>
+<li><code>0x00040000</code> - packet is on a nexus channel</li>
+<li><code>0x00080000</code> - this packet has a version 2 PKTAP header</li>
 </ul>
 <p>
 The flags field is at the same offset in the version 1 and version 2
@@ -209,8 +209,8 @@ before any other fields, including the length, are interpreted.
 <p>
 The protocol family field contains a value indicating the address
 family of the packet.  It may be 0 for "unknown", 2 for IPv4, or 30 for
-IPv6.  It may also be another macOS AF_ value; note that those values do
-not necessarily correspond to the AF_ value of the operating system on
+IPv6.  It may also be another macOS <code>AF_</code> value; note that those values do
+not necessarily correspond to the <code>AF_</code> value of the operating system on
 the host reading a capture.
 </p>
 <p>
@@ -253,7 +253,7 @@ have different delay tolerance, loss tolerance, etc. characteristics.
 </p>
 <p>
 <p>
-The interface type field contains an SNMP ifType value for the
+The interface type field contains an SNMP <code>ifType</code> value for the
 interface.
 </p>
 <p>
@@ -276,8 +276,8 @@ The flow ID field contains a hash value computed for the flow to which
 the packet belongs; it is 0 if there is no flow ID.
 </p>
 <p>
-The IP protocol field contains a macOS IPPROTO_ value for the packet; it
-may be IPPROTO_RAW if the packet was written to a raw socket.
+The IP protocol field contains a macOS <code>IPPROTO_</code> value for the packet; it
+may be <code>IPPROTO_RAW</code> if the packet was written to a raw socket.
 </p>
 <p>
 All fields following the effective command name field are optional; the
@@ -328,8 +328,8 @@ command name field is not present; otherwise, it's the offset from the
 beginning of the PKTAP header of the effective command name field. 
 </p>
 <p>
-The DLT_ value field contains a macOS DLT_ value for the packet, such as
-DLT_EN10MB for an Ethernet packet.
+The <code>DLT_</code> value field contains a macOS <code>DLT_</code> value for the packet, such as
+<code>DLT_EN10MB</code> for an Ethernet packet.
 </p>
 <p>
 The link-layer header length field appears to contain the length of the
@@ -340,18 +340,18 @@ The link-layer trailer length field is assumed to contain the length of
 the packet's link-layer trailer.  It may be 0.
 </p>
 <p>
-The interface type field contains an SNMP ifType value for the
+The interface type field contains an SNMP <code>ifType</code> value for the
 interface.
 </p>
 <p>
-The IP protocol field contains a macOS IPPROTO_ value for the packet; it
-may be IPPROTO_RAW if the packet was written to a raw socket.
+The IP protocol field contains a macOS <code>IPPROTO_</code> value for the packet; it
+may be <code>IPPROTO_RAW</code> if the packet was written to a raw socket.
 </p>
 <p>
 The protocol family field contains a value indicating the address
 family of the packet.  It may be 0 for "unknown", 2 for IPv4, or 30 for
-IPv6.  It may also be another macOS AF_ value; note that those values do
-not necessarily correspond to the AF_ value of the operating system on
+IPv6.  It may also be another macOS <code>AF_</code> value; note that those values do
+not necessarily correspond to the <code>AF_</code> value of the operating system on
 the host reading a capture.
 </p>
 <p>
@@ -389,17 +389,17 @@ some sort; it may be 0 if the process ID is unknown.
 The flags field contains a set of flags for the packet:
 </p>
 <ul>
-<li>0x00000001 - packet is an incoming packet</li>
-<li>0x00000002 - packet is an outgoing packet</li>
-<li>0x00000004 - process is delegated</li>
-<li>0x00000008 - interface is delegated</li>
-<li>0x00002000 - header has a time stamp</li>
-<li>0x00004000 - packet is from a new flow</li>
-<li>0x00008000 - packet is a retransmission</li>
-<li>0x00010000 - packet is a keep-alive packet</li>
-<li>0x00020000 - packet is on a socket</li>
-<li>0x00040000 - packet is on a nexus channel</li>
-<li>0x00080000 - this packet has a version 2 PKTAP header</li>
+<li><code>0x00000001</code> - packet is an incoming packet</li>
+<li><code>0x00000002</code> - packet is an outgoing packet</li>
+<li><code>0x00000004</code> - process is delegated</li>
+<li><code>0x00000008</code> - interface is delegated</li>
+<li><code>0x00002000</code> - header has a time stamp</li>
+<li><code>0x00004000</code> - packet is from a new flow</li>
+<li><code>0x00008000</code> - packet is a retransmission</li>
+<li><code>0x00010000</code> - packet is a keep-alive packet</li>
+<li><code>0x00020000</code> - packet is on a socket</li>
+<li><code>0x00040000</code> - packet is on a nexus channel</li>
+<li><code>0x00080000</code> - this packet has a version 2 PKTAP header</li>
 </ul>
 <p>
 The flags field is at the same offset in the version 1 and version 2

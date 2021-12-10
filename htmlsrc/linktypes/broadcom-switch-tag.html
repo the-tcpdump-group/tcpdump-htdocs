@@ -18,9 +18,9 @@ The first octet of the tag has the format:
 The OPcode field has a value that is one of:
 </p>
 <ul>
-<li>0b000, if the tag is an egress tag, for a packet going from the
+<li><code>0b000</code>, if the tag is an egress tag, for a packet going from the
 switch to the management port
-<li>0b001, if the tag is an ingress tag, for a packet going from the
+<li><code>0b001</code>, if the tag is an ingress tag, for a packet going from the
 management port to the switch
 </ul>
 <p>
@@ -47,13 +47,13 @@ The traffic class (TC) field values map to 802.1p/CoS traffic classes.
 The tag enforcement (TE) field has a value that is one of:
 </p>
 <ul>
-<li>0b00, if there is no enforcement
-<li>0b01, if there is untag enforcement (VLAN untagged packets are
+<li><code>0b00</code>, if there is no enforcement
+<li><code>0b01</code>, if there is untag enforcement (VLAN untagged packets are
 checked against VLAN entries)
-<li>0b10, if there is header enforcement
+<li><code>0b10</code>, if there is header enforcement
 </ul>
 <p>
-0b11 is a reserved value.
+<code>0b11</code> is a reserved value.
 </p>
 <p>
 The TS bit indicates whether the packets should be timestamped or not by
@@ -63,7 +63,7 @@ to follow.
 <p>
 The destination map is a bit mask of ports to send a packet to; it can be
 either one or multiple ports (e.g: broadcast/multicast), and the possible
-values are 0 through 0x1ff (total of 9 ports). The switch takes care of
+values are 0 through <code>0x1ff</code> (total of 9 ports). The switch takes care of
 copying the packet to multiple ports if specified.
 </p>
 <p>

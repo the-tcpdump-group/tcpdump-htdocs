@@ -83,8 +83,8 @@ The direction field contains a value that is one of:
 compressed TCP packet.  Otherwise, the upper 4 bits of the packet type
 are one of:
 <ul>
-<li>0x40, if the packet was an unmodified IP datagram;
-<li>0x70, if the packet was a uncompressed TCP segment.
+<li><code>0x40</code>, if the packet was an unmodified IP datagram;
+<li><code>0x70</code>, if the packet was a uncompressed TCP segment.
 </ul>
 <p>
 If the packet was an uncompressed TCP segment, the lower 4 bits of the

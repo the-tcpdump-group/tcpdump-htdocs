@@ -106,7 +106,7 @@ All multi-byte fields are little-endian.
 The version number field is a 2-octet value with the upper 8 bits
 giving the major version number, the next 4 bits giving the minor
 version number, and the next 4 bits giving the sub-minor version number.
-The current version is 1.0.0, so the value is 0x0100.
+The current version is 1.0.0, so the value is <code>0x0100</code>.
 <p>
 The length field indicates how long the header is; this value
 includes the length of the length field itself.  It should be
@@ -148,7 +148,7 @@ which the device is connected.  The upper 8 bits contain the bus number;
 all subsequent 4-bit fields correspond to the port numbers through which
 the device is connected, so that, for example, a device on bus 26
 that is connected to port 1 of the hub that is connected to root port 1 on
-the host controller would have a locationID of 0x1a110000.  If there are
+the host controller would have a locationID of <code>0x1a110000</code>.  If there are
 fewer than 6 ports in the route, the unused port number fields are zero.
 </p>
 <p>
@@ -250,7 +250,7 @@ indicates how many bytes of data there are for that frame.
 <li>If the packet indicates a submitted request, the payload is a
 sequence of "number of isochronous frames following" isochronous frame
 headers, with the frame length set to the number of bytes to be
-transferred, the frame status field set to 0xe0000001, and without any
+transferred, the frame status field set to <code>0xe0000001</code>, and without any
 data following the header.</li>
 </ul>
             </div>

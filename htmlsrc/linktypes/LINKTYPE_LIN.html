@@ -156,42 +156,42 @@
 <tbody>
 	<tr>
 		<td>reserved</td>
-		<td>0x80</td>
+		<td><code>0x80</code></td>
 		<td>Reserved</td>
 	</tr>
 	<tr>
 		<td>reserved</td>
-		<td>0x40</td>
+		<td><code>0x40</code></td>
 		<td>Reserved </td>
 	</tr>
 	<tr>
 		<td>e_overflow</td>
-		<td>0x20</td>
+		<td><code>0x20</td>
 		<td>Overflow Error, we have lost at least one message during reception because there was no space in the receiving controller's buffer</td>
 	</tr>
 	<tr>
 		<td>e_invalidid</td>
-		<td>0x10</td>
-		<td>Invalid ID, i.e. a frame ID of 0x3E or 0x3F has been received</td>
+		<td><code>0x10</code></td>
+		<td>Invalid ID, i.e. a frame ID of <code>0x3E</code> or <code>0x3F</code> has been received</td>
 	</tr>
 	<tr>
 		<td>e_cksum</td>
-		<td>0x08</td>
+		<td><code>0x08</code></td>
 		<td>Checksum Error</td>
 	</tr>
 	<tr>
 		<td>e_parity</td>
-		<td>0x04</td>
+		<td><code>0x04</code></td>
 		<td>Parity Error in the Protected Identifier field</td>
 	</tr>
 	<tr>
 		<td>e_framing</td>
-		<td>0x02</td>
+		<td><code>0x02</code></td>
 		<td>Framing Error, low-level transmissions/reception error</td>
 	</tr>
 	<tr>
 		<td>e_noslaveresp</td>
-		<td>0x01</td>
+		<td><code>0x01</code></td>
 		<td>No Slave Response Error; no slave wrote the Response
 		part of the frame, as per section 4.2.2 "Frames" of ISO 17987-3:2016</td>
 	</tr>
@@ -221,15 +221,15 @@ If a message is a LIN-Event, the following rules apply:
 </thead>
 <tbody>
 	<tr>
-		<td>0xB0B00001</td>
+		<td><code>0xB0B00001</code></td>
 		<td>Go-to-Sleep Event caused by a Go-to-Sleep Frame</td>
 	</tr>
 	<tr>
-		<td>0xB0B00002</td>
+		<td><code>0xB0B00002</code></td>
 		<td>Go-to-Sleep Event caused by bus inactivity for more than 4s</td>
 	</tr>
 	<tr>
-		<td>0xB0B00004</td>
+		<td><code>0xB0B00004</code></td>
 		<td>Wake-up Event caused by a Wake-up Signal</td>
 	</tr>
 </tbody>

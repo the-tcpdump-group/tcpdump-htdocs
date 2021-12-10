@@ -47,27 +47,27 @@ and are used in the lighting control industry.</p>
 <p>The Packet Delay field contains an integer value that is the
 number of milliseconds since the previous packet, in network byte order.</p>
 
-<p>The Preamble 1 and Preamble 2 fields should each contain 0xAA.</p>
+<p>The Preamble 1 and Preamble 2 fields should each contain <code>0xAA</code>.</p>
 
 <p>The Family/Address/IR field contains 3-bits of family code, 2-bits of
 address mode, 2-bits of IR (infrared) routing, and 1-bit unused.
 The 8 Legrand NITOO families are</p>
 <ul>
-<li>000=CAD Filaire</li>
-<li>001=TopDog</li>
-<li>010=CAD RF</li>
-<li>011=CAD PLC</li>
-<li>100=CAD IR</li>
-<li>101=DLM</li>
-<li>110=none</li>
-<li>111=Escape/DLM Bootloader</li>
+<li><code>000</code>=CAD Filaire</li>
+<li><code>001</code>=TopDog</li>
+<li><code>010</code>=CAD RF</li>
+<li><code>011</code>=CAD PLC</li>
+<li><code>100</code>=CAD IR</li>
+<li><code>101</code>=DLM</li>
+<li><code>110</code>=none</li>
+<li><code>111</code>=Escape/DLM Bootloader</li>
 </ul>
 <p>The Address mode bits are defined as</p>
 <ul>
-<li>00=Broadcast</li>
-<li>01=multicast</li>
-<li>10=unicast</li>
-<li>11=anonymous unicast</li>
+<li><code>00</code>=Broadcast</li>
+<li><code>01</code>=multicast</li>
+<li><code>10</code>=unicast</li>
+<li><code>11</code>=anonymous unicast</li>
 </ul>
 <p>The Payload varies depending on the Family.</p>
 

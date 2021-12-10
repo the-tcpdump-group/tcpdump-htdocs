@@ -91,8 +91,8 @@ else;</li>
 <li>4, if the packet was sent by us.</li>
 </ul>
 <p>
-The ARPHRD_ type field is in network byte order; it contains a Linux
-ARPHRD_ value for the link-layer device type.
+The <code>ARPHRD_</code> type field is in network byte order; it contains a Linux
+<code>ARPHRD_</code> value for the link-layer device type.
 </p>
 <p>
 The link-layer address length field is in network byte order; it
@@ -111,25 +111,25 @@ address to pad the field to 8 bytes.
 The protocol type field is in network byte order.
 </p>
 <p>
-If the ARPHRD_ type is ARPHRD_NETLINK (824), the packet data,
-including the LINKTYPE_LINUX_SLL header, is <a
-href="LINKTYPE_NETLINK.html">a LINKTYPE_NETLINK packet</a>,
+If the <code>ARPHRD_</code> type is <code>ARPHRD_NETLINK</code> (824), the packet data,
+including the <code>LINKTYPE_LINUX_SLL</code> header, is <a
+href="LINKTYPE_NETLINK.html">a <code>LINKTYPE_NETLINK</code> packet</a>,
 with the protocol type field being the Netlink protocol type.
 </p>
 <p>
-If the ARPHRD_ type is ARPHRD_IPGRE (778), the protocol type field
+If the <code>ARPHRD_</code> type is <code>ARPHRD_IPGRE</code> (778), the protocol type field
 contains a <a class=away href="https://tools.ietf.org/html/rfc2784">GRE</a>
 protocol type.
 </p>
 <p>
-If the ARPHRD_ type is ARPHRD_IEEE80211_RADIOTAP (803), the protocol
-type field is ignored, and the payload following the LINKTYPE_LINUX_SLL
+If the <code>ARPHRD_</code> type is <code>ARPHRD_IEEE80211_RADIOTAP</code> (803), the protocol
+type field is ignored, and the payload following the <code>LINKTYPE_LINUX_SLL</code>
 header begins with <a class=away href="http://www.radiotap.org/">Radiotap
 link-layer information</a> followed by an 802.11 header.
 </p>
 <p>
-If the ARPHRD_ type is ARPHRD_FRAD (770), the protocol type field is
-ignored, and the payload following the LINKTYPE_LINUX_SLL header is a
+If the <code>ARPHRD_</code> type is <code>ARPHRD_FRAD</code> (770), the protocol type field is
+ignored, and the payload following the <code>LINKTYPE_LINUX_SLL</code> header is a
 Frame Relay LAPF frame, beginning with a <a class=away
 href="https://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
 Q.922</a> LAPF header starting with the address field, and without an
@@ -140,12 +140,12 @@ Otherwise, the protocol type field contains the Ethernet protocol
 type for the packet, or one of:
 </p>
 <ul>
-<li>0x0001, if the frame is a Novell 802.3 frame without an 802.2 LLC
+<li><code>0x0001</code>, if the frame is a Novell 802.3 frame without an 802.2 LLC
 header;</li>
-<li>0x0003, in some mysterious cases;</li>
-<li>0x0004, if the frame begins with an 802.2 LLC header;</li>
-<li>0x000C, if the frame is a CAN bus frame;
-<li>0x000D, if the frame is a CAN FD (CAN with Flexible Data-Rate)
+<li><code>0x0003</code>, in some mysterious cases;</li>
+<li><code>0x0004</code>, if the frame begins with an 802.2 LLC header;</li>
+<li><code>0x000C</code>, if the frame is a CAN bus frame;
+<li><code>0x000D</code>, if the frame is a CAN FD (CAN with Flexible Data-Rate)
 frame.
 </ul>
 
@@ -178,11 +178,11 @@ The bottom 29 bits contain the CAN ID of the frame.  The remaining bits
 are:
 </p>
 <ul>
-<li>0x20000000 - set if the frame is an error message rather than a data
+<li><code>0x20000000</code> - set if the frame is an error message rather than a data
 frame.
-<li>0x40000000 - set if the frame is a remote transmission request
+<li><code>0x40000000</code> - set if the frame is a remote transmission request
 frame.
-<li>0x80000000 - set if the frame is an extended 29-bit frame rather
+<li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather
 than a standard 11-bit frame;
 </ul>
 <p>
@@ -218,13 +218,13 @@ The bottom 29 bits of that field contain the CAN ID of the frame.  The
 remaining bits are:
 </p>
 <ul>
-<li>0x80000000 - set if the frame is an extended 29-bit frame rather
+<li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather
 than a standard 11-bit frame.</li>
 </ul>
 The bits of the FD flags field are:
 <ul>
-<li>0x01 - set if the bit rate switch flag is set for the frame;</li>
-<li>0x02 - set if the error state indicator is set for the frame;</li>
+<li><code>0x01</code> - set if the bit rate switch flag is set for the frame;</li>
+<li><code>0x02</code> - set if the error state indicator is set for the frame;</li>
 </ul>
 <p>
 and the header is followed by the CAN FD payload.
@@ -243,24 +243,24 @@ empty.
 <p>
 For a CAN or CAN FD error message, the payload is always 8 bytes.  The
 lower bits of the CAN ID field contain an error class value, with bits
-specified by the first set of CAN_ERR_ values in <a class=away
+specified by the first set of <code>CAN_ERR_</code> values in <a class=away
 href="https://github.com/torvalds/linux/blob/master/include/uapi/linux/can/error.h">the
-Linux uapi/can/error.h header</a>.  The bytes in the payload are:
+Linux <code>uapi/can/error.h</code> header</a>.  The bytes in the payload are:
 </p>
 <ul>
 <li>first byte - if arbitration was lost, the bit number in the bitstream in which it was lost;
 otherwise 0. 
 <li>second byte - the error status of the CAN controller, with bits
-specified by the CAN_ERR_CRTL_ bits in the Linux uapi/can/error.h
+specified by the <code>CAN_ERR_CRTL_</code> bits in the Linux <code>uapi/can/error.h</code>
 header.
 <li>third byte - flags indicating a CAN protocol error type, with bits
-specified by the CAN_ERR_PROT_ bits in the Linux uapi/can/error.h
+specified by the <code>CAN_ERR_PROT_</code> bits in the Linux <code>uapi/can/error.h</code>
 header.
 <li>fourth byte - flags indicating a CAN protocol error location, with
-bits specified by the CAN_ERR_LOC_ bits in the Linux uapi/can/error.h
+bits specified by the <code>CAN_ERR_LOC_</code> bits in the Linux <code>uapi/can/error.h</code>
 header.
 <li>fifth byte - the error status of the CAN transceiver, with values
-specified by the CAN_ERR_TRX_ values in the Linux uapi/can/error.h
+specified by the <code>CAN_ERR_TRX_</code> values in the Linux <code>uapi/can/error.h</code>
 header.
 <li>sixth, seventh, and eighth bytes - controller-specific additional
 information.

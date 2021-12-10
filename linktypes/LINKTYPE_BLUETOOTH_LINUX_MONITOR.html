@@ -80,14 +80,14 @@ applies. On single-interface systems, this will typically be 0.
 The opcode field describes the type of packet.  Its value is:
 </p>
 <uL>
-<li>0x00 - New Index Event;</li>
-<li>0x01 - Delete Index Event;</li>
-<li>0x02 - HCI Command Packet;</li>
-<li>0x03 - HCI Event Packet;</li>
-<li>0x04 - transmitted HCI ACL Data Packet;</li>
-<li>0x05 - received HCI ACL Data Packet;</li>
-<li>0x06 - transmitted HCI Synchronous Data Packet;</li>
-<li>0x07 - received HCI Synchronous Data Packet.</li>
+<li><code>0x00</code> - New Index Event;</li>
+<li><code>0x01</code> - Delete Index Event;</li>
+<li><code>0x02</code> - HCI Command Packet;</li>
+<li><code>0x03</code> - HCI Event Packet;</li>
+<li><code>0x04</code> - transmitted HCI ACL Data Packet;</li>
+<li><code>0x05</code> - received HCI ACL Data Packet;</li>
+<li><code>0x06</code> - transmitted HCI Synchronous Data Packet;</li>
+<li><code>0x07</code> - received HCI Synchronous Data Packet.</li>
 </ul>
 <h4>New Index Event</h4>
 <p>
@@ -113,20 +113,20 @@ Its payload has the following format:
 The bus field specifies the type of controller:
 </p>
 <ul>
-<li>0x00 - BR/EDR;</li>
-<li>0x01 - AMP.</li>
+<li><code>0x00</code> - BR/EDR;</li>
+<li><code>0x01</code> - AMP.</li>
 </ul>
 <p>
 The type field specifies the transport type of the controller:
 </p>
 <ul>
-<li>0x00 - Virtual;</li>
-<li>0x01 - USB;</li>
-<li>0x02 - PC Card;</li>
-<li>0x03 - UART;</li>
-<li>0x04 - RS-232;</li>
-<li>0x05 - PCI;</li>
-<li>0x06 - SDIO.</li>
+<li><code>0x00</code> - Virtual;</li>
+<li><code>0x01</code> - USB;</li>
+<li><code>0x02</code> - PC Card;</li>
+<li><code>0x03</code> - UART;</li>
+<li><code>0x04</code> - RS-232;</li>
+<li><code>0x05</code> - PCI;</li>
+<li><code>0x06</code> - SDIO.</li>
 </ul>
 <p>
 The BD_ADDR field contains the MAC address of the interface.

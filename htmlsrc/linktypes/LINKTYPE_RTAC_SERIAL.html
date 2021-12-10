@@ -43,30 +43,30 @@ The Serial Event Type field  represents the type of packet entry in the pcap
 file:
 </p>
 <ul>
-<li>0x00 - STATUS_CHANGE</li>
-<li>0x01 - DATA_TX_START</li>
-<li>0x02 - DATA_RX_START</li>
-<li>0x03 - DATA_TX_END</li>
-<li>0x04 - DATA_RX_END</li>
-<li>0x05 - CAPTURE_DATA_LOST</li>
-<li>0x06 - CAPTURE_COMPLETE</li>
-<li>0x07 - FRAMING_ERROR</li>
-<li>0x08 - PARITY_ERROR</li>
-<li>0x09 - SERIAL_BREAK_EVENT</li>
-<li>0x0A - SERIAL_OVERFLOW_EVENT</li>
+<li><code>0x00</code> - STATUS_CHANGE</li>
+<li><code>0x01</code> - DATA_TX_START</li>
+<li><code>0x02</code> - DATA_RX_START</li>
+<li><code>0x03</code> - DATA_TX_END</li>
+<li><code>0x04</code> - DATA_RX_END</li>
+<li><code>0x05</code> - CAPTURE_DATA_LOST</li>
+<li><code>0x06</code> - CAPTURE_COMPLETE</li>
+<li><code>0x07</code> - FRAMING_ERROR</li>
+<li><code>0x08</code> - PARITY_ERROR</li>
+<li><code>0x09</code> - SERIAL_BREAK_EVENT</li>
+<li><code>0x0A</code> - SERIAL_OVERFLOW_EVENT</li>
 </ul>
 <p>
 The UART Control Line State field shows the state of the serial UART
 lines (asserted, de-asserted) at the time of the packet generation:
 </p>
 <ul>
-<li>0x01 - Clear To Send</li>
-<li>0x02 - Data Carrier Detect</li>
-<li>0x04 - Data Set Ready</li>
-<li>0x08 - Request To Send</li>
-<li>0x10 - Data Terminal Ready</li>
-<li>0x20 - RING</li>
-<li>0x40 - MBOK</li>
+<li><code>0x01</code> - Clear To Send</li>
+<li><code>0x02</code> - Data Carrier Detect</li>
+<li><code>0x04</code> - Data Set Ready</li>
+<li><code>0x08</code> - Request To Send</li>
+<li><code>0x10</code> - Data Terminal Ready</li>
+<li><code>0x20</code> - RING</li>
+<li><code>0x40</code> - MBOK</li>
 </ul>
 <p>
 The Footer is reserved for future use

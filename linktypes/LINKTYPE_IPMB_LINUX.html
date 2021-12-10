@@ -84,7 +84,7 @@ the flags depends on whether the packet is a regular packet or an event.
 If the packet is a regular packet, the flag bits are:
 </p>
 <ul>
-<li>0x00000001 - if set, the packet is a read.</li>
+<li><code>0x00000001</code> - if set, the packet is a read.</li>
 </ul>
 <p>
 The upper 7 bits of the hardware address field contain the slave address
@@ -94,30 +94,30 @@ for the packet.  The payload is an IPMB packet.
 If the packet is an event, the lower-order 16 bits indicate what type of
 event this is:
 <ul>
-<li>0x00000001 - promiscuous mode was enabled;</li>
-<li>0x00000002 - promiscuous mode was disabled;</li>
-<li>0x00000004 - the I2C controller went online;</li>
-<li>0x00000008 - the I2C controller went offline;</li>
-<li>0x00000010 - the I2C controller attached to an I2C bus;</li>
-<li>0x00000020 - the I2C controller detached from an I2C bus;</li>
-<li>0x00000040 - the promiscuous data buffer overflowed, and some data
+<li><code>0x00000001</code> - promiscuous mode was enabled;</li>
+<li><code>0x00000002</code> - promiscuous mode was disabled;</li>
+<li><code>0x00000004</code> - the I2C controller went online;</li>
+<li><code>0x00000008</code> - the I2C controller went offline;</li>
+<li><code>0x00000010</code> - the I2C controller attached to an I2C bus;</li>
+<li><code>0x00000020</code> - the I2C controller detached from an I2C bus;</li>
+<li><code>0x00000040</code> - the promiscuous data buffer overflowed, and some data
 was lost;</li>
-<li>0x00000080 - the promiscuous data buffer is no longer full;</li>
-<li>0x00000100 - the incoming I2C data buffer overflowed, and some data was lost;</li>
-<li>0x00000200 - the incoming I2C data buffer is no longer full;</li>
+<li><code>0x00000080</code> - the promiscuous data buffer is no longer full;</li>
+<li><code>0x00000100</code> - the incoming I2C data buffer overflowed, and some data was lost;</li>
+<li><code>0x00000200</code> - the incoming I2C data buffer is no longer full;</li>
 </ul>
 <p>
 For the "I2C controller went offline" error, the upper-order 16 bits
 indicate that:
 </p>
 <ul>
-<li>0x00010000 - the I2C controller is unable to drive data LO;</li>
-<li>0x00020000 - the I2C controller is unable to drive data HI;</li>
-<li>0x00040000 - the I2C controller is unable to drive clock LO;</li>
-<li>0x00080000 - the I2C controller is unable to drive clock HI;</li>
-<li>0x00100000 - the I2C controller got a clock low timeout;</li>
-<li>0x00200000 - the I2C controller was physically disconnected from the bus;</li>
-<li>0x00400000 - an undiagnosed failure occurred;</li>
+<li><code>0x00010000</code> - the I2C controller is unable to drive data LO;</li>
+<li><code>0x00020000</code> - the I2C controller is unable to drive data HI;</li>
+<li><code>0x00040000</code> - the I2C controller is unable to drive clock LO;</li>
+<li><code>0x00080000</code> - the I2C controller is unable to drive clock HI;</li>
+<li><code>0x00100000</code> - the I2C controller got a clock low timeout;</li>
+<li><code>0x00200000</code> - the I2C controller was physically disconnected from the bus;</li>
+<li><code>0x00400000</code> - an undiagnosed failure occurred;</li>
 </ul>
             </div>
             <!-- End of LINKTYPE_IPMB_LINUX section -->
