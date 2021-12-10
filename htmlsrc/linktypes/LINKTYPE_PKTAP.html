@@ -4,10 +4,7 @@
                 LINKTYPE_PKTAP
             </h2>
             <div class="entry">
-                <h3>Packet structure</h3>
-<p>
-PKTAP version 1:
-</p>
+                <h2 class="subtitle">Packet structure (PKTAP version 1)</h2>
 <pre>
 +---------------------------+
 |   Length of PKTAP header  |
@@ -78,9 +75,8 @@ PKTAP version 1:
 .                           .
 .                           .
 </pre>
-<p>
-PKTAP version 2:
-</p>
+
+                <h2 class="subtitle">Packet structure (PKTAP version 2)</h2>
 <pre>
 +----------------------------------------+
 |         Length of PKTAP header         |
@@ -155,15 +151,15 @@ PKTAP version 2:
 .                                        .
 </pre>
 
-                <h3>Description</h3>
+                <h2 class="subtitle">Description</h2>
 <p>
 All multi-byte fields currently appear to be little-endian, but Apple
 haven't indicated whether this is by design or merely a consequence of
 all Apple machines that write this format being little-endian.
 </p>
-<p>
+<h3 class="subtitle">
 In the PKTAP version 1 header:
-</p>
+</h3>
 <p>
 The length field indicates how long the PKTAP header is; this value
 includes the length of the length field itself.  It should be
@@ -236,7 +232,7 @@ assume that there is a NUL character at the end of the name.
 The service class field contains one of the following values:
 </p>
 <ul>
-<li>0, for "best effort",
+<li>0, for "best effort";
 <li>100, for "background system-initiated";
 <li>200, for "background user-initiated";
 <li>300, for "responsive data";
@@ -283,9 +279,9 @@ may be <code>IPPROTO_RAW</code> if the packet was written to a raw socket.
 All fields following the effective command name field are optional; the
 length field indicates how many fields are present.
 </p>
-<p>
+<h3 class="subtitle">
 In the PKTAP version 2 header:
-</p>
+</h3>
 <p>
 The length field indicates how long the PKTAP header is; this value
 includes the length of the length field itself.  It should be
@@ -358,7 +354,7 @@ the host reading a capture.
 The service class field contains one of the following values:
 </p>
 <ul>
-<li>0, for "best effort",
+<li>0, for "best effort";
 <li>100, for "background system-initiated";
 <li>200, for "background user-initiated";
 <li>300, for "responsive data";

@@ -5,10 +5,10 @@
             </h2>
             <div class="entry">
 
-<p>This document is based on <a class=away href="https://gitlab.com/wireshark/wireshark/-/issues/12033">Add a dissector for FlexRay</a> ticket in WireShark</p>
+<p>This document is based on <a class=away href="https://gitlab.com/wireshark/wireshark/-/issues/12033">Add a dissector for FlexRay</a> ticket in WireShark.</p>
 
 <p>
-There are two different types of FlexRay Packets - FlexRay Frame Data
+There are two different types of FlexRay Packets: FlexRay Frame Data
 Packets and FlexRay Symbol Packets.
 </p>
 
@@ -107,7 +107,8 @@ TI[0..6]: Type Index
 FCRCERR: Frame CRC error
 HCRCERR: Header CRC error
 FESERR: Frame End Sequence error
-CODERR: Coding error… indicates if a Frame Start Sequence Error (FSSERR) or a Byte Start Sequence error (BSSERR) occurred
+CODERR: Coding error&hellip; indicates if a Frame Start Sequence Error (FSSERR)
+        or a Byte Start Sequence error (BSSERR) occurred
 TSSVIOL: TSS violation
 </pre>
 
@@ -126,7 +127,7 @@ Error Flags if an error occurred during decoding of these bits (Bits
 </p>
 <p>
 Do not assume that only whole FlexRay Frames are contained in the
-log file – a measurement device may also produce truncated frames if
+log file&mdash;a measurement device may also produce truncated frames if
 errors occur.  Truncation may happen at each byte boundary!
 </p>
 

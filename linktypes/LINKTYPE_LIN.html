@@ -54,8 +54,8 @@ Original license : Creative Commons Attribution 2.5 License
             </h2>
             <div class="entry">
 
-<p>This document is based on email conversation with Hannes Kaelber</p>
-<p>Hannes Kaelber translated the original documentation from German</p>
+<p>This document is based on email conversation with Hannes Kaelber.</p>
+<p>Hannes Kaelber translated the original documentation from German.</p>
 
 <h3><strong>Frame Format</strong></h3>
 <table class="byte_array byte_array_32">
@@ -148,46 +148,46 @@ Original license : Creative Commons Attribution 2.5 License
 	<tr>
 		<td>msg_format_rev</td>
 		<td>8</td>
-		<td>LIN Message Format Revision, this field must always be set to 1, 0 is invalid value</td>
+		<td>LIN Message Format Revision, this field must always be set to 1, 0 is invalid value.</td>
 	</tr>
 	<tr>
 		<td>payload_length</td>
 		<td>4</td>
-		<td>Number of LIN payload bytes</td>
+		<td>Number of LIN payload bytes.</td>
 	</tr>
 	<tr>
 		<td>message_type</td>
 		<td>2</td>
-		<td>Message type (0=LIN-Frame, 3=LIN-Event, 1 and 2=undefined)</td>
+		<td>Message type (0=LIN-Frame, 3=LIN-Event, 1 and 2=undefined).</td>
 	</tr>
 	<tr>
 		<td>checksum_type</td>
 		<td>2</td>
 		<td>
-			Checksum type (0=unknown/error, 1=classic, 2=enhanced, 3=undefined)<br>
-			unknown/error means that either the checksum is incorrect (usually the case) or that a checksum algorithm we do not know has been used (should not happen).
+			Checksum type (0=unknown/error, 1=classic, 2=enhanced, 3=undefined).<br>
+			Unknown/error means that either the checksum is incorrect (usually the case) or that a checksum algorithm we do not know has been used (should not happen).
 			Since we detect which checksum variant has been used and we cannot say that for sure if the checksum is incorrect, we have introduced this value.
 		</td>
 	</tr>
 	<tr>
 		<td>PID</td>
 		<td>8</td>
-		<td>Protected Identifier, as described in section 5.2.2.5 "PID field" of ISO 17987-3:2016</td>
+		<td>Protected Identifier, as described in section 5.2.2.5 "PID field" of ISO 17987-3:2016.</td>
 	</tr>
 	<tr>
 		<td>checksum</td>
 		<td>8</td>
-		<td>Checksum, as described in section 5.2.2.7 "Checksum" of ISO 17987-3:2016</td>
+		<td>Checksum, as described in section 5.2.2.7 "Checksum" of ISO 17987-3:2016.</td>
 	</tr>
 	<tr>
 		<td>errors</td>
 		<td>8</td>
-		<td>Error Bits (see below)</td>
+		<td>Error Bits (see below).</td>
 	</tr>
 	<tr>
 		<td>payload[n]</td>
 		<td>8</td>
-		<td>Payload Byte n. Payload 5-8 exists only if payload_length is larger than 4</td>
+		<td>Payload Byte n. Payload 5-8 exists only if payload_length is larger than 4.</td>
 	</tr>
 </tbody>
 </table>
@@ -206,43 +206,43 @@ Original license : Creative Commons Attribution 2.5 License
 	<tr>
 		<td>reserved</td>
 		<td><code>0x80</code></td>
-		<td>Reserved</td>
+		<td>Reserved.</td>
 	</tr>
 	<tr>
 		<td>reserved</td>
 		<td><code>0x40</code></td>
-		<td>Reserved </td>
+		<td>Reserved.</td>
 	</tr>
 	<tr>
 		<td>e_overflow</td>
 		<td><code>0x20</td>
-		<td>Overflow Error, we have lost at least one message during reception because there was no space in the receiving controller's buffer</td>
+		<td>Overflow Error, we have lost at least one message during reception because there was no space in the receiving controller's buffer.</td>
 	</tr>
 	<tr>
 		<td>e_invalidid</td>
 		<td><code>0x10</code></td>
-		<td>Invalid ID, i.e. a frame ID of <code>0x3E</code> or <code>0x3F</code> has been received</td>
+		<td>Invalid ID, i.e. a frame ID of <code>0x3E</code> or <code>0x3F</code> has been received.</td>
 	</tr>
 	<tr>
 		<td>e_cksum</td>
 		<td><code>0x08</code></td>
-		<td>Checksum Error</td>
+		<td>Checksum Error.</td>
 	</tr>
 	<tr>
 		<td>e_parity</td>
 		<td><code>0x04</code></td>
-		<td>Parity Error in the Protected Identifier field</td>
+		<td>Parity Error in the Protected Identifier field.</td>
 	</tr>
 	<tr>
 		<td>e_framing</td>
 		<td><code>0x02</code></td>
-		<td>Framing Error, low-level transmissions/reception error</td>
+		<td>Framing Error, low-level transmissions/reception error.</td>
 	</tr>
 	<tr>
 		<td>e_noslaveresp</td>
 		<td><code>0x01</code></td>
 		<td>No Slave Response Error; no slave wrote the Response
-		part of the frame, as per section 4.2.2 "Frames" of ISO 17987-3:2016</td>
+		part of the frame, as per section 4.2.2 "Frames" of ISO 17987-3:2016.</td>
 	</tr>
 </tbody>
 </table>
@@ -257,7 +257,7 @@ If a message is a LIN-Event, the following rules apply:
 <ul>
 	<li>payload_length is always 4.</li>
 	<li>The fields checksum_type, PID, checksum and errors are set to 0 and must be ignored.</li>
-	<li>The payload bytes 1-4 contain the type of the LIN event (big endian)</li>
+	<li>The payload bytes 1-4 contain the type of the LIN event (big endian).</li>
 </ul>
 
 <h4>Event Types</h4>
@@ -271,15 +271,15 @@ If a message is a LIN-Event, the following rules apply:
 <tbody>
 	<tr>
 		<td><code>0xB0B00001</code></td>
-		<td>Go-to-Sleep Event caused by a Go-to-Sleep Frame</td>
+		<td>Go-to-Sleep Event caused by a Go-to-Sleep Frame.</td>
 	</tr>
 	<tr>
 		<td><code>0xB0B00002</code></td>
-		<td>Go-to-Sleep Event caused by bus inactivity for more than 4s</td>
+		<td>Go-to-Sleep Event caused by bus inactivity for more than 4s.</td>
 	</tr>
 	<tr>
 		<td><code>0xB0B00004</code></td>
-		<td>Wake-up Event caused by a Wake-up Signal</td>
+		<td>Wake-up Event caused by a Wake-up Signal.</td>
 	</tr>
 </tbody>
 </table>

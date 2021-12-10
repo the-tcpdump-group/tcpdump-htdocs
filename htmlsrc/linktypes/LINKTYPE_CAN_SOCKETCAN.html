@@ -101,13 +101,13 @@ might happen to be set even thugh the frame is not a CAN FD frame.
 Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> frames:
 </p>
 <ul>
-  <li>Must check the frame MTU when receiving frames from the Linux kernel in order to classify them as classic CAN frames or CAN FD frames</li>
+  <li>Must check the frame MTU when receiving frames from the Linux kernel in order to classify them as classic CAN frames or CAN FD frames.</li>
   <li>Must make the "FD flags" field 0 for classic CAN frames.</li>
   <li>Must set the <code>CANFD_FDF</code> bit of the "FD flags" field in CAN FD frames,
     and don't set any bits in that field other than the <code>CANFD_BRS</code> and <code>CANFD_ESI</code> bits
     unless and until Linux assigns them a meaning.</li>
   <li>Must make the "Reserved/Padding" fields 0 unless and until Linux assigns it a meaning.</li>
-  <li>May strip trailing padding bytes to save disk space if all above statements are satisfied</li>
+  <li>May strip trailing padding bytes to save disk space if all above statements are satisfied.</li>
 </ul>
 
 <p>

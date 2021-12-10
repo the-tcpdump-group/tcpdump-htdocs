@@ -150,7 +150,7 @@ frame.
 </ul>
 
 <p>
-A CAN bus frame begins with a header of the form
+A CAN bus frame begins with a header of the form:
 </p>
 
 <pre>
@@ -179,9 +179,9 @@ are:
 </p>
 <ul>
 <li><code>0x20000000</code> - set if the frame is an error message rather than a data
-frame.
+frame;
 <li><code>0x40000000</code> - set if the frame is a remote transmission request
-frame.
+frame;
 <li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather
 than a standard 11-bit frame;
 </ul>
@@ -190,7 +190,7 @@ and the header is followed by the CAN bus payload.
 </p>
 
 <p>
-A CAN FD frame begins with a header of the form
+A CAN FD frame begins with a header of the form:
 </p>
 
 <pre>

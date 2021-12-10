@@ -19,9 +19,9 @@ The OPcode field has a value that is one of:
 </p>
 <ul>
 <li><code>0b000</code>, if the tag is an egress tag, for a packet going from the
-switch to the management port
+switch to the management port;
 <li><code>0b001</code>, if the tag is an ingress tag, for a packet going from the
-management port to the switch
+management port to the switch.
 </ul>
 <p>
 Other values are reserved.
@@ -47,10 +47,10 @@ The traffic class (TC) field values map to 802.1p/CoS traffic classes.
 The tag enforcement (TE) field has a value that is one of:
 </p>
 <ul>
-<li><code>0b00</code>, if there is no enforcement
+<li><code>0b00</code>, if there is no enforcement;
 <li><code>0b01</code>, if there is untag enforcement (VLAN untagged packets are
-checked against VLAN entries)
-<li><code>0b10</code>, if there is header enforcement
+checked against VLAN entries);
+<li><code>0b10</code>, if there is header enforcement.
 </ul>
 <p>
 <code>0b11</code> is a reserved value.
@@ -94,13 +94,13 @@ The reason code is set when the packets are sent to the management port;
 its value is one of:
 <ul>
 <li>0: mirroring: the CPU is a capturing device.
-<li>1: MAC SA learning
-<li>2: Switching: CPU is the intended destination port for the packet
+<li>1: MAC SA learning.
+<li>2: Switching: CPU is the intended destination port for the packet.
 <li>3: Protocol termination: 802.1 protocol that needs to be terminated
-by the CPU, e.g: 802.1x/Radius
+by the CPU, e.g 802.1x/RADIUS.
 <li>4: Protocol snooping: the CPU needs to look at the packets: IGMP/MLD,
 RARP/ARP/DHCP etc.
-<li>5: Exception processing flooding
+<li>5: Exception processing flooding.
 </ul>
 <p>
 Values of 6 and 7 are reserved.

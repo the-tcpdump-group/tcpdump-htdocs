@@ -120,7 +120,7 @@ header;</li>
 <li><code>0x0003</code>, in some mysterious cases;</li>
 <li><code>0x0004</code>, if the frame begins with an 802.2 LLC header;</li>
 <li><code>0x000C</code>, if the frame is a CAN bus frame that begins with a header of
-the form
+the form:
 
 <pre>
 +---------------------------+
@@ -148,16 +148,16 @@ are:
 </p>
 <ul>
 <li><code>0x20000000</code> - set if the frame is an error message rather than a data
-frame.
+frame;
 <li><code>0x40000000</code> - set if the frame is a remote transmission request
-frame.
+frame;
 <li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather
 than a standard 11-bit frame;
 </ul>
-and the header is followed by the payload;</li>
+and the header is followed by the payload.</li>
 
 <li><code>0x000D</code>, if the frame is a CAN FD (CAN with Flexible Data-Rate) frame
-that begins with a header of the form
+that begins with a header of the form:
 
 <pre>
 +---------------------------+
@@ -194,7 +194,7 @@ The bits of the FD flags field are:
 </ul>
 and the header is followed by the payload.</li>
 </ul>
-<p>The "Reserved (MBZ) field is reserved, and must be set to zero.
+<p>The "Reserved (MBZ)" field is reserved, and must be set to zero.
 </p>
 <p>
 The interface index field is a signed integer in network byte order and
