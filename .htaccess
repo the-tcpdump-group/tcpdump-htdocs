@@ -1,5 +1,5 @@
 Options +Indexes
-IndexOptions +FancyIndexing +HTMLTable +SuppressDescription +SuppressLastModified
+IndexOptions +FancyIndexing +HTMLTable +SuppressDescription +SuppressLastModified +VersionSort
 IndexStyleSheet /style.css
 HeaderName /autoindex_header.html
 ReadmeName /autoindex_footer.html
