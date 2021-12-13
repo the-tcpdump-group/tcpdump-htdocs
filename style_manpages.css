@@ -33,3 +33,8 @@ div.version_boilerplate h4 {
 	margin-top: 1em;
 	margin-bottom: 1em;
 }
+
+/* for pcap-savefile(5) */
+table table td {
+	border: 1px solid black;
+}
