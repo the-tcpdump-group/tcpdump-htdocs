@@ -2,3 +2,11 @@ IndexOptions +SuppressSize +IgnoreClient
 # In this context these symlinks are only distractors.
 IndexIgnore images
 IndexIgnore style_manpages.css
+# This script does not serve direct requests.
+IndexIgnore restyle.php
+
+RewriteEngine On
+# Have the script process requests for all existing .html files.
+RewriteCond "%{REQUEST_FILENAME}" "\.html$"
+RewriteCond "%{REQUEST_FILENAME}" -f
+RewriteRule "." "restyle.php" [L,PT]
