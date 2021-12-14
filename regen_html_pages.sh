@@ -85,6 +85,7 @@ rewrite_URLs()
 {
 	if [ "${1:?}" != "${1#linktypes/}" ]; then
 		sed 's#<link href="style.css#<link href="../style.css#' |
+			sed 's#<link href="images/#<link href="../images/#' |
 			sed 's#<img src="images/#<img src="../images/#' |
 			sed 's#<a href="index.html#<a href="../index.html#' |
 			sed 's#<a href="security.html#<a href="../security.html#' |
