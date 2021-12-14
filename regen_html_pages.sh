@@ -60,6 +60,9 @@ substitute_page_title()
 	marvell-switch-tag)
 		title='Marvell switch tag | '
 		;;
+	realtek-switch-tag)
+		title='Realtek switch tag | '
+		;;
 	season-of-docs)
 		title='Season of Docs | '
 		;;
