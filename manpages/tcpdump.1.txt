@@ -181,9 +181,9 @@ OPTIONS
               secret is the ASCII text for ESP secret key.  If preceded by 0x,
               then a hex value will be read.
 
-              The option assumes RFC2406 ESP, not RFC1827 ESP.  The option  is
-              only  for  debugging purposes, and the use of this option with a
-              true `secret' key is discouraged.  By  presenting  IPsec  secret
+              The option assumes RFC 2406 ESP, not RFC 1827 ESP.   The  option
+              is  only for debugging purposes, and the use of this option with
+              a true `secret' key is discouraged.  By presenting IPsec  secret
               key  onto  command line you make it visible to others, via ps(1)
               and other occasions.
 
@@ -728,7 +728,7 @@ OUTPUT FORMAT
        LLC packet.
 
        (N.B.: The following description assumes familiarity with the SLIP com-
-       pression algorithm described in RFC-1144.)
+       pression algorithm described in RFC 1144.)
 
        On SLIP links, a direction indicator (``I'' for inbound, ``O'' for out-
        bound),  packet type, and compression information are printed out.  The
@@ -807,7 +807,7 @@ OUTPUT FORMAT
        TCP Packets
 
        (N.B.:The following description assumes familiarity with the TCP proto-
-       col described in RFC-793.  If you are not familiar with  the  protocol,
+       col described in RFC 793.  If you are not familiar with  the  protocol,
        this description will not be of much use to you.)
 
        The general format of a TCP protocol line is:
@@ -1044,13 +1044,13 @@ OUTPUT FORMAT
 
        Some  UDP  services are recognized (from the source or destination port
        number) and the higher level protocol information printed.  In particu-
-       lar,  Domain  Name  service  requests (RFC-1034/1035) and Sun RPC calls
-       (RFC-1050) to NFS.
+       lar,  Domain  Name  service  requests (RFC 1034/1035) and Sun RPC calls
+       (RFC 1050) to NFS.
 
        TCP or UDP Name Server Requests
 
        (N.B.:The following description assumes  familiarity  with  the  Domain
-       Service  protocol  described in RFC-1035.  If you are not familiar with
+       Service  protocol  described in RFC 1035.  If you are not familiar with
        the protocol, the following description will appear to  be  written  in
        Greek.)
 
