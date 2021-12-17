@@ -5,11 +5,12 @@
             </h2>
             <div class="entry">
 <p>
-This is a list of link-layer header types used in pcap and pcap-ng
+The table below lists link-layer header types used in pcap and pcap-ng
 capture files.  The <code>LINKTYPE_</code> name is the name given to that
 link-layer header type, and the <code>LINKTYPE_</code> value is the numerical
 value used in capture files.  The <code>DLT_</code> name is the name
-corresponding to the value returned by
+corresponding to the value (specific to the packet capture method and
+device type) returned by
 <a href="manpages/pcap_datalink.3pcap.html"><code>pcap_datalink()</code></a>
 and <code>pcap_datalink_ex()</code>; in most cases, the <code>LINKTYPE_</code>
 value and <code>DLT_</code> value are the same, but, in some cases, they differ,
@@ -25,13 +26,20 @@ additional information, or might be transformed in some way from the way
 it's specified for that link-layer protocol, e.g.  fields in the
 link-layer protocol header might be removed, added, moved, or modified.
 </p>
-<p>
-Values not listed here are reserved:</p>
-<ul><li>Values in the range 147 through
-162 are reserved for private use; if you have some link-layer header
+            </div>
+
+            <h2 class="title">
+                Assigned and Reserved Values
+            </h2>
+            <div class="entry">
+<ul>
+<li>
+Values in the range <code>DLT_USER0</code>&ndash;<code>DLT_USER15</code>
+(147&ndash;162, both inclusive) are reserved for private use; if you
+have some link-layer header
 type that you want to use within your organization, with the capture
 files using that link-layer header type not ever be sent outside your
-organization, you can use one or more these values.  No libpcap release
+organization, you can use one or more of these values.  No libpcap release
 will use these for any purpose, nor will any tcpdump release use them,
 either.
 <p>
@@ -39,7 +47,7 @@ Do <strong>NOT</strong> use these in capture files that you expect
 anybody not using your private versions of capture-file-reading tools to
 read; in particular, do <strong>NOT</strong> use them in products,
 otherwise you may find that people won't be able to use tcpdump, or
-snort, or Wireshark, or&hellip; to read capture files from your
+snort, or Wireshark, or&hellip; to read the capture files from your
 firewall/intrusion detection/traffic monitoring/etc.  appliance, or
 whatever product uses that link-layer header type value, and you may
 also find that the developers of those applications will not accept
@@ -51,30 +59,124 @@ for <em>their</em> private type and tools using them for <em>your</em>
 private type would have to read them.
 </p>
 </li>
+<li>
+<p>
+All other values listed in the table below are assigned.
+</p>
+</li>
+<li>
+<p>
+Any values not listed in the table below are reserved for future use
+and can be assigned subject to due process.
+</p>
+</li>
+</ul>
+            </div>
 
-<li>All other values are reserved for current or future uses.  If you
-need a value for a particular set of link-layer headers, you must
-  request one;
-  <ul>
-    <li> to do so, send a mail message to <a
-href="mailto:tcpdump-workers@lists.tcpdump.org">tcpdump-workers@lists.tcpdump.org</a>.
+            <h2 class="title">
+                How To Assign a New Value
+            </h2>
+            <div class="entry">
+
+<p>
+  Please remember that initial prototyping and experimentation can and
+  should be done using the <code>DLT_USERx</code> private use values.
+  If you need a value for a particular set of link-layer headers,
+  you must request one; to do so:
+</p>
+<ul>
+  <li>
+    <p>
+      Subscribe to the <a href="index.html#mailing-lists"> mailing
+      list</a> and send a message with the request.
+    </p>
 <p>
 Please include either an indication of the standard that describes the
 link-layer headers, a link to a page describing the link-layer headers,
 or a detailed description of the link-layer headers.  If the headers do
 not exactly match the description in a standard or standards&mdash;for
-example, if fields are added, removed, or reordered, or have their size
-or format changed, please describe the changes in detail.
+example, if fields are added, removed, or reordered, or have their size,
+endianness or format changed&mdash;please describe all differences in
+detail.
 </p>
-    <li> Send a pull request with the new value,
-      see: <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/doc/DLT_ALLOCATE_HOWTO.md">DLT_ALLOCATE_HOWTO.md</a>
-  </ul>
-</li>
+  </li>
+  <li>
+    <p>
+      Prepare <a href="https://github.com/the-tcpdump-group/libpcap">
+      libpcap</a> changes for the new value:
+    </p>
+    <ul>
+      <li>
+        In <code>pcap/dlt.h</code> add the new <code>DLT_</code>
+        value and the associated comments, increment
+        <code>DLT_MATCHING_MAX</code>.
+      </li>
+      <li>
+        In <code>pcap-common.c</code> add the new
+        <code>LINKTYPE_</code> value (omit the comments if the previous
+        step explains everything sufficiently well), increment
+        <code>LINKTYPE_MATCHING_MAX</code>.
+      </li>
+      <li>
+        In <code>pcap.c</code> add the new value to
+        <code>dlt_choices[]</code>.
+      </li>
+      <li>
+        Check everything and open a pull request with the changes.
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>
+      Prepare
+      <a href="https://github.com/the-tcpdump-group/tcpdump-htdocs">
+      web site</a> changes for the new value:
+    </p>
+    <ul>
+      <li>
+        If there is no other specification readily available for the
+        new header type, create a new
+        <code>htmlsrc/linktypes/LINKTYPE_xxxxx.html</code> file and
+        document the new header structure.
+      </li>
+      <li>
+        In <code>htmlsrc/linktypes.html</code> (this file) add the new
+        value to the bottom of the table.
+      </li>
+      <li>
+        Generate complete HTML files from the file(s) above as
+        explained
+        <a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">
+        here</a>.
+      </li>
+      <li>
+        Check everything and open a pull request with the changes.
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>
+      Have patience.
+    </p>
+    <p>
+      Be ready to answer questions and to address any technical issues
+      that emerge during the review.  This sometimes takes longer than
+      expected, but it is important to get every detail right because
+      after the assignment the new header structure should be set in
+      stone.
+    </p>
+  </li>
+</p>
 </ul>
+            </div>
 
+            <h2 class="title">
+                Warning
+            </h2>
+            <div class="entry">
 <p>
-Do <strong>NOT</strong> add new values to this list without asking
-tcpdump-workers@lists.tcpdump.org for a value.  Otherwise, you run the
+Do <strong>NOT</strong> add new values to this list except as explained
+above.  Otherwise, you run the
 risk of using a value that's already being used for some other purpose,
 and of having tools that read libpcap-format captures not being able to
 handle captures with your new link-layer header type value, with no hope
@@ -83,7 +185,7 @@ ability to read captures using that value for that other purpose).
 <p>
 Do <strong>NOT</strong> use any of these link-layer header type values
 unless your link-layer headers <strong>EXACTLY</strong> match the
-specification.  If they do not exactly match, request your own
+specification.  If they do not exactly match, request a new
 link-layer header type for them.
 </p>
             </div>
@@ -492,9 +594,9 @@ specification.
 </tr>
 
 <tr>
-<td class="symbol">LINKTYPE_USER0-LINKTYPE-USER15</td>
-<td class="number">147-162</td>
-<td class="symbol">DLT_USER0-DLT_USER15</td>
+<td class="symbol">LINKTYPE_USER0&ndash;LINKTYPE_USER15</td>
+<td class="number">147&ndash;162</td>
+<td class="symbol">DLT_USER0&ndash;DLT_USER15</td>
 <td>
 Reserved for private use; see above.
 </td>
