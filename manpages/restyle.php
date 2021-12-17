@@ -123,6 +123,16 @@ foreach ($taxonomy as $pname => $project)
 	(
 		array
 		(
+			'@^<!DOCTYPE HTML PUBLIC .+>@',
+			'<!DOCTYPE html>'
+		),
+		array
+		(
+			'@<HTML>@',
+			'<HTML lang="en">'
+		),
+		array
+		(
 			'@(.*<BODY>)$@m',
 			"\$1\n" . read_file (HEADER_FILE) . "<DIV id=page>\n<DIV class=post>\n"
 		),
@@ -151,6 +161,17 @@ foreach ($taxonomy as $pname => $project)
 			'@^(</HEAD>.*)$@m',
 			'<link href="/style.css" rel="stylesheet" type="text/css" media="screen">' . "\n\$1"
 		),
+		# In today's snapshot of HTML spec <DL compact>, <TT> and <A name=> are obsolete.
+		array
+		(
+			'@<DL COMPACT>@',
+			"<DL>"
+		),
+		array
+		(
+			'@</?TT>@',
+			''
+		),
 		array
 		(
 			'@<H1>(.+)</H1>@',
@@ -158,13 +179,13 @@ foreach ($taxonomy as $pname => $project)
 		),
 		array
 		(
-			'@<H2>(.+)</H2>@',
-			"</DIV>\n<H2 class=title>\$1</H2>\n<DIV class=entry>"
+			'@<A NAME="(.+)">&nbsp;</A>\n?<H2>(.+)</H2>@',
+			"</DIV>\n<H2 class=title id=\$1>\$2</H2>\n<DIV class=entry>"
 		),
 		array
 		(
-			'@<H3>(.+)</H3>@',
-			"<H3 class=subtitle>\$1</H3>"
+			'@<A NAME="(.+)">&nbsp;</A>\n?<H3>(.+)</H3>@',
+			"<H3 class=subtitle id=\$1>\$2</H3>"
 		),
 		array
 		(
