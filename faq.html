@@ -54,6 +54,7 @@ Original license : Creative Commons Attribution 2.5 License
                     </h2>
                     <div class="entry">
                         <ul>
+                          <li> <a href="#q12">How to decode a protocol on a non-standard port?</a> </li>
                           <li> <a href="#q2">How come I can not compile on Solaris?</a> </li>
                           <li> <a href="#q3">Why is tcpdump's address space steadily growing?</a> </li>
 
@@ -69,14 +70,52 @@ Original license : Creative Commons Attribution 2.5 License
 		                    are the time stamps?</a> </li>
                           <li> <a href="#q9">Why do my time stamps on Linux have only 100ms
 		                    resolution?</a> </li>
-                          <li> <a href="#q10">Why are my time stamps on Windows 95/98/Me wrong?</a> </li>
+                          <!-- (Was Q10, removed.) -->
                           <li> <a href="#q11">How to update the man pages?</a> </li>
-                          <li> <a href="#q12">How to decode a protocol on a non-standard port?</a> </li>
                         </ul>
                     </div>
                 </div>
                 <!-- End of QUESTION INDEX section -->
 
+
+                <!-- Start of QUESTION #12 section -->
+                <div class="post">
+                    <h2 class="title" id="q12">
+                        How to decode a protocol on a non-standard port?
+                    </h2>
+                    <div class="entry">
+                        <p>
+                            <span class=initial>A:</span>
+                            This may be possible under certain conditions.  First of all, the
+                            network protocol of interest must be one of the protocols supported by
+                            the <code>-T</code> flag of tcpdump.  You can find the complete list in the
+                            <a href="manpages/tcpdump.1.html">man page</a> (most of these protocols
+                            are UDP-based).
+                        </p>
+                        <p>
+                            If the protocol is supported, keep in mind that using <code>-T type</code>
+                            will usually override the protocol detection for many unrelated packets
+                            as well.  For the best results you would need to apply a packet filter
+                            to leave only the correct packets in scope.  For example, to decode
+                            RADIUS authentication packets on non-standard port 21812, you would need
+                            to run tcpdump in a way similar to the following:
+                        </p>
+<pre>
+tcpdump -T radius -nv udp port 21812
+</pre>
+                        <p>
+                            If this approach does not solve the problem, you can consider
+                            <a href="index.html#patches">contributing code</a> to extend tcpdump
+                            or using a different packet analyzer. For example,
+                            <a class=away
+                            href="https://mta.openssl.org/pipermail/openssl-users/2017-April/005624.html">this
+                            mailing list post</a> explains how to use <code>tshark</code> to examine
+                            the SSL protocol exchange of an FTPS connection that uses a non-standard
+                            TCP port.
+                        </p>
+                    </div>
+                </div>
+                <!-- End of QUESTION #12 section -->
 
                 <!-- Start of QUESTION #2 section -->
                 <div class="post">
@@ -482,29 +521,7 @@ Original license : Creative Commons Attribution 2.5 License
                 </div>
                 <!-- End of QUESTION #9 section -->
 
-                <!-- Start of QUESTION #10 section -->
-                <div class="post">
-                    <h2 class="title" id="q10">
-                        Why are my time stamps on Windows wrong?
-                    </h2>
-                    <div class="entry">
-                        <p>
-                            <span class=initial>Q:</span>
-                            I'm capturing packets on Windows, why are the time stamps on packets wrong?
-                        </p>
-
-                        <p>
-                            <span class=initial>A:</span>
-                            This is due to a bug in WinPcap.  The bug should be fixed in the WinPcap
-                            3.0 beta release&mdash;note that it's an beta release, so it may be
-                            buggier than the current production release of WinPcap; please report
-                            those bugs to the WinPcap developers, and help them try to track down
-                            the problem, so that they can fix it for the final release.
-                        </p>
-
-                    </div>
-                </div>
-                <!-- End of QUESTION #10 section -->
+                <!-- (Was Q10, removed.) -->
 
                 <!-- Start of QUESTION #11 section -->
                 <div class="post">
@@ -592,45 +609,6 @@ Example e-mail is \%nobody@example.org.
                     </div>
                 </div>
                 <!-- End of QUESTION #11 section -->
-
-                <!-- Start of QUESTION #12 section -->
-                <div class="post">
-                    <h2 class="title" id="q12">
-                        How to decode a protocol on a non-standard port?
-                    </h2>
-                    <div class="entry">
-                        <p>
-                            <span class=initial>A:</span>
-                            This may be possible under certain conditions.  First of all, the
-                            network protocol of interest must be one of the protocols supported by
-                            the <code>-T</code> flag of tcpdump.  You can find the complete list in the
-                            <a href="manpages/tcpdump.1.html">man page</a> (most of these protocols
-                            are UDP-based).
-                        </p>
-                        <p>
-                            If the protocol is supported, keep in mind that using <code>-T type</code>
-                            will usually override the protocol detection for many unrelated packets
-                            as well.  For the best results you would need to apply a packet filter
-                            to leave only the correct packets in scope.  For example, to decode
-                            RADIUS authentication packets on non-standard port 21812, you would need
-                            to run tcpdump in a way similar to the following:
-                        </p>
-<pre>
-tcpdump -T radius -nv udp port 21812
-</pre>
-                        <p>
-                            If this approach does not solve the problem, you can consider
-                            <a href="index.html#patches">contributing code</a> to extend tcpdump
-                            or using a different packet analyzer. For example,
-                            <a class=away
-                            href="https://mta.openssl.org/pipermail/openssl-users/2017-April/005624.html">this
-                            mailing list post</a> explains how to use <code>tshark</code> to examine
-                            the SSL protocol exchange of an FTPS connection that uses a non-standard
-                            TCP port.
-                        </p>
-                    </div>
-                </div>
-                <!-- End of QUESTION #12 section -->
         </div>
         <!-- END OF PAGE CONTENTS -->
 
