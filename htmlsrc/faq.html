@@ -5,6 +5,7 @@
                     </h2>
                     <div class="entry">
                         <ul>
+                          <li> <a href="#q13">Why my VLAN/MPLS packet filter does not work?</a> </li>
                           <li> <a href="#q12">How to decode a protocol on a non-standard port?</a> </li>
                           <li> <a href="#q2">How come I can not compile on Solaris?</a> </li>
                           <li> <a href="#q3">Why is tcpdump's address space steadily growing?</a> </li>
@@ -28,6 +29,75 @@
                 </div>
                 <!-- End of QUESTION INDEX section -->
 
+
+                <!-- Start of QUESTION #13 section -->
+                <div class="post">
+                    <h2 class="title" id="q13">
+                        Why my VLAN/MPLS packet filter does not work?
+                    </h2>
+                    <div class="entry">
+                        <p>
+                            <span class=initial>Q:</span>
+                            My packet filter expression includes the <code>vlan</code> or
+                            <code>mpls</code> keyword(s); what it actually matches and what I expect
+                            it to match are somewhat (or completely) different things, is this a bug?
+                        </p>
+                        <p>
+                            <span class=initial>A:</span>
+                            Most often this is not a bug, but a result of misunderstanding of how these
+                            keywords work.  The matter is, to test the packet for one or another
+                            matching condition, filter primitives need to read data at specific offsets
+                            from the beginning of the packet.  As the
+                            <a href="manpages/pcap-filter.7.html">pcap-filter man page</a> mentions it,
+                            some keywords automatically increment that offset for all subsequent
+                            keywords in the filter expression&mdash;this stands for every <code>vlan</code>,
+                            <code>mpls</code> or <code>geneve</code> keyword and for the first
+                            <code>pppoes</code> or <code>lane</code> keyword.
+                        </p>
+                        <p>
+                            On one hand, this simplifies expression syntax required to skip the outer
+                            header(s) once and to test multiple conditions in the inner header(s), e.g.:
+<pre>
+vlan and src net (192.0.2.0/24 or 2001:db8::/32) and port 53
+</pre>
+                        </p>
+                        <p>
+                            On the other hand, and rather counterintuitively, the filter expression
+                        </p>
+<pre>
+vlan 100 or vlan 200
+</pre>
+                        <p>
+                            means "a packet with at least one 802.1Q tag and the outermost VLAN ID 100 or
+                            a packet with at least two 802.1Q tags and the second outermost VLAN ID 200".
+                            Unfortunately, the current syntax of those primitives does not support
+                            expressions such as <code>vlan (100 or 200)</code>, which means that each
+                            VLAN/MPLS/Geneve layer can be tested at most once.
+                        </p>
+                        <p>
+                            In some cases it may be possible to achieve the desired effect by rearranging
+                            the same primitives in the filter expression to place <code>vlan</code> or
+                            <code>mpls</code> before or after other primitives, see tcpdump
+                            (<a href="https://github.com/the-tcpdump-group/tcpdump/issues/113">113</a>,
+                            <a href="https://github.com/the-tcpdump-group/tcpdump/issues/115">115</a>,
+                            <a href="https://github.com/the-tcpdump-group/tcpdump/issues/606">606</a>,
+                            <a href="https://github.com/the-tcpdump-group/tcpdump/issues/900">900</a>)
+                            and libpcap
+                            (<a href="https://github.com/the-tcpdump-group/libpcap/issues/408">408</a>,
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/798">798</a>,
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/1070">1070</a>)
+                            bug reports for specific examples.  Alternatively, it may be possible
+                            (although not trivial) to rewrite the expression using different primitives,
+                            as explained in
+                            <a href="https://ask.wireshark.org/question/24957/capture-filter-pppoes-does-not-work-as-expected/">
+                            this post</a>.
+                        </p>
+                        <p>
+
+                        </p>
+                    </div>
+                </div>
+                <!-- End of QUESTION #13 section -->
 
                 <!-- Start of QUESTION #12 section -->
                 <div class="post">
