@@ -161,6 +161,11 @@ foreach ($taxonomy as $pname => $project)
 			'@^(</HEAD>.*)$@m',
 			'<link href="/style.css" rel="stylesheet" type="text/css" media="screen">' . "\n\$1"
 		),
+		array
+		(
+			'@^(</HEAD>.*)$@m',
+			"<link href=\"${basename}.txt\" rel=\"alternate\" type=\"text/plain\">\n\$1"
+		),
 		# In today's snapshot of HTML spec <DL compact>, <TT> and <A name=> are obsolete.
 		array
 		(
@@ -205,12 +210,6 @@ $2'
 			"</DIV>\n</DIV>\n" . read_file (FOOTER_FILE) . "\n\$1"
 		),
 	);
-	if ($uri_path != $txthref = preg_replace ('/\.html$/', '.txt', $uri_path))
-		$toreplace[] = array
-		(
-			'@^(</HEAD>.*)$@m',
-			"<link href=\"${txthref}\" rel=\"alternate\" type=\"text/plain\">\n\$1"
-		);
 	foreach ($toreplace as $each)
 	{
 		list ($pattern, $replacement) = $each;
