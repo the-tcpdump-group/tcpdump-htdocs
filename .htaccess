@@ -1,6 +1,7 @@
 Options +Indexes
 IndexOptions +FancyIndexing +HTMLTable +SuppressDescription +SuppressLastModified +VersionSort
 IndexStyleSheet /style.css
+IndexHeadInsert "  <link rel=\"shortcut icon\" href=\"/images/T-32x32.png\" type=\"image/png\">"
 HeaderName /autoindex_header.html
 ReadmeName /autoindex_footer.html
 
