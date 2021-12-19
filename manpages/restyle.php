@@ -10,7 +10,7 @@ $taxonomy = array
 (
 	'tcpdump' => array
 	(
-		'versions' => array ('4.9.0', '4.9.1', '4.9.2', '4.99.0', '4.99.1'),
+		'versions' => array ('4.9.0', '4.9.1', '4.9.2', '4.9.3', '4.99.0', '4.99.1'),
 		'match_master' => '@^(tcpdump\.1)\.html$@',
 		'match_release' => '@^(tcpdump\.1)-([0-9.]+)\.html$@',
 		'print_master' => '%s.html',
