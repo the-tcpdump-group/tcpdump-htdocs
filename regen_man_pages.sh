@@ -39,7 +39,7 @@ WEBSITE_PFX=.
 # the <HTML> tag with an explicit hard-coded <!DOCTYPE ...> line.
 stripContentTypeHeader()
 {
-	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'
+	echo '<!DOCTYPE html>'
 	sed -n '/^<HTML><HEAD><TITLE>/,$p'
 }
 
@@ -61,19 +61,29 @@ printSedFile()
 {
 	# Fixup custom links.
 	# Suppress some output difference between Fedora and Ubuntu versions of man2html.
+	# Modernize a few HTML elements so the syntax conforms to the DOCTYPE; among other
+	# things lose the now obsolete TT as it is within PRE anyway and convert named
+	# anchors into IDs of the subsequent headers.
 	# Convert file:// schema hyperlinks to plain text.
 	# Customize the page footer.
 	cat <<ENDOFFILE
 s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX/">Return to Main Contents</A>@g
 s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
 s@^<HTML><HEAD><TITLE>Manpage of @<HTML><HEAD><TITLE>Man page of @
+s@<HTML>@<HTML lang="en">@
+s@</HEAD><BODY>@<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">\n\0@
+s@</HEAD><BODY>@<LINK rel="stylesheet" type="text/css" href="../style.css">\n\0@
 s@</HEAD><BODY>@<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">\n</HEAD><BODY>@
 s@</HEAD><BODY>@<meta charset="utf-8">\n</HEAD><BODY>@
+s@<DL COMPACT>@<DL>@g
+s@<TT>@@g
+s@</TT>@@g
 s@<H1>@<H1>Man page of @
+s@\(<A NAME="index">&nbsp;</A>\)\(<H2>Index</H2>\)@\1\n\2@
+/^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H2>\(.*\)</H2>@<H2 id=\1>\2</H2>@}
+/^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H3>\(.*\)</H3>@<H3 id=\1>\2</H3>@}
 s@<A HREF="file://\(.*\)">\(.*\)</A>@\2@g
-s@</BODY>@<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>\n\0@
-s@</BODY>@<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>\n\0@
-s/^using the manual pages.<BR>$/using the manual pages from "The Tcpdump Group" git repositories.<BR>/
+/^This document was created by\$/ {N;N;N;s@.*\n.*\n.*\nTime: \(.*\)\$@<H2>COLOPHON</H2>\nThis HTML man page was generated at \1\nfrom a source man page in "The Tcpdump Group" git repositories\nusing man2html and other tools.@}
 ENDOFFILE
 
 	# Convert links to non-local pages to plain text.
@@ -274,7 +284,7 @@ produceHTML()
 		echo "Updated but not in repository: $outfile"
 		return
 	}
-	git diff "$outfile" | tail --lines +5 | grep -E '^[-+]' | grep -E -q -v '^[-+]Time: ' || {
+	git diff "$outfile" | tail --lines +5 | grep -E '^[-+]' | grep -E -q -v '^[-+]This HTML man page was generated at ' || {
 		git checkout --quiet "$outfile"
 		return
 	}

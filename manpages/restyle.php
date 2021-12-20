@@ -123,16 +123,6 @@ foreach ($taxonomy as $pname => $project)
 	(
 		array
 		(
-			'@^<!DOCTYPE HTML PUBLIC .+>@',
-			'<!DOCTYPE html>'
-		),
-		array
-		(
-			'@<HTML>@',
-			'<HTML lang="en">'
-		),
-		array
-		(
 			'@(.*<BODY>)$@m',
 			"\$1\n" . read_file (HEADER_FILE) . "<DIV id=page>\n<DIV class=post>\n"
 		),
@@ -154,28 +144,7 @@ foreach ($taxonomy as $pname => $project)
 		array
 		(
 			'@^(</HEAD>.*)$@m',
-			'<link rel="shortcut icon" href="/images/T-32x32.png" type="image/png">' . "\n\$1"
-		),
-		array
-		(
-			'@^(</HEAD>.*)$@m',
-			'<link href="/style.css" rel="stylesheet" type="text/css" media="screen">' . "\n\$1"
-		),
-		array
-		(
-			'@^(</HEAD>.*)$@m',
 			"<link href=\"${basename}.txt\" rel=\"alternate\" type=\"text/plain\">\n\$1"
-		),
-		# In today's snapshot of HTML spec <DL compact>, <TT> and <A name=> are obsolete.
-		array
-		(
-			'@<DL COMPACT>@',
-			"<DL>"
-		),
-		array
-		(
-			'@</?TT>@',
-			''
 		),
 		array
 		(
@@ -184,30 +153,18 @@ foreach ($taxonomy as $pname => $project)
 		),
 		array
 		(
-			'@<A NAME="(.+)">&nbsp;</A>\n?<H2>(.+)</H2>@',
-			"</DIV>\n<H2 class=title id=\$1>\$2</H2>\n<DIV class=entry>"
+			'@(<H2)(.*>.+</H2>)@',
+			"</DIV>\n\$1 class=title\$2\n<DIV class=entry>"
 		),
 		array
 		(
-			'@<A NAME="(.+)">&nbsp;</A>\n?<H3>(.+)</H3>@',
-			"<H3 class=subtitle id=\$1>\$2</H3>"
-		),
-		array
-		(
-			"@<HR>\nThis document was created by.+Time: (.+, 20[0-9]{2}).+(</BODY>)@s",
-			'</DIV>
-<H2 class=title>COLOPHON</H2>
-<DIV class=entry>
-This HTML man page was generated at $1
-from a source man page in "The Tcpdump Group" git repositories
-using man2html and other tools.
-</DIV>
-$2'
+			'@(<H3)(.*>.+</H3>)@',
+			'$1 class=subtitle$2'
 		),
 		array
 		(
 			'@(</BODY>.*)$@m',
-			"</DIV>\n</DIV>\n" . read_file (FOOTER_FILE) . "\n\$1"
+			"</DIV>\n</DIV>\n</DIV>\n" . read_file (FOOTER_FILE) . "\n\$1"
 		),
 	);
 	foreach ($toreplace as $each)

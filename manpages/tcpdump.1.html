@@ -1,5 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<HTML><HEAD><TITLE>Man page of TCPDUMP</TITLE>
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of TCPDUMP</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 <meta charset="utf-8">
 </HEAD><BODY>
@@ -15,12 +17,10 @@ a different version on this web site or in the man pages available in your
 installation.
 </DIV>
 
-<A NAME="lbAB">&nbsp;</A>
-<H2>NAME</H2>
+<H2 id="lbAB">NAME</H2>
 
 tcpdump - dump traffic on a network
-<A NAME="lbAC">&nbsp;</A>
-<H2>SYNOPSIS</H2>
+<H2 id="lbAC">SYNOPSIS</H2>
 
 
 <B>tcpdump</B>
@@ -211,8 +211,7 @@ tcpdump - dump traffic on a network
 <BR>
 
 
-<A NAME="lbAD">&nbsp;</A>
-<H2>DESCRIPTION</H2>
+<H2 id="lbAD">DESCRIPTION</H2>
 
 <P>
 
@@ -261,7 +260,7 @@ When
 <I>tcpdump</I>
 
 finishes capturing packets, it will report counts of:
-<DL COMPACT>
+<DL>
 <DT><DD>
 packets ``captured'' (this is the number of packets that
 <I>tcpdump</I>
@@ -322,10 +321,9 @@ special privileges; see the
 
 man page for details.  Reading a saved packet file doesn't require
 special privileges.
-<A NAME="lbAE">&nbsp;</A>
-<H2>OPTIONS</H2>
+<H2 id="lbAE">OPTIONS</H2>
 
-<DL COMPACT>
+<DL>
 <DT><B>-A</B>
 
 <DD>
@@ -718,8 +716,8 @@ Useful if you want to see the data
 while capturing it.
 E.g.,
 <DT><DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump -l | tee dat</B>
 </PRE>
@@ -731,8 +729,8 @@ E.g.,
 <DT><DD>
 or
 <DT><DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump -l &gt; dat &amp; tail -f dat</B>
 </PRE>
@@ -1229,7 +1227,7 @@ and the group ID to the primary group of
 <DT><DD>
 This behavior can also be enabled by default at compile time.
 <DT><I> expression</I><DD>
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 selects which packets will be dumped.
 If no <I>expression</I>
 is given, all packets on the net will be dumped.
@@ -1251,13 +1249,12 @@ metacharacters.
 Multiple arguments are concatenated with spaces before being parsed.
 </DL>
 </DL>
-<A NAME="lbAF">&nbsp;</A>
-<H2>EXAMPLES</H2>
+<H2 id="lbAF">EXAMPLES</H2>
 
 <P>
 
 To print all packets arriving at or departing from <I>sundown</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump host sundown</B>
 </PRE>
@@ -1267,7 +1264,7 @@ To print all packets arriving at or departing from <I>sundown</I>:
 <P>
 
 To print traffic between <I>helios</I> and either <I>hot</I> or <I>ace</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump host helios and \( hot or ace \)</B>
 </PRE>
@@ -1277,7 +1274,7 @@ To print traffic between <I>helios</I> and either <I>hot</I> or <I>ace</I>:
 <P>
 
 To print all IP packets between <I>ace</I> and any host except <I>helios</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump ip host ace and not helios</B>
 </PRE>
@@ -1287,7 +1284,7 @@ To print all IP packets between <I>ace</I> and any host except <I>helios</I>:
 <P>
 
 To print all traffic between local hosts and hosts at Berkeley:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump net ucb-ether</B>
 </PRE>
@@ -1299,7 +1296,7 @@ To print all traffic between local hosts and hosts at Berkeley:
 To print all ftp traffic through internet gateway <I>snup</I>:
 (note that the expression is quoted to prevent the shell from
 (mis-)interpreting the parentheses):
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump 'gateway snup and (port ftp or ftp-data)'</B>
 </PRE>
@@ -1311,7 +1308,7 @@ To print all ftp traffic through internet gateway <I>snup</I>:
 To print traffic neither sourced from nor destined for local hosts
 (if you gateway to one other net, this stuff should never make it
 onto your local net).
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump ip and not net </B><I>localnet</I>
 </PRE>
@@ -1322,7 +1319,7 @@ onto your local net).
 
 To print the start and end packets (the SYN and FIN packets) of each
 TCP conversation that involves a non-local host.
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump 'tcp[tcpflags] &amp; (tcp-syn|tcp-fin) != 0 and not src and dst net </B><I>localnet</I>'
 </PRE>
@@ -1334,7 +1331,7 @@ TCP conversation that involves a non-local host.
 To print the TCP packets with flags RST and ACK both set.
 (i.e. select only the RST and ACK flags in the flags field, and if the result
 is &quot;RST and ACK both set&quot;, match)
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump 'tcp[tcpflags] &amp; (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)'</B>
 </PRE>
@@ -1346,7 +1343,7 @@ is &quot;RST and ACK both set&quot;, match)
 To print all IPv4 HTTP packets to and from port 80, i.e. print only
 packets that contain data, not, for example, SYN and FIN packets and
 ACK-only packets.  (IPv6 is left as an exercise for the reader.)
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump 'tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)'</B>
 </PRE>
@@ -1356,7 +1353,7 @@ ACK-only packets.  (IPv6 is left as an exercise for the reader.)
 <P>
 
 To print IP packets longer than 576 bytes sent through gateway <I>snup</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump 'gateway snup and ip[2:2] &gt; 576'</B>
 </PRE>
@@ -1369,7 +1366,7 @@ To print IP broadcast or multicast packets that were
 <I>not</I>
 
 sent via Ethernet broadcast or multicast:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump 'ether[0] &amp; 1 = 0 and ip[16] &gt;= 224'</B>
 </PRE>
@@ -1380,15 +1377,14 @@ sent via Ethernet broadcast or multicast:
 
 To print all ICMP packets that are not echo requests/replies (i.e., not
 ping packets):
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcpdump 'icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply'</B>
 </PRE>
 
 </DL>
 
-<A NAME="lbAG">&nbsp;</A>
-<H2>OUTPUT FORMAT</H2>
+<H2 id="lbAG">OUTPUT FORMAT</H2>
 
 <P>
 
@@ -1407,7 +1403,7 @@ Timestamps
 By default, all output lines are preceded by a timestamp.
 The timestamp
 is the current clock time in the form
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <I>hh:mm:ss.frac</I>
 </PRE>
@@ -1495,7 +1491,7 @@ For example, the following line shows an outbound compressed TCP packet,
 with an implicit connection identifier; the ack has changed by 6,
 the sequence number by 49, and the packet ID by 6; there are 3 bytes of
 data and 6 bytes of compressed header:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>O ctcp * A+6 S+49 I+6 3 (6)</B>
 </PRE>
@@ -1515,11 +1511,11 @@ The
 format is intended to be self explanatory.
 Here is a short sample taken from the start of an `rlogin' from
 host <I>rtsg</I> to host <I>csam</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
-<TT>arp who-has csam tell rtsg
-arp reply csam is-at CSAM</TT>
+arp who-has csam tell rtsg
+arp reply csam is-at CSAM
 
 </PRE>
 
@@ -1533,11 +1529,11 @@ are in caps and internet addresses in lower case).
 <P>
 
 This would look less redundant if we had done <I>tcpdump -n</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
-<TT>arp who-has 128.3.254.6 tell 128.3.254.68
-arp reply 128.3.254.6 is-at 02:07:01:00:01:c4</TT>
+arp who-has 128.3.254.6 tell 128.3.254.68
+arp reply 128.3.254.6 is-at 02:07:01:00:01:c4
 </PRE>
 
 </DL>
@@ -1546,11 +1542,11 @@ arp reply 128.3.254.6 is-at 02:07:01:00:01:c4</TT>
 
 If we had done <I>tcpdump -e</I>, the fact that the first packet is
 broadcast and the second is point-to-point would be visible:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
-<TT>RTSG Broadcast 0806  64: arp who-has csam tell rtsg
-CSAM RTSG 0806  64: arp reply csam is-at CSAM</TT>
+RTSG Broadcast 0806  64: arp who-has csam tell rtsg
+CSAM RTSG 0806  64: arp reply csam is-at CSAM
 
 </PRE>
 
@@ -1577,7 +1573,7 @@ If the
 flag is specified, information from the IPv4 header is shown in
 parentheses after the <B>IP</B> or the link-layer header.
 The general format of this information is:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
 tos <I>tos</I>, ttl <I>ttl</I>, id <I>id</I>, offset <I>offset</I>, flags [<I>flags</I>], proto <I>proto</I>, length <I>length</I>, options (<I>options</I>)
@@ -1631,7 +1627,7 @@ be of much use to you.)</I>
 <P>
 
 The general format of a TCP protocol line is:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
 <I>src</I> &gt; <I>dst</I>: Flags [<I>tcpflags</I>], seq <I>data-seqno</I>, ack <I>ackno</I>, win <I>window</I>, urg <I>urgent</I>, options [<I>opts</I>], length <I>len</I>
@@ -1664,10 +1660,10 @@ are output only if appropriate.
 
 Here is the opening portion of an rlogin from host <I>rtsg</I> to
 host <I>csam</I>.
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
-<TT>IP rtsg.1023 &gt; csam.login: Flags [S], seq 768512:768512, win 4096, opts [mss 1024]
+IP rtsg.1023 &gt; csam.login: Flags [S], seq 768512:768512, win 4096, opts [mss 1024]
 IP csam.login &gt; rtsg.1023: Flags [S.], seq, 947648:947648, ack 768513, win 4096, opts [mss 1024]
 IP rtsg.1023 &gt; csam.login: Flags [.], ack 1, win 4096
 IP rtsg.1023 &gt; csam.login: Flags [P.], seq 1:2, ack 1, win 4096, length 1
@@ -1675,7 +1671,7 @@ IP csam.login &gt; rtsg.1023: Flags [.], ack 2, win 4096
 IP rtsg.1023 &gt; csam.login: Flags [P.], seq 2:21, ack 1, win 4096, length 19
 IP csam.login &gt; rtsg.1023: Flags [P.], seq 1:2, ack 21, win 4077, length 1
 IP csam.login &gt; rtsg.1023: Flags [P.], seq 2:3, ack 21, win 4077, urg 1, length 1
-IP csam.login &gt; rtsg.1023: Flags [P.], seq 3:4, ack 21, win 4077, urg 1, length 1</TT>
+IP csam.login &gt; rtsg.1023: Flags [P.], seq 3:4, ack 21, win 4077, urg 1, length 1
 
 </PRE>
 
@@ -1748,7 +1744,7 @@ it as ``[<I>bad hdr length</I>]''.
 <P>
 
 There are 8 bits in the control bits section of the TCP header:
-<DL COMPACT>
+<DL>
 <DT><DD>
 <I>CWR | ECE | URG | ACK | PSH | RST | SYN | FIN</I>
 
@@ -1762,15 +1758,15 @@ when it initializes a new connection; the connection sequence with
 regard to the TCP control bits is
 <P>
 
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 1) Caller sends SYN
 </DL>
 
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 2) Recipient responds with SYN, ACK
 </DL>
 
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 3) Caller sends ACK
 </DL>
 
@@ -1864,7 +1860,7 @@ control bits section we see that only bit number 1 (SYN) is set.
 
 Assuming that octet number 13 is an 8-bit unsigned integer in
 network byte order, the binary value of this octet is
-<DL COMPACT>
+<DL>
 <DT><DD>
 00000010
 </DL>
@@ -1886,7 +1882,7 @@ as a 8-bit unsigned integer in network byte order, must be exactly 2.
 <P>
 
 This relationship can be expressed as
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <B>tcp[13] == 2</B>
 
 </DL>
@@ -1895,7 +1891,7 @@ This relationship can be expressed as
 
 We can use this expression as the filter for <I>tcpdump</I> in order
 to watch packets which have only SYN set:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <B>tcpdump -i xl0 tcp[13] == 2</B>
 
 </DL>
@@ -1926,7 +1922,7 @@ with SYN-ACK set arrives:
 Now bits 1 and 4 are set in the 13th octet.
 The binary value of
 octet 13 is
-<DL COMPACT>
+<DL>
 <DT><DD>
 <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;00010010
 </DL>
@@ -1973,14 +1969,14 @@ The decimal representation of the AND value as well as
 the result of this operation is 2 (binary 00000010),
 so we know that for packets with SYN set the following
 relation must hold true:
-<DL COMPACT>
+<DL>
 <DT><DD>
 ( ( value of octet 13 ) AND ( 2 ) ) == ( 2 )
 </DL>
 <P>
 
 This points us to the <I>tcpdump</I> filter expression
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tcpdump&nbsp;-i&nbsp;xl0&nbsp;'tcp[13]&nbsp;&amp;&nbsp;2&nbsp;==&nbsp;2'</B>
 
 </DL>
@@ -1995,7 +1991,7 @@ tcp-push, tcp-ack, tcp-urg.
 <P>
 
 This can be demonstrated as:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tcpdump&nbsp;-i&nbsp;xl0&nbsp;'tcp[tcpflags]&nbsp;&amp;&nbsp;tcp-push&nbsp;!=&nbsp;0'</B>
 
 </DL>
@@ -2015,10 +2011,10 @@ from the shell.
 <P>
 
 UDP format is illustrated by this rwho packet:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
-<TT>actinide.who &gt; broadcast.who: udp 84</TT>
+actinide.who &gt; broadcast.who: udp 84
 
 </PRE>
 
@@ -2050,12 +2046,12 @@ in Greek.)</I>
 <P>
 
 Name server requests are formatted as
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
 <I>src &gt; dst: id op? flags qtype qclass name (len)</I>
 
-<TT>h2opolo.1538 &gt; helios.domain: 3+ A? ucbvax.berkeley.edu. (37)</TT>
+h2opolo.1538 &gt; helios.domain: 3+ A? ucbvax.berkeley.edu. (37)
 
 </PRE>
 
@@ -2102,13 +2098,13 @@ TCP or UDP Name Server Responses
 <P>
 
 Name server responses are formatted as
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
 <I>src &gt; dst:  id op rcode flags a/n/au type class data (len)</I>
 
-<TT>helios.domain &gt; h2opolo.1538: 3 3/3/7 A 128.32.137.3 (273)
-helios.domain &gt; h2opolo.1537: 2 NXDomain* 0/1/0 (97)</TT>
+helios.domain &gt; h2opolo.1538: 3 3/3/7 A 128.32.137.3 (273)
+helios.domain &gt; h2opolo.1537: 2 NXDomain* 0/1/0 (97)
 
 </PRE>
 
@@ -2172,13 +2168,13 @@ NFS Requests and Replies
 <P>
 
 Sun NFS (Network File System) requests and replies are printed as:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
 <I>src.sport &gt; dst.nfs: NFS request xid xid len op args</I>
 <I>src.nfs &gt; dst.dport: NFS reply xid xid reply stat len op results</I>
 
-<TT>
+
 sushi.1023 &gt; wrl.nfs: NFS request xid 26377
         112 readlink fh 21,24/10.73165
 wrl.nfs &gt; sushi.1023: NFS reply xid 26377
@@ -2187,7 +2183,7 @@ sushi.1022 &gt; wrl.nfs: NFS request xid 8219
         144 lookup fh 9,74/4096.6878 &quot;xcolors&quot;
 wrl.nfs &gt; sushi.1022: NFS reply xid 8219
         reply ok 128 lookup fh 9,74/4134.3150
-</TT>
+
 
 </PRE>
 
@@ -2222,15 +2218,15 @@ instead of the non-NFS port number of the packet.
 
 If the -v (verbose) flag is given, additional information is printed.
 For example:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
-<TT>
+
 sushi.1023 &gt; wrl.nfs: NFS request xid 79658
         148 read fh 21,11/12.195 8192 bytes @ 24576
 wrl.nfs &gt; sushi.1023: NFS reply xid 79658
         reply ok 1472 read REG 100664 ids 417/0 sz 29388
-</TT>
+
 
 </PRE>
 
@@ -2275,19 +2271,19 @@ as:
 <B></B>
 
 
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
 <I>src.sport &gt; dst.dport: rx packet-type</I>
 <I>src.sport &gt; dst.dport: rx packet-type service call call-name args</I>
 <I>src.sport &gt; dst.dport: rx packet-type service reply call-name args</I>
 
-<TT>
+
 elvis.7001 &gt; pike.afsfs:
         rx data fs call rename old fid 536876964/1/1 &quot;.newsrc.new&quot;
         new fid 536876964/1/1 &quot;.newsrc&quot;
 pike.afsfs &gt; elvis.7001: rx data fs reply rename
-</TT>
+
 
 </PRE>
 
@@ -2359,14 +2355,14 @@ The file
 
 is used to translate AppleTalk net and node numbers to names.
 Lines in this file have the form
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
 <I>number  name</I>
 
-<TT>1.254           ether
+1.254           ether
 16.1            icsd-net
-1.254.110       ace</TT>
+1.254.110       ace
 
 </PRE>
 
@@ -2387,14 +2383,14 @@ a `#').
 <P>
 
 AppleTalk addresses are printed in the form
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
 <I>net.host.port</I>
 
-<TT>144.1.209.2 &gt; icsd-net.112.220
+144.1.209.2 &gt; icsd-net.112.220
 office.2 &gt; icsd-net.112.220
-jssmag.149.235 &gt; icsd-net.2</TT>
+jssmag.149.235 &gt; icsd-net.2
 
 </PRE>
 
@@ -2423,12 +2419,12 @@ the protocol name (or number if no name is registered for the
 protocol) and packet size.
 <P>
 <B>NBP packets</B> are formatted like the following examples:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
-<TT>icsd-net.112.220 &gt; jssmag.2: nbp-lkup 190: &quot;=:LaserWriter@*&quot;
+icsd-net.112.220 &gt; jssmag.2: nbp-lkup 190: &quot;=:LaserWriter@*&quot;
 jssmag.209.2 &gt; icsd-net.112.220: nbp-reply 190: &quot;RM1140:LaserWriter@*&quot; 250
-techpit.2 &gt; icsd-net.112.220: nbp-reply 190: &quot;techpit:LaserWriter@*&quot; 186</TT>
+techpit.2 &gt; icsd-net.112.220: nbp-reply 190: &quot;techpit:LaserWriter@*&quot; 186
 
 </PRE>
 
@@ -2445,10 +2441,10 @@ another reply to the same request saying host techpit has laserwriter
 &quot;techpit&quot; registered on port 186.
 <P>
 <B>ATP packet</B> formatting is demonstrated by the following example:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 
-<TT>jssmag.209.165 &gt; helios.132: atp-req  12266&lt;0-7&gt; 0xae030001
+jssmag.209.165 &gt; helios.132: atp-req  12266&lt;0-7&gt; 0xae030001
 helios.132 &gt; jssmag.209.165: atp-resp 12266:0 (512) 0xae040000
 helios.132 &gt; jssmag.209.165: atp-resp 12266:1 (512) 0xae040000
 helios.132 &gt; jssmag.209.165: atp-resp 12266:2 (512) 0xae040000
@@ -2461,7 +2457,7 @@ jssmag.209.165 &gt; helios.132: atp-req  12266&lt;3,5&gt; 0xae030001
 helios.132 &gt; jssmag.209.165: atp-resp 12266:3 (512) 0xae040000
 helios.132 &gt; jssmag.209.165: atp-resp 12266:5 (512) 0xae040000
 jssmag.209.165 &gt; helios.132: atp-rel  12266&lt;0-7&gt; 0xae030001
-jssmag.209.133 &gt; helios.132: atp-req* 12267&lt;0-7&gt; 0xae030002</TT>
+jssmag.209.133 &gt; helios.132: atp-req* 12267&lt;0-7&gt; 0xae030002
 
 </PRE>
 
@@ -2490,8 +2486,7 @@ jssmag.209 initiates the next request.
 The `*' on the request
 indicates that XO (`exactly once') was <I>not</I> set.
 <P>
-<A NAME="lbAH">&nbsp;</A>
-<H2>SEE ALSO</H2>
+<H2 id="lbAH">SEE ALSO</H2>
 
 <B>stty</B>(1),
 
@@ -2509,7 +2504,7 @@ indicates that XO (`exactly once') was <I>not</I> set.
 
 <P>
 
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 
 <I><A HREF="https://www.iana.org/assignments/media-types/application/vnd.tcpdump.pcap">https://www.iana.org/assignments/media-types/application/vnd.tcpdump.pcap</A></I>
 
@@ -2518,8 +2513,7 @@ indicates that XO (`exactly once') was <I>not</I> set.
 
 <P>
 
-<A NAME="lbAI">&nbsp;</A>
-<H2>AUTHORS</H2>
+<H2 id="lbAI">AUTHORS</H2>
 
 The original authors are:
 <P>
@@ -2536,7 +2530,7 @@ It is currently being maintained by tcpdump.org.
 The current version is available via HTTPS:
 <P>
 
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <I><A HREF="https://www.tcpdump.org/">https://www.tcpdump.org/</A></I>
 
 </DL>
@@ -2546,7 +2540,7 @@ The current version is available via HTTPS:
 The original distribution is available via anonymous ftp:
 <P>
 
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <I><A HREF="ftp://ftp.ee.lbl.gov/old/tcpdump.tar.Z">ftp://ftp.ee.lbl.gov/old/tcpdump.tar.Z</A></I>
 
 </DL>
@@ -2555,8 +2549,7 @@ The original distribution is available via anonymous ftp:
 
 IPv6/IPsec support is added by WIDE/KAME project.
 This program uses OpenSSL/LibreSSL, under specific configurations.
-<A NAME="lbAJ">&nbsp;</A>
-<H2>BUGS</H2>
+<H2 id="lbAJ">BUGS</H2>
 
 To report a security issue please send an e-mail to <A HREF="mailto:security@tcpdump.org">security@tcpdump.org</A>.
 <P>
@@ -2573,7 +2566,7 @@ We recommend that you use the latter.
 <P>
 
 On Linux systems with 2.0[.x] kernels:
-<DL COMPACT>
+<DL>
 <DT><DD>
 packets on the loopback device will be seen twice;
 <DT><DD>
@@ -2632,7 +2625,7 @@ It only looks at IPv4 packets.
 <P>
 
 <HR>
-<A NAME="index">&nbsp;</A><H2>Index</H2>
+<H2 id="index">Index</H2>
 <DL>
 <DT><A HREF="#lbAB">NAME</A><DD>
 <DT><A HREF="#lbAC">SYNOPSIS</A><DD>
@@ -2645,11 +2638,9 @@ It only looks at IPv4 packets.
 <DT><A HREF="#lbAJ">BUGS</A><DD>
 </DL>
 <HR>
-This document was created by
-man2html,
-using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 12:28:12 GMT, December 14, 2021
-<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
-<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 12:28:12 GMT, December 14, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
 </BODY>
 </HTML>

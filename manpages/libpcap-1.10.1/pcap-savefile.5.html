@@ -1,5 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<HTML><HEAD><TITLE>Man page of PCAP-SAVEFILE</TITLE>
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP-SAVEFILE</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 <meta charset="utf-8">
 </HEAD><BODY>
@@ -15,12 +17,10 @@ a different version on this web site or in the man pages available in your
 installation.
 </DIV>
 
-<A NAME="lbAB">&nbsp;</A>
-<H2>NAME</H2>
+<H2 id="lbAB">NAME</H2>
 
 pcap-savefile - libpcap savefile format
-<A NAME="lbAC">&nbsp;</A>
-<H2>DESCRIPTION</H2>
+<H2 id="lbAC">DESCRIPTION</H2>
 
 NOTE: applications and libraries should, if possible, use libpcap to
 read savefiles, rather than having their own code to read savefiles.
@@ -33,7 +33,7 @@ support the new file format.
 
 ``Savefiles'' read and written by libpcap and applications using libpcap
 start with a per-file header.  The format of the per-file header is:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <TABLE BORDER><TR><TD><TABLE>
 <TR VALIGN=top><TD ALIGN=center COLSPAN=2>Magic number<BR></TD></TR>
 <TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
@@ -77,7 +77,7 @@ seconds and nanoseconds rather than seconds and microseconds.
 <P>
 
 Following this are:
-<DL COMPACT>
+<DL>
 <DT><DD>
 A 2-byte file format major version number; the current version number is
 2.
@@ -117,7 +117,7 @@ values that can appear in this field.
 Following the per-file header are zero or more packets; each packet
 begins with a per-packet header, which is immediately followed by the
 raw packet data.  The format of the per-packet header is:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <TABLE BORDER><TR><TD><TABLE>
 <TR VALIGN=top><TD ALIGN=center>Time stamp, seconds value<BR></TD></TR>
 <TR VALIGN=top><TD><HR></TD></TR>
@@ -147,19 +147,16 @@ number of bytes of captured data that follow the per-packet header and a
 the packet not been truncated by the snapshot length.  The two lengths
 will be equal if the number of bytes of packet data are less than or
 equal to the snapshot length.
-<A NAME="lbAD">&nbsp;</A>
-<H2>SEE ALSO</H2>
+<H2 id="lbAD">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
 <P>
 
 <HR>
-This document was created by
-man2html,
-using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 12:26:13 GMT, October 07, 2021
-<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
-<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 12:26:13 GMT, October 07, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
 </BODY>
 </HTML>

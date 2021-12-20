@@ -1,5 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<HTML><HEAD><TITLE>Man page of PCAP_SNAPSHOT</TITLE>
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_SNAPSHOT</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 <meta charset="utf-8">
 </HEAD><BODY>
@@ -15,12 +17,10 @@ a different version on this web site or in the man pages available in your
 installation.
 </DIV>
 
-<A NAME="lbAB">&nbsp;</A>
-<H2>NAME</H2>
+<H2 id="lbAB">NAME</H2>
 
 pcap_snapshot - get the snapshot length
-<A NAME="lbAC">&nbsp;</A>
-<H2>SYNOPSIS</H2>
+<H2 id="lbAC">SYNOPSIS</H2>
 
 <PRE>
 <B>#include &lt;pcap/pcap.h&gt;
@@ -28,8 +28,7 @@ pcap_snapshot - get the snapshot length
 <B>int pcap_snapshot(pcap_t *p);
 </B></PRE>
 
-<A NAME="lbAD">&nbsp;</A>
-<H2>DESCRIPTION</H2>
+<H2 id="lbAD">DESCRIPTION</H2>
 
 <B>pcap_snapshot()</B>
 
@@ -49,8 +48,7 @@ It must not be called on a pcap descriptor created by
 that has not yet been activated by
 <B><A HREF='./pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)</B>.
 
-<A NAME="lbAE">&nbsp;</A>
-<H2>RETURN VALUE</H2>
+<H2 id="lbAE">RETURN VALUE</H2>
 
 <B>pcap_snapshot()</B>
 
@@ -58,18 +56,15 @@ returns the snapshot length on success and
 <B>PCAP_ERROR_NOT_ACTIVATED</B>
 
 if called on a capture handle that has been created but not activated.
-<A NAME="lbAF">&nbsp;</A>
-<H2>SEE ALSO</H2>
+<H2 id="lbAF">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP)
 <P>
 
 <HR>
-This document was created by
-man2html,
-using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 10:40:23 GMT, October 05, 2021
-<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
-<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 10:40:23 GMT, October 05, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
 </BODY>
 </HTML>

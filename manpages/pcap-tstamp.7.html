@@ -1,5 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<HTML><HEAD><TITLE>Man page of PCAP-TSTAMP</TITLE>
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP-TSTAMP</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 <meta charset="utf-8">
 </HEAD><BODY>
@@ -15,12 +17,10 @@ a different version on this web site or in the man pages available in your
 installation.
 </DIV>
 
-<A NAME="lbAB">&nbsp;</A>
-<H2>NAME</H2>
+<H2 id="lbAB">NAME</H2>
 
 pcap-tstamp - packet time stamps in libpcap
-<A NAME="lbAC">&nbsp;</A>
-<H2>DESCRIPTION</H2>
+<H2 id="lbAC">DESCRIPTION</H2>
 
 When capturing traffic, each packet is given a time stamp representing,
 for incoming packets, the arrival time of the packet and, for outgoing
@@ -29,7 +29,7 @@ approximation of the arrival or transmission time.  If it is supplied by
 the operating system running on the host on which the capture is being
 done, there are several reasons why it might not precisely represent the
 arrival or transmission time:
-<DL COMPACT>
+<DL>
 <DT><DD>
 if the time stamp is applied to the packet when the networking stack
 receives the packet, the networking stack might not see the packet until
@@ -126,8 +126,8 @@ use in code, the second value is the value returned by
 and accepted by
 <A HREF='./pcap_tstamp_type_name_to_val.3pcap.html'><B>pcap_tstamp_type_name_to_val</B></A>(3PCAP)<B>.</B>
 
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><B>PCAP_TSTAMP_HOST</B> - <B>host</B>
 
 <DD>
@@ -236,19 +236,16 @@ when capturing packets, this does not reflect the actual precision of
 the time stamp supplied by the hardware or operating system and, when
 reading a savefile, this does not indicate the actual precision of time
 stamps in the file.
-<A NAME="lbAD">&nbsp;</A>
-<H2>SEE ALSO</H2>
+<H2 id="lbAD">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
 <P>
 
 <HR>
-This document was created by
-man2html,
-using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 15:07:03 GMT, November 01, 2021
-<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
-<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 15:07:03 GMT, November 01, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
 </BODY>
 </HTML>

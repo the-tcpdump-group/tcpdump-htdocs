@@ -1,5 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<HTML><HEAD><TITLE>Man page of PCAP-FILTER</TITLE>
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP-FILTER</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 <meta charset="utf-8">
 </HEAD><BODY>
@@ -15,15 +17,13 @@ a different version on this web site or in the man pages available in your
 installation.
 </DIV>
 
-<A NAME="lbAB">&nbsp;</A>
-<H2>NAME</H2>
+<H2 id="lbAB">NAME</H2>
 
 pcap-filter - packet filter syntax
 <BR>
 
 
-<A NAME="lbAC">&nbsp;</A>
-<H2>DESCRIPTION</H2>
+<H2 id="lbAC">DESCRIPTION</H2>
 
 <P>
 
@@ -52,7 +52,7 @@ Primitives usually consist of an
 (name or number) preceded by one or more qualifiers.
 There are three
 different kinds of qualifier:
-<DL COMPACT>
+<DL>
 <DT><I>type</I><DD>
 <I>type</I>
 
@@ -210,7 +210,7 @@ E.g.,
 <P>
 
 Allowable primitives are:
-<DL COMPACT>
+<DL>
 <DT><B>dst host </B><I>host</I><DD>
 True if the IPv4/v6 destination field of the packet is <I>host</I>,
 which may be either an address or a name.
@@ -457,8 +457,8 @@ in so-called SNAP format with an Organizational Unit Identifier (OUI) of
 0x000000, for encapsulated Ethernet; it doesn't check whether the packet
 is in SNAP format with an OUI of 0x000000.
 The exceptions are:
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><B>iso</B><DD>
 the filter checks the DSAP (Destination Service Access Point) and
 SSAP (Source Service Access Point) fields of the LLC header;
@@ -473,8 +473,8 @@ and the AppleTalk etype.
 <DT><DD>
 In the case of Ethernet, the filter checks the Ethernet type field
 for most of those protocols.  The exceptions are:
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><B>iso</B>, <B>stp</B>, and <B>netbeui</B><DD>
 the filter checks for an 802.3 frame and then checks the LLC header as
 it does for FDDI, Token Ring, and 802.11;
@@ -549,8 +549,8 @@ True if the packet has an 802.2 LLC header and has the specified
 <I>type</I>
 
 can be one of:
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><B>i</B><DD>
 Information (I) PDUs
 <DT><B>s</B><DD>
@@ -1017,7 +1017,7 @@ The following TCP flags field values are available: <B>tcp-fin</B>,
 <P>
 
 Primitives may be combined using:
-<DL COMPACT>
+<DL>
 <DT><DD>
 A parenthesized group of primitives and operators.
 <DT><DD>
@@ -1059,13 +1059,12 @@ which should not be confused with
 </PRE>
 
 
-<A NAME="lbAD">&nbsp;</A>
-<H2>EXAMPLES</H2>
+<H2 id="lbAD">EXAMPLES</H2>
 
 <P>
 
 To select all packets arriving at or departing from <I>sundown</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>host sundown</B>
 </PRE>
@@ -1075,7 +1074,7 @@ To select all packets arriving at or departing from <I>sundown</I>:
 <P>
 
 To select traffic between <I>helios</I> and either <I>hot</I> or <I>ace</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>host helios and \( hot or ace \)</B>
 </PRE>
@@ -1085,7 +1084,7 @@ To select traffic between <I>helios</I> and either <I>hot</I> or <I>ace</I>:
 <P>
 
 To select all IP packets between <I>ace</I> and any host except <I>helios</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>ip host ace and not helios</B>
 </PRE>
@@ -1095,7 +1094,7 @@ To select all IP packets between <I>ace</I> and any host except <I>helios</I>:
 <P>
 
 To select all traffic between local hosts and hosts at Berkeley:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>net ucb-ether</B>
 </PRE>
@@ -1105,7 +1104,7 @@ To select all traffic between local hosts and hosts at Berkeley:
 <P>
 
 To select all ftp traffic through internet gateway <I>snup</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>gateway snup and (port ftp or ftp-data)</B>
 </PRE>
@@ -1117,7 +1116,7 @@ To select all ftp traffic through internet gateway <I>snup</I>:
 To select traffic neither sourced from nor destined for local hosts
 (if you gateway to one other net, this stuff should never make it
 onto your local net).
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>ip and not net </B><I>localnet</I>
 </PRE>
@@ -1128,7 +1127,7 @@ onto your local net).
 
 To select the start and end packets (the SYN and FIN packets) of each
 TCP conversation that involves a non-local host.
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcp[tcpflags] &amp; (tcp-syn|tcp-fin) != 0 and not src and dst net </B><I>localnet</I>
 </PRE>
@@ -1140,7 +1139,7 @@ TCP conversation that involves a non-local host.
 To select all IPv4 HTTP packets to and from port 80, i.e. print only
 packets that contain data, not, for example, SYN and FIN packets and
 ACK-only packets.  (IPv6 is left as an exercise for the reader.)
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)</B>
 </PRE>
@@ -1150,7 +1149,7 @@ ACK-only packets.  (IPv6 is left as an exercise for the reader.)
 <P>
 
 To select IP packets longer than 576 bytes sent through gateway <I>snup</I>:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>gateway snup and ip[2:2] &gt; 576</B>
 </PRE>
@@ -1163,7 +1162,7 @@ To select IP broadcast or multicast packets that were
 <I>not</I>
 
 sent via Ethernet broadcast or multicast:
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>ether[0] &amp; 1 = 0 and ip[16] &gt;= 224</B>
 </PRE>
@@ -1174,19 +1173,17 @@ sent via Ethernet broadcast or multicast:
 
 To select all ICMP packets that are not echo requests/replies (i.e., not
 ping packets):
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <PRE>
 <B>icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply</B>
 </PRE>
 
 </DL>
 
-<A NAME="lbAE">&nbsp;</A>
-<H2>SEE ALSO</H2>
+<H2 id="lbAE">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP)
-<A NAME="lbAF">&nbsp;</A>
-<H2>BUGS</H2>
+<H2 id="lbAF">BUGS</H2>
 
 To report a security issue please send an e-mail to <A HREF="mailto:security@tcpdump.org">security@tcpdump.org</A>.
 <P>
@@ -1220,11 +1217,9 @@ It only looks at IPv4 packets.
 <P>
 
 <HR>
-This document was created by
-man2html,
-using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 10:40:19 GMT, October 05, 2021
-<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
-<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 10:40:19 GMT, October 05, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
 </BODY>
 </HTML>

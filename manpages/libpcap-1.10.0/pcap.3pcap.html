@@ -1,5 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<HTML><HEAD><TITLE>Man page of PCAP</TITLE>
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
 <LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
 <meta charset="utf-8">
 </HEAD><BODY>
@@ -15,20 +17,17 @@ a different version on this web site or in the man pages available in your
 installation.
 </DIV>
 
-<A NAME="lbAB">&nbsp;</A>
-<H2>NAME</H2>
+<H2 id="lbAB">NAME</H2>
 
 pcap - Packet Capture library
-<A NAME="lbAC">&nbsp;</A>
-<H2>SYNOPSIS</H2>
+<H2 id="lbAC">SYNOPSIS</H2>
 
 <PRE>
 <B>#include &lt;pcap/pcap.h&gt;
 
 </B></PRE>
 
-<A NAME="lbAD">&nbsp;</A>
-<H2>DESCRIPTION</H2>
+<H2 id="lbAD">DESCRIPTION</H2>
 
 The Packet Capture library
 provides a high level interface to packet capture systems. All packets
@@ -36,14 +35,13 @@ on the network, even those destined for other hosts, are accessible
 through this mechanism.
 It also supports saving captured packets to a ``savefile'', and reading
 packets from a ``savefile''.
-<A NAME="lbAE">&nbsp;</A>
-<H3>Initializing</H3>
+<H3 id="lbAE">Initializing</H3>
 
 <B>pcap_init</B>()
 
 initializes the library.  It takes an argument giving options;
 currently, the options are:
-<DL COMPACT>
+<DL>
 <DT><B>PCAP_CHAR_ENC_LOCAL</B>
 
 <DD>
@@ -104,12 +102,12 @@ is called, as
 <B>pcap_init</B>()
 
 will initialize Winsock itself on Windows.
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_init.3pcap.html'><B>pcap_init</B></A>(3PCAP)
 
 <DD>
@@ -118,8 +116,7 @@ initialize the library
 </DL>
 
 </DL>
-<A NAME="lbAF">&nbsp;</A>
-<H3>Opening a capture handle for reading</H3>
+<H3 id="lbAF">Opening a capture handle for reading</H3>
 
 To open a handle for a live capture, given the name of the network or
 other interface on which the capture should be done, call
@@ -196,7 +193,7 @@ To close a handle, use
 <P>
 
 The options that can be set on a capture handle include
-<DL COMPACT>
+<DL>
 <DT>snapshot length<DD>
 If, when capturing, you capture the entire contents of the packet, that
 requires more CPU time to copy the packet to your application, more disk
@@ -355,7 +352,7 @@ The time stamp type is set with
 
 Reading packets from a network interface may require that you have
 special privileges:
-<DL COMPACT>
+<DL>
 <DT><B>Under SunOS 3.x or 4.x with NIT or BPF:</B>
 
 <DD>
@@ -499,12 +496,12 @@ corresponding to a
 opened for a ``savefile'', call
 <B>pcap_file</B>().
 
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
 
 <DD>
@@ -718,8 +715,7 @@ get the major and minor version of the file format version for a
 </DL>
 
 </DL>
-<A NAME="lbAG">&nbsp;</A>
-<H3>Selecting a link-layer header type for a live capture</H3>
+<H3 id="lbAG">Selecting a link-layer header type for a live capture</H3>
 
 Some devices may provide more than one link-layer header type.  To
 obtain a list of all link-layer header types provided by a device, call
@@ -737,12 +733,12 @@ To set the link-layer header type for a device, call
 
 This should be done after the device has been activated but before any
 packets are read and before any filters are compiled or installed.
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_list_datalinks.3pcap.html'><B>pcap_list_datalinks</B></A>(3PCAP)
 
 <DD>
@@ -776,8 +772,7 @@ get link-layer header type corresponding to a name
 </DL>
 
 </DL>
-<A NAME="lbAH">&nbsp;</A>
-<H3>Reading packets</H3>
+<H3 id="lbAH">Reading packets</H3>
 
 Packets are read with
 <B>pcap_dispatch</B>()
@@ -803,8 +798,8 @@ is supplied a pointer to a
 <I>struct pcap_pkthdr</I>,
 
 which includes the following members:
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><B>ts</B>
 
 <DD>
@@ -998,12 +993,12 @@ may not return any packets if the packet buffer timeout expires, a
 or other such call may, if the packet buffer timeout expires, indicate
 that a descriptor is ready to read even if there are no packets
 available to read.
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP)
 
 <DD>
@@ -1084,8 +1079,7 @@ and
 </DL>
 
 </DL>
-<A NAME="lbAI">&nbsp;</A>
-<H3>Filters</H3>
+<H3 id="lbAI">Filters</H3>
 
 In order to cause only certain packets to be returned when reading
 packets, a filter can be set on a handle.  For a live capture, the
@@ -1123,12 +1117,12 @@ A compiled filter can also be applied directly to a packet that has been
 read using
 <B>pcap_offline_filter</B>().
 
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_compile.3pcap.html'><B>pcap_compile</B></A>(3PCAP)
 
 <DD>
@@ -1155,8 +1149,7 @@ apply a filter program to a packet
 </DL>
 
 </DL>
-<A NAME="lbAJ">&nbsp;</A>
-<H3>Incoming and outgoing packets</H3>
+<H3 id="lbAJ">Incoming and outgoing packets</H3>
 
 By default, libpcap will attempt to capture both packets sent by the
 machine and packets received by the machine.  To limit it to capturing
@@ -1164,12 +1157,12 @@ only packets received by the machine or, if possible, only packets sent
 by the machine, call
 <B>pcap_setdirection</B>().
 
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_setdirection.3pcap.html'><B>pcap_setdirection</B></A>(3PCAP)
 
 <DD>
@@ -1178,19 +1171,18 @@ specify whether to capture incoming packets, outgoing packets, or both
 </DL>
 
 </DL>
-<A NAME="lbAK">&nbsp;</A>
-<H3>Capture statistics</H3>
+<H3 id="lbAK">Capture statistics</H3>
 
 To get statistics about packets received and dropped in a live capture,
 call
 <B>pcap_stats</B>().
 
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_stats.3pcap.html'><B>pcap_stats</B></A>(3PCAP)
 
 <DD>
@@ -1199,8 +1191,7 @@ get capture statistics
 </DL>
 
 </DL>
-<A NAME="lbAL">&nbsp;</A>
-<H3>Opening a handle for writing captured packets</H3>
+<H3 id="lbAL">Opening a handle for writing captured packets</H3>
 
 To open a ``savefile`` to which to write packets, given the pathname the
 ``savefile'' should have, call
@@ -1228,12 +1219,12 @@ To close a
 call
 <B>pcap_dump_close</B>().
 
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_dump_open.3pcap.html'><B>pcap_dump_open</B></A>(3PCAP)
 
 <DD>
@@ -1270,8 +1261,7 @@ opened for a ``savefile''
 </DL>
 
 </DL>
-<A NAME="lbAM">&nbsp;</A>
-<H3>Writing packets</H3>
+<H3 id="lbAM">Writing packets</H3>
 
 To write a packet to a
 <B>pcap_dumper_t</B>,
@@ -1300,12 +1290,12 @@ to be written to the ``savefile'', without closing the
 call
 <B>pcap_dump_flush</B>().
 
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_dump.3pcap.html'><B>pcap_dump</B></A>(3PCAP)
 
 <DD>
@@ -1329,8 +1319,7 @@ get current file position for a
 </DL>
 
 </DL>
-<A NAME="lbAN">&nbsp;</A>
-<H3>Injecting packets</H3>
+<H3 id="lbAN">Injecting packets</H3>
 
 If you have the required privileges, you can inject packets onto a
 network with a
@@ -1345,12 +1334,12 @@ or
 (The two routines exist for compatibility with both OpenBSD and
 WinPcap/Npcap; they perform the same function, but have different return
 values.)
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_inject.3pcap.html'><B>pcap_inject</B></A>(3PCAP)
 
 <DD>
@@ -1364,19 +1353,18 @@ transmit a packet
 </DL>
 
 </DL>
-<A NAME="lbAO">&nbsp;</A>
-<H3>Reporting errors</H3>
+<H3 id="lbAO">Reporting errors</H3>
 
 Some routines return error or warning status codes; to convert them to a
 string, use
 <B>pcap_statustostr</B>().
 
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_statustostr.3pcap.html'><B>pcap_statustostr</B></A>(3PCAP)
 
 <DD>
@@ -1385,18 +1373,17 @@ get a string for an error or warning status code
 </DL>
 
 </DL>
-<A NAME="lbAP">&nbsp;</A>
-<H3>Getting library version information</H3>
+<H3 id="lbAP">Getting library version information</H3>
 
 To get a string giving version information about libpcap, call
 <B>pcap_lib_version</B>().
 
-<DL COMPACT>
+<DL>
 <DT><B>Routines</B>
 
 <DD>
-<DL COMPACT><DT><DD>
-<DL COMPACT>
+<DL><DT><DD>
+<DL>
 <DT><A HREF='./pcap_lib_version.3pcap.html'><B>pcap_lib_version</B></A>(3PCAP)
 
 <DD>
@@ -1405,8 +1392,7 @@ get library version string
 </DL>
 
 </DL>
-<A NAME="lbAQ">&nbsp;</A>
-<H2>BACKWARD COMPATIBILITY</H2>
+<H2 id="lbAQ">BACKWARD COMPATIBILITY</H2>
 
 <P>
 
@@ -1450,8 +1436,7 @@ use an
 
 script or some other configuration script to check whether the libpcap
 1.0 APIs are available and use them only if they are.
-<A NAME="lbAR">&nbsp;</A>
-<H2>SEE ALSO</H2>
+<H2 id="lbAR">SEE ALSO</H2>
 
 <B>autoconf</B>(1),
 
@@ -1465,8 +1450,7 @@ script or some other configuration script to check whether the libpcap
 
 <B>usermod</B>(8)
 
-<A NAME="lbAS">&nbsp;</A>
-<H2>AUTHORS</H2>
+<H2 id="lbAS">AUTHORS</H2>
 
 The original authors of libpcap are:
 <P>
@@ -1480,13 +1464,12 @@ Lawrence Berkeley National Laboratory, University of California, Berkeley, CA.
 The current version is available from &quot;The Tcpdump Group&quot;'s Web site at
 <P>
 
-<DL COMPACT><DT><DD>
+<DL><DT><DD>
 <I><A HREF="https://www.tcpdump.org/">https://www.tcpdump.org/</A></I>
 
 </DL>
 
-<A NAME="lbAT">&nbsp;</A>
-<H2>BUGS</H2>
+<H2 id="lbAT">BUGS</H2>
 
 To report a security issue please send an e-mail to <A HREF="mailto:security@tcpdump.org">security@tcpdump.org</A>.
 <P>
@@ -1499,7 +1482,7 @@ in the libpcap source tree root.
 <P>
 
 <HR>
-<A NAME="index">&nbsp;</A><H2>Index</H2>
+<H2 id="index">Index</H2>
 <DL>
 <DT><A HREF="#lbAB">NAME</A><DD>
 <DT><A HREF="#lbAC">SYNOPSIS</A><DD>
@@ -1524,11 +1507,9 @@ in the libpcap source tree root.
 <DT><A HREF="#lbAT">BUGS</A><DD>
 </DL>
 <HR>
-This document was created by
-man2html,
-using the manual pages from "The Tcpdump Group" git repositories.<BR>
-Time: 12:27:43 GMT, October 07, 2021
-<a href="https://validator.w3.org/check?uri=referer">[Valid HTML 4.01]</a>
-<a href="https://jigsaw.w3.org/css-validator/check/referer">[Valid CSS]</a>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 12:27:43 GMT, October 07, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
 </BODY>
 </HTML>
