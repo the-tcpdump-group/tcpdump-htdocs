@@ -10,7 +10,16 @@ $taxonomy = array
 (
 	'tcpdump' => array
 	(
-		'versions' => array ('4.9.0', '4.9.1', '4.9.2', '4.9.3', '4.99.0', '4.99.1'),
+		'versions' => array
+		(
+			GIT_MASTER,
+			'4.99.1',
+			'4.99.0',
+			'4.9.3',
+			'4.9.2',
+			'4.9.1',
+			'4.9.0',
+		),
 		'match_master' => '@^(tcpdump\.1)\.html$@',
 		'match_release' => '@^(tcpdump\.1)-([0-9.]+)\.html$@',
 		'print_master' => '%s.html',
@@ -19,7 +28,14 @@ $taxonomy = array
 	),
 	'libpcap' => array
 	(
-		'versions' => array ('1.9.0', '1.9.1', '1.10.0', '1.10.1'),
+		'versions' => array
+		(
+			GIT_MASTER,
+			'1.10.1',
+			'1.10.0',
+			'1.9.1',
+			'1.9.0',
+		),
 		'match_master' => '@^(pcap.+)\.html$@',
 		'match_release' => '@^libpcap-([0-9.]+)/(pcap.+)\.html$@',
 		'print_master' => '%s.html',
@@ -28,7 +44,12 @@ $taxonomy = array
 	),
 	'tcpslice' => array
 	(
-		'versions' => array ('1.3', '1.4'),
+		'versions' => array
+		(
+			GIT_MASTER,
+			'1.4',
+			'1.3',
+		),
 		'match_master' => '@^(tcpslice\.1)\.html$@',
 		'match_release' => '@^(tcpslice\.1)-([0-9.]+)\.html$@',
 		'print_master' => '%s.html',
@@ -37,7 +58,14 @@ $taxonomy = array
 	),
 	'rpcapd' => array
 	(
-		'versions' => array ('1.9.0', '1.9.1', '1.10.0', '1.10.1'),
+		'versions' => array
+		(
+			GIT_MASTER,
+			'1.10.1',
+			'1.10.0',
+			'1.9.1',
+			'1.9.0',
+		),
 		'match_master' => '@^(rpcapd.+)\.html$@',
 		'match_release' => '@^libpcap-([0-9.]+)/(rpcapd.+)\.html$@',
 		'print_master' => '%s.html',
@@ -104,9 +132,7 @@ foreach ($taxonomy as $pname => $project)
 	$html = read_file ($uri_path);
 
 	$other_versions = array();
-	$allversions = $project['versions'];
-	$allversions[] = GIT_MASTER;
-	foreach ($allversions as $v)
+	foreach ($project['versions'] as $v)
 	{
 		if ($v == $version)
 			continue;
