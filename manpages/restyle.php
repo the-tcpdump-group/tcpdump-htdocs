@@ -116,6 +116,9 @@ if ($uri_path == $_SERVER['SCRIPT_NAME'])
 if (0 !== strpos ($uri_path, URI_PREFIX))
 	fail (400);
 $uri_path = str_replace (URI_PREFIX, '', $uri_path);
+# This is relative to the client-visible URL path, so remove any
+# directory prefix and change the filename extension.
+$txt_href = preg_replace ('@^(?:.+/)?(.+)\.html$@', '$1.txt', $uri_path);
 
 foreach ($taxonomy as $pname => $project)
 {
@@ -170,7 +173,7 @@ foreach ($taxonomy as $pname => $project)
 		array
 		(
 			'@^(</HEAD>.*)$@m',
-			"<link href=\"${basename}.txt\" rel=\"alternate\" type=\"text/plain\">\n\$1"
+			"<link href=\"${txt_href}\" rel=\"alternate\" type=\"text/plain\">\n\$1"
 		),
 		array
 		(
