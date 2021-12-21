@@ -201,6 +201,12 @@ foreach ($taxonomy as $pname => $project)
 			'@(<H3)(.*>.+</H3>)@',
 			'$1 class=subtitle$2'
 		),
+		# Fix HREFs from libpcap release pages.
+		array
+		(
+			'@<A HREF="\./(tcpdump|tcpslice)\.1\.html">@',
+			'<A HREF="' . URI_PREFIX . '$1.1.html">'
+		),
 		array
 		(
 			'@(</BODY>.*)$@m',
