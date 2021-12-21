@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_SETFILTER</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_SETFILTER</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 7 April 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.8.1.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_setfilter - set the filter
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_setfilter(pcap_t *p, struct bpf_program *fp);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_setfilter()</B>
+
+is used to specify a filter program.
+<I>fp</I>
+
+is a pointer to a
+<I>bpf_program</I>
+
+struct, usually the result of a call to
+<B>pcap_compile()</B>.
+
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_setfilter()</B>
+
+returns 0 on success and -1 on failure.
+If -1 is returned,
+<B>pcap_geterr()</B>
+
+or
+<B>pcap_perror()</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display the error text.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='./pcap_compile.3pcap.html'>pcap_compile</A>(3PCAP), <A HREF='./pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP)
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:28:23 GMT, December 21, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

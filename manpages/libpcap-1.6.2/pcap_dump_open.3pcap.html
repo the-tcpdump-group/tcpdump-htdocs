@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_DUMP_OPEN</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_DUMP_OPEN</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.6.2.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_dump_open, pcap_dump_fopen - open a file to which to write packets
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>pcap_dumper_t *pcap_dump_open(pcap_t *p, const char *fname);
+pcap_dumper_t *pcap_dump_fopen(pcap_t *p, FILE *fp);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_dump_open()</B>
+
+is called to open a ``savefile'' for writing.
+<I>fname</I>
+
+specifies the name of the file to open. The file will have
+the same format as those used by
+<B><A HREF="./tcpdump.1.html">tcpdump</A></B>(1)
+
+and
+<B><A HREF="./tcpslice.1.html">tcpslice</A></B>(1).
+
+The name &quot;-&quot; is a synonym
+for
+<B>stdout</B>.
+
+<P>
+
+<B>pcap_dump_fopen()</B>
+
+is called to write data to an existing open stream
+<I>fp</I>.
+
+Note that on Windows, that stream should be opened in binary mode.
+<P>
+
+<I>p</I>
+
+is a capture or ``savefile'' handle returned by an earlier call to
+<B>pcap_create()</B>
+
+and activated by an earlier call to
+<B>pcap_activate()</B>,
+
+or returned by an earlier call to
+<B>pcap_open_offline()</B>,
+
+<B>pcap_open_live()</B>,
+
+or
+<B>pcap_open_dead()</B>.
+
+The link-layer type and snapshot length from
+<I>p</I>
+
+are used as the link-layer type and snapshot length of the output file.
+<H2 id="lbAE">RETURN VALUES</H2>
+
+A pointer to a
+<B>pcap_dumper_t</B>
+
+structure to use in subsequent
+<B>pcap_dump()</B>
+
+and
+<B>pcap_dump_close()</B>
+
+calls is returned on success.
+<B>NULL</B>
+
+is returned on failure.
+If
+<B>NULL</B>
+
+is returned,
+<B>pcap_geterr(</B><I>p</I><B>)</B>
+
+can be used to get the error text.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='./pcap_create.3pcap.html'>pcap_create</A>(3PCAP), <A HREF='./pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP),
+<A HREF='./pcap_open_offline.3pcap.html'>pcap_open_offline</A>(3PCAP), <A HREF='./pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP), <A HREF='./pcap_open_dead.3pcap.html'>pcap_open_dead</A>(3PCAP),
+<A HREF='./pcap_dump.3pcap.html'>pcap_dump</A>(3PCAP), <A HREF='./pcap_dump_close.3pcap.html'>pcap_dump_close</A>(3PCAP), <A HREF='./pcap_geterr.3pcap.html'>pcap_geterr</A>(3PCAP),
+<A HREF="./pcap-savefile.5.html">pcap-savefile</A>(5)
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:32:23 GMT, December 21, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_DATALINK</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_DATALINK</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2010<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.5.3.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_datalink - get the link-layer header type
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_datalink(pcap_t *p);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_datalink()</B>
+
+returns the link-layer header type for the live capture or ``savefile''
+specified by
+<I>p</I>.
+
+<P>
+
+It must not be called on a pcap descriptor created by
+<B>pcap_create()</B>
+
+that has not yet been activated by
+<B>pcap_activate()</B>.
+
+<P>
+
+<I><A HREF="http://www.tcpdump.org/linktypes.html">http://www.tcpdump.org/linktypes.html</A></I>
+
+lists the values
+<B>pcap_datalink()</B>
+
+can return and describes the packet formats that
+correspond to those values.
+<P>
+
+Do
+<B>NOT</B>
+
+assume that the packets for a given capture or ``savefile`` will have
+any given link-layer header type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.  For example, the &quot;any&quot; device on Linux will have a
+link-layer header type of
+<B>DLT_LINUX_SLL</B>
+
+even if all devices on the system at the time the &quot;any&quot; device is opened
+have some other data link type, such as
+<B>DLT_EN10MB</B>
+
+for Ethernet.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_datalink()</B>
+
+returns the link-layer header type on success and
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+if called on a capture handle that has been created but not activated.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF="./pcap-linktype.7.html">pcap-linktype</A>(7)
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:34:26 GMT, December 21, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

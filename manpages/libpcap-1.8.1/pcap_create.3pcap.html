@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_CREATE</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_CREATE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 January 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.8.1.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_create - create a live capture handle
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>pcap_t *pcap_create(const char *source, char *errbuf);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_create()</B>
+
+is used to create a packet capture handle to look
+at packets on the network.
+<I>source</I>
+
+is a string that specifies the network device to open; on Linux systems
+with 2.2 or later kernels, a
+<I>source</I>
+
+argument of &quot;any&quot; or
+<B>NULL</B>
+
+can be used to capture packets from all interfaces.
+<P>
+
+The returned handle must be activated with
+<B>pcap_activate()</B>
+
+before packets can be captured
+with it; options for the capture, such as promiscuous mode, can be set
+on the handle before activating it.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_create()</B>
+
+returns a
+<I>pcap_t *</I>
+
+on success and
+<B>NULL</B>
+
+on failure.
+If
+<B>NULL</B>
+
+is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<I>errbuf</I>
+
+is assumed to be able to hold at least
+<B>PCAP_ERRBUF_SIZE</B>
+
+chars.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='./pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP)
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:28:21 GMT, December 21, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

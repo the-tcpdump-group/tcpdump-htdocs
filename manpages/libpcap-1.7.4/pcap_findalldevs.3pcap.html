@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_FINDALLDEVS</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_FINDALLDEVS</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 10 January 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.7.4.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_findalldevs, pcap_freealldevs - get a list of capture devices, and
+free that list
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>int pcap_findalldevs(pcap_if_t **alldevsp, char *errbuf);
+void pcap_freealldevs(pcap_if_t *alldevs);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_findalldevs()</B>
+
+constructs a list of network devices that can be opened with
+<B>pcap_create()</B>
+
+and
+<B>pcap_activate()</B>
+
+or with
+<B>pcap_open_live()</B>.
+
+(Note that there may be network devices that cannot be opened by the
+process calling
+<B>pcap_findalldevs()</B>,
+
+because, for example, that process does not have sufficient privileges
+to open them for capturing; if so, those devices will not appear on the
+list.)
+If
+<B>pcap_findalldevs()</B>
+
+succeeds, the pointer pointed to by
+<I>alldevsp</I>
+
+is set to point to the first element of the list, or to
+<B>NULL</B>
+
+if no devices were found (this is considered success).
+Each element of the list is of type
+<B>pcap_if_t</B>,
+
+and has the following members:
+<DL><DT><DD>
+<DL>
+<DT><B>next</B>
+
+<DD>
+if not
+<B>NULL</B>,
+
+a pointer to the next element in the list;
+<B>NULL</B>
+
+for the last element of the list
+<DT><B>name</B>
+
+<DD>
+a pointer to a string giving a name for the device to pass to
+<B>pcap_open_live()</B>
+
+<DT><B>description</B>
+
+<DD>
+if not
+<B>NULL</B>,
+
+a pointer to a string giving a human-readable description of the device
+<DT><B>addresses</B>
+
+<DD>
+a pointer to the first element of a list of network addresses for the
+device,
+or
+<B>NULL</B>
+
+if the device has no addresses
+<DT><B>flags</B>
+
+<DD>
+device flags:
+<DL><DT><DD>
+<DL>
+<DT><B>PCAP_IF_LOOPBACK</B>
+
+<DD>
+set if the device is a loopback interface
+<DT><B>PCAP_IF_UP</B>
+
+<DD>
+set if the device is up
+<DT><B>PCAP_IF_RUNNING</B>
+
+<DD>
+set if the device is running
+</DL>
+</DL>
+
+</DL>
+</DL>
+
+<P>
+
+Each element of the list of addresses is of type
+<B>pcap_addr_t</B>,
+
+and has the following members:
+<DL><DT><DD>
+<DL>
+<DT><B>next</B>
+
+<DD>
+if not
+<B>NULL</B>,
+
+a pointer to the next element in the list;
+<B>NULL</B>
+
+for the last element of the list
+<DT><B>addr</B>
+
+<DD>
+a pointer to a
+<B>struct sockaddr</B>
+
+containing an address
+<DT><B>netmask</B>
+
+<DD>
+if not
+<B>NULL</B>,
+
+a pointer to a
+<B>struct sockaddr</B>
+
+that contains the netmask corresponding to the address pointed to by
+<B>addr</B>
+
+<DT><B>broadaddr</B>
+
+<DD>
+if not
+<B>NULL</B>,
+
+a pointer to a
+<B>struct sockaddr</B>
+
+that contains the broadcast address corresponding to the address pointed
+to by
+<B>addr</B>;
+
+may be null if the device doesn't support broadcasts
+<DT><B>dstaddr</B>
+
+<DD>
+if not
+<B>NULL</B>,
+
+a pointer to a
+<B>struct sockaddr</B>
+
+that contains the destination address corresponding to the address pointed
+to by
+<B>addr</B>;
+
+may be null if the device isn't a point-to-point interface
+</DL>
+</DL>
+
+<P>
+
+Note that the addresses in the list of addresses might be IPv4
+addresses, IPv6 addresses, or some other type of addresses, so you must
+check the
+<B>sa_family</B>
+
+member of the
+<B>struct sockaddr</B>
+
+before interpreting the contents of the address; do not assume that the
+addresses are all IPv4 addresses, or even all IPv4 or IPv6 addresses.
+IPv4 addresses have the value
+<B>AF_INET</B>,
+
+IPv6 addresses have the value
+<B>AF_INET6</B>
+
+(which older operating systems that don't support IPv6 might not
+define), and other addresses have other values.  Whether other addresses
+are returned, and what types they might have is platform-dependent.
+For IPv4 addresses, the
+<B>struct sockaddr</B>
+
+pointer can be interpreted as if it pointed to a
+<B>struct sockaddr_in</B>;
+
+for IPv6 addresses, it can be interpreted as if it pointed to a
+<B>struct sockaddr_in6.</B>
+
+<P>
+
+The list of devices must be freed with
+<B>pcap_freealldevs()</B>,
+
+which frees the list pointed to by
+<I>alldevs</I>.
+
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_findalldevs()</B>
+
+returns 0 on success and -1 on failure; as indicated, finding no
+devices is considered success, rather than failure, so 0 will be
+returned in that case.
+If -1 is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<I>errbuf</I>
+
+is assumed to be able to hold at least
+<B>PCAP_ERRBUF_SIZE</B>
+
+chars.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='./pcap_create.3pcap.html'>pcap_create</A>(3PCAP), <A HREF='./pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP),
+<A HREF='./pcap_open_live.3pcap.html'>pcap_open_live</A>(3PCAP)
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:31:20 GMT, December 21, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

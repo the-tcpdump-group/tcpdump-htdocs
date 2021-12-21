@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_CAN_SET_RFMON</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_CAN_SET_RFMON</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 18 May 2010<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.7.4.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_can_set_rfmon - check whether monitor mode can be set for a
+not-yet-activated capture handle
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+
+int pcap_can_set_rfmon(pcap_t *p);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_can_set_rfmon()</B>
+
+checks whether monitor mode could be set on a capture handle when
+the handle is activated.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_can_set_rfmon()</B>
+
+returns 0 if monitor mode could not be set,
+1 if monitor mode could be set,
+<B>PCAP_ERROR_NO_SUCH_DEVICE</B>
+
+if the capture source specified when the handle was created doesn't
+exist,
+<B>PCAP_ERROR_PERM_DENIED</B>
+
+if the process doesn't have permission to check whether monitor mode
+could be supported,
+<B>PCAP_ERROR_ACTIVATED</B>
+
+if called on a capture handle that has been activated, or
+<B>PCAP_ERROR</B>
+
+if an error occurred.
+If
+<B>PCAP_ERROR</B>
+
+is returned,
+<B>pcap_geterr()</B>
+
+or
+<B>pcap_perror()</B>
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display the error text.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='./pcap_create.3pcap.html'>pcap_create</A>(3PCAP), <A HREF='./pcap_activate.3pcap.html'>pcap_activate</A>(3PCAP),
+<A HREF='./pcap_set_rfmon.3pcap.html'>pcap_set_rfmon</A>(3PCAP)
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:31:19 GMT, December 21, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

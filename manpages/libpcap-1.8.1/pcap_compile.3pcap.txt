@@ -1,0 +1,47 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.8.1.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_COMPILE(3PCAP)                                        PCAP_COMPILE(3PCAP)
+
+NAME
+       pcap_compile - compile a filter expression
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_compile(pcap_t *p, struct bpf_program *fp,
+               const char *str, int optimize, bpf_u_int32 netmask);
+
+DESCRIPTION
+       pcap_compile() is used to compile the string str into a filter program.
+       See pcap-filter(7) for the syntax of that string.  program is a pointer
+       to  a  bpf_program struct and is filled in by pcap_compile().  optimize
+       controls whether optimization on the resulting code is performed.  net-
+       mask specifies the IPv4 netmask of the network on which packets are be-
+       ing captured; it is used only when  checking  for  IPv4  broadcast  ad-
+       dresses  in the filter program.  If the netmask of the network on which
+       packets are being captured isn't known to the program,  or  if  packets
+       are being captured on the Linux "any" pseudo-interface that can capture
+       on more than one network, a value of PCAP_NETMASK_UNKNOWN can  be  sup-
+       plied; tests for IPv4 broadcast addresses will fail to compile, but all
+       other tests in the filter program will be OK.
+
+RETURN VALUE
+       pcap_compile() returns 0 on success and -1 on failure.  If  -1  is  re-
+       turned, pcap_geterr() or pcap_perror() may be called with p as an argu-
+       ment to fetch or display the error text.
+
+SEE ALSO
+       pcap(3PCAP),        pcap_setfilter(3PCAP),        pcap_freecode(3PCAP),
+       pcap_geterr(3PCAP), pcap-filter(7)
+
+                                 7 April 2014              PCAP_COMPILE(3PCAP)

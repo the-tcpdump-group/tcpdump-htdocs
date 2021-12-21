@@ -1,0 +1,34 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.6.2.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_DATALINK_VAL_TO_NAME(3PCAP)              PCAP_DATALINK_VAL_TO_NAME(3PCAP)
+
+NAME
+       pcap_datalink_val_to_name,  pcap_datalink_val_to_description  -  get  a
+       name or description for a link-layer header type value
+
+SYNOPSIS
+       #include <pcap.h>
+
+       const char *pcap_datalink_val_to_name(int dlt);
+       const char *pcap_datalink_val_to_description(int dlt);
+
+DESCRIPTION
+       pcap_datalink_val_to_name() translates a link-layer header  type  value
+       to  the corresponding link-layer header type name.  NULL is returned on
+       failure.
+
+       pcap_datalink_val_to_description() translates a link-layer header  type
+       value  to  a short description of that link-layer header type.  NULL is
+       returned on failure.
+
+                                22 August 2010PCAP_DATALINK_VAL_TO_NAME(3PCAP)

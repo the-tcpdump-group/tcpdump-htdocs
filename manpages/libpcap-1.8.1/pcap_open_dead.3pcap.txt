@@ -1,0 +1,50 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.8.1.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_OPEN_DEAD(3PCAP)                                    PCAP_OPEN_DEAD(3PCAP)
+
+NAME
+       pcap_open_dead,  pcap_open_dead_with_tstamp_precision  -  open  a  fake
+       pcap_t for compiling filters or opening a capture for output
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       pcap_t *pcap_open_dead(int linktype, int snaplen);
+       pcap_t *pcap_open_dead_with_tstamp_precision(int linktype, int snaplen,
+           u_int precision);
+
+DESCRIPTION
+       pcap_open_dead() and  pcap_open_dead_with_tstamp_precision()  are  used
+       for creating a pcap_t structure to use when calling the other functions
+       in libpcap.  It is typically used when just using libpcap for compiling
+       BPF  code;  it can also be used if using pcap_dump_open(), pcap_dump(),
+       and pcap_dump_close() to write a savefile if there is  no  pcap_t  that
+       supplies the packets to be written.
+
+       linktype specifies the link-layer type for the pcap_t.
+
+       snaplen specifies the snapshot length for the pcap_t.
+
+       When pcap_open_dead_with_tstamp_precision(), is used to create a pcap_t
+       for use with pcap_dump_open(), precision specifies the time stamp  pre-
+       cision  for packets; PCAP_TSTAMP_PRECISION_MICRO should be specified if
+       the packets to be written have time stamps in seconds and microseconds,
+       and PCAP_TSTAMP_PRECISION_NANO should be specified if the packets to be
+       written have time stamps in seconds and nanoseconds.   Its  value  does
+       not affect pcap_compile().
+
+SEE ALSO
+       pcap(3PCAP),   pcap_compile(3PCAP),  pcap_dump_open(3PCAP),  pcap-link-
+       type(7)
+
+                                3 January 2014           PCAP_OPEN_DEAD(3PCAP)

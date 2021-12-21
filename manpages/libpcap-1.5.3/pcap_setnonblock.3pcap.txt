@@ -1,0 +1,43 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.5.3.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_SETNONBLOCK(3PCAP)                                                                                  PCAP_SETNONBLOCK(3PCAP)
+
+NAME
+       pcap_setnonblock, pcap_getnonblock - set or get the state of non-blocking mode on a capture device
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       char errbuf[PCAP_ERRBUF_SIZE];
+
+       int pcap_setnonblock(pcap_t *p, int nonblock, char *errbuf);
+       int pcap_getnonblock(pcap_t *p, char *errbuf);
+
+DESCRIPTION
+       pcap_setnonblock()  puts a capture handle into ``non-blocking'' mode, or takes it out of ``non-blocking'' mode, depending
+       on whether the nonblock argument is non-zero or zero.  It has no effect on ``savefiles''.  If there is an  error,  -1  is
+       returned  and errbuf is filled in with an appropriate error message; otherwise, 0 is returned.  In ``non-blocking'' mode,
+       an attempt to read from the capture descriptor with pcap_dispatch() will, if no packets are  currently  available  to  be
+       read, return 0 immediately rather than blocking waiting for packets to arrive.  pcap_loop() and pcap_next() will not work
+       in ``non-blocking'' mode.
+
+RETURN VALUE
+       pcap_getnonblock() returns the current ``non-blocking'' state of the capture descriptor; it always returns 0  on  ``save-
+       files''.  If there is an error, -1 is returned and errbuf is filled in with an appropriate error message.
+
+       errbuf is assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
+
+SEE ALSO
+       pcap(3PCAP), pcap_loop(3PCAP), pcap_next_ex(3PCAP), pcap_geterr(3PCAP)
+
+                                                          5 April 2008                                   PCAP_SETNONBLOCK(3PCAP)

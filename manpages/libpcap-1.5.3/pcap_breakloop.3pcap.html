@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_BREAKLOOP</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_BREAKLOOP</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 April 2008<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.5.3.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_breakloop - force a pcap_dispatch() or pcap_loop() call to return
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>void pcap_breakloop(pcap_t *);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_breakloop()</B>
+
+sets a flag that will force
+<B>pcap_dispatch()</B>
+
+or
+<B>pcap_loop()</B>
+
+to return rather than looping; they will return the number of packets
+that have been processed so far, or -2 if no packets have been
+processed so far.
+<P>
+
+This routine is safe to use inside a signal handler on UNIX or a console
+control handler on Windows, as it merely sets a flag that is checked
+within the loop.
+<P>
+
+The flag is checked in loops reading packets from the OS - a signal by
+itself will not necessarily terminate those loops - as well as in loops
+processing a set of packets returned by the OS.
+<B>
+Note that if you are catching signals on UNIX systems that support
+restarting system calls after a signal, and calling pcap_breakloop()
+in the signal handler, you must specify, when catching those signals,
+that system calls should NOT be restarted by that signal.  Otherwise,
+if the signal interrupted a call reading packets in a live capture,
+when your signal handler returns after calling pcap_breakloop(), the
+call will be restarted, and the loop will not terminate until more
+packets arrive and the call completes.
+</B>
+<P>
+
+<B>
+Note also that, in a multi-threaded application, if one thread is
+blocked in pcap_dispatch(), pcap_loop(), pcap_next(), or pcap_next_ex(),
+a call to pcap_breakloop() in a different thread will not unblock that
+thread; you will need to use whatever mechanism the OS provides for
+breaking a thread out of blocking calls in order to unblock the thread,
+such as thread cancellation in systems that support POSIX threads.
+</B>
+<P>
+
+Note that
+<B>pcap_next()</B>
+
+and
+<B>pcap_next_ex()</B>
+
+will, on some platforms, loop reading packets from the OS; that loop
+will not necessarily be terminated by a signal, so
+<B>pcap_breakloop()</B>
+
+should be used to terminate packet processing even if
+<B>pcap_next()</B>
+
+or
+<B>pcap_next_ex()</B>
+
+is being used.
+<P>
+
+<B>pcap_breakloop()</B>
+
+does not guarantee that no further packets will be processed by
+<B>pcap_dispatch()</B>
+
+or
+<B>pcap_loop()</B>
+
+after it is called; at most one more packet might be processed.
+<P>
+
+If -2 is returned from
+<B>pcap_dispatch()</B>
+
+or
+<B>pcap_loop()</B>,
+
+the flag is cleared, so a subsequent call will resume reading packets. 
+If a positive number is returned, the flag is not cleared, so a
+subsequent call will return -2 and clear the flag.
+<H2 id="lbAE">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF='./pcap_loop.3pcap.html'>pcap_loop</A>(3PCAP), <A HREF='./pcap_next_ex.3pcap.html'>pcap_next_ex</A>(3PCAP)
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:34:25 GMT, December 21, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

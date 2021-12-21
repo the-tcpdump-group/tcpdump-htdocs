@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_OPEN_OFFLINE</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_OPEN_OFFLINE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 1 July 2013<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.7.4.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_open_offline, pcap_open_offline_with_tstamp_precision,
+pcap_fopen_offline, pcap_fopen_offline_with_tstamp_precision - open a saved capture file for reading
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>pcap_t *pcap_open_offline(const char *fname, char *errbuf);
+pcap_t *pcap_open_offline_with_tstamp_precision(const char *fname,
+    u_int precision, char *errbuf);
+pcap_t *pcap_fopen_offline(FILE *fp, char *errbuf);
+pcap_t *pcap_fopen_offline_with_tstamp_precision(FILE *fp,
+    u_int precision, char *errbuf);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_open_offline()</B>
+
+and
+<B>pcap_open_offline_with_tstamp_precision()</B>
+
+are called to open a ``savefile'' for reading.
+<P>
+
+<I>fname</I>
+
+specifies the name of the file to open. The file can have the pcap file
+format as described in
+<B><A HREF="./pcap-savefile.5.html">pcap-savefile</A></B>(5),
+
+which is the file format used by, among other programs,
+<B><A HREF="./tcpdump.1.html">tcpdump</A></B>(1)
+
+and
+<B><A HREF="./tcpslice.1.html">tcpslice</A></B>(1),
+
+or can have the pcap-ng file format, although not all pcap-ng files can
+be read.
+The name &quot;-&quot; is a synonym for
+<B>stdin</B>.
+
+<P>
+
+<B>pcap_open_offline_with_tstamp_precision()</B>
+
+takes an additional
+<I>precision</I>
+
+argument specifying the time stamp precision desired;
+if
+<B>PCAP_TSTAMP_PRECISION_MICRO</B>
+
+is specified, packet time stamps will be supplied in seconds and
+microseconds,
+and if
+<B>PCAP_TSTAMP_PRECISION_NANO</B>
+
+is specified, packet time stamps will be supplied in seconds and
+nanoseconds.  If the time stamps in the file do not have the same
+precision as the requested precision, they will be scaled up or down as
+necessary before being supplied.
+<P>
+
+Alternatively, you may call
+<B>pcap_fopen_offline()</B>
+
+or
+<B>pcap_fopen_offline_with_tstamp_precision()</B>
+
+to read dumped data from an existing open stream
+<I>fp</I>.
+
+<B>pcap_fopen_offline_with_tstamp_precision() takes an additional</B>
+
+<I>precision</I>
+
+argument as described above.
+Note that on Windows, that stream should be opened in binary mode.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_open_offline()</B>,
+
+<B>pcap_open_offline_with_tstamp_precision()</B>,
+
+<B>pcap_fopen_offline()</B>,
+
+and
+<B>pcap_fopen_offline_with_tstamp_precision()</B>
+
+return a
+<I>pcap_t *</I>
+
+on success and
+<B>NULL</B>
+
+on failure.
+If
+<B>NULL</B>
+
+is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<I>errbuf</I>
+
+is assumed to be able to hold at least
+<B>PCAP_ERRBUF_SIZE</B>
+
+chars.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP), <A HREF="./pcap-savefile.5.html">pcap-savefile</A>(5)
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:31:21 GMT, December 21, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

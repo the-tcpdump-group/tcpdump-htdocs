@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_SNAPSHOT</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_SNAPSHOT</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 17 September 2013<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.7.4.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_snapshot - get the snapshot length
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_snapshot(pcap_t *p);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_snapshot()</B>
+
+returns the snapshot length specified when
+<B>pcap_set_snapshot()</B>
+
+or
+<B>pcap_open_live()</B>
+
+was called, for a live capture, or the snapshot length from the capture
+file, for a ``savefile''.
+<P>
+
+It must not be called on a pcap descriptor created by
+<B>pcap_create()</B>
+
+that has not yet been activated by
+<B>pcap_activate()</B>.
+
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_snapshot()</B>
+
+returns the snapshot length on success and
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+if called on a capture handle that has been created but not activated.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'>pcap</A>(3PCAP)
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:31:22 GMT, December 21, 2021
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

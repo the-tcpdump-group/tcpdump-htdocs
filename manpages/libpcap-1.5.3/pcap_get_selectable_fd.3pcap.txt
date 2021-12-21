@@ -1,0 +1,77 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.5.3.                             |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_GET_SELECTABLE_FD(3PCAP)                    PCAP_GET_SELECTABLE_FD(3PCAP)
+
+NAME
+       pcap_get_selectable_fd  - get a file descriptor on which a select() can
+       be done for a live capture
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_get_selectable_fd(pcap_t *p);
+
+DESCRIPTION
+       pcap_get_selectable_fd() returns, on UNIX, a file descriptor number for
+       a  file descriptor on which one can do a select() or poll() to wait for
+       it to be possible to read packets without blocking, if such a  descrip-
+       tor  exists, or -1, if no such descriptor exists.  Some network devices
+       opened   with    pcap_create()    and    pcap_activate(),    or    with
+       pcap_open_live(), do not support select() or poll() (for example, regu-
+       lar network devices on FreeBSD 4.3 and 4.4, and Endace DAG devices), so
+       -1 is returned for those devices.
+
+       Note that in:
+
+              FreeBSD prior to FreeBSD 4.6;
+
+              NetBSD prior to NetBSD 3.0;
+
+              OpenBSD prior to OpenBSD 2.4;
+
+              Mac OS X prior to Mac OS X 10.7;
+
+       select()  and poll() do not work correctly on BPF devices; pcap_get_se-
+       lectable_fd() will return a file descriptor on most of  those  versions
+       (the  exceptions  being  FreeBSD 4.3 and 4.4), but a simple select() or
+       poll() will not indicate that the descriptor is readable until  a  full
+       buffer's worth of packets is received, even if the read timeout expires
+       before then.  To work around this, an application that uses select() or
+       poll()  to wait for packets to arrive must put the pcap_t in non-block-
+       ing mode, and must arrange that the select() or poll() have  a  timeout
+       less  than  or  equal to the read timeout, and must try to read packets
+       after that timeout expires, regardless of whether  select()  or  poll()
+       indicated  that  the file descriptor for the pcap_t is ready to be read
+       or not.  (That workaround will not work in FreeBSD 4.3 and later;  how-
+       ever,  in  FreeBSD 4.6 and later, select() and poll() work correctly on
+       BPF devices, so the workaround isn't necessary,  although  it  does  no
+       harm.)
+
+       Note  also that poll() doesn't work on character special files, includ-
+       ing BPF devices, in Mac OS X 10.4 and 10.5, so, while select()  can  be
+       used  on  the  descriptor  returned by pcap_get_selectable_fd(), poll()
+       cannot be used on it those versions of Mac OS X.   Kqueues  also  don't
+       work  on  that  descriptor.   poll(), but not kqueues, work on that de-
+       scriptor in Mac OS X releases prior to 10.4; poll() and kqueues work on
+       that descriptor in Mac OS X 10.6 and later.
+
+       pcap_get_selectable_fd() is not available on Windows.
+
+RETURN VALUE
+       A  selectable  file descriptor is returned if one exists; otherwise, -1
+       is returned.
+
+SEE ALSO
+       pcap(3PCAP), select(2), poll(2)
+
+                                 5 April 2008    PCAP_GET_SELECTABLE_FD(3PCAP)
