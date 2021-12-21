@@ -154,6 +154,8 @@ foreach ($taxonomy as $pname => $project)
 			$href = sprintf ($project['print_release'], $basename, $v);
 		else
 			$href = sprintf ($project['print_release'], $v, $basename);
+		if (! file_exists ($href))
+			continue;
 		$other_versions[] = sprintf ('<a href="%s%s">%s</a>', URI_PREFIX, $href, $v);
 	}
 
