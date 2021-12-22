@@ -65,6 +65,7 @@ printSedFile()
 	# things lose the now obsolete TT as it is within PRE anyway and convert named
 	# anchors into IDs of the subsequent headers.
 	# Convert file:// schema hyperlinks to plain text.
+	# Undo a very specific false positive case of man page detection.
 	# Customize the page footer.
 	cat <<ENDOFFILE
 s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX/">Return to Main Contents</A>@g
@@ -83,6 +84,7 @@ s@\(<A NAME="index">&nbsp;</A>\)\(<H2>Index</H2>\)@\1\n\2@
 /^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H2>\(.*\)</H2>@<H2 id=\1>\2</H2>@}
 /^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H3>\(.*\)</H3>@<H3 id=\1>\2</H3>@}
 s@<A HREF="file://\(.*\)">\(.*\)</A>@\2@g
+s@<A HREF="/cgi-bin/man/man2html?1+[123]:[234]">\([123]:[234]\)</A>(1)@\1(1)@
 /^This document was created by\$/ {N;N;N;s@.*\n.*\n.*\nTime: \(.*\)\$@<H2>COLOPHON</H2>\nThis HTML man page was generated at \1\nfrom a source man page in "The Tcpdump Group" git repositories\nusing man2html and other tools.@}
 ENDOFFILE
 
@@ -211,6 +213,7 @@ printNonLocalManPages()
 2	poll
 1	autoconf
 8	usermod
+1M	usermod
 3	strerror
 1	kill
 1	stty
@@ -229,6 +232,8 @@ printNonLocalManPages()
 7	packetfilter
 2	kevent
 2	timerfd_create
+3N	ethers
+7	pcap-tstamp-type
 ENDOFLIST
 }
 
