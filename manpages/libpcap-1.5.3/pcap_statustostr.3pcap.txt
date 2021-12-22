@@ -10,10 +10,11 @@
 |                                                                            |
 +----------------------------------------------------------------------------+
 
-PCAP_STATUSTOSTR(3PCAP)                                                                                  PCAP_STATUSTOSTR(3PCAP)
+PCAP_STATUSTOSTR(3PCAP)                                PCAP_STATUSTOSTR(3PCAP)
 
 NAME
-       pcap_statustostr - convert a PCAP_ERROR_ or PCAP_WARNING_ value to a string
+       pcap_statustostr  -  convert  a PCAP_ERROR_ or PCAP_WARNING_ value to a
+       string
 
 SYNOPSIS
        #include <pcap/pcap.h>
@@ -21,9 +22,10 @@ SYNOPSIS
        const char *pcap_statustostr(int error);
 
 DESCRIPTION
-       pcap_statustostr() converts a PCAP_ERROR_ or PCAP_WARNING_ value returned by a libpcap routine to an error string.
+       pcap_statustostr() converts a PCAP_ERROR_ or  PCAP_WARNING_  value  re-
+       turned by a libpcap routine to an error string.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                                          9 April 2008                                   PCAP_STATUSTOSTR(3PCAP)
+                                 9 April 2008          PCAP_STATUSTOSTR(3PCAP)

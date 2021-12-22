@@ -10,10 +10,11 @@
 |                                                                            |
 +----------------------------------------------------------------------------+
 
-PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)                                                          PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)
+PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)        PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)
 
 NAME
-       pcap_tstamp_type_name_to_val - get the time stamp type value corresponding to a time stamp type name
+       pcap_tstamp_type_name_to_val  -  get  the  time stamp type value corre-
+       sponding to a time stamp type name
 
 SYNOPSIS
        #include <pcap/pcap.h>
@@ -21,13 +22,15 @@ SYNOPSIS
        int pcap_tstamp_type_name_to_val(const char *name);
 
 DESCRIPTION
-       pcap_tstamp_type_name_to_val()  translates a time stamp type name to the corresponding time stamp type value.  The trans-
-       lation is case-insensitive.
+       pcap_tstamp_type_name_to_val() translates a time stamp type name to the
+       corresponding  time stamp type value.  The translation is case-insensi-
+       tive.
 
 RETURN VALUE
-       pcap_tstamp_type_name_to_val() returns 0 on success and PCAP_ERROR on failure.
+       pcap_tstamp_type_name_to_val() returns 0 on success and  PCAP_ERROR  on
+       failure.
 
 SEE ALSO
        pcap(3PCAP), pcap_tstamp_type_val_to_name(3PCAP)
 
-                                                         21 August 2010                      PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)
+                                21 August 2PCAP_TSTAMP_TYPE_NAME_TO_VAL(3PCAP)
