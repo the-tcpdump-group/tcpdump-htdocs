@@ -88,11 +88,6 @@ s@<A HREF="/cgi-bin/man/man2html?1+[123]:[234]">\([123]:[234]\)</A>(1)@\1(1)@
 /^This document was created by\$/ {N;N;N;s@.*\n.*\n.*\nTime: \(.*\)\$@<H2>COLOPHON</H2>\nThis HTML man page was generated at \1\nfrom a source man page in "The Tcpdump Group" git repositories\nusing man2html and other tools.@}
 ENDOFFILE
 
-	# Convert links to non-local pages to plain text.
-	printNonLocalManPages | while read -r mansection mantopic; do
-		echo "s@<A HREF=\"$MAN2HTML_PFX?${mansection}+${mantopic}\">$mantopic</A>@$mantopic@g"
-	done
-
 	# Fixup links to local pages, part 1.
 	while read -r mantopic manfile; do
 		echo "s@<A HREF=\"${MAN2HTML_PFX}?${mantopic}\"@<A HREF=\"$manfile\"@g"
@@ -117,6 +112,9 @@ ENDOFLIST
 		echo "s@$mantopic(3PCAP)@<A HREF='$manfile'>$mantopic</A>(3PCAP)@g"
 		echo "s@<B>$mantopic</B>(3PCAP)@<A HREF='$manfile'><B>$mantopic</B></A>(3PCAP)@g"
 	done
+
+	# Hyperlinks to any other man pages are non-local, convert these to plain text.
+	echo "s@<A HREF=\"$MAN2HTML_PFX?[1-9][a-zA-Z]\?+.\+\">\(.\+\)</A>@\\\\1@g"
 }
 
 print3PCAPMap()
@@ -198,42 +196,6 @@ pcap_strerror
 pcap_tstamp_type_name_to_val
 pcap_tstamp_type_val_to_description				pcap_tstamp_type_val_to_name
 pcap_tstamp_type_val_to_name
-ENDOFLIST
-}
-
-printNonLocalManPages()
-{
-	cat <<ENDOFLIST
-4P	tcp
-4P	udp
-4P	ip
-4	pf
-8	pfconfig
-2	select
-2	poll
-1	autoconf
-8	usermod
-1M	usermod
-3	strerror
-1	kill
-1	stty
-1	ps
-3	strftime
-4	bpf
-4P	nit
-2	epoll_wait
-2	kqueue
-2	socket
-1	date
-3	isatty
-3	fileno
-1	ECT
-2	ioctl
-7	packetfilter
-2	kevent
-2	timerfd_create
-3N	ethers
-7	pcap-tstamp-type
 ENDOFLIST
 }
 
