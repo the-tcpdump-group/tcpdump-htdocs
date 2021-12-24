@@ -61,6 +61,48 @@ Original license : Creative Commons Attribution 2.5 License
                 either the git master branch or a pull request status, whichever was the
                 last built.
               </p>
+              <p>
+                The current setup could be improved in a few ways, for example:
+              </p>
+              <ul>
+                <li>
+                  Test cross-compiling of every project in at least one context (to
+                  detect regressions like
+                  <a href="https://github.com/the-tcpdump-group/tcpdump/pull/954">this
+                  one</a>).
+                </li>
+                <li>
+                  Make all builds free of compiler warnings and treat all warnings as
+                  errors everywhere.
+                </li>
+                <li>
+                  In The Tcpdump Group Buildbot test all permutations of compilers,
+                  build systems and libpcap types (local/system).  Currently some
+                  permutations are disabled on some workers because of unresolved
+                  issues in the OS or a particular project source code.
+                </li>
+                <li>
+                  Ibid., trigger a build of tcpdump master branch every time libpcap
+                  master branch passes a build successfully.
+                </li>
+                <li>
+                  Ibid., migrate the 32-bit ARM Buildbot worker to true ARMv7 hardware
+                  (it currently runs in 32-bit mode on AArch64 hardware, which supports
+                  unaligned memory access and thus cannot detect alignment issues in
+                  the code).
+                </li>
+                <li>
+                  Ibid., add workers for AIX, DragonFly BSD, Haiku and HP-UX.
+                </li>
+              </ul>
+              <p>
+                Last but not least: because the full set of CI builds takes a long time
+                to complete, it is a good idea not to CI man page, change log and README
+                updates or any other changes that have no effect on the source code or
+                the build system logic.  This is very simple to do: just add
+                <code>[skip ci]</code> at the end of the git commit summary (which is
+                the very first line of a git commit message).
+              </p>
               <table class=cidigest>
 
                 <tr>
