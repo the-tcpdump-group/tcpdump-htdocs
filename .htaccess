@@ -16,6 +16,7 @@ Redirect permanent /tcpdump_man.html /manpages/tcpdump.1.html
 Redirect permanent /pcap3_man.html /manpages/pcap.3pcap.html
 Redirect permanent /pcap.htm /pcap.html
 Redirect permanent /tcpdump-workers.asc /release/signing-key-RSA-E089DEF1D9C15D0D.asc
+Redirect permanent /release/signing-key.asc /release/signing-key-RSA-E089DEF1D9C15D0D.asc
 Redirect permanent /sniffex.c /other/sniffex.c
 
 # removed
