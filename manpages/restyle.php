@@ -219,6 +219,7 @@ foreach ($taxonomy as $pname => $project)
 		$html = preg_replace ($pattern, $replacement, $html);
 	}
 
+	header ('Last-Modified: ' . gmdate (DATE_RFC7231, filemtime ($uri_path)));
 	echo $html;
 	exit;
 }
