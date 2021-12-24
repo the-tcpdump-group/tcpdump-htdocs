@@ -1,6 +1,6 @@
 # web site sources for www.tcpdump.org
 Most of what you see on the project's web site comes from this git repository.
-Most HTML files and all man pages in this repository are pre-generated using
+All of the HTML files and man pages in this repository are pre-generated using
 two shell scripts and committed to the master branch, the latest revision of
 which is automatically (with a small lag) used by the web server.
 

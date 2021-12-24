@@ -151,6 +151,7 @@ say. &quot;What is the deal with the <code>errbuf</code> string?&quot; Most of t
 commands allow us to pass them a string as an argument. The purpose of 
 this string? In the event that the command fails, it will populate the 
 string with a description of the error. In this case, if <code>pcap_lookupdev()</code>
+(<a href="manpages/pcap_lookupdev.3pcap.html">man page</a>)
 fails, it will store an error message in <code>errbuf</code>. Nifty, isn't it?
 And that's how we set our device.
         </div>
@@ -262,7 +263,9 @@ perhaps you are sharp enough to figure it out from my
 examples.
 
 <p>To compile the program we call <code>pcap_compile()</code>. The
-prototype defines it as:
+prototype
+(from the <a href="manpages/pcap_compile.3pcap.html">man page</a>)
+defines it as:
 <pre>
 int pcap_compile(pcap_t *p, struct bpf_program *fp, char *str, int optimize,
     bpf_u_int32 netmask)
@@ -278,7 +281,8 @@ other values imply success.
 
 <p>After the expression has been compiled, it is time to apply 
 it. Enter <code>pcap_setfilter()</code>. Following our format of explaining pcap,
-we shall look at the <code>pcap_setfilter()</code> prototype:
+we shall look at the <code>pcap_setfilter()</code> prototype
+(from the <a href="manpages/pcap_setfilter.3pcap.html">man page</a>):
 <pre>
 int pcap_setfilter(pcap_t *p, struct bpf_program *fp)
 </pre>
@@ -321,7 +325,9 @@ if (pcap_setfilter(handle, &amp;fp) == -1) {
 23, in promiscuous mode, on the device <code>rl0</code>.
 
 <p>You may notice that the previous example contains a function that we
-have not yet discussed.  <code>pcap_lookupnet()</code> is a function that, given the
+have not yet discussed.  <code>pcap_lookupnet()</code>
+(<a href="manpages/pcap_lookupnet.3pcap.html">man page</a>)
+is a function that, given the
 name of a device, returns one of its IPv4 network numbers and
 corresponding network mask (the network number is the IPv4 address ANDed
 with the network mask, so it contains only the network part of the
@@ -349,7 +355,9 @@ capture a single packet at a time, or we can enter a loop that waits for
 begin by looking at how to capture a single packet, then look at methods
 of using loops.  For this we use <code>pcap_next()</code>.
 
-<p>The prototype for <code>pcap_next()</code> is fairly simple:
+<p>The prototype
+(from the <a href="manpages/pcap_next_ex.3pcap.html">man page</a>)
+for <code>pcap_next()</code> is fairly simple:
 <pre>
 u_char *pcap_next(pcap_t *p, struct pcap_pkthdr *h)
 </pre>
@@ -418,7 +426,9 @@ int main(int argc, char *argv[])
 <p>This application sniffs on whatever device is returned by <code>pcap_lookupdev()</code> by
 putting it into promiscuous mode. It finds the first packet to come across 
 port 23 (telnet) and tells the user the size of the packet (in bytes). 
-Again, this program includes a new call, <code>pcap_close()</code>, which we will discuss
+Again, this program includes a new call, <code>pcap_close()</code>
+(<a href="manpages/pcap_close.3pcap.html">man page</a>),
+which we will discuss
 later (although it really is quite self explanatory).
 
 <p>The other technique we can use is more complicated, and 
