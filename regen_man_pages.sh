@@ -48,7 +48,7 @@ stripContentTypeHeader()
 stripIndexSection()
 {
 	case $(basename "${1:?}") in
-	tcpdump.1|tcpslice.1|pcap.3pcap)
+	tcpdump.1|pcap.3pcap)
 		cat
 		;;
 	*)
