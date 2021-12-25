@@ -4,6 +4,7 @@ define ('URI_PREFIX', '/manpages/');
 define ('HEADER_FILE', '../autoindex_header.html');
 define ('FOOTER_FILE', '../autoindex_footer.html');
 define ('GIT_MASTER', 'git master branch');
+define ('TITLE_SUFFIX', ' | TCPDUMP &amp; LIBPCAP');
 
 # Put the most frequent URIs first.
 $taxonomy = array
@@ -178,8 +179,10 @@ foreach ($taxonomy as $pname => $project)
 		),
 		array
 		(
-			'@(<TITLE>.+)(</TITLE>)@',
-			'$1 | TCPDUMP &amp; LIBPCAP$2'
+			'@(<TITLE>)(.*)(</TITLE>)@',
+			1 === preg_match ('/^(.+)\.([1-9][a-z]*)$/', $basename, $m) ?
+				sprintf ('$1%s(%s) man page%s$3', $m[1], strtoupper ($m[2]), TITLE_SUFFIX) :
+				sprintf ('$1$2%s$3', TITLE_SUFFIX)
 		),
 		array
 		(
