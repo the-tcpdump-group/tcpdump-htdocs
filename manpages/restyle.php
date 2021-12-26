@@ -165,7 +165,7 @@ foreach ($taxonomy as $pname => $project)
 		array
 		(
 			'@(.*<BODY>)$@m',
-			"\$1\n" . read_file (HEADER_FILE) . "<DIV id=page>\n<DIV class=post>\n"
+			"\$1\n" . read_file (HEADER_FILE) . "<DIV id=page class=manpage>\n<DIV class=post>\n"
 		),
 		array
 		(

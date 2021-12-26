@@ -74,7 +74,6 @@ s@^<HTML><HEAD><TITLE>Manpage of @<HTML><HEAD><TITLE>Man page of @
 s@<HTML>@<HTML lang="en">@
 s@</HEAD><BODY>@<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">\n\0@
 s@</HEAD><BODY>@<LINK rel="stylesheet" type="text/css" href="../style.css">\n\0@
-s@</HEAD><BODY>@<LINK REL="stylesheet" type="text/css" href="../style_manpages.css">\n</HEAD><BODY>@
 s@</HEAD><BODY>@<meta charset="utf-8">\n</HEAD><BODY>@
 s@<DL COMPACT>@<DL>@g
 s@<TT>@@g
