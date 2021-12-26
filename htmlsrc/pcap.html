@@ -101,8 +101,8 @@ int main(int argc, char *argv[])
 say. &quot;What is the deal with the <code>errbuf</code> string?&quot; Most of the pcap
 commands allow us to pass them a string as an argument. The purpose of 
 this string? In the event that the command fails, it will populate the 
-string with a description of the error. In this case, if <code>pcap_lookupdev()</code>
-(<a href="manpages/pcap_lookupdev.3pcap.html">man page</a>)
+string with a description of the error. In this case, if
+<a href="manpages/pcap_lookupdev.3pcap.html"><b>pcap_lookupdev</b></a>(3PCAP)
 fails, it will store an error message in <code>errbuf</code>. Nifty, isn't it?
 And that's how we set our device.
         </div>
@@ -112,8 +112,9 @@ And that's how we set our device.
         <h2 class="title">Opening the device for sniffing</h2>
         <div class="entry">
 <p>The task of creating a sniffing session is really quite 
-simple. For this, we use <code>pcap_open_live()</code>. The prototype of this
-function (from the <a href="manpages/pcap_open_live.3pcap.html">man page</a>) is as follows:
+simple. For this, we use
+<a href="manpages/pcap_open_live.3pcap.html"><b>pcap_open_live</b></a>(3PCAP).
+The prototype of this function is as follows:
 <pre>
 pcap_t *pcap_open_live(char *device, int snaplen, int promisc, int to_ms,
     char *ebuf)
@@ -171,7 +172,8 @@ capturing in monitor mode, don't.
 
 <p>You need to determine the type of link-layer headers the device
 provides, and use that type when processing the packet contents.  The
-pcap_datalink() routine returns a value indicating the type of
+<a href="manpages/pcap_datalink.3pcap.html"><b>pcap_datalink</b></a>(3PCAP)
+routine returns a value indicating the type of
 link-layer headers; see <a href="linktypes.html">the list of link-layer
 header type values</a>.  The values it returns are the <code>DLT_</code>
 values in that list.
@@ -197,10 +199,14 @@ traffic. For instance, there may be times when all we want is to sniff on
 port 23 (telnet) in search of passwords. Or perhaps we want to highjack a 
 file being sent over port 21 (FTP). Maybe we only want DNS traffic (port 
 53 UDP). Whatever the case, rarely do we just want to blindly sniff <i>all</i> 
-network traffic. Enter <code>pcap_compile()</code> and <code>pcap_setfilter()</code>.
+network traffic. Enter
+<a href="manpages/pcap_compile.3pcap.html"><b>pcap_compile</b></a>(3PCAP)
+and
+<a href="manpages/pcap_setfilter.3pcap.html"><b>pcap_setfilter</b></a>(3PCAP).
 
 <p>The process is quite simple.  After we have already called
-<code>pcap_open_live()</code> and have a working sniffing session, we can apply our
+<a href="manpages/pcap_open_live.3pcap.html"><b>pcap_open_live</b></a>()
+and have a working sniffing session, we can apply our
 filter.  Why not just use our own <code>if</code>/<code>else if</code> statements? Two reasons.
 First, pcap's filter is far more efficient, because it does it directly
 with the BPF filter; we eliminate numerous steps by having the BPF
@@ -208,15 +214,16 @@ driver do it directly.  Second, this is a <em>lot</em> easier :)
 
 <p>Before applying our filter, we must &quot;compile&quot; it.  The
 filter expression is kept in a regular string (<code>char</code> array).  The syntax
-is documented quite well in the <a href="manpages/pcap-filter.7.html">man page</a>; I leave you to
+is documented quite well in
+<a href="manpages/pcap-filter.7.html"><b>pcap-filter</b></a>(7);
+I leave you to
 read it on your own.  However, we will use simple test expressions, so
 perhaps you are sharp enough to figure it out from my
 examples.
 
-<p>To compile the program we call <code>pcap_compile()</code>. The
-prototype
-(from the <a href="manpages/pcap_compile.3pcap.html">man page</a>)
-defines it as:
+<p>To compile the program we call
+<a href="manpages/pcap_compile.3pcap.html"><b>pcap_compile</b></a>().
+The prototype defines it as:
 <pre>
 int pcap_compile(pcap_t *p, struct bpf_program *fp, char *str, int optimize,
     bpf_u_int32 netmask)
@@ -231,15 +238,16 @@ network the filter applies to.  The function returns -1 on failure; all
 other values imply success.
 
 <p>After the expression has been compiled, it is time to apply 
-it. Enter <code>pcap_setfilter()</code>. Following our format of explaining pcap,
-we shall look at the <code>pcap_setfilter()</code> prototype
-(from the <a href="manpages/pcap_setfilter.3pcap.html">man page</a>):
+it. Enter
+<a href="manpages/pcap_setfilter.3pcap.html"><b>pcap_setfilter</b></a>().
+Following our format of explaining pcap, we shall look at the prototype:
 <pre>
 int pcap_setfilter(pcap_t *p, struct bpf_program *fp)
 </pre>
 <p>This is very straightforward. The first argument is our session handler, 
 the second is a reference to the compiled version of the expression (presumably 
-the same variable as the second argument to <code>pcap_compile()</code>).
+the same variable as the second argument to
+<a href="manpages/pcap_compile.3pcap.html"><b>pcap_compile</b></a>()).
 
 <p>Perhaps another code sample would help to better understand:
 <pre>
@@ -276,8 +284,8 @@ if (pcap_setfilter(handle, &amp;fp) == -1) {
 23, in promiscuous mode, on the device <code>rl0</code>.
 
 <p>You may notice that the previous example contains a function that we
-have not yet discussed.  <code>pcap_lookupnet()</code>
-(<a href="manpages/pcap_lookupnet.3pcap.html">man page</a>)
+have not yet discussed.
+<a href="manpages/pcap_lookupnet.3pcap.html"><b>pcap_lookupnet</b></a>(3PCAP)
 is a function that, given the
 name of a device, returns one of its IPv4 network numbers and
 corresponding network mask (the network number is the IPv4 address ANDed
@@ -304,11 +312,9 @@ sniff for. Now it is time to actually capture some packets.
 capture a single packet at a time, or we can enter a loop that waits for
 <i>n</i> number of packets to be sniffed before being done.  We will
 begin by looking at how to capture a single packet, then look at methods
-of using loops.  For this we use <code>pcap_next()</code>.
-
-<p>The prototype
-(from the <a href="manpages/pcap_next_ex.3pcap.html">man page</a>)
-for <code>pcap_next()</code> is fairly simple:
+of using loops.  For this we use
+<a href="manpages/pcap_next_ex.3pcap.html"><b>pcap_next</b></a>(3PCAP).
+<p>The prototype is fairly simple:
 <pre>
 u_char *pcap_next(pcap_t *p, struct pcap_pkthdr *h)
 </pre>
@@ -316,12 +322,14 @@ u_char *pcap_next(pcap_t *p, struct pcap_pkthdr *h)
 pointer to a structure that holds general information about the packet, 
 specifically the time in which it was sniffed, the length of this packet, and 
 the length of this specific portion (in case it is fragmented, for example).
-<code>pcap_next()</code> returns a <code>u_char</code> pointer to the packet that is described by this
+<a href="manpages/pcap_next_ex.3pcap.html"><b>pcap_next</b></a>()
+returns a <code>u_char</code> pointer to the packet that is described by this
 structure. We'll discuss the technique for actually reading the packet 
 itself later.
 
-<p>Here is a simple demonstration of using <code>pcap_next()</code> to sniff a
-packet.
+<p>Here is a simple demonstration of using
+<a href="manpages/pcap_next_ex.3pcap.html"><b>pcap_next</b></a>()
+to sniff a packet.
 <pre>
 #include &lt;pcap.h&gt;
 #include &lt;stdio.h&gt;
@@ -374,18 +382,26 @@ int main(int argc, char *argv[])
 	return(0);
 }
 </pre>
-<p>This application sniffs on whatever device is returned by <code>pcap_lookupdev()</code> by
+<p>This application sniffs on whatever device is returned by
+<a href="manpages/pcap_lookupdev.3pcap.html"><b>pcap_lookupdev</b></a>()
+by
 putting it into promiscuous mode. It finds the first packet to come across 
 port 23 (telnet) and tells the user the size of the packet (in bytes). 
-Again, this program includes a new call, <code>pcap_close()</code>
-(<a href="manpages/pcap_close.3pcap.html">man page</a>),
+Again, this program includes a new call,
+<a href="manpages/pcap_close.3pcap.html"><b>pcap_close</b></a>(3PCAP),
 which we will discuss
 later (although it really is quite self explanatory).
 
 <p>The other technique we can use is more complicated, and 
-probably more useful. Few sniffers (if any) actually use <code>pcap_next()</code>.
-More often than not, they use <code>pcap_loop()</code> or <code>pcap_dispatch()</code> (which then
-themselves use <code>pcap_loop()</code>). To understand the use of these two functions,
+probably more useful. Few sniffers (if any) actually use
+<a href="manpages/pcap_next_ex.3pcap.html"><b>pcap_next</b></a>().
+More often than not, they use
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>(3PCAP)
+or
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_dispatch</b></a>(3PCAP)
+(which then themselves use
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()).
+To understand the use of these two functions,
 you must understand the idea of a callback function.
 
 <p>Callback functions are not anything new, and are very common in many
@@ -398,39 +414,56 @@ utilizing is a callback function.  Every time the user presses a key, my
 program will call the callback function.  Callbacks are used in pcap,
 but instead of being called when a user presses a key, they are called
 when pcap sniffs a packet.  The two functions that one can use to define
-their callback is <code>pcap_loop()</code> and <code>pcap_dispatch()</code>.  <code>pcap_loop()</code> and
-<code>pcap_dispatch()</code> are very similar in their usage of callbacks.  Both of
+their callback are
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+and
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_dispatch</b></a>(),
+these are very similar in their usage of callbacks.  Both of
 them call a callback function every time a packet is sniffed that meets
 our filter requirements (if any filter exists, of course.  If not, then
 <i>all</i> packets that are sniffed are sent to the callback.)
 
-<p>The prototype for <code>pcap_loop()</code> is below:
+<p>The prototype for
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+is below:
 <pre>
 int pcap_loop(pcap_t *p, int cnt, pcap_handler callback, u_char *user)
 </pre>
 <p>The first argument is our session handle.  Following that is an
-integer that tells <code>pcap_loop()</code> how many packets it should sniff for
+integer that tells
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+how many packets it should sniff for
 before returning (a negative value means it should sniff until an error
 occurs).  The third argument is the name of the callback function (just
 its identifier, no parentheses).  The last argument is useful in some
 applications, but many times is simply set as <code>NULL</code>.  Suppose we have
 arguments of our own that we wish to send to our callback function, in
-addition to the arguments that <code>pcap_loop()</code> sends.  This is where we do
+addition to the arguments that
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+sends.  This is where we do
 it.  Obviously, you must typecast to a <code>u_char</code> pointer to ensure the
 results make it there correctly; as we will see later, pcap makes use of
 some very interesting means of passing information in the form of a
 <code>u_char</code> pointer.  After we show an example of how pcap does it, it should
 be obvious how to do it here.  If not, consult your local C reference
 text, as an explanation of pointers is beyond the scope of this
-document.  <code>pcap_dispatch()</code> is almost identical in usage.  The only
-difference between <code>pcap_dispatch()</code> and <code>pcap_loop()</code> is that
-<code>pcap_dispatch()</code> will only process the first batch of packets that it
-receives from the system, while <code>pcap_loop()</code> will continue processing
+document.
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_dispatch</b></a>()
+is almost identical in usage.  The only
+difference between these two functions is that
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_dispatch</b></a>()
+will only process the first batch of packets that it
+receives from the system, while
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+will continue processing
 packets or batches of packets until the count of packets runs out.  For
-a more in depth discussion of their differences, see the <a href="manpages/pcap_loop.3pcap.html">man page</a>.
+a more in depth discussion of their differences, see the man page.
 <p>Before we can provide an example of using 
-<code>pcap_loop()</code>, we must examine the format of our callback function. We
-cannot arbitrarily define our callback's prototype; otherwise, <code>pcap_loop()</code> would
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>(),
+we must examine the format of our callback function. We
+cannot arbitrarily define our callback's prototype; otherwise,
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+would
 not know how to use the function. So we use this format as the prototype 
 for our callback function:
 <pre>
@@ -438,10 +471,14 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header,
     const u_char *packet);
 </pre>
 <p>Let's examine this in more detail. First, you'll notice that the function 
-has a <code>void</code> return type. This is logical, because <code>pcap_loop()</code> wouldn't know
-how to handle a return value anyway. The first argument corresponds to the 
-last argument of <code>pcap_loop()</code>. Whatever value is passed as the last
-argument to <code>pcap_loop()</code> is passed to the first argument of our callback function
+has a <code>void</code> return type. This is logical, because
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+wouldn't know how to handle a return value anyway. The first argument
+corresponds to the last argument of
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>().
+Whatever value is passed as the last argument to
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+is passed to the first argument of our callback function
 every time the function is called. The second argument is the pcap header, 
 which contains information about when the packet was sniffed, how large it is, 
 etc. The <code>pcap_pkthdr</code> structure is defined in <code>pcap.h</code> as:
@@ -456,7 +493,8 @@ struct pcap_pkthdr {
 the most interesting of them all, and the most confusing to the average
 novice pcap programmer.  It is another pointer to a <code>u_char</code>, and it
 points to the first byte of a chunk of data containing the entire
-packet, as sniffed by <code>pcap_loop()</code>.
+packet, as sniffed by
+<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>().
 
 <p>But how do you make use of this variable (named <code>packet</code> in
 our prototype)? A packet contains many attributes, so as you can
