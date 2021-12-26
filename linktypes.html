@@ -317,8 +317,8 @@ or Frame Check Sequence fields, and with only the first ISU of the
 Destination Identifier.  For most packet types, ARCNET Trade Association
 draft standard <a class=away href="https://web.archive.org/web/20100414154914/http://www.arcnet.com/resources/ata8782.pdf">ATA
 878.2</a> is also used.  See also <a class=away
-href="https://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a class=away
-href="https://tools.ietf.org/html/rfc1201">RFC 1201</a>; for RFC 1051
+href="https://www.rfc-editor.org/rfc/rfc1051.html">RFC 1051</a> and <a class=away
+href="https://www.rfc-editor.org/rfc/rfc1201.html">RFC 1201</a>; for RFC 1051
 frames, ATA 878.2 is not used.
 </td>
 </tr>
@@ -339,9 +339,9 @@ SLIP, encapsulated with
 <td class="symbol">DLT_PPP</td>
 <td>
 PPP, as per
-<a class=away href="https://tools.ietf.org/html/rfc1661">RFC 1661</a>
+<a class=away href="https://www.rfc-editor.org/rfc/rfc1661.html">RFC 1661</a>
 and
-<a class=away href="https://tools.ietf.org/html/rfc1662">RFC 1662</a>; if
+<a class=away href="https://www.rfc-editor.org/rfc/rfc1662.html">RFC 1662</a>; if
 the first 2 bytes are <code>0xff</code> and <code>0x03</code>, it's PPP in HDLC-like
 framing, with the PPP header following those two bytes, otherwise it's
 PPP without framing, and the packet begins with the PPP header.  The
@@ -364,9 +364,9 @@ FDDI, as specified by ANSI INCITS 239-1994.
 <td class="symbol">DLT_PPP_SERIAL</td>
 <td>
 PPP in HDLC-like framing, as per
-<a class=away href="https://tools.ietf.org/html/rfc1662"> RFC 1662</a>,
+<a class=away href="https://www.rfc-editor.org/rfc/rfc1661.html"> RFC 1662</a>,
 or Cisco PPP with HDLC
-framing, as per <a class=away href="https://tools.ietf.org/html/rfc1547#section-4.3.1">
+framing, as per <a class=away href="https://www.rfc-editor.org/rfc/rfc1547.html#section-4.3.1">
 section 4.3.1 of RFC 1547</a>; the first byte will be <code>0xFF</code>
 for PPP in HDLC-like framing, and will be <code>0x0F</code> or <code>0x8F</code> for Cisco PPP
 with HDLC framing.  The data in the frame is not octet-stuffed or
@@ -380,7 +380,7 @@ bit-stuffed.
 <td class="symbol">DLT_PPP_ETHER</td>
 <td>
 PPPoE; the packet begins with a PPPoE header, as per
-<a class=away href="https://tools.ietf.org/html/rfc2516">RFC 2516</a>.
+<a class=away href="https://www.rfc-editor.org/rfc/rfc2516.html">RFC 2516</a>.
 </td>
 </tr>
 
@@ -389,7 +389,7 @@ PPPoE; the packet begins with a PPPoE header, as per
 <td class="number">100</td>
 <td class="symbol">DLT_ATM_RFC1483</td>
 <td>
-<a class=away href="https://tools.ietf.org/html/rfc1483">RFC 1483</a>
+<a class=away href="https://www.rfc-editor.org/rfc/rfc1483.html">RFC 1483</a>
 LLC/SNAP-encapsulated ATM; the packet begins with an
 <a class=away href="https://www.iso.org/standard/30174.html">ISO 8802-2</a>
 (formerly known as IEEE 802.2) LLC header.
@@ -413,7 +413,7 @@ header.
 <td class="symbol">DLT_C_HDLC</td>
 <td>
 Cisco PPP with HDLC framing, as per
-<a class=away href="https://tools.ietf.org/html/rfc1547#section-4.3.1">
+<a class=away href="https://www.rfc-editor.org/rfc/rfc1547.html#section-4.3.1">
 section 4.3.1 of RFC 1547</a>.
 </td>
 </tr>
@@ -506,7 +506,7 @@ information</a> followed by an 802.11 header.
 <td class="number">122</td>
 <td class="symbol">DLT_IP_OVER_FC</td>
 <td>
-<a class=away href="https://tools.ietf.org/html/rfc2625">RFC 2625</a>
+<a class=away href="https://www.rfc-editor.org/rfc/rfc2625.html">RFC 2625</a>
 IP-over-Fibre Channel, with the link-layer header being the
 Network_Header as described in that RFC.
 </td>
@@ -548,8 +548,8 @@ Trade Association draft standard
 <a class=away href="https://web.archive.org/web/20100414154914/http://www.arcnet.com/resources/ata8782.pdf">ATA 878.2</a> is
 also used; however, no exception frames are supplied, and reassembled
 frames, rather than fragments, are supplied.  See also <a class=away
-href="https://tools.ietf.org/html/rfc1051">RFC 1051</a> and <a class=away
-href="https://tools.ietf.org/html/rfc1201">RFC 1201</a>; for RFC 1051
+href="https://www.rfc-editor.org/rfc/rfc1051.html">RFC 1051</a> and <a class=away
+href="https://www.rfc-editor.org/rfc/rfc1201.html">RFC 1201</a>; for RFC 1051
 frames, ATA 878.2 is not used.
 </td>
 </tr>
@@ -877,9 +877,9 @@ pseudo-header.
 <td class="symbol">DLT_PPP_WITH_DIR</td>
 <td>
 PPP, as per
-<a class=away href="https://tools.ietf.org/html/rfc1661">RFC 1661</a>
+<a class=away href="https://www.rfc-editor.org/rfc/rfc1661.html">RFC 1661</a>
 and
-<a class=away href="https://tools.ietf.org/html/rfc1662">RFC 1662</a>,
+<a class=away href="https://www.rfc-editor.org/rfc/rfc1662.html">RFC 1662</a>,
 preceded with a one-byte pseudo-header with a zero value meaning
 "received by this host" and a non-zero value meaning "sent by this
 host"; if the first 2 bytes are <code>0xff</code> and <code>0x03</code>, it's PPP in HDLC-like
@@ -895,7 +895,7 @@ data in the frame is not octet-stuffed or bit-stuffed.
 <td class="symbol">DLT_C_HDLC_WITH_DIR</td>
 <td>
 Cisco PPP with HDLC framing, as per
-<a class=away href="https://tools.ietf.org/html/rfc1547#section-4.3.1">
+<a class=away href="https://www.rfc-editor.org/rfc/rfc1547.html#section-4.3.1">
 section 4.3.1 of RFC 1547</a>,
 preceded with a one-byte pseudo-header with a zero value meaning
 "received by this host" and a non-zero value meaning "sent by this
@@ -1163,7 +1163,7 @@ and ending with the FCS.
 <td class="symbol">DLT_IPOIB</td>
 <td>
 IP-over-InfiniBand, as specified by <a class=away
-href="https://tools.ietf.org/html/rfc4391#section-6">RFC 4391 section 6</a>.
+href="https://www.rfc-editor.org/rfc/rfc4391.html#section-6">RFC 4391 section 6</a>.
 </td>
 </tr>
 
@@ -1229,7 +1229,7 @@ Specifications</a>.
 <td class="symbol">DLT_SCTP</td>
 <td>
 SCTP packets, as defined by <a class=away
-href="https://tools.ietf.org/html/rfc4960">RFC 4960</a>, with no
+href="https://www.rfc-editor.org/rfc/rfc4960.html">RFC 4960</a>, with no
 lower-level protocols such as IPv4 or IPv6.
 </td>
 </tr>
