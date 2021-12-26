@@ -69,8 +69,10 @@ RETURN VALUE
 
 BACKWARD COMPATIBILITY
        This function became available in libpcap release 1.9.0.   In  previous
-       releases,  select(),  poll(), epoll_wait(), and kevent() cannot be used
-       on any capture source for which pcap_get_selectable_fd() returns -1.
+       releases,  select(),  poll(),  epoll_wait(),  and kevent() could not be
+       used for devices that don't provide a selectable  file  descriptor  (in
+       other  words,  on  any capture source for that pcap_get_selectable_fd()
+       returns -1).
 
        In libpcap release 1.10.0 and later, the timeout value can change  from
        call  to call, so pcap_get_required_select_timeout() must be called be-
@@ -80,11 +82,6 @@ BACKWARD COMPATIBILITY
        pcap_get_required_select_timeout()  should  be  changed  to call it for
        each call to select(), poll(), epoll_wait(), or kevent()  even  if  the
        code must also work with libpcap 1.9.x.
-
-BACKWARD COMPATIBILITY
-       This  function  became available in libpcap release 1.9.0.  In previous
-       releases, select(), poll(), epoll_wait(), and  kevent()  could  not  be
-       used for devices that don't provide a selectable file descriptor.
 
 SEE ALSO
        pcap(3PCAP),    pcap_get_selectable_fd(3PCAP),    select(2),   poll(2),

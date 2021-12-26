@@ -184,11 +184,12 @@ releases,
 and
 <B>kevent</B>()
 
-cannot be used on any capture source for which
+could not be used for devices that don't provide a selectable file
+descriptor (in other words, on any capture source for that
 <B>pcap_get_selectable_fd</B>()
 
 returns
-<B>-1</B>.
+<B>-1</B>).
 
 <P>
 
@@ -222,22 +223,7 @@ or
 <B>kevent</B>()
 
 even if the code must also work with libpcap 1.9.x.
-<H2 id="lbAG">BACKWARD COMPATIBILITY</H2>
-
-This function became available in libpcap release 1.9.0.  In previous
-releases,
-<B>select</B>(),
-
-<B>poll</B>(),
-
-<B>epoll_wait</B>(),
-
-and
-<B>kevent</B>()
-
-could not be used for devices that don't provide a selectable file
-descriptor.
-<H2 id="lbAH">SEE ALSO</H2>
+<H2 id="lbAG">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
 
@@ -255,7 +241,7 @@ descriptor.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:05 GMT, November 01, 2021
+This HTML man page was generated at 14:30:16 GMT, December 26, 2021
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
