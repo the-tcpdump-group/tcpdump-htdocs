@@ -72,7 +72,8 @@ all. All of the code examples presented here have been tested on FreeBSD
 general layout of a pcap sniffer. The flow of code is as follows:
 <ol>
   <li>We begin by determining which interface we want to sniff 
-  on. In Linux this may be something like eth0, in BSD it may be xl1, etc. 
+  on. In Linux this may be something like <code>eth0</code>, in BSD it may
+  be <code>xl1</code>, etc.
   We can either define this device in a string, or we can ask pcap to
   provide us with the name of an interface that will do the job.
   <li>Initialize pcap. This is where we actually tell pcap 
@@ -84,7 +85,7 @@ general layout of a pcap sniffer. The flow of code is as follows:
   only TCP/IP packets, only packets going to port 23, etc) we must create a rule 
   set, &quot;compile&quot; it, and apply it. This is a three phase process, all of 
   which is closely related. The rule set is kept in a string, and is 
-  converted into a format that pcap can read (hence compiling it.) The 
+  converted into a format that pcap can read (hence compiling it). The
   compilation is actually just done by calling a function within our program; it 
   does not involve the use of an external application. Then we tell pcap 
   to apply it to whichever session we wish for it to filter.
@@ -99,7 +100,7 @@ general layout of a pcap sniffer. The flow of code is as follows:
 </ol>
 <p>This is actually a very 
 simple process. Five steps total, one of which is optional (step 3,
-in case you were wondering.) Let's take a look at each of the steps and how 
+in case you were wondering). Let's take a look at each of the steps and how
 to implement them.
         </div>
       </div>
@@ -282,7 +283,7 @@ previous example).  Following that is a reference to the place we will
 store the compiled version of our filter.  Then comes the expression
 itself, in regular string format.  Next is an integer that decides if
 the expression should be &quot;optimized&quot; or not (0 is false, 1 is
-true.  Standard stuff.)  Finally, we must specify the network mask of the
+true&mdash;standard stuff).  Finally, we must specify the network mask of the
 network the filter applies to.  The function returns -1 on failure; all
 other values imply success.
 
@@ -454,7 +455,7 @@ To understand the use of these two functions,
 you must understand the idea of a callback function.
 
 <p>Callback functions are not anything new, and are very common in many
-API's.  The concept behind a callback function is fairly simple. 
+APIs.  The concept behind a callback function is fairly simple.
 Suppose I have a program that is waiting for an event of some sort.  For
 the purpose of this example, let's pretend that my program wants a user
 to press a key on the keyboard.  Every time they press a key, I want to
