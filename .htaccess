@@ -30,11 +30,10 @@ Redirect permanent /libpcap-credits.txt https://git.tcpdump.org/libpcap/blob/HEA
 Redirect permanent /tcpdump-changes.txt https://git.tcpdump.org/tcpdump/blob/HEAD:/CHANGES
 Redirect permanent /tcpdump-credits.txt https://git.tcpdump.org/tcpdump/blob/HEAD:/CREDITS
 
-# Serve a PNG file (via symlink) with the correct Content-Type (via ForceType)
+# Serve a PNG file with the correct Content-Type
 # and no HTTP redirects when a client asks for the default "/favicon.ico".
-<Files "/favicon.ico">
-	ForceType image/png
-</Files>
+RewriteEngine On
+RewriteRule "^favicon\.ico$" "images/T-32x32.png" [L,PT]
 
 ExpiresActive On
 # .css documents tend to be cached for too long, so declare them short-lived
