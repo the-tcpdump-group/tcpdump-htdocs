@@ -1,7 +1,6 @@
 IndexOptions +SuppressSize +IgnoreClient
 # In this context these symlinks are only distractors.
 IndexIgnore images
-IndexIgnore style_manpages.css
 IndexIgnore style.css
 # This script does not serve direct requests.
 IndexIgnore restyle.php
