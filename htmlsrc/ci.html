@@ -37,6 +37,10 @@
                   master branch passes a build successfully.
                 </li>
                 <li>
+                  Ibid., schedule builds on slow workers only after all fast workers
+                  have successfully completed building the change.
+                </li>
+                <li>
                   Ibid., migrate the 32-bit ARM Buildbot worker to true ARMv7 hardware
                   (it currently runs in 32-bit mode on AArch64 hardware, which supports
                   unaligned memory access and thus cannot detect alignment issues in
