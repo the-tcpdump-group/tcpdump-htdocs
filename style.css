@@ -154,12 +154,12 @@ hr {
 }
 
 .post .initial {
-	font-size: large;
+	font-size: larger;
 	font-weight: bold;
 }
 
 .post code, pre {
-	font-size: large;
+	font-size: larger;
 	/* Pad the sides to keep the inline <code> clear of any adjacent punctuation marks. */
 	padding: 0px 5px;
 	border-radius: 3px;
