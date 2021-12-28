@@ -12,7 +12,9 @@
 # * Fedora Linux 34
 # * Devuan Linux
 # * FreeBSD 12
-# * FreeBSD 13
+# * FreeBSD 13.0
+# * OpenBSD 7.0
+# * NetBSD 9.2
 #
 
 HTML_HEAD='htmlsrc/_html_head.html'
