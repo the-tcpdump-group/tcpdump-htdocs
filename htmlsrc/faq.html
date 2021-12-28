@@ -11,6 +11,7 @@
                    -->
                     <div class="entry">
                         <ul>
+                          <li> <a href="#q14">Why is the <code>pcap-int.h</code> header file missing from libpcap?</a> </li>
                           <li> <a href="#q13">Why my VLAN/MPLS packet filter does not work?</a> </li>
                           <li> <a href="#q12">How to decode a protocol on a non-standard port?</a> </li>
                           <li> <a href="#q2">How come I can not compile on Solaris?</a> </li>
@@ -35,6 +36,44 @@
                 </div>
                 <!-- End of QUESTION INDEX section -->
 
+
+                <!-- Start of QUESTION #14 section -->
+                <div class="post">
+                    <h2 class="title" id="q14">
+                        Why is the <code>pcap-int.h</code> header file missing from libpcap?
+                    </h2>
+                    <div class="entry">
+                        <p>
+                            <span class=initial>Q:</span>
+                            I am trying to compile a program that uses libpcap, this works fine
+                            when I use a complete source tree of libpcap. When I use the libpcap
+                            development package provided with the operating system, on some systems
+                            the compilation fails because of a missing header file
+                            (<code>pcap-int.h</code> or another header that it includes). What is
+                            the problem and how to solve it?
+                        </p>
+                        <p>
+                            <span class=initial>A:</span>
+                            In libpcap the <code>pcap-int.h</code> file has always been an internal
+                            header, which means its contents may change at any time in any way.
+                            Programs should never include libpcap internal headers directly and libpcap
+                            packages should never install internal header files. However, some libpcap
+                            packages do install <code>pcap-int.h</code> and some programs do include it
+                            and, consequently, fail to compile with libpcap packages that [correctly] do
+                            not install the internal headers.
+                        </p>
+                        <p>
+                            The right solution is to fix the program not to include
+                            <code>pcap-int.h</code>, as discussed in greater detail in libpcap
+                            (<a href="https://github.com/the-tcpdump-group/libpcap/issues/457">457</a>,
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/560">560</a>)
+                            and tcpslice
+                            (<a href="https://github.com/the-tcpdump-group/tcpslice/pull/6">6</a>)
+                            bug reports.
+                        </p>
+                    </div>
+                </div>
+                <!-- End of QUESTION #14 section -->
 
                 <!-- Start of QUESTION #13 section -->
                 <div class="post">
