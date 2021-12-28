@@ -249,10 +249,14 @@ table.byte_array_8 th:nth-last-child(-n+8), table.byte_array_8 td:nth-last-child
 table.cidigest {
 	width: 100%;
 	border-collapse: collapse;
+	margin-bottom: 1em;
 }
 
 table.cidigest th {
 	text-align: left;
+}
+
+table.cidigest tbody th {
 	padding-top: 1em;
 }
 

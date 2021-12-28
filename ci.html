@@ -49,7 +49,7 @@ Original license : Creative Commons Attribution 2.5 License
 
           <!-- Start of CONTINUOUS INTEGRATION section -->
           <div class="post">
-            <h2 class="title">Continuous integration</h2>
+            <h2 class="title">Current Build Status</h2>
             <div class="entry">
               <p>
                 The continuous integration (CI) systems below automatically build the
@@ -61,54 +61,9 @@ Original license : Creative Commons Attribution 2.5 License
                 either the git master branch or a pull request status, whichever was the
                 last built.
               </p>
-              <p>
-                The current setup could be improved in a few ways, for example:
-              </p>
-              <ul>
-                <li>
-                  Test cross-compiling of every project in at least one context (to
-                  detect regressions like
-                  <a href="https://github.com/the-tcpdump-group/tcpdump/pull/954">this
-                  one</a>).
-                </li>
-                <li>
-                  Make all builds free of compiler warnings and treat all warnings as
-                  errors everywhere.
-                </li>
-                <li>
-                  In The Tcpdump Group Buildbot test all permutations of compilers,
-                  build systems and libpcap types (local/system).  Currently some
-                  permutations are disabled on some workers because of unresolved
-                  issues in the OS or a particular project source code.
-                </li>
-                <li>
-                  Ibid., trigger a build of tcpdump master branch every time libpcap
-                  master branch passes a build successfully.
-                </li>
-                <li>
-                  Ibid., schedule builds on slow workers only after all fast workers
-                  have successfully completed building the change.
-                </li>
-                <li>
-                  Ibid., migrate the 32-bit ARM Buildbot worker to true ARMv7 hardware
-                  (it currently runs in 32-bit mode on AArch64 hardware, which supports
-                  unaligned memory access and thus cannot detect alignment issues in
-                  the code).
-                </li>
-                <li>
-                  Ibid., add workers for AIX, DragonFly BSD, Haiku and HP-UX.
-                </li>
-              </ul>
-              <p>
-                Last but not least: because the full set of CI builds takes a long time
-                to complete, it is a good idea not to CI man page, change log and README
-                updates or any other changes that have no effect on the source code or
-                the build system logic.  This is very simple to do: just add
-                <code>[skip ci]</code> at the end of the git commit summary (which is
-                the very first line of a git commit message).
-              </p>
               <table class=cidigest>
 
+                <thead>
                 <tr>
                   <th>
                     &nbsp;
@@ -123,7 +78,9 @@ Original license : Creative Commons Attribution 2.5 License
                     tcpslice
                   </th>
                 </tr>
+                </thead>
 
+                <tbody>
                 <tr>
                   <th colspan=4>
                     <a href="https://cirrus-ci.org/">Cirrus CI</a>
@@ -470,9 +427,65 @@ Original license : Creative Commons Attribution 2.5 License
                       src='https://ci.tcpdump.org/badges/tcpslice-illumos-amd64.svg'></a>
                   </td>
                 </tr>
+                </tbody>
 
               </table>
+            </div>
 
+            <h2 class="title">Potential Improvements</h2>
+            <div class="entry">
+              <ul>
+                <li>
+                  Test cross-compiling of every project in at least one context (to
+                  detect regressions like
+                  <a href="https://github.com/the-tcpdump-group/tcpdump/pull/954">this
+                  one</a>).
+                </li>
+                <li>
+                  Make all builds free of compiler warnings and treat all warnings as
+                  errors everywhere.
+                </li>
+                <li>
+                  In The Tcpdump Group Buildbot test all permutations of compilers,
+                  build systems and libpcap types (local/system).  Currently some
+                  permutations are disabled on some workers because of unresolved
+                  issues in the OS or a particular project source code.
+                </li>
+                <li>
+                  Ibid., trigger a build of tcpdump master branch every time libpcap
+                  master branch passes a build successfully.
+                </li>
+                <li>
+                  Ibid., schedule builds on slow workers only after all fast workers
+                  have successfully completed building the change.
+                </li>
+                <li>
+                  Ibid., migrate the 32-bit ARM worker to true ARMv7 hardware
+                  (it currently runs in 32-bit mode on AArch64 hardware, which supports
+                  unaligned memory access and thus cannot detect alignment issues in
+                  the code).
+                </li>
+                <li>
+                  Ibid., add workers for AIX, DragonFly BSD, Haiku and HP-UX.
+                </li>
+                <li>
+                  &hellip;anything else? Please send any suggestions to the
+                  <a href="index.html#mailing-lists">mailing list</a>, especially those
+                  you can help implementing.
+                </li>
+              </ul>
+            </div>
+
+            <h2 class="title">Skipping the CI</h2>
+            <div class="entry">
+              <p>
+                Last but not least: because the full set of CI builds takes a long time
+                to complete, it is a good idea not to CI man page, change log and README
+                updates or any other changes that have no effect on the source code or
+                the build system logic.  This is very simple to do: just add
+                <code>[skip ci]</code> at the end of the git commit summary (which is
+                the very first line of a git commit message).
+              </p>
             </div>
           </div>
           <!-- End of CONTINUOUS INTEGRATION section -->
