@@ -171,13 +171,15 @@ tcpdump -T radius -nv udp port 21812
 </pre>
                         <p>
                             If this approach does not solve the problem, you can consider
-                            <a href="index.html#patches">contributing code</a> to extend tcpdump
-                            or using a different packet analyzer. For example,
+                            <a href="index.html#patches">contributing code</a> to extend tcpdump (see
+                            <a href="https://github.com/the-tcpdump-group/tcpdump/issues/495">this
+                            discussion</a>) or using a different packet analyzer. For example,
                             <a class=away
                             href="https://mta.openssl.org/pipermail/openssl-users/2017-April/005624.html">this
                             mailing list post</a> explains how to use <code>tshark</code> to examine
                             the SSL protocol exchange of an FTPS connection that uses a non-standard
-                            TCP port.
+                            TCP port.  In the specific case of SSL/TLS, it is also possible to use
+                            <code>ssldump</code>.
                         </p>
                     </div>
                 </div>
@@ -195,7 +197,11 @@ tcpdump -T radius -nv udp port 21812
                         <code>lex</code> has some parameter set
                         too low. See <a href="https://web.archive.org/web/20010129094200/http://www.tcpdump.org:80/lists/workers/2000/msg00404.html">
                         the thread</a> <a href="https://web.archive.org/web/20010126233700/http://www.tcpdump.org/lists/workers/2000/msg00677.html">
-                        summmary</a>.
+                        summmary</a>.  See also libpcap
+                        <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/INSTALL.md">
+                          generic</a> and
+                        <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/doc/README.solaris.md">
+                          Solaris-related</a> installation notes.
                         </p>
                     </div>
                 </div>
