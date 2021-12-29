@@ -100,6 +100,10 @@
 		<loc>https://www.tcpdump.org/wpcap.html</loc>
 		<changefreq>monthly</changefreq>
 	</url>
+	<url>
+		<loc>https://www.tcpdump.org/libpcap-module-HOWTO.html</loc>
+		<changefreq>monthly</changefreq>
+	</url>
 
 	<url>
 		<loc>https://www.tcpdump.org/old_releases.html</loc>

@@ -53,6 +53,9 @@ substitute_page_title()
 	wpcap)
 		title='Information on WinPcap and WinDump | '
 		;;
+	libpcap-module-HOWTO)
+		title='How to write a libpcap module | '
+		;;
 	related)
 		title='See also | '
 		;;

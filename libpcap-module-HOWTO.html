@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates (later "TEMPLATED")
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html lang="en">
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>How to write a libpcap module | TCPDUMP &amp; LIBPCAP</title>
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="style.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="images/T-32x32.png" rel="shortcut icon" type="image/png">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="security.html">Security</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="manpages/">Man Pages</a></li>
+                <li><a href="ci.html">CI</a></li>
+                <li><a href="linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="related.html">See Also</a></li>
+                <li><a href="old_releases.html">Old Releases</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+      <div class="post">
+        <h1 class="title">How to write a libpcap module (draft)</h1>
+        <div class="entry">
+          <p>by Guy Harris</p>
+          <p>
+            This HOWTO is not yet complete, it can and should be improved.  If
+            you wish to contribute,
+            <a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">
+              this document</a> explains how to do it.
+          </p>
+        </div>
+
+        <h2 class="title">Introduction</h2>
+        <div class="entry">
+          <p>
+            <strong>WARNING:</strong> this document describes an unstable
+            interface; future releases of libpcap may, and some probably will,
+            change the interface in an incompatible fashion.  If you submit your
+            module to the libpcap developers for inclusion in libpcap, not only
+            does that make it more likely that it will be available in the
+            libpcap provided by operating system vendors (such as Linux
+            distributions), but it also means that we will attempt to update it
+            to handle future changes to this interface.  If we add new
+            capabilities, we may have to ask you how to provide those additional
+            capabilities if you're using an underlying mechanism for which we
+            have neither the source code nor the documentation.
+          </p>
+          <p>
+            <strong>NOTE:</strong> this document assumes familiarity with the
+            entire libpcap API.
+          </p>
+          <p>
+            <strong>TODO:</strong> more routines, more stuff that the activate
+            routine has to do (such as setting the list of <code>DLT_</code>s)?
+          </p>
+          <p>
+            On Linux, *BSD, macOS, Solaris, AIX, HP-UX, IRIX, and Tru64 UNIX,
+            Libpcap supports capturing on network interfaces as supported by the
+            operating system networking stack, using the native packet capture
+            mechanism provided by the OS.  On Windows, it supports it with the
+            help of the driver and library supplied by WinPcap and Npcap.
+          </p>
+          <p>
+            In addition, it also supports capturing on other types of devices,
+            such as:
+          </p>
+          <ul>
+            <li>specialized capture cards, such as Endace DAG cards;</li>
+            <li>network adapters that provide special high-performance code
+              paths, such as CSPI Myricom adapters;</li>
+            <li>buses such as USB;</li>
+            <li>software communication channels such as D-Bus and Linux netlink;
+              </li>
+            <li>etc.</li>
+          </ul>
+          <p>
+            Support for those devices is provided by modules compiled into
+            libpcap.
+          </p>
+        </div>
+
+        <h2 class="title">Where to start</h2>
+        <div class="entry">
+          <p>
+            If you want to add such a module, you would first have to check
+            <a href="linktypes.html">the list of link-layer header types
+            supported by libpcap</a>, to see if one of those would be sufficient
+            for your device.
+          </p>
+          <p>
+            If none of those would work for your device, please follow the
+            guidelines on the same page to request a new link-layer header type.
+          </p>
+          <p>
+            Once you have a link-layer header type value or values that you can
+            use, you can add new module.
+          </p>
+          <p>
+            The module should be a C source file, with a name of the form
+            <code>pcap-{MOD}.c</code>, where <code>{MOD}</code> is a name
+            appropriate for your device; for example, the support for DAG cards
+            is in <code>pcap-dag.c</code>, and the support for capturing USB
+            traffic on Linux is <code>pcap-usb-linux.c</code>.
+          </p>
+          <p>
+            Your module is assumed to support one or more named devices.  The
+            names should be relatively short names, containing only lower-case
+            alphanumeric characters, consisting of a prefix that ends with an
+            alphabetic character and, if there can be more than one device
+            instance, possibly followed by a numerical device ID, such as
+            <code>mydevice</code> or
+            <code>mydevice0</code>/<code>mydevice1</code>/&hellip;  If you have
+            more than one type of device that you can support, you can have more
+            than one prefix, each of which can be followed by a numerical device
+            ID.
+          </p>
+          <p>
+            The two exported functions that your module must provide are
+            routines to provide a list of device instances and a program to
+            initialize a created-but-not-activated <code>pcap_t</code> for an
+            instance of one of your devices.
+          </p>
+        </div>
+
+        <h2 class="title">The list device instances routine</h2>
+        <div class="entry">
+          <p>
+            The "list of device instances" routine takes, as arguments:
+          </p>
+          <ul>
+            <li>a pointer to a <code>pcap_if_list_t</code>;</li>
+            <li>a pointer to an error message buffer.</li>
+          </ul>
+          <p>
+            The error message buffer may be assumed to be
+            <code>PCAP_ERRBUF_SIZE</code> bytes large, but must not be assumed
+            to be larger.  By convention, the routine typically has a name
+            containing "findalldevs".
+          </p>
+          <p>
+            The routine should attempt to determine what device instances are
+            available and add them to the list pointed to by the first argument;
+            this may be impossible for some modules, but, for those modules, it
+            may be difficult to capture on the devices using Wirehshark
+            (although it should be possible to capture on them using tcpdump,
+            TShark, or other programs that take a device name on the command
+            line), so we recommend that your routine provide the list of devices
+            if possible.  If it cannot, it should just immediately return 0.
+          </p>
+          <p>
+            The routine should add devices to the list by calling the
+            <code>add_dev()</code> routine in libpcap, declared in the
+            <code>pcap-int.h header</code>.  It takes, as arguments:
+          </p>
+          <ul>
+            <li>
+              the pointer to the <code>pcap_if_list_t</code> passed as an
+              argument to the routine;
+            </li>
+            <li>
+              the device name, as described above;
+            </li>
+            <li>
+              a 32-bit word of flags, as provided by
+              <a href="manpages/pcap_findalldevs.3pcap.html"><b>pcap_findalldevs</b></a>(3PCAP);
+            </li>
+            <li>
+              a text description of the device, or <code>NULL</code> if there is
+              no description;
+            </li>
+            <li>
+              the error message buffer pointer provided to the routine.
+            </li>
+          </ul>
+          <p>
+            <code>add_dev()</code> will, if it succeeds, return a pointer to a
+            <code>pcap_if_t</code> that was added to the list of devices.  If it
+            fails, it will return <code>NULL</code>; in this case, the error
+            message buffer has been filled in with an error string, and your
+            routine must return -1 to indicate the error.
+          </p>
+          <p>
+            If your routine succeeds, it must return 0.  If it fails, it must
+            fill in the error message buffer with an error string and return -1.
+          </p>
+        </div>
+
+        <h2 class="title">The initialize routine</h2>
+        <div class="entry">
+          <p>
+            The "initialize the <code>pcap_t</code>" routine takes, as
+            arguments:
+          </p>
+          <ul>
+            <li>
+              a pointer to a device name;
+            </li>
+            <li>
+              a pointer to an error message buffer;
+            </li>
+            <li>
+              a pointer to an <code>int</code>.
+            </li>
+          </ul>
+          <p>
+          It returns a pointer to a <code>pcap_t</code>.
+          </p>
+          <p>
+            Your module will probably need, for each <code>pcap_t</code> for an
+            opened device, a private data structure to maintain its own
+            information about the opened device.  These should be allocated per
+            opened instance, not per device; if, for example,
+            <code>mydevice0</code> can be captured on by more than one program
+            at the same time, there will be more than one <code>pcap_t</code>
+            opened for <code>mydevice0</code>, and so there will be separate
+            private data structures for each <code>pcap_t</code>.  If you need
+            to maintain per-device, rather than per-opened instance information,
+            you will have to maintain that yourself.
+          </p>
+          <p>
+            The routine should first check the device to see whether it looks
+            like a device that this module would handle; for example, it should
+            begin with one of the device name prefixes for your module and, if
+            your devices have instance numbers, be followed by a number.  If it
+            is not one of those devices, you must set the integer pointed to by
+            the third argument to 0, to indicate that this is
+            <strong>not</strong> one of the devices for your module, and return
+            <code>NULL</code>.
+          </p>
+          <p>
+            If it <strong>is</strong> one of those devices, it should call
+            <code>pcap_create_common()</code>, passing to it the error message
+            buffer as the first argument and the size of the per-opened instance
+            data structure as the second argument.  If it fails, it will return
+            <code>NULL</code>; you must return <code>NULL</code> in this case.
+          </p>
+          <p>
+            If it succeeds, the <code>pcap_t</code> pointed to by the return
+            value has been partially initialized, but you will need to complete
+            the process.  It has a <code>priv</code> member, which is a
+            <code>void *</code> that points to the private data structure
+            attached to it; that structure has been initialized to zeroes.
+          </p>
+          <p>
+            What you need to set are some function pointers to your routines to
+            handle certain operations:
+          </p>
+          <dl>
+            <dt><code>activate_op</code></dt>
+            <dd>
+              the routine called when
+              <a href="manpages/pcap_activate.3pcap.html"><b>pcap_activate</b></a>(3PCAP)
+              is done on the <code>pcap_t</code>
+            </dd>
+            <dt><code>can_set_rfmon_op</code></dt>
+            <dd>
+              the routine called when
+              <a href="manpages/pcap_can_set_rfmon.3pcap.html"><b>pcap_can_set_rfmon</b></a>(3PCAP)
+              is done on the <code>pcap_t</code>&mdash;if your device doesn't
+              support 802.11 monitor mode, you can leave this as initialized by
+              <code>pcap_create_common()</code>, as that routine will return
+              "no, monitor mode isn't supported".
+            </dd>
+          </dl>
+          <p>
+            Once you've set the <code>activate_op</code> and, if necessary, the
+            <code>can_set_rfmon_op</code>, you must return the
+            <code>pcap_t *</code> that was returned to you.
+          </p>
+        </div>
+
+        <h2 class="title">The activate routine</h2>
+        <div class="entry">
+          <p>
+            Your activate routine takes, as an argument, a pointer to the
+            <code>pcap_t</code> being activated, and returns an
+            <code>int</code>.
+          </p>
+          <p>
+            The perameters set for the device in the
+            <a href="manpages/pcap_create.3pcap.html"><b>pcap_create</b></a>(3PCAP)
+            call, and after that <code>call()</code>, are mostly in the
+            <code>opt</code> member of the <code>pcap_t</code>:
+          </p>
+          <dl>
+            <dt><code>device</code></dt>
+            <dd>
+              the name of the device
+            </dd>
+            <dt><code>timeout</code></dt>
+            <dd>
+              the buffering timeout, in milliseconds
+            </dd>
+            <dt><code>buffer_size</code></dt>
+            <dd>
+              the buffer size to use
+            </dd>
+            <dt><code>promisc</code></dt>
+            <dd>
+              1 if promiscuous mode is to be used, 0 otherwise
+            </dd>
+            <dt><code>rfmon</code></dt>
+            <dd>
+              1 if monitor mode is to be used, 0 otherwise
+            </dd>
+            <dt><code>immediate</code></dt>
+            <dd>
+              1 if the device should be in immediate mode, 0 otherwise
+            </dd>
+            <dt><code>nonblock</code></dt>
+            <dd>
+              1 if the device should be in non-blocking mode, 0 otherwise
+            </dd>
+            <dt><code>tstamp_type</code></dt>
+            <dd>
+              the type of time stamp to supply
+            </dd>
+            <dt><code>tstamp_precision</code></dt>
+            <dd>
+              the time stamp precision to supply
+            </dd>
+          </dl>
+          <p>
+            The <code>snapshot</code> member of the <code>pcap_t</code>
+            structure will contain the snapshot length to be used.
+          </p>
+          <p>
+            Your routine should attempt to set up the device for capturing.  If
+            it fails, it must return an error indication which is one of the
+            <code>PCAP_ERROR</code> values.  For <code>PCAP_ERROR</code>, it
+            must also set the <code>errbuf</code> member of the
+            <code>pcap_t</code> to an error string.  For
+            <code>PCAP_ERROR_NO_SUCH_DEVICE</code> and
+            <code>PCAP_ERROR_PERM_DENIED</code>, it may set it to an error
+            string providing additional information that may be useful for
+            debugging, or may just leave it as a null string.
+          </p>
+          <p>
+            If it succeeds, it must set certain function pointers in the
+            <code>pcap_t</code> structure:
+          </p>
+          </dl>
+            <dt><code>read_op</code></dt>
+            <dd>
+              called whenever packets are to be read
+            </dd>
+            <dt><code>inject_op</code></dt>
+            <dd>
+              called whenever packets are to be injected
+            </dd>
+            <dt><code>setfilter_op</code></dt>
+            <dd>
+              called whenever
+              <a href="manpages/pcap_setfilter.3pcap.html"><b>pcap_setfilter</b></a>(3PCAP)
+              is called
+            </dd>
+            <dt><code>setdirection_op</code></dt>
+            <dd>
+              called whenever
+              <a href="manpages/pcap_setdirection.3pcap.html"><b>pcap_setdirection</b></a>(3PCAP)
+              is called
+            </dd>
+            <dt><code>set_datalink_op</code></dt>
+            <dd>
+              called whenever
+              <a href="manpages/pcap_set_datalink.3pcap.html"><b>pcap_set_datalink</b></a>(3PCAP)
+              is called
+            </dd>
+            <dt><code>getnonblock_op</code></dt>
+            <dd>
+              called whenever
+              <a href="manpages/pcap_setnonblock.3pcap.html"><b>pcap_getnonblock</b></a>(3PCAP)
+              is called
+            </dd>
+            <dt><code>setnonblock_op</code></dt>
+            <dd>
+              called whenever
+              <a href="manpages/pcap_setnonblock.3pcap.html"><b>pcap_setnonblock</b></a>(3PCAP)
+              is called
+            </dd>
+            <dt><code>stats_op</code></dt>
+            <dd>
+              called whenever
+              <a href="manpages/pcap_stats.3pcap.html"><b>pcap_stats</b></a>(3PCAP)
+              is called
+            </dd>
+            <dt><code>cleanup_op</code></dt>
+            <dd>
+              called if the activate routine fails or
+              <a href="manpages/pcap_close.3pcap.html"><b>pcap_close</b></a>(3PCAP)
+              is called
+            </dd>
+          </dl>
+          <p>
+            and must also set the linktype member to the <code>DLT_</code> value
+            for the device.
+          </p>
+          <p>
+            On UN*Xes, if the device supports waiting for packets to arrive with
+            <code>select()</code>/<code>poll()</code>/<code>epoll()</code>/kqueues
+            etc., it should set the <code>selectable_fd</code> member of the
+            structure to the descriptor you would use with those calls.  If it
+            does not, then, if that's because the device polls for packets
+            rather than receiving interrupts or other signals when packets
+            arrive, it should have a <code>struct timeval</code> in the private
+            data structure, set the value of that <code>struct timeval</code> to
+            the poll timeout, and set the <code>required_select_timeout</code>
+            member of the <code>pcap_t</code> to point to the
+            <code>struct timeval</code>.
+          </p>
+        </div>
+
+        <h2 class="title">The read routine</h2>
+        <div class="entry">
+          <p>
+            The <code>read_op</code> routine is called when
+            <a href="manpages/pcap_loop.3pcap.html"><b>pcap_dispatch</b></a>(3PCAP),
+            <a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>(3PCAP),
+            <a href="manpages/pcap_next_ex.3pcap.html"><b>pcap_next</b></a>(3PCAP),
+            or
+            <a href="manpages/pcap_next_ex.3pcap.html"><b>pcap_next_ex</b></a>(3PCAP)
+            is called.  It is passed the same arguments as
+            <b>pcap_dispatch</b>() is called.
+          </p>
+          <p>
+            The routine should first check if the <code>break_loop</code> member
+            of the <code>pcap_t</code> is non-zero and, if so, set that member
+            to zero and return <code>PCAP_ERROR_BREAK</code>.
+          </p>
+          <p>
+            Then, if the <code>pcap_t</code> is in blocking mode (as opposed to
+            non-blocking mode), and there are no packets immediately available
+            to be passed to the callback, it should block waiting for packets to
+            arrive, using the buffering timeout, first, and read packets from
+            the device if necessary.
+          </p>
+          <p>
+            Then it should loop through the available packets, calling the
+            callback routine for each packet:
+          </p>
+<pre>
+If the PACKET_COUNT_IS_UNLIMITED() macro evaluates to true when
+passed the packet count argument, the loop should continue until
+there are no more packets immediately available or the
+break_loop member of the pcap_t is non-zero.  If the break_loop
+member is fount to be non-zero, it should set that member to
+zero and return PCAP_ERROR_BREAK.
+
+If it doesn't evaluate to true, then the loop should also
+terminate if the specified number of packets have been delivered
+to the callback.
+</pre>
+          <p>
+            Note that there is <strong>NO</strong> requirement that the packet
+            header or data provided to the callback remain available, or valid,
+            after the callback routine returns; if the callback needs to save
+            the data for other code to use, it must make a copy of that data.
+            This means that the module is free to, for example, overwrite the
+            buffer into which it read the packet, or release back to the kernel
+            a packet in a memory-mapped buffer shared between the kernel and
+            userland, after the callback returns.
+          </p>
+          <p>
+            If an error occurs when reading packets from the device, it must set
+            the <code>errbuf</code> member of the <code>pcap_t</code> to an
+            error string and return <code>PCAP_ERROR</code>.
+          </p>
+          <p>
+            If no error occurs, it must return the number of packets that were
+            supplied to the callback routine.
+          </p>
+        </div>
+
+        <h2 class="title">The inject routine</h2>
+        <div class="entry">
+          <p>
+            The inject routine is passed a pointer to the <code>pcap_t</code>, a
+            buffer containing the contents of the packet to inject, and the
+            number of bytes in the packet.  If the device doesn't support packet
+            injection, the routine must set the <code>errbuf</code> member of
+            the <code>pcap_t</code> to a message indicating that packet
+            injection isn't supported and return <code>PCAP_ERROR</code>.
+            Otherwise, it should attempt to inject the packet; if the attempt
+            fails, it must set the <code>errbuf</code> member of the
+            <code>pcap_t</code> to an error message and return
+            <code>PCAP_ERROR</code>.  Otherwise, it should return the number of
+            bytes injected.
+          </p>
+        </div>
+
+        <h2 class="title">The setfilter routine</h2>
+        <div class="entry">
+          <p>
+            The setfilter routine is passed a pointer to the <code>pcap_t</code>
+            and a pointer to a <code>struct bpf_program</code> containing a BPF
+            program to be used as a filter.  If the mechanism used by your
+            module can perform filtering with a BPF program, it would attempt to
+            set that filter to the specified program.
+          </p>
+          <p>
+            If that failed because the program was too large, or used BPF
+            features not supported by that mechanism, the module should fall
+            back on filtering in userland by saving a copy of the filter with a
+            call to <code>install_bpf_program()</code>, setting a flag in the
+            private data instructure indicating that filtering is being done by
+            the module and, in the read routine's main loop, checking the flag
+            and, if it's set, calling
+            <a href="manpages/pcap_filter.3pcap.html"><b>pcap_filter</b></a>(3PCAP),
+            passing it the <code>fcode.bf_insns</code> member of the
+            <code>pcap_t</code>, the raw packet data, the on-the-wire length of
+            the packet, and the captured length of the packet, and only passing
+            the packet to the callback routine, and counting it, if
+            <b>pcap_filter</b>() returns a non-zero value.  (If the flag is not
+            set, all packets should be passed to the callback routine and
+            counted, as the filtering is being done by the mechanism used by the
+            module.)  If <code>install_bpf_program()</code> returns a negative
+            value,  the routine should return <code>PCAP_ERROR</code>.
+          </p>
+          <p>
+            If the attempt to set the filter failed for any other reason, the
+            routine must set the <code>errbuf</code> member of the
+            <code>pcap_t</code> to an error message and return
+            <code>PCAP_ERROR</code>.
+          </p>
+          <p>
+            If the attempt to set the filter succeeded, or it failed because the
+            mechanism used by the module rejected it and the call to
+            <code>install_bpf_program()</code> succeeded, the routine should
+            return 0.
+          </p>
+          <p>
+            If the mechanism the module uses doesn't support filtering, the
+            pointer to the setfilter routine can just be set to point to
+            <code>install_bpf_program()</code>; the module does not need a
+            routine of its own to handle that.
+          </p>
+        </div>
+
+        <h2 class="title">The setdirection routine</h2>
+        <div class="entry">
+          <p>
+            The setdirection routine is passed a pointer to the
+            <code>pcap_t</code> and a <code>pcap_direction_t</code> indicating
+            which packet directions should be accepted.  If the module can't
+            arrange to handle only incoming packets or only outgoing packets, it
+            can set the pointer to the setdirection routine to
+            <code>NULL</code>, and calls to
+            <a href="manpages/pcap_setdirection.3pcap.html"><b>pcap_setdirection</b></a>(3PCAP)
+            will fail with an error message indicating that setting the
+            direction isn't supported.
+          </p>
+        </div>
+
+        <h2 class="title">TBD</h2>
+        <div class="entry">
+          <p>
+            <strong>XXX</strong> describe <code>set_datalink()</code>, including
+            what the activate routine has to do <strong>XXX</strong>
+          </p>
+          <p>
+            <strong>XXX</strong> describe the rest of the routines
+            <strong>XXX</strong>
+          </p>
+        </div>
+      </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                &copy; 2010&ndash;2021 The Tcpdump Group. Designed by
+                <a class=away href="https://www.luismg.com/">Luis MartinGarcia</a>;
+                based on a template by TEMPLATED.
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
