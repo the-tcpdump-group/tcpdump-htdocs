@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+	<url>
+		<loc>https://www.tcpdump.org/</loc>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/papers/ethereal-tcpdump.pdf</loc>
+		<changefreq>never</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/papers/bpf-usenix93.pdf</loc>
+		<changefreq>never</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/pcap.html</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/other/sniffex.c</loc>
+		<changefreq>never</changefreq>
+	</url>
+
+	<url>
+		<loc>https://www.tcpdump.org/security.html</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+
+	<url>
+		<loc>https://www.tcpdump.org/faq.html</loc>
+		<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
+		<loc>https://www.tcpdump.org/manpages/libpcap-1.5.3/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/manpages/libpcap-1.6.2/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/manpages/libpcap-1.7.4/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/manpages/libpcap-1.8.1/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/manpages/libpcap-1.9.0/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/manpages/libpcap-1.9.1/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/manpages/libpcap-1.10.0/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/manpages/libpcap-1.10.1/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/manpages/</loc>
+		<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
+		<loc>https://www.tcpdump.org/ci.html</loc>
+		<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
+		<loc>https://www.tcpdump.org/linktypes.html</loc>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/linktypes/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+
+	<url>
+		<loc>https://www.tcpdump.org/related.html</loc>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/papers/sigcomm99bpf+.ps.gz</loc>
+		<changefreq>never</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/other/pktdump.c</loc>
+		<changefreq>never</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/wpcap.html</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+
+	<url>
+		<loc>https://www.tcpdump.org/old_releases.html</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
+		<loc>https://www.tcpdump.org/release/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+
+</urlset>

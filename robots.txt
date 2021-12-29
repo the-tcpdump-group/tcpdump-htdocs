@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /beta/
 Crawl-delay: 1
+Sitemap: https://www.tcpdump.org/sitemap.xml
