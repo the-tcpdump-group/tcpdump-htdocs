@@ -254,8 +254,7 @@ network traffic. Enter
 and
 <a href="manpages/pcap_setfilter.3pcap.html"><b>pcap_setfilter</b></a>(3PCAP).
 
-<p>The process is quite simple.  After we have already called
-<a href="manpages/pcap_open_live.3pcap.html"><b>pcap_open_live</b></a>()
+<p>The process is quite simple.  After we have already called <b>pcap_open_live</b>()
 and have a working sniffing session, we can apply our
 filter.  Why not just use our own <code>if</code>/<code>else if</code> statements? Two reasons.
 First, pcap's filter is far more efficient, because it does it directly
@@ -271,9 +270,7 @@ read it on your own.  However, we will use simple test expressions, so
 perhaps you are sharp enough to figure it out from my
 examples.
 
-<p>To compile the program we call
-<a href="manpages/pcap_compile.3pcap.html"><b>pcap_compile</b></a>().
-The prototype defines it as:
+<p>To compile the program we call <b>pcap_compile</b>(). The prototype defines it as:
 <pre>
 int pcap_compile(pcap_t *p, struct bpf_program *fp, char *str, int optimize,
     bpf_u_int32 netmask)
@@ -288,16 +285,14 @@ network the filter applies to.  The function returns -1 on failure; all
 other values imply success.
 
 <p>After the expression has been compiled, it is time to apply 
-it. Enter
-<a href="manpages/pcap_setfilter.3pcap.html"><b>pcap_setfilter</b></a>().
+it. Enter <b>pcap_setfilter</b>().
 Following our format of explaining pcap, we shall look at the prototype:
 <pre>
 int pcap_setfilter(pcap_t *p, struct bpf_program *fp)
 </pre>
 <p>This is very straightforward. The first argument is our session handler, 
 the second is a reference to the compiled version of the expression (presumably 
-the same variable as the second argument to
-<a href="manpages/pcap_compile.3pcap.html"><b>pcap_compile</b></a>()).
+the same variable as the second argument to <b>pcap_compile</b>()).
 
 <p>Perhaps another code sample would help to better understand:
 <pre>
@@ -372,14 +367,12 @@ u_char *pcap_next(pcap_t *p, struct pcap_pkthdr *h)
 pointer to a structure that holds general information about the packet, 
 specifically the time in which it was sniffed, the length of this packet, and 
 the length of this specific portion (in case it is fragmented, for example).
-<a href="manpages/pcap_next_ex.3pcap.html"><b>pcap_next</b></a>()
+<b>pcap_next</b>()
 returns a <code>u_char</code> pointer to the packet that is described by this
 structure. We'll discuss the technique for actually reading the packet 
 itself later.
 
-<p>Here is a simple demonstration of using
-<a href="manpages/pcap_next_ex.3pcap.html"><b>pcap_next</b></a>()
-to sniff a packet.
+<p>Here is a simple demonstration of using <b>pcap_next</b>() to sniff a packet.
 <pre>
 #include &lt;pcap.h&gt;
 #include &lt;stdio.h&gt;
@@ -432,8 +425,7 @@ int main(int argc, char *argv[])
 	return(0);
 }
 </pre>
-<p>This application sniffs on whatever device is returned by
-<a href="manpages/pcap_lookupdev.3pcap.html"><b>pcap_lookupdev</b></a>()
+<p>This application sniffs on whatever device is returned by <b>pcap_lookupdev</b>()
 by
 putting it into promiscuous mode. It finds the first packet to come across 
 port 23 (telnet) and tells the user the size of the packet (in bytes). 
@@ -443,14 +435,12 @@ which we will discuss
 later (although it really is quite self explanatory).
 
 <p>The other technique we can use is more complicated, and 
-probably more useful. Few sniffers (if any) actually use
-<a href="manpages/pcap_next_ex.3pcap.html"><b>pcap_next</b></a>().
+probably more useful. Few sniffers (if any) actually use <b>pcap_next</b>().
 More often than not, they use
 <a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>(3PCAP)
 or
 <a href="manpages/pcap_loop.3pcap.html"><b>pcap_dispatch</b></a>(3PCAP)
-(which then themselves use
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()).
+(which then themselves use <b>pcap_loop</b>()).
 To understand the use of these two functions,
 you must understand the idea of a callback function.
 
@@ -464,70 +454,50 @@ utilizing is a callback function.  Every time the user presses a key, my
 program will call the callback function.  Callbacks are used in pcap,
 but instead of being called when a user presses a key, they are called
 when pcap sniffs a packet.  The two functions that one can use to define
-their callback are
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
-and
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_dispatch</b></a>(),
+their callback are <b>pcap_loop</b>() and <b>pcap_dispatch</b>(),
 these are very similar in their usage of callbacks.  Both of
 them call a callback function every time a packet is sniffed that meets
 our filter requirements (if any filter exists, of course.  If not, then
 <i>all</i> packets that are sniffed are sent to the callback.)
 
-<p>The prototype for
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
-is below:
+<p>The prototype for <b>pcap_loop</b>() is below:
 <pre>
 int pcap_loop(pcap_t *p, int cnt, pcap_handler callback, u_char *user)
 </pre>
 <p>The first argument is our session handle.  Following that is an
-integer that tells
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
-how many packets it should sniff for
+integer that tells <b>pcap_loop</b>() how many packets it should sniff for
 before returning (a negative value means it should sniff until an error
 occurs).  The third argument is the name of the callback function (just
 its identifier, no parentheses).  The last argument is useful in some
 applications, but many times is simply set as <code>NULL</code>.  Suppose we have
 arguments of our own that we wish to send to our callback function, in
-addition to the arguments that
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
-sends.  This is where we do
+addition to the arguments that <b>pcap_loop</b>() sends.  This is where we do
 it.  Obviously, you must typecast to a <code>u_char</code> pointer to ensure the
 results make it there correctly; as we will see later, pcap makes use of
 some very interesting means of passing information in the form of a
 <code>u_char</code> pointer.  After we show an example of how pcap does it, it should
 be obvious how to do it here.  If not, consult your local C reference
 text, as an explanation of pointers is beyond the scope of this
-document.
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_dispatch</b></a>()
-is almost identical in usage.  The only
-difference between these two functions is that
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_dispatch</b></a>()
-will only process the first batch of packets that it
-receives from the system, while
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
-will continue processing
+document. <b>pcap_dispatch</b>() is almost identical in usage.  The only
+difference between these two functions is that <b>pcap_dispatch</b>()
+will only process the first batch of packets that it receives from the system, while
+<b>pcap_loop</b>() will continue processing
 packets or batches of packets until the count of packets runs out.  For
 a more in depth discussion of their differences, see the man page.
-<p>Before we can provide an example of using 
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>(),
+<p>Before we can provide an example of using <b>pcap_loop</b>(),
 we must examine the format of our callback function. We
-cannot arbitrarily define our callback's prototype; otherwise,
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
-would
-not know how to use the function. So we use this format as the prototype 
+cannot arbitrarily define our callback's prototype; otherwise, <b>pcap_loop</b>()
+would not know how to use the function. So we use this format as the prototype
 for our callback function:
 <pre>
 void got_packet(u_char *args, const struct pcap_pkthdr *header,
     const u_char *packet);
 </pre>
 <p>Let's examine this in more detail. First, you'll notice that the function 
-has a <code>void</code> return type. This is logical, because
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+has a <code>void</code> return type. This is logical, because <b>pcap_loop</b>()
 wouldn't know how to handle a return value anyway. The first argument
-corresponds to the last argument of
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>().
-Whatever value is passed as the last argument to
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>()
+corresponds to the last argument of <b>pcap_loop</b>().
+Whatever value is passed as the last argument to <b>pcap_loop</b>()
 is passed to the first argument of our callback function
 every time the function is called. The second argument is the pcap header, 
 which contains information about when the packet was sniffed, how large it is, 
@@ -543,8 +513,7 @@ struct pcap_pkthdr {
 the most interesting of them all, and the most confusing to the average
 novice pcap programmer.  It is another pointer to a <code>u_char</code>, and it
 points to the first byte of a chunk of data containing the entire
-packet, as sniffed by
-<a href="manpages/pcap_loop.3pcap.html"><b>pcap_loop</b></a>().
+packet, as sniffed by <b>pcap_loop</b>().
 
 <p>But how do you make use of this variable (named <code>packet</code> in
 our prototype)? A packet contains many attributes, so as you can
