@@ -663,6 +663,27 @@ tcpdump -T radius -nv udp port 21812
                         </ul>
 
                         <p>
+                            A few words about the man page dates. Less the comments, every man page
+                            usually starts with a command similar to the following:
+<pre>
+.TH PCAP_INIT 3PCAP "11 April 2020"
+</pre>
+                            Both the text and the HTML versions of the man page display this date,
+                            which informs the readers about substantial changes to the content (to
+                            make it easy, for example, to tell if a specific function's man page is
+                            different between two particular versions of libpcap). With this in
+                            mind, when updating a man page, please update the date if and only if
+                            the changes include any of the following:
+                        </p>
+
+                        <ul>
+                            <li>a C function's arguments or return value</li>
+                            <li>a program's command-line arguments, i/o data or exit status</li>
+                            <li>other documented behaviour or usage semantics</li>
+                            <li>backward compatibility</li>
+                        </ul>
+
+                        <p>
                             The man pages use a mixture of formatting languages. When making
                             changes, please try to keep the style consistent. Below are a few
                             examples of common use cases.
