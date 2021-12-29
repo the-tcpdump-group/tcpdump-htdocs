@@ -34,22 +34,6 @@
 	</url>
 
 	<url>
-		<loc>https://www.tcpdump.org/manpages/libpcap-1.5.3/</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>https://www.tcpdump.org/manpages/libpcap-1.6.2/</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>https://www.tcpdump.org/manpages/libpcap-1.7.4/</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
-		<loc>https://www.tcpdump.org/manpages/libpcap-1.8.1/</loc>
-		<changefreq>monthly</changefreq>
-	</url>
-	<url>
 		<loc>https://www.tcpdump.org/manpages/libpcap-1.9.0/</loc>
 		<changefreq>monthly</changefreq>
 	</url>
