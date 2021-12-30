@@ -192,7 +192,7 @@ hr {
 	padding: 6px 0 0 20px;
 	border-bottom: 1px dashed #B9B9B9;
 	text-transform: uppercase;
-	font-size: small;
+	font-size: smaller;
 	font-weight: bold;
 	color: #000000;
 }
@@ -269,7 +269,7 @@ table.cidigest span.cibadge {
 	color: #f9f9f9;
 	padding: 3px 7px;
 	border-radius: 3px;
-	font-size: small;
+	font-size: smaller;
 	white-space: nowrap;
 }
 
