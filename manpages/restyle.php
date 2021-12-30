@@ -57,6 +57,7 @@ $taxonomy = array
 		'versions' => array
 		(
 			GIT_MASTER,
+			'1.5',
 			'1.4',
 			'1.3',
 		),
