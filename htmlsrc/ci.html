@@ -10,7 +10,8 @@
                 badges do not indicate a status, the current status can be seen by
                 following the links.  For The Tcpdump Group Buildbot the badges indicate
                 either the git master branch or a pull request status, whichever was the
-                last built.
+                last built.  Coverity Scan uses a manually triggered automatic process
+                on whichever git branch is necessary (usually the master).
               </p>
               <table class=cidigest>
 
@@ -376,6 +377,30 @@
                   <td>
                     <a href='https://ci.tcpdump.org/#/builders/tcpslice-illumos-amd64'><img alt='status badge' class='cibadge'
                       src='https://ci.tcpdump.org/badges/tcpslice-illumos-amd64.svg'></a>
+                  </td>
+                </tr>
+                <tr>
+                  <th colspan=4>
+                    Coverity Scan (service sponsored by
+                    <a class=away href='https://www.synopsys.com/'>Synopsys</a>)
+                  </th>
+                </tr>
+
+                <tr class=even>
+                  <td>
+                    {AMD64} &times; {Linux}
+                  </td>
+                  <td>
+                    <img alt='status badge' class='cibadge'
+                    src='https://scan.coverity.com/projects/230/badge.svg'>
+                  </td>
+                  <td>
+                    <img alt='status badge' class='cibadge'
+                    src='https://scan.coverity.com/projects/120/badge.svg'>
+                  </td>
+                  <td>
+                    <img alt='status badge' class='cibadge'
+                    src='https://scan.coverity.com/projects/21663/badge.svg'>
                   </td>
                 </tr>
                 </tbody>
