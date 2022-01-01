@@ -89,27 +89,14 @@ substitute_page_title()
 rewrite_URLs()
 {
 	if [ "${1:?}" != "${1#linktypes/}" ]; then
-		sed 's#<link href="style.css#<link href="../style.css#' |
-			sed 's#<link href="images/#<link href="../images/#' |
-			sed 's#<img src="images/#<img src="../images/#' |
-			sed 's#<a href="index.html#<a href="../index.html#' |
-			sed 's#<a href="security.html#<a href="../security.html#' |
-			sed 's#<a href="faq.html#<a href="../faq.html#' |
-			sed 's#<a href="manpages/#<a href="../manpages/#' |
-			sed 's#<a href="ci.html#<a href="../ci.html#' |
-			sed 's#<a href="linktypes.html#<a href="../linktypes.html#' |
-			sed 's#<a href="related.html#<a href="../related.html#' |
-			sed 's#<a href="old_releases.html#<a href="../old_releases.html#'
+		sed 's#\(<link href="\)\(images/\|style.css\)#\1../\2#' |
+			sed 's#\(<img src="\)\(images/\)#\1../\2#' |
+			sed 's#\(<a href="\)\(manpages/\)#\1../\2#' |
+			sed 's#\(<a href="\)\([a-z_-]\+.html\)#\1../\2#'
 	elif [ "$1" = autoindex_header.html ]; then
-		sed 's#<img src="images/#<img src="/images/#' |
-			sed 's#<a href="index.html#<a href="/index.html#' |
-			sed 's#<a href="security.html#<a href="/security.html#' |
-			sed 's#<a href="faq.html#<a href="/faq.html#' |
-			sed 's#<a href="manpages/#<a href="/manpages/#' |
-			sed 's#<a href="ci.html#<a href="/ci.html#' |
-			sed 's#<a href="linktypes.html#<a href="/linktypes.html#' |
-			sed 's#<a href="related.html#<a href="/related.html#' |
-			sed 's#<a href="old_releases.html#<a href="/old_releases.html#'
+		sed 's#\(<img src="\)\(images/\)#\1/\2#' |
+			sed 's#\(<a href="\)\([a-z]\+/\)#\1/\2#' |
+			sed 's#\(<a href="\)\([a-z_-]\+.html\)#\1/\2#'
 	else
 		cat
 	fi
