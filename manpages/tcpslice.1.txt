@@ -35,6 +35,7 @@ DESCRIPTION
        trace-file to stdout (assuming the file does not include more than  ten
        years' worth of data).
 
+TIME FORMATS
        There  are  a number of ways to specify times.  The first is using Unix
        timestamps of the form sssssssss.uuuuuu (this is the  format  specified
        by  tcpdump's -tt flag).  For example, 654321098.7654 specifies 38 sec-
@@ -90,6 +91,7 @@ DESCRIPTION
        an  m field is followed by a d field then it is interpreted as specify-
        ing months; otherwise it specifies minutes.
 
+MULTIPLE INPUT FILES
        If more than one input file is specified then tcpslice merges the pack-
        ets  from  the  various  input files into the single output file.  Nor-
        mally, this merge is done based on the value of the time stamps in  the

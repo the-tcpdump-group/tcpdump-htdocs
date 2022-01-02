@@ -651,25 +651,31 @@ DESCRIPTION
        Routines
 
               pcap_dump_open(3PCAP)
-                     open a pcap_dumper_t for a ``savefile``, given a pathname
+                     open  a  pcap_dumper_t  for a ``savefile``, given a path-
+                     name, replacing any existing data
+
+              pcap_dump_open_append(3PCAP)
+                     open a pcap_dumper_t for a ``savefile``,  given  a  path-
+                     name, appending to the existing data
 
               pcap_dump_fopen(3PCAP)
-                     open a pcap_dumper_t for a ``savefile``, given a FILE *
+                     open  a pcap_dumper_t for a ``savefile``, given a FILE *,
+                     assuming an empty file
 
               pcap_dump_close(3PCAP)
                      close a pcap_dumper_t
 
               pcap_dump_file(3PCAP)
-                     get  the  FILE * for a pcap_dumper_t opened for a ``save-
+                     get the FILE * for a pcap_dumper_t opened for  a  ``save-
                      file''
 
    Writing packets
-       To write a packet to a pcap_dumper_t, call pcap_dump().  Packets  writ-
-       ten  with  pcap_dump()  may  be buffered, rather than being immediately
-       written to the ``savefile''.  Closing the pcap_dumper_t will cause  all
+       To  write a packet to a pcap_dumper_t, call pcap_dump().  Packets writ-
+       ten with pcap_dump() may be buffered,  rather  than  being  immediately
+       written  to the ``savefile''.  Closing the pcap_dumper_t will cause all
        buffered-but-not-yet-written packets to be written to the ``savefile''.
-       To force all packets written to the pcap_dumper_t, and not yet  written
-       to  the  ``savefile'' because they're buffered by the pcap_dumper_t, to
+       To  force all packets written to the pcap_dumper_t, and not yet written
+       to the ``savefile'' because they're buffered by the  pcap_dumper_t,  to
        be written to the ``savefile'', without closing the pcap_dumper_t, call
        pcap_dump_flush().
 
@@ -679,7 +685,7 @@ DESCRIPTION
                      write packet to a pcap_dumper_t
 
               pcap_dump_flush(3PCAP)
-                     flush  buffered packets written to a pcap_dumper_t to the
+                     flush buffered packets written to a pcap_dumper_t to  the
                      ``savefile''
 
               pcap_dump_ftell(3PCAP)
@@ -689,7 +695,7 @@ DESCRIPTION
        If you have the required privileges, you can inject packets onto a net-
        work  with  a  pcap_t  for  a  live  capture,  using  pcap_inject()  or
        pcap_sendpacket().  (The two routines exist for compatibility with both
-       OpenBSD  and  WinPcap/Npcap;  they  perform the same function, but have
+       OpenBSD and WinPcap/Npcap; they perform the  same  function,  but  have
        different return values.)
 
        Routines
@@ -699,7 +705,7 @@ DESCRIPTION
                      transmit a packet
 
    Reporting errors
-       Some routines return error or warning status codes; to convert them  to
+       Some  routines return error or warning status codes; to convert them to
        a string, use pcap_statustostr().
 
        Routines
@@ -717,29 +723,29 @@ DESCRIPTION
                      get library version string
 
 BACKWARD COMPATIBILITY
-       In versions of libpcap prior to 1.0, the pcap.h header file was not  in
-       a  pcap  directory on most platforms; if you are writing an application
-       that must work on versions of libpcap prior to 1.0,  include  <pcap.h>,
+       In  versions of libpcap prior to 1.0, the pcap.h header file was not in
+       a pcap directory on most platforms; if you are writing  an  application
+       that  must  work on versions of libpcap prior to 1.0, include <pcap.h>,
        which  will  include  <pcap/pcap.h>  for  you,  rather  than  including
        <pcap/pcap.h>.
 
-       pcap_create() and pcap_activate() were not  available  in  versions  of
-       libpcap  prior to 1.0; if you are writing an application that must work
+       pcap_create()  and  pcap_activate()  were  not available in versions of
+       libpcap prior to 1.0; if you are writing an application that must  work
        on versions of libpcap prior to 1.0, either use pcap_open_live() to get
        a handle for a live capture or, if you want to be able to use the addi-
        tional capabilities offered by using pcap_create() and pcap_activate(),
-       use  an  autoconf(1) script or some other configuration script to check
-       whether the libpcap 1.0 APIs are available and use them  only  if  they
+       use an autoconf(1) script or some other configuration script  to  check
+       whether  the  libpcap  1.0 APIs are available and use them only if they
        are.
 
 SEE ALSO
-       autoconf(1),   tcpdump(1),  tcpslice(1),  pcap-filter(7),  pfconfig(8),
+       autoconf(1),  tcpdump(1),  tcpslice(1),  pcap-filter(7),   pfconfig(8),
        usermod(8)
 
 AUTHORS
        The original authors of libpcap are:
 
-       Van Jacobson, Craig Leres and  Steven  McCanne,  all  of  the  Lawrence
+       Van  Jacobson,  Craig  Leres  and  Steven  McCanne, all of the Lawrence
        Berkeley National Laboratory, University of California, Berkeley, CA.
 
        The current version is available from "The Tcpdump Group"'s Web site at
@@ -747,11 +753,11 @@ AUTHORS
               https://www.tcpdump.org/
 
 BUGS
-       To    report    a   security   issue   please   send   an   e-mail   to
+       To   report   a   security   issue   please   send   an    e-mail    to
        security@tcpdump.org.
 
-       To report bugs and other problems, contribute patches, request  a  fea-
-       ture,  provide generic feedback etc please see the file CONTRIBUTING.md
+       To  report  bugs and other problems, contribute patches, request a fea-
+       ture, provide generic feedback etc please see the file  CONTRIBUTING.md
        in the libpcap source tree root.
 
                                9 September 2020                    PCAP(3PCAP)

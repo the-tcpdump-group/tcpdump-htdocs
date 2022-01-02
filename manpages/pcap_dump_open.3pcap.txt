@@ -51,7 +51,7 @@ DESCRIPTION
        header type, and snapshot length as p, it will write new packets at the
        end of the file.
 
-RETURN VALUES
+RETURN VALUE
        A   pointer   to   a  pcap_dumper_t  structure  to  use  in  subsequent
        pcap_dump(3PCAP) and pcap_dump_close(3PCAP) calls is returned  on  suc-
        cess.    NULL   is   returned   on   failure.   If  NULL  is  returned,

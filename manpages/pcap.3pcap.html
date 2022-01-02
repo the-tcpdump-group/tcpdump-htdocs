@@ -1230,7 +1230,14 @@ call
 open a
 <B>pcap_dumper_t</B>
 
-for a ``savefile``, given a pathname
+for a ``savefile``, given a pathname, replacing any existing data
+<DT><A HREF='./pcap_dump_open.3pcap.html'><B>pcap_dump_open_append</B></A>(3PCAP)
+
+<DD>
+open a
+<B>pcap_dumper_t</B>
+
+for a ``savefile``, given a pathname, appending to the existing data
 <DT><A HREF='./pcap_dump_open.3pcap.html'><B>pcap_dump_fopen</B></A>(3PCAP)
 
 <DD>
@@ -1238,8 +1245,9 @@ open a
 <B>pcap_dumper_t</B>
 
 for a ``savefile``, given a
-<B>FILE&nbsp;*</B>
+<B>FILE&nbsp;*</B>,
 
+assuming an empty file
 <DT><A HREF='./pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP)
 
 <DD>
@@ -1507,7 +1515,7 @@ in the libpcap source tree root.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:03 GMT, November 01, 2021
+This HTML man page was generated at 02:07:06 GMT, January 02, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
