@@ -230,7 +230,7 @@ regenerate_page()
 	# shellcheck disable=SC2181
 	if [ $? -ne 0 ]; then
 		echo "Error: failed to overwrite output file $f_out" >&2
-		continue
+		return 1
 	fi
 	file_differs_from_repository "$f_out" && echo "Regenerated: $f_out"
 	return 0
@@ -241,7 +241,7 @@ regenerate_pages()
 	for f_in in htmlsrc/[!_]*.html htmlsrc/linktypes/*.html; do
 		# Skip editor backup files.
 		[ "$f_in" != "${f_in#\~}" ] && continue
-		regenerate_page "$f_in" "${f_in#htmlsrc/}"
+		regenerate_page "$f_in" "${f_in#htmlsrc/}" || return 1
 	done
 	regenerate_page "$TOP_MENU" autoindex_header.html
 }
