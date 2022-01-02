@@ -140,6 +140,7 @@ pcap_dump_fopen							pcap_dump_open
 pcap_dump_ftell
 pcap_dump_ftell64						pcap_dump_ftell
 pcap_dump_open
+pcap_dump_open_append						pcap_dump_open
 pcap_file
 pcap_fileno
 pcap_findalldevs
@@ -274,6 +275,11 @@ ENDOFTEXT
 	echo
 }
 
+get_columns()
+{
+	stty size | cut -d' ' -f2
+}
+
 produceTXT()
 {
 	infile=${1:?}
@@ -281,6 +287,11 @@ produceTXT()
 	[ -s "$infile" ] || {
 		echo "Skipped: $infile, which does not exist or is empty"
 		return
+	}
+	[ "$(get_columns)" -eq 80 ] || {
+		echo 'ERROR: the terminal width has reset, possibly after a focus loss' >&2
+		get_columns
+		exit 2
 	}
 	printTXTBoilerplate "$infile" > "$outfile"
 	man -E ascii "$infile" >> "$outfile"
@@ -304,14 +315,14 @@ known3PCAPFile()
 updateOutputFiles()
 {
 	command -v man2html >/dev/null 2>&1 || {
-		echo "man2html must be installed to proceed"
+		echo "man2html must be installed to proceed" >&2
 		exit 1
 	}
 
 	# The .txt version of a man page assumes an 80 columns wide terminal,
 	# which used to be the default in PC text mode console, xterm etc.
 	# Use stty because $COLUMNS doesn't always work.
-	cols=$(stty size | cut -d' ' -f2)
+	cols=$(get_columns)
 	[ "$cols" -ne 80 ] && stty columns 80
 
 	sedfile=$(mktemp --tmpdir manpages_sedfile.XXXXXX)
