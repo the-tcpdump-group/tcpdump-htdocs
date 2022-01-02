@@ -290,7 +290,6 @@ produceTXT()
 	}
 	[ "$(get_columns)" -eq 80 ] || {
 		echo 'ERROR: the terminal width has reset, possibly after a focus loss' >&2
-		get_columns
 		exit 2
 	}
 	printTXTBoilerplate "$infile" > "$outfile"
