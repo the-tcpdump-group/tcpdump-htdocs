@@ -11,6 +11,7 @@
                    -->
                     <div class="entry">
                         <ul>
+                          <li> <a href="#q15">I get packets from libpcap after a long delay, is this a bug?</a> </li>
                           <li> <a href="#q14">Why is the <code>pcap-int.h</code> header file missing from libpcap?</a> </li>
                           <li> <a href="#q13">Why my VLAN/MPLS packet filter does not work?</a> </li>
                           <li> <a href="#q12">How to decode a protocol on a non-standard port?</a> </li>
@@ -36,6 +37,75 @@
                 </div>
                 <!-- End of QUESTION INDEX section -->
 
+
+                <!-- Start of QUESTION #15 section -->
+                <div class="post">
+                    <h2 class="title" id="q15">
+                        I get packets from libpcap after a long delay, is this a bug?
+                    </h2>
+                    <div class="entry">
+                        <p>
+                            <span class=initial>Q:</span>
+                            I have a program that uses libpcap on Linux, it works as expected with
+                            old versions of Linux kernel and/or old versions of libpcap; with modern
+                            Linux kernels and modern libpcap versions the program waits on libpcap
+                            for a much longer time (or even indefinitely).  Is this a libpcap bug?
+                        </p>
+                        <p>
+                            <span class=initial>A:</span>
+                            This is a consequence of certain developments in Linux kernel and
+                            libpcap; from a libpcap user's point of view the key concept involved is
+                            "immediate mode", even though the latter is not Linux-specific.
+                        </p>
+                        <p>
+                            In immediate mode libpcap receives captured packets from the OS kernel
+                            one at a time, which results in a higher CPU overhead and a more likely
+                            packet loss; in buffered mode it receives multiple packets at once, but
+                            only after the buffer is full or its timeout has expired, which might
+                            take much longer than expected&mdash;see "packet buffer timeout" in
+                            <a href="manpages/pcap.3pcap.html"><b>pcap</b></a>(3PCAP) for a more
+                            detailed explanation.  For many use cases one particular mode works
+                            much better than the other, also in buffered mode different values of
+                            the timeout produce different results.
+                        </p>
+                        <p>
+                            Linux kernel for a long time supported immediate mode only; since the
+                            introduction of <code>TPACKET_V3</code> in version 3.2 it supports both
+                            immediate and buffered modes.  libpcap in version 1.5.0
+                            added support for the buffered mode on Linux and made it the default
+                            mode on Linux (subject to compile- and runtime conditions, as discussed
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/454">
+                            here</a>).  This did not change libpcap API behaviour, as far as the man
+                            pages documented it, but in a number of cases it did change the default
+                            user experience on Linux, as was discussed in great detail in libpcap
+                            (<a href="https://github.com/the-tcpdump-group/libpcap/issues/335">335</a>,
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/350">350</a>,
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/354">354</a>,
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/382">382</a>,
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/472">472</a>,
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/550">550</a>,
+                            <a href="https://github.com/the-tcpdump-group/libpcap/issues/572">572</a>)
+                            and other bug reports.
+                        <p>
+                        </p>
+                            The best approach would be not to rely on the default behaviour, but to
+                            study the use case and the documentation, and to have the program
+                            explicitly request the most appropriate mode using
+                            <a href="manpages/pcap_set_immediate_mode.3pcap.html">
+                              <b>pcap_set_immediate_mode</b></a>(3PCAP)
+                            and the most appropriate timeout value (beware that zero is a
+                            platform-dependent edge case) using
+                            <a href="manpages/pcap_set_timeout.3pcap.html">
+                              <b>pcap_set_timeout</b></a>(3PCAP) or
+                            <a href="manpages/pcap_open_live.3pcap.html">
+                              <b>pcap_open_live</b></a>(3PCAP).
+                            For example, tcpdump does that conditionally at runtime to
+                            achieve lower latency decoding live packets on one hand, and higher
+                            throughput writing packets to a file on the other.
+                        </p>
+                    </div>
+                </div>
+                <!-- End of QUESTION #15 section -->
 
                 <!-- Start of QUESTION #14 section -->
                 <div class="post">
