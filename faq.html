@@ -135,8 +135,8 @@ Original license : Creative Commons Attribution 2.5 License
                             <a href="https://github.com/the-tcpdump-group/libpcap/issues/550">550</a>,
                             <a href="https://github.com/the-tcpdump-group/libpcap/issues/572">572</a>)
                             and other bug reports.
-                        <p>
                         </p>
+                        <p>
                             The best approach would be not to rely on the default behaviour, but to
                             study the use case and the documentation, and to have the program
                             explicitly request the most appropriate mode using
@@ -221,10 +221,10 @@ Original license : Creative Commons Attribution 2.5 License
                         <p>
                             On one hand, this simplifies expression syntax required to skip the outer
                             header(s) once and to test multiple conditions in the inner header(s), e.g.:
+                        </p>
 <pre>
 vlan and src net (192.0.2.0/24 or 2001:db8::/32) and port 53
 </pre>
-                        </p>
                         <p>
                             On the other hand, and rather counterintuitively, the filter expression
                         </p>
@@ -741,9 +741,11 @@ tcpdump -T radius -nv udp port 21812
                         <p>
                             A few words about the man page dates. Less the comments, every man page
                             usually starts with a command similar to the following:
+                        </p>
 <pre>
 .TH PCAP_INIT 3PCAP "11 April 2020"
 </pre>
+                        <p>
                             Both the text and the HTML versions of the man page display this date,
                             which informs the readers about substantial changes to the content (to
                             make it easy, for example, to tell if a specific function's man page is
