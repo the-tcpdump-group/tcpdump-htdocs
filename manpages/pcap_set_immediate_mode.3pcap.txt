@@ -47,7 +47,7 @@ BACKWARD COMPATIBILITY
               other platforms, so don't assume it's sufficient);
 
               on Digital UNIX/Tru64 UNIX, immediate mode must be turned on  by
-              doing  a  BIOCMBIC  ioctl,  as documented in packetfilter(7), to
+              doing  a  BIOCMBIC ioctl(), as documented in packetfilter(7), to
               clear  the  ENBATCH  flag  on   the   descriptor   returned   by
               pcap_fileno(3PCAP), after pcap_activate(3PCAP) is called;
 

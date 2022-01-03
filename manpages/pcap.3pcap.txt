@@ -573,11 +573,11 @@ DESCRIPTION
 
               pcap_get_selectable_fd(3PCAP)
                      attempt to get a descriptor for a pcap_t that can be used
-                     in calls such as select(2) and poll(2)
+                     in calls such as select() and poll()
 
               pcap_get_required_select_timeout(3PCAP)
                      attempt to get a timeout required for using a  pcap_t  in
-                     calls such as select(2) and poll(2)
+                     calls such as select() and poll()
 
    Filters
        In  order  to  cause  only  certain packets to be returned when reading
