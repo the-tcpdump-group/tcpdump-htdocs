@@ -211,8 +211,8 @@ Original license : Creative Commons Attribution 2.5 License
                             Most often this is not a bug, but a result of misunderstanding of how these
                             keywords work.  The matter is, to test the packet for one or another
                             matching condition, filter primitives need to read data at specific offsets
-                            from the beginning of the packet.  As the
-                            <a href="manpages/pcap-filter.7.html">pcap-filter man page</a> mentions it,
+                            from the beginning of the packet.  As
+                            <a href="manpages/pcap-filter.7.html"><b>pcap-filter</b></a>(7) mentions it,
                             some keywords automatically increment that offset for all subsequent
                             keywords in the filter expression&mdash;this stands for every <code>vlan</code>,
                             <code>mpls</code> or <code>geneve</code> keyword and for the first
@@ -273,9 +273,9 @@ vlan 100 or vlan 200
                             <span class=initial>A:</span>
                             This may be possible under certain conditions.  First of all, the
                             network protocol of interest must be one of the protocols supported by
-                            the <code>-T</code> flag of tcpdump.  You can find the complete list in the
-                            <a href="manpages/tcpdump.1.html">man page</a> (most of these protocols
-                            are UDP-based).
+                            the <code>-T</code> flag of tcpdump.  You can find the complete list in
+                            <a href="manpages/tcpdump.1.html"><b>tcpdump</b></a>(1) (most of these
+                            protocols are UDP-based).
                         </p>
                         <p>
                             If the protocol is supported, keep in mind that using <code>-T type</code>
