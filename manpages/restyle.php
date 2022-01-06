@@ -223,7 +223,14 @@ foreach ($taxonomy as $pname => $project)
 		$html = preg_replace ($pattern, $replacement, $html);
 	}
 
+	# FIXME1: mtime may be inconsistent across the servers and the output depends
+	# on this script contents too, so instead of Last-Modified header generate
+	# ETag as a hash of this script contents and the target HTML file contents
+	# and URI path.
+	# FIXME2: Respond with "HTTP 304 Not Modified" when the client produces an
+	# If-None-Match header with a matching ETag.
 	header ('Last-Modified: ' . gmdate (DATE_RFC7231, filemtime ($uri_path)));
+	header ('Content-Length: ' . strlen ($html));
 	echo $html;
 	exit;
 }
