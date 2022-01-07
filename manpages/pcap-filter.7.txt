@@ -16,37 +16,39 @@ NAME
        pcap-filter - packet filter syntax
 
 DESCRIPTION
-       pcap_compile()  is used to compile a string into a filter program.  The
-       resulting filter program can then be applied to some stream of  packets
-       to  determine  which  packets  will  be  supplied  to pcap_loop(3PCAP),
-       pcap_dispatch(3PCAP), pcap_next(3PCAP), or pcap_next_ex(3PCAP).
+       pcap_compile(3PCAP)  is used to compile a string into a filter program.
+       The resulting filter program can then be  applied  to  some  stream  of
+       packets    to   determine   which   packets   will   be   supplied   to
+       pcap_loop(3PCAP),    pcap_dispatch(3PCAP),     pcap_next(3PCAP),     or
+       pcap_next_ex(3PCAP).
 
-       The filter expression consists of one or more  primitives.   Primitives
+       The  filter  expression consists of one or more primitives.  Primitives
        usually consist of an id (name or number) preceded by one or more qual-
        ifiers.  There are three different kinds of qualifier:
 
-       type   type qualifiers say what kind of thing the  id  name  or  number
-              refers  to.   Possible  types are host, net, port and portrange.
+       type   type  qualifiers  say  what  kind of thing the id name or number
+              refers to.  Possible types are host, net,  port  and  portrange.
               E.g., `host foo', `net 128.3', `port 20', `portrange 6000-6008'.
               If there is no type qualifier, host is assumed.
 
        dir    dir qualifiers specify a particular transfer direction to and/or
-              from id.  Possible directions are src, dst, src or dst, src  and
-              dst,  ra,  ta, addr1, addr2, addr3, and addr4.  E.g., `src foo',
+              from  id.  Possible directions are src, dst, src or dst, src and
+              dst, ra, ta, addr1, addr2, addr3, and addr4.  E.g.,  `src  foo',
               `dst net 128.3', `src or dst port ftp-data'.  If there is no dir
-              qualifier,  `src  or dst' is assumed.  The ra, ta, addr1, addr2,
+              qualifier, `src or dst' is assumed.  The ra, ta,  addr1,  addr2,
               addr3, and addr4 qualifiers are only valid for IEEE 802.11 Wire-
               less LAN link layers.
 
-       proto  proto  qualifiers  restrict  the match to a particular protocol.
-              Possible protos are: ether, fddi, tr, wlan, ip, ip6, arp,  rarp,
-              decnet,  tcp  and  udp.  E.g., `ether src foo', `arp net 128.3',
-              `tcp  port  21',  `udp   portrange   7000-7009',   `wlan   addr2
-              0:2:3:4:5:6'.   If  there  is  no proto qualifier, all protocols
-              consistent with the type are assumed.   E.g.,  `src  foo'  means
-              `(ip  or  arp  or rarp) src foo' (except the latter is not legal
-              syntax), `net bar' means `(ip or arp or rarp) net bar' and `port
-              53' means `(tcp or udp) port 53'.
+       proto  proto qualifiers restrict the match to  a  particular  protocol.
+              Possible  protocols  are:  ether,  fddi, tr, wlan, ip, ip6, arp,
+              rarp, decnet, sctp, tcp and udp.  E.g., `ether  src  foo',  `arp
+              net  128.3',  `tcp  port  21',  `udp portrange 7000-7009', `wlan
+              addr2 0:2:3:4:5:6'.  If there is no proto qualifier, all  proto-
+              cols  consistent  with  the  type  are assumed.  E.g., `src foo'
+              means `(ip or arp or rarp) src foo', `net bar' means `(ip or arp
+              or rarp) net bar' and `port 53' means `(tcp or udp or sctp) port
+              53' (note that these examples use invalid syntax  to  illustrate
+              the principle).
 
        [fddi  is  actually  an alias for ether; the parser treats them identi-
        cally as meaning ``the data link level used on  the  specified  network
@@ -154,14 +156,14 @@ DESCRIPTION
               wide.  May be qualified with src or dst.
 
        dst port port
-              True if the packet is IPv4 TCP, IPv4 UDP, IPv6 TCP or  IPv6  UDP
-              and  has  a  destination  port value of port.  The port can be a
-              number  or  a  name  used  in  /etc/services  (see  tcp(4P)  and
-              udp(4P)).   If a name is used, both the port number and protocol
-              are checked.  If a number or ambiguous name is  used,  only  the
-              port  number  is  checked  (e.g., `dst port 513' will print both
-              tcp/login traffic and udp/who traffic, and  `port  domain'  will
-              print both tcp/domain and udp/domain traffic).
+              True if the packet is IPv4/v6 TCP, UDP or SCTP and has a  desti-
+              nation  port  value of port.  The port can be a number or a name
+              used in /etc/services (see tcp(4P) and udp(4P)).  If a  name  is
+              used,  both the port number and protocol are checked.  If a num-
+              ber or ambiguous name is used, only the port number  is  checked
+              (e.g.,  `dst  port  513'  will  print both tcp/login traffic and
+              udp/who traffic, and `port domain' will  print  both  tcp/domain
+              and udp/domain traffic).
 
        src port port
               True if the packet has a source port value of port.
@@ -171,10 +173,10 @@ DESCRIPTION
               port.
 
        dst portrange port1-port2
-              True if the packet is IPv4 TCP, IPv4 UDP, IPv6 TCP or  IPv6  UDP
-              and  has  a destination port value between port1 and port2 (both
-              inclusive).  port1 and port2 are interpreted in the same fashion
-              as the port parameter for port.
+              True if the packet is IPv4/v6 TCP, UDP or SCTP and has a  desti-
+              nation  port  value  between  port1  and port2 (both inclusive).
+              port1 and port2 are interpreted in the same fashion as the  port
+              parameter for port.
 
        src portrange port1-port2
               True  if  the  packet  has a source port value between port1 and
@@ -185,7 +187,7 @@ DESCRIPTION
               between port1 and port2 (both inclusive).
 
               Any of the above port or port range expressions can be prepended
-              with the keywords, tcp or udp, as in:
+              with the keywords, tcp, udp or sctp, as in:
                    tcp src port port
               which matches only TCP packets whose source port is port.
 
@@ -202,10 +204,10 @@ DESCRIPTION
        ip proto protocol
               True if the packet is an IPv4 packet (see  ip(4P))  of  protocol
               type  protocol.   Protocol  can  be a number or one of the names
-              icmp, icmp6, igmp, igrp, pim, ah, esp, vrrp, udp, or tcp.   Note
-              that  the  identifiers  tcp, udp, and icmp are also keywords and
-              must be escaped via backslash (\).   Note  that  this  primitive
-              does not chase the protocol header chain.
+              icmp, icmp6, igmp, igrp, pim, ah, esp, vrrp, sctp, udp, or  tcp.
+              Note  that the identifiers tcp, udp, sctp and icmp are also key-
+              words and must be escaped via backslash  (\).   Note  that  this
+              primitive does not chase the protocol header chain.
 
        ip6 proto protocol
               True  if the packet is an IPv6 packet of protocol type protocol.
@@ -217,7 +219,7 @@ DESCRIPTION
               protocol.  Note that this primitive does not chase the  protocol
               header chain.
 
-       tcp, udp, icmp
+       tcp, udp, icmp, sctp
               Abbreviations for:
                    proto \protocol
               where protocol is one of the above protocols.
@@ -648,17 +650,17 @@ DESCRIPTION
               To access data inside the packet, use the following syntax:
                    proto [ expr : size ]
               Proto is one of ether, fddi, tr, wlan, ppp, slip, link, ip, arp,
-              rarp, tcp, udp, icmp, ip6 or radio, and indicates  the  protocol
-              layer  for  the  index  operation.  (ether, fddi, wlan, tr, ppp,
-              slip and link all refer to the link layer. radio refers  to  the
-              "radio  header"  added to some 802.11 captures.)  Note that tcp,
-              udp and other upper-layer protocol types only apply to IPv4, not
-              IPv6 (this will be fixed in the future).  The byte offset, rela-
-              tive to the indicated protocol layer, is given by expr.  Size is
-              optional  and  indicates the number of bytes in the field of in-
-              terest; it can be either one, two, or four, and defaults to one.
-              The  length  operator,  indicated  by the keyword len, gives the
-              length of the packet.
+              rarp, tcp, udp, sctp, icmp, ip6 or radio, and indicates the pro-
+              tocol  layer  for  the index operation.  (ether, fddi, wlan, tr,
+              ppp, slip and link all refer to the link layer. radio refers  to
+              the  "radio  header"  added to some 802.11 captures.)  Note that
+              tcp, udp and other upper-layer  protocol  types  only  apply  to
+              IPv4,  not  IPv6  (this  will be fixed in the future).  The byte
+              offset, relative to the indicated protocol layer,  is  given  by
+              expr.  Size is optional and indicates the number of bytes in the
+              field of interest; it can be either one, two, or four,  and  de-
+              faults  to  one.   The length operator, indicated by the keyword
+              len, gives the length of the packet.
 
               For example, `ether[0] & 1 != 0' catches all multicast  traffic.
               The  expression `ip[0] & 0xf != 5' catches all IPv4 packets with
@@ -793,4 +795,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                6 February 2021                 PCAP-FILTER(7)
+                                4 January 2022                  PCAP-FILTER(7)

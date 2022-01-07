@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 6 February 2021<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 4 January 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -26,7 +26,7 @@ pcap-filter - packet filter syntax
 
 <P>
 
-<B>pcap_compile</B>()
+<A HREF='./pcap_compile.3pcap.html'><B>pcap_compile</B></A>(3PCAP)
 
 is used to compile a string into a filter program.
 The resulting filter program can then be applied to
@@ -123,7 +123,7 @@ qualifiers are only valid for IEEE 802.11 Wireless LAN link layers.
 
 qualifiers restrict the match to a particular protocol.
 Possible
-protos are:
+protocols are:
 <B>ether</B>,
 
 <B>fddi</B>,
@@ -142,6 +142,8 @@ protos are:
 
 <B>decnet</B>,
 
+<B>sctp</B>,
+
 <B>tcp</B>
 
 and
@@ -149,13 +151,14 @@ and
 
 E.g., `<B>ether src</B> foo', `<B>arp net</B> 128.3', `<B>tcp port</B> 21',
 `<B>udp portrange</B> 7000-7009', `<B>wlan addr2</B> 0:2:3:4:5:6'.
-If there is
-no proto qualifier, all protocols consistent with the type are
-assumed.
-E.g., `<B>src</B> foo' means `<B>(ip or arp or rarp) src</B> foo'
-(except the latter is not legal syntax), `<B>net</B> bar' means `<B>(ip or
-arp or rarp) net</B> bar' and `<B>port</B> 53' means `<B>(tcp or udp)
-port</B> 53'.
+If there is no
+<I>proto</I>
+
+qualifier, all protocols consistent with the type are assumed.
+E.g., `<B>src</B> foo' means `<B>(ip or arp or rarp) src</B> foo',
+`<B>net</B> bar' means `<B>(ip or arp or rarp) net</B> bar' and
+`<B>port</B> 53' means `<B>(tcp or udp or sctp) port</B> 53'
+(note that these examples use invalid syntax to illustrate the principle).
 </DL>
 <P>
 
@@ -291,7 +294,7 @@ True if the IPv4/v6 address matches <I>net</I> with a netmask <I>len</I>
 bits wide.
 May be qualified with <B>src</B> or <B>dst</B>.
 <DT><B>dst port </B><I>port</I><DD>
-True if the packet is IPv4 TCP, IPv4 UDP, IPv6 TCP or IPv6 UDP and has a
+True if the packet is IPv4/v6 TCP, UDP or SCTP and has a
 destination port value of <I>port</I>.
 The <I>port</I> can be a number or a name used in /etc/services (see
 <B>tcp</B>(4P)
@@ -310,7 +313,7 @@ True if the packet has a source port value of <I>port</I>.
 <DT><B>port </B><I>port</I><DD>
 True if either the source or destination port of the packet is <I>port</I>.
 <DT><B>dst portrange </B><I>port1-port2</I><DD>
-True if the packet is IPv4 TCP, IPv4 UDP, IPv6 TCP or IPv6 UDP and has a
+True if the packet is IPv4/v6 TCP, UDP or SCTP and has a
 destination port value between <I>port1</I> and <I>port2</I> (both inclusive).
 <I>port1</I>
 
@@ -331,7 +334,7 @@ True if either the source or destination port of the packet is between
 <I>port1</I> and <I>port2</I> (both inclusive).
 <DT><DD>
 Any of the above port or port range expressions can be prepended with
-the keywords, <B>tcp</B> or <B>udp</B>, as in:
+the keywords, <B>tcp</B>, <B>udp</B> or <B>sctp</B>, as in:
 
 <PRE>
 <B>tcp src port </B><I>port</I>
@@ -364,9 +367,9 @@ True if the packet is an IPv4 packet (see
 of protocol type <I>protocol</I>.
 <I>Protocol</I> can be a number or one of the names
 <B>icmp</B>, <B>icmp6</B>, <B>igmp</B>, <B>igrp</B>, <B>pim</B>, <B>ah</B>,
-<B>esp</B>, <B>vrrp</B>, <B>udp</B>, or <B>tcp</B>.
-Note that the identifiers <B>tcp</B>, <B>udp</B>, and <B>icmp</B> are also
-keywords and must be escaped via backslash (\).
+<B>esp</B>, <B>vrrp</B>, <B>sctp</B>, <B>udp</B>, or <B>tcp</B>.
+Note that the identifiers <B>tcp</B>, <B>udp</B>, <B>sctp</B> and <B>icmp</B>
+are also keywords and must be escaped via backslash (\).
 Note that this primitive does not chase the protocol header chain.
 <DT><B>ip6 proto </B><I>protocol</I><DD>
 True if the packet is an IPv6 packet of protocol type <I>protocol</I>.
@@ -375,12 +378,12 @@ Note that this primitive does not chase the protocol header chain.
 True if the packet is an IPv4 or IPv6 packet of protocol type
 <I>protocol</I>.  Note that this primitive does not chase the protocol
 header chain.
-<DT><B>tcp</B>, <B>udp</B>, <B>icmp</B><DD>
+<DT><B>tcp</B>, <B>udp</B>, <B>icmp</B>, <B>sctp</B><DD>
 Abbreviations for:
 
 <PRE>
-<B>proto \</B><I>protocol</I><B>
-</B></PRE>
+<B>proto \</B><I>protocol</I>
+</PRE>
 
 
 where <I>protocol</I> is one of the above protocols.
@@ -954,7 +957,7 @@ To access data inside the packet, use the following syntax:
 
 
 <I>Proto</I> is one of <B>ether, fddi, tr, wlan, ppp, slip, link,
-ip, arp, rarp, tcp, udp, icmp, ip6</B> or <B>radio</B>, and
+ip, arp, rarp, tcp, udp, sctp, icmp, ip6</B> or <B>radio</B>, and
 indicates the protocol layer for the index operation.
 (<B>ether, fddi, wlan, tr, ppp, slip</B> and <B>link</B> all refer to the
 link layer. <B>radio</B> refers to the &quot;radio header&quot; added to some
@@ -1233,7 +1236,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:03 GMT, November 01, 2021
+This HTML man page was generated at 17:30:41 GMT, January 07, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
