@@ -54,7 +54,7 @@ Original license : Creative Commons Attribution 2.5 License
               <p>
                 The continuous integration (CI) systems below automatically build the
                 <a href="index.html#source">current development versions</a>
-                of tcpdump, libpcap and tcpslice.  For Cirrus CI and Appveyor CI the
+                of tcpdump, libpcap and tcpslice.  For Cirrus CI and AppVeyor CI the
                 badges indicate the git master branch status.  For OpenCSW Buildbot the
                 badges do not indicate a status, the current status can be seen by
                 following the links.  For The Tcpdump Group Buildbot the badges indicate
@@ -494,6 +494,10 @@ Original license : Creative Commons Attribution 2.5 License
                   Ibid., add workers for AIX, DragonFly BSD, Haiku and HP-UX.
                 </li>
                 <li>
+                  Ibid., have the master recognize <code>[skip buildbot]</code> and
+                  <code>[skip bb]</code>.
+                </li>
+                <li>
                   &hellip;anything else? Please send any suggestions to the
                   <a href="index.html#mailing-lists">mailing list</a>, especially those
                   you can help implementing.
@@ -507,10 +511,28 @@ Original license : Creative Commons Attribution 2.5 License
                 Last but not least: because the full set of CI builds takes a long time
                 to complete, it is a good idea not to CI man page, change log and README
                 updates or any other changes that have no effect on the source code or
-                the build system logic.  This is very simple to do: just add
-                <code>[skip ci]</code> at the end of the git commit summary (which is
-                the very first line of a git commit message).
+                the build system logic.  This is very simple to do:
               </p>
+              <ul>
+                <li>
+                  To skip CI in as many systems as possible, append <code>[skip ci]</code>
+                  to the git commit summary (which is the very first line of
+                  a git commit message).
+                </li>
+                <li>
+                  To skip CI in AppVeyor CI only, append <code>[skip appveyor]</code> to
+                  the git commit summary.
+                </li>
+                <li>
+                  To skip CI in Cirrus CI only, append <code>[skip cirrus]</code> to the
+                  git commit summary.
+                </li>
+                <li>
+                  To skip CI in The Tcpdump Group Buildbot only, append
+                  <code>[skip ci]</code> to the git commit message outside of the
+                  commit summary.
+                </li>
+              </ul>
             </div>
           </div>
           <!-- End of CONTINUOUS INTEGRATION section -->
