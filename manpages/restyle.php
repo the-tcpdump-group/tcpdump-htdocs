@@ -223,13 +223,26 @@ foreach ($taxonomy as $pname => $project)
 		$html = preg_replace ($pattern, $replacement, $html);
 	}
 
-	# FIXME1: mtime may be inconsistent across the servers and the output depends
-	# on this script contents too, so instead of Last-Modified header generate
-	# ETag as a hash of this script contents and the target HTML file contents
-	# and URI path.
-	# FIXME2: Respond with "HTTP 304 Not Modified" when the client produces an
-	# If-None-Match header with a matching ETag.
-	header ('Last-Modified: ' . gmdate (DATE_RFC7231, filemtime ($uri_path)));
+	# As far as an HTTP client cache is concerned, it does not matter when
+	# the requested .html file or this script were modified or what their
+	# contents or filesystem location are on the server, but it does matter
+	# what the resulting HTML output is and whether it is exactly the same
+	# as before; hence use only a digest of the latter as the entity tag.
+	$etag = base64_encode (sha1 ($html, TRUE));
+	# Rely on mod_headers custom configuration in ../.htaccess to see the
+	# original entity tag in If-None-Match header of the request.
+	if
+	(
+		array_key_exists ('HTTP_IF_NONE_MATCH', $_SERVER) &&
+		in_array ("\"{$etag}\"", explode (', ', $_SERVER['HTTP_IF_NONE_MATCH']))
+	)
+	{
+		header ("${_SERVER['SERVER_PROTOCOL']} 304 Not Modified");
+		exit;
+	}
+	# Omit Last-Modified so the client omits If-Modified-Since and there is
+	# less logic to implement in this script.
+	header ("ETag: \"$etag\"");
 	header ('Content-Length: ' . strlen ($html));
 	echo $html;
 	exit;

@@ -40,7 +40,20 @@ ExpiresActive On
 # for better visual consistency.
 ExpiresByType text/css "access plus 1 hour"
 # .html and .txt documents can change rather often, and browsers typically do
-# a good enough job detecting the change via If-Modified-Since.  In case that
+# a good enough job detecting the change via If-None-Match.  In case that
 # didn't work, have a hard limit in place.
 ExpiresByType text/html "access plus 24 hours"
 ExpiresByType text/plain "access plus 24 hours"
+
+# Fix caching of compressed responses when using entity tags (by Joost
+# Dekeijzer), this applies to restyle.php as well.  For example,
+# ETag: "abcdef-gzip"
+# becomes
+# ETag: "abcdef", "abcdef-gzip"
+# https://bz.apache.org/bugzilla/show_bug.cgi?id=39727
+# https://bz.apache.org/bugzilla/show_bug.cgi?id=45023
+# https://github.com/symfony/symfony-docs/issues/12644
+RequestHeader edit "If-None-Match" '^"((.+)-(?:gzip|br))"$' '"$2", "$1"'
+# If the document before any compression is the same, do not confuse the client
+# with a possibly different entity tag, HTTP 304 is everything it needs to see.
+Header unset "ETag" "expr=%{REQUEST_STATUS} == 304"
