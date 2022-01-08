@@ -92,6 +92,7 @@ function fail (int $status): void
 		400 => 'Bad Request',
 		403 => 'Forbidden',
 		404 => 'Not Found',
+		405 => 'Method Not Allowed',
 		500 => 'Internal Server Error',
 	);
 	if (! array_key_exists ($status, $statusmap))
@@ -117,6 +118,9 @@ function read_file (string $filename): string
 		fail (500);
 	return $ret;
 }
+
+if (! in_array ($_SERVER['REQUEST_METHOD'], array ('GET', 'HEAD')))
+	fail (405);
 
 if (! array_key_exists ('REQUEST_URI', $_SERVER))
 	fail (400);
@@ -244,7 +248,8 @@ foreach ($taxonomy as $pname => $project)
 	# less logic to implement in this script.
 	header ("ETag: \"$etag\"");
 	header ('Content-Length: ' . strlen ($html));
-	echo $html;
+	if ($_SERVER['REQUEST_METHOD'] == 'GET')
+		echo $html;
 	exit;
 }
 fail (400);
