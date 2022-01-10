@@ -6,7 +6,9 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0;
 	padding: 0;
-	background: #FFFFFF url(images/img01.png) repeat-x;
+	/* images/img01.png */
+	background: #FFFFFF url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAtCAAAAABO5Y4lAAAAG0lEQVQI12OYPXs2AwivXbuW6hhmNjVxTU0NAP4KVc9H5B9KAAAAAElFTkSuQmCC");
+	background-repeat: repeat-x;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #737373;
 }
@@ -51,18 +53,23 @@ hr {
 	padding: 0px 0;
 }
 
+#menu ul, #menu li {
+	/* images/img03.png */
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAtCAAAAAChJ+UbAAAAF0lEQVQI12Nwi2MAosBMihDEELJRWBgASNYeq7YFCY4AAAAASUVORK5CYII=");
+	background-repeat: no-repeat;
+}
+
 #menu ul {
 	height: 45px;
 	margin: 0;
 	padding: 0;
-	background: url(images/img03.png) no-repeat;
 	list-style: none;
 }
 
 #menu li {
 	float: left;
 	height: 45px;
-	background: url(images/img03.png) no-repeat right top;
+	background-position: right top;
 }
 
 #menu a {
@@ -78,7 +85,9 @@ hr {
 }
 
 #menu a:hover {
-	background: url(images/img02.png) repeat-x;
+	/* images/img02.png */
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAtAgMAAAAW4DlqAAAACVBMVEU9PT1PT09sbGygOkitAAAAEUlEQVQI12NgAIIQoiHxYAUAwPUHjcr6akYAAAAASUVORK5CYII=");
+	background-repeat: repeat-x;
 	color: #FFFFFF;
 	height: 45px;
 }
