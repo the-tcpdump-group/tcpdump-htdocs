@@ -21,9 +21,10 @@ SYNOPSIS
                [ -E spi@ipaddr algo:secret,...  ]
                [ -F file ] [ -G rotate_seconds ] [ -i interface ]
                [ --immediate-mode ] [ -j tstamp_type ] [ -m module ]
-               [ -M secret ] [ --number ] [ --print ] [ -Q in|out|inout ]
-               [ -r file ] [ -s snaplen ] [ -T type ] [ --version ]
-               [ -V file ] [ -w file ] [ -W filecount ] [ -y datalinktype ]
+               [ -M secret ] [ --number ] [ --print ]
+               [ --print-sampling nth ] [ -Q in|out|inout ] [ -r file ]
+               [ -s snaplen ] [ -T type ] [ --version ] [ -V file ]
+               [ -w file ] [ -W filecount ] [ -y datalinktype ]
                [ -z postrotate-command ] [ -Z user ]
                [ --time-stamp-precision=tstamp_precision ]
                [ --micro ] [ --nano ]
@@ -392,6 +393,17 @@ OPTIONS
        --print
               Print  parsed  packet  output, even if the raw packets are being
               saved to a file with the -w flag.
+
+       --print-sampling=nth
+              Print every nth packet. This option enables the --print flag.
+
+              Unprinted packets are not  parsed,  which  decreases  processing
+              time.  Setting  nth  to  100 for example, will (counting from 1)
+              parse and print the 100th packet, 200th patcket,  300th  packet,
+              and so on.
+
+              This  option  also enables the -S flag, as relative TCP sequence
+              numbers are not tracked for unprinted packets.
 
        -Q direction
        --direction=direction
@@ -1377,4 +1389,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                               29 November 2021                     TCPDUMP(1)
+                                17 January 2022                     TCPDUMP(1)
