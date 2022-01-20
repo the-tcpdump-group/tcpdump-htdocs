@@ -338,6 +338,10 @@ div.version_boilerplate h4 {
 	margin-bottom: 1em;
 }
 
+div.manpage .post .entry dt {
+	font-weight: initial;
+}
+
 /* for pcap-savefile(5) */
 div.manpage table table td {
 	border: 1px solid black;
