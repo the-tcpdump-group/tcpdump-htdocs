@@ -220,6 +220,18 @@ foreach ($taxonomy as $pname => $project)
 			'@(</BODY>.*)$@m',
 			"</DIV>\n</DIV>\n</DIV>\n" . read_file (FOOTER_FILE) . "\n\$1"
 		),
+		# In the live version use /style.css and /images/ instead of the relative
+		# paths to simplify the visible URL space.
+		array
+		(
+			'@( href=")\.\.(/style\.css")@',
+			'$1$2'
+		),
+		array
+		(
+			'@( href=")\.\.(/images/)@',
+			'$1$2'
+		),
 	);
 	foreach ($toreplace as $each)
 	{
