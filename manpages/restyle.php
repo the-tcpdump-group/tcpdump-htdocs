@@ -232,6 +232,12 @@ foreach ($taxonomy as $pname => $project)
 			'@( href=")\.\.(/images/)@',
 			'$1$2'
 		),
+		# Prevent out of place line breaks inside various pcap man page names.
+		array
+		(
+			'@<B><A HREF="\./pcap[_-].+\.html">pcap[_-].+</A></B>\(.+\)@',
+			'<SPAN class=manref>$0</SPAN>'
+		),
 	);
 	foreach ($toreplace as $each)
 	{

@@ -346,3 +346,7 @@ div.manpage .post .entry dt {
 div.manpage table table td {
 	border: 1px solid black;
 }
+
+div.manpage span.manref {
+	white-space: nowrap;
+}
