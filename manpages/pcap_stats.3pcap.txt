@@ -60,12 +60,14 @@ DESCRIPTION
        packets.
 
 RETURN VALUE
-       pcap_stats() returns 0 on success and returns PCAP_ERROR if there is an
-       error  or  if p doesn't support packet statistics. If PCAP_ERROR is re-
-       turned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called  with  p
-       as an argument to fetch or display the error text.
+       pcap_stats() returns 0 on success, PCAP_ERROR_NOT_ACTIVATED  if  called
+       on  a  capture  handle  that  has  been  created  but not activated, or
+       PCAP_ERROR if there is another error or if  p  doesn't  support  packet
+       statistics.  If PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_per-
+       ror(3PCAP) may be called with p as an argument to fetch or display  the
+       error text.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                 25 July 2018                PCAP_STATS(3PCAP)
+                                 5 March 2022                PCAP_STATS(3PCAP)

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_LOOP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2020<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 March 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -210,15 +210,19 @@ if
 
 is exhausted or if, when reading from a ``savefile'', no more packets
 are available.  It returns
-<B>PCAP_ERROR</B>
-
-if an error occurs or
 <B>PCAP_ERROR_BREAK</B>
 
 if the loop terminated due to a call to
 <B>pcap_breakloop</B>()
 
-before any packets were processed.
+before any packets were processed,
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+if called on a capture handle that has been created but not activated,
+or
+<B>PCAP_ERROR</B>
+
+if another error occurs.
 It does
 <B>not</B>
 
@@ -236,15 +240,19 @@ packets arrive, the timeout expires before any packets arrive, or if the
 file descriptor for the capture device is in non-blocking mode and no
 packets were available to be read) or if no more packets are available
 in a ``savefile.'' It returns
-<B>PCAP_ERROR</B>
-
-if an error occurs or
 <B>PCAP_ERROR_BREAK</B>
 
 if the loop terminated due to a call to
 <B>pcap_breakloop</B>()
 
-before any packets were processed.
+before any packets were processed,
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+if called on a capture handle that has been created but not activated,
+or
+<B>PCAP_ERROR</B>
+
+if another error occurs.
 <B>
 If your application uses pcap_breakloop(),
 make sure that you explicitly check for PCAP_ERROR and PCAP_ERROR_BREAK,
@@ -293,7 +301,7 @@ as the value of
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:05 GMT, November 01, 2021
+This HTML man page was generated at 15:38:07 GMT, March 07, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

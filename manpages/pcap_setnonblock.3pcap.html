@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_SETNONBLOCK</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 March 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -104,7 +104,11 @@ always returns
 <B>0</B>
 
 on ``savefiles''.
-If there is an error,
+If called on a capture handle that has been created but not activated,
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+is returned.
+If there is another error,
 <B>PCAP_ERROR</B>
 
 is returned and
@@ -131,7 +135,7 @@ chars.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:07 GMT, November 01, 2021
+This HTML man page was generated at 15:38:08 GMT, March 07, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

@@ -26,11 +26,13 @@ DESCRIPTION
        pcap_compile(3PCAP).
 
 RETURN VALUE
-       pcap_setfilter()  returns  0  on  success and PCAP_ERROR on failure. If
-       PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be
-       called with p as an argument to fetch or display the error text.
+       pcap_setfilter()  returns  0  on  success,  PCAP_ERROR_NOT_ACTIVATED if
+       called on a capture handle that has been created but not activated,  or
+       PCAP_ERROR    on    other   errors.    If   PCAP_ERROR   is   returned,
+       pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p as an ar-
+       gument to fetch or display the error text.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                 25 July 2018            PCAP_SETFILTER(3PCAP)
+                                 5 March 2022            PCAP_SETFILTER(3PCAP)

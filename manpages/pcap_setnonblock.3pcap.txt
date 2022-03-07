@@ -49,13 +49,14 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_getnonblock() returns the current ``non-blocking''  state  of  the
-       capture  descriptor; it always returns 0 on ``savefiles''.  If there is
-       an error, PCAP_ERROR is returned and errbuf is filled in with an appro-
-       priate error message.
+       capture descriptor; it always returns 0 on ``savefiles''.  If called on
+       a capture handle that has been  created  but  not  activated,  PCAP_ER-
+       ROR_NOT_ACTIVATED  is  returned.  If there is another error, PCAP_ERROR
+       is returned and errbuf is filled in with an appropriate error message.
 
        errbuf is assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
 
 SEE ALSO
        pcap(3PCAP), pcap_next_ex(3PCAP), pcap_geterr(3PCAP)
 
-                                 25 July 2018          PCAP_SETNONBLOCK(3PCAP)
+                                 5 March 2022          PCAP_SETNONBLOCK(3PCAP)

@@ -63,11 +63,13 @@ DESCRIPTION
 RETURN VALUE
        pcap_next_ex() returns 1 if the packet was read without problems, 0  if
        packets  are being read from a live capture and the packet buffer time-
-       out expired, PCAP_ERROR if an error occurred while reading the  packet,
-       and  PCAP_ERROR_BREAK if packets are being read from a ``savefile'' and
-       there are no more packets to read from the savefile.  If PCAP_ERROR  is
-       returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p
-       as an argument to fetch or display the error text.
+       out expired, PCAP_ERROR_BREAK if packets are being read from a  ``save-
+       file''  and  there  are  no  more  packets  to  read from the savefile,
+       PCAP_ERROR_NOT_ACTIVATED if called on a capture handle  that  has  been
+       created  but  not  activated,  or PCAP_ERROR if an error occurred while
+       reading the packet.  If PCAP_ERROR is returned,  pcap_geterr(3PCAP)  or
+       pcap_perror(3PCAP) may be called with p as an argument to fetch or dis-
+       play the error text.
 
        pcap_next() returns a pointer to the packet data on  success,  and  re-
        turns NULL if an error occurred, or if no packets were read from a live
@@ -82,4 +84,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP)
 
-                                 25 July 2018              PCAP_NEXT_EX(3PCAP)
+                                 5 March 2022              PCAP_NEXT_EX(3PCAP)

@@ -51,10 +51,13 @@ DESCRIPTION
        are provided for compatibility.)
 
 RETURN VALUE
-       pcap_inject()  returns  the  number  of  bytes  written  on success and
-       PCAP_ERROR on failure.
+       pcap_inject()  returns the number of bytes written on success, PCAP_ER-
+       ROR_NOT_ACTIVATED if called on a capture handle that has  been  created
+       but not activated, and PCAP_ERROR on other errors.
 
-       pcap_sendpacket() returns 0 on success and PCAP_ERROR on failure.
+       pcap_sendpacket()  returns  0  on  success, PCAP_ERROR_NOT_ACTIVATED if
+       called on a capture handle that has been created but not activated, and
+       PCAP_ERROR on other errors.
 
        If PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may
        be called with p as an argument to fetch or display the error text.
@@ -62,4 +65,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP)
 
-                                 25 July 2018               PCAP_INJECT(3PCAP)
+                                 5 March 2022               PCAP_INJECT(3PCAP)
