@@ -267,7 +267,7 @@ a value of 7 for OSI packets, or
 a value of 23 for IPX packets.  All of the IPv6 values correspond to
 IPv6 packets; code reading files should check for all of them.
 <p>Note that ``host byte order'' is the byte order of the machine on
-which the packets are captured; if a live capture is being done, ``host
+that the packets are captured; if a live capture is being done, ``host
 byte order'' is the byte order of the machine capturing the packets, but
 if a ``savefile'' is being read, the byte order is not necessarily that
 of the machine reading the capture file.
@@ -484,7 +484,7 @@ AppleTalk, Second Edition</a>.
 <td>
 OpenBSD pflog; the link-layer header contains a
 <code>struct pfloghdr</code>
-structure, as defined by the host on which the file was saved.  (This
+structure, as defined by the host on that the file was saved.  (This
 differs from operating system to operating system and release to
 release; there is nothing in the file to indicate what the layout of
 that structure is.)
@@ -774,7 +774,7 @@ USB packets, beginning with a Linux USB header, as specified by the
 <code>Documentation/usb/usbmon.txt</code> file in the Linux source tree.
 Only the first 48 bytes of that header are present.  All fields in the
 header are in host byte order.  When performing a live capture, the
-host byte order is the byte order of the machine on which the packets
+host byte order is the byte order of the machine on that the packets
 are captured.  When reading a pcap file, the byte order is the byte
 order for the file, as specified by the file's magic number; when
 reading a pcapng file, the byte order is the byte order for the section
@@ -990,7 +990,7 @@ USB packets, beginning with a Linux USB header, as specified by the
 <code>Documentation/usb/usbmon.txt</code> file in the Linux source tree.
 All 64 bytes of the header are present.  All fields in the header are in
 host byte order.  When performing a live capture, the host byte order is
-the byte order of the machine on which the packets are captured.  When
+the byte order of the machine on that the packets are captured.  When
 reading a pcap file, the byte order is the byte order for the file, as
 specified by the file's magic number; when reading a pcapng file, the
 byte order is the byte order for the section of the pcapng file, as

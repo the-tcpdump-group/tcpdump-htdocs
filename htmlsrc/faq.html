@@ -321,7 +321,7 @@ tcpdump -T radius -nv udp port 21812
 
                             <p>
                                 <span class=initial>A:</span>
-                                This might be because the interface on which you're capturing is plugged
+                                This might be because the interface on that you're capturing is plugged
                                 into a switch; on a switched network, unicast traffic between two ports
                                 will not necessarily appear on other ports&mdash;only broadcast and
                                 multicast traffic will be sent to all ports.
@@ -370,7 +370,7 @@ tcpdump -T radius -nv udp port 21812
                                 If your machine is <em>not</em> plugged into a switched network or a
                                 dual-speed hub, or it is plugged into a switched network but the port is
                                 set up to have all traffic replicated to it, the problem might be that
-                                the network interface on which you're capturing doesn't support
+                                the network interface on that you're capturing doesn't support
                                 "promiscuous" mode, or because your OS can't put the interface into
                                 promiscuous mode.  Normally, network interfaces supply to the host only:
                             </p>
@@ -394,7 +394,7 @@ tcpdump -T radius -nv udp port 21812
                             <p>
                                 Most network interfaces can also be put in "promiscuous" mode, in which
                                 they supply to the host all network packets they see.  Tcpdump will try
-                                to put the interface on which it's capturing into promiscuous mode
+                                to put the interface on that it's capturing into promiscuous mode
                                 unless the <code>-p</code> option was specified.  However, some network
                                 interfaces don't support promiscuous mode, and some OSes might not allow
                                 interfaces to be put into promiscuous mode.
@@ -585,7 +585,7 @@ tcpdump -T radius -nv udp port 21812
                         </p>
 
                         <p>
-                            In most OSes on which tcpdump and libpcap run, the packet is time
+                            In most OSes on that tcpdump and libpcap run, the packet is time
                             stamped as part of the process of the network interface's device driver,
                             or the networking stack, handling it.  This means that the packet is not
                             time stamped at the instant that it arrives at the network interface;
