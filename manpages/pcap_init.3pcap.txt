@@ -51,16 +51,17 @@ DESCRIPTION
        Windows.
 
 RETURN VALUE
-       pcap_init() returns 0 on success and -1 on failure.  If -1 is returned,
-       errbuf  is  filled in with an appropriate error message.  errbuf is as-
-       sumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
+       pcap_init() returns  0  on  success  and  PCAP_ERROR  on  failure.   If
+       PCAP_ERROR  is  returned, errbuf is filled in with an appropriate error
+       message.  errbuf is assumed to  be  able  to  hold  at  least  PCAP_ER-
+       RBUF_SIZE chars.
 
 BACKWARD COMPATIBILITY
-       This function became available in libpcap release 1.10.0.  In  previous
-       releases,  on  Windows,  all  strings  supplied  as  arguments, and all
+       This  function  became available in libpcap release 1.9.0.  In previous
+       releases, on Windows,  all  strings  supplied  as  arguments,  and  all
        strings returned to the caller, are in the local character encoding.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                 11 April 2020                PCAP_INIT(3PCAP)
+                                  4 May 2022                  PCAP_INIT(3PCAP)
