@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates (later "TEMPLATED")
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html lang="en">
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>LINKTYPE_FIRA_UCI | TCPDUMP &amp; LIBPCAP</title>
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="../images/T-32x32.png" rel="shortcut icon" type="image/png">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../manpages/">Man Pages</a></li>
+                <li><a href="../ci.html">CI</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../bpfexam/">BPF Exam</a></li>
+                <li><a href="../related.html">See Also</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_FIRA_UCI section -->
+          <div class="post">
+            <h2 class="title">LINKTYPE_FIRA_UCI</h2>
+<p>
+The protocol description is availale to members only on the FiRa consortium website:
+<a class=away href="https://groups.firaconsortium.org/wg/members/document/1679">
+FiRa Consortium UWB Command Interface Generic Technical Specification</a>.
+</p>
+                <div class="entry">
+                <h2 class="subtitle">Packet format</h2>
+<pre>
++---------------------------+
+|        Packet header      |
+|         (2 Octets)        |
++---------------------------+
+|            RFU            |
+|         (1 Octet)         |
++---------------------------+
+|       Payload Length      |
+|         (1 Octet)         |
++---------------------------+
+|          Payload          |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h2 class="subtitle">Description</h2>
+Unless otherwise indicated, the byte ordering for UCI packets is little-endian.
+The packet header contains the following fields, listed from most most significant
+to least significant bits:
+<ul>
+<li>Message Type (MT), 3 Bits
+    <ul>
+    <li><code>0b000</code> RFU</li>
+    <li><code>0b001</code> Command message</li>
+    <li><code>0b010</code> Response message</li>
+    <li><code>0b011</code> Notification message</li>
+    <li><code>0b100 - 0b111</code> RFU</li>
+    </ul>
+</li>
+<li>Packet Boundary Flag (PBF), 1 Bit
+    <ul>
+    <li><code>0b0</code> The packet contains a complete message, or the packet
+    contains the last segment of a segmented message</li>
+    <li><code>0b1</code> The packet contains a segment that is not the last
+    segment of a segmented message</li>
+    </ul>
+</li>
+<li>Group Identifier (GID), 4 Bits
+    <ul>
+    <li><code>0b0000</code> Core group</li>
+    <li><code>0b0001</code> Sesion Config group</li>
+    <li><code>0b0010</code> Ranging Session Control group</li>
+    <li><code>0b0011</code> Data Control group</li>
+    <li><code>0b1001 - 0b1100</code>Vendor Specific group</li>
+    <li><code>0b1101</code> Test group</li>
+    <li><code>0b1110 - 0b1111</code>Vendor Specific group</li>
+    </ul>
+</li>
+<li>RFU, 2 Bits</li>
+<li>Opcode Identifier (OID), 6 Bits</li>
+</ul>
+            </div>
+            <!-- End of LINKTYPE_FIRA_UCI section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                &copy; 2010&ndash;2023 The Tcpdump Group. Designed by
+                <a class=away href="https://www.luismg.com/">Luis MartinGarcia</a>;
+                based on a template by TEMPLATED.
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
