@@ -59,6 +59,7 @@ function array_fetch (array $a, $key, $dfl)
 
 function fail (int $status): void
 {
+	ob_end_clean();
 	$statusmap = array
 	(
 		400 => 'Bad Request',
@@ -95,7 +96,8 @@ if ($req_dlt_name !== NULL && ! array_key_exists ($req_dlt_name, $dltlist))
 $req_filter = array_fetch ($_REQUEST, EXPR_INPUT_NAME, NULL);
 
 # HTTP status code can be changed only before the document, so start buffering
-# now to enable HTTP 429 later on.
+# now to enable HTTP 429 and other errors later on, when some of the output
+# has already been generated.
 ob_start();
 
 ?>
@@ -109,6 +111,11 @@ ob_start();
 		<STYLE type="text/css">
 TH {
 	text-align: right;
+	white-space: nowrap;
+}
+TD {
+	vertical-align: top;
+	padding-right: 1em;
 }
 PRE.stderr {
 	color: red;
@@ -184,7 +191,46 @@ echo "</TR>\n";
 						</TR>
 					</TABLE>
 					</FORM>
+				</DIV>
 <?php
+function run_tcpdump (string $tcpdump_bin, string $dlt_name, string $filter, bool $optimize): void
+{
+	global $dltlist;
+
+	$argv = array ($tcpdump_bin, '-r', '-', '-d', $filter);
+	if (! $optimize)
+		$argv []= '-O';
+	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
+	# a network interface even if provided with the "-y" flag.  To work around that,
+	# feed an empty .pcap file with the DLT of interest to stdin.
+	$po = proc_open
+	(
+		$argv,
+		array
+		(
+			0 => array ('pipe', 'r'), # stdin
+			1 => array ('pipe', 'w'), # stdout
+			2 => array ('pipe', 'w'), # stderr
+		),
+		$pipes
+	);
+	if ($po === FALSE)
+	{
+		printf ('<PRE class=stderr>ERROR: failed to run tcpdump binary!</PRE>');
+		return;
+	}
+	fwrite ($pipes[0], DLT_HEADER_PREFIX . $dltlist[$dlt_name]['suffix']);
+	$stdout = stream_get_contents ($pipes[1]);
+	$stderr = stream_get_contents ($pipes[2]);
+	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
+	$stderr = preg_replace ('/^Warning: interface names might be incorrect\n/', '', $stderr);
+	proc_close ($po);
+	if ($stdout != '')
+		echo "<PRE>${stdout}</PRE>";
+	if ($stderr != '')
+		echo "<PRE class=stderr>${stderr}</PRE>";
+}
+
 if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 {
 	# Enforce at lest 1 second between requests that spawn tcpdump.
@@ -196,45 +242,31 @@ if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 		if ($mtime > $now)
 			fail (500);
 		if ($now - $mtime < 1)
-		{
-			ob_end_clean();
 			fail (429);
-		}
 	}
 	if (! @touch (TIMESTAMP_FILE))
 		fail (500);
-
-	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
-	# a network interface even if provided with the "-y" flag.  To work around that,
-	# feed an empty .pcap file with the DLT of interest to stdin.
-	$po = proc_open
-	(
-		array ($versions[$req_ver], '-r', '-', '-d', $req_filter),
-		array
-		(
-			0 => array ('pipe', 'r'), # stdin
-			1 => array ('pipe', 'w'), # stdout
-			2 => array ('pipe', 'w'), # stderr
-		),
-		$pipes
-	);
-	if ($po === FALSE)
-		printf ('ERROR: failed to run tcpdump binary');
-	else
-	{
-		fwrite ($pipes[0], DLT_HEADER_PREFIX . $dltlist[$req_dlt_name]['suffix']);
-		$stdout = stream_get_contents ($pipes[1]);
-		$stderr = stream_get_contents ($pipes[2]);
-		$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
-		proc_close ($po);
-		if ($stdout != '')
-			echo "<H3 class=subtitle>Output</H3><PRE>${stdout}</PRE>";
-		if ($stderr != '')
-			echo "<H3 class=subtitle>Errors</H3><PRE class=stderr>${stderr}</PRE>";
-	}
+?>
+				<H2 class=title>Packet-matching code</H2>
+				<DIV class=entry>
+					<TABLE>
+						<TR>
+							<TD><H3 class=subtitle>before optimization</H3>
+<?php
+run_tcpdump ($versions[$req_ver], $req_dlt_name, $req_filter, FALSE);
+?>
+							</TD>
+							<TD><H3 class=subtitle>after optimization</H3>
+<?php
+run_tcpdump ($versions[$req_ver], $req_dlt_name, $req_filter, TRUE);
+?>
+							</TD>
+						</TR>
+					</TABLE>
+				</DIV>
+<?php
 }
 ?>
-				</DIV>
 			</DIV>
 		</DIV>
 <?php
