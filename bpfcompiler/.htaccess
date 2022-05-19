@@ -1,0 +1,4 @@
+# "ExpiresByType text/html" in the parent directory by default applies to all
+# PHP scripts and caches all dynamic output, which is wrong for this specific
+# use case.
+ExpiresByType text/html "now"
