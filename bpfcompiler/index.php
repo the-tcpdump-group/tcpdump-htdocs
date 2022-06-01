@@ -7,7 +7,7 @@ define ('EXPR_INPUT_NAME', 'filter');
 define ('SUBMIT_INPUT_NAME', 'compile');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('DEFAULT_FILTER', 'tcp or udp port 53 or 123');
-# Without the trailing 4 octets of the link-layer header type.
+# Little-endian, without the trailing 4 octets of the link-layer header type.
 define ('DLT_HEADER_PREFIX', "\xd4\xc3\xb2\xa1\x02\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00");
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 
@@ -16,6 +16,12 @@ $versions = array
 	# libpcap 1.9.1 in Ubuntu 20.04 (/usr/sbin/tcpdump, v4.9.3)
 	# libpcap 1.10.0 in Debian 11 (/usr/bin/tcpdump, v4.99.0)
 	'default' => 'tcpdump',
+	'1.10.1' => '/usr/local/bin/tcpdump-libpcap-1.10.1',
+	'1.9.1' => '/usr/local/bin/tcpdump-libpcap-1.9.1',
+	'1.8.1' => '/usr/local/bin/tcpdump-libpcap-1.8.1',
+	'1.7.4' => '/usr/local/bin/tcpdump-libpcap-1.7.4',
+	'1.6.2' => '/usr/local/bin/tcpdump-libpcap-1.6.2',
+	'1.5.3' => '/usr/local/bin/tcpdump-libpcap-1.5.3',
 );
 
 $dltlist = array
@@ -23,32 +29,32 @@ $dltlist = array
 	'EN10MB' => array
 	(
 		'descr' => 'Ethernet',
-		'suffix' => "\x01\x00\x00\x00",
+		'val' => 1,
 	),
 	'RAW' => array
 	(
 		'descr' => 'Raw IP',
-		'suffix' => "\x65\x00\x00\x00",
+		'val' => 101,
 	),
 	'LINUX_SLL' => array
 	(
 		'descr' => 'Linux cooked',
-		'suffix' => "\x71\x00\x00\x00",
+		'val' => 113,
 	),
 	'IEEE802_11' => array
 	(
 		'descr' => 'IEEE 802.11 WLAN',
-		'suffix' => "\x69\x00\x00\x00",
+		'val' => 105,
 	),
 	'IEEE802_11_RADIO' => array
 	(
 		'descr' => 'Radiotap + IEEE 802.11 WLAN',
-		'suffix' => "\x7F\x00\x00\x00",
+		'val' => 127,
 	),
 	'LINUX_SLL2' => array
 	(
 		'descr' => 'Linux cooked v2',
-		'suffix' => "\x14\x01\x00\x00",
+		'val' => 276,
 	),
 );
 
@@ -197,6 +203,11 @@ function run_tcpdump (string $tcpdump_bin, string $dlt_name, string $filter, boo
 {
 	global $dltlist;
 
+	if (strpos ($tcpdump_bin, '/') !== FALSE && ! is_executable ($tcpdump_bin))
+	{
+		printf ("<PRE class=stderr>ERROR: the requested tcpdump binary is not executable!</PRE>");
+		return;
+	}
 	$argv = array ($tcpdump_bin, '-r', '-', '-d', $filter);
 	if (! $optimize)
 		$argv []= '-O';
@@ -214,12 +225,14 @@ function run_tcpdump (string $tcpdump_bin, string $dlt_name, string $filter, boo
 		),
 		$pipes
 	);
+	# FIXME: When trying to execute a non-existent binary, proc_open() returns
+	# a resource that is indistinguishable from a successful invocation.
 	if ($po === FALSE)
 	{
 		printf ('<PRE class=stderr>ERROR: failed to run tcpdump binary!</PRE>');
 		return;
 	}
-	fwrite ($pipes[0], DLT_HEADER_PREFIX . $dltlist[$dlt_name]['suffix']);
+	fwrite ($pipes[0], DLT_HEADER_PREFIX . pack ('V', $dltlist[$dlt_name]['val']));
 	$stdout = stream_get_contents ($pipes[1]);
 	$stderr = stream_get_contents ($pipes[2]);
 	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
