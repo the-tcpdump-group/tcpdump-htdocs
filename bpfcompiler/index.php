@@ -7,8 +7,6 @@ define ('EXPR_INPUT_NAME', 'filter');
 define ('SUBMIT_INPUT_NAME', 'compile');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('DEFAULT_FILTER', 'tcp or udp port 53 or 123');
-# Little-endian, without the trailing 4 octets of the link-layer header type.
-define ('DLT_HEADER_PREFIX', "\xd4\xc3\xb2\xa1\x02\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00");
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 
 $versions = array
@@ -199,24 +197,26 @@ echo "</TR>\n";
 					</FORM>
 				</DIV>
 <?php
-function run_tcpdump (string $tcpdump_bin, string $dlt_name, string $filter, bool $optimize): void
+function gen_pcap_header (string $dlt_name): string
 {
 	global $dltlist;
 
+	# Little-endian, without the trailing 4 octets of the link-layer header type.
+	$ret = "\xd4\xc3\xb2\xa1\x02\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00";
+	$ret .= pack ('V', $dltlist[$dlt_name]['val']);
+	return $ret;
+}
+
+function run_tcpdump (string $tcpdump_bin, string $dlt_name, string $filter, array $extra_argv): array
+{
 	if (strpos ($tcpdump_bin, '/') !== FALSE && ! is_executable ($tcpdump_bin))
-	{
-		printf ("<PRE class=stderr>ERROR: the requested tcpdump binary is not executable!</PRE>");
-		return;
-	}
-	$argv = array ($tcpdump_bin, '-r', '-', '-d', $filter);
-	if (! $optimize)
-		$argv []= '-O';
+		return array (NULL, 'ERROR: the requested tcpdump binary is not executable!');
 	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
 	# a network interface even if provided with the "-y" flag.  To work around that,
 	# feed an empty .pcap file with the DLT of interest to stdin.
 	$po = proc_open
 	(
-		$argv,
+		array_merge (array ($tcpdump_bin, '-r', '-'), $extra_argv, array ($filter)),
 		array
 		(
 			0 => array ('pipe', 'r'), # stdin
@@ -228,23 +228,17 @@ function run_tcpdump (string $tcpdump_bin, string $dlt_name, string $filter, boo
 	# FIXME: When trying to execute a non-existent binary, proc_open() returns
 	# a resource that is indistinguishable from a successful invocation.
 	if ($po === FALSE)
-	{
-		printf ('<PRE class=stderr>ERROR: failed to run tcpdump binary!</PRE>');
-		return;
-	}
-	fwrite ($pipes[0], DLT_HEADER_PREFIX . pack ('V', $dltlist[$dlt_name]['val']));
+		return array (NULL, 'ERROR: failed to run tcpdump binary!');
+	fwrite ($pipes[0], gen_pcap_header ($dlt_name));
 	$stdout = stream_get_contents ($pipes[1]);
 	$stderr = stream_get_contents ($pipes[2]);
 	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
 	$stderr = preg_replace ('/^Warning: interface names might be incorrect\n/', '', $stderr);
 	proc_close ($po);
-	if ($stdout != '')
-		echo "<PRE>${stdout}</PRE>";
-	if ($stderr != '')
-		echo "<PRE class=stderr>${stderr}</PRE>";
+	return array ($stdout, $stderr);
 }
 
-if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
+function limit_request_rate(): void
 {
 	# Enforce at lest 1 second between requests that spawn tcpdump.
 	if (file_exists (TIMESTAMP_FILE))
@@ -259,19 +253,42 @@ if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 	}
 	if (! @touch (TIMESTAMP_FILE))
 		fail (500);
+}
+
+function print_exec_block (string $header, array $stdout_stderr): void
+{
+	list ($stdout, $stderr) = $stdout_stderr;
+	echo "<H3 class=subtitle>${header}</H3>\n";
+	if ($stdout != '')
+		echo "<PRE>${stdout}</PRE>";
+	if ($stderr != '')
+		echo "<PRE class=stderr>${stderr}</PRE>";
+}
+
+if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
+{
+	limit_request_rate();
 ?>
 				<H2 class=title>Packet-matching code</H2>
 				<DIV class=entry>
 					<TABLE>
 						<TR>
-							<TD><H3 class=subtitle>before optimization</H3>
+							<TD>
 <?php
-run_tcpdump ($versions[$req_ver], $req_dlt_name, $req_filter, FALSE);
+	print_exec_block
+	(
+		'before optimization',
+		run_tcpdump ($versions[$req_ver], $req_dlt_name, $req_filter, array ('-d', '-O'))
+	);
 ?>
 							</TD>
-							<TD><H3 class=subtitle>after optimization</H3>
+							<TD>
 <?php
-run_tcpdump ($versions[$req_ver], $req_dlt_name, $req_filter, TRUE);
+	print_exec_block
+	(
+		'after optimization',
+		run_tcpdump ($versions[$req_ver], $req_dlt_name, $req_filter, array ('-d'))
+	);
 ?>
 							</TD>
 						</TR>
