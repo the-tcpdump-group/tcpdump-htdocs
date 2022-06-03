@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'GET')
 $req_ver = array_fetch ($_REQUEST, VER_INPUT_NAME, NULL);
 if ($req_ver !== NULL && ! array_key_exists ($req_ver, $versions))
 	fail (400);
+$tcpdump_bin = $versions[$req_ver];
 $req_dlt_name = array_fetch ($_REQUEST, DLT_INPUT_NAME, NULL);
 if ($req_dlt_name !== NULL && ! array_key_exists ($req_dlt_name, $dltlist))
 	fail (400);
@@ -207,16 +208,18 @@ function gen_pcap_header (string $dlt_name): string
 	return $ret;
 }
 
-function run_tcpdump (string $tcpdump_bin, string $dlt_name, string $filter, array $extra_argv): array
+# Feed the input to stdin and return the stdout and stderr as a 2-tuple.
+function pipe_process (array $argv, string $input): array
 {
-	if (strpos ($tcpdump_bin, '/') !== FALSE && ! is_executable ($tcpdump_bin))
-		return array (NULL, 'ERROR: the requested tcpdump binary is not executable!');
-	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
-	# a network interface even if provided with the "-y" flag.  To work around that,
-	# feed an empty .pcap file with the DLT of interest to stdin.
+	if (count ($argv) < 1)
+		throw new Exception ('$argv must have at least one element');
+	$bin = array_shift ($argv);
+	if (strpos ($bin, '/') !== FALSE && ! is_executable ($bin))
+		throw new Exception ("the binary ${bin} is not executable!");
+	array_unshift ($argv, $bin);
 	$po = proc_open
 	(
-		array_merge (array ($tcpdump_bin, '-r', '-'), $extra_argv, array ($filter)),
+		$argv,
 		array
 		(
 			0 => array ('pipe', 'r'), # stdin
@@ -228,13 +231,33 @@ function run_tcpdump (string $tcpdump_bin, string $dlt_name, string $filter, arr
 	# FIXME: When trying to execute a non-existent binary, proc_open() returns
 	# a resource that is indistinguishable from a successful invocation.
 	if ($po === FALSE)
-		return array (NULL, 'ERROR: failed to run tcpdump binary!');
-	fwrite ($pipes[0], gen_pcap_header ($dlt_name));
+		throw new Exception ("failed to run the ${bin} binary!");
+	fwrite ($pipes[0], $input);
+	fclose ($pipes[0]);
 	$stdout = stream_get_contents ($pipes[1]);
 	$stderr = stream_get_contents ($pipes[2]);
+	proc_close ($po);
+	return array ($stdout, $stderr);
+}
+
+function run_tcpdump (array $argv, string $dlt_name): array
+{
+	try
+	{
+		# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
+		# a network interface even if provided with the "-y" flag.  To work around that,
+		# feed an empty .pcap file with the DLT of interest to stdin.
+		if (count ($argv) < 1)
+			throw new Exception ('$argv must have at least one element');
+		array_splice ($argv, 1, 0, array ('-r', '-'));
+		list ($stdout, $stderr) = pipe_process ($argv, gen_pcap_header ($dlt_name));
+	}
+	catch (Exception $e)
+	{
+		return array (NULL, $e->getMessage());
+	}
 	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
 	$stderr = preg_replace ('/^Warning: interface names might be incorrect\n/', '', $stderr);
-	proc_close ($po);
 	return array ($stdout, $stderr);
 }
 
@@ -260,9 +283,9 @@ function print_exec_block (string $header, array $stdout_stderr): void
 	list ($stdout, $stderr) = $stdout_stderr;
 	echo "<H3 class=subtitle>${header}</H3>\n";
 	if ($stdout != '')
-		echo "<PRE>${stdout}</PRE>";
+		echo '<PRE>' . htmlentities ($stdout) . '</PRE>';
 	if ($stderr != '')
-		echo "<PRE class=stderr>${stderr}</PRE>";
+		echo '<PRE class=stderr>' . htmlentities ($stderr) . '</PRE>';
 }
 
 if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
@@ -278,7 +301,7 @@ if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 	print_exec_block
 	(
 		'before optimization',
-		run_tcpdump ($versions[$req_ver], $req_dlt_name, $req_filter, array ('-d', '-O'))
+		run_tcpdump (array ($tcpdump_bin, '-Od', '--', $req_filter), $req_dlt_name)
 	);
 ?>
 							</TD>
@@ -287,7 +310,7 @@ if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 	print_exec_block
 	(
 		'after optimization',
-		run_tcpdump ($versions[$req_ver], $req_dlt_name, $req_filter, array ('-d'))
+		run_tcpdump (array ($tcpdump_bin, '-d', '--', $req_filter), $req_dlt_name)
 	);
 ?>
 							</TD>
