@@ -95,7 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'GET')
 $req_ver = array_fetch ($_REQUEST, VER_INPUT_NAME, NULL);
 if ($req_ver !== NULL && ! array_key_exists ($req_ver, $versions))
 	fail (400);
-$tcpdump_bin = $versions[$req_ver];
 $req_dlt_name = array_fetch ($_REQUEST, DLT_INPUT_NAME, NULL);
 if ($req_dlt_name !== NULL && ! array_key_exists ($req_dlt_name, $dltlist))
 	fail (400);
@@ -368,6 +367,7 @@ function print_exec_block_html (string $header, array $stdout_stderr): void
 if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 {
 	limit_request_rate();
+	$tcpdump_bin = $versions[$req_ver];
 ?>
 				<H2 class=title>Packet-matching code (libpcap format)</H2>
 				<DIV class=entry>
