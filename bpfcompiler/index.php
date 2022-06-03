@@ -25,30 +25,170 @@ $versions = array
 
 $dltlist = array
 (
+	'NULL' => array
+	(
+		'descr' => 'BSD loopback encapsulation',
+		'val' => 0,
+	),
 	'EN10MB' => array
 	(
 		'descr' => 'Ethernet',
 		'val' => 1,
+	),
+	'IEEE802' => array
+	(
+		'descr' => '802.5 Token Ring',
+		'val' => 6,
+	),
+	'ARCNET' => array
+	(
+		'descr' => 'ARCNET, with BSD-style header',
+		'val' => 7,
+	),
+	'SLIP' => array
+	(
+		'descr' => 'Serial Line IP',
+		'val' => 8,
+	),
+	'PPP' => array
+	(
+		'descr' => 'Point-to-point Protocol',
+		'val' => 9,
+	),
+	'FDDI' => array
+	(
+		'descr' => 'Fiber Distributed Data Interface',
+		'val' => 10,
+	),
+	'ATM_CLIP' => array
+	(
+		'descr' => 'Linux Classical IP over ATM',
+		'val' => 19,
+	),
+	'PPP_SERIAL' => array
+	(
+		'descr' => 'PPP over serial with HDLC encapsulation',
+		'val' => 50,
+	),
+	'PPP_ETHER' => array
+	(
+		'descr' => 'PPP over Ethernet',
+		'val' => 51,
+	),
+	'SYMANTEC_FIREWALL' => array
+	(
+		'val' => 99,
+	),
+	'ATM_RFC1483' => array
+	(
+		'descr' => 'LLC-encapsulated ATM',
+		'val' => 100,
 	),
 	'RAW' => array
 	(
 		'descr' => 'Raw IP',
 		'val' => 101,
 	),
-	'LINUX_SLL' => array
+	'C_HDLC' => array
 	(
-		'descr' => 'Linux cooked',
-		'val' => 113,
+		'descr' => 'Cisco HDLC',
+		'val' => 104,
 	),
 	'IEEE802_11' => array
 	(
 		'descr' => 'IEEE 802.11 WLAN',
 		'val' => 105,
 	),
+	'LOOP' => array
+	(
+		'descr' => 'OpenBSD loopback encapsulation',
+		'val' => 108,
+	),
+	'FRELAY' => array
+	(
+		'descr' => 'Frame Relay',
+		'val' => 107,
+	),
+	'LINUX_SLL' => array
+	(
+		'descr' => 'Linux cooked',
+		'val' => 113,
+	),
+	'LTALK' => array
+	(
+		'descr' => 'Apple LocalTalk',
+		'val' => 114,
+	),
+	'PRISM_HEADER' => array
+	(
+		'descr' => 'Prism monitor mode + 802.11',
+		'val' => 119,
+	),
+	'IP_OVER_FC' => array
+	(
+		'descr' => 'IP-over-Fibre Channel',
+		'val' => 122,
+	),
+	'SUNATM' => array
+	(
+		'descr' => 'ATM with SunATM encapsulation',
+		'val' => 123,
+	),
 	'IEEE802_11_RADIO' => array
 	(
 		'descr' => 'Radiotap + IEEE 802.11 WLAN',
 		'val' => 127,
+	),
+	'ARCNET_LINUX' => array
+	(
+		'descr' => 'ARCNET, with Linux-style header',
+		'val' => 129,
+	),
+	'APPLE_IP_OVER_IEEE1394' => array
+	(
+		'val' => 138,
+	),
+	'IEEE802_11_RADIO_AVS' => array
+	(
+		'val' => 163,
+	),
+	'BACNET_MS_TP' => array
+	(
+		'descr' => 'BACnet MS/TP frames',
+		'val' => 165,
+	),
+	'PPP_PPPD' => array
+	(
+		'descr' => 'Point-to-point Protocol',
+		'val' => 166,
+	),
+	'PPI' => array
+	(
+		'descr' => 'Per Packet Information encapsulated packets',
+		'val' => 192,
+	),
+	'IPNET' => array
+	(
+		'descr' => 'Solaris ipnet pseudo-header',
+		'val' => 226,
+	),
+	'IPV4' => array
+	(
+		'descr' => 'raw IPv4',
+		'val' => 228,
+	),
+	'IPV6' => array
+	(
+		'descr' => 'raw IPv6',
+		'val' => 229,
+	),
+	'NETANALYZER' => array
+	(
+		'val' => 240,
+	),
+	'NETANALYZER_TRANSPARENT' => array
+	(
+		'val' => 241,
 	),
 	'LINUX_SLL2' => array
 	(
@@ -145,7 +285,7 @@ printf
 	VER_INPUT_NAME
 );
 echo "<TD>\n";
-printf ("<SELECT name='%s' id='%s'>\n", VER_INPUT_NAME, VER_INPUT_NAME);
+printf ("<SELECT name='%s' id='%s' tabindex=100>\n", VER_INPUT_NAME, VER_INPUT_NAME);
 foreach (array_keys ($versions) as $optval)
 {
 	echo "<OPTION value='${optval}'";
@@ -163,13 +303,14 @@ printf
 	"<TH><LABEL for='%s'>Link-layer header type (<A href='/linktypes.html'>?</A>):</LABEL></TH>\n",
 	DLT_INPUT_NAME
 );
-printf ("<TD><SELECT name='%s'>\n", DLT_INPUT_NAME);
+printf ("<TD><SELECT name='%s' tabindex=200>\n", DLT_INPUT_NAME);
 foreach ($dltlist as $dlt_code => $dlt)
 {
 	echo "<OPTION value=${dlt_code}";
 	if ($dlt_code == ($req_dlt_name ?? DEFAULT_DLT))
 		echo ' selected';
-	echo ">DLT_${dlt_code} (${dlt['descr']})</OPTION>\n";
+	$dlt_descr = array_key_exists ('descr', $dlt) ? " (${dlt['descr']})" : '';
+	echo ">${dlt['val']}: DLT_${dlt_code}${dlt_descr}</OPTION>\n";
 }
 echo "</SELECT>\n</TD>\n</TR>\n";
 ?>
@@ -183,7 +324,7 @@ printf
 );
 printf
 (
-	"<TD><INPUT type=text size=80 name='%s' id='%s' value='%s'></TD>\n",
+	"<TD><INPUT type=text size=80 name='%s' id='%s' value='%s' tabindex=300></TD>\n",
 	EXPR_INPUT_NAME,
 	EXPR_INPUT_NAME,
 	htmlentities ($req_filter ?? DEFAULT_FILTER)
@@ -192,7 +333,7 @@ echo "</TR>\n";
 ?>
 						<TR>
 							<TD></TD>
-							<TD><INPUT type=submit value='<?php echo SUBMIT_INPUT_NAME; ?>'></TD>
+							<TD><INPUT type=submit value='<?php echo SUBMIT_INPUT_NAME; ?>' tabindex=1000></TD>
 						</TR>
 					</TABLE>
 					</FORM>
