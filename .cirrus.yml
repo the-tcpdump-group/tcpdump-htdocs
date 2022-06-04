@@ -10,7 +10,7 @@ task:
     DEBIAN_FRONTEND: noninteractive
   script:
     - apt-get -qy update
-    - apt-get -qy install git php-cli
+    - apt-get -qy install git php-cli >/dev/null
     - ./regen_html_pages.sh
     - git status
     - test "$(git status --porcelain | wc -l)" -eq 0
