@@ -9,7 +9,7 @@ task:
   env:
     DEBIAN_FRONTEND: noninteractive
   script:
-    - apt-get -qy update
+    - apt-get -qy update >/dev/null
     - apt-get -qy install git php-cli >/dev/null
     - ./regen_html_pages.sh
     - git status
