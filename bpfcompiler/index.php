@@ -9,18 +9,44 @@ define ('DEFAULT_DLT', 'EN10MB');
 define ('DEFAULT_FILTER', 'tcp or udp port 53 or 123');
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 define ('RADARE2_BIN', '/usr/bin/r2');
+define ('DOT_BIN', '/usr/bin/dot');
 
+# filtertest, where specified, was copied from libpcap built
+# using "./configure --enable-optimizer-dbg"
 $versions = array
 (
 	# libpcap 1.9.1 in Ubuntu 20.04 (/usr/sbin/tcpdump, v4.9.3)
 	# libpcap 1.10.0 in Debian 11 (/usr/bin/tcpdump, v4.99.0)
-	'default' => 'tcpdump',
-	'1.10.1' => '/usr/local/bin/tcpdump-libpcap-1.10.1',
-	'1.9.1' => '/usr/local/bin/tcpdump-libpcap-1.9.1',
-	'1.8.1' => '/usr/local/bin/tcpdump-libpcap-1.8.1',
-	'1.7.4' => '/usr/local/bin/tcpdump-libpcap-1.7.4',
-	'1.6.2' => '/usr/local/bin/tcpdump-libpcap-1.6.2',
-	'1.5.3' => '/usr/local/bin/tcpdump-libpcap-1.5.3',
+	'default' => array
+	(
+		'tcpdump' => 'tcpdump',
+	),
+	'1.10.1' => array
+	(
+		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.1',
+		'filtertest' => '/usr/local/bin/filtertest-1.10.1-optdebug',
+	),
+	'1.9.1' => array
+	(
+		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.9.1',
+		'filtertest' => '/usr/local/bin/filtertest-1.9.1-optdebug',
+	),
+	'1.8.1' => array
+	(
+		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.8.1',
+	),
+	'1.7.4' => array
+	(
+		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.7.4',
+	),
+	'1.6.2' => array
+	(
+		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.6.2',
+	),
+	'1.5.3' => array
+	(
+		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.5.3',
+	),
 );
 
 $dltlist = array
@@ -286,12 +312,15 @@ printf
 );
 echo "<TD>\n";
 printf ("<SELECT name='%s' id='%s' tabindex=100>\n", VER_INPUT_NAME, VER_INPUT_NAME);
-foreach (array_keys ($versions) as $optval)
+foreach ($versions as $ver => $paths)
 {
-	echo "<OPTION value='${optval}'";
-	if ($optval == $req_ver)
+	$optlabel = $ver;
+	if (array_key_exists ('filtertest', $paths))
+		$optlabel .= ' (with optimizer steps)';
+	echo "<OPTION value='${ver}'";
+	if ($ver == $req_ver)
 		echo ' selected';
-	echo ">${optval}</OPTION>\n";
+	echo ">${optlabel}</OPTION>\n";
 }
 echo "</SELECT>\n</TD>\n</TR>\n";
 
@@ -393,6 +422,76 @@ function run_tcpdump (array $argv, string $dlt_name): string
 	return $stdout;
 }
 
+function run_filtertest ($filtertest_bin, $dlt_name, $filter): string
+{
+	list ($stdout, $stderr) = pipe_process
+	(
+		array
+		(
+			$filtertest_bin,
+			'-g',
+			$dlt_name,
+			'--',
+			$filter
+		),
+		''
+	);
+	if ($stderr != '')
+		throw new Exception (htmlentities ($stderr));
+	return $stdout;
+}
+
+define ('S_SKIP', 1);
+define ('S_TITLE', 2);
+define ('S_DEF', 3);
+function detect_graphs (string $text): array
+{
+	$ret = array();
+	$i = 1;
+	$state = S_SKIP;
+	foreach (explode ("\n", $text) as $line)
+	{
+		switch ($state)
+		{
+		case S_SKIP:
+			if (0 === strpos ($line, 'after ') || 0 === strpos ($line, 'opt_loop('))
+			{
+				$title = $line;
+				$state = S_TITLE;
+			}
+			break;
+		case S_TITLE:
+			if ($line !== 'digraph BPF {')
+				throw new Exception (htmlentities ("FSM error: unexpected line ${line}"));
+			$deflines = array ($line);
+			$state = S_DEF;
+			break;
+		case S_DEF:
+			$deflines[] = $line;
+			if ($line == '}')
+			{
+				$ret["${i}. ${title}"] = implode ("\n", $deflines);
+				$i++;
+				$state = S_SKIP;
+			}
+			break;
+		default:
+			throw new Exception ('FSM error: invalid state');
+		}
+	}
+	if ($state !== S_SKIP)
+		throw new Exception ('FSM error: unexpected end of input');
+	return $ret;
+}
+
+function run_dot (string $graphdef): string
+{
+	list ($stdout, $stderr) = pipe_process (array (DOT_BIN, '-Tsvg'), $graphdef);
+	if ($stderr != '')
+		throw new Exception (htmlentities ($stderr));
+	return $stdout;
+}
+
 # Parse "tcpdump -ddd" format and return binary BPF instructions.
 function bpf_ddd2bin (string $ddd): string
 {
@@ -468,18 +567,33 @@ function limit_request_rate(): void
 		fail (500);
 }
 
-function process_request (string $tcpdump_bin, string $req_dlt_name, string $req_filter): void
+function process_request (array $paths, string $req_dlt_name, string $req_filter): void
 {
 	$libpcap_before =
 		$libpcap_after =
 		$radare2_before =
 		$radare2_after = '(N/A)';
+	$optimizer_steps = NULL;
 	try
 	{
-		$libpcap_before = htmlentities (run_tcpdump (array ($tcpdump_bin, '-Od', '--', $req_filter), $req_dlt_name));
-		$libpcap_after = htmlentities (run_tcpdump (array ($tcpdump_bin, '-d', '--', $req_filter), $req_dlt_name));
-		$radare2_before = run_radare2 (run_tcpdump (array ($tcpdump_bin, '-Oddd', '--', $req_filter), $req_dlt_name));
-		$radare2_after = run_radare2 (run_tcpdump (array ($tcpdump_bin, '-ddd', '--', $req_filter), $req_dlt_name));
+		$libpcap_before = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-Od', '--', $req_filter), $req_dlt_name));
+		$libpcap_after = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-d', '--', $req_filter), $req_dlt_name));
+		$radare2_before = run_radare2 (run_tcpdump (array ($paths['tcpdump'], '-Oddd', '--', $req_filter), $req_dlt_name));
+		$radare2_after = run_radare2 (run_tcpdump (array ($paths['tcpdump'], '-ddd', '--', $req_filter), $req_dlt_name));
+		if (array_key_exists ('filtertest', $paths))
+		{
+			$graphs = detect_graphs (run_filtertest ($paths['filtertest'], $req_dlt_name, $req_filter));
+			if (count ($graphs))
+			{
+				$optimizer_steps = '';
+				foreach ($graphs as $title => $deftext)
+				{
+					$optimizer_steps .= '<H3 class=subtitle>' . htmlentities ($title) . "</H3>\n";
+					$base64 = base64_encode (run_dot ($deftext));
+					$optimizer_steps .= "<IMG src='data:image/svg+xml;base64,${base64}' width='100%'>";
+				}
+			}
+		}
 	}
 	finally
 	{
@@ -510,6 +624,14 @@ function process_request (string $tcpdump_bin, string $req_dlt_name, string $req
 				</TD>
 			</TR>
 		</TABLE>
+		</DIV>
+ENDOFTEXT;
+
+		if ($optimizer_steps !== NULL)
+			echo <<<"ENDOFTEXT"
+		<H2 class=title>Optimizer steps</H2>
+		<DIV class=entry>
+			${optimizer_steps}
 		</DIV>
 ENDOFTEXT;
 	}
