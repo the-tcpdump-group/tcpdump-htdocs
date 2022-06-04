@@ -294,9 +294,7 @@ foreach (array_keys ($versions) as $optval)
 	echo ">${optval}</OPTION>\n";
 }
 echo "</SELECT>\n</TD>\n</TR>\n";
-?>
 
-<?php
 echo "<TR>\n";
 printf
 (
@@ -313,9 +311,7 @@ foreach ($dltlist as $dlt_code => $dlt)
 	echo ">${dlt['val']}: DLT_${dlt_code}${dlt_descr}</OPTION>\n";
 }
 echo "</SELECT>\n</TD>\n</TR>\n";
-?>
 
-<?php
 echo "<TR>\n";
 printf
 (
@@ -381,25 +377,20 @@ function pipe_process (array $argv, string $input): array
 	return array ($stdout, $stderr);
 }
 
-function run_tcpdump (array $argv, string $dlt_name): array
+function run_tcpdump (array $argv, string $dlt_name): string
 {
-	try
-	{
-		# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
-		# a network interface even if provided with the "-y" flag.  To work around that,
-		# feed an empty .pcap file with the DLT of interest to stdin.
-		if (count ($argv) < 1)
-			throw new Exception ('$argv must have at least one element');
-		array_splice ($argv, 1, 0, array ('-r', '-'));
-		list ($stdout, $stderr) = pipe_process ($argv, gen_pcap_header ($dlt_name));
-	}
-	catch (Exception $e)
-	{
-		return array (NULL, $e->getMessage());
-	}
+	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
+	# a network interface even if provided with the "-y" flag.  To work around that,
+	# feed an empty .pcap file with the DLT of interest to stdin.
+	if (count ($argv) < 1)
+		throw new Exception ('$argv must have at least one element');
+	array_splice ($argv, 1, 0, array ('-r', '-'));
+	list ($stdout, $stderr) = pipe_process ($argv, gen_pcap_header ($dlt_name));
 	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
 	$stderr = preg_replace ('/^Warning: interface names might be incorrect\n/', '', $stderr);
-	return array ($stdout, $stderr);
+	if ($stderr != '')
+		throw new Exception (htmlentities ($stderr));
+	return $stdout;
 }
 
 # Parse "tcpdump -ddd" format and return binary BPF instructions.
@@ -414,7 +405,7 @@ function bpf_ddd2bin (string $ddd): string
 	# The instruction counter.
 	$line = array_shift ($lines);
 	if (1 !== preg_match ('/^\d+$/', $line, $m))
-		throw new Exception ("malformed instruction counter line: '${line}'");
+		throw new Exception (htmlentities ("malformed instruction counter line: '${line}'"));
 	$declared = (int) $m[0];
 	if ($declared < 1)
 		throw new Exception ("instruction counter ${declared} declared too low");
@@ -425,46 +416,39 @@ function bpf_ddd2bin (string $ddd): string
 	foreach ($lines as $line)
 	{
 		if (1 !== preg_match ('/^(?P<opcode>\d+) (?P<jt>\d+) (?P<jf>\d+) (?P<k>\d+)$/', $line, $m))
-			throw new Exception ("malformed instruction line: '${line}'");
+			throw new Exception (htmlentities ("malformed instruction line: '${line}'"));
 		# 16-bit, 8-bit, 8-bit, 32-bit; nCCN for LE, vCCV for LE.
 		$ret .= pack ('vCCV', $m['opcode'], $m['jt'], $m['jf'], $m['k']);
 	}
 	return $ret;
 }
 
-function run_radare2 (array $stdout_stderr): array
+function run_radare2 (string $ddd): string
 {
-	list ($ddd, $stderr) = $stdout_stderr;
-	if ($stderr != '')
-		return $stdout_stderr;
-	try
-	{
-		return pipe_process
+	list ($stdout, $stderr) = pipe_process
+	(
+		array
 		(
-			array
-			(
-				RADARE2_BIN,
-				# These options require either Radare2 5.7.1 (after it is released)
-				# or a recent build of the master branch.
-				'-q',
-				'-a', 'bpf.mr', # Not the Capstone BPF engine.
-				'-e', 'scr.utf8=true', # Defaults to ASCII when LANG=C.
-				'-e', 'scr.utf8.curvy=true',
-				'-e', 'scr.html=true',
-				'-e', 'scr.color=0',
-				'-e', 'asm.nbytes=8', # 6 octets by default.
-				'-e', 'asm.lines.wide=true',
-				'-e', 'asm.lines.width=30',
-				'-c', 'pD $s', # Disassemble the input file size worth of bytes.
-				'stdin://'
-			),
-			bpf_ddd2bin ($ddd)
-		);
-	}
-	catch (Exception $e)
-	{
-		return array (NULL, $e->getMessage());
-	}
+			RADARE2_BIN,
+			# These options require either Radare2 5.7.1 (after it is released)
+			# or a recent build of the master branch.
+			'-q',
+			'-a', 'bpf.mr', # Not the Capstone BPF engine.
+			'-e', 'scr.utf8=true', # Defaults to ASCII when LANG=C.
+			'-e', 'scr.utf8.curvy=true',
+			'-e', 'scr.html=true',
+			'-e', 'scr.color=0',
+			'-e', 'asm.nbytes=8', # 6 octets by default.
+			'-e', 'asm.lines.wide=true',
+			'-e', 'asm.lines.width=30',
+			'-c', 'pD $s', # Disassemble the input file size worth of bytes.
+			'stdin://'
+		),
+		bpf_ddd2bin ($ddd)
+	);
+	if ($stderr != '')
+		throw new Exception ($stderr);
+	return $stdout;
 }
 
 function limit_request_rate(): void
@@ -484,74 +468,64 @@ function limit_request_rate(): void
 		fail (500);
 }
 
-function print_exec_block (string $header, array $stdout_stderr): void
+function process_request (string $tcpdump_bin, string $req_dlt_name, string $req_filter): void
 {
-	list ($stdout, $stderr) = $stdout_stderr;
-	echo "<H3 class=subtitle>${header}</H3>\n";
-	if ($stdout != '')
-		echo '<PRE>' . htmlentities ($stdout) . '</PRE>';
-	if ($stderr != '')
-		echo '<PRE class=stderr>' . htmlentities ($stderr) . '</PRE>';
-}
-
-# Assume the stdout is a properly escaped HTML.
-function print_exec_block_html (string $header, array $stdout_stderr): void
-{
-	list ($stdout, $stderr) = $stdout_stderr;
-	echo "<H3 class=subtitle>${header}</H3>\n";
-	if ($stdout != '')
-		echo "<PRE>${stdout}</PRE>";
-	if ($stderr != '')
-		echo '<PRE class=stderr>' . htmlentities ($stderr) . '</PRE>';
+	$libpcap_before =
+		$libpcap_after =
+		$radare2_before =
+		$radare2_after = '(N/A)';
+	try
+	{
+		$libpcap_before = htmlentities (run_tcpdump (array ($tcpdump_bin, '-Od', '--', $req_filter), $req_dlt_name));
+		$libpcap_after = htmlentities (run_tcpdump (array ($tcpdump_bin, '-d', '--', $req_filter), $req_dlt_name));
+		$radare2_before = run_radare2 (run_tcpdump (array ($tcpdump_bin, '-Oddd', '--', $req_filter), $req_dlt_name));
+		$radare2_after = run_radare2 (run_tcpdump (array ($tcpdump_bin, '-ddd', '--', $req_filter), $req_dlt_name));
+	}
+	finally
+	{
+		echo <<<"ENDOFTEXT"
+		<H2 class=title>Packet-matching code</H2>
+		<DIV class=entry>
+		<TABLE>
+			<TR>
+				<TD>
+					<H3 class=subtitle>before optimization (libpcap format)</H3>
+					<PRE>${libpcap_before}</PRE>
+				</TD>
+				<TD>
+					<H3 class=subtitle>after optimization (libpcap format)</H3>
+					<PRE>${libpcap_after}</PRE>
+				</TD>
+			</TR>
+			<TR>
+				<TD colspan=2>
+					<H3 class=subtitle>before optimization (Radare2 format)</H3>
+					<PRE>${radare2_before}</PRE>
+				</TD>
+			</TR>
+			<TR>
+				<TD colspan=2>
+					<H3 class=subtitle>after optimization (Radare2 format)</H3>
+					<PRE>${radare2_after}</PRE>
+				</TD>
+			</TR>
+		</TABLE>
+		</DIV>
+ENDOFTEXT;
+	}
 }
 
 if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 {
 	limit_request_rate();
-	$tcpdump_bin = $versions[$req_ver];
-?>
-				<H2 class=title>Packet-matching code (libpcap format)</H2>
-				<DIV class=entry>
-					<TABLE>
-						<TR>
-							<TD>
-<?php
-	print_exec_block
-	(
-		'before optimization',
-		run_tcpdump (array ($tcpdump_bin, '-Od', '--', $req_filter), $req_dlt_name)
-	);
-?>
-							</TD>
-							<TD>
-<?php
-	print_exec_block
-	(
-		'after optimization',
-		run_tcpdump (array ($tcpdump_bin, '-d', '--', $req_filter), $req_dlt_name)
-	);
-?>
-							</TD>
-						</TR>
-					</TABLE>
-				</DIV>
-
-				<H2 class=title>Packet-matching code (Radare2 format)</H2>
-				<DIV class=entry>
-<?php
-	print_exec_block_html
-	(
-		'before optimization',
-		run_radare2 (run_tcpdump (array ($tcpdump_bin, '-Oddd', '--', $req_filter), $req_dlt_name))
-	);
-	print_exec_block_html
-	(
-		'after optimization',
-		run_radare2 (run_tcpdump (array ($tcpdump_bin, '-ddd', '--', $req_filter), $req_dlt_name))
-	);
-?>
-				</DIV>
-<?php
+	try
+	{
+		process_request ($versions[$req_ver], $req_dlt_name, $req_filter);
+	}
+	catch (Exception $e)
+	{
+		echo '<PRE class=stderr>' . $e->getMessage() . '</PRE>';
+	}
 }
 ?>
 			</DIV>
