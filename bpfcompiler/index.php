@@ -522,7 +522,7 @@ function bpf_ddd2bin (string $ddd): string
 	return $ret;
 }
 
-function run_radare2 (string $ddd): string
+function r2_disasm (string $bytecode): string
 {
 	list ($stdout, $stderr) = pipe_process
 	(
@@ -543,7 +543,28 @@ function run_radare2 (string $ddd): string
 			'-c', 'pD $s', # Disassemble the input file size worth of bytes.
 			'stdin://'
 		),
-		bpf_ddd2bin ($ddd)
+		$bytecode
+	);
+	if ($stderr != '')
+		throw new Exception ($stderr);
+	return $stdout;
+}
+
+function r2_graph (string $bytecode): string
+{
+	list ($stdout, $stderr) = pipe_process
+	(
+		array
+		(
+			RADARE2_BIN,
+			'-q',
+			'-a', 'bpf.mr', # Not the Capstone BPF engine.
+			'-e', 'anal.cc=reg', # Squelch a warning.
+			'-c', 'af',
+			'-c', 'agfd',
+			'stdin://'
+		),
+		$bytecode
 	);
 	if ($stderr != '')
 		throw new Exception ($stderr);
@@ -567,19 +588,31 @@ function limit_request_rate(): void
 		fail (500);
 }
 
+function inline_img (string $data): string
+{
+	return '<IMG src="data:image/svg+xml;base64,' . base64_encode ($data) . '" width="100%">';
+}
+
 function process_request (array $paths, string $req_dlt_name, string $req_filter): void
 {
 	$libpcap_before =
 		$libpcap_after =
-		$radare2_before =
-		$radare2_after = '(N/A)';
+		$r2_disasm_before =
+		$r2_graph_before =
+		$r2_disasm_after =
+		$r2_graph_after =
+		'(N/A)';
 	$optimizer_steps = NULL;
 	try
 	{
 		$libpcap_before = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-Od', '--', $req_filter), $req_dlt_name));
 		$libpcap_after = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-d', '--', $req_filter), $req_dlt_name));
-		$radare2_before = run_radare2 (run_tcpdump (array ($paths['tcpdump'], '-Oddd', '--', $req_filter), $req_dlt_name));
-		$radare2_after = run_radare2 (run_tcpdump (array ($paths['tcpdump'], '-ddd', '--', $req_filter), $req_dlt_name));
+		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($paths['tcpdump'], '-Oddd', '--', $req_filter), $req_dlt_name));
+		$r2_disasm_before = r2_disasm ($bytecode_before);
+		$r2_graph_before = inline_img (run_dot (r2_graph ($bytecode_before)));
+		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($paths['tcpdump'], '-ddd', '--', $req_filter), $req_dlt_name));
+		$r2_disasm_after = r2_disasm ($bytecode_after);
+		$r2_graph_after = inline_img (run_dot (r2_graph ($bytecode_after)));
 		if (array_key_exists ('filtertest', $paths))
 		{
 			$graphs = detect_graphs (run_filtertest ($paths['filtertest'], $req_dlt_name, $req_filter));
@@ -589,8 +622,7 @@ function process_request (array $paths, string $req_dlt_name, string $req_filter
 				foreach ($graphs as $title => $deftext)
 				{
 					$optimizer_steps .= '<H3 class=subtitle>' . htmlentities ($title) . "</H3>\n";
-					$base64 = base64_encode (run_dot ($deftext));
-					$optimizer_steps .= "<IMG src='data:image/svg+xml;base64,${base64}' width='100%'>";
+					$optimizer_steps .= inline_img (run_dot ($deftext));
 				}
 			}
 		}
@@ -603,27 +635,39 @@ function process_request (array $paths, string $req_dlt_name, string $req_filter
 		<TABLE>
 			<TR>
 				<TD>
-					<H3 class=subtitle>before optimization (libpcap format)</H3>
+					<H3 class=subtitle>before optimization (libpcap dump)</H3>
 					<PRE>${libpcap_before}</PRE>
 				</TD>
 				<TD>
-					<H3 class=subtitle>after optimization (libpcap format)</H3>
+					<H3 class=subtitle>after optimization (libpcap dump)</H3>
 					<PRE>${libpcap_after}</PRE>
 				</TD>
 			</TR>
 			<TR>
 				<TD colspan=2>
-					<H3 class=subtitle>before optimization (Radare2 format)</H3>
-					<PRE>${radare2_before}</PRE>
+					<H3 class=subtitle>before optimization (Radare2 disassembly)</H3>
+					<PRE>${r2_disasm_before}</PRE>
 				</TD>
 			</TR>
 			<TR>
 				<TD colspan=2>
-					<H3 class=subtitle>after optimization (Radare2 format)</H3>
-					<PRE>${radare2_after}</PRE>
+					<H3 class=subtitle>after optimization (Radare2 disassembly)</H3>
+					<PRE>${r2_disasm_after}</PRE>
 				</TD>
 			</TR>
 		</TABLE>
+		</DIV>
+
+		<H2 class=title>Control flow graph</H2>
+		<DIV class=entry>
+			<H3 class=subtitle>before optimization (Radare2 graph)</H3>
+			<P>
+				${r2_graph_before}
+			</P>
+			<H3 class=subtitle>after optimization (Radare2 graph)</H3>
+			<P>
+				${r2_graph_after}
+			</P>
 		</DIV>
 ENDOFTEXT;
 
