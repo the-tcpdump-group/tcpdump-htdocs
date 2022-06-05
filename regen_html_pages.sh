@@ -92,6 +92,7 @@ rewrite_URLs()
 		sed 's#\(<link href="\)\(images/\|style.css\)#\1../\2#' |
 			sed 's#\(<img src="\)\(images/\)#\1../\2#' |
 			sed 's#\(<a href="\)\(manpages/\)#\1../\2#' |
+			sed 's#\(<a href="\)\(bpfexam/\)#\1../\2#' |
 			sed 's#\(<a href="\)\([a-z_-]\+.html\)#\1../\2#'
 	elif [ "$1" = autoindex_header.html ]; then
 		sed 's#\(<img src="\)\(images/\)#\1/\2#' |

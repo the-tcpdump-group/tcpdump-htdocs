@@ -1,6 +1,6 @@
 <?php
 
-define ('PAGE_TITLE', 'BPF Compiler');
+define ('PAGE_TITLE', 'BPF Exam');
 define ('VER_INPUT_NAME', 'ver');
 define ('DLT_INPUT_NAME', 'dlt');
 define ('EXPR_INPUT_NAME', 'filter');

@@ -69,6 +69,11 @@
 	</url>
 
 	<url>
+		<loc>https://www.tcpdump.org/bpfexam/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+
+	<url>
 		<loc>https://www.tcpdump.org/related.html</loc>
 		<changefreq>weekly</changefreq>
 	</url>
