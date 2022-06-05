@@ -4,7 +4,8 @@ define ('PAGE_TITLE', 'BPF Compiler');
 define ('VER_INPUT_NAME', 'ver');
 define ('DLT_INPUT_NAME', 'dlt');
 define ('EXPR_INPUT_NAME', 'filter');
-define ('SUBMIT_INPUT_NAME', 'compile');
+define ('SUBMIT_INPUT_NAME', 'examine');
+define ('DEFAULT_VER', '1.10.1');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('DEFAULT_FILTER', 'tcp or udp port 53 or 123');
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
@@ -15,12 +16,6 @@ define ('DOT_BIN', '/usr/bin/dot');
 # using "./configure --enable-optimizer-dbg"
 $versions = array
 (
-	# libpcap 1.9.1 in Ubuntu 20.04 (/usr/sbin/tcpdump, v4.9.3)
-	# libpcap 1.10.0 in Debian 11 (/usr/bin/tcpdump, v4.99.0)
-	'default' => array
-	(
-		'tcpdump' => 'tcpdump',
-	),
 	'1.10.1' => array
 	(
 		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.1',
@@ -46,6 +41,12 @@ $versions = array
 	'1.5.3' => array
 	(
 		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.5.3',
+	),
+	# libpcap 1.9.1 in Ubuntu 20.04 (/usr/sbin/tcpdump, v4.9.3)
+	# libpcap 1.10.0 in Debian 11 (/usr/bin/tcpdump, v4.99.0)
+	'random (OS default)' => array
+	(
+		'tcpdump' => 'tcpdump',
 	),
 );
 
@@ -299,7 +300,7 @@ readfile ('../autoindex_header.html');
 ?>
 		<DIV id=page>
 			<DIV class=post>
-				<H2 class=title><?php echo PAGE_TITLE; ?></H2>
+				<H2 class=title>Input parameters</H2>
 				<DIV class=entry>
 					<FORM method=get>
 					<TABLE>
@@ -316,9 +317,9 @@ foreach ($versions as $ver => $paths)
 {
 	$optlabel = $ver;
 	if (array_key_exists ('filtertest', $paths))
-		$optlabel .= ' (with optimizer steps)';
+		$optlabel .= ' (with optimizer debugging)';
 	echo "<OPTION value='${ver}'";
-	if ($ver == $req_ver)
+	if ($ver == ($req_ver ?? DEFAULT_VER))
 		echo ' selected';
 	echo ">${optlabel}</OPTION>\n";
 }
@@ -484,6 +485,33 @@ function detect_graphs (string $text): array
 	return $ret;
 }
 
+function restyle_libpcap_graph (string $graphdef): string
+{
+	# Do not change the default edge type to "ortho", it does not look well.
+	# Undo explicit node shapes and set the default the same as in Radare2.
+	$ret = preg_replace ('/^([[:space:]]*block.+ \[)shape=ellipse, /m', '\1', $graphdef);
+	$ret = preg_replace ('/^(digraph BPF {)$/m', "\\1\n        node [shape=box fontname=\"Courier\"];", $ret);
+	# Colourize the edges same as in Radare2, but keep the labels.
+	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[label="T")(\])/m', '\1 color="#13a10e"\2', $ret);
+	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[label="F")(\])/m', '\1 color="#c50f1f"\2', $ret);
+	# Align all node label text to the left.
+	$ret = preg_replace ('/\\\\n/', '\\\\l', $ret);
+	$ret = preg_replace ('/^([[:space:]]*block.+ \[.+ label="[^"]+)(")/m', '\1\\\\l\2', $ret);
+	# Let Graphviz decide where to place incoming edges arrows, so they don't jam as much.
+	$ret = preg_replace ('/^([[:space:]].+:s. -> .+):n /m', '\1 ', $ret);
+	return $ret;
+}
+
+function restyle_r2_graph (string $graphdef): string
+{
+	# Drop the default background.
+	$ret = preg_replace ('/^([[:space:]]*graph \[)bgcolor=azure /m', '\1', $graphdef);
+	# Label the coloured true/false edges for consistency with libpcap format.
+	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[color="#13a10e")(];)/m', '\1 xlabel="T"\2', $ret);
+	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[color="#c50f1f")(];)/m', '\1 xlabel="F"\2', $ret);
+	return $ret;
+}
+
 function run_dot (string $graphdef): string
 {
 	list ($stdout, $stderr) = pipe_process (array (DOT_BIN, '-Tsvg'), $graphdef);
@@ -560,6 +588,7 @@ function r2_graph (string $bytecode): string
 			'-q',
 			'-a', 'bpf.mr', # Not the Capstone BPF engine.
 			'-e', 'anal.cc=reg', # Squelch a warning.
+			'-e', 'asm.cmt.col=0', # Condense horizontally.
 			'-c', 'af',
 			'-c', 'agfd',
 			'stdin://'
@@ -609,10 +638,10 @@ function process_request (array $paths, string $req_dlt_name, string $req_filter
 		$libpcap_after = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-d', '--', $req_filter), $req_dlt_name));
 		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($paths['tcpdump'], '-Oddd', '--', $req_filter), $req_dlt_name));
 		$r2_disasm_before = r2_disasm ($bytecode_before);
-		$r2_graph_before = inline_img (run_dot (r2_graph ($bytecode_before)));
+		$r2_graph_before = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_before))));
 		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($paths['tcpdump'], '-ddd', '--', $req_filter), $req_dlt_name));
 		$r2_disasm_after = r2_disasm ($bytecode_after);
-		$r2_graph_after = inline_img (run_dot (r2_graph ($bytecode_after)));
+		$r2_graph_after = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_after))));
 		if (array_key_exists ('filtertest', $paths))
 		{
 			$graphs = detect_graphs (run_filtertest ($paths['filtertest'], $req_dlt_name, $req_filter));
@@ -622,7 +651,7 @@ function process_request (array $paths, string $req_dlt_name, string $req_filter
 				foreach ($graphs as $title => $deftext)
 				{
 					$optimizer_steps .= '<H3 class=subtitle>' . htmlentities ($title) . "</H3>\n";
-					$optimizer_steps .= inline_img (run_dot ($deftext));
+					$optimizer_steps .= inline_img (run_dot (restyle_libpcap_graph ($deftext)));
 				}
 			}
 		}
@@ -630,41 +659,41 @@ function process_request (array $paths, string $req_dlt_name, string $req_filter
 	finally
 	{
 		echo <<<"ENDOFTEXT"
-		<H2 class=title>Packet-matching code</H2>
+		<H2 class=title>Final packet-matching code</H2>
 		<DIV class=entry>
 		<TABLE>
 			<TR>
 				<TD>
-					<H3 class=subtitle>before optimization (libpcap dump)</H3>
+					<H3 class=subtitle>without optimization (libpcap dump)</H3>
 					<PRE>${libpcap_before}</PRE>
 				</TD>
 				<TD>
-					<H3 class=subtitle>after optimization (libpcap dump)</H3>
+					<H3 class=subtitle>with optimization (libpcap dump)</H3>
 					<PRE>${libpcap_after}</PRE>
 				</TD>
 			</TR>
 			<TR>
 				<TD colspan=2>
-					<H3 class=subtitle>before optimization (Radare2 disassembly)</H3>
+					<H3 class=subtitle>without optimization (Radare2 bytecode disassembly)</H3>
 					<PRE>${r2_disasm_before}</PRE>
 				</TD>
 			</TR>
 			<TR>
 				<TD colspan=2>
-					<H3 class=subtitle>after optimization (Radare2 disassembly)</H3>
+					<H3 class=subtitle>with optimization (Radare2 bytecode disassembly)</H3>
 					<PRE>${r2_disasm_after}</PRE>
 				</TD>
 			</TR>
 		</TABLE>
 		</DIV>
 
-		<H2 class=title>Control flow graph</H2>
+		<H2 class=title>Final control flow graph (Radare2)</H2>
 		<DIV class=entry>
-			<H3 class=subtitle>before optimization (Radare2 graph)</H3>
+			<H3 class=subtitle>without optimization</H3>
 			<P>
 				${r2_graph_before}
 			</P>
-			<H3 class=subtitle>after optimization (Radare2 graph)</H3>
+			<H3 class=subtitle>with optimization</H3>
 			<P>
 				${r2_graph_after}
 			</P>
@@ -673,7 +702,7 @@ ENDOFTEXT;
 
 		if ($optimizer_steps !== NULL)
 			echo <<<"ENDOFTEXT"
-		<H2 class=title>Optimizer steps</H2>
+		<H2 class=title>Optimization step-by-step (libpcap)</H2>
 		<DIV class=entry>
 			${optimizer_steps}
 		</DIV>
