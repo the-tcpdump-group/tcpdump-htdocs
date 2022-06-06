@@ -655,10 +655,10 @@ function process_request (array $paths, string $req_dlt_name, string $req_filter
 	try
 	{
 		$libpcap_before = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-Od', '--', $req_filter), $req_dlt_name));
-		$libpcap_after = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-d', '--', $req_filter), $req_dlt_name));
 		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($paths['tcpdump'], '-Oddd', '--', $req_filter), $req_dlt_name));
 		$r2_disasm_before = r2_disasm ($bytecode_before);
 		$r2_graph_before = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_before))));
+		$libpcap_after = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-d', '--', $req_filter), $req_dlt_name));
 		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($paths['tcpdump'], '-ddd', '--', $req_filter), $req_dlt_name));
 		$r2_disasm_after = r2_disasm ($bytecode_after);
 		$r2_graph_after = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_after))));
