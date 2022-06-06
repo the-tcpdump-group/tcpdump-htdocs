@@ -1,5 +1,7 @@
 <?php
 
+define ('HEADER_FILE', '../autoindex_header.html');
+define ('FOOTER_FILE', '../autoindex_footer.html');
 define ('PAGE_TITLE', 'BPF Exam');
 define ('VER_INPUT_NAME', 'ver');
 define ('DLT_INPUT_NAME', 'dlt');
@@ -257,6 +259,13 @@ ENDOFTEXT;
 	exit;
 }
 
+function read_file (string $filename): string
+{
+	if (FALSE === $ret = @file_get_contents ($filename))
+		fail (500);
+	return $ret;
+}
+
 if ($_SERVER['REQUEST_METHOD'] != 'GET')
 	fail (405);
 $req_ver = array_fetch ($_REQUEST, VER_INPUT_NAME, NULL);
@@ -296,7 +305,12 @@ PRE.stderr {
 	</HEAD>
 	<BODY>
 <?php
-readfile ('../autoindex_header.html');
+echo preg_replace
+(
+	sprintf ('@<li>(<a href="%s/">)@', dirname ($_SERVER['SCRIPT_NAME'])),
+	'<li class=current_page_item>$1',
+	read_file (HEADER_FILE)
+);
 ?>
 		<DIV id=page>
 			<DIV class=post>
@@ -727,7 +741,7 @@ if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 		</DIV>
 <?php
 ob_end_flush();
-readfile ('../autoindex_footer.html');
+echo read_file (FOOTER_FILE);
 ?>
 	</BODY>
 </HTML>
