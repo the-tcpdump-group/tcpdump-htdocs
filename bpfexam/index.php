@@ -226,6 +226,12 @@ $dltlist = array
 	),
 );
 
+# Throw this to indicate that the message has already been HTML-escaped
+# (Radare2 escapes both stdout and stderr in HTML output mode).
+class EscapedException extends Exception
+{
+}
+
 function array_fetch (array $a, $key, $dfl)
 {
 	return array_key_exists ($key, $a) ? $a[$key] : $dfl;
@@ -433,7 +439,7 @@ function run_tcpdump (array $argv, string $dlt_name): string
 	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
 	$stderr = preg_replace ('/^Warning: interface names might be incorrect\n/', '', $stderr);
 	if ($stderr != '')
-		throw new Exception (htmlentities ($stderr));
+		throw new Exception ($stderr);
 	return $stdout;
 }
 
@@ -452,7 +458,7 @@ function run_filtertest ($filtertest_bin, $dlt_name, $filter): string
 		''
 	);
 	if ($stderr != '')
-		throw new Exception (htmlentities ($stderr));
+		throw new Exception ($stderr);
 	return $stdout;
 }
 
@@ -477,7 +483,7 @@ function detect_graphs (string $text): array
 			break;
 		case S_TITLE:
 			if ($line !== 'digraph BPF {')
-				throw new Exception (htmlentities ("FSM error: unexpected line ${line}"));
+				throw new Exception ("FSM error: unexpected line ${line}");
 			$deflines = array ($line);
 			$state = S_DEF;
 			break;
@@ -530,7 +536,7 @@ function run_dot (string $graphdef): string
 {
 	list ($stdout, $stderr) = pipe_process (array (DOT_BIN, '-Tsvg'), $graphdef);
 	if ($stderr != '')
-		throw new Exception (htmlentities ($stderr));
+		throw new Exception ($stderr);
 	return $stdout;
 }
 
@@ -546,7 +552,7 @@ function bpf_ddd2bin (string $ddd): string
 	# The instruction counter.
 	$line = array_shift ($lines);
 	if (1 !== preg_match ('/^\d+$/', $line, $m))
-		throw new Exception (htmlentities ("malformed instruction counter line: '${line}'"));
+		throw new Exception ("malformed instruction counter line: '${line}'");
 	$declared = (int) $m[0];
 	if ($declared < 1)
 		throw new Exception ("instruction counter ${declared} declared too low");
@@ -557,7 +563,7 @@ function bpf_ddd2bin (string $ddd): string
 	foreach ($lines as $line)
 	{
 		if (1 !== preg_match ('/^(?P<opcode>\d+) (?P<jt>\d+) (?P<jf>\d+) (?P<k>\d+)$/', $line, $m))
-			throw new Exception (htmlentities ("malformed instruction line: '${line}'"));
+			throw new Exception ("malformed instruction line: '${line}'");
 		# 16-bit, 8-bit, 8-bit, 32-bit; nCCN for LE, vCCV for LE.
 		$ret .= pack ('vCCV', $m['opcode'], $m['jt'], $m['jf'], $m['k']);
 	}
@@ -588,7 +594,7 @@ function r2_disasm (string $bytecode): string
 		$bytecode
 	);
 	if ($stderr != '')
-		throw new Exception ($stderr);
+		throw new EscapedException ($stderr);
 	return $stdout;
 }
 
@@ -610,7 +616,7 @@ function r2_graph (string $bytecode): string
 		$bytecode
 	);
 	if ($stderr != '')
-		throw new Exception ($stderr);
+		throw new EscapedException ($stderr);
 	return $stdout;
 }
 
@@ -731,9 +737,13 @@ if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 	{
 		process_request ($versions[$req_ver], $req_dlt_name, $req_filter);
 	}
-	catch (Exception $e)
+	catch (EscapedException $e)
 	{
 		echo '<PRE class=stderr>' . $e->getMessage() . '</PRE>';
+	}
+	catch (Exception $e)
+	{
+		echo '<PRE class=stderr>' . htmlentities ($e->getMessage()) . '</PRE>';
 	}
 }
 ?>
