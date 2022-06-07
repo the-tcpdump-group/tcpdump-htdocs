@@ -11,6 +11,9 @@ define ('DEFAULT_VER', '1.10.1');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('DEFAULT_FILTER', 'tcp or udp port 53 or 123');
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
+# Enforce an RPS limit for requests that submit the form, as these spawn
+# external processes, which together take a while (0.5s to 1.0s) to complete.
+define ('MAX_RPS_LIMIT', 1.0);
 define ('RADARE2_BIN', '/usr/bin/r2');
 define ('DOT_BIN', '/usr/bin/dot');
 
@@ -622,18 +625,29 @@ function r2_graph (string $bytecode): string
 
 function limit_request_rate(): void
 {
-	# Enforce at lest 1 second between requests that spawn tcpdump.
-	if (file_exists (TIMESTAMP_FILE))
-	{
-		$now = time();
-		if (FALSE === $mtime = @filemtime (TIMESTAMP_FILE))
-			fail (500);
-		if ($mtime > $now)
-			fail (500);
-		if ($now - $mtime < 1)
-			fail (429);
-	}
-	if (! @touch (TIMESTAMP_FILE))
+	if (FALSE === $f = fopen (TIMESTAMP_FILE, 'c+'))
+		fail (500);
+	if (FALSE === flock ($f, LOCK_EX))
+		fail (500);
+	if (FALSE === $prev_txt = stream_get_contents ($f, 256))
+		fail (500);
+	if ($prev_txt == '')
+		$prev_txt = '0';
+	$prev = (float) $prev_txt;
+	$now = gettimeofday (TRUE);
+	if ($prev > $now)
+		fail (500);
+	if ($now - $prev < 1.0 / MAX_RPS_LIMIT)
+		fail (429);
+	# It is certainly fine to proceed.  Update the timestamp and release
+	# the lock early so any concurrent requests can bounce without a delay.
+	if (FALSE === ftruncate ($f, 0))
+		fail (500);
+	if (FALSE === rewind ($f))
+		fail (500);
+	if (FALSE === fwrite ($f, $now))
+		fail (500);
+	if (FALSE === fclose ($f))
 		fail (500);
 }
 
