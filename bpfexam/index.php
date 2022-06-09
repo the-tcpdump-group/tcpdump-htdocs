@@ -9,7 +9,7 @@ define ('EXPR_INPUT_NAME', 'filter');
 define ('SUBMIT_INPUT_NAME', 'examine');
 define ('DEFAULT_VER', '1.10.1');
 define ('DEFAULT_DLT', 'EN10MB');
-define ('DEFAULT_FILTER', 'tcp or udp port 53 or 123');
+define ('DEFAULT_FILTER', 'icmp or udp port 53 or bootpc');
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 # Enforce an RPS limit for requests that submit the form, as these spawn
 # external processes, which together take a while (0.5s to 1.0s) to complete.
