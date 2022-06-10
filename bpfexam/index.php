@@ -21,6 +21,12 @@ define ('DOT_BIN', '/usr/bin/dot');
 # using "./configure --enable-optimizer-dbg"
 $versions = array
 (
+	'master' => array
+	(
+		'descr' => 'git master snapshot',
+		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-git',
+		'filtertest' => '/usr/local/bin/filtertest-git-optdebug',
+	),
 	'1.10.1' => array
 	(
 		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.1',
@@ -49,8 +55,9 @@ $versions = array
 	),
 	# libpcap 1.9.1 in Ubuntu 20.04 (/usr/sbin/tcpdump, v4.9.3)
 	# libpcap 1.10.0 in Debian 11 (/usr/bin/tcpdump, v4.99.0)
-	'random (OS default)' => array
+	'random' => array
 	(
+		'descr' => 'random (OS default)',
 		'tcpdump' => 'tcpdump',
 	),
 );
@@ -336,10 +343,10 @@ printf
 );
 echo "<TD>\n";
 printf ("<SELECT name='%s' id='%s' tabindex=100>\n", VER_INPUT_NAME, VER_INPUT_NAME);
-foreach ($versions as $ver => $paths)
+foreach ($versions as $ver => $vdata)
 {
-	$optlabel = $ver;
-	if (array_key_exists ('filtertest', $paths))
+	$optlabel = array_fetch ($vdata, 'descr', $ver);
+	if (array_key_exists ('filtertest', $vdata))
 		$optlabel .= ' (with optimizer debugging)';
 	echo "<OPTION value='${ver}'";
 	if ($ver == ($req_ver ?? DEFAULT_VER))
@@ -656,7 +663,7 @@ function inline_img (string $data): string
 	return '<IMG src="data:image/svg+xml;base64,' . base64_encode ($data) . '" width="100%">';
 }
 
-function process_request (array $paths, string $req_dlt_name, string $req_filter): void
+function process_request (array $vdata, string $req_dlt_name, string $req_filter): void
 {
 	$libpcap_before =
 		$libpcap_after =
@@ -668,17 +675,17 @@ function process_request (array $paths, string $req_dlt_name, string $req_filter
 	$optimizer_steps = NULL;
 	try
 	{
-		$libpcap_before = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-Od', '--', $req_filter), $req_dlt_name));
-		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($paths['tcpdump'], '-Oddd', '--', $req_filter), $req_dlt_name));
+		$libpcap_before = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-Od', '--', $req_filter), $req_dlt_name));
+		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-Oddd', '--', $req_filter), $req_dlt_name));
 		$r2_disasm_before = r2_disasm ($bytecode_before);
 		$r2_graph_before = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_before))));
-		$libpcap_after = htmlentities (run_tcpdump (array ($paths['tcpdump'], '-d', '--', $req_filter), $req_dlt_name));
-		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($paths['tcpdump'], '-ddd', '--', $req_filter), $req_dlt_name));
+		$libpcap_after = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-d', '--', $req_filter), $req_dlt_name));
+		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-ddd', '--', $req_filter), $req_dlt_name));
 		$r2_disasm_after = r2_disasm ($bytecode_after);
 		$r2_graph_after = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_after))));
-		if (array_key_exists ('filtertest', $paths))
+		if (array_key_exists ('filtertest', $vdata))
 		{
-			$graphs = detect_graphs (run_filtertest ($paths['filtertest'], $req_dlt_name, $req_filter));
+			$graphs = detect_graphs (run_filtertest ($vdata['filtertest'], $req_dlt_name, $req_filter));
 			if (count ($graphs))
 			{
 				$optimizer_steps = '';
