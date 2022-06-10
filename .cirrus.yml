@@ -10,8 +10,10 @@ task:
     DEBIAN_FRONTEND: noninteractive
   script:
     - apt-get -qy update >/dev/null
-    - apt-get -qy install git php-cli >/dev/null
+    - apt-get -qy install git php-cli shellcheck >/dev/null
     - ./regen_html_pages.sh
     - git status
     - test "$(git status --porcelain | wc -l)" -eq 0
     - find . -name '*.php' | xargs -L1 php --syntax-check
+    - shellcheck regen_man_pages.sh
+    - shellcheck regen_html_pages.sh
