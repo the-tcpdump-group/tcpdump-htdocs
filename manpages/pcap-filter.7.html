@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 4 January 2022<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 12 June 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -365,20 +365,69 @@ True if the packet is an IPv4 packet (see
 <B>ip</B>(4P))
 
 of protocol type <I>protocol</I>.
-<I>Protocol</I> can be a number or one of the names
-<B>icmp</B>, <B>icmp6</B>, <B>igmp</B>, <B>igrp</B>, <B>pim</B>, <B>ah</B>,
-<B>esp</B>, <B>vrrp</B>, <B>sctp</B>, <B>udp</B>, or <B>tcp</B>.
-Note that the identifiers <B>tcp</B>, <B>udp</B>, <B>sctp</B> and <B>icmp</B>
+<I>Protocol</I> can be a number or one of the names recognized by
+<B>getprotobyname</B>(3)
+
+(as in e.g. `<B>getent</B>(1) protocols'), typically from an entry in
+<I>/etc/protocols</I>,
+
+for example:
+<B>ah</B>,
+
+<B>esp</B>,
+
+<B>eigrp</B>
+
+(only in Linux, FreeBSD and NetBSD),
+<B>icmp</B>,
+
+<B>igmp</B>,
+
+<B>igrp</B>
+
+(only in OpenBSD),
+<B>pim</B>,
+
+<B>sctp</B>,
+
+<B>tcp</B>,
+
+<B>udp</B>
+
+or
+<B>vrrp</B>.
+
+Note that most of these example identifiers
 are also keywords and must be escaped via backslash (\).
 Note that this primitive does not chase the protocol header chain.
+<DT><B>icmp</B><DD>
+Abbreviation for:
+
+<PRE>
+<B>ip proto</B> 1
+</PRE>
+
+
 <DT><B>ip6 proto </B><I>protocol</I><DD>
 True if the packet is an IPv6 packet of protocol type <I>protocol</I>.
+Note that the IPv6 variant of ICMP uses a different protocol number, named
+<B>ipv6-icmp</B>
+
+in Linux, FreeBSD, NetBSD, OpenBSD, illumos and Solaris.
 Note that this primitive does not chase the protocol header chain.
+<DT><B>icmp6</B><DD>
+Abbreviation for:
+
+<PRE>
+<B>ip6 proto</B> 58
+</PRE>
+
+
 <DT><B>proto </B><I>protocol</I><DD>
 True if the packet is an IPv4 or IPv6 packet of protocol type
 <I>protocol</I>.  Note that this primitive does not chase the protocol
 header chain.
-<DT><B>tcp</B>, <B>udp</B>, <B>icmp</B>, <B>sctp</B><DD>
+<DT><B>ah</B>, <B>esp</B>, <B>pim</B>, <B>sctp</B>, <B>tcp</B>, <B>udp</B><DD>
 Abbreviations for:
 
 <PRE>
@@ -956,10 +1005,62 @@ To access data inside the packet, use the following syntax:
 </PRE>
 
 
-<I>Proto</I> is one of <B>ether, fddi, tr, wlan, ppp, slip, link,
-ip, arp, rarp, tcp, udp, sctp, icmp, ip6</B> or <B>radio</B>, and
+<I>Proto</I>
+
+is one of
+<B>arp</B>,
+
+<B>ether</B>,
+
+<B>fddi</B>,
+
+<B>icmp</B>,
+
+<B>icmp6</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>link</B>,
+
+<B>ppp</B>,
+
+<B>radio</B>,
+
+<B>rarp</B>,
+
+<B>sctp</B>,
+
+<B>slip</B>,
+
+<B>tcp</B>,
+
+<B>tr</B>,
+
+<B>udp</B>
+
+or
+<B>wlan</B>,
+
+and
 indicates the protocol layer for the index operation.
-(<B>ether, fddi, wlan, tr, ppp, slip</B> and <B>link</B> all refer to the
+(<B>ether</B>,
+
+<B>fddi</B>,
+
+<B>link</B>,
+
+<B>ppp</B>,
+
+<B>slip</B>,
+
+<B>tr</B>
+
+and
+<B>wlan</B>
+
+all refer to the
 link layer. <B>radio</B> refers to the &quot;radio header&quot; added to some
 802.11 captures.)
 Note that <B>tcp</B>, <B>udp</B> and other upper-layer protocol types only
@@ -1236,7 +1337,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 17:30:41 GMT, January 07, 2022
+This HTML man page was generated at 16:35:13 GMT, June 12, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
