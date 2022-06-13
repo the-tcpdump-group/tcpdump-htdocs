@@ -574,7 +574,7 @@ function bpf_ddd2bin (string $ddd): string
 	{
 		if (1 !== preg_match ('/^(?P<opcode>\d+) (?P<jt>\d+) (?P<jf>\d+) (?P<k>\d+)$/', $line, $m))
 			throw new Exception ("malformed instruction line: '${line}'");
-		# 16-bit, 8-bit, 8-bit, 32-bit; nCCN for LE, vCCV for LE.
+		# 16-bit, 8-bit, 8-bit, 32-bit; nCCN for BE, vCCV for LE.
 		$ret .= pack ('vCCV', $m['opcode'], $m['jt'], $m['jf'], $m['k']);
 	}
 	return $ret;
@@ -590,7 +590,7 @@ function r2_disasm (string $bytecode): string
 			# These options require either Radare2 5.7.1 (after it is released)
 			# or a recent build of the master branch.
 			'-q',
-			'-a', 'bpf.mr', # Not the Capstone BPF engine.
+			'-a', 'bpf.mr', # Not the Capstone eBPF engine.
 			'-e', 'scr.utf8=true', # Defaults to ASCII when LANG=C.
 			'-e', 'scr.utf8.curvy=true',
 			'-e', 'scr.html=true',
