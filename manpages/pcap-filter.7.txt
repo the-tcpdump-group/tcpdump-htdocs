@@ -206,11 +206,11 @@ DESCRIPTION
               type  protocol.   Protocol  can  be a number or one of the names
               recognized by getprotobyname(3) (as in  e.g.  `getent(1)  proto-
               cols'),  typically from an entry in /etc/protocols, for example:
-              ah, esp, eigrp (only in Linux, FreeBSD and NetBSD), icmp,  igmp,
-              igrp  (only in OpenBSD), pim, sctp, tcp, udp or vrrp.  Note that
-              most of these example identifiers are also keywords and must  be
-              escaped  via  backslash  (\).  Note that this primitive does not
-              chase the protocol header chain.
+              ah, esp, eigrp (only in Linux, FreeBSD, NetBSD,  DragonFly  BSD,
+              and  macOS), icmp, igmp, igrp (only in OpenBSD), pim, sctp, tcp,
+              udp or vrrp.  Note that most of these  example  identifiers  are
+              also  keywords and must be escaped via backslash (\).  Note that
+              this primitive does not chase the protocol header chain.
 
        icmp   Abbreviation for:
                    ip proto 1
@@ -218,9 +218,9 @@ DESCRIPTION
        ip6 proto protocol
               True if the packet is an IPv6 packet of protocol type  protocol.
               Note  that  the  IPv6  variant of ICMP uses a different protocol
-              number, named ipv6-icmp in Linux, FreeBSD, NetBSD, OpenBSD,  il-
-              lumos  and Solaris.  Note that this primitive does not chase the
-              protocol header chain.
+              number, named ipv6-icmp in AIX, FreeBSD, illumos, Linux,  macOS,
+              NetBSD,  OpenBSD, Solaris and Windows.  Note that this primitive
+              does not chase the protocol header chain.
 
        icmp6  Abbreviation for:
                    ip6 proto 58
