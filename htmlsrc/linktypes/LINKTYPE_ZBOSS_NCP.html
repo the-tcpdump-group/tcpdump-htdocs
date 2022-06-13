@@ -25,16 +25,13 @@
 </pre>
                 <h3>Description</h3>
 <p>
-All multi-byte numerical fields are little-endian.
+The Signature field contains ASCII string "ZBNCP".
 </p>
 <p>
-The signature field contains ASCII string "ZBNCP".
+The Version field is set to 0 (only this value is defined now).
 </p>
 <p>
-The version field is set to 0 (only this value is defined now).
-</p>
-<p>
-The type field is set to 6.
+The Type field is set to 6.
 </p>
 <h4>Options bitfield</h4>
 
@@ -59,6 +56,14 @@ The type field is set to 6.
         <code>b03</code>&ndash;<code>b07</code> are reserved for future use
     </li>
 </ul>
+<h4>Payload</h4>
+<p>
+The payload begins with the "Low-level protocol" header, as described in
+section 3.2 of
+<a href="https://cloud.dsr-corporation.com/index.php/s/3isHzaNTTgtJebn">ZBOSS
+NCP Serial Protocol</a>, so that the first two bytes of the payload are
+<code>0xde</code> <code>0xad</code>, in order.
+</p>
             </div>
             <!-- End of LINKTYPE_ZBOSS_NCP section -->
             </div>
