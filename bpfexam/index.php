@@ -437,6 +437,20 @@ function pipe_process (array $argv, string $input): array
 	return array ($stdout, $stderr);
 }
 
+function on_stderr_throw (string $stdout, string $stderr): string
+{
+	if ($stderr != '')
+		throw new Exception ($stderr);
+	return $stdout;
+}
+
+function on_stderr_throw_escaped (string $stdout, string $stderr): string
+{
+	if ($stderr != '')
+		throw new EscapedException ($stderr);
+	return $stdout;
+}
+
 function run_tcpdump (array $argv, string $dlt_name): string
 {
 	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
@@ -448,9 +462,7 @@ function run_tcpdump (array $argv, string $dlt_name): string
 	list ($stdout, $stderr) = pipe_process ($argv, gen_pcap_header ($dlt_name));
 	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
 	$stderr = preg_replace ('/^Warning: interface names might be incorrect\n/', '', $stderr);
-	if ($stderr != '')
-		throw new Exception ($stderr);
-	return $stdout;
+	return on_stderr_throw ($stdout, $stderr);
 }
 
 function run_filtertest ($filtertest_bin, $dlt_name, $filter): string
@@ -467,9 +479,7 @@ function run_filtertest ($filtertest_bin, $dlt_name, $filter): string
 		),
 		''
 	);
-	if ($stderr != '')
-		throw new Exception ($stderr);
-	return $stdout;
+	return on_stderr_throw ($stdout, $stderr);
 }
 
 define ('S_SKIP', 1);
@@ -545,9 +555,7 @@ function restyle_r2_graph (string $graphdef): string
 function run_dot (string $graphdef): string
 {
 	list ($stdout, $stderr) = pipe_process (array (DOT_BIN, '-Tsvg'), $graphdef);
-	if ($stderr != '')
-		throw new Exception ($stderr);
-	return $stdout;
+	return on_stderr_throw ($stdout, $stderr);
 }
 
 # Parse "tcpdump -ddd" format and return binary BPF instructions.
@@ -603,9 +611,7 @@ function r2_disasm (string $bytecode): string
 		),
 		$bytecode
 	);
-	if ($stderr != '')
-		throw new EscapedException ($stderr);
-	return $stdout;
+	return on_stderr_throw_escaped ($stdout, $stderr);
 }
 
 function r2_graph (string $bytecode): string
@@ -625,9 +631,7 @@ function r2_graph (string $bytecode): string
 		),
 		$bytecode
 	);
-	if ($stderr != '')
-		throw new EscapedException ($stderr);
-	return $stdout;
+	return on_stderr_throw_escaped ($stdout, $stderr);
 }
 
 function limit_request_rate(): void
