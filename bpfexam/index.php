@@ -255,6 +255,7 @@ function fail (int $status): void
 		400 => 'Bad Request',
 		405 => 'Method Not Allowed',
 		429 => 'Too Many Requests',
+		500 => 'Internal Server Error',
 	);
 	if (! array_key_exists ($status, $statusmap))
 		$status = 500;
@@ -429,7 +430,8 @@ function pipe_process (array $argv, string $input): array
 	# a resource that is indistinguishable from a successful invocation.
 	if ($po === FALSE)
 		throw new Exception ("failed to run the ${bin} binary!");
-	fwrite ($pipes[0], $input);
+	if (FALSE === fwrite ($pipes[0], $input))
+		throw new Exception ("failed to write to a child process stdin");
 	fclose ($pipes[0]);
 	$stdout = stream_get_contents ($pipes[1]);
 	$stderr = stream_get_contents ($pipes[2]);
@@ -473,8 +475,8 @@ function run_filtertest ($filtertest_bin, $dlt_name, $filter): string
 		(
 			$filtertest_bin,
 			'-g',
-			$dlt_name,
 			'--',
+			$dlt_name,
 			$filter
 		),
 		''
@@ -622,7 +624,7 @@ function r2_graph (string $bytecode): string
 		(
 			RADARE2_BIN,
 			'-q',
-			'-a', 'bpf.mr', # Not the Capstone BPF engine.
+			'-a', 'bpf.mr', # Not the Capstone eBPF engine.
 			'-e', 'anal.cc=reg', # Squelch a warning.
 			'-e', 'asm.cmt.col=0', # Condense horizontally.
 			'-c', 'af',
