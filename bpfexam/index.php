@@ -331,6 +331,59 @@ echo preg_replace
 ?>
 		<DIV id=page>
 			<DIV class=post>
+				<H2 class=title>Overview</H2>
+				<DIV class=entry>
+					<P>
+						This tool, <EM><?php echo PAGE_TITLE; ?></EM>, illustrates the
+						theory of Berkeley Packet Filter compilation and the practice of its
+						reference implementation in libpcap. It can be used for
+						troubleshooting and debugging as well. To understand what it does,
+						just press the "<?php echo SUBMIT_INPUT_NAME; ?>" button
+						below, see some outputs and continue reading.
+					</P>
+					<P>
+						Compilation of a BPF expression consists of several steps. The first
+						step translates the expression string into a
+						<A class=away href="https://en.wikipedia.org/wiki/Control-flow_graph">control
+						flow graph</A> (CFG). The second step is conditional, as specified
+						using the <code>optimize</code> argument to
+						<A href="/manpages/pcap_compile.3pcap.html"><B>pcap_compile</B></A>(3PCAP);
+						it optimizes the CFG as discussed in detail in
+						<A class=away href="https://sharkfestus.wireshark.org/sharkfest.11/presentations/McCanne-Sharkfest'11_Keynote_Address.pdf">this
+						document</A>. The third step translates the CFG into binary
+						bytecode, which can be used by the OS kernel.
+					</P>
+					<P>
+						Given a set of input parameters below,
+						<EM><?php echo PAGE_TITLE; ?></EM> displays the compiled filter
+						(also known as "filter program" or "packet-matching code") as a
+						sequence of BPF instructions in two formats: an output of
+						<code>tcpdump -d</code> (which is explained in detail in
+						<A href="/papers/bpf-usenix93.pdf">this document</A>) and a
+						disassembly produced by Radare2. It also tries to reconstruct the
+						final CFG using Radare2 and Graphviz. All these outputs stand for
+						the unoptimized compilation of the filter.
+					</P>
+					<P>
+						Then, if the optimization attempt have not failed (which can happen,
+						for example, because the filter rejects all packets),
+						<EM><?php echo PAGE_TITLE; ?></EM> displays respective
+						outputs for the optimized compilation plus a snapshot of the CFG
+						for every step of the optimization procedure. The procedure may be
+						internally skipped by libpcap code for some link-layer header types
+						or filter keywords, in which case the unoptimized and the optimized
+						outputs are exactly the same and there are no step-by-step CFG
+						snapshots.
+					</P>
+					<P>
+						The default filter expression is simple, but representative of
+						everyday BPF usage. You are welcome to experiment with different
+						filter expressions and link-layer header types. If you have any
+						feedback about this tool, please send it to the
+						<A href="/#mailing-lists">mailing list</A>.
+					</P>
+				</DIV>
+
 				<H2 class=title>Input parameters</H2>
 				<DIV class=entry>
 					<FORM method=get>
