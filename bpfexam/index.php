@@ -365,7 +365,7 @@ echo preg_replace
 						the unoptimized compilation of the filter.
 					</P>
 					<P>
-						Then, if the optimization attempt have not failed (which can happen,
+						Then, if the optimization attempt has not failed (which can happen,
 						for example, because the filter rejects all packets),
 						<EM><?php echo PAGE_TITLE; ?></EM> displays respective
 						outputs for the optimized compilation plus a snapshot of the CFG
