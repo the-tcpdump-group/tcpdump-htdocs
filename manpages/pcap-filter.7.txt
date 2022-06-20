@@ -217,18 +217,20 @@ DESCRIPTION
 
        ip6 proto protocol
               True if the packet is an IPv6 packet of protocol type  protocol.
-              Note  that  the  IPv6  variant of ICMP uses a different protocol
-              number, named ipv6-icmp in AIX, FreeBSD, illumos, Linux,  macOS,
-              NetBSD,  OpenBSD, Solaris and Windows.  Note that this primitive
-              does not chase the protocol header chain.
+              (See  `ip  proto' above for the meaning of protocol.)  Note that
+              the IPv6 variant of ICMP uses a different protocol number, named
+              ipv6-icmp  in AIX, FreeBSD, illumos, Linux, macOS, NetBSD, Open-
+              BSD, Solaris and Windows.  Note that  this  primitive  does  not
+              chase the protocol header chain.
 
        icmp6  Abbreviation for:
                    ip6 proto 58
 
        proto protocol
-              True if the packet is an IPv4 or IPv6 packet  of  protocol  type
-              protocol.   Note that this primitive does not chase the protocol
-              header chain.
+              True  if  the  packet is an IPv4 or IPv6 packet of protocol type
+              protocol.  (See `ip proto' above for the meaning  of  protocol.)
+              Note  that  this  primitive  does  not chase the protocol header
+              chain.
 
        ah, esp, pim, sctp, tcp, udp
               Abbreviations for:
@@ -237,24 +239,26 @@ DESCRIPTION
 
        ip6 protochain protocol
               True if the packet is IPv6 packet, and contains protocol  header
-              with type protocol in its protocol header chain.  For example,
+              with  type  protocol  in  its  protocol  header chain.  (See `ip
+              proto' above for the meaning of protocol.)  For example,
                    ip6 protochain 6
               matches any IPv6 packet with TCP protocol header in the protocol
-              header chain.  The packet may contain, for example,  authentica-
-              tion  header,  routing  header, or hop-by-hop option header, be-
-              tween IPv6 header and TCP header.  The BPF code emitted by  this
-              primitive  is  complex  and cannot be optimized by the BPF opti-
-              mizer code, and is not supported by filter engines in  the  ker-
+              header  chain.  The packet may contain, for example, authentica-
+              tion header, routing header, or hop-by-hop  option  header,  be-
+              tween  IPv6 header and TCP header.  The BPF code emitted by this
+              primitive is complex and cannot be optimized by  the  BPF  opti-
+              mizer  code,  and is not supported by filter engines in the ker-
               nel, so this can be somewhat slow, and may cause more packets to
               be dropped.
 
        ip protochain protocol
-              Equivalent to ip6 protochain protocol, but this is for IPv4.
+              Equivalent  to  ip6  protochain  protocol, but this is for IPv4.
+              (See `ip proto' above for the meaning of protocol.)
 
        protochain protocol
               True if the packet is an IPv4 or IPv6 packet  of  protocol  type
-              protocol.   Note  that this primitive chases the protocol header
-              chain.
+              protocol.   (See  `ip proto' above for the meaning of protocol.)
+              Note that this primitive chases the protocol header chain.
 
        ether broadcast
               True if the packet is an Ethernet broadcast packet.   The  ether
