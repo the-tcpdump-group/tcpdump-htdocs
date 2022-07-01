@@ -193,6 +193,9 @@ foreach ($taxonomy as $pname => $project)
 			continue;
 		$other_versions[] = sprintf ('<a href="%s%s">%s</a>', URI_PREFIX, $href, $v);
 	}
+	$see_also = count ($other_versions) ?
+		('see also: ' . implode (', ', $other_versions)) :
+		'only this version has this man page';
 
 	$toreplace = array
 	(
@@ -209,7 +212,7 @@ foreach ($taxonomy as $pname => $project)
 		array
 		(
 			"@(<H4>This man page documents ${pname} version .+)(.</H4>)@",
-			"\$1 (see also: " . implode (', ', $other_versions) . ")\$2"
+			"\$1 ($see_also)\$2"
 		),
 		array
 		(
