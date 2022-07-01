@@ -14,6 +14,7 @@ task:
     - ./regen_html_pages.sh
     - git status
     - test "$(git status --porcelain | wc -l)" -eq 0
-    - find . -name '*.php' | xargs -L1 php --syntax-check
+    - php --syntax-check bpfexam/index.php
+    - php --syntax-check manpages/restyle.php
     - shellcheck regen_man_pages.sh
     - shellcheck regen_html_pages.sh
