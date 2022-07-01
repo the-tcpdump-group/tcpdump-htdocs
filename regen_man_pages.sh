@@ -258,6 +258,11 @@ insertHTMLBoilerplate()
 	rm -f "$HBTMP"
 }
 
+in_repository()
+{
+	git cat-file -e HEAD:"${1:?}" >/dev/null 2>&1
+}
+
 produceHTML()
 {
 	infile=${1:?}
@@ -273,8 +278,8 @@ produceHTML()
 		stripIndexSection "$infile" | sed --file="$html_sedfile" > "$outfile"
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
-	git show "$outfile" >/dev/null 2>&1 || {
-		echo "Updated but not in repository: $outfile"
+	in_repository "$outfile" || {
+		echo "Generated, but not in the repository: $outfile"
 		return
 	}
 	git diff "$outfile" | tail --lines +5 | grep -E '^[-+]' | grep -E -q -v '^[-+]This HTML man page was generated at ' || {
@@ -320,6 +325,10 @@ produceTXT()
 	}
 	printTXTBoilerplate "$infile" > "$outfile"
 	man -E ascii "$infile" >> "$outfile"
+	in_repository "$outfile" || {
+		echo "Generated, but not in the repository: $outfile"
+		return
+	}
 	git diff "$outfile" | grep -E -q '^[-+]' && echo "Updated: $outfile"
 }
 
