@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 12 June 2022<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 3 July 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -989,19 +989,65 @@ Connect Ack, Release, or Release Done message.
 True if the packet is an ATM packet, for SunATM on Solaris, and is
 on a meta signaling circuit and is a Q.2931 Setup, Call Proceeding, Connect,
 Release, or Release Done message.
-<DT><I>expr relop expr</I><DD>
-True if the relation holds, where <I>relop</I> is one of &gt;, &lt;, &gt;=, &lt;=, =
-or ==, !=, and <I>expr</I> is an arithmetic expression composed of integer
-constants (expressed in standard C syntax), the normal binary operators
-[+, -, *, /, %, &amp;, |, ^, &lt;&lt;, &gt;&gt;], a length operator, and special packet data
+<DT><I>expr1 relop expr2</I><DD>
+True if the relation holds.  <I>Relop</I> is one of
+{<B>&gt;</B>,
+
+<B>&lt;</B>,
+
+<B>&gt;=</B>,
+
+<B>&lt;=</B>,
+
+<B>=</B>
+
+or
+<B>==</B>,
+
+<B>!=</B>}.
+
+Each of <I>expr1</I> and <I>expr2</I> is an arithmetic expression composed of
+integer constants (expressed in standard C syntax), the normal binary operators
+{<B>+</B>,
+
+<B>-</B>,
+
+<B>*</B>,
+
+<B>/</B>,
+
+<B>%</B>,
+
+<B>&amp;</B>,
+
+<B>|</B>,
+
+<B>^</B>,
+
+<B>&lt;&lt;</B>,
+
+<B>&gt;&gt;</B>},
+
+a length operator, and special packet data
 accessors.  Note that all comparisons are unsigned, so that, for example,
 0x80000000 and 0xffffffff are &gt; 0.
 <DT><DD>
-The % and ^ operators are currently only supported for filtering in the
-kernel on Linux with 3.7 and later kernels; on all other systems, if
+The
+<B>%</B>
+
+and
+<B>^</B>
+
+operators are currently only supported for filtering in the kernel on
+particular operating systems (for example: FreeBSD, Linux with 3.7 and later
+kernels, NetBSD); on all other systems (for example: AIX, illumos, Solaris,
+OpenBSD), if
 those operators are used, filtering will be done in user mode, which
 will increase the overhead of capturing packets and may cause more
 packets to be dropped.
+<DT><DD>
+The length operator, indicated by the keyword <B>len</B>, gives the
+length of the packet.
 <DT><DD>
 To access data inside the packet, use the following syntax:
 
@@ -1074,8 +1120,6 @@ The byte offset, relative to the indicated protocol layer, is
 given by <I>expr</I>.
 <I>Size</I> is optional and indicates the number of bytes in the
 field of interest; it can be either one, two, or four, and defaults to one.
-The length operator, indicated by the keyword <B>len</B>, gives the
-length of the packet.
 <P>
 For example, `<B>ether[</B>0<B>] &amp;</B> 1 <B>!=</B> 0' catches all multicast traffic.
 The expression `<B>ip[</B>0<B>] &amp;</B> 0xf <B>!=</B> 5'
@@ -1342,7 +1386,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 10:18:48 GMT, June 20, 2022
+This HTML man page was generated at 13:24:28 GMT, July 03, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

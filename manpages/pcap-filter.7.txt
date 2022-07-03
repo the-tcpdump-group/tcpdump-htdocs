@@ -647,35 +647,39 @@ DESCRIPTION
               is  on a meta signaling circuit and is a Q.2931 Setup, Call Pro-
               ceeding, Connect, Release, or Release Done message.
 
-       expr relop expr
-              True if the relation holds, where relop is one of >, <, >=,  <=,
-              =  or  ==,  !=, and expr is an arithmetic expression composed of
-              integer constants (expressed in standard C syntax),  the  normal
-              binary  operators [+, -, *, /, %, &, |, ^, <<, >>], a length op-
-              erator, and special packet data accessors.  Note that  all  com-
-              parisons  are  unsigned,  so  that,  for example, 0x80000000 and
-              0xffffffff are > 0.
+       expr1 relop expr2
+              True if the relation holds.  Relop is one of {>, <, >=, <=, = or
+              ==,  !=}.   Each  of expr1 and expr2 is an arithmetic expression
+              composed of integer constants (expressed in standard C  syntax),
+              the  normal binary operators {+, -, *, /, %, &, |, ^, <<, >>}, a
+              length operator, and special packet data accessors.   Note  that
+              all  comparisons  are unsigned, so that, for example, 0x80000000
+              and 0xffffffff are > 0.
 
               The % and ^ operators are currently only supported for filtering
-              in  the kernel on Linux with 3.7 and later kernels; on all other
-              systems, if those operators are used, filtering will be done  in
-              user mode, which will increase the overhead of capturing packets
-              and may cause more packets to be dropped.
+              in  the  kernel  on  particular  operating systems (for example:
+              FreeBSD, Linux with 3.7 and later kernels, NetBSD); on all other
+              systems  (for example: AIX, illumos, Solaris, OpenBSD), if those
+              operators are used, filtering will be done in user  mode,  which
+              will  increase  the  overhead of capturing packets and may cause
+              more packets to be dropped.
+
+              The length operator, indicated by the  keyword  len,  gives  the
+              length of the packet.
 
               To access data inside the packet, use the following syntax:
                    proto [ expr : size ]
-              Proto is one of arp, ether, fddi, icmp, icmp6,  ip,  ip6,  link,
-              ppp,  radio,  rarp,  sctp, slip, tcp, tr, udp or wlan, and indi-
+              Proto  is  one  of arp, ether, fddi, icmp, icmp6, ip, ip6, link,
+              ppp, radio, rarp, sctp, slip, tcp, tr, udp or  wlan,  and  indi-
               cates the protocol layer for the index operation.  (ether, fddi,
-              link,  ppp, slip, tr and wlan all refer to the link layer. radio
-              refers to the "radio header" added  to  some  802.11  captures.)
+              link, ppp, slip, tr and wlan all refer to the link layer.  radio
+              refers  to  the  "radio  header" added to some 802.11 captures.)
               Note that tcp, udp and other upper-layer protocol types only ap-
-              ply to IPv4, not IPv6 (this will be fixed in the  future).   The
-              byte  offset, relative to the indicated protocol layer, is given
-              by expr.  Size is optional and indicates the number of bytes  in
-              the  field  of interest; it can be either one, two, or four, and
-              defaults to one.  The length operator, indicated by the  keyword
-              len, gives the length of the packet.
+              ply  to  IPv4, not IPv6 (this will be fixed in the future).  The
+              byte offset, relative to the indicated protocol layer, is  given
+              by  expr.  Size is optional and indicates the number of bytes in
+              the field of interest; it can be either one, two, or  four,  and
+              defaults to one.
 
               For  example, `ether[0] & 1 != 0' catches all multicast traffic.
               The expression `ip[0] & 0xf != 5' catches all IPv4 packets  with
@@ -810,4 +814,4 @@ BUGS
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                 12 June 2022                   PCAP-FILTER(7)
+                                  3 July 2022                   PCAP-FILTER(7)

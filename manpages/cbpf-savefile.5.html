@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of CBPF-SAVEFILE</H1>
-Section: File Formats (5)<BR>Updated: 30 June 2022<BR>
+Section: File Formats (5)<BR>Updated: 3 July 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -18,7 +18,7 @@ installation.
 
 <H2 id="lbAB">NAME</H2>
 
-cbpf-savefile - cBPF savefile format (work in progress, DRAFT revision 4)
+cbpf-savefile - cBPF savefile format (work in progress, DRAFT revision 5)
 <H2 id="lbAC">DESCRIPTION</H2>
 
 This man page discusses a file format for cBPF, which is the &quot;classic&quot; (and
@@ -112,10 +112,17 @@ part of the header up to and including MinorVer identical.
 
 <P>
 MOD, XOR, COP and CPX: if set to 1, in this BPF dialect BPF_MOD, BPF_XOR,
-BPF_COP and BPF_COPX respectively are valid instructions.  BPF_MOD and BPF_XOR
-are implemented in the OS kernel of FreeBSD, illumos, Linux, NetBSD and
-Solaris &gt;= 11.4, but not AIX or OpenBSD.  BPF_COP and BPF_COPX are implemented
-in NetBSD kernel.
+BPF_COP and BPF_COPX respectively are valid instructions.  For the current
+list of OSes that support BPF_MOD and BPF_XOR in the kernel see the
+<B>%</B>
+
+and
+<B>^</B>
+
+binary operators in
+<B><A HREF="./pcap-filter.7.html">pcap-filter</A></B>(7).
+
+BPF_COP and BPF_COPX are implemented in NetBSD kernel.
 <P>
 
 Note that the fact an instruction is valid in a BPF dialect does not always
@@ -303,7 +310,7 @@ None at the time of this writing.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 09:57:18 GMT, July 01, 2022
+This HTML man page was generated at 13:24:28 GMT, July 03, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

@@ -14,7 +14,7 @@ CBPF-SAVEFILE(5)              File Formats Manual             CBPF-SAVEFILE(5)
 
 NAME
        cbpf-savefile  - cBPF savefile format (work in progress, DRAFT revision
-       4)
+       5)
 
 DESCRIPTION
        This man page discusses a file format for cBPF, which is the  "classic"
@@ -92,10 +92,10 @@ FILE FORMAT
        +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 
        MOD, XOR, COP and CPX: if set  to  1,  in  this  BPF  dialect  BPF_MOD,
-       BPF_XOR,  BPF_COP  and  BPF_COPX  respectively  are valid instructions.
-       BPF_MOD and BPF_XOR are implemented in the OS kernel of FreeBSD,  illu-
-       mos,  Linux,  NetBSD  and  Solaris  >=  11.4,  but  not AIX or OpenBSD.
-       BPF_COP and BPF_COPX are implemented in NetBSD kernel.
+       BPF_XOR, BPF_COP and BPF_COPX respectively are valid instructions.  For
+       the current list of OSes that support BPF_MOD and BPF_XOR in the kernel
+       see  the  %  and  ^  binary  operators  in pcap-filter(7).  BPF_COP and
+       BPF_COPX are implemented in NetBSD kernel.
 
        Note that the fact an instruction is valid in a BPF  dialect  does  not
        always mean the compiled bytecode in the savefile contains the instruc-
@@ -206,4 +206,4 @@ SOFTWARE SUPPORT
 SEE ALSO
        pcap-savefile(5)
 
-                                 30 June 2022                 CBPF-SAVEFILE(5)
+                                  3 July 2022                 CBPF-SAVEFILE(5)
