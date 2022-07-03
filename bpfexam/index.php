@@ -46,6 +46,11 @@ define ('MAX_RPS_LIMIT', 1.0);
 define ('RADARE2_BIN', '/usr/bin/r2');
 define ('DOT_BIN', '/usr/bin/dot');
 
+# HTTP status code can be changed only before the document, so start buffering
+# now to enable HTTP 429 and other errors later on, when some of the output
+# has already been generated.
+ob_start();
+
 # filtertest, where specified, was copied from libpcap built
 # using "./configure --enable-optimizer-dbg"
 $versions = array
@@ -321,11 +326,6 @@ $req_dlt_name = array_fetch ($_REQUEST, DLT_INPUT_NAME, NULL);
 if ($req_dlt_name !== NULL && ! array_key_exists ($req_dlt_name, $dltlist))
 	fail (400);
 $req_filter = array_fetch ($_REQUEST, EXPR_INPUT_NAME, NULL);
-
-# HTTP status code can be changed only before the document, so start buffering
-# now to enable HTTP 429 and other errors later on, when some of the output
-# has already been generated.
-ob_start();
 
 ?>
 <!DOCTYPE html>
