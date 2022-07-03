@@ -267,7 +267,7 @@ foreach ($taxonomy as $pname => $project)
 		# Prevent out of place line breaks inside various pcap man page names.
 		array
 		(
-			'@<B><A HREF="\./pcap[_-].+\.html">pcap[_-].+</A></B>\(.+\)@',
+			'@<B><A HREF="\./(pcap|cbpf)[_-].+\.html">(pcap|cbpf)[_-].+</A></B>\(.+\)@',
 			'<SPAN class=manref>$0</SPAN>'
 		),
 	);
