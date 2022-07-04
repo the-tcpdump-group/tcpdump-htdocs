@@ -423,7 +423,7 @@ If the PACKET_COUNT_IS_UNLIMITED() macro evaluates to true when
 passed the packet count argument, the loop should continue until
 there are no more packets immediately available or the
 break_loop member of the pcap_t is non-zero.  If the break_loop
-member is fount to be non-zero, it should set that member to
+member is found to be non-zero, it should set that member to
 zero and return PCAP_ERROR_BREAK.
 
 If it doesn't evaluate to true, then the loop should also
