@@ -347,6 +347,6 @@ div.manpage table table td {
 	border: 1px solid black;
 }
 
-div.manpage span.manref {
+span.manref {
 	white-space: nowrap;
 }
