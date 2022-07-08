@@ -400,7 +400,7 @@ OPTIONS
 
               Unprinted  packets  are  not  parsed, which decreases processing
               time. Setting nth to 100 for example,  will  (counting  from  1)
-              parse  and  print the 100th packet, 200th patcket, 300th packet,
+              parse  and  print  the 100th packet, 200th packet, 300th packet,
               and so on.
 
               This option also enables the -S flag, as relative  TCP  sequence

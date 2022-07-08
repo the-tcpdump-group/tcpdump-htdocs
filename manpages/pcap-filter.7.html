@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 3 July 2022<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 8 July 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -999,12 +999,17 @@ True if the relation holds.  <I>Relop</I> is one of
 
 <B>&lt;=</B>,
 
-<B>=</B>
+<B>=</B>,
 
-or
 <B>==</B>,
 
-<B>!=</B>}.
+<B>!=</B>}
+
+(where
+<B>=</B>
+
+means the same as
+<B>==</B>).
 
 Each of <I>expr1</I> and <I>expr2</I> is an arithmetic expression composed of
 integer constants (expressed in standard C syntax), the normal binary operators
@@ -1061,6 +1066,12 @@ To access data inside the packet, use the following syntax:
 is one of
 <B>arp</B>,
 
+<B>atalk</B>,
+
+<B>carp</B>,
+
+<B>decnet</B>,
+
 <B>ether</B>,
 
 <B>fddi</B>,
@@ -1069,17 +1080,31 @@ is one of
 
 <B>icmp6</B>,
 
+<B>igmp</B>,
+
+<B>igrp</B>,
+
 <B>ip</B>,
 
 <B>ip6</B>,
 
+<B>lat</B>,
+
 <B>link</B>,
+
+<B>mopdl</B>,
+
+<B>moprc</B>,
+
+<B>pim</B>,
 
 <B>ppp</B>,
 
 <B>radio</B>,
 
 <B>rarp</B>,
+
+<B>sca</B>,
 
 <B>sctp</B>,
 
@@ -1089,7 +1114,9 @@ is one of
 
 <B>tr</B>,
 
-<B>udp</B>
+<B>udp</B>,
+
+<B>vrrp</B>
 
 or
 <B>wlan</B>,
@@ -1386,7 +1413,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:24:28 GMT, July 03, 2022
+This HTML man page was generated at 22:01:14 GMT, July 08, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

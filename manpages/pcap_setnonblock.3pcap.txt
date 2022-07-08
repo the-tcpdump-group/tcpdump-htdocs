@@ -37,7 +37,7 @@ DESCRIPTION
        than blocking waiting for packets to arrive.
 
        pcap_loop(3PCAP)  will loop forever, consuming CPU time when no packets
-       are  currently  available;  pacp_dispatch()  should  be  used  instead.
+       are  currently  available;  pcap_dispatch()  should  be  used  instead.
        pcap_next(3PCAP)  will  return  NULL  if there are no packets currently
        available  to  read;  this  is  indistinguishable  from  an  error,  so
        pcap_next_ex() should be used instead.
