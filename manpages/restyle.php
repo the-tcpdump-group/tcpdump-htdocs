@@ -216,10 +216,22 @@ foreach ($taxonomy as $pname => $project)
 		),
 		array
 		(
-			'@(<TITLE>)(.*)(</TITLE>)@',
+			'@(<TITLE>)(Man page of .+)(</TITLE>)@',
 			1 === preg_match ('/^(.+)\.([1-9][a-z]*)$/', $basename, $m) ?
 				sprintf ('$1%s(%s) man page%s$3', $m[1], strtoupper ($m[2]), TITLE_SUFFIX) :
 				sprintf ('$1$2%s$3', TITLE_SUFFIX)
+		),
+		array
+		(
+			'@(<H1>)(Man page of .+)(</H1>)@',
+			1 === preg_match ('/^(.+)\.([1-9][a-z]*)$/', $basename, $m) ?
+				sprintf ('$1%s(%s) man page$3', $m[1], strtoupper ($m[2])) :
+				'$1$2$3'
+		),
+		array
+		(
+			'@^Section: .+<BR>(.+<BR>)$@m',
+			'$1'
 		),
 		array
 		(
