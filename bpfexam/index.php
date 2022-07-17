@@ -680,7 +680,7 @@ function r2_disasm (string $bytecode): string
 		(
 			RADARE2_BIN,
 			'-q',
-			'-a', 'bpf.mr', # Not the Capstone eBPF engine (Radare 2 >= 5.7.2).
+			'-a', 'bpf.mr', # Not the Capstone eBPF engine (Radare2 >= 5.7.2).
 			'-e', 'scr.utf8=true', # Defaults to ASCII when LANG=C.
 			'-e', 'scr.utf8.curvy=true',
 			'-e', 'scr.html=true',
@@ -689,7 +689,7 @@ function r2_disasm (string $bytecode): string
 			'-e', 'asm.lines.wide=true',
 			'-e', 'asm.lines.width=30',
 			'-c', 'pD $s', # Disassemble the input file size worth of bytes.
-			'stdin://' # (Radare 2 >= 5.7.2)
+			'stdin://' # (Radare2 >= 5.7.2)
 		),
 		$bytecode
 	);
