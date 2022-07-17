@@ -14,12 +14,12 @@ CBPF-SAVEFILE(5)              File Formats Manual             CBPF-SAVEFILE(5)
 
 NAME
        cbpf-savefile  - cBPF savefile format (work in progress, DRAFT revision
-       5)
+       6)
 
 DESCRIPTION
        This man page discusses a file format for cBPF, which is the  "classic"
        (and for a long time the only) Berkeley Packet Filter.  It does NOT ap-
-       ply to the newer eBPF variety of BPF.
+       ply to the newer "extended" variety of BPF (eBPF).
 
        The main purpose of this file format is to  store  BPF  bytecode,  most
        commonly  compiled from a BPF filter expression (see pcap-filter(7) for
@@ -112,18 +112,19 @@ FILE FORMAT
        Contains the link-layer header type value  used  for  the  compilation,
        usually  this is either the linktype input argument to pcap_open_dead()
        or the dlt input argument to pcap_set_datalink(3PCAP) or  the  value(s)
-       returned  by  pcap_datalink(3PCAP)  and pcap_list_datalinks(3PCAP).  By
-       convention link-layer header type values are limited to 16 bits.
+       returned  by  pcap_datalink(3PCAP) and pcap_list_datalinks(3PCAP).  Al-
+       though these functions take and return link-layer  header  type  values
+       via the int C type, by convention only the low 16 bits are in use.
 
    InstructionCount
-       This is the last field of the fixed header in major version 1, it  con-
-       tains  the  number  of  bytecode instructions following the header.  By
-       convention, valid BPF bytecode must consist of at  least  one  instruc-
-       tion, so in a valid savefile this field value is at least 1.
+       This  is the last field of the fixed header in major version 1, it con-
+       tains the number of bytecode instructions  following  the  header.   By
+       convention, valid BPF bytecode always ends with a "ret" instruction, so
+       in a valid savefile this field value is at least 1.
 
-       The  file format thus far minimizes the overhead for software that uses
-       the BPF bytecode.  If there is any data after the last instruction,  it
-       is  the  trailing  TLV space, which mostly contains meta-data for human
+       The file format thus far minimizes the overhead for software that  uses
+       the  BPF bytecode.  If there is any data after the last instruction, it
+       is the trailing TLV space, which mostly contains  meta-data  for  human
        interpretation.  It contains TLVs in the format specified below.
 
 INSTRUCTION FORMAT
@@ -136,7 +137,7 @@ INSTRUCTION FORMAT
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
        This is the traditional encoding of a BPF instruction (a 4-tuple of in-
-       tegers).   Note that usually the endianness depends on the machine, but
+       tegers).  Note that usually the endianness depends on the machine,  but
        in this format it is fixed.  Some opcodes interpret k as a signed inte-
        ger.
 
@@ -151,21 +152,21 @@ TLV FORMAT
        |                                                               |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-       All  TLVs  are  optional.  Every TLV may appear in the same savefile at
+       All TLVs are optional.  Every TLV may appear in the  same  savefile  at
        most once.  Length value does not include Type and Length.  Code points
        for Type and the associated Length constraints are defined below.
 
    EOF TLV
-       Allows  to  mark the end of TLV space (hence of the file) explicitly to
-       make it clear that the file is not truncated.  If this TLV  is  present
-       in the TLV space, it may appear the last only.
+       Allows to mark the end of TLV space (hence of the savefile)  explicitly
+       to  make  it  clear  that  the  file  is not truncated.  If this TLV is
+       present in the TLV space, it may appear the last only.
 
        Type is 0, Length is 0, Value is empty.
 
    LinkTypeName TLV
        Allows to record the input argument to pcap_datalink_name_to_val(3PCAP)
-       if the latter was used to translate a DLT name into LinkTypeValue  (the
-       same  name  can  sometimes  produce  different values in different con-
+       if  the latter was used to translate a DLT name into LinkTypeValue (the
+       same name can sometimes produce  different  values  in  different  con-
        texts).
 
        Type is 1, Length is variable, Value contains an ASCII string.
@@ -178,8 +179,8 @@ TLV FORMAT
 
    OptReq TLV
        Allows to record whether optimization was requested for the compilation
-       or not, usually this is the optimize input argument to  pcap_compile().
-       Note  that some link-layer header types and filter keywords disable the
+       or  not, usually this is the optimize input argument to pcap_compile().
+       Note that some link-layer header types and filter keywords disable  the
        optimization automatically in libpcap.
 
        Type is 3, Length is 1, Value contains 1 or 0.
@@ -206,4 +207,4 @@ SOFTWARE SUPPORT
 SEE ALSO
        pcap-savefile(5)
 
-                                  3 July 2022                 CBPF-SAVEFILE(5)
+                                 17 July 2022                 CBPF-SAVEFILE(5)

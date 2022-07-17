@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of CBPF-SAVEFILE</H1>
-Section: File Formats (5)<BR>Updated: 3 July 2022<BR>
+Section: File Formats (5)<BR>Updated: 17 July 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -18,14 +18,14 @@ installation.
 
 <H2 id="lbAB">NAME</H2>
 
-cbpf-savefile - cBPF savefile format (work in progress, DRAFT revision 5)
+cbpf-savefile - cBPF savefile format (work in progress, DRAFT revision 6)
 <H2 id="lbAC">DESCRIPTION</H2>
 
 This man page discusses a file format for cBPF, which is the &quot;classic&quot; (and
 for a long time the only) Berkeley Packet Filter.  It does
 <B>NOT</B>
 
-apply to the newer eBPF variety of BPF.
+apply to the newer &quot;extended&quot; variety of BPF (eBPF).
 <P>
 
 The main purpose of this file format is to store BPF bytecode, most commonly
@@ -165,14 +165,17 @@ or the value(s) returned by
 and
 <A HREF='./pcap_list_datalinks.3pcap.html'><B>pcap_list_datalinks</B></A>(3PCAP).
 
-By convention link-layer header type values are limited to 16 bits.
+Although these functions take and return link-layer header type values via the
+<I>int</I>
+
+C type, by convention only the low 16 bits are in use.
 <P>
 <H3 id="lbAI">InstructionCount</H3>
 
 This is the last field of the fixed header in major version 1, it contains the
 number of bytecode instructions following the header.  By convention, valid
-BPF bytecode must consist of at least one instruction, so in a valid savefile
-this field value is at least 1.
+BPF bytecode always ends with a &quot;ret&quot; instruction, so in a valid savefile this
+field value is at least 1.
 <P>
 <P>
 
@@ -225,7 +228,7 @@ and the associated Length constraints are defined below.
 <P>
 <H3 id="lbAL">EOF TLV</H3>
 
-Allows to mark the end of TLV space (hence of the file) explicitly to make it
+Allows to mark the end of TLV space (hence of the savefile) explicitly to make it
 clear that the file is not truncated.  If this TLV is present in the TLV
 space, it may appear the last only.
 <P>
@@ -310,7 +313,7 @@ None at the time of this writing.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:24:28 GMT, July 03, 2022
+This HTML man page was generated at 17:08:54 GMT, July 17, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
