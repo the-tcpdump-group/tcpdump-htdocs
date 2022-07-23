@@ -680,7 +680,7 @@ function r2_disasm (string $bytecode): string
 		(
 			RADARE2_BIN,
 			'-q',
-			'-a', 'bpf.mr', # Not the Capstone eBPF engine (Radare2 >= 5.7.2).
+			'-a', 'bpf.mr', # Not the Capstone eBPF engine (Radare2 >= 5.7.6).
 			'-e', 'scr.utf8=true', # Defaults to ASCII when LANG=C.
 			'-e', 'scr.utf8.curvy=true',
 			'-e', 'scr.html=true',
