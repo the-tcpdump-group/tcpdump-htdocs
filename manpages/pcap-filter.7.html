@@ -212,42 +212,42 @@ E.g.,
 
 Allowable primitives are:
 <DL>
-<DT><B>dst host </B><I>host</I><DD>
-True if the IPv4/v6 destination field of the packet is <I>host</I>,
+<DT><B>dst host </B><I>hostnameaddr</I><DD>
+True if the IPv4/v6 destination field of the packet is <I>hostnameaddr</I>,
 which may be either an address or a name.
-<DT><B>src host </B><I>host</I><DD>
-True if the IPv4/v6 source field of the packet is <I>host</I>.
-<DT><B>host </B><I>host</I><DD>
-True if either the IPv4/v6 source or destination of the packet is <I>host</I>.
+<DT><B>src host </B><I>hostnameaddr</I><DD>
+True if the IPv4/v6 source field of the packet is <I>hostnameaddr</I>.
+<DT><B>host </B><I>hostnameaddr</I><DD>
+True if either the IPv4/v6 source or destination of the packet is <I>hostnameaddr</I>.
 <DT><DD>
 Any of the above host expressions can be prepended with the keywords,
 <B>ip</B>, <B>arp</B>, <B>rarp</B>, or <B>ip6</B> as in:
 
 <PRE>
-<B>ip host </B><I>host</I>
+<B>ip host </B><I>hostnameaddr</I>
 </PRE>
 
 
 which is equivalent to:
 
 <PRE>
-<B>ether proto \</B>ip <B>and host </B><I>host</I>
+<B>ether proto \</B>ip <B>and host </B><I>hostnameaddr</I>
 </PRE>
 
 
-If <I>host</I> is a name with multiple IPv4 addresses, each address will
+If <I>hostnameaddr</I> is a name with multiple IPv4/v6 addresses, each address will
 be checked for a match.
-<DT><B>ether dst </B><I>ehost</I><DD>
-True if the Ethernet destination address is <I>ehost</I>.
-<I>Ehost</I>
+<DT><B>ether dst </B><I>ethernameaddr</I><DD>
+True if the Ethernet destination address is <I>ethernameaddr</I>.
+<I>ethernameaddr</I>
 may be either a name from /etc/ethers or a numerical MAC address of the
 form &quot;xx:xx:xx:xx:xx:xx&quot;, &quot;xx.xx.xx.xx.xx.xx&quot;, &quot;xx-xx-xx-xx-xx-xx&quot;,
 &quot;xxxx.xxxx.xxxx&quot;, &quot;xxxxxxxxxxxx&quot;, or various mixes of ':', '.', and '-',
 where each &quot;x&quot; is a hex digit (0-9, a-f, or A-F).
-<DT><B>ether src </B><I>ehost</I><DD>
-True if the Ethernet source address is <I>ehost</I>.
-<DT><B>ether host </B><I>ehost</I><DD>
-True if either the Ethernet source or destination address is <I>ehost</I>.
+<DT><B>ether src </B><I>ethernameaddr</I><DD>
+True if the Ethernet source address is <I>ethernameaddr</I>.
+<DT><B>ether host </B><I>ethernameaddr</I><DD>
+True if either the Ethernet source or destination address is <I>ethernameaddr</I>.
 <DT><B>gateway</B> <I>host</I><DD>
 True if the packet used <I>host</I> as a gateway.
 I.e., the Ethernet
@@ -260,15 +260,15 @@ host-name-to-Ethernet-address resolution mechanism (/etc/ethers, etc.).
 (An equivalent expression is
 
 <PRE>
-<B>ether host </B><I>ehost </I><B>and not host </B><I>host</I>
+<B>ether host </B><I>ethernameaddr </I><B>and not host </B><I>hostnameaddr</I>
 </PRE>
 
 
-which can be used with either names or numbers for <I>host / ehost</I>.)
+which can be used with either names or numbers for <I>hostnameaddr / ethernameaddr</I>.)
 This syntax does not work in IPv6-enabled configuration at this moment.
-<DT><B>dst net </B><I>net</I><DD>
+<DT><B>dst net </B><I>netnameaddr</I><DD>
 True if the IPv4/v6 destination address of the packet has a network
-number of <I>net</I>.
+number of <I>netnameaddr</I>.
 <I>Net</I> may be either a name from the networks database
 (/etc/networks, etc.) or a network number.
 An IPv4 network number can be written as a dotted quad (e.g., 192.168.1.0),
@@ -279,24 +279,24 @@ triple, 255.255.0.0 for a dotted pair, or 255.0.0.0 for a single number.
 An IPv6 network number must be written out fully; the netmask is
 ff:ff:ff:ff:ff:ff:ff:ff, so IPv6 &quot;network&quot; matches are really always
 host matches, and a network match requires a netmask length.
-<DT><B>src net </B><I>net</I><DD>
+<DT><B>src net </B><I>netnameaddr</I><DD>
 True if the IPv4/v6 source address of the packet has a network
-number of <I>net</I>.
-<DT><B>net </B><I>net</I><DD>
+number of <I>netnameaddr</I>.
+<DT><B>net </B><I>netnameaddr</I><DD>
 True if either the IPv4/v6 source or destination address of the packet has a network
-number of <I>net</I>.
-<DT><B>net </B><I>net</I> <B>mask </B><I>netmask</I><DD>
-True if the IPv4 address matches <I>net</I> with the specific <I>netmask</I>.
+number of <I>netnameaddr</I>.
+<DT><B>net </B><I>netaddr</I> <B>mask </B><I>netmask</I><DD>
+True if the IPv4 address matches <I>netaddr</I> with the specific <I>netmask</I>.
 May be qualified with <B>src</B> or <B>dst</B>.
-Note that this syntax is not valid for IPv6 <I>net</I>.
-<DT><B>net </B><I>net</I>/<I>len</I><DD>
-True if the IPv4/v6 address matches <I>net</I> with a netmask <I>len</I>
+Note that this syntax is not valid for IPv6 <I>netaddr</I>.
+<DT><B>net </B><I>netaddr</I>/<I>len</I><DD>
+True if the IPv4/v6 address matches <I>netaddr</I> with a netmask <I>len</I>
 bits wide.
 May be qualified with <B>src</B> or <B>dst</B>.
-<DT><B>dst port </B><I>port</I><DD>
+<DT><B>dst port </B><I>portnamenum</I><DD>
 True if the packet is IPv4/v6 TCP, UDP or SCTP and has a
-destination port value of <I>port</I>.
-The <I>port</I> can be a number or a name used in /etc/services (see
+destination port value of <I>portnamenum</I>.
+The <I>portnamenum</I> can be a number or a name used in /etc/services (see
 <B>tcp</B>(4P)
 
 and
@@ -308,40 +308,40 @@ If a number or ambiguous name is used,
 only the port number is checked (e.g., `<B>dst port</B> 513' will print both
 tcp/login traffic and udp/who traffic, and `<B>port</B> domain' will print
 both tcp/domain and udp/domain traffic).
-<DT><B>src port </B><I>port</I><DD>
-True if the packet has a source port value of <I>port</I>.
-<DT><B>port </B><I>port</I><DD>
-True if either the source or destination port of the packet is <I>port</I>.
-<DT><B>dst portrange </B><I>port1-port2</I><DD>
+<DT><B>src port </B><I>portnamenum</I><DD>
+True if the packet has a source port value of <I>portnamenum</I>.
+<DT><B>port </B><I>portnamenum</I><DD>
+True if either the source or destination port of the packet is <I>portnamenum</I>.
+<DT><B>dst portrange </B><I>portnamenum1-portnamenum2</I><DD>
 True if the packet is IPv4/v6 TCP, UDP or SCTP and has a
-destination port value between <I>port1</I> and <I>port2</I> (both inclusive).
-<I>port1</I>
+destination port value between <I>portnamenum1</I> and <I>portnamenum2</I> (both inclusive).
+<I>portnamenum1</I>
 
 and
-<I>port2</I>
+<I>portnamenum2</I>
 
 are interpreted in the same fashion as the
-<I>port</I>
+<I>portnamenum</I>
 
 parameter for
 <B>port</B>.
 
-<DT><B>src portrange </B><I>port1-port2</I><DD>
-True if the packet has a source port value between <I>port1</I> and
-<I>port2</I> (both inclusive).
-<DT><B>portrange </B><I>port1-port2</I><DD>
+<DT><B>src portrange </B><I>portnamenum1-portnamenum2</I><DD>
+True if the packet has a source port value between <I>portnamenum1</I> and
+<I>portnamenum2</I> (both inclusive).
+<DT><B>portrange </B><I>portnamenum1-portnamenum2</I><DD>
 True if either the source or destination port of the packet is between
-<I>port1</I> and <I>port2</I> (both inclusive).
+<I>portnamenum1</I> and <I>portnamenum2</I> (both inclusive).
 <DT><DD>
 Any of the above port or port range expressions can be prepended with
 the keywords, <B>tcp</B>, <B>udp</B> or <B>sctp</B>, as in:
 
 <PRE>
-<B>tcp src port </B><I>port</I>
+<B>tcp src port </B><I>portnamenum</I>
 </PRE>
 
 
-which matches only TCP packets whose source port is <I>port</I>.
+which matches only TCP packets whose source port is <I>portnamenum</I>.
 <DT><B>less </B><I>length</I><DD>
 True if the packet has a length less than or equal to <I>length</I>.
 This is equivalent to:
@@ -568,21 +568,21 @@ Note that not all applications using
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
 currently know how to parse these protocols.
-<DT><B>decnet src </B><I>host</I><DD>
+<DT><B>decnet src </B><I>decnetaddr</I><DD>
 True if the DECnet source address is
-<I>host</I>,
+<I>decnetaddr</I>,
 
 which may be an address of the form ``10.123'', or a DECnet host
 name.
 [DECnet host name support is only available on ULTRIX systems
 that are configured to run DECnet.]
-<DT><B>decnet dst </B><I>host</I><DD>
+<DT><B>decnet dst </B><I>decnetaddr</I><DD>
 True if the DECnet destination address is
-<I>host</I>.
+<I>decnetaddr</I>.
 
-<DT><B>decnet host </B><I>host</I><DD>
+<DT><B>decnet host </B><I>decnetaddr</I><DD>
 True if either the DECnet source or destination address is
-<I>host</I>.
+<I>decnetaddr</I>.
 
 <DT><B>llc</B><DD>
 True if the packet has an 802.2 LLC header.  This includes:
@@ -817,9 +817,9 @@ then valid <I>wlan_subtype</I>s are:
 <DT><B>subtype </B><I>wlan_subtype</I><DD>
 True if the IEEE 802.11 frame subtype matches the specified <I>wlan_subtype</I>
 and frame has the type to which the specified <I>wlan_subtype</I> belongs.
-<DT><B>dir </B><I>dir</I><DD>
+<DT><B>dir </B><I>direction</I><DD>
 True if the IEEE 802.11 frame direction matches the specified
-<I>dir</I>.
+<I>direction</I>.
 
 Valid directions are:
 <B>nods</B>,
@@ -1413,7 +1413,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 17:08:54 GMT, July 17, 2022
+This HTML man page was generated at 20:11:21 GMT, July 25, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

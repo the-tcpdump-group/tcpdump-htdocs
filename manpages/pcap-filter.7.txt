@@ -77,122 +77,123 @@ DESCRIPTION
 
        Allowable primitives are:
 
-       dst host host
-              True if the IPv4/v6 destination field of  the  packet  is  host,
-              which may be either an address or a name.
+       dst host hostnameaddr
+              True if the IPv4/v6 destination field of  the  packet  is  host-
+              nameaddr, which may be either an address or a name.
 
-       src host host
-              True if the IPv4/v6 source field of the packet is host.
+       src host hostnameaddr
+              True if the IPv4/v6 source field of the packet is hostnameaddr.
 
-       host host
+       host hostnameaddr
               True  if  either the IPv4/v6 source or destination of the packet
-              is host.
+              is hostnameaddr.
 
               Any of the above host expressions can be prepended with the key-
               words, ip, arp, rarp, or ip6 as in:
-                   ip host host
+                   ip host hostnameaddr
               which is equivalent to:
-                   ether proto \ip and host host
-              If  host  is  a  name with multiple IPv4 addresses, each address
-              will be checked for a match.
+                   ether proto \ip and host hostnameaddr
+              If  hostnameaddr is a name with multiple IPv4/v6 addresses, each
+              address will be checked for a match.
 
-       ether dst ehost
-              True if the Ethernet destination address is ehost.  Ehost may be
-              either a name from /etc/ethers or a numerical MAC address of the
-              form "xx:xx:xx:xx:xx:xx", "xx.xx.xx.xx.xx.xx",  "xx-xx-xx-xx-xx-
-              xx",  "xxxx.xxxx.xxxx", "xxxxxxxxxxxx", or various mixes of ':',
-              '.', and '-', where each "x" is a hex digit (0-9, a-f, or A-F).
+       ether dst ethernameaddr
+              True if the Ethernet destination address is ethernameaddr.  eth-
+              ernameaddr  may be either a name from /etc/ethers or a numerical
+              MAC     address     of     the     form     "xx:xx:xx:xx:xx:xx",
+              "xx.xx.xx.xx.xx.xx",    "xx-xx-xx-xx-xx-xx",   "xxxx.xxxx.xxxx",
+              "xxxxxxxxxxxx", or various mixes of ':',  '.',  and  '-',  where
+              each "x" is a hex digit (0-9, a-f, or A-F).
 
-       ether src ehost
-              True if the Ethernet source address is ehost.
+       ether src ethernameaddr
+              True if the Ethernet source address is ethernameaddr.
 
-       ether host ehost
-              True if either the Ethernet source  or  destination  address  is
-              ehost.
+       ether host ethernameaddr
+              True  if  either  the  Ethernet source or destination address is
+              ethernameaddr.
 
        gateway host
-              True  if  the packet used host as a gateway.  I.e., the Ethernet
+              True if the packet used host as a gateway.  I.e.,  the  Ethernet
               source or destination address was host but neither the IP source
-              nor  the  IP destination was host.  Host must be a name and must
-              be found both by the machine's  host-name-to-IP-address  resolu-
-              tion  mechanisms (host name file, DNS, NIS, etc.) and by the ma-
+              nor the IP destination was host.  Host must be a name  and  must
+              be  found  both by the machine's host-name-to-IP-address resolu-
+              tion mechanisms (host name file, DNS, NIS, etc.) and by the  ma-
               chine's   host-name-to-Ethernet-address   resolution   mechanism
               (/etc/ethers, etc.).  (An equivalent expression is
-                   ether host ehost and not host host
-              which  can  be  used  with  either  names  or numbers for host /
-              ehost.)  This syntax does not work in IPv6-enabled configuration
-              at this moment.
+                   ether host ethernameaddr and not host hostnameaddr
+              which can be used with either names or numbers for  hostnameaddr
+              /  ethernameaddr.)   This  syntax  does not work in IPv6-enabled
+              configuration at this moment.
 
-       dst net net
+       dst net netnameaddr
               True if the IPv4/v6 destination address of the packet has a net-
-              work number of net.  Net may be either a name from the  networks
-              database  (/etc/networks,  etc.)  or  a network number.  An IPv4
-              network  number  can  be  written  as  a  dotted   quad   (e.g.,
+              work  number  of netnameaddr.  Net may be either a name from the
+              networks database (/etc/networks, etc.) or a network number.  An
+              IPv4  network  number  can  be  written  as a dotted quad (e.g.,
               192.168.1.0), dotted triple (e.g., 192.168.1), dotted pair (e.g,
-              172.16),  or  single  number  (e.g.,   10);   the   netmask   is
-              255.255.255.255  for a dotted quad (which means that it's really
-              a host match), 255.255.255.0 for a  dotted  triple,  255.255.0.0
-              for  a  dotted  pair, or 255.0.0.0 for a single number.  An IPv6
-              network number  must  be  written  out  fully;  the  netmask  is
-              ff:ff:ff:ff:ff:ff:ff:ff,  so  IPv6  "network" matches are really
-              always host matches, and a  network  match  requires  a  netmask
+              172.16),   or   single   number   (e.g.,  10);  the  netmask  is
+              255.255.255.255 for a dotted quad (which means that it's  really
+              a  host  match),  255.255.255.0 for a dotted triple, 255.255.0.0
+              for a dotted pair, or 255.0.0.0 for a single  number.   An  IPv6
+              network  number  must  be  written  out  fully;  the  netmask is
+              ff:ff:ff:ff:ff:ff:ff:ff, so IPv6 "network"  matches  are  really
+              always  host  matches,  and  a  network match requires a netmask
               length.
 
-       src net net
-              True  if  the IPv4/v6 source address of the packet has a network
-              number of net.
+       src net netnameaddr
+              True if the IPv4/v6 source address of the packet has  a  network
+              number of netnameaddr.
 
-       net net
-              True if either the IPv4/v6 source or destination address of  the
-              packet has a network number of net.
+       net netnameaddr
+              True  if either the IPv4/v6 source or destination address of the
+              packet has a network number of netnameaddr.
 
-       net net mask netmask
-              True  if the IPv4 address matches net with the specific netmask.
-              May be qualified with src or dst.  Note that this syntax is  not
-              valid for IPv6 net.
+       net netaddr mask netmask
+              True if the IPv4 address matches netaddr with the specific  net-
+              mask.   May be qualified with src or dst.  Note that this syntax
+              is not valid for IPv6 netaddr.
 
-       net net/len
-              True  if the IPv4/v6 address matches net with a netmask len bits
-              wide.  May be qualified with src or dst.
+       net netaddr/len
+              True if the IPv4/v6 address matches netaddr with a  netmask  len
+              bits wide.  May be qualified with src or dst.
 
-       dst port port
-              True if the packet is IPv4/v6 TCP, UDP or SCTP and has a  desti-
-              nation  port  value of port.  The port can be a number or a name
-              used in /etc/services (see tcp(4P) and udp(4P)).  If a  name  is
-              used,  both the port number and protocol are checked.  If a num-
-              ber or ambiguous name is used, only the port number  is  checked
-              (e.g.,  `dst  port  513'  will  print both tcp/login traffic and
-              udp/who traffic, and `port domain' will  print  both  tcp/domain
-              and udp/domain traffic).
+       dst port portnamenum
+              True  if the packet is IPv4/v6 TCP, UDP or SCTP and has a desti-
+              nation port value of portnamenum.  The portnamenum can be a num-
+              ber  or  a name used in /etc/services (see tcp(4P) and udp(4P)).
+              If a name is  used,  both  the  port  number  and  protocol  are
+              checked.   If  a number or ambiguous name is used, only the port
+              number is checked (e.g., `dst port 513' will print both  tcp/lo-
+              gin  traffic  and  udp/who traffic, and `port domain' will print
+              both tcp/domain and udp/domain traffic).
 
-       src port port
-              True if the packet has a source port value of port.
+       src port portnamenum
+              True if the packet has a source port value of portnamenum.
 
-       port port
-              True  if  either the source or destination port of the packet is
-              port.
-
-       dst portrange port1-port2
-              True if the packet is IPv4/v6 TCP, UDP or SCTP and has a  desti-
-              nation  port  value  between  port1  and port2 (both inclusive).
-              port1 and port2 are interpreted in the same fashion as the  port
-              parameter for port.
-
-       src portrange port1-port2
-              True  if  the  packet  has a source port value between port1 and
-              port2 (both inclusive).
-
-       portrange port1-port2
+       port portnamenum
               True if either the source or destination port of the  packet  is
-              between port1 and port2 (both inclusive).
+              portnamenum.
+
+       dst portrange portnamenum1-portnamenum2
+              True  if the packet is IPv4/v6 TCP, UDP or SCTP and has a desti-
+              nation port value between portnamenum1  and  portnamenum2  (both
+              inclusive).   portnamenum1  and  portnamenum2 are interpreted in
+              the same fashion as the portnamenum parameter for port.
+
+       src portrange portnamenum1-portnamenum2
+              True if the packet has a source port value between  portnamenum1
+              and portnamenum2 (both inclusive).
+
+       portrange portnamenum1-portnamenum2
+              True  if  either the source or destination port of the packet is
+              between portnamenum1 and portnamenum2 (both inclusive).
 
               Any of the above port or port range expressions can be prepended
               with the keywords, tcp, udp or sctp, as in:
-                   tcp src port port
-              which matches only TCP packets whose source port is port.
+                   tcp src port portnamenum
+              which matches only TCP packets whose source port is portnamenum.
 
        less length
-              True if the packet has a length less than or  equal  to  length.
+              True  if  the  packet has a length less than or equal to length.
               This is equivalent to:
                    len <= length
 
@@ -202,34 +203,34 @@ DESCRIPTION
                    len >= length
 
        ip proto protocol
-              True if the packet is an IPv4 packet (see  ip(4P))  of  protocol
-              type  protocol.   Protocol  can  be a number or one of the names
-              recognized by getprotobyname(3) (as in  e.g.  `getent(1)  proto-
-              cols'),  typically from an entry in /etc/protocols, for example:
-              ah, esp, eigrp (only in Linux, FreeBSD, NetBSD,  DragonFly  BSD,
-              and  macOS), icmp, igmp, igrp (only in OpenBSD), pim, sctp, tcp,
-              udp or vrrp.  Note that most of these  example  identifiers  are
-              also  keywords and must be escaped via backslash (\).  Note that
+              True  if  the  packet is an IPv4 packet (see ip(4P)) of protocol
+              type protocol.  Protocol can be a number or  one  of  the  names
+              recognized  by  getprotobyname(3)  (as in e.g. `getent(1) proto-
+              cols'), typically from an entry in /etc/protocols, for  example:
+              ah,  esp,  eigrp (only in Linux, FreeBSD, NetBSD, DragonFly BSD,
+              and macOS), icmp, igmp, igrp (only in OpenBSD), pim, sctp,  tcp,
+              udp  or  vrrp.   Note that most of these example identifiers are
+              also keywords and must be escaped via backslash (\).  Note  that
               this primitive does not chase the protocol header chain.
 
        icmp   Abbreviation for:
                    ip proto 1
 
        ip6 proto protocol
-              True if the packet is an IPv6 packet of protocol type  protocol.
-              (See  `ip  proto' above for the meaning of protocol.)  Note that
+              True  if the packet is an IPv6 packet of protocol type protocol.
+              (See `ip proto' above for the meaning of protocol.)   Note  that
               the IPv6 variant of ICMP uses a different protocol number, named
-              ipv6-icmp  in AIX, FreeBSD, illumos, Linux, macOS, NetBSD, Open-
-              BSD, Solaris and Windows.  Note that  this  primitive  does  not
+              ipv6-icmp in AIX, FreeBSD, illumos, Linux, macOS, NetBSD,  Open-
+              BSD,  Solaris  and  Windows.   Note that this primitive does not
               chase the protocol header chain.
 
        icmp6  Abbreviation for:
                    ip6 proto 58
 
        proto protocol
-              True  if  the  packet is an IPv4 or IPv6 packet of protocol type
-              protocol.  (See `ip proto' above for the meaning  of  protocol.)
-              Note  that  this  primitive  does  not chase the protocol header
+              True if the packet is an IPv4 or IPv6 packet  of  protocol  type
+              protocol.   (See  `ip proto' above for the meaning of protocol.)
+              Note that this primitive does  not  chase  the  protocol  header
               chain.
 
        ah, esp, pim, sctp, tcp, udp
@@ -238,46 +239,46 @@ DESCRIPTION
               where protocol is one of the above protocols.
 
        ip6 protochain protocol
-              True if the packet is IPv6 packet, and contains protocol  header
-              with  type  protocol  in  its  protocol  header chain.  (See `ip
+              True  if the packet is IPv6 packet, and contains protocol header
+              with type protocol in  its  protocol  header  chain.   (See  `ip
               proto' above for the meaning of protocol.)  For example,
                    ip6 protochain 6
               matches any IPv6 packet with TCP protocol header in the protocol
-              header  chain.  The packet may contain, for example, authentica-
-              tion header, routing header, or hop-by-hop  option  header,  be-
-              tween  IPv6 header and TCP header.  The BPF code emitted by this
-              primitive is complex and cannot be optimized by  the  BPF  opti-
-              mizer  code,  and is not supported by filter engines in the ker-
+              header chain.  The packet may contain, for example,  authentica-
+              tion  header,  routing  header, or hop-by-hop option header, be-
+              tween IPv6 header and TCP header.  The BPF code emitted by  this
+              primitive  is  complex  and cannot be optimized by the BPF opti-
+              mizer code, and is not supported by filter engines in  the  ker-
               nel, so this can be somewhat slow, and may cause more packets to
               be dropped.
 
        ip protochain protocol
-              Equivalent  to  ip6  protochain  protocol, but this is for IPv4.
+              Equivalent to ip6 protochain protocol, but  this  is  for  IPv4.
               (See `ip proto' above for the meaning of protocol.)
 
        protochain protocol
-              True if the packet is an IPv4 or IPv6 packet  of  protocol  type
-              protocol.   (See  `ip proto' above for the meaning of protocol.)
+              True  if  the  packet is an IPv4 or IPv6 packet of protocol type
+              protocol.  (See `ip proto' above for the meaning  of  protocol.)
               Note that this primitive chases the protocol header chain.
 
        ether broadcast
-              True if the packet is an Ethernet broadcast packet.   The  ether
+              True  if  the packet is an Ethernet broadcast packet.  The ether
               keyword is optional.
 
        ip broadcast
-              True  if  the packet is an IPv4 broadcast packet.  It checks for
-              both the all-zeroes  and  all-ones  broadcast  conventions,  and
-              looks  up  the subnet mask on the interface on which the capture
+              True if the packet is an IPv4 broadcast packet.  It  checks  for
+              both  the  all-zeroes  and  all-ones  broadcast conventions, and
+              looks up the subnet mask on the interface on which  the  capture
               is being done.
 
-              If the subnet mask of the interface on which the capture is  be-
+              If  the subnet mask of the interface on which the capture is be-
               ing done is not available, either because the interface on which
-              capture is being done has no netmask or because the  capture  is
-              being  done  on  the Linux "any" interface, which can capture on
+              capture  is  being done has no netmask or because the capture is
+              being done on the Linux "any" interface, which  can  capture  on
               more than one interface, this check will not work correctly.
 
        ether multicast
-              True if the packet is an Ethernet multicast packet.   The  ether
+              True  if  the packet is an Ethernet multicast packet.  The ether
               keyword is optional.  This is shorthand for `ether[0] & 1 != 0'.
 
        ip multicast
@@ -288,27 +289,27 @@ DESCRIPTION
 
        ether proto protocol
               True if the packet is of ether type protocol.  Protocol can be a
-              number or one of the names aarp, arp, atalk,  decnet,  ip,  ip6,
-              ipx,  iso,  lat,  loopback,  mopdl, moprc, netbeui, rarp, sca or
+              number  or  one  of the names aarp, arp, atalk, decnet, ip, ip6,
+              ipx, iso, lat, loopback, mopdl, moprc,  netbeui,  rarp,  sca  or
               stp.  Note these identifiers (except loopback) are also keywords
               and must be escaped via backslash (\).
 
-              [In  the  case  of  FDDI  (e.g.,  `fddi proto \arp'), Token Ring
-              (e.g., `tr proto \arp'), and IEEE 802.11  wireless  LANs  (e.g.,
-              `wlan  proto  \arp'),  for most of those protocols, the protocol
-              identification comes from the 802.2 Logical Link  Control  (LLC)
+              [In the case of FDDI  (e.g.,  `fddi  proto  \arp'),  Token  Ring
+              (e.g.,  `tr  proto  \arp'), and IEEE 802.11 wireless LANs (e.g.,
+              `wlan proto \arp'), for most of those  protocols,  the  protocol
+              identification  comes  from the 802.2 Logical Link Control (LLC)
               header, which is usually layered on top of the FDDI, Token Ring,
               or 802.11 header.
 
-              When filtering for most  protocol  identifiers  on  FDDI,  Token
+              When  filtering  for  most  protocol  identifiers on FDDI, Token
               Ring, or 802.11, the filter checks only the protocol ID field of
-              an LLC header in so-called SNAP format  with  an  Organizational
+              an  LLC  header  in so-called SNAP format with an Organizational
               Unit Identifier (OUI) of 0x000000, for encapsulated Ethernet; it
-              doesn't check whether the packet is in SNAP format with  an  OUI
+              doesn't  check  whether the packet is in SNAP format with an OUI
               of 0x000000.  The exceptions are:
 
-              iso    the  filter  checks  the DSAP (Destination Service Access
-                     Point) and SSAP (Source Service Access Point)  fields  of
+              iso    the filter checks the DSAP  (Destination  Service  Access
+                     Point)  and  SSAP (Source Service Access Point) fields of
                      the LLC header;
 
               stp and netbeui
@@ -317,24 +318,24 @@ DESCRIPTION
               atalk  the filter checks for a SNAP-format packet with an OUI of
                      0x080007 and the AppleTalk etype.
 
-              In the case of Ethernet, the filter  checks  the  Ethernet  type
+              In  the  case  of  Ethernet, the filter checks the Ethernet type
               field for most of those protocols.  The exceptions are:
 
               iso, stp, and netbeui
-                     the  filter checks for an 802.3 frame and then checks the
+                     the filter checks for an 802.3 frame and then checks  the
                      LLC header as it does for FDDI, Token Ring, and 802.11;
 
               atalk  the filter checks both for the AppleTalk etype in an Eth-
-                     ernet  frame  and for a SNAP-format packet as it does for
+                     ernet frame and for a SNAP-format packet as it  does  for
                      FDDI, Token Ring, and 802.11;
 
-              aarp   the filter checks for the AppleTalk ARP etype  in  either
-                     an  Ethernet  frame or an 802.2 SNAP frame with an OUI of
+              aarp   the  filter  checks for the AppleTalk ARP etype in either
+                     an Ethernet frame or an 802.2 SNAP frame with an  OUI  of
                      0x000000;
 
               ipx    the filter checks for the IPX etype in an Ethernet frame,
-                     the  IPX  DSAP  in the LLC header, the 802.3-with-no-LLC-
-                     header encapsulation of IPX, and the IPX etype in a  SNAP
+                     the IPX DSAP in the LLC  header,  the  802.3-with-no-LLC-
+                     header  encapsulation of IPX, and the IPX etype in a SNAP
                      frame.
 
        ip, ip6, arp, rarp, atalk, aarp, decnet, iso, stp, ipx, netbeui
@@ -349,17 +350,18 @@ DESCRIPTION
               applications using pcap(3PCAP) currently know how to parse these
               protocols.
 
-       decnet src host
-              True  if  the DECnet source address is host, which may be an ad-
-              dress of the form ``10.123'', or a DECnet  host  name.   [DECnet
-              host  name  support is only available on ULTRIX systems that are
+       decnet src decnetaddr
+              True if the DECnet source address is decnetaddr, which may be an
+              address  of the form ``10.123'', or a DECnet host name.  [DECnet
+              host name support is only available on ULTRIX systems  that  are
               configured to run DECnet.]
 
-       decnet dst host
-              True if the DECnet destination address is host.
+       decnet dst decnetaddr
+              True if the DECnet destination address is decnetaddr.
 
-       decnet host host
-              True if either the DECnet source or destination address is host.
+       decnet host decnetaddr
+              True  if either the DECnet source or destination address is dec-
+              netaddr.
 
        llc    True if the packet has an 802.2 LLC header.  This includes:
 
@@ -515,10 +517,10 @@ DESCRIPTION
               wlan_subtype  and  frame  has  the  type  to which the specified
               wlan_subtype belongs.
 
-       dir dir
+       dir direction
               True if the IEEE 802.11 frame direction  matches  the  specified
-              dir.  Valid directions are: nods, tods, fromds, dstods, or a nu-
-              meric value.
+              direction.  Valid directions are: nods, tods, fromds, dstods, or
+              a numeric value.
 
        vlan [vlan_id]
               True if the packet is an IEEE 802.1Q VLAN packet.   If  the  op-
