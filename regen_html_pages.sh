@@ -33,6 +33,7 @@
 #
 # * Ubuntu Linux 18.04
 # * Ubuntu Linux 20.04
+# * Ubuntu Linux 22.04
 # * Fedora Linux 30
 # * Fedora Linux 32
 # * Fedora Linux 34
