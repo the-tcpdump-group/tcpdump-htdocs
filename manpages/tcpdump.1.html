@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 17 January 2022<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 30 July 2022<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents tcpdump version 5.0.0-PRE-GIT.</H4>
@@ -525,10 +525,11 @@ Sun's NIS server --- usually it hangs forever translating non-local
 internet numbers).
 <DT><DD>
 The test for `foreign' IPv4 addresses is done using the IPv4 address and
-netmask of the interface on which capture is being done.  If that
-address or netmask are not available, available, either because the
-interface on which capture is being done has no address or netmask or
-because the capture is being done on the Linux &quot;any&quot; interface, which
+netmask of the interface on that capture is being done.  If that
+address or netmask are not available, either because the
+interface on that capture is being done has no address or netmask or
+because it is the &quot;any&quot; pseudo-interface, which is
+available in Linux and in recent versions of macOS and Solaris, and which
 can capture on more than one interface, this option will not work
 correctly.
 <DT><B>-F</B><I> file</I>
@@ -594,11 +595,12 @@ flag is not given, <I>tcpdump</I> searches the system
 interface list for the lowest numbered, configured up interface
 (excluding loopback), which may turn out to be, for example, ``eth0''.
 <DT><DD>
-On Linux systems with 2.2 or later kernels, an
+On Linux systems with 2.2 or later kernels and on recent versions of macOS
+and Solaris, an
 <I>interface</I>
 
 argument of ``any'' can be used to capture packets from all interfaces.
-Note that captures on the ``any'' device will not be done in promiscuous
+Note that captures on the ``any'' pseudo-interface will not be done in promiscuous
 mode.
 <DT><DD>
 If the
@@ -2661,7 +2663,7 @@ It only looks at IPv4 packets.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 22:01:19 GMT, July 08, 2022
+This HTML man page was generated at 15:12:49 GMT, July 31, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
