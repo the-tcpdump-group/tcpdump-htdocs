@@ -17,8 +17,8 @@ NAME
        tion
 
 SYNOPSIS
-       rpcapd [ -b address ] [ -p port ] [ -4 ] [ -l host_list ]
-               [ -a host,port ] [ -n ] [ -v ] [ -d ] [ -i ]
+       rpcapd [ -b address ] [ -p port ] [ -t data_port ] [ -4 ]
+               [ -l host_list ] [ -a host,port ] [ -n ] [ -v ] [ -d ] [ -i ]
                [ -D ] [ -s config_file ] [ -f config_file ] [ -S ]
                [ -K ssl_keyfile ] [ -X ssl_certfile ] [ -C ]
 
@@ -97,6 +97,11 @@ OPTIONS
        -p port
               Bind to the port specified by port.  By default, rpcapd binds to
               port 2002.
+
+       -t data_port
+              Use  the port specified by data_port as the port for data trans-
+              fer.  By default, rpcapd uses a port  chosen  by  the  operating
+              system.
 
        -4     Listen  only  on  IPv4 addresses.  By default, rpcapd listens on
               both IPv4 and IPv6 addresses.

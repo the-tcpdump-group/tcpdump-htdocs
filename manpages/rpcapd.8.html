@@ -34,19 +34,22 @@ rpcapd
 <I>port</I>
 
 ] [
-<B>-4</B>
+<B>-t</B>
+
+<I>data_port</I>
 
 ] [
+<B>-4</B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
 <B>-l</B>
 
 <I>host_list</I>
 
-]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[
+] [
 <B>-a</B>
 
 <I>host</I>,<I>port</I>
@@ -64,8 +67,6 @@ rpcapd
 <B>-i</B>
 
 ]
-<BR>
-
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
@@ -87,8 +88,6 @@ rpcapd
 <B>-S</B>
 
 ]
-<BR>
-
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
@@ -249,6 +248,17 @@ By default,
 <B>rpcapd</B>
 
 binds to port 2002.
+<DT><B>-t</B><I> data_port</I>
+
+<DD>
+Use the port specified by
+<I>data_port</I>
+
+as the port for data transfer.
+By default,
+<B>rpcapd</B>
+
+uses a port chosen by the operating system.
 <DT><B>-4</B>
 
 <DD>
@@ -385,7 +395,7 @@ as the SSL certificate file.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:03 GMT, November 01, 2021
+This HTML man page was generated at 19:44:04 GMT, August 03, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
