@@ -184,6 +184,11 @@ hr {
 	background-color: #f0f0f0;
 }
 
+/* Caper does not wrap its output. */
+pre.caper {
+	white-space: normal;
+}
+
 /* Sidebar */
 
 #sidebar {

@@ -45,6 +45,9 @@ define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 define ('MAX_RPS_LIMIT', 1.0);
 define ('RADARE2_BIN', '/usr/bin/r2');
 define ('DOT_BIN', '/usr/bin/dot');
+# To compile, see https://gitlab.com/niksu/caper/-/blob/master/Vagrantfile
+# and use a separate VM with the same distribution as the production server.
+define ('CAPER_BIN', '/usr/local/bin/caper.native');
 
 # HTTP status code can be changed only before the document, so start buffering
 # now to enable HTTP 429 and other errors later on, when some of the output
@@ -384,7 +387,12 @@ echo preg_replace
 					</P>
 					<P>
 						Given a set of input parameters below,
-						<EM><?php echo PAGE_TITLE; ?></EM> displays the compiled filter
+						<EM><?php echo PAGE_TITLE; ?></EM> tries to produce a number of
+						outputs, the first of which is a filter expression that has the
+						same effect as the input filter expression, but includes all the
+						implied predicates explicitly as determined using
+						<A href='https://gitlab.com/niksu/caper'>Caper</A>. Then follows
+						the compiled filter
 						(also known as "filter program" or "packet-matching code") as a
 						sequence of BPF instructions in two formats: an output of
 						<code>tcpdump -d</code> (which is explained in detail in
@@ -716,6 +724,24 @@ function r2_graph (string $bytecode): string
 	return on_stderr_throw_escaped ($stdout, $stderr);
 }
 
+function run_caper (string $filter): string
+{
+	list ($stdout, $stderr) = pipe_process
+	(
+		array
+		(
+			CAPER_BIN,
+			'-q',
+			'-r',
+			'-n',
+			'-e',
+			$filter
+		),
+		''
+	);
+	return on_stderr_throw ($stdout, $stderr);
+}
+
 function limit_request_rate(): void
 {
 	if (FALSE === $f = fopen (TIMESTAMP_FILE, 'c+'))
@@ -757,6 +783,7 @@ function process_request (array $vdata, string $req_dlt_name, string $req_filter
 		$r2_graph_before =
 		$r2_disasm_after =
 		$r2_graph_after =
+		$caper_output =
 		'(N/A)';
 	$optimizer_steps = NULL;
 	try
@@ -782,10 +809,17 @@ function process_request (array $vdata, string $req_dlt_name, string $req_filter
 				}
 			}
 		}
+		# Try this one last because it is the most fragile.
+		$caper_output = run_caper ($req_filter);
 	}
 	finally
 	{
 		echo <<<"ENDOFTEXT"
+		<H2 class=title>Equivalent filter (Caper expansion)</H2>
+		<DIV class=entry>
+			<PRE class=caper>${caper_output}</PRE>
+		</DIV>
+
 		<H2 class=title>Final packet-matching code</H2>
 		<DIV class=entry>
 		<TABLE>
