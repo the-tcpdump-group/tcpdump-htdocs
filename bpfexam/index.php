@@ -43,6 +43,11 @@ define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 # Enforce an RPS limit for requests that submit the form, as these spawn
 # external processes, which together take a while (0.5s to 1.0s) to complete.
 define ('MAX_RPS_LIMIT', 1.0);
+# Starting with Radare2 5.7.6 it should be sufficient to install the amd64.deb
+# package from [1].  However, if it is necessary to try a git master snapshot
+# of Radare2, the recommended way is to build a Debian package in a separate,
+# non-production Debian 11 VM using sys/debian.sh in a Radare2 git clone.
+# 1: https://github.com/radareorg/radare2/releases.
 define ('RADARE2_BIN', '/usr/bin/r2');
 define ('DOT_BIN', '/usr/bin/dot');
 # To compile, see https://gitlab.com/niksu/caper/-/blob/master/Vagrantfile
@@ -388,18 +393,20 @@ echo preg_replace
 					<P>
 						Given a set of input parameters below,
 						<EM><?php echo PAGE_TITLE; ?></EM> tries to produce a number of
-						outputs, the first of which is a filter expression that has the
-						same effect as the input filter expression, but includes all the
+						outputs. The first output is a filter expression that should have
+						the same effect as the input filter expression, but includes all the
 						implied predicates explicitly as determined using
-						<A href='https://gitlab.com/niksu/caper'>Caper</A>. Then follows
-						the compiled filter
-						(also known as "filter program" or "packet-matching code") as a
-						sequence of BPF instructions in two formats: an output of
-						<code>tcpdump -d</code> (which is explained in detail in
-						<A href="/papers/bpf-usenix93.pdf">this document</A>) and a
-						disassembly produced by Radare2. It also tries to reconstruct the
-						final CFG using Radare2 and Graphviz. All these outputs stand for
-						the unoptimized compilation of the filter.
+						<A href="https://gitlab.com/niksu/caper">Caper</A>, which implements
+						the theory set out in
+						<A href="http://www.cs.iit.edu/~nsultana1/files/pcap_semantics.pdf">this document</A>.
+						Then follows the compiled filter (also known as "filter program" or
+						"packet-matching code") as a sequence of BPF instructions in two
+						formats: an output of <code>tcpdump -d</code> (which is explained in
+						detail in <A href="/papers/bpf-usenix93.pdf">this document</A>) and
+						a disassembly produced by
+						<A href="https://www.radare.org/">Radare2</A>. It also tries to
+						reconstruct the final CFG using Radare2 and Graphviz. All these
+						outputs stand for the unoptimized compilation of the filter.
 					</P>
 					<P>
 						Then, if the optimization attempt has not failed (which can happen,
@@ -497,7 +504,7 @@ function gen_pcap_header (string $dlt_name): string
 }
 
 # Feed the input to stdin and return the stdout and stderr as a 2-tuple.
-function pipe_process (array $argv, string $input): array
+function pipe_process (array $argv, string $stdin = ''): array
 {
 	if (count ($argv) < 1)
 		throw new Exception ('$argv must have at least one element');
@@ -520,7 +527,7 @@ function pipe_process (array $argv, string $input): array
 	# a resource that is indistinguishable from a successful invocation.
 	if ($po === FALSE)
 		throw new Exception ("failed to run the ${bin} binary!");
-	if (FALSE === fwrite ($pipes[0], $input))
+	if (FALSE === fwrite ($pipes[0], $stdin))
 		throw new Exception ("failed to write to a child process stdin");
 	fclose ($pipes[0]);
 	$stdout = stream_get_contents ($pipes[1]);
@@ -557,7 +564,7 @@ function run_tcpdump (array $argv, string $dlt_name): string
 	return on_stderr_throw ($stdout, $stderr);
 }
 
-function run_filtertest ($filtertest_bin, $dlt_name, $filter): string
+function run_filtertest (string $filtertest_bin, string $dlt_name, string $filter): string
 {
 	list ($stdout, $stderr) = pipe_process
 	(
@@ -568,8 +575,7 @@ function run_filtertest ($filtertest_bin, $dlt_name, $filter): string
 			'--',
 			$dlt_name,
 			$filter
-		),
-		''
+		)
 	);
 	return on_stderr_throw ($stdout, $stderr);
 }
@@ -736,8 +742,7 @@ function run_caper (string $filter): string
 			'-n',
 			'-e',
 			$filter
-		),
-		''
+		)
 	);
 	return on_stderr_throw ($stdout, $stderr);
 }
@@ -810,7 +815,7 @@ function process_request (array $vdata, string $req_dlt_name, string $req_filter
 			}
 		}
 		# Try this one last because it is the most fragile.
-		$caper_output = run_caper ($req_filter);
+		$caper_output = htmlentities (run_caper ($req_filter));
 	}
 	finally
 	{
@@ -874,18 +879,21 @@ ENDOFTEXT;
 if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
 {
 	limit_request_rate();
+	$error = '';
+	ob_start();
 	try
 	{
 		process_request ($versions[$req_ver], $req_dlt_name, $req_filter);
 	}
 	catch (EscapedException $e)
 	{
-		echo '<PRE class=stderr>' . $e->getMessage() . '</PRE>';
+		$error = '<PRE class=stderr>' . $e->getMessage() . '</PRE>';
 	}
 	catch (Exception $e)
 	{
-		echo '<PRE class=stderr>' . htmlentities ($e->getMessage()) . '</PRE>';
+		$error = '<PRE class=stderr>' . htmlentities ($e->getMessage()) . '</PRE>';
 	}
+	echo $error . ob_get_clean();
 }
 ?>
 			</DIV>
