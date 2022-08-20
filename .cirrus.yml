@@ -3,7 +3,7 @@ env:
 
 task:
   container:
-    image: ubuntu:20.04
+    image: ubuntu:22.04
     cpu: 1
     memory: 512M
   env:
