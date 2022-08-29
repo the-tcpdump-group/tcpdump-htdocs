@@ -448,10 +448,9 @@
                   have successfully completed building the change.
                 </li>
                 <li>
-                  Ibid., migrate the 32-bit ARM worker to true ARMv7 hardware
-                  (it currently runs in 32-bit mode on AArch64 hardware, which supports
-                  unaligned memory access and thus cannot detect alignment issues in
-                  the code).
+                  Ibid., manage the 32-bit ARM worker to terminate user processes on
+                  unaligned memory access attempts so the build detects alignment issues
+                  in the code too.
                 </li>
                 <li>
                   Ibid., add workers for AIX, DragonFly BSD, Haiku and HP-UX.
