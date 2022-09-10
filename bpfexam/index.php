@@ -570,10 +570,8 @@ function on_stderr_throw_escaped (string $stdout, string $stderr): string
 	return $stdout;
 }
 
-function run_tcpdump (array $argv, int $snaplen, string $dlt_name): string
+function run_tcpdump (array $argv, int $snaplen, string $dlt_value): string
 {
-	global $dltlist;
-
 	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
 	# a network interface even if provided with the "-y" flag.  To work around that,
 	# feed an empty .pcap file with the DLT of interest to stdin.  A side effect of
@@ -591,7 +589,7 @@ function run_tcpdump (array $argv, int $snaplen, string $dlt_name): string
 		0, # time zone offset
 		0, # time stamp accuracy
 		$snaplen,
-		$dltlist[$dlt_name]['val']
+		$dlt_value
 	);
 	list ($stdout, $stderr) = pipe_process ($argv, $pcap_header);
 	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
@@ -823,6 +821,9 @@ function process_request
 	string $req_filter
 ): void
 {
+	global $dltlist;
+
+	$dlt_value = $dltlist[$req_dlt_name]['val'];
 	$libpcap_before =
 		$libpcap_after =
 		$r2_disasm_before =
@@ -834,12 +835,12 @@ function process_request
 	$optimizer_steps = NULL;
 	try
 	{
-		$libpcap_before = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-Od', '--', $req_filter), $snaplen, $req_dlt_name));
-		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-Oddd', '--', $req_filter), $snaplen, $req_dlt_name));
+		$libpcap_before = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-Od', '--', $req_filter), $snaplen, $dlt_value));
+		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-Oddd', '--', $req_filter), $snaplen, $dlt_value));
 		$r2_disasm_before = r2_disasm ($bytecode_before);
 		$r2_graph_before = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_before))));
-		$libpcap_after = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-d', '--', $req_filter), $snaplen, $req_dlt_name));
-		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-ddd', '--', $req_filter), $snaplen, $req_dlt_name));
+		$libpcap_after = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-d', '--', $req_filter), $snaplen, $dlt_value));
+		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-ddd', '--', $req_filter), $snaplen, $dlt_value));
 		$r2_disasm_after = r2_disasm ($bytecode_after);
 		$r2_graph_after = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_after))));
 		if (array_key_exists ('filtertest', $vdata))
