@@ -36,8 +36,12 @@ define ('VER_INPUT_NAME', 'ver');
 define ('DLT_INPUT_NAME', 'dlt');
 define ('EXPR_INPUT_NAME', 'filter');
 define ('SUBMIT_INPUT_NAME', 'examine');
+define ('SNAPLEN_INPUT_NAME', 'snaplen');
 define ('DEFAULT_VER', '1.10.1');
 define ('DEFAULT_DLT', 'EN10MB');
+define ('MIN_SNAPLEN', 10);
+define ('DEFAULT_SNAPLEN', 65535);
+define ('MAX_SNAPLEN', 262000);
 define ('DEFAULT_FILTER', 'icmp or udp port 53 or bootpc');
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 # Enforce an RPS limit for requests that submit the form, as these spawn
@@ -333,6 +337,17 @@ if ($req_ver !== NULL && ! array_key_exists ($req_ver, $versions))
 $req_dlt_name = array_fetch ($_REQUEST, DLT_INPUT_NAME, NULL);
 if ($req_dlt_name !== NULL && ! array_key_exists ($req_dlt_name, $dltlist))
 	fail (400);
+$req_snaplen = array_fetch ($_REQUEST, SNAPLEN_INPUT_NAME, NULL);
+if
+(
+	$req_snaplen !== NULL &&
+	(
+		1 !== preg_match ('/^[0-9]+$/', $req_snaplen) ||
+		$req_snaplen < MIN_SNAPLEN ||
+		$req_snaplen > MAX_SNAPLEN
+	)
+)
+	fail (400);
 $req_filter = array_fetch ($_REQUEST, EXPR_INPUT_NAME, NULL);
 
 ?>
@@ -473,6 +488,21 @@ echo "</SELECT>\n</TD>\n</TR>\n";
 echo "<TR>\n";
 printf
 (
+	"<TH><LABEL for='%s'>Snapshot length (<A href='/manpages/pcap_set_snaplen.3pcap.html'>?</A>):</LABEL></TH>\n",
+	SNAPLEN_INPUT_NAME
+);
+printf
+(
+	"<TD><INPUT type=text size=7 name='%s' id='%s' value='%s' tabindex=250></TD>\n",
+	SNAPLEN_INPUT_NAME,
+	SNAPLEN_INPUT_NAME,
+	$req_snaplen ?? DEFAULT_SNAPLEN
+);
+echo "</TR>\n";
+
+echo "<TR>\n";
+printf
+(
 	"<TH><LABEL for='%s'>Filter expression (<A href='/manpages/pcap-filter.7.html'>?</A>):</LABEL></TH>\n",
 	EXPR_INPUT_NAME
 );
@@ -493,16 +523,6 @@ echo "</TR>\n";
 					</FORM>
 				</DIV>
 <?php
-function gen_pcap_header (string $dlt_name): string
-{
-	global $dltlist;
-
-	# Little-endian, without the trailing 4 octets of the link-layer header type.
-	$ret = "\xd4\xc3\xb2\xa1\x02\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x04\x00";
-	$ret .= pack ('V', $dltlist[$dlt_name]['val']);
-	return $ret;
-}
-
 # Feed the input to stdin and return the stdout and stderr as a 2-tuple.
 function pipe_process (array $argv, string $stdin = ''): array
 {
@@ -550,15 +570,30 @@ function on_stderr_throw_escaped (string $stdout, string $stderr): string
 	return $stdout;
 }
 
-function run_tcpdump (array $argv, string $dlt_name): string
+function run_tcpdump (array $argv, int $snaplen, string $dlt_name): string
 {
+	global $dltlist;
+
 	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
 	# a network interface even if provided with the "-y" flag.  To work around that,
-	# feed an empty .pcap file with the DLT of interest to stdin.
+	# feed an empty .pcap file with the DLT of interest to stdin.  A side effect of
+	# feeding the .pcap file is that tcpdump uses snapshot length from the file
+	# header and disregards any "-s" flags.
 	if (count ($argv) < 1)
 		throw new Exception ('$argv must have at least one element');
 	array_splice ($argv, 1, 0, array ('-r', '-'));
-	list ($stdout, $stderr) = pipe_process ($argv, gen_pcap_header ($dlt_name));
+	$pcap_header = pack
+	(
+		'VvvVVVV',
+		0xA1B2C3D4, # magic number
+		2, # major version
+		4, # minor version
+		0, # time zone offset
+		0, # time stamp accuracy
+		$snaplen,
+		$dltlist[$dlt_name]['val']
+	);
+	list ($stdout, $stderr) = pipe_process ($argv, $pcap_header);
 	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
 	$stderr = preg_replace ('/^Warning: interface names might be incorrect\n/', '', $stderr);
 	return on_stderr_throw ($stdout, $stderr);
@@ -780,7 +815,13 @@ function inline_img (string $data): string
 	return '<IMG src="data:image/svg+xml;base64,' . base64_encode ($data) . '" width="100%">';
 }
 
-function process_request (array $vdata, string $req_dlt_name, string $req_filter): void
+function process_request
+(
+	array $vdata,
+	string $req_dlt_name,
+	int $snaplen,
+	string $req_filter
+): void
 {
 	$libpcap_before =
 		$libpcap_after =
@@ -793,12 +834,12 @@ function process_request (array $vdata, string $req_dlt_name, string $req_filter
 	$optimizer_steps = NULL;
 	try
 	{
-		$libpcap_before = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-Od', '--', $req_filter), $req_dlt_name));
-		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-Oddd', '--', $req_filter), $req_dlt_name));
+		$libpcap_before = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-Od', '--', $req_filter), $snaplen, $req_dlt_name));
+		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-Oddd', '--', $req_filter), $snaplen, $req_dlt_name));
 		$r2_disasm_before = r2_disasm ($bytecode_before);
 		$r2_graph_before = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_before))));
-		$libpcap_after = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-d', '--', $req_filter), $req_dlt_name));
-		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-ddd', '--', $req_filter), $req_dlt_name));
+		$libpcap_after = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-d', '--', $req_filter), $snaplen, $req_dlt_name));
+		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-ddd', '--', $req_filter), $snaplen, $req_dlt_name));
 		$r2_disasm_after = r2_disasm ($bytecode_after);
 		$r2_graph_after = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_after))));
 		if (array_key_exists ('filtertest', $vdata))
@@ -876,14 +917,20 @@ ENDOFTEXT;
 	}
 }
 
-if ($req_ver !== NULL && $req_dlt_name !== NULL && $req_filter !== NULL)
+if
+(
+	$req_ver !== NULL &&
+	$req_dlt_name !== NULL &&
+	$req_snaplen !== NULL &&
+	$req_filter !== NULL
+)
 {
 	limit_request_rate();
 	$error = '';
 	ob_start();
 	try
 	{
-		process_request ($versions[$req_ver], $req_dlt_name, $req_filter);
+		process_request ($versions[$req_ver], $req_dlt_name, $req_snaplen, $req_filter);
 	}
 	catch (EscapedException $e)
 	{
