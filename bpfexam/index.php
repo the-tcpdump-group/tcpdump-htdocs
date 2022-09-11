@@ -35,14 +35,18 @@ define ('PAGE_TITLE', 'BPF Exam');
 define ('VER_INPUT_NAME', 'ver');
 define ('DLT_INPUT_NAME', 'dlt');
 define ('EXPR_INPUT_NAME', 'filter');
-define ('SUBMIT_INPUT_NAME', 'examine');
+define ('SUBMIT_INPUT_NAME', 'process');
 define ('SNAPLEN_INPUT_NAME', 'snaplen');
+define ('ACTION_INPUT_NAME', 'action');
 define ('DEFAULT_VER', '1.10.1');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('MIN_SNAPLEN', 10);
 define ('DEFAULT_SNAPLEN', 65535);
 define ('MAX_SNAPLEN', 262000);
 define ('DEFAULT_FILTER', 'icmp or udp port 53 or bootpc');
+define ('ACTION_EXAMINE', 'examine');
+define ('ACTION_OPTCBPF', 'optcbpf');
+define ('ACTION_UNOPTCBPF', 'unoptcbpf');
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 # Enforce an RPS limit for requests that submit the form, as these spawn
 # external processes, which together take a while (0.5s to 1.0s) to complete.
@@ -62,6 +66,13 @@ define ('CAPER_BIN', '/usr/local/bin/caper.native');
 # now to enable HTTP 429 and other errors later on, when some of the output
 # has already been generated.
 ob_start();
+
+$actions = array
+(
+	ACTION_EXAMINE => 'examine',
+	ACTION_UNOPTCBPF => 'download as cBPF savefile (without optimization)',
+	ACTION_OPTCBPF => 'download as cBPF savefile (with optimization)',
+);
 
 # filtertest, where specified, was copied from libpcap built
 # using "./configure --enable-optimizer-dbg"
@@ -288,6 +299,125 @@ class EscapedException extends Exception
 {
 }
 
+class ByteCode
+{
+	protected const EOF_TLV = 0;
+	protected const LINKTYPENAME_TLV = 1;
+	protected const FILTER_TLV = 2;
+	protected const OPTREQ_TLV = 3;
+	protected const COMMENT_TLV = 5;
+	protected const TIMESTAMP_TLV = 6;
+	protected const COMMENT_STR = 'Generated at https://www.tcpdump.org/bpfexam/';
+
+	protected array $statements;
+	public int $snaplen;
+	public int $dlt_value;
+	public string $dlt_name;
+	public string $filter;
+	public bool $optreq;
+
+	# Parse output of "tcpdump -ddd".
+	public function setStatements (string $ddd): void
+	{
+		$this->statements = array();
+		$lines = explode ("\n", rtrim ($ddd, "\n"));
+		# Require one instruction counter line and at least one instruction line for a "ret".
+		if (count ($lines) < 2)
+			throw new InvalidArgumentException ('the input must comprise at least two lines of text');
+
+		# The instruction counter.
+		$line = array_shift ($lines);
+		if (1 !== preg_match ('/^\d+$/', $line, $m))
+			throw new InvalidArgumentException ("malformed instruction counter line: '${line}'");
+		$declared = (int) $m[0];
+		if ($declared < 1)
+			throw new InvalidArgumentException ("instruction counter ${declared} declared too low");
+		if ($declared != count ($lines))
+			throw new InvalidArgumentException ("instruction counter ${declared} does not match the contents");
+
+		# The instructions.
+		foreach ($lines as $line)
+		{
+			if (1 !== preg_match ('/^(?P<opcode>\d+) (?P<jt>\d+) (?P<jf>\d+) (?P<k>\d+)$/', $line, $m))
+				throw new InvalidArgumentException ("malformed instruction line: '${line}'");
+			$this->statements []= array
+			(
+				'opcode' => $m['opcode'],
+				'jt' => $m['jt'],
+				'jf' => $m['jf'],
+				'k' => $m['k'],
+			);
+		}
+	}
+
+	public function getBinaryBE(): string
+	{
+		$ret = '';
+		foreach ($this->statements as $stmt)
+			$ret .= pack ('nCCN', $stmt['opcode'], $stmt['jt'], $stmt['jf'], $stmt['k']);
+		return $ret;
+	}
+
+	public function getBinaryLE(): string
+	{
+		$ret = '';
+		foreach ($this->statements as $stmt)
+			$ret .= pack ('vCCV', $stmt['opcode'], $stmt['jt'], $stmt['jf'], $stmt['k']);
+		return $ret;
+	}
+
+	protected function getStringTLV (int $t, string $s): string
+	{
+		return pack ('nn', $t, strlen ($s)) . $s;
+	}
+
+	protected function getUint8TLV (int $t, int $v): string
+	{
+		return pack ('nnC', $t, 1, $v);
+	}
+
+	protected function getUint64TLV (int $t, int $v): string
+	{
+		# FIXME: PHP 7.4.30 seems to have a bug encoding large 64-bit values.
+		return pack ('nnJ', $t, 8, $v);
+	}
+
+	protected function getVoidTLV (int $t): string
+	{
+		return pack ('nn', $t, 0);
+	}
+
+	# This implements cbpf-savefile(5) draft revision 6.
+	public function getSavefile(): string
+	{
+		$ret = pack
+		(
+			'NNCCnNnn',
+			0xA1B2C3CB, # binary signature
+			0x63425046, # ASCII hint
+			1, # MajorVer
+			0, # MinorVer
+			0b0000000000000011, # XOR | MOD
+			$this->snaplen,
+			$this->dlt_value,
+			count ($this->statements)
+		);
+		$ret .= $this->getBinaryBE();
+
+		if ($this->dlt_name !== NULL)
+			$ret .= self::getStringTLV (self::LINKTYPENAME_TLV, $this->dlt_name);
+		if ($this->filter !== NULL)
+			$ret .= self::getStringTLV (self::FILTER_TLV, $this->filter);
+		if ($this->optreq !== NULL)
+			$ret .= self::getUint8TLV (self::OPTREQ_TLV, (int)$this->optreq);
+		$ret .= self::getStringTLV (self::COMMENT_TLV, self::COMMENT_STR);
+		$ret .= self::getUint64TLV (self::TIMESTAMP_TLV, time());
+		$ret .= self::getVoidTLV (self::EOF_TLV);
+
+		return $ret;
+	}
+} # class ByteCode
+
 function array_fetch (array $a, $key, $dfl)
 {
 	return array_key_exists ($key, $a) ? $a[$key] : $dfl;
@@ -332,24 +462,21 @@ function read_file (string $filename): string
 if ($_SERVER['REQUEST_METHOD'] != 'GET')
 	fail (405);
 $req_ver = array_fetch ($_REQUEST, VER_INPUT_NAME, NULL);
-if ($req_ver !== NULL && ! array_key_exists ($req_ver, $versions))
-	fail (400);
 $req_dlt_name = array_fetch ($_REQUEST, DLT_INPUT_NAME, NULL);
-if ($req_dlt_name !== NULL && ! array_key_exists ($req_dlt_name, $dltlist))
-	fail (400);
 $req_snaplen = array_fetch ($_REQUEST, SNAPLEN_INPUT_NAME, NULL);
-if
-(
-	$req_snaplen !== NULL &&
-	(
-		1 !== preg_match ('/^[0-9]+$/', $req_snaplen) ||
-		$req_snaplen < MIN_SNAPLEN ||
-		$req_snaplen > MAX_SNAPLEN
-	)
-)
-	fail (400);
 $req_filter = array_fetch ($_REQUEST, EXPR_INPUT_NAME, NULL);
+$req_action = array_fetch ($_REQUEST, ACTION_INPUT_NAME, NULL);
 
+function print_html_page
+(
+	string $req_ver,
+	string $req_dlt_name,
+	int $req_snaplen,
+	string $req_filter,
+	string $results_html = ''
+): void
+{
+	global $versions, $dltlist, $actions;
 ?>
 <!DOCTYPE html>
 <HTML lang='en'>
@@ -462,7 +589,7 @@ foreach ($versions as $ver => $vdata)
 	if (array_key_exists ('filtertest', $vdata))
 		$optlabel .= ' (with optimizer debugging)';
 	echo "<OPTION value='${ver}'";
-	if ($ver == ($req_ver ?? DEFAULT_VER))
+	if ($ver == $req_ver)
 		echo ' selected';
 	echo ">${optlabel}</OPTION>\n";
 }
@@ -478,7 +605,7 @@ printf ("<TD><SELECT name='%s' tabindex=200>\n", DLT_INPUT_NAME);
 foreach ($dltlist as $dlt_code => $dlt)
 {
 	echo "<OPTION value=${dlt_code}";
-	if ($dlt_code == ($req_dlt_name ?? DEFAULT_DLT))
+	if ($dlt_code == $req_dlt_name)
 		echo ' selected';
 	$dlt_descr = array_key_exists ('descr', $dlt) ? " (${dlt['descr']})" : '';
 	echo ">${dlt['val']}: DLT_${dlt_code}${dlt_descr}</OPTION>\n";
@@ -496,7 +623,7 @@ printf
 	"<TD><INPUT type=text size=7 name='%s' id='%s' value='%s' tabindex=250></TD>\n",
 	SNAPLEN_INPUT_NAME,
 	SNAPLEN_INPUT_NAME,
-	$req_snaplen ?? DEFAULT_SNAPLEN
+	$req_snaplen
 );
 echo "</TR>\n";
 
@@ -511,9 +638,21 @@ printf
 	"<TD><INPUT type=text size=80 name='%s' id='%s' value='%s' tabindex=300></TD>\n",
 	EXPR_INPUT_NAME,
 	EXPR_INPUT_NAME,
-	htmlentities ($req_filter ?? DEFAULT_FILTER)
+	htmlentities ($req_filter)
 );
 echo "</TR>\n";
+
+echo "<TR>\n";
+printf
+(
+	"<TH><LABEL for='%s'>Action:</LABEL></TH>\n",
+	ACTION_INPUT_NAME
+);
+printf ("<TD><SELECT name='%s' tabindex=400>\n", ACTION_INPUT_NAME);
+foreach ($actions as $value => $label)
+	echo "<OPTION value=${value}>${label}</OPTION>\n";
+echo "</SELECT>\n</TD>\n</TR>\n";
+
 ?>
 						<TR>
 							<TD></TD>
@@ -523,6 +662,12 @@ echo "</TR>\n";
 					</FORM>
 				</DIV>
 <?php
+	echo $results_html;
+	echo "</DIV>\n</DIV>\n";
+	echo read_file (FOOTER_FILE);
+	echo "</BODY>\n</HTML>\n";
+} # print_html_page()
+
 # Feed the input to stdin and return the stdout and stderr as a 2-tuple.
 function pipe_process (array $argv, string $stdin = ''): array
 {
@@ -570,7 +715,7 @@ function on_stderr_throw_escaped (string $stdout, string $stderr): string
 	return $stdout;
 }
 
-function run_tcpdump (array $argv, int $snaplen, string $dlt_value): string
+function run_tcpdump (array $argv, object $bytecode): string
 {
 	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
 	# a network interface even if provided with the "-y" flag.  To work around that,
@@ -579,7 +724,12 @@ function run_tcpdump (array $argv, int $snaplen, string $dlt_value): string
 	# header and disregards any "-s" flags.
 	if (count ($argv) < 1)
 		throw new Exception ('$argv must have at least one element');
-	array_splice ($argv, 1, 0, array ('-r', '-'));
+	$argv []= '-r';
+	$argv []= '-';
+	if (! $bytecode->optreq)
+		$argv []= '-O';
+	$argv []= '--';
+	$argv []= $bytecode->filter;
 	$pcap_header = pack
 	(
 		'VvvVVVV',
@@ -588,8 +738,8 @@ function run_tcpdump (array $argv, int $snaplen, string $dlt_value): string
 		4, # minor version
 		0, # time zone offset
 		0, # time stamp accuracy
-		$snaplen,
-		$dlt_value
+		$bytecode->snaplen,
+		$bytecode->dlt_value
 	);
 	list ($stdout, $stderr) = pipe_process ($argv, $pcap_header);
 	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
@@ -597,7 +747,7 @@ function run_tcpdump (array $argv, int $snaplen, string $dlt_value): string
 	return on_stderr_throw ($stdout, $stderr);
 }
 
-function run_filtertest (string $filtertest_bin, string $dlt_name, string $filter): string
+function run_filtertest (string $filtertest_bin, object $bytecode): string
 {
 	list ($stdout, $stderr) = pipe_process
 	(
@@ -606,8 +756,8 @@ function run_filtertest (string $filtertest_bin, string $dlt_name, string $filte
 			$filtertest_bin,
 			'-g',
 			'--',
-			$dlt_name,
-			$filter
+			$bytecode->dlt_name,
+			$bytecode->filter
 		)
 	);
 	return on_stderr_throw ($stdout, $stderr);
@@ -689,36 +839,6 @@ function run_dot (string $graphdef): string
 	return on_stderr_throw ($stdout, $stderr);
 }
 
-# Parse "tcpdump -ddd" format and return binary BPF instructions.
-function bpf_ddd2bin (string $ddd): string
-{
-	$ret = '';
-	$lines = explode ("\n", rtrim ($ddd, "\n"));
-	# Require one instruction counter line and at least one instruction line for a "ret".
-	if (count ($lines) < 2)
-		throw new Exception ('the input must comprise at least two lines of text');
-
-	# The instruction counter.
-	$line = array_shift ($lines);
-	if (1 !== preg_match ('/^\d+$/', $line, $m))
-		throw new Exception ("malformed instruction counter line: '${line}'");
-	$declared = (int) $m[0];
-	if ($declared < 1)
-		throw new Exception ("instruction counter ${declared} declared too low");
-	if ($declared != count ($lines))
-		throw new Exception ("instruction counter ${declared} does not match the contents");
-
-	# The instructions.
-	foreach ($lines as $line)
-	{
-		if (1 !== preg_match ('/^(?P<opcode>\d+) (?P<jt>\d+) (?P<jf>\d+) (?P<k>\d+)$/', $line, $m))
-			throw new Exception ("malformed instruction line: '${line}'");
-		# 16-bit, 8-bit, 8-bit, 32-bit; nCCN for BE, vCCV for LE.
-		$ret .= pack ('vCCV', $m['opcode'], $m['jt'], $m['jf'], $m['k']);
-	}
-	return $ret;
-}
-
 function r2_disasm (string $bytecode): string
 {
 	list ($stdout, $stderr) = pipe_process
@@ -743,7 +863,7 @@ function r2_disasm (string $bytecode): string
 	return on_stderr_throw_escaped ($stdout, $stderr);
 }
 
-function r2_graph (string $bytecode): string
+function r2_graph (object $bytecode): string
 {
 	list ($stdout, $stderr) = pipe_process
 	(
@@ -758,12 +878,12 @@ function r2_graph (string $bytecode): string
 			'-c', 'agfd',
 			'stdin://'
 		),
-		$bytecode
+		$bytecode->getBinaryLE()
 	);
 	return on_stderr_throw_escaped ($stdout, $stderr);
 }
 
-function run_caper (string $filter): string
+function run_caper (object $bytecode): string
 {
 	list ($stdout, $stderr) = pipe_process
 	(
@@ -774,7 +894,7 @@ function run_caper (string $filter): string
 			'-r',
 			'-n',
 			'-e',
-			$filter
+			$bytecode->filter
 		)
 	);
 	return on_stderr_throw ($stdout, $stderr);
@@ -815,15 +935,11 @@ function inline_img (string $data): string
 
 function process_request
 (
-	array $vdata,
-	string $req_dlt_name,
-	int $snaplen,
-	string $req_filter
+	object $bytecode,
+	string $tcpdump_bin,
+	string $filtertest_bin
 ): void
 {
-	global $dltlist;
-
-	$dlt_value = $dltlist[$req_dlt_name]['val'];
 	$libpcap_before =
 		$libpcap_after =
 		$r2_disasm_before =
@@ -835,17 +951,19 @@ function process_request
 	$optimizer_steps = NULL;
 	try
 	{
-		$libpcap_before = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-Od', '--', $req_filter), $snaplen, $dlt_value));
-		$bytecode_before = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-Oddd', '--', $req_filter), $snaplen, $dlt_value));
-		$r2_disasm_before = r2_disasm ($bytecode_before);
-		$r2_graph_before = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_before))));
-		$libpcap_after = htmlentities (run_tcpdump (array ($vdata['tcpdump'], '-d', '--', $req_filter), $snaplen, $dlt_value));
-		$bytecode_after = bpf_ddd2bin (run_tcpdump (array ($vdata['tcpdump'], '-ddd', '--', $req_filter), $snaplen, $dlt_value));
-		$r2_disasm_after = r2_disasm ($bytecode_after);
-		$r2_graph_after = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode_after))));
-		if (array_key_exists ('filtertest', $vdata))
+		$bytecode->optreq = FALSE;
+		$libpcap_before = htmlentities (run_tcpdump (array ($tcpdump_bin, '-d'), $bytecode));
+		$bytecode->setStatements (run_tcpdump (array ($tcpdump_bin, '-ddd'), $bytecode));
+		$r2_disasm_before = r2_disasm ($bytecode->getBinaryLE());
+		$r2_graph_before = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode))));
+		$bytecode->optreq = TRUE;
+		$libpcap_after = htmlentities (run_tcpdump (array ($tcpdump_bin, '-d'), $bytecode));
+		$bytecode->setStatements (run_tcpdump (array ($tcpdump_bin, '-ddd'), $bytecode));
+		$r2_disasm_after = r2_disasm ($bytecode->getBinaryLE());
+		$r2_graph_after = inline_img (run_dot (restyle_r2_graph (r2_graph ($bytecode))));
+		if ($filtertest_bin !== NULL)
 		{
-			$graphs = detect_graphs (run_filtertest ($vdata['filtertest'], $req_dlt_name, $req_filter));
+			$graphs = detect_graphs (run_filtertest ($filtertest_bin, $bytecode));
 			if (count ($graphs))
 			{
 				$optimizer_steps = '';
@@ -857,7 +975,7 @@ function process_request
 			}
 		}
 		# Try this one last because it is the most fragile.
-		$caper_output = htmlentities (run_caper ($req_filter));
+		$caper_output = htmlentities (run_caper ($bytecode));
 	}
 	finally
 	{
@@ -916,39 +1034,109 @@ ENDOFTEXT;
 		</DIV>
 ENDOFTEXT;
 	}
-}
+} # process_request()
 
-if
-(
-	$req_ver !== NULL &&
-	$req_dlt_name !== NULL &&
-	$req_snaplen !== NULL &&
-	$req_filter !== NULL
-)
+# A valid request specifies either all inputs at once, or none at all.  If this
+# is not the case, something is clearly wrong.
+if ($req_action === NULL)
 {
-	limit_request_rate();
-	$error = '';
-	ob_start();
-	try
-	{
-		process_request ($versions[$req_ver], $req_dlt_name, $req_snaplen, $req_filter);
-	}
-	catch (EscapedException $e)
-	{
-		$error = '<PRE class=stderr>' . $e->getMessage() . '</PRE>';
-	}
-	catch (Exception $e)
-	{
-		$error = '<PRE class=stderr>' . htmlentities ($e->getMessage()) . '</PRE>';
-	}
-	echo $error . ob_get_clean();
+	if
+	(
+		$req_ver !== NULL ||
+		$req_dlt_name !== NULL ||
+		$req_snaplen !== NULL ||
+		$req_filter !== NULL
+	)
+		fail (400);
 }
-?>
-			</DIV>
-		</DIV>
-<?php
+elseif
+(
+	! array_key_exists ($req_action, $actions) ||
+	$req_ver === NULL ||
+	! array_key_exists ($req_ver, $versions) ||
+	$req_dlt_name === NULL ||
+	! array_key_exists ($req_dlt_name, $dltlist) ||
+	$req_snaplen === NULL ||
+	1 !== preg_match ('/^[0-9]+$/', $req_snaplen) ||
+	$req_snaplen < MIN_SNAPLEN ||
+	$req_snaplen > MAX_SNAPLEN ||
+	$req_filter === NULL
+)
+	fail (400);
+
+try
+{
+	if ($req_action === NULL)
+		print_html_page
+		(
+			DEFAULT_VER,
+			DEFAULT_DLT,
+			DEFAULT_SNAPLEN,
+			DEFAULT_FILTER
+		);
+	else
+	{
+		limit_request_rate();
+		$bytecode = new ByteCode;
+		$bytecode->snaplen = $req_snaplen;
+		$bytecode->dlt_value = $dltlist[$req_dlt_name]['val'];
+		$bytecode->filter = $req_filter;
+		$bytecode->dlt_name = $req_dlt_name;
+		switch ($req_action)
+		{
+		case ACTION_EXAMINE:
+			$error = '';
+			ob_start();
+			try
+			{
+				process_request
+				(
+					$bytecode,
+					$versions[$req_ver]['tcpdump'],
+					array_fetch ($versions[$req_ver], 'filtertest', NULL)
+				);
+			}
+			catch (EscapedException $e)
+			{
+				$error = '<PRE class=stderr>' . $e->getMessage() . '</PRE>';
+			}
+			catch (Exception $e)
+			{
+				$error = '<PRE class=stderr>' . htmlentities ($e->getMessage()) . '</PRE>';
+			}
+			print_html_page
+			(
+				$req_ver,
+				$bytecode->dlt_name,
+				$bytecode->snaplen,
+				$bytecode->filter,
+				$error . ob_get_clean()
+			);
+			break;
+		case ACTION_OPTCBPF:
+		case ACTION_UNOPTCBPF:
+			$bytecode->optreq = $req_action == ACTION_OPTCBPF;
+			$bytecode->setStatements (run_tcpdump (array ($versions[$req_ver]['tcpdump'], '-ddd'), $bytecode));
+			$data = $bytecode->getSavefile();
+			header ('Content-Type: application/octet-stream');
+			header ('Content-Length: ' . strlen ($data));
+			$filename = sprintf
+			(
+				'savefile_DRAFT_rev6_%u_%s_DLT_%s.cbpf',
+				time(),
+				$bytecode->optreq ? 'optimized' : 'unoptimized',
+				$req_dlt_name
+			);
+			header ("Content-Disposition: attachment; filename=\"${filename}\"");
+			echo $data;
+			break;
+		default:
+			throw new LogicError;
+		}
+	}
+}
+catch (Exception $e)
+{
+	fail (500);
+}
 ob_end_flush();
-echo read_file (FOOTER_FILE);
-?>
-	</BODY>
-</HTML>
