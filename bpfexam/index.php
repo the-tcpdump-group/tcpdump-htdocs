@@ -35,18 +35,18 @@ define ('PAGE_TITLE', 'BPF Exam');
 define ('VER_INPUT_NAME', 'ver');
 define ('DLT_INPUT_NAME', 'dlt');
 define ('EXPR_INPUT_NAME', 'filter');
-define ('SUBMIT_INPUT_NAME', 'process');
+define ('SUBMIT_INPUT_NAME', 'examine');
 define ('SNAPLEN_INPUT_NAME', 'snaplen');
-define ('ACTION_INPUT_NAME', 'action');
+define ('ACTION_INPUT_NAME', 'cbpf');
 define ('DEFAULT_VER', '1.10.1');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('MIN_SNAPLEN', 10);
 define ('DEFAULT_SNAPLEN', 65535);
 define ('MAX_SNAPLEN', 262000);
 define ('DEFAULT_FILTER', 'icmp or udp port 53 or bootpc');
-define ('ACTION_EXAMINE', 'examine');
-define ('ACTION_OPTCBPF', 'optcbpf');
-define ('ACTION_UNOPTCBPF', 'unoptcbpf');
+define ('ACTION_EXAMINE', 'none');
+define ('ACTION_OPTCBPF', 'opt');
+define ('ACTION_UNOPTCBPF', 'unopt');
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 # Enforce an RPS limit for requests that submit the form, as these spawn
 # external processes, which together take a while (0.5s to 1.0s) to complete.
@@ -69,9 +69,9 @@ ob_start();
 
 $actions = array
 (
-	ACTION_EXAMINE => 'examine',
-	ACTION_UNOPTCBPF => 'download as cBPF savefile (without optimization)',
-	ACTION_OPTCBPF => 'download as cBPF savefile (with optimization)',
+	ACTION_EXAMINE => 'no',
+	ACTION_UNOPTCBPF => 'yes, without optimization',
+	ACTION_OPTCBPF => 'yes, with optimization',
 );
 
 # filtertest, where specified, was copied from libpcap built
@@ -645,7 +645,7 @@ echo "</TR>\n";
 echo "<TR>\n";
 printf
 (
-	"<TH><LABEL for='%s'>Action:</LABEL></TH>\n",
+	"<TH><LABEL for='%s'>Make a cBPF savefile (<A href='/manpages/cbpf-savefile.5.html'>?</A>):</LABEL></TH>\n",
 	ACTION_INPUT_NAME
 );
 printf ("<TD><SELECT name='%s' tabindex=400>\n", ACTION_INPUT_NAME);
