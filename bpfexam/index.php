@@ -42,7 +42,7 @@ define ('DEFAULT_VER', '1.10.1');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('MIN_SNAPLEN', 10);
 define ('DEFAULT_SNAPLEN', 65535);
-define ('MAX_SNAPLEN', 262000);
+define ('MAX_SNAPLEN', 262144);
 define ('DEFAULT_FILTER', 'icmp or udp port 53 or bootpc');
 define ('ACTION_EXAMINE', 'none');
 define ('ACTION_OPTCBPF', 'opt');
