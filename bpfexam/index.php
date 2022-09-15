@@ -302,7 +302,6 @@ class ByteCode
 	protected const OPTREQ_TLV = 3;
 	protected const COMMENT_TLV = 5;
 	protected const TIMESTAMP_TLV = 6;
-	protected const COMMENT_STR = 'Generated at https://www.tcpdump.org/bpfexam/';
 
 	protected array $statements;
 	public int $snaplen;
@@ -310,6 +309,7 @@ class ByteCode
 	public string $dlt_name;
 	public string $filter;
 	public bool $optreq;
+	public string $comment;
 
 	# Parse output of "tcpdump -ddd".
 	public function setStatements (string $ddd): void
@@ -405,7 +405,7 @@ class ByteCode
 			$ret .= self::getStringTLV (self::FILTER_TLV, $this->filter);
 		if ($this->optreq !== NULL)
 			$ret .= self::getUint8TLV (self::OPTREQ_TLV, (int)$this->optreq);
-		$ret .= self::getStringTLV (self::COMMENT_TLV, self::COMMENT_STR);
+		$ret .= self::getStringTLV (self::COMMENT_TLV, $this->comment);
 		$ret .= self::getUint64TLV (self::TIMESTAMP_TLV, time());
 		$ret .= self::getVoidTLV (self::EOF_TLV);
 
@@ -1084,6 +1084,13 @@ try
 		$bytecode->dlt_value = $dltlist[$req_dlt_name]['val'];
 		$bytecode->filter = $req_filter;
 		$bytecode->dlt_name = $req_dlt_name;
+		$bytecode->comment = sprintf
+		(
+			'Generated at https://www.tcpdump.org%s using libpcap %s.',
+			$_SERVER['SCRIPT_NAME'],
+			array_key_exists ('descr', $versions[$req_ver]) ? 'unknown version' : $req_ver
+		);
+
 		switch ($req_action)
 		{
 		case ACTION_EXAMINE:
