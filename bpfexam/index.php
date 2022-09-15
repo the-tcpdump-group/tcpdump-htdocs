@@ -62,11 +62,6 @@ define ('DOT_BIN', '/usr/bin/dot');
 # and use a separate VM with the same distribution as the production server.
 define ('CAPER_BIN', '/usr/local/bin/caper.native');
 
-# HTTP status code can be changed only before the document, so start buffering
-# now to enable HTTP 429 and other errors later on, when some of the output
-# has already been generated.
-ob_start();
-
 $actions = array
 (
 	ACTION_EXAMINE => 'no',
@@ -458,14 +453,6 @@ function read_file (string $filename): string
 		fail (500);
 	return $ret;
 }
-
-if ($_SERVER['REQUEST_METHOD'] != 'GET')
-	fail (405);
-$req_ver = array_fetch ($_REQUEST, VER_INPUT_NAME, NULL);
-$req_dlt_name = array_fetch ($_REQUEST, DLT_INPUT_NAME, NULL);
-$req_snaplen = array_fetch ($_REQUEST, SNAPLEN_INPUT_NAME, NULL);
-$req_filter = array_fetch ($_REQUEST, EXPR_INPUT_NAME, NULL);
-$req_action = array_fetch ($_REQUEST, ACTION_INPUT_NAME, NULL);
 
 function print_html_page
 (
@@ -1035,6 +1022,21 @@ ENDOFTEXT;
 ENDOFTEXT;
 	}
 } # process_request()
+
+################################### START ###################################
+
+# HTTP status code can be changed only before the document, so start buffering
+# now to enable HTTP 429 and other errors later on, when some of the output
+# has already been generated.
+ob_start();
+
+if ($_SERVER['REQUEST_METHOD'] != 'GET')
+	fail (405);
+$req_ver = array_fetch ($_REQUEST, VER_INPUT_NAME, NULL);
+$req_dlt_name = array_fetch ($_REQUEST, DLT_INPUT_NAME, NULL);
+$req_snaplen = array_fetch ($_REQUEST, SNAPLEN_INPUT_NAME, NULL);
+$req_filter = array_fetch ($_REQUEST, EXPR_INPUT_NAME, NULL);
+$req_action = array_fetch ($_REQUEST, ACTION_INPUT_NAME, NULL);
 
 # A valid request specifies either all inputs at once, or none at all.  If this
 # is not the case, something is clearly wrong.
