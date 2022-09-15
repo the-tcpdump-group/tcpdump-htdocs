@@ -924,7 +924,7 @@ function process_request
 (
 	object $bytecode,
 	string $tcpdump_bin,
-	string $filtertest_bin
+	?string $filtertest_bin = NULL
 ): void
 {
 	$libpcap_before =
