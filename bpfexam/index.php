@@ -1087,7 +1087,7 @@ try
 		$bytecode->comment = sprintf
 		(
 			'Generated at https://www.tcpdump.org%s using libpcap %s.',
-			$_SERVER['SCRIPT_NAME'],
+			preg_replace ('/\?.*$/', '', $_SERVER['REQUEST_URI']),
 			array_key_exists ('descr', $versions[$req_ver]) ? 'unknown version' : $req_ver
 		);
 
