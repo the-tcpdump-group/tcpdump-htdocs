@@ -688,10 +688,10 @@ function pipe_process (array $argv, string $stdin = ''): array
 	return array ($stdout, $stderr);
 }
 
-function on_stderr_throw (string $stdout, string $stderr): string
+function on_stderr_throw (string $stdout, string $stderr, string $prefix = ''): string
 {
 	if ($stderr != '')
-		throw new Exception ($stderr);
+		throw new Exception ($prefix . $stderr);
 	return $stdout;
 }
 
@@ -884,7 +884,7 @@ function run_caper (object $bytecode): string
 			$bytecode->filter
 		)
 	);
-	return on_stderr_throw ($stdout, $stderr);
+	return on_stderr_throw ($stdout, $stderr, CAPER_BIN . ': ');
 }
 
 function limit_request_rate(): void
