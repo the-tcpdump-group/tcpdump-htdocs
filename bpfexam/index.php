@@ -522,7 +522,9 @@ echo preg_replace
 					<P>
 						Given a set of input parameters below,
 						<EM><?php echo PAGE_TITLE; ?></EM> tries to produce a number of
-						outputs. The first output is a filter expression that should have
+						outputs. The first output, which is specific to the
+						<code>DLT_EN10MB</code> link-layer header type only, is a filter
+						expression that should have
 						the same effect as the input filter expression, but includes all the
 						implied predicates explicitly as determined using
 						<A href="https://gitlab.com/niksu/caper">Caper</A>, which implements
@@ -742,6 +744,7 @@ function run_filtertest (string $filtertest_bin, object $bytecode): string
 		(
 			$filtertest_bin,
 			'-g',
+			'-s', $bytecode->snaplen,
 			'--',
 			$bytecode->dlt_name,
 			$bytecode->filter
@@ -962,7 +965,10 @@ function process_request
 			}
 		}
 		# Try this one last because it is the most fragile.
-		$caper_output = htmlentities (run_caper ($bytecode));
+		# Also have this output conditional to the requested DLT because Caper
+		# implements logic that is hard-coded to Ethernet.
+		if ($bytecode->dlt_name == 'EN10MB')
+			$caper_output = htmlentities (run_caper ($bytecode));
 	}
 	finally
 	{
