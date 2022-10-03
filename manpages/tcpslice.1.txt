@@ -16,7 +16,7 @@ NAME
        tcpslice - extract pieces of and/or merge together pcap files
 
 SYNOPSIS
-       tcpslice [ -DdlhRrtv ] [ -w file ]
+       tcpslice [ -DdlhRrtv ] [ -w output-file ]
                 [ -s types [ -e seconds ] [ -f format ] ]
                 [ start-time [ end-time ] ] file ...
 
@@ -129,12 +129,14 @@ OPTIONS
               -r  or  -t  has  been specified then the times are dumped in the
               corresponding format; otherwise, raw format (-R) is used.
 
-       -e     Specify a number of seconds to wait after the  last  packet  was
+       -e seconds
+              Specify a number of seconds to wait after the  last  packet  was
               seen before considering a session to be expired (default: 0 = do
               not expire inactive sessions). This is only effective  when  the
               -s option is used to track sessions.
 
-       -f     Specify the name format of PCAP files to which each session will
+       -f format
+              Specify the name format of PCAP files to which each session will
               be extracted (default: NULL = do not extract sessions  to  sepa-
               rate  files).  This is only effective when the -s option is used
               to track sessions.
@@ -157,7 +159,8 @@ OPTIONS
        -r     Same  as  -R  except the timestamps are dumped in human-readable
               format, similar to that used by date(1).
 
-       -s     Enable session tracking for  the  specified  types  which  is  a
+       -s types
+              Enable session tracking for  the  specified  types  which  is  a
               comma-separated list of the following:
 
               tcp    track all TCP connections
@@ -194,7 +197,8 @@ OPTIONS
               least twice, subsessions (sessions initiated by other  sessions)
               openings and closings are also displayed.
 
-       -w     Direct the output to file rather than stdout.
+       -w output-file
+              Direct the output to output-file rather than stdout.
 
 SEE ALSO
        tcpdump(1)

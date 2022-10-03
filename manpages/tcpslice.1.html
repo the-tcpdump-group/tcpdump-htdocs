@@ -30,11 +30,9 @@ tcpslice - extract pieces of and/or merge together pcap files
 ] [
 <B>-w</B>
 
-<I>file</I>
+<I>output-file</I>
 
 ]
-<BR>
-
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
@@ -53,8 +51,6 @@ tcpslice - extract pieces of and/or merge together pcap files
 <I>format</I>
 
 ] ]
-<BR>
-
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
@@ -330,7 +326,7 @@ or
 
 has been specified then the times are dumped in the corresponding
 format; otherwise, raw format (<B>-R</B>) is used.
-<DT><B>-e</B>
+<DT><B>-e</B><I> seconds</I>
 
 <DD>
 Specify a number of
@@ -342,7 +338,7 @@ is only effective when the
 <B>-s</B>
 
 option is used to track sessions.
-<DT><B>-f</B>
+<DT><B>-f</B><I> format</I>
 
 <DD>
 Specify the name
@@ -388,7 +384,7 @@ except the timestamps are dumped in human-readable format, similar
 to that used by
 <B>date</B>(1).
 
-<DT><B>-s</B>
+<DT><B>-s</B><I> types</I>
 
 <DD>
 Enable session tracking for the specified
@@ -458,10 +454,10 @@ displayed past
 
 if specified at least twice, subsessions (sessions initiated by other
 sessions) openings and closings are also displayed.
-<DT><B>-w</B>
+<DT><B>-w</B><I> output-file</I>
 
 <DD>
-Direct the output to <I>file</I> rather than <I>stdout</I>.
+Direct the output to <I>output-file</I> rather than <I>stdout</I>.
 </DL>
 <H2 id="lbAH">SEE ALSO</H2>
 
@@ -591,7 +587,7 @@ supported more general editing of trace files.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 02:07:11 GMT, January 02, 2022
+This HTML man page was generated at 21:07:02 GMT, October 03, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
