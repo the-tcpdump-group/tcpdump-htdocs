@@ -1,6 +1,6 @@
 +----------------------------------------------------------------------------+
 |                                                                            |
-| This man page documents tcpslice version 1.6-PRE-GIT.                      |
+| This man page documents tcpslice version 1.7-PRE-GIT.                      |
 |                                                                            |
 | Your system may have a different version installed, possibly with some     |
 | local modifications.  To achieve the best results, please make sure this   |
