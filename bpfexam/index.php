@@ -527,15 +527,17 @@ echo preg_replace
 						expression that should have
 						the same effect as the input filter expression, but includes all the
 						implied predicates explicitly as determined using
-						<A href="https://gitlab.com/niksu/caper">Caper</A>, which implements
-						the theory set out in
-						<A href="http://www.cs.iit.edu/~nsultana1/files/pcap_semantics.pdf">this document</A>.
+						<A class=away href="https://gitlab.com/niksu/caper">Caper</A>, which
+						implements the theory set out in
+						<A class=away
+						href="http://www.cs.iit.edu/~nsultana1/files/pcap_semantics.pdf">this
+						document</A>.
 						Then follows the compiled filter (also known as "filter program" or
 						"packet-matching code") as a sequence of BPF instructions in two
 						formats: an output of <code>tcpdump -d</code> (which is explained in
 						detail in <A href="/papers/bpf-usenix93.pdf">this document</A>) and
 						a disassembly produced by
-						<A href="https://www.radare.org/">Radare2</A>. It also tries to
+						<A class=away href="https://www.radare.org/">Radare2</A>. It also tries to
 						reconstruct the final CFG using Radare2 and Graphviz. All these
 						outputs stand for the unoptimized compilation of the filter.
 					</P>
