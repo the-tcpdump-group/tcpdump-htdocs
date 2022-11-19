@@ -706,7 +706,7 @@ DESCRIPTION
               qreply, icmp-maskreq, icmp-maskreply.
 
               The  following  ICMPv6 type fields are available: icmp6-destina-
-              tionrunreach, icmp6-packettoobig, icmp6-timeexceeded,  icmp6-pa-
+              tionunreach, icmp6-packettoobig,  icmp6-timeexceeded,  icmp6-pa-
               rameterproblem, icmp6-echo, icmp6-echoreply, icmp6-multicastlis-
               tenerquery, icmp6-multicastlistenerreportv1, icmp6-multicastlis-
               tenerdone, icmp6-routersolicit, icmp6-routeradvert, icmp6-neigh-
@@ -823,4 +823,4 @@ BUGS
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                  8 July 2022                   PCAP-FILTER(7)
+                               19 November 2022                 PCAP-FILTER(7)
