@@ -438,9 +438,9 @@ DESCRIPTION
 
        reason code
               True if the packet was logged with the specified PF reason code.
-              The known codes are: match, bad-offset, fragment, short, normal-
-              ize, and memory (applies only to packets logged by OpenBSD's  or
-              FreeBSD's pf(4)).
+              The   known  codes  are:  match,  bad-offset,  fragment,  short,
+              normalize, and memory (applies only to packets logged  by  Open-
+              BSD's or FreeBSD's pf(4)).
 
        rset name
               True if the packet was logged as matching the specified PF rule-
@@ -508,9 +508,9 @@ DESCRIPTION
 
               If the specified wlan_type is  data,  then  valid  wlan_subtypes
               are:  data,  data-cf-ack,  data-cf-poll, data-cf-ack-poll, null,
-              cf-ack, cf-poll, cf-ack-poll,  qos-data,  qos-data-cf-ack,  qos-
-              data-cf-poll, qos-data-cf-ack-poll, qos, qos-cf-poll and qos-cf-
-              ack-poll.
+              cf-ack,   cf-poll,   cf-ack-poll,   qos-data,   qos-data-cf-ack,
+              qos-data-cf-poll,  qos-data-cf-ack-poll,  qos,  qos-cf-poll  and
+              qos-cf-ack-poll.
 
        subtype wlan_subtype
               True if the IEEE 802.11  frame  subtype  matches  the  specified
@@ -699,25 +699,27 @@ DESCRIPTION
               (ICMPv6 type  field),  icmpcode  (ICMP  code  field),  icmp6code
               (ICMPv6 code field) and tcpflags (TCP flags field).
 
-              The following ICMP type field values are available: icmp-echore-
-              ply, icmp-unreach, icmp-sourcequench, icmp-redirect,  icmp-echo,
-              icmp-routeradvert,   icmp-routersolicit,   icmp-timxceed,  icmp-
-              paramprob, icmp-tstamp, icmp-tstampreply,  icmp-ireq,  icmp-ire-
-              qreply, icmp-maskreq, icmp-maskreply.
+              The   following   ICMP   type   field   values   are  available:
+              icmp-echoreply, icmp-unreach, icmp-sourcequench,  icmp-redirect,
+              icmp-echo, icmp-routeradvert, icmp-routersolicit, icmp-timxceed,
+              icmp-paramprob,   icmp-tstamp,   icmp-tstampreply,    icmp-ireq,
+              icmp-ireqreply, icmp-maskreq, icmp-maskreply.
 
-              The  following  ICMPv6 type fields are available: icmp6-destina-
-              tionunreach, icmp6-packettoobig,  icmp6-timeexceeded,  icmp6-pa-
-              rameterproblem, icmp6-echo, icmp6-echoreply, icmp6-multicastlis-
-              tenerquery, icmp6-multicastlistenerreportv1, icmp6-multicastlis-
-              tenerdone, icmp6-routersolicit, icmp6-routeradvert, icmp6-neigh-
-              borsolicit, icmp6-neighboradvert, icmp6-redirect,  icmp6-router-
-              renum,    icmp6-nodeinformationquery,   icmp6-nodeinformationre-
-              sponse, icmp6-ineighbordiscoverysolicit,  icmp6-ineighbordiscov-
-              eryadvert,  icmp6-multicastlistenerreportv2, icmp6-homeagentdis-
-              coveryrequest,  icmp6-homeagentdiscoveryreply,  icmp6-mobilepre-
-              fixsolicit,   icmp6-mobileprefixadvert,   icmp6-certpathsolicit,
-              icmp6-certpathadvert, icmp6-multicastrouteradvert,  icmp6-multi-
-              castroutersolicit, icmp6-multicastrouterterm.
+              The   following   ICMPv6   type   field  values  are  available:
+              icmp6-destinationunreach,                    icmp6-packettoobig,
+              icmp6-timeexceeded,      icmp6-parameterproblem,     icmp6-echo,
+              icmp6-echoreply,                   icmp6-multicastlistenerquery,
+              icmp6-multicastlistenerreportv1,    icmp6-multicastlistenerdone,
+              icmp6-routersolicit, icmp6-routeradvert,  icmp6-neighborsolicit,
+              icmp6-neighboradvert,     icmp6-redirect,     icmp6-routerrenum,
+              icmp6-nodeinformationquery,       icmp6-nodeinformationresponse,
+              icmp6-ineighbordiscoverysolicit, icmp6-ineighbordiscoveryadvert,
+              icmp6-multicastlistenerreportv2,
+              icmp6-homeagentdiscoveryrequest,  icmp6-homeagentdiscoveryreply,
+              icmp6-mobileprefixsolicit,             icmp6-mobileprefixadvert,
+              icmp6-certpathsolicit,                     icmp6-certpathadvert,
+              icmp6-multicastrouteradvert,       icmp6-multicastroutersolicit,
+              icmp6-multicastrouterterm.
 
               The  following  TCP  flags  field values are available: tcp-fin,
               tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg, tcp-ece, tcp-cwr.

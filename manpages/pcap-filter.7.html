@@ -800,20 +800,36 @@ then valid <I>wlan_subtype</I>s are:
 If the specified <I>wlan_type</I> is <B>data</B>,
 then valid <I>wlan_subtype</I>s are:
 <B>data</B>,
+
 <B>data-cf-ack</B>,
+
 <B>data-cf-poll</B>,
+
 <B>data-cf-ack-poll</B>,
+
 <B>null</B>,
+
 <B>cf-ack</B>,
+
 <B>cf-poll</B>,
+
 <B>cf-ack-poll</B>,
+
 <B>qos-data</B>,
+
 <B>qos-data-cf-ack</B>,
+
 <B>qos-data-cf-poll</B>,
+
 <B>qos-data-cf-ack-poll</B>,
+
 <B>qos</B>,
-<B>qos-cf-poll</B> and
+
+<B>qos-cf-poll</B>
+
+and
 <B>qos-cf-ack-poll</B>.
+
 <DT><B>subtype </B><I>wlan_subtype</I><DD>
 True if the IEEE 802.11 frame subtype matches the specified <I>wlan_subtype</I>
 and frame has the type to which the specified <I>wlan_subtype</I> belongs.
@@ -1168,28 +1184,97 @@ available: <B>icmptype</B> (ICMP type field), <B>icmp6type</B> (ICMPv6 type fiel
 <B>icmpcode</B> (ICMP code field), <B>icmp6code</B> (ICMPv6 code field) and
 <B>tcpflags</B> (TCP flags field).
 <DT><DD>
-The following ICMP type field values are available: <B>icmp-echoreply</B>,
-<B>icmp-unreach</B>, <B>icmp-sourcequench</B>, <B>icmp-redirect</B>,
-<B>icmp-echo</B>, <B>icmp-routeradvert</B>, <B>icmp-routersolicit</B>,
-<B>icmp-timxceed</B>, <B>icmp-paramprob</B>, <B>icmp-tstamp</B>,
-<B>icmp-tstampreply</B>, <B>icmp-ireq</B>, <B>icmp-ireqreply</B>,
-<B>icmp-maskreq</B>, <B>icmp-maskreply</B>.
+The following ICMP type field values are available:
+<B>icmp-echoreply</B>,
+
+<B>icmp-unreach</B>,
+
+<B>icmp-sourcequench</B>,
+
+<B>icmp-redirect</B>,
+
+<B>icmp-echo</B>,
+
+<B>icmp-routeradvert</B>,
+
+<B>icmp-routersolicit</B>,
+
+<B>icmp-timxceed</B>,
+
+<B>icmp-paramprob</B>,
+
+<B>icmp-tstamp</B>,
+
+<B>icmp-tstampreply</B>,
+
+<B>icmp-ireq</B>,
+
+<B>icmp-ireqreply</B>,
+
+<B>icmp-maskreq</B>,
+
+<B>icmp-maskreply</B>.
+
 <DT><DD>
-The following ICMPv6 type fields are available: <B>icmp6-destinationunreach</B>,
-<B>icmp6-packettoobig</B>, <B>icmp6-timeexceeded</B>,
-<B>icmp6-parameterproblem</B>, <B>icmp6-echo</B>,
-<B>icmp6-echoreply</B>, <B>icmp6-multicastlistenerquery</B>,
-<B>icmp6-multicastlistenerreportv1</B>, <B>icmp6-multicastlistenerdone</B>,
-<B>icmp6-routersolicit</B>, <B>icmp6-routeradvert</B>,
-<B>icmp6-neighborsolicit</B>, <B>icmp6-neighboradvert</B>, <B>icmp6-redirect</B>,
-<B>icmp6-routerrenum</B>, <B>icmp6-nodeinformationquery</B>,
-<B>icmp6-nodeinformationresponse</B>, <B>icmp6-ineighbordiscoverysolicit</B>,
-<B>icmp6-ineighbordiscoveryadvert</B>, <B>icmp6-multicastlistenerreportv2</B>,
-<B>icmp6-homeagentdiscoveryrequest</B>, <B>icmp6-homeagentdiscoveryreply</B>,
-<B>icmp6-mobileprefixsolicit</B>, <B>icmp6-mobileprefixadvert</B>,
-<B>icmp6-certpathsolicit</B>, <B>icmp6-certpathadvert</B>,
-<B>icmp6-multicastrouteradvert</B>, <B>icmp6-multicastroutersolicit</B>,
+The following ICMPv6 type field values are available:
+<B>icmp6-destinationunreach</B>,
+
+<B>icmp6-packettoobig</B>,
+
+<B>icmp6-timeexceeded</B>,
+
+<B>icmp6-parameterproblem</B>,
+
+<B>icmp6-echo</B>,
+
+<B>icmp6-echoreply</B>,
+
+<B>icmp6-multicastlistenerquery</B>,
+
+<B>icmp6-multicastlistenerreportv1</B>,
+
+<B>icmp6-multicastlistenerdone</B>,
+
+<B>icmp6-routersolicit</B>,
+
+<B>icmp6-routeradvert</B>,
+
+<B>icmp6-neighborsolicit</B>,
+
+<B>icmp6-neighboradvert</B>,
+
+<B>icmp6-redirect</B>,
+
+<B>icmp6-routerrenum</B>,
+
+<B>icmp6-nodeinformationquery</B>,
+
+<B>icmp6-nodeinformationresponse</B>,
+
+<B>icmp6-ineighbordiscoverysolicit</B>,
+
+<B>icmp6-ineighbordiscoveryadvert</B>,
+
+<B>icmp6-multicastlistenerreportv2</B>,
+
+<B>icmp6-homeagentdiscoveryrequest</B>,
+
+<B>icmp6-homeagentdiscoveryreply</B>,
+
+<B>icmp6-mobileprefixsolicit</B>,
+
+<B>icmp6-mobileprefixadvert</B>,
+
+<B>icmp6-certpathsolicit</B>,
+
+<B>icmp6-certpathadvert</B>,
+
+<B>icmp6-multicastrouteradvert</B>,
+
+<B>icmp6-multicastroutersolicit</B>,
+
 <B>icmp6-multicastrouterterm</B>.
+
 <DT><DD>
 The following TCP flags field values are available: <B>tcp-fin</B>,
 <B>tcp-syn</B>, <B>tcp-rst</B>, <B>tcp-push</B>,
@@ -1428,7 +1513,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 19:35:59 GMT, November 19, 2022
+This HTML man page was generated at 12:43:42 GMT, November 20, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
