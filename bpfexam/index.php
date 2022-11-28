@@ -55,7 +55,7 @@ define ('MAX_RPS_LIMIT', 1.0);
 # package from [1].  However, if it is necessary to try a git master snapshot
 # of Radare2, the recommended way is to build a Debian package in a separate,
 # non-production Debian 11 VM using sys/debian.sh in a Radare2 git clone.
-# 1: https://github.com/radareorg/radare2/releases.
+# 1: https://github.com/radareorg/radare2/releases
 define ('RADARE2_BIN', '/usr/bin/r2');
 define ('DOT_BIN', '/usr/bin/dot');
 # To compile, see https://gitlab.com/niksu/caper/-/blob/master/Vagrantfile
