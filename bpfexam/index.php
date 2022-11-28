@@ -889,7 +889,7 @@ function run_caper (object $bytecode): string
 			$bytecode->filter
 		)
 	);
-	return on_stderr_throw ($stdout, $stderr, CAPER_BIN . ': ');
+	return on_stderr_throw ($stdout, $stderr);
 }
 
 function limit_request_rate(): void
