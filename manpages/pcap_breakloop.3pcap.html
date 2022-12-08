@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_BREAKLOOP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 7 December 2022<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 8 December 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -163,7 +163,18 @@ subsequent call will return
 <B>PCAP_ERROR_BREAK</B>
 
 and clear the flag.
-<H2 id="lbAE">SEE ALSO</H2>
+<H2 id="lbAE">BACKWARD COMPATIBILITY</H2>
+
+<P>
+
+This function became available in libpcap release 0.8.1.
+<P>
+
+In releases prior to libpcap 1.10.0,
+<B>pcap_breakloop</B>()
+
+will not wake up a blocked thread on any platform.
+<H2 id="lbAF">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
@@ -171,7 +182,7 @@ and clear the flag.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 09:00:32 GMT, December 08, 2022
+This HTML man page was generated at 22:57:49 GMT, December 08, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

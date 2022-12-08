@@ -95,7 +95,13 @@ DESCRIPTION
        If a positive number is returned, the flag is not cleared, so a  subse-
        quent call will return PCAP_ERROR_BREAK and clear the flag.
 
+BACKWARD COMPATIBILITY
+       This function became available in libpcap release 0.8.1.
+
+       In  releases prior to libpcap 1.10.0, pcap_breakloop() will not wake up
+       a blocked thread on any platform.
+
 SEE ALSO
        pcap(3PCAP)
 
-                                7 December 2022          PCAP_BREAKLOOP(3PCAP)
+                                8 December 2022          PCAP_BREAKLOOP(3PCAP)
