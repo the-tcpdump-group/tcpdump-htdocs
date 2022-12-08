@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_BREAKLOOP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 7 December 2022<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -41,12 +41,26 @@ to return rather than looping; they will return the number of packets
 that have been processed so far, or
 <B>PCAP_ERROR_BREAK</B>
 
-if no packets have been processed so far.
+if no packets have been processed so far.  If the loop is currently
+blocked waiting for packets to arrive,
+<B>pcap_breakloop</B>()
+
+will also, on some platforms, wake up the thread that is blocked.  In
+this version of libpcap, the only platforms on which a wakeup is caused
+by
+<B>pcap_breakloop</B>()
+
+are Linux and Windows, and the wakeup will only be caused when capturing
+on network interfaces; it will not be caused on other operating systems,
+and will not be caused on any OS when capturing on other types of
+devices.
 <P>
 
 This routine is safe to use inside a signal handler on UNIX or a console
-control handler on Windows, as it merely sets a flag that is checked
-within the loop.
+control handler on Windows, or in a thread other than the one in which
+the loop is running, as it merely sets a flag that is checked within the
+loop and, on some platforms, performs a signal-safe and thread-safe API
+call.
 <P>
 
 The flag is checked in loops reading packets from the OS - a signal by
@@ -66,28 +80,42 @@ packets arrive and the call completes.
 
 <B>
 Note also that, in a multi-threaded application, if one thread is
-blocked in pcap_dispatch(), pcap_loop(), <A HREF='./pcap_next_ex.3pcap.html'>pcap_next</A>(3PCAP), or <A HREF='./pcap_next_ex.3pcap.html'>pcap_next_ex</A>(3PCAP),
-a call to pcap_breakloop() in a different thread will not unblock that
-thread.
+blocked in pcap_dispatch(), pcap_loop(), <A HREF='./pcap_next_ex.3pcap.html'>pcap_next</A>(3PCAP), or
+<A HREF='./pcap_next_ex.3pcap.html'>pcap_next_ex</A>(3PCAP), a call to pcap_breakloop() in a different thread
+will only unblock that thread on the platforms and capture devices
+listed above.
+<P>
+
+If a non-zero packet buffer timeout is set on the
+pcap_t</B>,
+
+and you are capturing on a network interface, the thread will be
+unblocked with the timeout expires.  This is not guaranteed to happen
+unless at least one packet has arrived; the only platforms on which it
+happens are macOS, the BSDs, Solaris 11, AIX, Tru64 UNIX, and Windows.
+<P>
+
+If you want to ensure that the loop will eventually be unblocked on any
+other platforms, or unblocked when capturing on a device other than a
+network interface, you will need to use whatever mechanism the OS
+provides for breaking a thread out of blocking calls in order to unblock
+the thread, such as thread cancellation or thread signalling in systems
+that support POSIX threads.
+
+<P>
+
+<B>
+Note that if pcap_breakloop() unblocks the thread capturing packets, and
+you are running on a platform that supports packet buffering, there may
+be packets in the buffer that arrived before pcap_breakloop() were
+called but that weren't yet provided to libpcap, those packets will not
+have been processed by pcap_dispatch() or pcap_loop().  If
+pcap_breakloop() was called in order to terminate the capture process,
+then, in order to process those packets, you would have to call
+pcap_dispatch() one time in order to process the last batch of packets. 
+This may block until the packet buffer timeout expires, so a non-zero
+packet buffer timeout must be used.
 </B>
-You will need to use whatever mechanism the OS provides for
-breaking a thread out of blocking calls in order to unblock the thread,
-such as thread cancellation or thread signalling in systems that support
-POSIX threads, or
-<B>SetEvent</B>()
-
-on the result of
-<B>pcap_getevent</B>()
-
-on a
-<B>pcap_t</B>
-
-on which the thread is blocked on Windows.  Asynchronous procedure calls
-will not work on Windows, as a thread blocked on a
-<B>pcap_t</B>
-
-will not be in an alertable state.
-
 <P>
 
 Note that
@@ -143,7 +171,7 @@ and clear the flag.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:03 GMT, November 01, 2021
+This HTML man page was generated at 09:00:32 GMT, December 08, 2022
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
