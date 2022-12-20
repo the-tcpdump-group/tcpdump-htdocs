@@ -48,6 +48,7 @@
 # * Ubuntu 18.04
 # * Ubuntu 20.04
 # * Ubuntu 22.04 <--- or this one
+# * Debian 11 <--- or this one
 #
 # Please mind that the generated contents of the .txt files may change much
 # more than respective source man pages, sometimes even when the source man
