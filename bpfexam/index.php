@@ -885,10 +885,16 @@ function run_caper (object $bytecode): string
 			'-q',
 			'-r',
 			'-n',
+			'-HTML',
 			'-e',
 			$bytecode->filter
 		)
 	);
+	# Strip unnecessary markup and add missing markup.
+	$stdout = preg_replace ('@<p>(.*)</p> <br/>@', '\1', $stdout);
+	$stdout = preg_replace ('@&@', '&amp;', $stdout);
+	$stdout = preg_replace ('@ > @', ' &gt; ', $stdout);
+	$stdout = preg_replace ('@ < @', ' &lt; ', $stdout);
 	return on_stderr_throw ($stdout, $stderr);
 }
 
@@ -970,7 +976,7 @@ function process_request
 		# Also have this output conditional to the requested DLT because Caper
 		# implements logic that is hard-coded to Ethernet.
 		if ($bytecode->dlt_name == 'EN10MB')
-			$caper_output = htmlentities (run_caper ($bytecode));
+			$caper_output = run_caper ($bytecode);
 	}
 	finally
 	{
