@@ -361,23 +361,23 @@ class ByteCode
 		return $ret;
 	}
 
-	protected function getStringTLV (int $t, string $s): string
+	protected static function getStringTLV (int $t, string $s): string
 	{
 		return pack ('nn', $t, strlen ($s)) . $s;
 	}
 
-	protected function getUint8TLV (int $t, int $v): string
+	protected static function getUint8TLV (int $t, int $v): string
 	{
 		return pack ('nnC', $t, 1, $v);
 	}
 
-	protected function getUint64TLV (int $t, int $v): string
+	protected static function getUint64TLV (int $t, int $v): string
 	{
 		# FIXME: PHP 7.4.30 seems to have a bug encoding large 64-bit values.
 		return pack ('nnJ', $t, 8, $v);
 	}
 
-	protected function getVoidTLV (int $t): string
+	protected static function getVoidTLV (int $t): string
 	{
 		return pack ('nn', $t, 0);
 	}
