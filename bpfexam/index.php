@@ -890,11 +890,6 @@ function run_caper (object $bytecode): string
 			$bytecode->filter
 		)
 	);
-	# Strip unnecessary markup and add missing markup.
-	$stdout = preg_replace ('@<p>(.*)</p> <br/>@', '\1', $stdout);
-	$stdout = preg_replace ('@&@', '&amp;', $stdout);
-	$stdout = preg_replace ('@ > @', ' &gt; ', $stdout);
-	$stdout = preg_replace ('@ < @', ' &lt; ', $stdout);
 	return on_stderr_throw ($stdout, $stderr);
 }
 
