@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_FILENO</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_FILENO</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.2.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_fileno - get the file descriptor for a live capture
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_fileno(pcap_t *p);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+If
+<I>p</I>
+
+refers to a network device that was opened for a live capture using
+a combination of
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+
+and
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP),
+
+or using
+<A HREF='./pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP),
+
+<B>pcap_fileno</B>()
+
+returns the file descriptor from which captured packets are read.
+<P>
+
+If
+<I>p</I>
+
+refers to a ``savefile'' that was opened using functions such as
+<A HREF='./pcap_open_offline.3pcap.html'><B>pcap_open_offline</B></A>(3PCAP)
+
+or
+<A HREF='./pcap_open_offline.3pcap.html'><B>pcap_fopen_offline</B></A>(3PCAP),
+
+a ``dead''
+<B>pcap_t</B>
+
+opened using
+<A HREF='./pcap_open_dead.3pcap.html'><B>pcap_open_dead</B></A>(3PCAP),
+
+or a
+<B>pcap_t</B>
+
+that was created with
+<B>pcap_create</B>()
+
+but that has not yet been activated with
+<B>pcap_activate</B>(),
+
+it returns
+<B>PCAP_ERROR</B>.
+
+<H2 id="lbAE">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 15:42:07 GMT, December 31, 2022
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_DUMP_OPEN</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_DUMP_OPEN</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 July 2020<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.2.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_dump_open, pcap_dump_open_append, pcap_dump_fopen - open a file to
+which to write packets
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>pcap_dumper_t *pcap_dump_open(pcap_t *p, const char *fname);
+pcap_dumper_t *pcap_dump_open_append(pcap_t *p, const char *fname);
+pcap_dumper_t *pcap_dump_fopen(pcap_t *p, FILE *fp);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_dump_open</B>()
+
+is called to open a ``savefile'' for writing.
+<I>fname</I>
+
+specifies the name of the file to open. The file will have
+the same format as those used by
+<B><A HREF="./tcpdump.1.html">tcpdump</A></B>(1)
+
+and
+<B><A HREF="./tcpslice.1.html">tcpslice</A></B>(1).
+
+If the file does not exist, it will be created; if the file exists, it
+will be truncated and overwritten.
+The name &quot;-&quot; is a synonym
+for
+<B>stdout</B>.
+
+<P>
+
+<B>pcap_dump_fopen</B>()
+
+is called to write data to an existing open stream
+<I>fp</I>;
+
+this stream will be closed by a subsequent call to
+<A HREF='./pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP).
+
+The stream is assumed to be at the beginning of a file that has been
+newly created or truncated, so that writes will start at the beginning
+of the file.
+Note that on Windows, that stream should be opened in binary mode.
+<P>
+
+<I>p</I>
+
+is a capture or ``savefile'' handle returned by an earlier call to
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+
+and activated by an earlier call to
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP),
+
+or returned by an earlier call to
+<A HREF='./pcap_open_offline.3pcap.html'><B>pcap_open_offline</B></A>(3PCAP),
+
+<A HREF='./pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP),
+
+or
+<A HREF='./pcap_open_dead.3pcap.html'><B>pcap_open_dead</B></A>(3PCAP).
+
+The time stamp precision, link-layer type, and snapshot length from
+<I>p</I>
+
+are used as the link-layer type and snapshot length of the output file.
+<P>
+
+<B>pcap_dump_open_append</B>()
+
+is like
+<B>pcap_dump_open</B>()
+
+but, if the file already exists, and is a pcap file with the same byte
+order as the host opening the file, and has the same time stamp
+precision, link-layer header type, and snapshot length as
+<I>p</I>,
+
+it will write new packets at the end of the file.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+A pointer to a
+<B>pcap_dumper_t</B>
+
+structure to use in subsequent
+<A HREF='./pcap_dump.3pcap.html'><B>pcap_dump</B></A>(3PCAP)
+
+and
+<A HREF='./pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP)
+
+calls is returned on success.
+<B>NULL</B>
+
+is returned on failure.
+If
+<B>NULL</B>
+
+is returned,
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
+
+can be used to get the error text.
+<H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
+
+<P>
+
+The
+<B>pcap_dump_open_append</B>()
+
+function became available in libpcap release 1.7.2.  In previous
+releases, there is no support for appending packets to an existing
+savefile.
+<H2 id="lbAG">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
+
+<B><A HREF="./pcap-savefile.5.html">pcap-savefile</A></B>(5)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 15:42:07 GMT, December 31, 2022
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

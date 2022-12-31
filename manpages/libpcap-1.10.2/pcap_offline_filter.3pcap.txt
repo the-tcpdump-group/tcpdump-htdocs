@@ -1,0 +1,38 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.2.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_OFFLINE_FILTER(3PCAP)                          PCAP_OFFLINE_FILTER(3PCAP)
+
+NAME
+       pcap_offline_filter - check whether a filter matches a packet
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_offline_filter(const struct bpf_program *fp,
+               const struct pcap_pkthdr *h, const u_char *pkt)
+
+DESCRIPTION
+       pcap_offline_filter()  checks whether a filter matches a packet.  fp is
+       a pointer to a bpf_program struct, usually the  result  of  a  call  to
+       pcap_compile(3PCAP).   h  points  to  the pcap_pkthdr structure for the
+       packet, and pkt points to the data in the packet.
+
+RETURN VALUE
+       pcap_offline_filter() returns the return value of the  filter  program.
+       This  will  be zero if the packet doesn't match the filter and non-zero
+       if the packet matches the filter.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                 7 April 2014       PCAP_OFFLINE_FILTER(3PCAP)

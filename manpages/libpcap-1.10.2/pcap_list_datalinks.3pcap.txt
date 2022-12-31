@@ -1,0 +1,50 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.2.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_LIST_DATALINKS(3PCAP)                          PCAP_LIST_DATALINKS(3PCAP)
+
+NAME
+       pcap_list_datalinks,  pcap_free_datalinks  -  get  a list of link-layer
+       header types supported by a capture device, and free that list
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_list_datalinks(pcap_t *p, int **dlt_buf);
+       void pcap_free_datalinks(int *dlt_list);
+
+DESCRIPTION
+       pcap_list_datalinks() is used to get a list of the supported link-layer
+       header  types  of  the  interface  associated with the pcap descriptor.
+       pcap_list_datalinks() allocates an array to  hold  the  list  and  sets
+       *dlt_buf to point to that array.
+
+       The    caller    is    responsible   for   freeing   the   array   with
+       pcap_free_datalinks(), which frees the list of link-layer header  types
+       pointed to by dlt_list.
+
+       It   must   not   be   called   on   a   pcap   descriptor  created  by
+       pcap_create(3PCAP)   that   has   not    yet    been    activated    by
+       pcap_activate(3PCAP).
+
+RETURN VALUE
+       pcap_list_datalinks()  returns the number of link-layer header types in
+       the array on success, PCAP_ERROR_NOT_ACTIVATED if called on  a  capture
+       handle that has been created but not activated, and PCAP_ERROR on other
+       errors.    If   PCAP_ERROR   is   returned,    pcap_geterr(3PCAP)    or
+       pcap_perror(3PCAP) may be called with p as an argument to fetch or dis-
+       play the error text.
+
+SEE ALSO
+       pcap(3PCAP), pcap_datalink_val_to_name(3PCAP), pcap-linktype(7)
+
+                                 25 July 2018       PCAP_LIST_DATALINKS(3PCAP)

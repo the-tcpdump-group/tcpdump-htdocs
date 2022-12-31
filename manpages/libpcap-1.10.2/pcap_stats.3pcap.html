@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_STATS</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_STATS</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 March 2022<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.2.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_stats - get capture statistics
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_stats(pcap_t *p, struct pcap_stat *ps);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_stats</B>()
+
+fills in the
+<B>struct pcap_stat</B>
+
+pointed to by its second argument.  The values represent
+packet statistics from the start of the run to the time of the call.
+<P>
+
+<B>pcap_stats</B>()
+
+is supported only on live captures, not on ``savefiles''; no statistics
+are stored in ``savefiles'', so no statistics are available when reading
+from a ``savefile''.
+<P>
+
+A
+<B>struct pcap_stat</B>
+
+has the following members:
+<DL><DT><DD>
+<DL>
+<DT><B>ps_recv</B>
+
+<DD>
+number of packets received;
+<DT><B>ps_drop</B>
+
+<DD>
+number of packets dropped because there was no room in the operating
+system's buffer when they arrived, because packets weren't being read
+fast enough;
+<DT><B>ps_ifdrop</B>
+
+<DD>
+number of packets dropped by the network interface or its driver.
+</DL>
+</DL>
+
+<P>
+
+The statistics do not behave the same way on all platforms.
+<B>ps_recv</B>
+
+might count packets whether they passed any filter set with
+<A HREF='./pcap_setfilter.3pcap.html'><B>pcap_setfilter</B></A>(3PCAP)
+
+or not, or it might count only packets that pass the filter.
+It also might, or might not, count packets dropped because there was no
+room in the operating system's buffer when they arrived.
+<B>ps_drop</B>
+
+is not available on all platforms; it is zero on platforms where it's
+not available.  If packet filtering is done in libpcap, rather than in
+the operating system, it would count packets that don't pass the filter.
+Both
+<B>ps_recv</B>
+
+and
+<B>ps_drop</B>
+
+might, or might not, count packets not yet read from the operating
+system and thus not yet seen by the application.
+<B>ps_ifdrop</B>
+
+might, or might not, be implemented; if it's zero, that might mean that
+no packets were dropped by the interface, or it might mean that the
+statistic is unavailable, so it should not be treated as an indication
+that the interface did not drop any packets.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_stats</B>()
+
+returns
+<B>0</B>
+
+on success,
+<B>PCAP_ERROR_NOT_ACTIVATED</B>
+
+if called on a capture handle that has been created but not activated,
+or
+<B>PCAP_ERROR</B>
+
+if there is another error or if
+<I>p</I>
+
+doesn't support packet statistics. If
+<B>PCAP_ERROR</B>
+
+is returned,
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
+
+or
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_perror</B></A>(3PCAP)
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display the error text.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 15:42:09 GMT, December 31, 2022
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

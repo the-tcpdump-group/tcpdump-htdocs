@@ -1,0 +1,62 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.2.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_SETNONBLOCK(3PCAP)                                PCAP_SETNONBLOCK(3PCAP)
+
+NAME
+       pcap_setnonblock, pcap_getnonblock - set or get the state of non-block-
+       ing mode on a capture device
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       char errbuf[PCAP_ERRBUF_SIZE];
+
+       int pcap_setnonblock(pcap_t *p, int nonblock, char *errbuf);
+       int pcap_getnonblock(pcap_t *p, char *errbuf);
+
+DESCRIPTION
+       pcap_setnonblock() puts a capture handle into ``non-blocking'' mode, or
+       takes  it  out  of ``non-blocking'' mode, depending on whether the non-
+       block argument is non-zero or zero.  It has no effect on ``savefiles''.
+       If  there  is  an error, PCAP_ERROR is returned and errbuf is filled in
+       with an appropriate error message; otherwise, 0 is returned.
+
+       In ``non-blocking'' mode, an attempt to read from the capture  descrip-
+       tor with pcap_dispatch(3PCAP) and pcap_next_ex(3PCAP) will, if no pack-
+       ets are currently available to be read,  return  0  immediately  rather
+       than blocking waiting for packets to arrive.
+
+       pcap_loop(3PCAP)  will loop forever, consuming CPU time when no packets
+       are  currently  available;  pcap_dispatch()  should  be  used  instead.
+       pcap_next(3PCAP)  will  return  NULL  if there are no packets currently
+       available  to  read;  this  is  indistinguishable  from  an  error,  so
+       pcap_next_ex() should be used instead.
+
+       When   first   activated   with  pcap_activate(3PCAP)  or  opened  with
+       pcap_open_live(3PCAP),  a  capture  handle  is  not  in  ``non-blocking
+       mode'';  a  call  to  pcap_setnonblock() is required in order to put it
+       into ``non-blocking'' mode.
+
+RETURN VALUE
+       pcap_getnonblock() returns the current ``non-blocking''  state  of  the
+       capture descriptor; it always returns 0 on ``savefiles''.  If called on
+       a capture handle that has been  created  but  not  activated,  PCAP_ER-
+       ROR_NOT_ACTIVATED  is  returned.  If there is another error, PCAP_ERROR
+       is returned and errbuf is filled in with an appropriate error message.
+
+       errbuf is assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
+
+SEE ALSO
+       pcap(3PCAP), pcap_next_ex(3PCAP), pcap_geterr(3PCAP)
+
+                                 5 March 2022          PCAP_SETNONBLOCK(3PCAP)

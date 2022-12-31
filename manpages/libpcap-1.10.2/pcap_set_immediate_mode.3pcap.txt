@@ -1,0 +1,67 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.2.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_SET_IMMEDIATE_MODE(3PCAP)                  PCAP_SET_IMMEDIATE_MODE(3PCAP)
+
+NAME
+       pcap_set_immediate_mode  -  set  immediate mode for a not-yet-activated
+       capture handle
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_immediate_mode(pcap_t *p, int immediate_mode);
+
+DESCRIPTION
+       pcap_set_immediate_mode() sets whether immediate mode should be set  on
+       a  capture  handle  when  the  handle is activated.  In immediate mode,
+       packets are always delivered as soon as they arrive, with no buffering.
+       If immediate_mode is non-zero, immediate mode will be set, otherwise it
+       will not be set.
+
+RETURN VALUE
+       pcap_set_immediate_mode() returns 0 on success or  PCAP_ERROR_ACTIVATED
+       if called on a capture handle that has been activated.
+
+BACKWARD COMPATIBILITY
+       This  function  became available in libpcap release 1.5.0.  In previous
+       releases, if immediate delivery of packets is required:
+
+              on FreeBSD, NetBSD, OpenBSD, DragonFly BSD, macOS,  and  Solaris
+              11,  immediate  mode  must  be  turned  on  with a BIOCIMMEDIATE
+              ioctl(2), as documented in bpf(4), on the descriptor returned by
+              pcap_fileno(3PCAP), after pcap_activate(3PCAP) is called;
+
+              on  Solaris  10  and earlier versions of Solaris, immediate mode
+              must be turned on by using a read timeout of 0 when opening  the
+              device  (this  will not provide immediate delivery of packets on
+              other platforms, so don't assume it's sufficient);
+
+              on Digital UNIX/Tru64 UNIX, immediate mode must be turned on  by
+              doing  a  BIOCMBIC ioctl(), as documented in packetfilter(7), to
+              clear  the  ENBATCH  flag  on   the   descriptor   returned   by
+              pcap_fileno(3PCAP), after pcap_activate(3PCAP) is called;
+
+              on  Windows,  immediate  mode  must  be  turned  on  by  calling
+              pcap_setmintocopy() with a size of 0.
+
+       On Linux, with previous releases of libpcap, capture devices are always
+       in  immediate  mode; however, in 1.5.0 and later, they are, by default,
+       not in immediate mode, so if pcap_set_immediate_mode() is available, it
+       should be used.
+
+       On other platforms, capture devices are always in immediate mode.
+
+SEE ALSO
+       pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
+
+                                23 August 2018  PCAP_SET_IMMEDIATE_MODE(3PCAP)
