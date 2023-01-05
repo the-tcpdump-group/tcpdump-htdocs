@@ -38,7 +38,7 @@ define ('EXPR_INPUT_NAME', 'filter');
 define ('SUBMIT_INPUT_NAME', 'examine');
 define ('SNAPLEN_INPUT_NAME', 'snaplen');
 define ('ACTION_INPUT_NAME', 'cbpf');
-define ('DEFAULT_VER', '1.10.1');
+define ('DEFAULT_VER', '1.10.2');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('MIN_SNAPLEN', 10);
 define ('DEFAULT_SNAPLEN', 65535);
@@ -70,7 +70,8 @@ $actions = array
 );
 
 # filtertest, where specified, was copied from libpcap built
-# using "./configure --enable-optimizer-dbg"
+# using "./configure --enable-optimizer-dbg".  tcpdump in each case was linked
+# with the same version of libpcap built _without_ "--enable-optimizer-dbg".
 $versions = array
 (
 	'master' => array
@@ -78,6 +79,11 @@ $versions = array
 		'descr' => 'git master snapshot',
 		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-git',
 		'filtertest' => '/usr/local/bin/filtertest-git-optdebug',
+	),
+	'1.10.2' => array
+	(
+		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.2',
+		'filtertest' => '/usr/local/bin/filtertest-1.10.2-optdebug',
 	),
 	'1.10.1' => array
 	(
