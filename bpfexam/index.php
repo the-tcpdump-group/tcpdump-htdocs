@@ -689,7 +689,7 @@ function pipe_process (array $argv, string $stdin = ''): array
 	# a resource that is indistinguishable from a successful invocation.
 	if ($po === FALSE)
 		throw new Exception ("failed to run the ${bin} binary!");
-	if (FALSE === fwrite ($pipes[0], $stdin))
+	if ($stdin != '' && FALSE === fwrite ($pipes[0], $stdin))
 		throw new Exception ("failed to write to a child process stdin");
 	fclose ($pipes[0]);
 	$stdout = stream_get_contents ($pipes[1]);
