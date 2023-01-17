@@ -26,6 +26,9 @@ DESCRIPTION
        pcap_init()  is  used  to  initialize the Packet Capture library.  opts
        specifies options for the library; currently, the options are:
 
+       PCAP_MMAP_32BIT
+              Map packet buffers with 32-bit addresses.
+
        PCAP_CHAR_ENC_LOCAL
               Treat all strings supplied as arguments, and return all  strings
               to the caller, as being in the local character encoding.
@@ -64,4 +67,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP)
 
-                                  4 May 2022                  PCAP_INIT(3PCAP)
+                                17 January 2023               PCAP_INIT(3PCAP)
