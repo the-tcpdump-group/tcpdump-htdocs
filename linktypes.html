@@ -1309,6 +1309,16 @@ Preamble.
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_WIRESHARK_UPPER_PDU</td>
+<td class="number">252</td>
+<td class="symbol">DLT_WIRESHARK_UPPER_PDU</td>
+<td>
+Upper-protocol layer PDU saves from Wireshark; the actual contents are
+determined by two tags, one or more of which is stored with each packet.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_NETLINK</td>
 <td class="number">253</td>
 <td class="symbol">DLT_NETLINK</td>
@@ -1461,6 +1471,17 @@ href="linktypes/LINKTYPE_RDS.html">this form</a>.
 USB packets, beginning with a
 <a href="linktypes/LINKTYPE_USB_DARWIN.html">Darwin (macOS, etc.) USB
 header</a>.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_OPENFLOW</td>
+<td class="number">267</td>
+<td class="symbol">DLT_OPENFLOW</td>
+<td>
+OpenFlow messages with an additional 12-octet header, as used in
+<a class=away href="https://github.com/the-tcpdump-group/libpcap/issues/542">OpenBSD
+switch interface monitoring</a>.
 </td>
 </tr>
 
