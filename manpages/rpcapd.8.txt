@@ -88,6 +88,22 @@ Starting rpcapd on Unix-like systems
        provide  more  elegant  solutions when run as user than the above solu-
        tions, all of them different.
 
+       If your system supports systemd(1) and the corresponding  rpcapd.socket
+       and  rpcapd@.service service files have been installed, the rpcapd ser-
+       vice can be enabled by enabling the rpcapd.socket unit.
+
+       If your system supports  launchd(8)  and  the  org.tcpdump.rpcapd.plist
+       file  has  been installed, the rpcapd service can be enabled by loading
+       the org.tcpdump.rpcapd service.
+
+       If your system supports inetd(8) and the  rpcapd.inetd.conf  entry  has
+       been  added  to  inetd.conf(5),  the  rpcapd  service can be enabled by
+       telling inetd to reread its configuration file.
+
+       If your system supports xinetd(8) and the rpcapd.xinetd.conf entry  has
+       been  added  to  xinetd.conf(5),  the  rpcapd service can be enabled by
+       telling xinetd to reread its configuration file.
+
 OPTIONS
        -b address
               Bind to the IP address specified by address (either  numeric  or
@@ -158,4 +174,4 @@ OPTIONS
 SEE ALSO
        pcap(3PCAP), rpcapd-config(5)
 
-                                13 January 2019                      RPCAPD(8)
+                                20 January 2023                      RPCAPD(8)

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of RPCAPD</H1>
-Section: Maintenance Commands (8)<BR>Updated: 13 January 2019<BR>
+Section: Maintenance Commands (8)<BR>Updated: 20 January 2023<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents rpcapd version 1.11.0-PRE-GIT.</H4>
@@ -224,6 +224,65 @@ needs sufficient privileges to perform packet capture, e.g.
 run as root or be owned by root and have suid set. Most operating
 systems provide more elegant solutions when run as user than the
 above solutions, all of them different.
+<P>
+
+If your system supports
+<B>systemd</B>(1)
+
+and the corresponding
+<B>rpcapd.socket</B>
+
+and
+<B><A HREF="mailto:rpcapd@.service">rpcapd@.service</A></B>
+
+service files have been
+installed, the rpcapd service can be enabled by enabling the
+<B>rpcapd.socket</B>
+
+unit.
+<P>
+
+If your system supports
+<B>launchd</B>(8)
+
+and the
+<B>org.tcpdump.rpcapd.plist</B>
+
+file has been installed, the rpcapd service can be enabled by loading
+the
+<B>org.tcpdump.rpcapd</B>
+
+service.
+<P>
+
+If your system supports
+<B>inetd</B>(8)
+
+and the
+<B>rpcapd.inetd.conf</B>
+
+entry has been added to
+<B>inetd.conf</B>(5),
+
+the rpcapd service can be enabled by telling
+<B>inetd</B>
+
+to reread its configuration file.
+<P>
+
+If your system supports
+<B>xinetd</B>(8)
+
+and the
+<B>rpcapd.xinetd.conf</B>
+
+entry has been added to
+<B>xinetd.conf</B>(5),
+
+the rpcapd service can be enabled by telling
+<B>xinetd</B>
+
+to reread its configuration file.
 <H2 id="lbAJ">OPTIONS</H2>
 
 <DL>
@@ -395,7 +454,7 @@ as the SSL certificate file.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 19:44:04 GMT, August 03, 2022
+This HTML man page was generated at 23:22:53 GMT, January 20, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
