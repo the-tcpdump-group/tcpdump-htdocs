@@ -20,6 +20,7 @@ Disallow: /manpages/tcpdump.1-4.8.1.txt
 Disallow: /cve/
 Disallow: /cvs-log/
 Disallow: /daily/
+Disallow: /lists/
 Disallow: /weekly/
 # The content never existed.
 Disallow: /feed
