@@ -240,12 +240,39 @@ of the machine reading the capture file.
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_EXP_ETHERNET</td>
+<td class="number">2</td>
+<td class="symbol">DLT_EN3MB</td>
+<td>
+Experimental Ethernet (3Mb).
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_AX25</td>
 <td class="number">3</td>
 <td class="symbol">DLT_AX25</td>
 <td>
 <a class=away href="http://www.ax25.net/AX25.2.2-Jul%2098-2.pdf">AX.25</a> packet,
 with nothing preceding it.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PRONET</td>
+<td class="number">4</td>
+<td class="symbol">DLT_PRONET</td>
+<td>
+Proteon ProNET Token Ring.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_CHAOS</td>
+<td class="number">5</td>
+<td class="symbol">DLT_CHAOS</td>
+<td>
+Chaos.
 </td>
 </tr>
 
@@ -313,6 +340,15 @@ FDDI, as specified by ANSI INCITS 239-1994.
 </tr>
 
 <tr>
+<td class="symbol"></td>
+<td class="number">32</td>
+<td class="symbol">DLT_REDBACK_SMARTEDGE</td>
+<td>
+Redback SmartEdge 400/800.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_PPP_HDLC</td>
 <td class="number">50</td>
 <td class="symbol">DLT_PPP_SERIAL</td>
@@ -335,6 +371,15 @@ bit-stuffed.
 <td>
 PPPoE; the packet begins with a PPPoE header, as per
 <a class=away href="https://www.rfc-editor.org/rfc/rfc2516.html">RFC 2516</a>.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_SYMANTEC_FIREWALL</td>
+<td class="number">99</td>
+<td class="symbol">DLT_SYMANTEC_FIREWALL</td>
+<td>
+Symantec Enterprise (ex-Axent Raptor) firewall.
 </td>
 </tr>
 
@@ -432,6 +477,24 @@ AppleTalk, Second Edition</a>.
 </tr>
 
 <tr>
+<td class="symbol"></td>
+<td class="number">115</td>
+<td class="symbol">DLT_ECONET</td>
+<td>
+Acorn Econet.
+</td>
+</tr>
+
+<tr>
+<td class="symbol"></td>
+<td class="number">116</td>
+<td class="symbol">DLT_IPFILTER</td>
+<td>
+OpenBSD ipfilter.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_PFLOG</td>
 <td class="number">117</td>
 <td class="symbol">DLT_PFLOG</td>
@@ -442,6 +505,15 @@ structure, as defined by the host on that the file was saved.  (This
 differs from operating system to operating system and release to
 release; there is nothing in the file to indicate what the layout of
 that structure is.)
+</td>
+</tr>
+
+<tr>
+<td class="symbol"></td>
+<td class="number">118</td>
+<td class="symbol">DLT_CISCO_IOS</td>
+<td>
+Cisco internal use.
 </td>
 </tr>
 
@@ -474,6 +546,33 @@ Network_Header as described in that RFC.
 ATM traffic, encapsulated as per
 <a href="linktypes/LINKTYPE_SUNATM.html">the scheme used by SunATM
 devices</a>.
+</td>
+</tr>
+
+<tr>
+<td class="symbol"></td>
+<td class="number">124</td>
+<td class="symbol">DLT_RIO</td>
+<td>
+RapidIO.
+</td>
+</tr>
+
+<tr>
+<td class="symbol"></td>
+<td class="number">125</td>
+<td class="symbol">DLT_PCI_EXP</td>
+<td>
+PCI Express.
+</td>
+</tr>
+
+<tr>
+<td class="symbol"></td>
+<td class="number">126</td>
+<td class="symbol">DLT_AURORA</td>
+<td>
+Xilinx Aurora.
 </td>
 </tr>
 
