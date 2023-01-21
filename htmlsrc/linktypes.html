@@ -773,6 +773,26 @@ Recommendation G.7041/Y.1303</a>.
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_ERF_ETH</td>
+<td class="number">175</td>
+<td class="symbol">DLT_ERF_ETH</td>
+<td>
+An <a class=away href="https://www.endace.com/erf-extensible-record-format-types.pdf">ERF header</a>
+followed by Ethernet.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_ERF_POS</td>
+<td class="number">176</td>
+<td class="symbol">DLT_ERF_POS</td>
+<td>
+An <a class=away href="https://www.endace.com/erf-extensible-record-format-types.pdf">ERF header</a>
+followed by Packet-over-SONET.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_LINUX_LAPD</td>
 <td class="number">177</td>
 <td class="symbol">DLT_LINUX_LAPD</td>
@@ -802,6 +822,34 @@ Interface fragmentation format fragmentation header.
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_JUNIPER_VP</td>
+<td class="number">183</td>
+<td class="symbol">DLT_JUNIPER_VP</td>
+<td>
+Juniper Networks private data link type.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_A429</td>
+<td class="number">184</td>
+<td class="symbol">DLT_A429</td>
+<td>
+<a class=away href="https://web.archive.org/web/20040616233302/https://www.condoreng.com/support/downloads/tut"> ARINC 429</a> frames. Every frame contains a 32-bit A429 label.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_A653_ICM</td>
+<td class="number">185</td>
+<td class="symbol">DLT_A653_ICM</td>
+<td>
+ARINC 653 interpartition communication messages. Please refer to the A653-1
+standard for more information.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_BLUETOOTH_HCI_H4</td>
 <td class="number">187</td>
 <td class="symbol">DLT_BLUETOOTH_HCI_H4</td>
@@ -814,6 +862,15 @@ Bluetooth Core specification</a>, followed by an HCI packet of the
 specified packet type, as specified by the Host Controller Interface
 Functional Specification portion of the most recent Bluetooth Core
 Specification.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_16_MAC_CPS</td>
+<td class="number">188</td>
+<td class="symbol">DLT_IEEE802_16_MAC_CPS</td>
+<td>
+IEEE 802.16 MAC Common Part Sublayer.
 </td>
 </tr>
 
@@ -836,6 +893,24 @@ of the pcapng file, as specified by the Section Header Block.
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_CAN20B</td>
+<td class="number">190</td>
+<td class="symbol">DLT_CAN20B</td>
+<td>
+Controller Area Network (CAN) v. 2.0B.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_15_4_LINUX</td>
+<td class="number">191</td>
+<td class="symbol">DLT_IEEE802_15_4_LINUX</td>
+<td>
+IEEE 802.15.4, with address fields padded, as is done by Linux drivers.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_PPI</td>
 <td class="number">192</td>
 <td class="symbol">DLT_PPI</td>
@@ -844,6 +919,24 @@ Per-Packet Information information, as specified by <a class=away
 href="https://web.archive.org/web/20160328114748/http://www.cacetech.com/documents/PPI%20Header%20format%201.0.7.pdf">the
 Per-Packet Information Header Specification</a>,  followed by a packet
 with the <code>LINKTYPE_</code> value specified by the <code>pph_dlt</code> field of that header.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IEEE802_16_MAC_CPS_RADIO</td>
+<td class="number">193</td>
+<td class="symbol">DLT_IEEE802_16_MAC_CPS_RADIO</td>
+<td>
+IEEE 802.16 MAC Common Part Sublayer plus radiotap header.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_ISM</td>
+<td class="number">194</td>
+<td class="symbol">DLT_JUNIPER_ISM</td>
+<td>
+Juniper Networks private data link type.
 </td>
 </tr>
 
@@ -876,6 +969,35 @@ for <a class=away href="https://www.sita.aero">SITA</a>.
 <td>
 Various link-layer types, with a pseudo-header, for Endace DAG cards;
 encapsulates Endace ERF records.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_RAIF1</td>
+<td class="number">198</td>
+<td class="symbol">DLT_RAIF1</td>
+<td>
+Special header prepended to Ethernet packets when capturing from a
+u10 Networks board.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IPMB_KONTRON</td>
+<td class="number">199</td>
+<td class="symbol">DLT_IPMB_KONTRON</td>
+<td>
+IPMB packet for IPMI, beginning with a 2-byte header, followed by
+the I2C slave address, followed by the netFn and LUN, etc&hellip;
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_ST</td>
+<td class="number">200</td>
+<td class="symbol">DLT_JUNIPER_ST</td>
+<td>
+Juniper Networks private data link type.
 </td>
 </tr>
 
