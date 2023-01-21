@@ -1070,6 +1070,24 @@ automotive bus, preceded by a
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_X2E_SERIAL</td>
+<td class="number">213</td>
+<td class="symbol">DLT_X2E_SERIAL</td>
+<td>
+X2E-private data link type used for serial line capture.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_X2E_XORAYA</td>
+<td class="number">214</td>
+<td class="symbol">DLT_X2E_XORAYA</td>
+<td>
+X2E-private data link type used for the Xoraya data logger family.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_IEEE802_15_4_NONASK_PHY</td>
 <td class="number">215</td>
 <td class="symbol">DLT_IEEE802_15_4_NONASK_PHY</td>
@@ -1080,6 +1098,42 @@ of the frame, and with the PHY-level data for the O-QPSK, BPSK, GFSK,
 MSK, and RCC DSS BPSK PHYs (4 octets of 0 as preamble, one octet of SFD,
 one octet of frame length + reserved bit) preceding the MAC-layer data
 (starting with the frame control field).
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_LINUX_EVDEV</td>
+<td class="number">216</td>
+<td class="symbol">DLT_LINUX_EVDEV</td>
+<td>
+Linux evdev events from <code>/dev/input/eventN</code> devices.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_GSMTAP_UM</td>
+<td class="number">217</td>
+<td class="symbol">DLT_GSMTAP_UM</td>
+<td>
+GSM Um interface, preceded by a "gsmtap" header.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_GSMTAP_ABIS</td>
+<td class="number">218</td>
+<td class="symbol">DLT_GSMTAP_ABIS</td>
+<td>
+GSM Abis interface, preceded by a "gsmtap" header.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_MPLS</td>
+<td class="number">219</td>
+<td class="symbol">DLT_MPLS</td>
+<td>
+MPLS, with an MPLS label as the link-layer header.
 </td>
 </tr>
 
@@ -1100,6 +1154,34 @@ byte order is the byte order for the section of the pcapng file, as
 specified by the Section Header Block.  For isochronous transfers, the
 <code>ndesc</code> field specifies the number of isochronous descriptors
 that follow.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_DECT</td>
+<td class="number">221</td>
+<td class="symbol">DLT_DECT</td>
+<td>
+DECT packets, with a pseudo-header.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_AOS</td>
+<td class="number">222</td>
+<td class="symbol">DLT_AOS</td>
+<td>
+AOS Space Data Link Protocol.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_WIHART</td>
+<td class="number">223</td>
+<td class="symbol">DLT_WIHART</td>
+<td>
+WirelessHART (Highway Addressable Remote Transducer) from the HART
+Communication Foundation (IEC/PAS 62591).
 </td>
 </tr>
 
@@ -1346,6 +1428,15 @@ SCTP traffic.
 packet captures</a>, followed by frame data for the LLCP Protocol as
 specified by
 <a class=away href="http://www.nfc-forum.org/specs/spec_list/">NFCForum-TS-LLCP_1.1</a>.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_PFSYNC</td>
+<td class="number">246</td>
+<td class="symbol"></td>
+<td>
+Packet filter state syncing.
 </td>
 </tr>
 
@@ -1599,6 +1690,15 @@ information units (PIUs) as the payload.
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_TI_LLN_SNIFFER</td>
+<td class="number">269</td>
+<td class="symbol">DLT_TI_LLN_SNIFFER</td>
+<td>
+TI LLN sniffer frames.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_LORATAP</td>
 <td class="number">270</td>
 <td class="symbol">DLT_LORATAP</td>
@@ -1673,6 +1773,15 @@ DisplayPort (DP) Standard preceded by a
 <td>
 <a href="linktypes/LINKTYPE_LINUX_SLL2.html">Linux "cooked" capture
 encapsulation v2</a>.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_SERCOS_MONITOR</td>
+<td class="number">277</td>
+<td class="symbol">DLT_SERCOS_MONITOR</td>
+<td>
+Sercos Monitor.
 </td>
 </tr>
 
@@ -1825,6 +1934,16 @@ ATSC 3.0 standards page</a>, beginning with a Base Header.
 <td>
 Event Tracing for Windows messages, beginning with a
 <a href="linktypes/LINKTYPE_ETW.html">pseudo-header</a>.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_NETANALYZER_NG</td>
+<td class="number">291</td>
+<td class="symbol">DLT_NETANALYZER_NG</td>
+<td>
+Hilscher Gesellschaft fuer Systemautomation mbH netANALYZER NG hardware and
+software (<a class=away href="https://kb.hilscher.com/x/brDJBw">specification</a>).
 </td>
 </tr>
 
