@@ -455,6 +455,24 @@ all of them.
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_ENC</td>
+<td class="number">109</td>
+<td class="symbol">DLT_ENC</td>
+<td>
+Encapsulated packets for IPsec.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_NETBSD_HDLC</td>
+<td class="number">112</td>
+<td class="symbol">DLT_HDLC</td>
+<td>
+Cisco HDLC.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_LINUX_SLL</td>
 <td class="number">113</td>
 <td class="symbol">DLT_LINUX_SLL</td>
@@ -528,6 +546,15 @@ information</a> followed by an 802.11 header.
 </tr>
 
 <tr>
+<td class="symbol"></td>
+<td class="number">120</td>
+<td class="symbol">DLT_AIRONET_HEADER</td>
+<td>
+Reserved for Aironet 802.11 cards, with an Aironet link-layer header.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_IP_OVER_FC</td>
 <td class="number">122</td>
 <td class="symbol">DLT_IP_OVER_FC</td>
@@ -587,6 +614,17 @@ followed by an 802.11 header.
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_TZSP</td>
+<td class="number">128</td>
+<td class="symbol">DLT_TZSP</td>
+<td>
+Tazmen Sniffer Protocol (TZSP) is a generic encapsulation for any other link
+type, which includes a means to include meta-information with the packet,
+e.g. signal strength and channel for 802.11 packets.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_ARCNET_LINUX</td>
 <td class="number">129</td>
 <td class="symbol">DLT_ARCNET_LINUX</td>
@@ -604,6 +642,78 @@ frames, rather than fragments, are supplied.  See also <a class=away
 href="https://www.rfc-editor.org/rfc/rfc1051.html">RFC 1051</a> and <a class=away
 href="https://www.rfc-editor.org/rfc/rfc1201.html">RFC 1201</a>; for RFC 1051
 frames, ATA 878.2 is not used.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_MLPPP</td>
+<td class="number">130</td>
+<td class="symbol">DLT_JUNIPER_MLPPP</td>
+<td>
+Juniper Networks private data link type.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_MLFR</td>
+<td class="number">131</td>
+<td class="symbol">DLT_JUNIPER_MLFR</td>
+<td>
+Juniper Networks private data link type.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_ES</td>
+<td class="number">132</td>
+<td class="symbol">DLT_JUNIPER_ES</td>
+<td>
+Juniper Networks private data link type.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_GGSN</td>
+<td class="number">133</td>
+<td class="symbol">DLT_JUNIPER_GGSN</td>
+<td>
+Juniper Networks private data link type.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_MFR</td>
+<td class="number">134</td>
+<td class="symbol">DLT_JUNIPER_MFR</td>
+<td>
+Juniper Networks private data link type.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_ATM2</td>
+<td class="number">135</td>
+<td class="symbol">DLT_JUNIPER_ATM2</td>
+<td>
+Juniper Networks private data link type.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_SERVICES</td>
+<td class="number">136</td>
+<td class="symbol">DLT_JUNIPER_SERVICES</td>
+<td>
+Juniper Networks private data link type.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_ATM1</td>
+<td class="number">137</td>
+<td class="symbol">DLT_JUNIPER_ATM1</td>
+<td>
+Juniper Networks private data link type.
 </td>
 </tr>
 
@@ -696,6 +806,24 @@ specification.
 </tr>
 
 <tr>
+<td class="symbol">LINKTYPE_IBM_SP</td>
+<td class="number">145</td>
+<td class="symbol">DLT_IBM_SP</td>
+<td>
+IBM SP switch.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_IBM_SN</td>
+<td class="number">146</td>
+<td class="symbol">DLT_IBM_SN</td>
+<td>
+IBM Next Federation switch.
+</td>
+</tr>
+
+<tr>
 <td class="symbol">LINKTYPE_USER0&ndash;LINKTYPE_USER15</td>
 <td class="number">147&ndash;162</td>
 <td class="symbol">DLT_USER0&ndash;DLT_USER15</td>
@@ -711,6 +839,15 @@ Reserved for private use; see above.
 <td>
 <a class=away href="http://web.archive.org/web/20040803232023/http://www.shaftnet.org/~pizza/software/capturefrm.txt">AVS monitor mode
 information</a> followed by an 802.11 header.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_MONITOR</td>
+<td class="number">164</td>
+<td class="symbol">DLT_JUNIPER_MONITOR</td>
+<td>
+Juniper Networks private data link type.
 </td>
 </tr>
 
@@ -737,6 +874,24 @@ present, the Data CRC.
 PPP in HDLC-like encapsulation, like <code>LINKTYPE_PPP_HDLC</code>, but with the
 <code>0xff</code> address byte replaced by a direction indication&mdash;<code>0x00</code>
 for incoming and <code>0x01</code> for outgoing.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_PPPOE</td>
+<td class="number">167</td>
+<td class="symbol">DLT_JUNIPER_PPPOE</td>
+<td>
+Juniper Networks private data link type.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_PPPOE_ATM</td>
+<td class="number">168</td>
+<td class="symbol">DLT_JUNIPER_PPPOE_ATM</td>
+<td>
+Juniper Networks private data link type.
 </td>
 </tr>
 
@@ -769,6 +924,33 @@ Recommendation G.7041/Y.1303</a>.
 Frame-mapped generic framing procedure, as specified by
 <a class=away href="https://www.itu.int/rec/T-REC-G.7041/en">ITU-T
 Recommendation G.7041/Y.1303</a>.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_GCOM_T1E1</td>
+<td class="number">172</td>
+<td class="symbol">DLT_GCOM_T1E1</td>
+<td>
+Gcom's T1/E1 line monitoring equipment.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_GCOM_SERIAL</td>
+<td class="number">173</td>
+<td class="symbol">DLT_GCOM_SERIAL</td>
+<td>
+Gcom's T1/E1 line monitoring equipment.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_PIC_PEER</td>
+<td class="number">174</td>
+<td class="symbol">DLT_JUNIPER_PIC_PEER</td>
+<td>
+Juniper Networks private data link type.
 </td>
 </tr>
 
@@ -806,6 +988,46 @@ Recommendation Q.921</a>, captured via vISDN, with a
 <a href="linktypes/LINKTYPE_LINUX_LAPD.html"><code>LINKTYPE_LINUX_LAPD</code>
 header</a>, followed by the Q.921 frame, starting with the address
 field.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_ETHER</td>
+<td class="number">178</td>
+<td class="symbol">DLT_JUNIPER_ETHER</td>
+<td>
+Juniper Networks private data link type. Ethernet frames prepended with
+meta-information.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_PPP</td>
+<td class="number">179</td>
+<td class="symbol">DLT_JUNIPER_PPP</td>
+<td>
+Juniper Networks private data link type. PPP frames prepended with
+meta-information.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_FRELAY</td>
+<td class="number">180</td>
+<td class="symbol">DLT_JUNIPER_FRELAY</td>
+<td>
+Juniper Networks private data link type. Frame Relay frames prepended with
+meta-information.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_JUNIPER_CHDLC</td>
+<td class="number">181</td>
+<td class="symbol">DLT_JUNIPER_CHDLC</td>
+<td>
+Juniper Networks private data link type. C-HDLC frames prepended with
+meta-information.
 </td>
 </tr>
 
