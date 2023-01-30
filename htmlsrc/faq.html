@@ -32,6 +32,8 @@
 		                    resolution?</a> </li>
                           <!-- (Was Q10, removed.) -->
                           <li> <a href="#q11">How to update the man pages?</a> </li>
+                          <li> <a href="#q16">What should and what should not be in the change log?</a> </li>
+
                         </ul>
                     </div>
                 </div>
@@ -774,3 +776,64 @@ Example e-mail is \%nobody@example.org.
                     </div>
                 </div>
                 <!-- End of QUESTION #11 section -->
+
+                <!-- Start of QUESTION #16 section -->
+                <div class="post">
+                    <h2 class="title" id="q16">
+                        What should and what should not be in the change log?
+                    </h2>
+                    <div class="entry">
+                        <p>
+                            <span class=initial>A:</span>
+                            The change log purpose is to help the end users understand what a
+                            particular software release means for their particular use case.  With
+                            this in mind, when preparing files for a commit, please consider
+                            whether to include a change log entry and what to say in the entry to
+                            document the change well.  The following guidelines can be used as a
+                            starting point.
+                        </p>
+
+                        <p>
+                            Any of the following likely has to have a change log entry:
+                        </p>
+
+                        <ul>
+                            <li>bug fixes</li>
+                            <li>new features</li>
+                            <li>API changes</li>
+                            <li>difference in observed or documented behaviour</li>
+                            <li>difference in the intended usage</li>
+                            <li>difference in backward compatibility</li>
+                            <li><a href="#q11">substantial</a> changes to the man page(s)</li>
+                            <li>difference in build dependencies (Autoconf, CMake, compilers,
+                                libraries)</li>
+                            <li>difference in the result of <code>make install</code></li>
+                            <li>difference in runtime dependencies (OS kernel or configuration,
+                                libraries)</li>
+                            <li>difference in integration level of specific OSes</li>
+                            <li>changes to the <code>VERSION</code> file</li>
+                        </ul>
+
+                        <p>
+                            Any of the following likely does not require a change log entry:
+                        </p>
+
+                        <ul>
+                            <li>cosmetic improvements (comments, typos, formatting)</li>
+                            <li>changes to integration of external development tools (CI, code
+                                analysis)</li>
+                            <li>changes to build matrix scripts</li>
+                            <li>changes to repository-specific files such as <code>.mailmap</code>,
+                                <code>.gitignore</code> and <code>.gitattributes</code></li>
+                            <li>changes that have been replaced by later changes within the same
+                                release</li>
+                            <li>changes that fix minor issues with earlier changes that have
+                                already been described for the same release</li>
+                            <li>changes that do not result in meaningfull difference in the release
+                                tarball</li>
+                            <li>changes to the <code>CREDITS</code> file</li>
+                            <li>changes to the <code>CHANGES</code> file itself</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End of QUESTION #5 section -->
