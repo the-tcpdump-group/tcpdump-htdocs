@@ -580,6 +580,20 @@ printf
 );
 echo "<TD>\n";
 printf ("<SELECT name='%s' id='%s' tabindex=100>\n", VER_INPUT_NAME, VER_INPUT_NAME);
+
+# In case the server is not properly set up, omit known-broken versions.
+foreach (array_keys ($versions) as $ver)
+	foreach (array ('tcpdump', 'filtertest') as $tool)
+		if
+		(
+			array_key_exists ($tool, $versions[$ver]) &&
+			would_not_run ($versions[$ver][$tool])
+		)
+		{
+			unset ($versions[$ver]);
+			break;
+		}
+
 foreach ($versions as $ver => $vdata)
 {
 	$optlabel = array_fetch ($vdata, 'descr', $ver);
@@ -665,13 +679,20 @@ echo "</SELECT>\n</TD>\n</TR>\n";
 	echo "</BODY>\n</HTML>\n";
 } # print_html_page()
 
+# The given command name looks like a file name with a path and the file either
+# does not exist or is not executable.
+function would_not_run (string $bin): bool
+{
+	return dirname ($bin) != '.' && ! is_executable ($bin);
+}
+
 # Feed the input to stdin and return the stdout and stderr as a 2-tuple.
 function pipe_process (array $argv, string $stdin = ''): array
 {
 	if (count ($argv) < 1)
 		throw new Exception ('$argv must have at least one element');
 	$bin = array_shift ($argv);
-	if (strpos ($bin, '/') !== FALSE && ! is_executable ($bin))
+	if (would_not_run ($bin))
 		throw new Exception ("the binary ${bin} is not executable!");
 	array_unshift ($argv, $bin);
 	$po = proc_open
