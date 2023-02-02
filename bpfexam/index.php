@@ -920,6 +920,9 @@ function run_caper (object $bytecode): string
 	return on_stderr_throw ($stdout, $stderr);
 }
 
+# A possible alternative solution could be using PHP System V semaphore
+# functions to limit the request processing branch of this script.  This would
+# have granularity of one CPU core, which might be not precise enough.
 function limit_request_rate(): void
 {
 	if (FALSE === $f = fopen (TIMESTAMP_FILE, 'c+'))
