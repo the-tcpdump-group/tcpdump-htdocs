@@ -51,6 +51,12 @@ define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 # Enforce an RPS limit for requests that submit the form, as these spawn
 # external processes, which together take a while (0.5s to 1.0s) to complete.
 define ('MAX_RPS_LIMIT', 1.0);
+define
+(
+	'RPS_EXCEEDED_MESSAGE',
+	'When you think the server is ready to process new requests again, ' .
+	'just reload this page.'
+);
 # Starting with Radare2 5.7.6 it should be sufficient to install the amd64.deb
 # package from [1].  However, if it is necessary to try a git master snapshot
 # of Radare2, the recommended way is to build a Debian package in a separate,
@@ -424,7 +430,7 @@ function array_fetch (array $a, $key, $dfl)
 	return array_key_exists ($key, $a) ? $a[$key] : $dfl;
 }
 
-function fail (int $status): void
+function fail (int $status, string $message = ''): void
 {
 	ob_end_clean();
 	$statusmap = array
@@ -447,6 +453,7 @@ function fail (int $status): void
 	</HEAD>
 	<BODY>
 		<H1>${line}</H1>
+		${message}
 	</BODY>
 </HTML>
 ENDOFTEXT;
@@ -938,7 +945,7 @@ function limit_request_rate(): void
 	if ($prev > $now)
 		fail (500);
 	if ($now - $prev < 1.0 / MAX_RPS_LIMIT)
-		fail (429);
+		fail (429, RPS_EXCEEDED_MESSAGE);
 	# It is certainly fine to proceed.  Update the timestamp and release
 	# the lock early so any concurrent requests can bounce without a delay.
 	if (FALSE === ftruncate ($f, 0))
