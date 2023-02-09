@@ -735,8 +735,7 @@ DESCRIPTION
               Alternation (`||' or `or').
 
        Negation has the highest  precedence.   Alternation  and  concatenation
-       have  equal precedence and associate left to right.  Note that explicit
-       and tokens, not juxtaposition, are now required for concatenation.
+       have equal precedence and associate left to right.
 
        If an identifier is given without a keyword, the most recent keyword is
        assumed.  For example,
@@ -762,34 +761,34 @@ EXAMPLES
        To select all FTP traffic through Internet gateway `snup':
               gateway snup and (port ftp or ftp-data)
 
-       To  select  IPv4  traffic  neither  sourced from nor destined for local
+       To select IPv4 traffic neither sourced  from  nor  destined  for  local
        hosts (if you gateway to one other net, this stuff should never make it
        onto your local net).
               ip and not net localnet
 
-       To  select  the start and end packets (the SYN and FIN packets) of each
+       To select the start and end packets (the SYN and FIN packets)  of  each
        TCP conversation that involves a non-local host.
               tcp[tcpflags] & (tcp-syn|tcp-fin) != 0 and not src and dst net localnet
 
-       To select the TCP packets with flags RST and ACK both set.   (i.e.  se-
-       lect  only  the RST and ACK flags in the flags field, and if the result
+       To  select  the TCP packets with flags RST and ACK both set.  (i.e. se-
+       lect only the RST and ACK flags in the flags field, and if  the  result
        is "RST and ACK both set", match)
               tcp[tcpflags] & (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)
 
-       To select all IPv4 HTTP packets to and from port 80,  i.e.  print  only
-       packets  that  contain  data, not, for example, SYN and FIN packets and
+       To  select  all  IPv4 HTTP packets to and from port 80, i.e. print only
+       packets that contain data, not, for example, SYN and  FIN  packets  and
        ACK-only packets.  (IPv6 is left as an exercise for the reader.)
               tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)
 
-       To select IPv4 packets longer  than  576  bytes  sent  through  gateway
+       To  select  IPv4  packets  longer  than  576 bytes sent through gateway
        `snup':
               gateway snup and ip[2:2] > 576
 
-       To  select  IPv4  broadcast or multicast packets that were not sent via
+       To select IPv4 broadcast or multicast packets that were  not  sent  via
        Ethernet broadcast or multicast:
               ether[0] & 1 = 0 and ip[16] >= 224
 
-       To select all ICMP packets that are not  echo  requests/replies  (i.e.,
+       To  select  all  ICMP packets that are not echo requests/replies (i.e.,
        not ping packets):
               icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply
               icmp6[icmp6type] != icmp6-echo and icmp6[icmp6type] != icmp6-echoreply
@@ -804,25 +803,25 @@ SEE ALSO
        pcap(3PCAP)
 
 BUGS
-       To   report   a   security   issue   please   send   an    e-mail    to
+       To    report    a   security   issue   please   send   an   e-mail   to
        security@tcpdump.org.
 
-       To  report  bugs and other problems, contribute patches, request a fea-
-       ture, provide generic feedback etc please see the file  CONTRIBUTING.md
+       To report bugs and other problems, contribute patches, request  a  fea-
+       ture,  provide generic feedback etc please see the file CONTRIBUTING.md
        in the libpcap source tree root.
 
-       Filter  expressions  on  fields  other than those in Token Ring headers
+       Filter expressions on fields other than those  in  Token  Ring  headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter expressions on fields other than those in  802.11  headers  will
-       not  correctly  handle  802.11 data packets with both To DS and From DS
+       Filter  expressions  on  fields other than those in 802.11 headers will
+       not correctly handle 802.11 data packets with both To DS  and  From  DS
        set.
 
-       `ip6 proto' should chase header chain, but at this moment it does  not.
-       `ip6  protochain' is supplied for this behavior.  For example, to match
+       `ip6  proto' should chase header chain, but at this moment it does not.
+       `ip6 protochain' is supplied for this behavior.  For example, to  match
        IPv6 fragments: `ip6 protochain 44'
 
-       Arithmetic expression against transport  layer  headers,  like  tcp[0],
+       Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
                                19 November 2022                 PCAP-FILTER(7)
