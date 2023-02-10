@@ -920,6 +920,7 @@ function run_caper (object $bytecode): string
 			'-r',
 			'-n',
 			'-HTML',
+			'-p',
 			'-e',
 			$bytecode->filter
 		)
