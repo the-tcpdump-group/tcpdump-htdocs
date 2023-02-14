@@ -29,7 +29,7 @@ struct bpf_program fcode;
 
 	switch (argv[1] [1])
 	{
-	
+
 	case 'n':
 		{
 			if ( (fp= pcap_open_live(argv[2], 100, 1, 20, error) ) == NULL)
@@ -63,6 +63,6 @@ struct bpf_program fcode;
 		};
 		break;
 	}
-		
-	
+
+
 }
