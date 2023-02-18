@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-CONFIG</H1>
-Section: User Commands  (1)<BR>Updated: 15 February 2015<BR>
+Section: User Commands  (1)<BR>Updated: 18 February 2023<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -25,35 +25,85 @@ pcap-config - write libpcap compiler and linker flags to standard output
 <B>pcap-config</B>
 
 [
-<B>--static</B>
+<B>--help</B>
 
 ]
 [
-<B>--cflags | --libs | --additional-libs</B>
+<B>--version</B>
+
+]
+[
+<B>--cflags</B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>--libs</B>
+
+|
+<B>--additional-libs</B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>--static</B>
+
+|
+<B>--static-pcap-only</B>
 
 ]
 
+<P>
 <H2 id="lbAD">DESCRIPTION</H2>
 
 <P>
 
-When run with the
-<B>--cflags</B>
-
-option,
 <I>pcap-config</I>
 
-writes to the standard output the
+writes to the standard output various compiler and linker flags required to
+build a user program with libpcap.  By default, it writes flags appropriate
+for building with a dynamically-linked version of libpcap; see the
+<B>--static</B>
+
+and
+<B>--static-pcap-only</B>
+
+options for building with a statically-linked version.  Depending on the
+manner of libpcap installation, some options or their combinations may
+produce empty output - this is by design.
+<P>
+<H2 id="lbAE">OPTIONS</H2>
+
+<DL>
+<DT><B>--help</B>
+
+<DD>
+Produce a help message and exit.
+<P>
+<DT><B>--version</B>
+
+<DD>
+Produce libpcap version and exit.  The version is the contents of
+<I>VERSION</I>
+
+file in libpcap source tree rather than the result of
+<A HREF='./pcap_lib_version.3pcap.html'><B>pcap_lib_version</B></A>(3PCAP).
+
+<P>
+<DT><B>--cflags</B>
+
+<DD>
+Produce the
 <B>-I</B>
 
-compiler flags required to include libpcap's header files.
-When run with the
-<B>--libs</B>
+compiler flag required to include libpcap's header files.
+<P>
+<DT><B>--libs</B>
 
-option,
-<I>pcap-config</I>
-
-writes to the standard output the
+<DD>
+Produce the
 <B>-L</B>
 
 and
@@ -63,31 +113,56 @@ linker flags required to link with libpcap, including
 <B>-l</B>
 
 flags for libraries required by libpcap.
-When run with the
-<B>--additional-libs</B>
+<P>
+<DT><B>--additional-libs</B>
 
-option,
-<I>pcap-config</I>
-
-writes to the standard output the
+<DD>
+Produce the
 <B>-L</B>
 
 and
 <B>-l</B>
 
-flags for libraries required by libpcap, but not the
-<B>-lpcap</B>
+linker flags for libraries required by libpcap, but not the
+<B>-l</B>
 
 flag to link with libpcap itself.
 <P>
+<DT><B>--static</B>
 
-By default, it writes flags appropriate for compiling with a
-dynamically-linked version of libpcap; the
-<B>--static</B>
+<DD>
+This option causes
+<B>--libs</B>
 
-flag causes it to write flags appropriate for compiling with a
-statically-linked version of libpcap.
-<H2 id="lbAE">SEE ALSO</H2>
+and
+<B>--additional-libs</B>
+
+to produce linker flags appropriate for static linking with libpcap.
+<P>
+<DT><B>--static-pcap-only</B>
+
+<DD>
+This option causes
+<B>--libs</B>
+
+and
+<B>--additional-libs</B>
+
+to produce linker flags appropriate for static linking with libpcap and
+dynamic linking with all other libraries, including libraries required by
+libpcap.
+<P>
+</DL>
+<H2 id="lbAF">EXIT STATUS</H2>
+
+<I>pcap-config</I>
+
+exits with a non-zero status when invoked with an invalid command-line
+option, and with status 0 otherwise.
+<P>
+<H2 id="lbAG">SEE ALSO</H2>
+
+<B>pkg-config</B>(1),
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
@@ -95,7 +170,7 @@ statically-linked version of libpcap.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:07 GMT, November 01, 2021
+This HTML man page was generated at 23:15:43 GMT, February 18, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
