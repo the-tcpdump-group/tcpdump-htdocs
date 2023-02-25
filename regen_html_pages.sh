@@ -43,6 +43,7 @@
 # * OpenBSD 7.0
 # * NetBSD 9.2
 # * Debian 11
+# * Haiku
 #
 
 HTML_HEAD='htmlsrc/_html_head.html'
