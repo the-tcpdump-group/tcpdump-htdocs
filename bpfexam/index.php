@@ -916,12 +916,12 @@ function run_caper (object $bytecode): string
 		array
 		(
 			CAPER_BIN,
-			'-q',
-			'-r',
-			'-n',
-			'-HTML',
-			'-p',
-			'-e',
+			'-q', # suppress updates on processing
+			'-r', # relaxed printing
+			'-n', # do not resolve names
+			'-HTML', # produce HTML
+			'-p', # pretty-print the result
+			'-e', # input expression follows
 			$bytecode->filter
 		)
 	);
