@@ -285,7 +285,6 @@ maybeBoldToCode()
 	done <<-EOF
 		cbpf-savefile
 		pcap
-		pcap_activate
 		pcap_breakloop
 		pcap_datalink
 		pcap-filter
@@ -294,7 +293,6 @@ maybeBoldToCode()
 		pcap_loop
 		pcap_next_ex
 		pcap_set_immediate_mode
-		pcap_set_tstamp_precision
 		pcap-tstamp
 		rpcapd
 		rpcapd-config
