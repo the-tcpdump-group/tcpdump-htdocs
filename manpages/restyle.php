@@ -237,6 +237,12 @@ foreach ($taxonomy as $pname => $project)
 			'@^Section: .+<BR>(.+<BR>)$@m',
 			'$1'
 		),
+		# Combine two header lines into one.
+		array
+		(
+			'@^(Updated: [12]?[0-9] [[:alpha:]]+ 20[0-9][0-9])<BR>$@m',
+			'$1 | '
+		),
 		array
 		(
 			'@^(</HEAD>.*)$@m',
