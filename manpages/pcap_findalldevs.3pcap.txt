@@ -106,13 +106,13 @@ DESCRIPTION
               broadaddr
                      if not NULL, a pointer to a struct sockaddr that contains
                      the   broadcast  address  corresponding  to  the  address
-                     pointed to by addr; may be null  if  the  device  doesn't
+                     pointed to by addr; may be NULL  if  the  device  doesn't
                      support broadcasts
 
               dstaddr
                      if not NULL, a pointer to a struct sockaddr that contains
                      the destination  address  corresponding  to  the  address
-                     pointed  to  by  addr;  may be null if the device isn't a
+                     pointed  to  by  addr;  may be NULL if the device isn't a
                      point-to-point interface
 
        Note that the addresses in the list of  addresses  might  be  IPv4  ad-

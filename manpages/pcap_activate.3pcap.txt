@@ -89,7 +89,7 @@ RETURN VALUE
        or error code.
 
        If  pcap_activate()  fails,  the  pcap_t  * is not closed and freed; it
-       should be closed using pcap_close().
+       should be closed using pcap_close(3PCAP).
 
 SEE ALSO
        pcap(3PCAP)

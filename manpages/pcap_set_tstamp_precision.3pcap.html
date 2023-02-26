@@ -44,9 +44,10 @@ that has not yet been activated by
 
 Two time stamp precisions are supported, microseconds and nanoseconds. One can
 use options
-<B>PCAP_TSTAMP_PRECISION_MICRO and</B>
+<CODE>PCAP_TSTAMP_PRECISION_MICRO</CODE>
 
-<B>PCAP_TSTAMP_PRECISION_NANO</B>
+and
+<CODE>PCAP_TSTAMP_PRECISION_NANO</CODE>
 
 to request desired precision. By default, time stamps are in microseconds.
 <H2 id="lbAE">RETURN VALUE</H2>
@@ -58,11 +59,11 @@ returns
 
 on success if the specified time stamp precision is expected to be
 supported by the capture device,
-<B>PCAP_ERROR_TSTAMP_PRECISION_NOTSUP</B>
+<CODE>PCAP_ERROR_TSTAMP_PRECISION_NOTSUP</CODE>
 
 if the capture device does not support the requested time stamp
 precision,
-<B>PCAP_ERROR_ACTIVATED</B>
+<CODE>PCAP_ERROR_ACTIVATED</CODE>
 
 if called on a capture handle that has been activated.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
@@ -82,7 +83,7 @@ in seconds and microseconds.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:07 GMT, November 01, 2021
+This HTML man page was generated at 20:42:57 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

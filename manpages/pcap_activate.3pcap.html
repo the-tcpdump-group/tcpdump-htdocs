@@ -49,12 +49,12 @@ occurred.
 
 The possible warning values are:
 <DL>
-<DT><B>PCAP_WARNING_PROMISC_NOTSUP</B>
+<DT><CODE>PCAP_WARNING_PROMISC_NOTSUP</CODE>
 
 <DD>
 Promiscuous mode was requested, but the capture source doesn't support
 promiscuous mode.
-<DT><B>PCAP_WARNING_TSTAMP_TYPE_NOTSUP</B>
+<DT><CODE>PCAP_WARNING_TSTAMP_TYPE_NOTSUP</CODE>
 
 <DD>
 The time stamp type specified in a previous
@@ -62,7 +62,7 @@ The time stamp type specified in a previous
 
 call isn't supported by the capture source (the time stamp type is
 left as the default),
-<DT><B>PCAP_WARNING</B>
+<DT><CODE>PCAP_WARNING</CODE>
 
 <DD>
 Another warning condition occurred;
@@ -81,34 +81,34 @@ condition.
 
 The possible error values are:
 <DL>
-<DT><B>PCAP_ERROR_ACTIVATED</B>
+<DT><CODE>PCAP_ERROR_ACTIVATED</CODE>
 
 <DD>
 The handle has already been activated.
-<DT><B>PCAP_ERROR_NO_SUCH_DEVICE</B>
+<DT><CODE>PCAP_ERROR_NO_SUCH_DEVICE</CODE>
 
 <DD>
 The capture source specified when the handle was created doesn't
 exist.
-<DT><B>PCAP_ERROR_PERM_DENIED</B>
+<DT><CODE>PCAP_ERROR_PERM_DENIED</CODE>
 
 <DD>
 The process doesn't have permission to open the capture source.
-<DT><B>PCAP_ERROR_PROMISC_PERM_DENIED</B>
+<DT><CODE>PCAP_ERROR_PROMISC_PERM_DENIED</CODE>
 
 <DD>
 The process has permission to open the capture source but doesn't
 have permission to put it into promiscuous mode.
-<DT><B>PCAP_ERROR_RFMON_NOTSUP</B>
+<DT><CODE>PCAP_ERROR_RFMON_NOTSUP</CODE>
 
 <DD>
 Monitor mode was specified but the capture source doesn't support
 monitor mode.
-<DT><B>PCAP_ERROR_IFACE_NOT_UP</B>
+<DT><CODE>PCAP_ERROR_IFACE_NOT_UP</CODE>
 
 <DD>
 The capture source device is not up.
-<DT><B>PCAP_ERROR</B>
+<DT><CODE>PCAP_ERROR</CODE>
 
 <DD>
 Another error occurred.
@@ -125,12 +125,12 @@ as an argument to fetch or display a message describing the error.
 <P>
 
 If
-<B>PCAP_WARNING_PROMISC_NOTSUP</B>,
+<CODE>PCAP_WARNING_PROMISC_NOTSUP</CODE>,
 
-<B>PCAP_ERROR_NO_SUCH_DEVICE</B>,
+<CODE>PCAP_ERROR_NO_SUCH_DEVICE</CODE>,
 
 or
-<B>PCAP_ERROR_PERM_DENIED</B>
+<CODE>PCAP_ERROR_PERM_DENIED</CODE>
 
 is returned,
 <B>pcap_geterr</B>()
@@ -160,10 +160,10 @@ If
 <B>pcap_activate</B>()
 
 fails, the
-<I>pcap_t *</I>
+<CODE>pcap_t *</CODE>
 
 is not closed and freed; it should be closed using
-<B>pcap_close</B>().
+<A HREF='./pcap_close.3pcap.html'><B>pcap_close</B></A>(3PCAP).
 
 <H2 id="lbAF">SEE ALSO</H2>
 
@@ -173,7 +173,7 @@ is not closed and freed; it should be closed using
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:03 GMT, November 01, 2021
+This HTML man page was generated at 20:50:40 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
