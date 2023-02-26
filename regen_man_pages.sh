@@ -260,6 +260,49 @@ insertHTMLBoilerplate()
 	rm -f "$HBTMP"
 }
 
+# Starting from the description section (which usually follows the synopsis,
+# which uses bold font differently), convert most freestanding bold text to
+# inline code.
+definitelyBoldToCode()
+{
+	# Do not convert a standalone "0" or "1" because it does not look well.
+	sed -E '/^<H2 .+>DESCRIPTION/,$s@^<DT><B>(.+)</B>@<DT><CODE>\1</CODE>@' |
+		sed -E '/^<H2 .+>DESCRIPTION/,$s@^<B>([01].+|[^01].*)</B>([,.;]?)$@<CODE>\1</CODE>\2@'
+}
+
+# The substitution does not produce good results for every page, so do not
+# modify pages that for one or another reason would not look good afterwards.
+maybeBoldToCode()
+{
+	mbtc_bn=$(basename "${1:?}")
+	mbtc_bn=${mbtc_bn%.*}
+	mbtc_filter='definitelyBoldToCode'
+	while read -r mbtc_fn; do
+		if [ "$mbtc_fn" = "$mbtc_bn" ]; then
+			mbtc_filter='cat'
+			break
+		fi
+	done <<-EOF
+		cbpf-savefile
+		pcap
+		pcap_activate
+		pcap_breakloop
+		pcap_datalink
+		pcap-filter
+		pcap_get_required_select_timeout
+		pcap_lookupdev
+		pcap_loop
+		pcap_next_ex
+		pcap_set_immediate_mode
+		pcap_set_tstamp_precision
+		pcap-tstamp
+		rpcapd
+		rpcapd-config
+		tcpdump
+	EOF
+	"$mbtc_filter"
+}
+
 in_repository()
 {
 	git cat-file -e HEAD:"${1:?}" >/dev/null 2>&1
@@ -277,7 +320,9 @@ produceHTML()
 	# A possible alternative: mandoc -T html $infile > $outfile
 	man2html -M $MAN2HTML_PFX "$infile" | stripContentTypeHeader |
 		insertHTMLBoilerplate "$infile" |
-		stripIndexSection "$infile" | sed --file="$html_sedfile" > "$outfile"
+		stripIndexSection "$infile" |
+		sed --file="$html_sedfile" |
+		maybeBoldToCode "$infile" >"$outfile"
 	# If the output file is git-tracked and the new revision is different in
 	# timestamp only, discard the new revision.
 	in_repository "$outfile" || {
