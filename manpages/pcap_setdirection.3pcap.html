@@ -35,23 +35,23 @@ is used to specify a direction that packets will be captured.
 <I>d</I>
 
 is one of the constants
-<B>PCAP_D_IN</B>,
+<CODE>PCAP_D_IN</CODE>,
 
-<B>PCAP_D_OUT</B>
+<CODE>PCAP_D_OUT</CODE>
 
 or
-<B>PCAP_D_INOUT</B>.
+<CODE>PCAP_D_INOUT</CODE>.
 
-<B>PCAP_D_IN</B>
+<CODE>PCAP_D_IN</CODE>
 
 will only capture packets received by the device,
-<B>PCAP_D_OUT</B>
+<CODE>PCAP_D_OUT</CODE>
 
 will only capture packets sent by the device and
-<B>PCAP_D_INOUT</B>
+<CODE>PCAP_D_INOUT</CODE>
 
 will capture packets received by or sent by the device.
-<B>PCAP_D_INOUT</B>
+<CODE>PCAP_D_INOUT</CODE>
 
 is the default setting if this function is not called.
 <P>
@@ -61,7 +61,7 @@ is the default setting if this function is not called.
 isn't necessarily fully supported on all platforms; some platforms might
 return an error for all values, and some other platforms might not
 support
-<B>PCAP_D_OUT</B>.
+<CODE>PCAP_D_OUT</CODE>.
 
 <P>
 
@@ -74,13 +74,13 @@ returns
 <B>0</B>
 
 on success,
-<B>PCAP_ERROR_NOT_ACTIVATED</B>
+<CODE>PCAP_ERROR_NOT_ACTIVATED</CODE>
 
 if called on a capture handle that has been created but not activated, or
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 on other errors. If
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 is returned,
 <A HREF='./pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
@@ -100,7 +100,7 @@ as an argument to fetch or display the error text.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:38:08 GMT, March 07, 2022
+This HTML man page was generated at 13:50:57 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

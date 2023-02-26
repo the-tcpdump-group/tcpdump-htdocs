@@ -58,90 +58,90 @@ succeeds, the pointer pointed to by
 <I>alldevsp</I>
 
 is set to point to the first element of the list, or to
-<B>NULL</B>
+<CODE>NULL</CODE>
 
 if no devices were found (this is considered success).
 Each element of the list is of type
-<B>pcap_if_t</B>,
+<CODE>pcap_if_t</CODE>,
 
 and has the following members:
 <DL><DT><DD>
 <DL>
-<DT><B>next</B>
+<DT><CODE>next</CODE>
 
 <DD>
 if not
-<B>NULL</B>,
+<CODE>NULL</CODE>,
 
 a pointer to the next element in the list;
-<B>NULL</B>
+<CODE>NULL</CODE>
 
 for the last element of the list
-<DT><B>name</B>
+<DT><CODE>name</CODE>
 
 <DD>
 a pointer to a string giving a name for the device to pass to
 <B>pcap_open_live</B>()
 
-<DT><B>description</B>
+<DT><CODE>description</CODE>
 
 <DD>
 if not
-<B>NULL</B>,
+<CODE>NULL</CODE>,
 
 a pointer to a string giving a human-readable description of the device
-<DT><B>addresses</B>
+<DT><CODE>addresses</CODE>
 
 <DD>
 a pointer to the first element of a list of network addresses for the
 device,
 or
-<B>NULL</B>
+<CODE>NULL</CODE>
 
 if the device has no addresses
-<DT><B>flags</B>
+<DT><CODE>flags</CODE>
 
 <DD>
 device flags:
 <DL><DT><DD>
 <DL>
-<DT><B>PCAP_IF_LOOPBACK</B>
+<DT><CODE>PCAP_IF_LOOPBACK</CODE>
 
 <DD>
 set if the device is a loopback interface
-<DT><B>PCAP_IF_UP</B>
+<DT><CODE>PCAP_IF_UP</CODE>
 
 <DD>
 set if the device is up
-<DT><B>PCAP_IF_RUNNING</B>
+<DT><CODE>PCAP_IF_RUNNING</CODE>
 
 <DD>
 set if the device is running
-<DT><B>PCAP_IF_WIRELESS</B>
+<DT><CODE>PCAP_IF_WIRELESS</CODE>
 
 <DD>
 set if the device is a wireless interface; this includes IrDA as well as
 radio-based networks such as IEEE 802.15.4 and IEEE 802.11, so it
 doesn't just mean Wi-Fi
-<DT><B>PCAP_IF_CONNECTION_STATUS</B>
+<DT><CODE>PCAP_IF_CONNECTION_STATUS</CODE>
 
 <DD>
 a bitmask for an indication of whether the adapter is connected or not;
 for wireless interfaces, &quot;connected&quot; means &quot;associated with a network&quot;
 <DT>The possible values for the connection status bits are:<DD>
-<DT><B>PCAP_IF_CONNECTION_STATUS_UNKNOWN</B>
+<DT><CODE>PCAP_IF_CONNECTION_STATUS_UNKNOWN</CODE>
 
 <DD>
 it's unknown whether the adapter is connected or not
-<DT><B>PCAP_IF_CONNECTION_STATUS_CONNECTED</B>
+<DT><CODE>PCAP_IF_CONNECTION_STATUS_CONNECTED</CODE>
 
 <DD>
 the adapter is connected
-<DT><B>PCAP_IF_CONNECTION_STATUS_DISCONNECTED</B>
+<DT><CODE>PCAP_IF_CONNECTION_STATUS_DISCONNECTED</CODE>
 
 <DD>
 the adapter is disconnected
-<DT><B>PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE</B>
+<DT><CODE>PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE</CODE>
 
 <DD>
 the notion of &quot;connected&quot; and &quot;disconnected&quot; don't apply to this
@@ -155,66 +155,66 @@ interface; for example, it doesn't apply to a loopback device
 <P>
 
 Each element of the list of addresses is of type
-<B>pcap_addr_t</B>,
+<CODE>pcap_addr_t</CODE>,
 
 and has the following members:
 <DL><DT><DD>
 <DL>
-<DT><B>next</B>
+<DT><CODE>next</CODE>
 
 <DD>
 if not
-<B>NULL</B>,
+<CODE>NULL</CODE>,
 
 a pointer to the next element in the list;
-<B>NULL</B>
+<CODE>NULL</CODE>
 
 for the last element of the list
-<DT><B>addr</B>
+<DT><CODE>addr</CODE>
 
 <DD>
 a pointer to a
-<B>struct sockaddr</B>
+<CODE>struct sockaddr</CODE>
 
 containing an address
-<DT><B>netmask</B>
+<DT><CODE>netmask</CODE>
 
 <DD>
 if not
-<B>NULL</B>,
+<CODE>NULL</CODE>,
 
 a pointer to a
-<B>struct sockaddr</B>
+<CODE>struct sockaddr</CODE>
 
 that contains the netmask corresponding to the address pointed to by
-<B>addr</B>
+<CODE>addr</CODE>
 
-<DT><B>broadaddr</B>
+<DT><CODE>broadaddr</CODE>
 
 <DD>
 if not
-<B>NULL</B>,
+<CODE>NULL</CODE>,
 
 a pointer to a
-<B>struct sockaddr</B>
+<CODE>struct sockaddr</CODE>
 
 that contains the broadcast address corresponding to the address pointed
 to by
-<B>addr</B>;
+<CODE>addr</CODE>;
 
 may be null if the device doesn't support broadcasts
-<DT><B>dstaddr</B>
+<DT><CODE>dstaddr</CODE>
 
 <DD>
 if not
-<B>NULL</B>,
+<CODE>NULL</CODE>,
 
 a pointer to a
-<B>struct sockaddr</B>
+<CODE>struct sockaddr</CODE>
 
 that contains the destination address corresponding to the address pointed
 to by
-<B>addr</B>;
+<CODE>addr</CODE>;
 
 may be null if the device isn't a point-to-point interface
 </DL>
@@ -225,30 +225,30 @@ may be null if the device isn't a point-to-point interface
 Note that the addresses in the list of addresses might be IPv4
 addresses, IPv6 addresses, or some other type of addresses, so you must
 check the
-<B>sa_family</B>
+<CODE>sa_family</CODE>
 
 member of the
-<B>struct sockaddr</B>
+<CODE>struct sockaddr</CODE>
 
 before interpreting the contents of the address; do not assume that the
 addresses are all IPv4 addresses, or even all IPv4 or IPv6 addresses.
 IPv4 addresses have the value
-<B>AF_INET</B>,
+<CODE>AF_INET</CODE>,
 
 IPv6 addresses have the value
-<B>AF_INET6</B>
+<CODE>AF_INET6</CODE>
 
 (which older operating systems that don't support IPv6 might not
 define), and other addresses have other values.  Whether other addresses
 are returned, and what types they might have is platform-dependent.
 For IPv4 addresses, the
-<B>struct sockaddr</B>
+<CODE>struct sockaddr</CODE>
 
 pointer can be interpreted as if it pointed to a
-<B>struct sockaddr_in</B>;
+<CODE>struct sockaddr_in</CODE>;
 
 for IPv6 addresses, it can be interpreted as if it pointed to a
-<B>struct sockaddr_in6.</B>
+<CODE>struct sockaddr_in6.</CODE>
 
 <P>
 
@@ -266,7 +266,7 @@ returns
 <B>0</B>
 
 on success and
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 on failure; as indicated, finding no
 devices is considered success, rather than failure, so
@@ -274,7 +274,7 @@ devices is considered success, rather than failure, so
 
 will be
 returned in that case. If
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 is returned,
 <I>errbuf</I>
@@ -283,7 +283,7 @@ is filled in with an appropriate error message.
 <I>errbuf</I>
 
 is assumed to be able to hold at least
-<B>PCAP_ERRBUF_SIZE</B>
+<CODE>PCAP_ERRBUF_SIZE</CODE>
 
 chars.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
@@ -291,24 +291,24 @@ chars.
 <P>
 
 The
-<B>PCAP_IF_UP</B>
+<CODE>PCAP_IF_UP</CODE>
 
 and
-<B>PCAP_IF_RUNNING</B>
+<CODE>PCAP_IF_RUNNING</CODE>
 
 constants became available in libpcap release 1.6.1.  The
-<B>PCAP_IF_WIRELESS</B>,
+<CODE>PCAP_IF_WIRELESS</CODE>,
 
-<B>PCAP_IF_CONNECTION_STATUS</B>,
+<CODE>PCAP_IF_CONNECTION_STATUS</CODE>,
 
-<B>PCAP_IF_CONNECTION_STATUS_UNKNOWN</B>,
+<CODE>PCAP_IF_CONNECTION_STATUS_UNKNOWN</CODE>,
 
-<B>PCAP_IF_CONNECTION_STATUS_CONNECTED</B>,
+<CODE>PCAP_IF_CONNECTION_STATUS_CONNECTED</CODE>,
 
-<B>PCAP_IF_CONNECTION_STATUS_DISCONNECTED</B>,
+<CODE>PCAP_IF_CONNECTION_STATUS_DISCONNECTED</CODE>,
 
 and
-<B>PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE</B>
+<CODE>PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE</CODE>
 
 constants became available in libpcap release 1.9.0.
 <H2 id="lbAG">SEE ALSO</H2>
@@ -319,7 +319,7 @@ constants became available in libpcap release 1.9.0.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 14:30:16 GMT, December 26, 2021
+This HTML man page was generated at 13:50:55 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

@@ -60,7 +60,7 @@ and
 or can have the pcapng file format, although not all pcapng files can
 be read.
 The name &quot;-&quot; is a synonym for
-<B>stdin</B>.
+<CODE>stdin</CODE>.
 
 <P>
 
@@ -71,12 +71,12 @@ takes an additional
 
 argument specifying the time stamp precision desired;
 if
-<B>PCAP_TSTAMP_PRECISION_MICRO</B>
+<CODE>PCAP_TSTAMP_PRECISION_MICRO</CODE>
 
 is specified, packet time stamps will be supplied in seconds and
 microseconds,
 and if
-<B>PCAP_TSTAMP_PRECISION_NANO</B>
+<CODE>PCAP_TSTAMP_PRECISION_NANO</CODE>
 
 is specified, packet time stamps will be supplied in seconds and
 nanoseconds.  If the time stamps in the file do not have the same
@@ -115,11 +115,11 @@ return a
 <I>pcap_t *</I>
 
 on success and
-<B>NULL</B>
+<CODE>NULL</CODE>
 
 on failure.
 If
-<B>NULL</B>
+<CODE>NULL</CODE>
 
 is returned,
 <I>errbuf</I>
@@ -128,7 +128,7 @@ is filled in with an appropriate error message.
 <I>errbuf</I>
 
 is assumed to be able to hold at least
-<B>PCAP_ERRBUF_SIZE</B>
+<CODE>PCAP_ERRBUF_SIZE</CODE>
 
 chars.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
@@ -150,7 +150,7 @@ stamps from a savefile are always given in seconds and microseconds.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:06 GMT, November 01, 2021
+This HTML man page was generated at 13:50:56 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

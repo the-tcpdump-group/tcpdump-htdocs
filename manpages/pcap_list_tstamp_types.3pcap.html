@@ -58,20 +58,20 @@ which frees the list pointed to by
 <B>pcap_list_tstamp_types</B>()
 
 returns the number of time stamp types in the array on success and
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 on failure.
 A return value of one means that the only time stamp type supported is
 the one in the list, which is the capture device's default time stamp
 type.  A return value of zero means that the only time stamp type
 supported is
-<B>PCAP_TSTAMP_HOST</B>,
+<CODE>PCAP_TSTAMP_HOST</CODE>,
 
 which is the capture device's default time stamp type (only older
 versions of libpcap will return that; newer versions will always return
 one or more types).
 If
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 is returned,
 <A HREF='./pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
@@ -102,7 +102,7 @@ type offered by a capture source is available.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:05 GMT, November 01, 2021
+This HTML man page was generated at 13:50:56 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

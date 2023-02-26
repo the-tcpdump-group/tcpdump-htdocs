@@ -40,7 +40,7 @@ and
 <B>pcap_open_dead_with_tstamp_precision</B>()
 
 are used for creating a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 structure to use when calling the other functions in libpcap.  It is
 typically used when just using libpcap for compiling BPF code; it can
@@ -53,7 +53,7 @@ and
 <A HREF='./pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP)
 
 to write a savefile if there is no
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 that supplies the packets to be written.
 <P>
@@ -61,14 +61,14 @@ that supplies the packets to be written.
 <I>linktype</I>
 
 specifies the link-layer type for the
-<B>pcap_t</B>.
+<CODE>pcap_t</CODE>.
 
 <P>
 
 <I>snaplen</I>
 
 specifies the snapshot length for the
-<B>pcap_t</B>.
+<CODE>pcap_t</CODE>.
 
 <P>
 
@@ -76,7 +76,7 @@ When
 <B>pcap_open_dead_with_tstamp_precision</B>(),
 
 is used to create a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for use with
 <B>pcap_dump_open</B>(),
@@ -84,11 +84,11 @@ for use with
 <I>precision</I>
 
 specifies the time stamp precision for packets;
-<B>PCAP_TSTAMP_PRECISION_MICRO</B>
+<CODE>PCAP_TSTAMP_PRECISION_MICRO</CODE>
 
 should be specified if the packets to be written have time stamps in
 seconds and microseconds, and
-<B>PCAP_TSTAMP_PRECISION_NANO</B>
+<CODE>PCAP_TSTAMP_PRECISION_NANO</CODE>
 
 should be specified if the packets to be written have time stamps in
 seconds and nanoseconds.  Its value does not affect
@@ -112,7 +112,7 @@ time stamps given in seconds and nanoseconds.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:06 GMT, November 01, 2021
+This HTML man page was generated at 13:50:56 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

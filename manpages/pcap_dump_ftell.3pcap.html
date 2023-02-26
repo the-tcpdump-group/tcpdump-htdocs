@@ -39,26 +39,26 @@ number of bytes written by
 and
 <A HREF='./pcap_dump.3pcap.html'><B>pcap_dump</B></A>(3PCAP).
 
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 is returned on error. If the current file position does not fit in a
-<B>long</B>,
+<CODE>long</CODE>,
 
 it will be truncated; this can happen on 32-bit UNIX-like systems with
 large file support and on Windows.
 <B>pcap_dump_ftell64</B>()
 
 returns the current file position in a
-<B>int64_t</B>,
+<CODE>int64_t</CODE>,
 
 so if file offsets that don't fit in a
-<B>long</B>
+<CODE>long</CODE>
 
 but that fit in a
-<B>int64_t</B>
+<CODE>int64_t</CODE>
 
 are supported, this will return the file offset without truncation.
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 is returned on error.
 <H2 id="lbAE">BACKWARD COMPATIBILITY</H2>
@@ -68,7 +68,7 @@ The function
 
 became available in libpcap release 1.9.0.  In previous releases, there
 was no mechanism to obtain a file offset that is too large to fit in a
-<B>long</B>.
+<CODE>long</CODE>.
 
 <H2 id="lbAF">SEE ALSO</H2>
 
@@ -78,7 +78,7 @@ was no mechanism to obtain a file offset that is too large to fit in a
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:04 GMT, November 01, 2021
+This HTML man page was generated at 13:50:55 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

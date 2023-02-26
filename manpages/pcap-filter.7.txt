@@ -45,10 +45,10 @@ DESCRIPTION
               net  128.3',  `tcp  port  21',  `udp portrange 7000-7009', `wlan
               addr2 0:2:3:4:5:6'.  If there is no proto qualifier, all  proto-
               cols  consistent  with  the  type  are assumed.  E.g., `src foo'
-              means `(ip or arp or rarp) src foo', `net bar' means `(ip or arp
-              or rarp) net bar' and `port 53' means `(tcp or udp or sctp) port
-              53' (note that these examples use invalid syntax  to  illustrate
-              the principle).
+              means `(ip6 or ip or arp or rarp) src foo', `net bar' means `(ip
+              or  arp  or  rarp)  net bar' and `port 53' means `(tcp or udp or
+              sctp) port 53' (note that these examples use invalid  syntax  to
+              illustrate the principle).
 
        [fddi  is  actually  an alias for ether; the parser treats them identi-
        cally as meaning ``the data link level used on  the  specified  network
@@ -824,4 +824,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                               19 November 2022                 PCAP-FILTER(7)
+                               20 February 2023                 PCAP-FILTER(7)

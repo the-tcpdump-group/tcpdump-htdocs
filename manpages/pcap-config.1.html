@@ -65,10 +65,10 @@ pcap-config - write libpcap compiler and linker flags to standard output
 writes to the standard output various compiler and linker flags required to
 build a user program with libpcap.  By default, it writes flags appropriate
 for building with a dynamically-linked version of libpcap; see the
-<B>--static</B>
+<CODE>--static</CODE>
 
 and
-<B>--static-pcap-only</B>
+<CODE>--static-pcap-only</CODE>
 
 options for building with a statically-linked version.  Depending on the
 manner of libpcap installation, some options or their combinations may
@@ -77,12 +77,12 @@ produce empty output - this is by design.
 <H2 id="lbAE">OPTIONS</H2>
 
 <DL>
-<DT><B>--help</B>
+<DT><CODE>--help</CODE>
 
 <DD>
 Produce a help message and exit.
 <P>
-<DT><B>--version</B>
+<DT><CODE>--version</CODE>
 
 <DD>
 Produce libpcap version and exit.  The version is the contents of
@@ -92,61 +92,61 @@ file in libpcap source tree rather than the result of
 <A HREF='./pcap_lib_version.3pcap.html'><B>pcap_lib_version</B></A>(3PCAP).
 
 <P>
-<DT><B>--cflags</B>
+<DT><CODE>--cflags</CODE>
 
 <DD>
 Produce the
-<B>-I</B>
+<CODE>-I</CODE>
 
 compiler flag required to include libpcap's header files.
 <P>
-<DT><B>--libs</B>
+<DT><CODE>--libs</CODE>
 
 <DD>
 Produce the
-<B>-L</B>
+<CODE>-L</CODE>
 
 and
-<B>-l</B>
+<CODE>-l</CODE>
 
 linker flags required to link with libpcap, including
-<B>-l</B>
+<CODE>-l</CODE>
 
 flags for libraries required by libpcap.
 <P>
-<DT><B>--additional-libs</B>
+<DT><CODE>--additional-libs</CODE>
 
 <DD>
 Produce the
-<B>-L</B>
+<CODE>-L</CODE>
 
 and
-<B>-l</B>
+<CODE>-l</CODE>
 
 linker flags for libraries required by libpcap, but not the
-<B>-l</B>
+<CODE>-l</CODE>
 
 flag to link with libpcap itself.
 <P>
-<DT><B>--static</B>
+<DT><CODE>--static</CODE>
 
 <DD>
 This option causes
-<B>--libs</B>
+<CODE>--libs</CODE>
 
 and
-<B>--additional-libs</B>
+<CODE>--additional-libs</CODE>
 
 to produce linker flags appropriate for static linking with libpcap.
 <P>
-<DT><B>--static-pcap-only</B>
+<DT><CODE>--static-pcap-only</CODE>
 
 <DD>
 This option causes
-<B>--libs</B>
+<CODE>--libs</CODE>
 
 and
-<B>--additional-libs</B>
+<CODE>--additional-libs</CODE>
 
 to produce linker flags appropriate for static linking with libpcap and
 dynamic linking with all other libraries, including libraries required by
@@ -170,7 +170,7 @@ option, and with status 0 otherwise.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 23:15:43 GMT, February 18, 2023
+This HTML man page was generated at 13:50:57 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

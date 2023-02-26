@@ -39,16 +39,16 @@ is used to initialize the Packet Capture library.
 specifies options for the library;
 currently, the options are:
 <DL>
-<DT><B>PCAP_MMAP_32BIT</B>
+<DT><CODE>PCAP_MMAP_32BIT</CODE>
 
 <DD>
 Map packet buffers with 32-bit addresses.
-<DT><B>PCAP_CHAR_ENC_LOCAL</B>
+<DT><CODE>PCAP_CHAR_ENC_LOCAL</CODE>
 
 <DD>
 Treat all strings supplied as arguments, and return all strings to the
 caller, as being in the local character encoding.
-<DT><B>PCAP_CHAR_ENC_UTF_8</B>
+<DT><CODE>PCAP_CHAR_ENC_UTF_8</CODE>
 
 <DD>
 Treat all strings supplied as arguments, and return all strings to the
@@ -99,11 +99,11 @@ returns
 <B>0</B>
 
 on success and
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 on failure.
 If
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 is returned,
 <I>errbuf</I>
@@ -112,7 +112,7 @@ is filled in with an appropriate error message.
 <I>errbuf</I>
 
 is assumed to be able to hold at least
-<B>PCAP_ERRBUF_SIZE</B>
+<CODE>PCAP_ERRBUF_SIZE</CODE>
 
 chars.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
@@ -128,7 +128,7 @@ returned to the caller, are in the local character encoding.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 19:58:07 GMT, January 17, 2023
+This HTML man page was generated at 13:50:55 GMT, February 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
