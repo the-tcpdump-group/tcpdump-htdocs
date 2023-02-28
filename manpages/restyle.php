@@ -237,11 +237,11 @@ foreach ($taxonomy as $pname => $project)
 			'@^Section: .+<BR>(.+<BR>)$@m',
 			'$1'
 		),
-		# Combine two header lines into one.
+		# Combine two header lines into one and make it a mini-menu.
 		array
 		(
 			'@^(Updated: [12]?[0-9] [[:alpha:]]+ 20[0-9][0-9])<BR>$@m',
-			'$1 | '
+			"\$1 &bull; <A href='${txt_href}'>View in plain text</A> &bull; "
 		),
 		array
 		(
