@@ -47,7 +47,7 @@ returns
 <B>0</B>
 
 on success or
-<B>PCAP_ERROR_ACTIVATED</B>
+<CODE>PCAP_ERROR_ACTIVATED</CODE>
 
 if called on a capture handle that has been activated.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
@@ -60,7 +60,7 @@ releases, if immediate delivery of packets is required:
 <DT><DD>
 on FreeBSD, NetBSD, OpenBSD, DragonFly BSD, macOS, and Solaris 11,
 immediate mode must be turned on with a
-<B>BIOCIMMEDIATE</B>
+<CODE>BIOCIMMEDIATE</CODE>
 
 <B>ioctl</B>(2),
 
@@ -81,7 +81,7 @@ will not provide immediate delivery of packets on other platforms, so
 don't assume it's sufficient);
 <DT><DD>
 on Digital UNIX/Tru64 UNIX, immediate mode must be turned on by doing a
-<B>BIOCMBIC</B>
+<CODE>BIOCMBIC</CODE>
 
 <B>ioctl</B>(),
 
@@ -89,7 +89,7 @@ as documented in
 <B>packetfilter</B>(7),
 
 to clear the
-<B>ENBATCH</B>
+<CODE>ENBATCH</CODE>
 
 flag on the descriptor returned by
 <A HREF='./pcap_fileno.3pcap.html'><B>pcap_fileno</B></A>(3PCAP),
@@ -129,7 +129,7 @@ On other platforms, capture devices are always in immediate mode.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 20:46:00 GMT, January 03, 2022
+This HTML man page was generated at 08:15:37 GMT, February 28, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

@@ -111,18 +111,38 @@ part of the header up to and including MinorVer identical.
 </PRE>
 
 <P>
-MOD, XOR, COP and CPX: if set to 1, in this BPF dialect BPF_MOD, BPF_XOR,
-BPF_COP and BPF_COPX respectively are valid instructions.  For the current
-list of OSes that support BPF_MOD and BPF_XOR in the kernel see the
-<B>%</B>
+MOD, XOR, COP and CPX: if set to 1, in this BPF dialect
+<CODE>BPF_MOD</CODE>,
+
+<CODE>BPF_XOR</CODE>,
+
+<CODE>BPF_COP</CODE>
 
 and
-<B>^</B>
+<CODE>BPF_COPX</CODE>
+
+respectively are valid instructions.  For the current list of OSes that
+support
+<CODE>BPF_MOD</CODE>
+
+and
+<CODE>BPF_XOR</CODE>
+
+in the kernel see the
+<CODE>%</CODE>
+
+and
+<CODE>^</CODE>
 
 binary operators in
 <B><A HREF="./pcap-filter.7.html">pcap-filter</A></B>(7).
 
-BPF_COP and BPF_COPX are implemented in NetBSD kernel.
+<CODE>BPF_COP</CODE>
+
+and
+<CODE>BPF_COPX</CODE>
+
+are implemented in NetBSD kernel.
 <P>
 
 Note that the fact an instruction is valid in a BPF dialect does not always
@@ -166,7 +186,7 @@ and
 <A HREF='./pcap_list_datalinks.3pcap.html'><B>pcap_list_datalinks</B></A>(3PCAP).
 
 Although these functions take and return link-layer header type values via the
-<I>int</I>
+<CODE>int</CODE>
 
 C type, by convention only the low 16 bits are in use.
 <P>
@@ -174,8 +194,10 @@ C type, by convention only the low 16 bits are in use.
 
 This is the last field of the fixed header in major version 1, it contains the
 number of bytecode instructions following the header.  By convention, valid
-BPF bytecode always ends with a &quot;ret&quot; instruction, so in a valid savefile this
-field value is at least 1.
+BPF bytecode always ends with a
+<CODE>ret</CODE>
+
+instruction, so in a valid savefile this field value is at least 1.
 <P>
 <P>
 
@@ -316,7 +338,7 @@ can produce a cBPF savefile from user input.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 21:31:53 GMT, September 11, 2022
+This HTML man page was generated at 08:15:34 GMT, February 28, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

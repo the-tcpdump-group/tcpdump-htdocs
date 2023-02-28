@@ -110,11 +110,11 @@ but must not rely on it happening.
 <I>callback</I>
 
 specifies a
-<I>pcap_handler</I>
+<CODE>pcap_handler</CODE>
 
 routine to be called with three arguments:
 a
-<I>u_char</I>
+<CODE>u_char</CODE>
 
 pointer which is passed in the
 <I>user</I>
@@ -126,20 +126,20 @@ or
 <B>pcap_dispatch</B>(),
 
 a
-<I>const struct pcap_pkthdr</I>
+<CODE>const struct pcap_pkthdr</CODE>
 
 pointer pointing to the packet time stamp and lengths, and a
-<I>const u_char</I>
+<CODE>const u_char</CODE>
 
 pointer to the first
-<B>caplen</B>
+<CODE>caplen</CODE>
 
 (as given in the
-<I>struct pcap_pkthdr</I>
+<CODE>struct pcap_pkthdr</CODE>,
 
 a pointer to which is passed to the callback routine)
 bytes of data from the packet.  The
-<I>struct pcap_pkthdr</I>
+<CODE>struct pcap_pkthdr</CODE>
 
 and the packet data are not to be freed by the callback routine, and are
 not guaranteed to be valid after the callback routine returns; if the
@@ -152,7 +152,7 @@ format of the link-layer header is indicated by the return value of the
 <A HREF='./pcap_datalink.3pcap.html'><B>pcap_datalink</B></A>(3PCAP)
 
 routine when handed the
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 value also passed to
 <B>pcap_loop</B>()
@@ -184,18 +184,18 @@ Do
 
 assume that the packets for a given capture or ``savefile`` will have
 any given link-layer header type, such as
-<B>DLT_EN10MB</B>
+<CODE>DLT_EN10MB</CODE>
 
 for Ethernet.  For example, the &quot;any&quot; device on Linux will have a
 link-layer header type of
-<B>DLT_LINUX_SLL</B>
+<CODE>DLT_LINUX_SLL</CODE>
 
 or
-<B>DLT_LINUX_SLL2</B>
+<CODE>DLT_LINUX_SLL2</CODE>
 
 even if all devices on the system at the time the &quot;any&quot; device is opened
 have some other data link type, such as
-<B>DLT_EN10MB</B>
+<CODE>DLT_EN10MB</CODE>
 
 for Ethernet.
 <H2 id="lbAE">RETURN VALUE</H2>
@@ -210,17 +210,17 @@ if
 
 is exhausted or if, when reading from a ``savefile'', no more packets
 are available.  It returns
-<B>PCAP_ERROR_BREAK</B>
+<CODE>PCAP_ERROR_BREAK</CODE>
 
 if the loop terminated due to a call to
 <B>pcap_breakloop</B>()
 
 before any packets were processed,
-<B>PCAP_ERROR_NOT_ACTIVATED</B>
+<CODE>PCAP_ERROR_NOT_ACTIVATED</CODE>
 
 if called on a capture handle that has been created but not activated,
 or
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 if another error occurs.
 It does
@@ -240,17 +240,17 @@ packets arrive, the timeout expires before any packets arrive, or if the
 file descriptor for the capture device is in non-blocking mode and no
 packets were available to be read) or if no more packets are available
 in a ``savefile.'' It returns
-<B>PCAP_ERROR_BREAK</B>
+<CODE>PCAP_ERROR_BREAK</CODE>
 
 if the loop terminated due to a call to
 <B>pcap_breakloop</B>()
 
 before any packets were processed,
-<B>PCAP_ERROR_NOT_ACTIVATED</B>
+<CODE>PCAP_ERROR_NOT_ACTIVATED</CODE>
 
 if called on a capture handle that has been created but not activated,
 or
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 if another error occurs.
 <B>
@@ -261,7 +261,7 @@ rather than just checking for a return value &lt; 0.
 <P>
 
 If
-<B>PCAP_ERROR</B>
+<CODE>PCAP_ERROR</CODE>
 
 is returned,
 <A HREF='./pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
@@ -301,7 +301,7 @@ as the value of
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:38:07 GMT, March 07, 2022
+This HTML man page was generated at 08:15:37 GMT, February 28, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

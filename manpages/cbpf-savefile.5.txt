@@ -119,7 +119,7 @@ FILE FORMAT
    InstructionCount
        This  is the last field of the fixed header in major version 1, it con-
        tains the number of bytecode instructions  following  the  header.   By
-       convention, valid BPF bytecode always ends with a "ret" instruction, so
+       convention,  valid  BPF bytecode always ends with a ret instruction, so
        in a valid savefile this field value is at least 1.
 
        The file format thus far minimizes the overhead for software that  uses
