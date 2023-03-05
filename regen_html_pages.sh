@@ -163,24 +163,18 @@ Original license : Creative Commons Attribution 2.5 License
 <html lang="en">
 
     <!-- HEAD -->
-ENDOFTEXT
-	cat "$HTML_HEAD"
-	cat <<ENDOFTEXT
+$(cat "$HTML_HEAD")
     <!-- END OF HTML HEAD -->
 
     <!-- BODY -->
     <body>
 
         <!-- TOP MENU -->
-ENDOFTEXT
-	cat "$TOP_MENU"
-	cat <<ENDOFTEXT
+$(cat "$TOP_MENU")
         <!-- END OF TOP MENU -->
 
         <!-- PAGE HEADER -->
-ENDOFTEXT
-	cat "$BODY_HEADER"
-	cat <<ENDOFTEXT
+$(cat "$BODY_HEADER")
         <!-- END OF PAGE HEADER -->
 
         <!-- PAGE CONTENTS -->
@@ -203,9 +197,7 @@ ENDOFTEXT
 	if [ "$show_sidebar" = 'yes' ]; then
 		cat <<ENDOFTEXT
             <!-- LEFT SIDEBAR -->
-ENDOFTEXT
-		cat "$SIDEBAR"
-		cat <<ENDOFTEXT
+$(cat "$SIDEBAR")
             <!-- END OF LEFT SIDEBAR -->
 
 ENDOFTEXT
@@ -216,9 +208,7 @@ ENDOFTEXT
         <!-- END OF PAGE CONTENTS -->
 
         <!-- FOOTER -->
-ENDOFTEXT
-	cat "$BODY_FOOTER"
-	cat <<ENDOFTEXT
+$(cat "$BODY_FOOTER")
         <!-- END OF FOOTER -->
 
     </body>
