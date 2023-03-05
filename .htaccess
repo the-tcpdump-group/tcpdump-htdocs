@@ -9,7 +9,7 @@ ReadmeName /autoindex_footer.html
 RedirectMatch 404 /\.git
 # A side effect of the directive below is that ReadmeName cannot access any
 # files in htmlsrc directly, but using a symlink works.
-RedirectMatch 404 /htmlsrc
+Redirect 404 /htmlsrc
 
 # legacy locations of a few current documents
 Redirect permanent /tcpdump_man.html /manpages/tcpdump.1.html
