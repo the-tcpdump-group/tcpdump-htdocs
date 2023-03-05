@@ -487,11 +487,11 @@ DESCRIPTION
 
        pcap_next() is passed an argument that points to a  struct  pcap_pkthdr
        structure,  and  fills  it in with the time stamp and length values for
-       the packet.  It returns a const u_char to the first caplen bytes of the
-       packet on success, and NULL on error.
+       the packet.  It returns a const u_char * to the first caplen  bytes  of
+       the packet on success, and NULL on error.
 
        pcap_next_ex()  is passed two pointer arguments, one of which points to
-       a structpcap_pkthdr* and one of which points to a  const  u_char*.   It
+       a struct pcap_pkthdr * and the other points to a const  u_char  *.   It
        sets  the first pointer to point to a struct pcap_pkthdr structure with
        the time stamp and length values for the packet, and  sets  the  second
        pointer to point to the first caplen bytes of the packet.

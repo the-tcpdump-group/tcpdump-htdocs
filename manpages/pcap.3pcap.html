@@ -794,7 +794,7 @@ and
 <B>pcap_loop</B>()
 
 is supplied a pointer to a
-<I>struct pcap_pkthdr</I>,
+<B>struct pcap_pkthdr</B>,
 
 which includes the following members:
 <DL><DT><DD>
@@ -803,14 +803,14 @@ which includes the following members:
 
 <DD>
 a
-<I>struct timeval</I>
+<B>struct timeval</B>
 
 containing the time when the packet was captured
 <DT><B>caplen</B>
 
 <DD>
 a
-<I>bpf_u_int32</I>
+<B>bpf_u_int32</B>
 
 giving the number of bytes of the packet that are available from the
 capture
@@ -818,7 +818,7 @@ capture
 
 <DD>
 a
-<I>bpf_u_int32</I>
+<B>bpf_u_int32</B>
 
 giving the length of the packet, in bytes (which might be more than the
 number of bytes available from the capture, if the length of the packet
@@ -829,13 +829,13 @@ is larger than the maximum number of bytes to capture).
 <P>
 
 The callback is also supplied a
-<I>const u_char</I>
+<B>const u_char</B>
 
 pointer to the first
 <B>caplen</B>
 
 (as given in the
-<I>struct pcap_pkthdr</I>
+<B>struct pcap_pkthdr</B>
 
 mentioned above)
 bytes of data from the packet.  This won't necessarily be the entire
@@ -855,11 +855,11 @@ performed will limit the amount of packet data available.
 <B>pcap_next</B>()
 
 is passed an argument that points to a
-<I>struct pcap_pkthdr</I>
+<B>struct pcap_pkthdr</B>
 
 structure, and fills it in with the time stamp and length values for the
 packet.  It returns a
-<I>const u_char</I>
+<B>const u_char *</B>
 
 to the first
 <B>caplen</B>
@@ -873,13 +873,13 @@ on error.
 <B>pcap_next_ex</B>()
 
 is passed two pointer arguments, one of which points to a
-<I>struct</I>pcap_pkthdr<I>*</I>
+<B>struct pcap_pkthdr *</B>
 
-and one of which points to a
-<I>const u_char</I>*.
+and the other points to a
+<B>const u_char *</B>.
 
 It sets the first pointer to point to a
-<I>struct pcap_pkthdr</I>
+<B>struct pcap_pkthdr</B>
 
 structure with the time stamp and length values for the packet, and sets
 the second pointer to point to the first
@@ -1515,7 +1515,7 @@ in the libpcap source tree root.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 22:01:14 GMT, July 08, 2022
+This HTML man page was generated at 11:36:14 GMT, March 05, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

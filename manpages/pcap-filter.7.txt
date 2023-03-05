@@ -135,9 +135,9 @@ DESCRIPTION
               a  host  match),  255.255.255.0 for a dotted triple, 255.255.0.0
               for a dotted pair, or 255.0.0.0 for a single  number.   An  IPv6
               network  number  must  be  written  out  fully;  the  netmask is
-              ff:ff:ff:ff:ff:ff:ff:ff, so IPv6 "network"  matches  are  really
-              always  host  matches,  and  a  network match requires a netmask
-              length.
+              ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff,   so   IPv6   "network"
+              matches  are really always host matches, and a network match re-
+              quires a netmask length.
 
        src net netnameaddr
               True if the IPv4/v6 source address of the packet has  a  network
