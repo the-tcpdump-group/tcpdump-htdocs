@@ -62,7 +62,7 @@ consistent time stamps;
 some time sources, such as those that supply POSIX &quot;seconds since the
 Epoch&quot; time, do not count leap seconds, meaning that the seconds
 portion
-(<B>tv_sec</B>)
+(<CODE>tv_sec</CODE>)
 
 of the time stamp might not be incremented for a leap second, so that
 the fraction-of-a-second part of the time stamp might roll over past
@@ -118,50 +118,52 @@ call and before a
 <B>pcap_activate</B>()
 
 call to specify the type of time stamp to be used on the device.
-The time stamp types are listed here; the first value is the #define to
-use in code, the second value is the value returned by
+The time stamp types are listed here; the first value is the
+<CODE>#define</CODE>
+
+to use in code, the second value is the value returned by
 <A HREF='./pcap_tstamp_type_val_to_name.3pcap.html'><B>pcap_tstamp_type_val_to_name</B></A>(3PCAP)
 
 and accepted by
-<A HREF='./pcap_tstamp_type_name_to_val.3pcap.html'><B>pcap_tstamp_type_name_to_val</B></A>(3PCAP)<B>.</B>
+<A HREF='./pcap_tstamp_type_name_to_val.3pcap.html'><B>pcap_tstamp_type_name_to_val</B></A>(3PCAP).
 
 <DL><DT><DD>
 <DL>
-<DT><B>PCAP_TSTAMP_HOST</B> - <B>host</B>
+<DT><CODE>PCAP_TSTAMP_HOST</CODE> - <B>host</B>
 
 <DD>
 Time stamp provided by the host on which the capture is being done.  The
 precision of this time stamp is unspecified; it might or might not be
 synchronized with the host operating system's clock.
-<DT><B>PCAP_TSTAMP_HOST_LOWPREC</B> - <B>host_lowprec</B>
+<DT><CODE>PCAP_TSTAMP_HOST_LOWPREC</CODE> - <B>host_lowprec</B>
 
 <DD>
 Time stamp provided by the host on which the capture is being done.
 This is a low-precision time stamp, synchronized with the host operating
 system's clock.
-<DT><B>PCAP_TSTAMP_HOST_HIPREC</B> - <B>host_hiprec</B>
+<DT><CODE>PCAP_TSTAMP_HOST_HIPREC</CODE> - <B>host_hiprec</B>
 
 <DD>
 Time stamp provided by the host on which the capture is being done.
 This is a high-precision time stamp, synchronized with the host
 operating system's clock. It might be more expensive to fetch than
-<B>PCAP_TSTAMP_HOST_LOWPREC</B>.
+<CODE>PCAP_TSTAMP_HOST_LOWPREC</CODE>.
 
-<DT><B>PCAP_TSTAMP_HOST_HIPREC_UNSYNCED</B> - <B>host_hiprec_unsynced</B>
+<DT><CODE>PCAP_TSTAMP_HOST_HIPREC_UNSYNCED</CODE> - <B>host_hiprec_unsynced</B>
 
 <DD>
 Time stamp provided by the host on which the capture is being done.
 This is a high-precision time stamp, not synchronized with the host
 operating system's clock. It might be more expensive to fetch than
-<B>PCAP_TSTAMP_HOST_LOWPREC</B>.
+<CODE>PCAP_TSTAMP_HOST_LOWPREC</CODE>.
 
-<DT><B>PCAP_TSTAMP_ADAPTER</B> - <B>adapter</B>
+<DT><CODE>PCAP_TSTAMP_ADAPTER</CODE> - <B>adapter</B>
 
 <DD>
 Time stamp provided by the network adapter on which the capture is being
 done.  This is a high-precision time stamp, synchronized with the host
 operating system's clock.
-<DT><B>PCAP_TSTAMP_ADAPTER_UNSYNCED</B> - <B>adapter_unsynced</B>
+<DT><CODE>PCAP_TSTAMP_ADAPTER_UNSYNCED</CODE> - <B>adapter_unsynced</B>
 
 <DD>
 Time stamp provided by the network adapter on which the capture is being
@@ -243,7 +245,7 @@ stamps in the file.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:03 GMT, November 01, 2021
+This HTML man page was generated at 23:10:31 GMT, March 07, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
