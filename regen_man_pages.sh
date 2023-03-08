@@ -270,7 +270,7 @@ definitelyBoldToCode()
 	# regexps do not support negative matching and this function is the
 	# only source of <CODE> tags in the page.
 	sed -E '/^<H2 .+>DESCRIPTION/,$s@^<DT><B>([^<>]+)</B>@<DT><CODE>\1</CODE>@' |
-		sed -E '/^<H2 .+>DESCRIPTION/,$s@^([(]?<)B(>[^<>]+</)B(>[,.;)]?)$@\1CODE\2CODE\3@' |
+		sed -E '/^<H2 .+>DESCRIPTION/,$s@^(non-<|\(<|<)B(>[^<>]+</)B(>[,.;)s]?)$@\1CODE\2CODE\3@' |
 		sed -E 's@<CODE>(NOT|not|0|1|-1)</CODE>@<B>\1</B>@'
 }
 
@@ -290,7 +290,6 @@ maybeBoldToCode()
 		pcap
 		pcap_breakloop
 		pcap-filter
-		pcap_get_required_select_timeout
 		pcap_lookupdev
 		rpcapd
 		rpcapd-config
