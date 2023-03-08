@@ -1041,7 +1041,7 @@ OUTPUT FORMAT
        Some offsets and field values may be expressed as names rather than  as
        numeric values. For example tcp[13] may be replaced with tcp[tcpflags].
        The following TCP flag field values are also available:  tcp-fin,  tcp-
-       syn, tcp-rst, tcp-push, tcp-ack, tcp-urg.
+       syn, tcp-rst, tcp-push, tcp-ack, tcp-urg, tcp-ece and tcp-cwr.
 
        This can be demonstrated as:
                    tcpdump -i xl0 'tcp[tcpflags] & tcp-push != 0'
@@ -1313,8 +1313,12 @@ OUTPUT FORMAT
        mag.209 initiates the next request.  The `*' on the  request  indicates
        that XO (`exactly once') was not set.
 
+BACKWARD COMPATIBILITY
+       The  TCP  flag  names tcp-ece and tcp-cwr became available when linking
+       with libpcap 1.9.0 or later.
+
 SEE ALSO
-       stty(1),     pcap(3PCAP),     bpf(4),     nit(4P),    pcap-savefile(5),
+       stty(1),    pcap(3PCAP),     bpf(4),     nit(4P),     pcap-savefile(5),
        pcap-filter(7), pcap-tstamp(7)
 
               https://www.iana.org/assignments/media-types/applica-
@@ -1323,7 +1327,7 @@ SEE ALSO
 AUTHORS
        The original authors are:
 
-       Van  Jacobson,  Craig  Leres  and  Steven  McCanne, all of the Lawrence
+       Van Jacobson, Craig Leres and  Steven  McCanne,  all  of  the  Lawrence
        Berkeley National Laboratory, University of California, Berkeley, CA.
 
        It is currently maintained by The Tcpdump Group.
@@ -1336,14 +1340,14 @@ AUTHORS
 
               ftp://ftp.ee.lbl.gov/old/tcpdump.tar.Z
 
-       IPv6/IPsec support is added by WIDE/KAME project.   This  program  uses
+       IPv6/IPsec  support  is  added by WIDE/KAME project.  This program uses
        OpenSSL/LibreSSL, under specific configurations.
 
 BUGS
-       To    report    a   security   issue   please   send   an   e-mail   to
+       To   report   a   security   issue   please   send   an    e-mail    to
        security@tcpdump.org.
 
-       To report bugs and other problems, contribute patches, request  a  fea-
+       To  report  bugs and other problems, contribute patches, request a fea-
        ture, provide generic feedback etc. please see the file CONTRIBUTING.md
        in the tcpdump source tree root.
 
@@ -1355,41 +1359,41 @@ BUGS
               packets on the loopback device will be seen twice;
 
               packet filtering cannot be done in the kernel, so that all pack-
-              ets must be copied from the kernel in order to  be  filtered  in
+              ets  must  be  copied from the kernel in order to be filtered in
               user mode;
 
-              all  of  a  packet, not just the part that's within the snapshot
-              length, will be copied from the kernel (the 2.0[.x] packet  cap-
-              ture  mechanism,  if  asked  to  copy  only  part of a packet to
-              userspace, will not report the true length of the  packet;  this
+              all of a packet, not just the part that's  within  the  snapshot
+              length,  will be copied from the kernel (the 2.0[.x] packet cap-
+              ture mechanism, if asked to  copy  only  part  of  a  packet  to
+              userspace,  will  not report the true length of the packet; this
               would cause most IP packets to get an error from tcpdump);
 
               capturing on some PPP devices won't work correctly.
 
        We recommend that you upgrade to a 2.2 or later kernel.
 
-       Some  attempt should be made to reassemble IP fragments or, at least to
+       Some attempt should be made to reassemble IP fragments or, at least  to
        compute the right length for the higher level protocol.
 
        Name server inverse queries are not dumped correctly: the (empty) ques-
-       tion  section  is printed rather than real query in the answer section.
-       Some believe that inverse queries are themselves a bug  and  prefer  to
+       tion section is printed rather than real query in the  answer  section.
+       Some  believe  that  inverse queries are themselves a bug and prefer to
        fix the program generating them rather than tcpdump.
 
-       A  packet  trace  that crosses a daylight savings time change will give
+       A packet trace that crosses a daylight savings time  change  will  give
        skewed time stamps (the time change is ignored).
 
-       Filter expressions on fields other than those  in  Token  Ring  headers
+       Filter  expressions  on  fields  other than those in Token Ring headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter  expressions  on  fields other than those in 802.11 headers will
-       not correctly handle 802.11 data packets with both To DS  and  From  DS
+       Filter expressions on fields other than those in  802.11  headers  will
+       not  correctly  handle  802.11 data packets with both To DS and From DS
        set.
 
-       ip6  proto  should  chase header chain, but at this moment it does not.
+       ip6 proto should chase header chain, but at this moment  it  does  not.
        ip6 protochain is supplied for this behavior.
 
-       Arithmetic expression against transport  layer  headers,  like  tcp[0],
+       Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
                                  30 July 2022                       TCPDUMP(1)

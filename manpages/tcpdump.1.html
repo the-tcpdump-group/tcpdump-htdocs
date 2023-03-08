@@ -2009,7 +2009,7 @@ Some offsets and field values may be expressed as names
 rather than as numeric values. For example tcp[13] may
 be replaced with tcp[tcpflags]. The following TCP flag
 field values are also available: tcp-fin, tcp-syn, tcp-rst,
-tcp-push, tcp-ack, tcp-urg.
+tcp-push, tcp-ack, tcp-urg, tcp-ece and tcp-cwr.
 <P>
 
 This can be demonstrated as:
@@ -2508,7 +2508,17 @@ jssmag.209 initiates the next request.
 The `*' on the request
 indicates that XO (`exactly once') was <I>not</I> set.
 <P>
-<H2 id="lbAH">SEE ALSO</H2>
+<H2 id="lbAH">BACKWARD COMPATIBILITY</H2>
+
+The TCP flag names
+<B>tcp-ece</B>
+
+and
+<B>tcp-cwr</B>
+
+became available when linking with libpcap 1.9.0 or later.
+<P>
+<H2 id="lbAI">SEE ALSO</H2>
 
 <B>stty</B>(1),
 
@@ -2535,7 +2545,7 @@ indicates that XO (`exactly once') was <I>not</I> set.
 
 <P>
 
-<H2 id="lbAI">AUTHORS</H2>
+<H2 id="lbAJ">AUTHORS</H2>
 
 The original authors are:
 <P>
@@ -2571,7 +2581,7 @@ The original distribution is available via anonymous ftp:
 
 IPv6/IPsec support is added by WIDE/KAME project.
 This program uses OpenSSL/LibreSSL, under specific configurations.
-<H2 id="lbAJ">BUGS</H2>
+<H2 id="lbAK">BUGS</H2>
 
 To report a security issue please send an e-mail to <A HREF="mailto:security@tcpdump.org">security@tcpdump.org</A>.
 <P>
@@ -2655,13 +2665,14 @@ It only looks at IPv4 packets.
 <DT><A HREF="#lbAE">OPTIONS</A><DD>
 <DT><A HREF="#lbAF">EXAMPLES</A><DD>
 <DT><A HREF="#lbAG">OUTPUT FORMAT</A><DD>
-<DT><A HREF="#lbAH">SEE ALSO</A><DD>
-<DT><A HREF="#lbAI">AUTHORS</A><DD>
-<DT><A HREF="#lbAJ">BUGS</A><DD>
+<DT><A HREF="#lbAH">BACKWARD COMPATIBILITY</A><DD>
+<DT><A HREF="#lbAI">SEE ALSO</A><DD>
+<DT><A HREF="#lbAJ">AUTHORS</A><DD>
+<DT><A HREF="#lbAK">BUGS</A><DD>
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 21:23:28 GMT, October 20, 2022
+This HTML man page was generated at 22:21:52 GMT, March 08, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
