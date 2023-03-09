@@ -94,11 +94,21 @@ Original license : Creative Commons Attribution 2.5 License
                             </dd>
 
                         </dl>
+                        <p>
+                            Below you can find a few projects that are related to tcpdump or libpcap
+                            in some way. If you think some project should be in this list, please
+                            either open a pull request as explained
+                            <a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">here</a> or
+                            subscribe to the <a href="index.html#mailing-lists">mailing list</a> and
+                            make your input there. The new entry should include the name of the
+                            project, a brief (between 200 and 500 characters) description and a link
+                            to the project page.
+                        </p>
                     </div>
                 </div>
                 <!-- End of RELATED DOCUMENTS section -->
 
-                <!-- Start of RELATED PROJECTS section -->
+                <!-- Start of RELATED LIBRARIES section -->
                 <div class="post">
                     <h2 class="title">
                         Related Libraries
@@ -225,21 +235,110 @@ Original license : Creative Commons Attribution 2.5 License
                             </dd>
                         </dl>
                     </div>
+                </div>
+                <!-- End of RELATED LIBRARIES section -->
 
+                <!-- Start of RELATED SOFTWARE (FILE PROCESSING) section -->
+                <div class="post">
+                    <h2 class="title">
+                        Related Software (File Processing)
+                    </h2>
+                    <div class="entry">
+                        <dl>
+                            <dt>
+                                <a href="https://github.com/the-tcpdump-group/tcpslice">TCPslice</a>
+                            </dt>
+                            <dd>
+                                TCPslice is a tool for extracting portions of packet
+                                trace files generated using tcpdump's <code>-w</code> flag. It
+                                can combine multiple trace files, and/or extract
+                                portions of one or more traces based on time.
+                                TCPslice originally comes from LBL and now is
+                                maintained by The Tcpdump Group.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://sourceforge.net/projects/open-tcptrace/">TCPTrace</a>
+                            </dt>
+                            <dd>
+                                TCPTrace analyzes the behavior of captured TCP streams, and accepts
+                                many trace file formats (including pcap).  It provides connection
+                                statistics and several types of graphs, including the widely-used
+                                time-sequence graphs.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="http://netdude.sourceforge.net/">NetDude</a>
+                            </dt>
+                            <dd>
+                                netdude (NETwork DUmp data Displayer and Editor).
+                                From their webpage, "it is a GUI-based tool that
+                                allows you to make detailed changes to packets in
+                                tcpdump tracefiles."
+                            </dd>
+
+                            <dt>
+                                <a class=away href="http://www.xplot.org/">Xplot</a>
+                            </dt>
+                            <dd>
+                                The program xplot was written in the late 1980s to support the analysis of TCP packet traces.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://www.vanheusden.com/multitail/">Multitail</a>
+                            </dt>
+                            <dd>
+                                MultiTail now has a colorscheme included for monitoring the tcpdump
+                                output. It can also filter, convert timestamps to timestrings and much
+                                more.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="http://f00l.de/pcapfix/">pcapfix</a>
+                            </dt>
+                            <dd>
+                                pcapfix is a repair tool for corrupted pcap and pcapng files. It checks
+                                for an intact pcap global header and packet block and repairs it if there
+                                are any corrupted bytes. If a header is not present, one is created and
+                                added to the beginning of the file. It then tries to find pcap packet
+                                headers or packet blocks, and checks and repairs them.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://www.radare.org/">Radare2</a>
+                            </dt>
+                            <dd>
+                                A free/libre toolchain for easing several low level
+                                tasks like forensics, software reverse engineering,
+                                exploiting, debugging&hellip; Radare2 can process
+                                compiled BPF bytecode.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://www.read.seas.harvard.edu/~kohler/ipsumdump/">ipsumdump</a>
+                            </dt>
+                            <dd>
+                                The ipsumdump program summarizes TCP/IP dump files into
+                                a self-describing ASCII format easily readable by
+                                humans and programs.  Ipsumdump can read packets from
+                                network interfaces, from .pcap files, and from existing
+                                ipsumdump files.  It will transparently uncompress
+                                .pcap or ipsumdump files when necessary. It can
+                                randomly sample traffic, filter traffic based on its
+                                contents, anonymize IP addresses, and sort packets from
+                                multiple dumps by timestamp.  Also, it can optionally
+                                create a .pcap file containing actual packet data.
+                            </dd>
+                        </dl>
+                    </div>
+                <!-- Start of RELATED SOFTWARE (FILE PROCESSING) section -->
+
+                <!-- Start of RELATED PROJECTS section -->
+                <div class="post">
                     <h2 class="title">
                         Related Projects
                     </h2>
                     <div class="entry">
-                        <p>
-                            Below you can find a few projects that are related to tcpdump or libpcap
-                            in some way. If you think some project should be in this list, please
-                            either open a pull request as explained
-                            <a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">here</a> or
-                            subscribe to the <a href="index.html#mailing-lists">mailing list</a> and
-                            make your input there. The new entry should include the name of the
-                            project, a brief (between 200 and 500 characters) description and a link
-                            to the project page.
-                        </p>
                         <dl>
 
                             <dt>
@@ -278,28 +377,6 @@ Original license : Creative Commons Attribution 2.5 License
 	                            Ethernet, FDDI, Token Ring, ISDN, PPP and SLIP devices.  It can
 	                            filter traffic to be shown, and can read traffic from a file as
 	                            well as live from the network.
-                            </dd>
-
-                            <dt>
-                                <a href="https://github.com/the-tcpdump-group/tcpslice">TCPslice</a>
-                            </dt>
-                            <dd>
-                                TCPslice is a tool for extracting portions of packet
-                                trace files generated using tcpdump's <code>-w</code> flag. It
-                                can combine multiple trace files, and/or extract
-                                portions of one or more traces based on time.
-                                TCPslice originally comes from LBL and now is
-                                maintained by The Tcpdump Group.
-                            </dd>
-
-                            <dt>
-                                <a class=away href="https://sourceforge.net/projects/open-tcptrace/">TCPTrace</a>
-                            </dt>
-                            <dd>
-                                TCPTrace analyzes the behavior of captured TCP streams, and accepts
-                                many trace file formats (including pcap).  It provides connection
-                                statistics and several types of graphs, including the widely-used
-                                time-sequence graphs.
                             </dd>
 
                             <dt>
@@ -401,32 +478,6 @@ Original license : Creative Commons Attribution 2.5 License
                             </dd>
 
                             <dt>
-                                <a class=away href="http://netdude.sourceforge.net/">NetDude</a>
-                            </dt>
-                            <dd>
-                                netdude (NETwork DUmp data Displayer and Editor).
-                                From their webpage, "it is a GUI-based tool that
-                                allows you to make detailed changes to packets in
-                                tcpdump tracefiles."
-                            </dd>
-
-                            <dt>
-                                <a class=away href="http://www.xplot.org/">Xplot</a>
-                            </dt>
-                            <dd>
-                                The program xplot was written in the late 1980s to support the analysis of TCP packet traces.
-                            </dd>
-
-                            <dt>
-                                <a class=away href="https://www.vanheusden.com/multitail/">Multitail</a>
-                            </dt>
-                            <dd>
-                                MultiTail now has a colorscheme included for monitoring the tcpdump
-                                output. It can also filter, convert timestamps to timestrings and much
-                                more.
-                            </dd>
-
-                            <dt>
                                 <a class=away href="http://netsniff-ng.org/">netsniff-ng</a>
                             </dt>
                             <dd>
@@ -437,17 +488,6 @@ Original license : Creative Commons Attribution 2.5 License
                                 user space and vice versa.
                                 <br>
                                 <strong>Submitted by: </strong>Daniel Borkmann
-                            </dd>
-
-                            <dt>
-                                <a class=away href="http://f00l.de/pcapfix/">pcapfix</a>
-                            </dt>
-                            <dd>
-                                pcapfix is a repair tool for corrupted pcap and pcapng files. It checks
-                                for an intact pcap global header and packet block and repairs it if there
-                                are any corrupted bytes. If a header is not present, one is created and
-                                added to the beginning of the file. It then tries to find pcap packet
-                                headers or packet blocks, and checks and repairs them.
                             </dd>
 
                             <dt>
@@ -594,16 +634,6 @@ Original license : Creative Commons Attribution 2.5 License
                             </dd>
 
                             <dt>
-                                <a class=away href="https://www.radare.org/">Radare2</a>
-                            </dt>
-                            <dd>
-                                A free/libre toolchain for easing several low level
-                                tasks like forensics, software reverse engineering,
-                                exploiting, debugging&hellip; Radare2 can process
-                                compiled BPF bytecode.
-                            </dd>
-
-                            <dt>
                                 <a class=away href="https://github.com/rmind/npf">NPF</a>
                             </dt>
                             <dd>
@@ -634,28 +664,13 @@ Original license : Creative Commons Attribution 2.5 License
                             </dd>
 
                             <dt>
-                                <a class=away href="https://www.read.seas.harvard.edu/~kohler/ipsumdump/">ipsumdump</a>
-                            </dt>
-                            <dd>
-                                The ipsumdump program summarizes TCP/IP dump files into
-                                a self-describing ASCII format easily readable by
-                                humans and programs.  Ipsumdump can read packets from
-                                network interfaces, from .pcap files, and from existing
-                                ipsumdump files.  It will transparently uncompress
-                                .pcap or ipsumdump files when necessary. It can
-                                randomly sample traffic, filter traffic based on its
-                                contents, anonymize IP addresses, and sort packets from
-                                multiple dumps by timestamp.  Also, it can optionally
-                                create a .pcap file containing actual packet data.
-                            </dd>
-
-                            <dt>
                                 <a class=away href="https://github.com/ThomasHabets/arping">arping</a>
                             </dt>
                             <dd>
                                 Arping is a util to find out if a specific IP address on
                                 the LAN is 'taken' and what MAC address owns it.
                             </dd>
+
                             <dt>
                                 <a class=away href="https://ostinato.org/">Ostinato</a>
                             </dt>
@@ -666,6 +681,7 @@ Original license : Creative Commons Attribution 2.5 License
                                 Python APIs.  Works on all platforms: Windows, macOS,
                                 Linux and the labbing platforms (CML, EVE-NG and GNS3).
                             </dd>
+
                             <dt>
                                 <a class=away href="https://github.com/royhills/arp-scan">arp-scan</a>
                             </dt>
@@ -682,6 +698,7 @@ Original license : Creative Commons Attribution 2.5 License
                                     <li>Fingerprint IP hosts using the arp-fingerprint tool.</li>
                                 </ul>
                             </dd>
+
                             <dt>
                                 <a class=away href="https://suricata.io/">Suricata</a>
                             </dt>
