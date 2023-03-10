@@ -288,7 +288,6 @@ maybeBoldToCode()
 		fi
 	done <<-EOF
 		pcap
-		pcap_breakloop
 		pcap-filter
 		rpcapd
 		rpcapd-config
