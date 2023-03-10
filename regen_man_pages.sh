@@ -271,7 +271,7 @@ definitelyBoldToCode()
 	# only source of <CODE> tags in the page.
 	sed -E '/^<H2 .+>DESCRIPTION/,$s@^<DT><B>([^<>]+)</B>@<DT><CODE>\1</CODE>@' |
 		sed -E '/^<H2 .+>DESCRIPTION/,$s@^(non-<|\(<|<)B(>[^<>]+</)B(>[,.;)s]?)$@\1CODE\2CODE\3@' |
-		sed -E 's@<CODE>(NOT|not|0|1|-1)</CODE>@<B>\1</B>@'
+		sed -E 's@<CODE>(NOT|not|0|1|-1|If|This .+|has been .+)</CODE>@<B>\1</B>@'
 }
 
 # The substitution does not produce good results for every page, so do not
@@ -290,7 +290,6 @@ maybeBoldToCode()
 		pcap
 		pcap_breakloop
 		pcap-filter
-		pcap_lookupdev
 		rpcapd
 		rpcapd-config
 		tcpdump
