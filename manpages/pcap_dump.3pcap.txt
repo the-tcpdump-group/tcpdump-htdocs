@@ -19,7 +19,7 @@ SYNOPSIS
        #include <pcap/pcap.h>
 
        void pcap_dump(u_char *user, struct pcap_pkthdr *h,
-               u_char *sp);
+           u_char *sp);
 
 DESCRIPTION
        pcap_dump()   outputs   a   packet  to  the  ``savefile''  opened  with

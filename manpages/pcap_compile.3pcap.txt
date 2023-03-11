@@ -19,7 +19,7 @@ SYNOPSIS
        #include <pcap/pcap.h>
 
        int pcap_compile(pcap_t *p, struct bpf_program *fp,
-               const char *str, int optimize, bpf_u_int32 netmask);
+           const char *str, int optimize, bpf_u_int32 netmask);
 
 DESCRIPTION
        pcap_compile() is used to compile the string str into a filter program.

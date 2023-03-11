@@ -20,12 +20,11 @@ SYNOPSIS
        #include <pcap/pcap.h>
 
        typedef void (*pcap_handler)(u_char *user, const struct pcap_pkthdr *h,
-                                   const u_char *bytes);
-
+           const u_char *bytes);
        int pcap_loop(pcap_t *p, int cnt,
-               pcap_handler callback, u_char *user);
+           pcap_handler callback, u_char *user);
        int pcap_dispatch(pcap_t *p, int cnt,
-               pcap_handler callback, u_char *user);
+           pcap_handler callback, u_char *user);
 
 DESCRIPTION
        pcap_loop() processes packets from a live capture or ``savefile'' until

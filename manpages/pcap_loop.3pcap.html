@@ -25,15 +25,11 @@ pcap_loop, pcap_dispatch - process packets from a live capture or savefile
 <B>#include &lt;pcap/pcap.h&gt;
 </B>
 <B>typedef void (*pcap_handler)(u_char *user, const struct pcap_pkthdr *h,
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                             const u_char *bytes);
-</B>
-<B>int pcap_loop(pcap_t *p, int cnt,
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pcap_handler callback, u_char *user);
+    const u_char *bytes);
+int pcap_loop(pcap_t *p, int cnt,
+    pcap_handler callback, u_char *user);
 int pcap_dispatch(pcap_t *p, int cnt,
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pcap_handler callback, u_char *user);
+    pcap_handler callback, u_char *user);
 </B></PRE>
 
 <H2 id="lbAD">DESCRIPTION</H2>
@@ -301,7 +297,7 @@ as the value of
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 08:15:37 GMT, February 28, 2023
+This HTML man page was generated at 12:32:47 GMT, March 11, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

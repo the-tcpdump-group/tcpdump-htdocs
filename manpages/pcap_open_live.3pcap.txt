@@ -21,7 +21,7 @@ SYNOPSIS
        char errbuf[PCAP_ERRBUF_SIZE];
 
        pcap_t *pcap_open_live(const char *device, int snaplen,
-               int promisc, int to_ms, char *errbuf);
+           int promisc, int to_ms, char *errbuf);
 
 DESCRIPTION
        pcap_open_live()  is  used to obtain a packet capture handle to look at

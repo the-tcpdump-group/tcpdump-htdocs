@@ -21,7 +21,7 @@ SYNOPSIS
        char errbuf[PCAP_ERRBUF_SIZE];
 
        int pcap_lookupnet(const char *device, bpf_u_int32 *netp,
-               bpf_u_int32 *maskp, char *errbuf);
+           bpf_u_int32 *maskp, char *errbuf);
 
 DESCRIPTION
        pcap_lookupnet()  is used to determine the IPv4 network number and mask

@@ -19,7 +19,7 @@ SYNOPSIS
        #include <pcap/pcap.h>
 
        int pcap_offline_filter(const struct bpf_program *fp,
-               const struct pcap_pkthdr *h, const u_char *pkt)
+           const struct pcap_pkthdr *h, const u_char *pkt);
 
 DESCRIPTION
        pcap_offline_filter()  checks whether a filter matches a packet.  fp is
