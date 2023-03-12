@@ -828,15 +828,15 @@ OUTPUT FORMAT
        The general format of a TCP protocol line is:
               src > dst: Flags [tcpflags], seq data-seqno, ack ackno, win window, urg urgent, options [opts], length len
        Src and dst are the source and  destination  IP  addresses  and  ports.
-       Tcpflags are some combination of S (SYN), F (FIN), P (PUSH), R (RST), U
-       (URG), W (ECN CWR), E (ECN-Echo) or `.' (ACK), or `none'  if  no  flags
-       are set.  Data-seqno describes the portion of sequence space covered by
-       the data in this packet (see example below).  Ackno is sequence  number
-       of the next data expected the other direction on this connection.  Win-
-       dow is the number of bytes of receive buffer space available the  other
-       direction  on this connection.  Urg indicates there is `urgent' data in
-       the packet.  Opts are TCP options (e.g., mss 1024).  Len is the  length
-       of payload data.
+       Tcpflags  are some combination of S (SYN), F (FIN), P (PSH), R (RST), U
+       (URG), W (CWR), E (ECE) or `.' (ACK), or `none' if no  flags  are  set.
+       Data-seqno  describes the portion of sequence space covered by the data
+       in this packet (see example below).  Ackno is sequence  number  of  the
+       next  data  expected the other direction on this connection.  Window is
+       the number of bytes of receive buffer space available the other  direc-
+       tion  on  this connection.  Urg indicates there is `urgent' data in the
+       packet.  Opts are TCP options (e.g., mss 1024).  Len is the  length  of
+       payload data.
 
        Iptype,  Src,  dst, and flags are always present.  The other fields de-
        pend on the contents of the packet's TCP protocol header and are output
@@ -874,7 +874,7 @@ OUTPUT FORMAT
        the original sequence numbers to be output.
 
        On the 6th line, rtsg sends csam 19 bytes of data (bytes 2  through  20
-       in the rtsg -> csam side of the conversation).  The PUSH flag is set in
+       in  the rtsg -> csam side of the conversation).  The PSH flag is set in
        the packet.  On the 7th line, csam says it's received data sent by rtsg
        up  to but not including byte 21.  Most of this data is apparently sit-
        ting in the socket buffer since csam's receive  window  has  gotten  19
@@ -1396,4 +1396,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                 30 July 2022                       TCPDUMP(1)
+                                 12 March 2023                      TCPDUMP(1)

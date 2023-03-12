@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 20 February 2023<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 12 March 2023<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -572,10 +572,12 @@ currently know how to parse these protocols.
 True if the DECnet source address is
 <I>decnetaddr</I>,
 
-which may be an address of the form ``10.123'', or a DECnet host
-name.
-[DECnet host name support is only available on ULTRIX systems
-that are configured to run DECnet.]
+which is an address of the form
+<B>AREANUMBER.NODENUMBER</B>
+
+(for example, &quot;10.123&quot;), where the area number can be between 0 and 63
+and the node number can be between 0 and 1023 and both numbers always use
+decimal base.
 <DT><B>decnet dst </B><I>decnetaddr</I><DD>
 True if the DECnet destination address is
 <I>decnetaddr</I>.
@@ -1511,7 +1513,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 11:36:13 GMT, March 05, 2023
+This HTML man page was generated at 20:28:36 GMT, March 12, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 30 July 2022<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 12 March 2023<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents tcpdump version 5.0.0-PRE-GIT.</H4>
@@ -1661,7 +1661,7 @@ The general format of a TCP protocol line is:
 <I>Src</I> and <I>dst</I> are the source and destination IP
 addresses and ports.
 <I>Tcpflags</I> are some combination of S (SYN),
-F (FIN), P (PUSH), R (RST), U (URG), W (ECN CWR), E (ECN-Echo) or
+F (FIN), P (PSH), R (RST), U (URG), W (CWR), E (ECE) or
 `.' (ACK), or `none' if no flags are set.
 <I>Data-seqno</I> describes the portion of sequence space covered
 by the data in this packet (see example below).
@@ -1734,7 +1734,7 @@ feature, causing the original sequence numbers to be output.
 
 On the 6th line, rtsg sends csam 19 bytes of data (bytes 2 through 20
 in the rtsg &rarr; csam side of the conversation).
-The PUSH flag is set in the packet.
+The PSH flag is set in the packet.
 On the 7th line, csam says it's received data sent by rtsg up to
 but not including byte 21.
 Most of this data is apparently sitting in the
@@ -2672,7 +2672,7 @@ It only looks at IPv4 packets.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 22:21:52 GMT, March 08, 2023
+This HTML man page was generated at 20:28:40 GMT, March 12, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
