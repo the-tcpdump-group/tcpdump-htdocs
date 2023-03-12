@@ -95,39 +95,39 @@ printSedFile()
 	# Convert file:// schema hyperlinks to plain text.
 	# Undo a very specific false positive case of man page detection.
 	# Customize the page footer.
-	cat <<ENDOFFILE
-s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX/">Return to Main Contents</A>@g
-s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
-s@^<HTML><HEAD><TITLE>Manpage of @<HTML><HEAD><TITLE>Man page of @
-s@<HTML>@<HTML lang="en">@
-s@</HEAD><BODY>@<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">\n\0@
-s@</HEAD><BODY>@<LINK rel="stylesheet" type="text/css" href="../style.css">\n\0@
-s@</HEAD><BODY>@<meta charset="utf-8">\n</HEAD><BODY>@
-s@<DL COMPACT>@<DL>@g
-s@<TT>@@g
-s@</TT>@@g
-s@<H1>@<H1>Man page of @
-s@\(<A NAME="index">&nbsp;</A>\)\(<H2>Index</H2>\)@\1\n\2@
-/^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H2>\(.*\)</H2>@<H2 id=\1>\2</H2>@}
-/^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H3>\(.*\)</H3>@<H3 id=\1>\2</H3>@}
-s@<A HREF="file://\(.*\)">\(.*\)</A>@\2@g
-s@<A HREF="/cgi-bin/man/man2html?1+[123]:[234]">\([123]:[234]\)</A>(1)@\1(1)@
-/^This document was created by\$/ {N;N;N;s@.*\n.*\n.*\nTime: \(.*\)\$@<H2>COLOPHON</H2>\nThis HTML man page was generated at \1\nfrom a source man page in "The Tcpdump Group" git repositories\nusing man2html and other tools.@}
-ENDOFFILE
+	cat <<-ENDOFFILE
+		s@<A HREF="$MAN2HTML_PFX">Return to Main Contents</A>@<A HREF="$WEBSITE_PFX/">Return to Main Contents</A>@g
+		s@<A HREF="$MAN2HTML_PFX">man2html</A>@man2html@g
+		s@^<HTML><HEAD><TITLE>Manpage of @<HTML><HEAD><TITLE>Man page of @
+		s@<HTML>@<HTML lang="en">@
+		s@</HEAD><BODY>@<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">\n\0@
+		s@</HEAD><BODY>@<LINK rel="stylesheet" type="text/css" href="../style.css">\n\0@
+		s@</HEAD><BODY>@<meta charset="utf-8">\n</HEAD><BODY>@
+		s@<DL COMPACT>@<DL>@g
+		s@<TT>@@g
+		s@</TT>@@g
+		s@<H1>@<H1>Man page of @
+		s@\(<A NAME="index">&nbsp;</A>\)\(<H2>Index</H2>\)@\1\n\2@
+		/^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H2>\(.*\)</H2>@<H2 id=\1>\2</H2>@}
+		/^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H3>\(.*\)</H3>@<H3 id=\1>\2</H3>@}
+		s@<A HREF="file://\(.*\)">\(.*\)</A>@\2@g
+		s@<A HREF="/cgi-bin/man/man2html?1+[123]:[234]">\([123]:[234]\)</A>(1)@\1(1)@
+		/^This document was created by\$/ {N;N;N;s@.*\n.*\n.*\nTime: \(.*\)\$@<H2>COLOPHON</H2>\nThis HTML man page was generated at \1\nfrom a source man page in "The Tcpdump Group" git repositories\nusing man2html and other tools.@}
+	ENDOFFILE
 
 	# Fixup links to local pages, part 1.
 	while read -r mantopic manfile; do
 		echo "s@<A HREF=\"${MAN2HTML_PFX}?${mantopic}\"@<A HREF=\"$manfile\"@g"
-	done <<ENDOFLIST
-7+pcap-linktype		$WEBSITE_PFX/pcap-linktype.7.html
-7+pcap-tstamp		$WEBSITE_PFX/pcap-tstamp.7.html
-7+pcap-filter		$WEBSITE_PFX/pcap-filter.7.html
-5+pcap-savefile		$WEBSITE_PFX/pcap-savefile.5.html
-1+tcpdump		$WEBSITE_PFX/tcpdump.1.html
-1+tcpslice		$WEBSITE_PFX/tcpslice.1.html
-5+rpcapd-config		$WEBSITE_PFX/rpcapd-config.5.html
-8+rpcapd		$WEBSITE_PFX/rpcapd.8.html
-ENDOFLIST
+	done <<-ENDOFLIST
+		7+pcap-linktype		$WEBSITE_PFX/pcap-linktype.7.html
+		7+pcap-tstamp		$WEBSITE_PFX/pcap-tstamp.7.html
+		7+pcap-filter		$WEBSITE_PFX/pcap-filter.7.html
+		5+pcap-savefile		$WEBSITE_PFX/pcap-savefile.5.html
+		1+tcpdump		$WEBSITE_PFX/tcpdump.1.html
+		1+tcpslice		$WEBSITE_PFX/tcpslice.1.html
+		5+rpcapd-config		$WEBSITE_PFX/rpcapd-config.5.html
+		8+rpcapd		$WEBSITE_PFX/rpcapd.8.html
+	ENDOFLIST
 
 	# Fixup links to local pages, part 2.
 	print3PCAPMap | while read -r mantopic manfile; do
@@ -146,85 +146,85 @@ ENDOFLIST
 
 print3PCAPMap()
 {
-	cat <<ENDOFLIST
-pcap
-pcap_activate
-pcap_breakloop
-pcap_can_set_rfmon
-pcap_close
-pcap_compile
-pcap_create
-pcap_datalink
-pcap_datalink_name_to_val
-pcap_datalink_val_to_description				pcap_datalink_val_to_name
-pcap_datalink_val_to_description_or_dlt				pcap_datalink_val_to_name
-pcap_datalink_val_to_name
-pcap_dispatch							pcap_loop
-pcap_dump
-pcap_dump_close
-pcap_dump_file
-pcap_dump_flush
-pcap_dump_fopen							pcap_dump_open
-pcap_dump_ftell
-pcap_dump_ftell64						pcap_dump_ftell
-pcap_dump_open
-pcap_dump_open_append						pcap_dump_open
-pcap_file
-pcap_fileno
-pcap_findalldevs
-pcap_fopen_offline						pcap_open_offline
-pcap_fopen_offline_with_tstamp_precision			pcap_open_offline
-pcap_freealldevs						pcap_findalldevs
-pcap_freecode
-pcap_free_datalinks						pcap_list_datalinks
-pcap_free_tstamp_types						pcap_list_tstamp_types
-pcap_get_required_select_timeout
-pcap_geterr
-pcap_getnonblock						pcap_setnonblock
-pcap_get_selectable_fd
-pcap_get_tstamp_precision
-pcap_init
-pcap_inject
-pcap_is_swapped
-pcap_lib_version
-pcap_list_datalinks
-pcap_list_tstamp_types
-pcap_lookupdev
-pcap_lookupnet
-pcap_loop
-pcap_major_version
-pcap_minor_version						pcap_major_version
-pcap_next_ex
-pcap_next							pcap_next_ex
-pcap_offline_filter
-pcap_open_dead
-pcap_open_dead_with_tstamp_precision				pcap_open_dead
-pcap_open_live
-pcap_open_offline
-pcap_open_offline_with_tstamp_precision				pcap_open_offline
-pcap_perror							pcap_geterr
-pcap_sendpacket							pcap_inject
-pcap_set_buffer_size
-pcap_set_datalink
-pcap_setdirection
-pcap_setfilter
-pcap_set_immediate_mode
-pcap_setnonblock
-pcap_set_promisc
-pcap_set_protocol_linux
-pcap_set_rfmon
-pcap_set_snaplen
-pcap_set_timeout
-pcap_set_tstamp_precision
-pcap_set_tstamp_type
-pcap_snapshot
-pcap_stats
-pcap_statustostr
-pcap_strerror
-pcap_tstamp_type_name_to_val
-pcap_tstamp_type_val_to_description				pcap_tstamp_type_val_to_name
-pcap_tstamp_type_val_to_name
-ENDOFLIST
+	cat <<-ENDOFLIST
+		pcap
+		pcap_activate
+		pcap_breakloop
+		pcap_can_set_rfmon
+		pcap_close
+		pcap_compile
+		pcap_create
+		pcap_datalink
+		pcap_datalink_name_to_val
+		pcap_datalink_val_to_description				pcap_datalink_val_to_name
+		pcap_datalink_val_to_description_or_dlt				pcap_datalink_val_to_name
+		pcap_datalink_val_to_name
+		pcap_dispatch							pcap_loop
+		pcap_dump
+		pcap_dump_close
+		pcap_dump_file
+		pcap_dump_flush
+		pcap_dump_fopen							pcap_dump_open
+		pcap_dump_ftell
+		pcap_dump_ftell64						pcap_dump_ftell
+		pcap_dump_open
+		pcap_dump_open_append						pcap_dump_open
+		pcap_file
+		pcap_fileno
+		pcap_findalldevs
+		pcap_fopen_offline						pcap_open_offline
+		pcap_fopen_offline_with_tstamp_precision			pcap_open_offline
+		pcap_freealldevs						pcap_findalldevs
+		pcap_freecode
+		pcap_free_datalinks						pcap_list_datalinks
+		pcap_free_tstamp_types						pcap_list_tstamp_types
+		pcap_get_required_select_timeout
+		pcap_geterr
+		pcap_getnonblock						pcap_setnonblock
+		pcap_get_selectable_fd
+		pcap_get_tstamp_precision
+		pcap_init
+		pcap_inject
+		pcap_is_swapped
+		pcap_lib_version
+		pcap_list_datalinks
+		pcap_list_tstamp_types
+		pcap_lookupdev
+		pcap_lookupnet
+		pcap_loop
+		pcap_major_version
+		pcap_minor_version						pcap_major_version
+		pcap_next_ex
+		pcap_next							pcap_next_ex
+		pcap_offline_filter
+		pcap_open_dead
+		pcap_open_dead_with_tstamp_precision				pcap_open_dead
+		pcap_open_live
+		pcap_open_offline
+		pcap_open_offline_with_tstamp_precision				pcap_open_offline
+		pcap_perror							pcap_geterr
+		pcap_sendpacket							pcap_inject
+		pcap_set_buffer_size
+		pcap_set_datalink
+		pcap_setdirection
+		pcap_setfilter
+		pcap_set_immediate_mode
+		pcap_setnonblock
+		pcap_set_promisc
+		pcap_set_protocol_linux
+		pcap_set_rfmon
+		pcap_set_snaplen
+		pcap_set_timeout
+		pcap_set_tstamp_precision
+		pcap_set_tstamp_type
+		pcap_snapshot
+		pcap_stats
+		pcap_statustostr
+		pcap_strerror
+		pcap_tstamp_type_name_to_val
+		pcap_tstamp_type_val_to_description				pcap_tstamp_type_val_to_name
+		pcap_tstamp_type_val_to_name
+	ENDOFLIST
 }
 
 detectProject()
@@ -244,12 +244,12 @@ installation.'
 printHTMLBoilerplate()
 {
 	detectProject "${1:?}"
-cat <<ENDOFTEXT
-<DIV class=version_boilerplate>
-<H4>This man page documents ${project_name} version ${project_version}.</H4>
-$BOILERPLATE_BODY
-</DIV>
-ENDOFTEXT
+	cat <<-ENDOFTEXT
+		<DIV class=version_boilerplate>
+		<H4>This man page documents ${project_name} version ${project_version}.</H4>
+		$BOILERPLATE_BODY
+		</DIV>
+	ENDOFTEXT
 }
 
 insertHTMLBoilerplate()
@@ -335,13 +335,13 @@ printTXTBoilerplate()
 	echo '+----------------------------------------------------------------------------+'
 	while read -r line; do
 		printf '| %-74s |\n' "$line"
-	done <<ENDOFTEXT
+	done <<-ENDOFTEXT
 
-This man page documents ${project_name} version ${project_version}.
+		This man page documents ${project_name} version ${project_version}.
 
-$BOILERPLATE_BODY
+		$BOILERPLATE_BODY
 
-ENDOFTEXT
+	ENDOFTEXT
 	echo '+----------------------------------------------------------------------------+'
 	echo
 }
