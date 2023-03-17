@@ -402,6 +402,9 @@ updateOutputFiles()
 	sedfile=$(mktemp --tmpdir manpages_sedfile.XXXXXX)
 	printSedFile > "$sedfile"
 
+	# It would be trivial to deduplicate the two code blocks below if
+	# produceTXT didn't use stty, which does not work inside a while loop
+	# reading from a here-doc.
 	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
 	produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
 	produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
