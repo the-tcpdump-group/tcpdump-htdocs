@@ -27,7 +27,9 @@ freebsd_task:
   freebsd_instance:
     cpu: 1
     memory: 1G
+    image_family: freebsd-13-1
   script:
+    - pkg install -qy git-tiny
     - ./regen_html_pages.sh
     - git status
     - test "$(git status --porcelain | wc -l)" -eq 0
