@@ -1414,12 +1414,8 @@ The output of <I>tcpdump</I> is protocol dependent.
 The following
 gives a brief description and examples of most of the formats.
 
+<H3 id="lbAH">Timestamps</H3>
 
-<P>
-<B></B>
-
-
-Timestamps
 <P>
 
 By default, all output lines are preceded by a timestamp.
@@ -1442,12 +1438,8 @@ packet from the network and the time when an interrupt was delivered to
 the kernel to get it to read the packet and a delay between the time
 when the kernel serviced the `new packet' interrupt and the time when it
 applied a time stamp to the packet.
+<H3 id="lbAI">Link Level Headers</H3>
 
-<P>
-<B></B>
-
-
-Link Level Headers
 <P>
 
 If the '-e' option is given, the link level header is printed out.
@@ -1520,12 +1512,8 @@ data and 6 bytes of compressed header:
 
 </DL>
 
+<H3 id="lbAJ">ARP/RARP Packets</H3>
 
-<P>
-<B></B>
-
-
-ARP/RARP Packets
 <P>
 
 ARP/RARP output shows the type of request and its arguments.
@@ -1577,12 +1565,8 @@ CSAM RTSG 0806  64: arp reply csam is-at CSAM
 For the first packet this says the Ethernet source address is RTSG, the
 destination is the Ethernet broadcast address, the type field
 contained hex 0806 (type ETHER_ARP) and the total length was 64 bytes.
+<H3 id="lbAK">IPv4 Packets</H3>
 
-<P>
-<B></B>
-
-
-IPv4 Packets
 <P>
 
 If the link-layer header is not being printed, for IPv4 packets,
@@ -1633,12 +1617,8 @@ the
 <B>-v</B>
 
 flag, in the IP header information, as described above.
+<H3 id="lbAL">TCP Packets</H3>
 
-<P>
-<B></B>
-
-
-TCP Packets
 <P>
 
 <I>(N.B.:The following description assumes familiarity with
@@ -1756,12 +1736,7 @@ If the header
 length indicates options are present but the IP datagram length is not
 long enough for the options to actually be there, <I>tcpdump</I> reports
 it as ``[<I>bad hdr length</I>]''.
-
-<P>
-<B></B>
-
-
-<B>Capturing TCP packets with particular flag combinations (SYN-ACK, URG-ACK, etc.)</B>
+<H3 id="lbAM">Particular TCP Flag Combinations (SYN-ACK, URG-ACK, etc.)</H3>
 
 <P>
 
@@ -2023,12 +1998,7 @@ This can be demonstrated as:
 Note that you should use single quotes or a backslash
 in the expression to hide the AND ('&amp;') special character
 from the shell.
-
-<P>
-<B></B>
-
-
-<B>UDP Packets</B>
+<H3 id="lbAN">UDP Packets</H3>
 
 <P>
 
@@ -2052,12 +2022,8 @@ Some UDP services are recognized (from the source or destination
 port number) and the higher level protocol information printed.
 In particular, Domain Name service requests (RFC 1034/1035) and Sun
 RPC calls (RFC 1050) to NFS.
+<H3 id="lbAO">TCP or UDP Name Server Requests</H3>
 
-<P>
-<B></B>
-
-
-TCP or UDP Name Server Requests
 <P>
 
 <I>(N.B.:The following description assumes familiarity with
@@ -2111,12 +2077,8 @@ is the appropriate count.
 If any of the response bits are set (AA, RA or rcode) or any of the
 `must be zero' bits are set in bytes two and three, `[b2&amp;3=<I>x</I>]'
 is printed, where <I>x</I> is the hex value of header bytes two and three.
+<H3 id="lbAP">TCP or UDP Name Server Responses</H3>
 
-<P>
-<B></B>
-
-
-TCP or UDP Name Server Responses
 <P>
 
 Name server responses are formatted as
@@ -2156,12 +2118,8 @@ RA, <I>not</I> set) and `|' (truncated message, TC, set).
 If the
 `question' section doesn't contain exactly one entry, `[<I>n</I>q]'
 is printed.
+<H3 id="lbAQ">SMB/CIFS Decoding</H3>
 
-<P>
-<B></B>
-
-
-SMB/CIFS decoding
 <P>
 
 <I>tcpdump</I> now includes fairly extensive SMB/CIFS/NBT decoding for data
@@ -2181,12 +2139,8 @@ For information on SMB packet formats and what all the fields mean see
 <A HREF="https://download.samba.org/pub/samba/specs/">https://download.samba.org/pub/samba/specs/</A> and other online resources.
 The SMB patches were written by Andrew Tridgell
 (<A HREF="mailto:tridge@samba.org">tridge@samba.org</A>).
+<H3 id="lbAR">NFS Requests and Replies</H3>
 
-<P>
-<B></B>
-
-
-NFS Requests and Replies
 <P>
 
 Sun NFS (Network File System) requests and replies are printed as:
@@ -2278,12 +2232,8 @@ Instead,
 replies using the transaction ID.
 If a reply does not closely follow the
 corresponding request, it might not be parsable.
+<H3 id="lbAS">AFS Requests and Replies</H3>
 
-<P>
-<B></B>
-
-
-AFS Requests and Replies
 <P>
 
 Transarc AFS (Andrew File System) requests and replies are printed
@@ -2361,12 +2311,8 @@ If a reply does not closely
 follow the
 corresponding request, it might not be parsable.
 <P>
+<H3 id="lbAT">KIP AppleTalk (DDP in UDP)</H3>
 
-<P>
-<B></B>
-
-
-KIP AppleTalk (DDP in UDP)
 <P>
 
 AppleTalk DDP packets encapsulated in UDP datagrams are de-encapsulated
@@ -2440,7 +2386,9 @@ Other protocols just dump
 the protocol name (or number if no name is registered for the
 protocol) and packet size.
 <P>
-<B>NBP packets</B> are formatted like the following examples:
+<H3 id="lbAU">NBP Packets</H3>
+
+NBP packets are formatted like the following examples:
 <DL><DT><DD>
 <PRE>
 
@@ -2462,7 +2410,9 @@ The third line is
 another reply to the same request saying host techpit has laserwriter
 &quot;techpit&quot; registered on port 186.
 <P>
-<B>ATP packet</B> formatting is demonstrated by the following example:
+<H3 id="lbAV">ATP Packets</H3>
+
+ATP packet formatting is demonstrated by the following example:
 <DL><DT><DD>
 <PRE>
 
@@ -2508,7 +2458,7 @@ jssmag.209 initiates the next request.
 The `*' on the request
 indicates that XO (`exactly once') was <I>not</I> set.
 <P>
-<H2 id="lbAH">BACKWARD COMPATIBILITY</H2>
+<H2 id="lbAW">BACKWARD COMPATIBILITY</H2>
 
 The TCP flag names
 <B>tcp-ece</B>
@@ -2518,7 +2468,7 @@ and
 
 became available when linking with libpcap 1.9.0 or later.
 <P>
-<H2 id="lbAI">SEE ALSO</H2>
+<H2 id="lbAX">SEE ALSO</H2>
 
 <B>stty</B>(1),
 
@@ -2545,7 +2495,7 @@ became available when linking with libpcap 1.9.0 or later.
 
 <P>
 
-<H2 id="lbAJ">AUTHORS</H2>
+<H2 id="lbAY">AUTHORS</H2>
 
 The original authors are:
 <P>
@@ -2581,7 +2531,7 @@ The original distribution is available via anonymous ftp:
 
 IPv6/IPsec support is added by WIDE/KAME project.
 This program uses OpenSSL/LibreSSL, under specific configurations.
-<H2 id="lbAK">BUGS</H2>
+<H2 id="lbAZ">BUGS</H2>
 
 To report a security issue please send an e-mail to <A HREF="mailto:security@tcpdump.org">security@tcpdump.org</A>.
 <P>
@@ -2665,14 +2615,31 @@ It only looks at IPv4 packets.
 <DT><A HREF="#lbAE">OPTIONS</A><DD>
 <DT><A HREF="#lbAF">EXAMPLES</A><DD>
 <DT><A HREF="#lbAG">OUTPUT FORMAT</A><DD>
-<DT><A HREF="#lbAH">BACKWARD COMPATIBILITY</A><DD>
-<DT><A HREF="#lbAI">SEE ALSO</A><DD>
-<DT><A HREF="#lbAJ">AUTHORS</A><DD>
-<DT><A HREF="#lbAK">BUGS</A><DD>
+<DL>
+<DT><A HREF="#lbAH">Timestamps</A><DD>
+<DT><A HREF="#lbAI">Link Level Headers</A><DD>
+<DT><A HREF="#lbAJ">ARP/RARP Packets</A><DD>
+<DT><A HREF="#lbAK">IPv4 Packets</A><DD>
+<DT><A HREF="#lbAL">TCP Packets</A><DD>
+<DT><A HREF="#lbAM">Particular TCP Flag Combinations (SYN-ACK, URG-ACK, etc.)</A><DD>
+<DT><A HREF="#lbAN">UDP Packets</A><DD>
+<DT><A HREF="#lbAO">TCP or UDP Name Server Requests</A><DD>
+<DT><A HREF="#lbAP">TCP or UDP Name Server Responses</A><DD>
+<DT><A HREF="#lbAQ">SMB/CIFS Decoding</A><DD>
+<DT><A HREF="#lbAR">NFS Requests and Replies</A><DD>
+<DT><A HREF="#lbAS">AFS Requests and Replies</A><DD>
+<DT><A HREF="#lbAT">KIP AppleTalk (DDP in UDP)</A><DD>
+<DT><A HREF="#lbAU">NBP Packets</A><DD>
+<DT><A HREF="#lbAV">ATP Packets</A><DD>
+</DL>
+<DT><A HREF="#lbAW">BACKWARD COMPATIBILITY</A><DD>
+<DT><A HREF="#lbAX">SEE ALSO</A><DD>
+<DT><A HREF="#lbAY">AUTHORS</A><DD>
+<DT><A HREF="#lbAZ">BUGS</A><DD>
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 20:28:40 GMT, March 12, 2023
+This HTML man page was generated at 16:56:17 GMT, March 18, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
