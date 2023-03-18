@@ -31,19 +31,14 @@
 #
 # This script has been tested to work on the following systems:
 #
-# * Ubuntu Linux 18.04
-# * Ubuntu Linux 20.04
-# * Ubuntu Linux 22.04
-# * Fedora Linux 30
-# * Fedora Linux 32
-# * Fedora Linux 34
-# * Devuan Linux
-# * FreeBSD 12
-# * FreeBSD 13.0
-# * OpenBSD 7.0
-# * NetBSD 9.2
-# * Debian 11
+# * AIX 7
+# * FreeBSD
+# * GNU/Linux
 # * Haiku
+# * illumos
+# * NetBSD
+# * OpenBSD
+# * Solaris 11
 #
 
 HTML_HEAD='htmlsrc/_html_head.html'
@@ -118,15 +113,16 @@ substitute_page_title()
 rewrite_URLs()
 {
 	if [ "${1:?}" != "${1#linktypes/}" ]; then
-		sed 's#\(<link href="\)\(images/\|style.css\)#\1../\2#' |
+		sed 's#\(<link href="\)\(images/\)#\1../\2#' |
+			sed 's#\(<link href="\)\(style.css\)#\1../\2#' |
 			sed 's#\(<img src="\)\(images/\)#\1../\2#' |
 			sed 's#\(<a href="\)\(manpages/\)#\1../\2#' |
 			sed 's#\(<a href="\)\(bpfexam/\)#\1../\2#' |
-			sed 's#\(<a href="\)\([a-z_-]\+.html\)#\1../\2#'
+			sed 's#\(<a href="\)\([a-z_-]\{1,\}.html\)#\1../\2#'
 	elif [ "$1" = autoindex_header.html ]; then
 		sed 's#\(<img src="\)\(images/\)#\1/\2#' |
-			sed 's#\(<a href="\)\([a-z]\+/\)#\1/\2#' |
-			sed 's#\(<a href="\)\([a-z_-]\+.html\)#\1/\2#'
+			sed 's#\(<a href="\)\([a-z]\{1,\}/\)#\1/\2#' |
+			sed 's#\(<a href="\)\([a-z_-]\{1,\}.html\)#\1/\2#'
 	else
 		cat
 	fi
