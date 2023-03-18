@@ -1,7 +1,9 @@
 env:
   CIRRUS_CLONE_DEPTH: 3
 
-task:
+# GNU sed, test everything.
+linux_task:
+  name: Linux
   container:
     image: ubuntu:22.04
     cpu: 1
@@ -18,3 +20,14 @@ task:
     - php --syntax-check manpages/restyle.php
     - shellcheck regen_man_pages.sh
     - shellcheck regen_html_pages.sh
+
+# BSD sed, test one script only.
+freebsd_task:
+  name: FreeBSD
+  freebsd_instance:
+    cpu: 1
+    memory: 1G
+  script:
+    - ./regen_html_pages.sh
+    - git status
+    - test "$(git status --porcelain | wc -l)" -eq 0
