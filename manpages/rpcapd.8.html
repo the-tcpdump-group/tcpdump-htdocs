@@ -119,16 +119,16 @@ Rpcapd can run in two modes: passive mode (default) and active mode.
 <P>
 
 In passive mode, the client (e.g., a network sniffer) connects to
-<B>rpcapd</B>.
+<I>rpcapd</I>.
 
 The client then sends the appropriate commands to
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 to start the capture.
 <P>
 
 In active mode,
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 tries to establish a connection toward the client
 (e.g., a network sniffer). The client then sends the appropriate commands
@@ -136,11 +136,11 @@ to rpcapd to start the capture.
 <P>
 
 Active mode is useful in case
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 is run behind a firewall and
 cannot receive connections from the external world. In this case,
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 can be configured to establish the connection to a given host,
 which has to be configured in order to wait for that connection. After
@@ -152,24 +152,26 @@ the same way in both active and passive mode.
 
 The user can create a configuration file in the same directory as the
 executable, and put the configuration commands in there. In order for
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 to execute the commands, it needs to be restarted on Win32, i.e.
 the configuration file is parsed only at the beginning. The UNIX
 version of
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 will reread the configuration file upon receiving a
-HUP signal. In that case, all the existing connections remain in place,
+<CODE>HUP</CODE>
+
+signal. In that case, all the existing connections remain in place,
 while the new connections will be created according to the new parameters.
 <P>
 
 In case a user does not want to create the configuration file manually,
 they can launch
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 with the desired flags plus
-<B>-s filename</B>.
+<CODE>-s filename</CODE>.
 
 Rpcapd will parse all the parameters and save them into the specified
 configuration file.
@@ -179,7 +181,7 @@ configuration file.
 
 The remote daemon is installed automatically when installing WinPcap.
 The installation process places the
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 executable file into the WinPcap folder.
 This file can be executed either from the command line, or as a service.
@@ -192,10 +194,10 @@ administrative tools - services - start).
 
 The service has a set of &quot;standard&quot; parameters, i.e. it is launched
 with the
-<B>-d</B>
+<CODE>-d</CODE>
 
 flag (in order to make it run as a service) and the
-<B>-f rpcapd.ini</B>
+<CODE>-f rpcapd.ini</CODE>
 
 flag.
 <H2 id="lbAG">Starting rpcapd on Win32</H2>
@@ -203,13 +205,13 @@ flag.
 <P>
 
 The
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 executable can be launched directly, i.e.  it can run in the
 foreground as well (not as a daemon/service).  The procedure is quite
 simple: you have to invoke the executable from the command line with all
 the requested parameters except for the
-<B>-d</B>
+<CODE>-d</CODE>
 
 flag.  The capture server will
 start in the foreground.
@@ -218,7 +220,7 @@ start in the foreground.
 TBD
 <H2 id="lbAI">Starting rpcapd on Unix-like systems</H2>
 
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 needs sufficient privileges to perform packet capture, e.g.
 run as root or be owned by root and have suid set. Most operating
@@ -230,14 +232,14 @@ If your system supports
 <B>systemd</B>(1)
 
 and the corresponding
-<B>rpcapd.socket</B>
+<CODE>rpcapd.socket</CODE>
 
 and
-<B>rpcapd@.service</B>
+<CODE>rpcapd@.service</CODE>
 
 service files have been
 installed, the rpcapd service can be enabled by enabling the
-<B>rpcapd.socket</B>
+<CODE>rpcapd.socket</CODE>
 
 unit.
 <P>
@@ -246,11 +248,11 @@ If your system supports
 <B>launchd</B>(8)
 
 and the
-<B>org.tcpdump.rpcapd.plist</B>
+<CODE>org.tcpdump.rpcapd.plist</CODE>
 
 file has been installed, the rpcapd service can be enabled by loading
 the
-<B>org.tcpdump.rpcapd</B>
+<CODE>org.tcpdump.rpcapd</CODE>
 
 service.
 <P>
@@ -259,14 +261,12 @@ If your system supports
 <B>inetd</B>(8)
 
 and the
-<B>rpcapd.inetd.conf</B>
+<CODE>rpcapd.inetd.conf</CODE>
 
 entry has been added to
 <B>inetd.conf</B>(5),
 
-the rpcapd service can be enabled by telling
-<B>inetd</B>
-
+the rpcapd service can be enabled by telling inetd
 to reread its configuration file.
 <P>
 
@@ -274,19 +274,17 @@ If your system supports
 <B>xinetd</B>(8)
 
 and the
-<B>rpcapd.xinetd.conf</B>
+<CODE>rpcapd.xinetd.conf</CODE>
 
 entry has been added to
 <B>xinetd.conf</B>(5),
 
-the rpcapd service can be enabled by telling
-<B>xinetd</B>
-
+the rpcapd service can be enabled by telling xinetd
 to reread its configuration file.
 <H2 id="lbAJ">OPTIONS</H2>
 
 <DL>
-<DT><B>-b</B><I> address</I>
+<DT><CODE>-b</CODE><I> address</I>
 
 <DD>
 Bind to the IP address specified by
@@ -294,20 +292,20 @@ Bind to the IP address specified by
 
 (either numeric or literal).
 By default,
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 binds to all local IPv4 and IPv6 addresses.
-<DT><B>-p</B><I> port</I>
+<DT><CODE>-p</CODE><I> port</I>
 
 <DD>
 Bind to the port specified by
 <I>port</I>.
 
 By default,
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 binds to port 2002.
-<DT><B>-t</B><I> data_port</I>
+<DT><CODE>-t</CODE><I> data_port</I>
 
 <DD>
 Use the port specified by
@@ -315,18 +313,18 @@ Use the port specified by
 
 as the port for data transfer.
 By default,
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 uses a port chosen by the operating system.
-<DT><B>-4</B>
+<DT><CODE>-4</CODE>
 
 <DD>
 Listen only on IPv4 addresses.
 By default,
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 listens on both IPv4 and IPv6 addresses.
-<DT><B>-l</B><I> host_list</I>
+<DT><CODE>-l</CODE><I> host_list</I>
 
 <DD>
 Only allow hosts specified in the
@@ -338,13 +336,14 @@ argument to connect to this server.
 is a list of host names or IP addresses, separated by commas.
 We suggest that you use host names rather than literal IP addresses
 in order to avoid problems with different address families.
-<DT><B>-n</B>
+<DT><CODE>-n</CODE>
 
 <DD>
-Permit NULL authentication (usually used with
-<B>-l</B>).
+Permit NULL authentication (usually used with the
+<CODE>-l</CODE>
 
-<DT><B>-a</B><I> host</I><B>,</B><I>port</I>
+flag).
+<DT><CODE>-a</CODE><I> host</I><B>,</B><I>port</I>
 
 <DD>
 Run in active mode, connecting to host
@@ -357,31 +356,31 @@ In case
 <I>port</I>
 
 is omitted, the default port (2003) is used.
-<DT><B>-v</B>
+<DT><CODE>-v</CODE>
 
 <DD>
 Run in active mode only; by default, if
-<B>-a</B>
+<CODE>-a</CODE>
 
 is specified,
-<B>rpcapd</B>
+<I>rpcapd</I>
 
-it accepts passive connections as well.
-<DT><B>-d</B>
+accepts passive connections as well.
+<DT><CODE>-d</CODE>
 
 <DD>
 Run in daemon mode (UNIX only) or as a service (Win32 only).
 Warning (Win32): this flag is specified automatically when
 the service is started from the control panel.
-<DT><B>-i</B>
+<DT><CODE>-i</CODE>
 
 <DD>
 Run in inetd mode (UNIX only).
-<DT><B>-D</B>
+<DT><CODE>-D</CODE>
 
 <DD>
 Log debugging messages.
-<DT><B>-s</B><I> config_file</I>
+<DT><CODE>-s</CODE><I> config_file</I>
 
 <DD>
 Save the current configuration to
@@ -390,7 +389,7 @@ Save the current configuration to
 in the format specified by
 <B><A HREF="./rpcapd-config.5.html">rpcapd-config</A></B>(5).
 
-<DT><B>-f</B><I> config_file</I>
+<DT><CODE>-f</CODE><I> config_file</I>
 
 <DD>
 Load the current configuration from
@@ -400,7 +399,7 @@ in the format specified by
 <B><A HREF="./rpcapd-config.5.html">rpcapd-config</A></B>(5)
 
 and ignore all flags specified on the command line.
-<DT><B>-h</B>
+<DT><CODE>-h</CODE>
 
 <DD>
 Print this help screen.
@@ -408,34 +407,30 @@ Print this help screen.
 <P>
 
 If
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 was compiled with SSL support, the following options are also
 available:
 <DL>
-<DT><B>-S</B>
+<DT><CODE>-S</CODE>
 
 <DD>
 Require that SSL be used on connections.
-<DT><B>-C</B>
+<DT><CODE>-C</CODE>
 
 <DD>
 With SSL enabled, XXX - I'm not sure how *fetching* the list of
 compression mechanisms does anything to compression.
-<DT><B>-S</B>
+<DT><CODE>-S</CODE><I> ssl_keyfile</I>
 
 <DD>
-<I>ssl_keyfile</I>
-
 With SSL enabled, use
 <I>ssl_keyfile</I>
 
 as the SSL key file.
-<DT><B>-X</B>
+<DT><CODE>-X</CODE><I> ssl_certfile</I>
 
 <DD>
-<I>ssl_certfile</I>
-
 With SSL enabled, use
 <I>ssl_certfile</I>
 
@@ -454,7 +449,7 @@ as the SSL certificate file.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 23:17:49 GMT, March 25, 2023
+This HTML man page was generated at 00:30:54 GMT, March 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

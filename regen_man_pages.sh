@@ -282,7 +282,6 @@ maybeBoldToCode()
 	done <<-EOF
 		pcap
 		pcap-filter
-		rpcapd
 		rpcapd-config
 		tcpdump
 	EOF

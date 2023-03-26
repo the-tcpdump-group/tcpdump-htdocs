@@ -129,14 +129,14 @@ OPTIONS
               names  rather  than literal IP addresses in order to avoid prob-
               lems with different address families.
 
-       -n     Permit NULL authentication (usually used with -l).
+       -n     Permit NULL authentication (usually used with the -l flag).
 
        -a host,port
               Run in active mode, connecting to host host on  port  port.   In
               case port is omitted, the default port (2003) is used.
 
        -v     Run  in active mode only; by default, if -a is specified, rpcapd
-              it accepts passive connections as well.
+              accepts passive connections as well.
 
        -d     Run in daemon mode (UNIX only) or as  a  service  (Win32  only).
               Warning  (Win32):  this flag is specified automatically when the
@@ -165,11 +165,11 @@ OPTIONS
        -C     With SSL enabled, XXX - I'm not sure how *fetching* the list  of
               compression mechanisms does anything to compression.
 
-       -S     ssl_keyfile  With  SSL  enabled,  use ssl_keyfile as the SSL key
-              file.
+       -S ssl_keyfile
+              With SSL enabled, use ssl_keyfile as the SSL key file.
 
-       -X     ssl_certfile With SSL enabled, use ssl_certfile as the SSL  cer-
-              tificate file.
+       -X ssl_certfile
+              With SSL enabled, use ssl_certfile as the SSL certificate file.
 
 SEE ALSO
        pcap(3PCAP), rpcapd-config(5)
