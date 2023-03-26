@@ -109,18 +109,12 @@ printSedFile()
 	ENDOFFILE
 
 	# Fixup links to local pages, part 1.
-	while read -r mantopic manfile; do
-		echo "s@<A HREF=\"${MAN2HTML_PFX}?${mantopic}\"@<A HREF=\"$manfile\"@g"
-	done <<-ENDOFLIST
-		7+pcap-linktype		$WEBSITE_PFX/pcap-linktype.7.html
-		7+pcap-tstamp		$WEBSITE_PFX/pcap-tstamp.7.html
-		7+pcap-filter		$WEBSITE_PFX/pcap-filter.7.html
-		5+pcap-savefile		$WEBSITE_PFX/pcap-savefile.5.html
-		1+tcpdump		$WEBSITE_PFX/tcpdump.1.html
-		1+tcpslice		$WEBSITE_PFX/tcpslice.1.html
-		5+rpcapd-config		$WEBSITE_PFX/rpcapd-config.5.html
-		8+rpcapd		$WEBSITE_PFX/rpcapd.8.html
-	ENDOFLIST
+	printNon3PCAPFiles | while read -r f; do
+		bn="${f##*/}"
+		mansection="$(translateManSection "${bn##*.}")"
+		manpage="${bn%.*}"
+		echo "s@<A HREF=\"${MAN2HTML_PFX}?\($mansection\)+\($manpage\)\"@<A HREF=\"$WEBSITE_PFX/\\\\2.\\\\1.html\"@g"
+	done
 
 	# Fixup links to local pages, part 2.
 	print3PCAPMap | while read -r mantopic manfile; do
@@ -135,6 +129,41 @@ printSedFile()
 
 	# Hyperlinks to any other man pages are non-local, convert these to plain text.
 	echo "s@<A HREF=\"$MAN2HTML_PFX?[1-9][a-zA-Z]\?+.\+\">\(.\+\)</A>@\\\\1@g"
+}
+
+printNon3PCAPFiles()
+{
+	cat <<-ENDOFLIST
+		libpcap/pcap-filter.manmisc
+		libpcap/pcap-linktype.manmisc
+		libpcap/pcap-savefile.manfile
+		libpcap/cbpf-savefile.manfile
+		libpcap/pcap-tstamp.manmisc
+		libpcap/rpcapd/rpcapd.manadmin
+		libpcap/rpcapd/rpcapd-config.manfile
+		libpcap/pcap-config.1
+		tcpdump/tcpdump.1
+		tcpslice/tcpslice.1
+	ENDOFLIST
+}
+
+# There are several conventions, traditionally the web site uses Linux one.
+translateManSection()
+{
+	case "${1:?}" in
+	manfile)
+		echo 5
+		;;
+	manmisc)
+		echo 7
+		;;
+	manadmin)
+		echo 8
+		;;
+	*)
+		echo "$1"
+		;;
+	esac
 }
 
 print3PCAPMap()
@@ -394,30 +423,16 @@ updateOutputFiles()
 	sedfile=$(mktemp --tmpdir manpages_sedfile.XXXXXX)
 	printSedFile > "$sedfile"
 
-	# It would be trivial to deduplicate the two code blocks below if
-	# produceTXT didn't use stty, which does not work inside a while loop
-	# reading from a here-doc.
-	produceTXT ../libpcap/pcap-filter.manmisc manpages/pcap-filter.7.txt
-	produceTXT ../libpcap/pcap-linktype.manmisc manpages/pcap-linktype.7.txt
-	produceTXT ../libpcap/pcap-savefile.manfile manpages/pcap-savefile.5.txt
-	produceTXT ../libpcap/cbpf-savefile.manfile manpages/cbpf-savefile.5.txt
-	produceTXT ../libpcap/pcap-tstamp.manmisc manpages/pcap-tstamp.7.txt
-	produceTXT ../libpcap/rpcapd/rpcapd.manadmin manpages/rpcapd.8.txt
-	produceTXT ../libpcap/rpcapd/rpcapd-config.manfile manpages/rpcapd-config.5.txt
-
-	produceHTML ../libpcap/pcap-filter.manmisc "$sedfile" manpages/pcap-filter.7.html
-	produceHTML ../libpcap/pcap-linktype.manmisc "$sedfile" manpages/pcap-linktype.7.html
-	produceHTML ../libpcap/pcap-savefile.manfile "$sedfile" manpages/pcap-savefile.5.html
-	produceHTML ../libpcap/cbpf-savefile.manfile "$sedfile" manpages/cbpf-savefile.5.html
-	produceHTML ../libpcap/pcap-tstamp.manmisc "$sedfile" manpages/pcap-tstamp.7.html
-	produceHTML ../libpcap/rpcapd/rpcapd.manadmin "$sedfile" manpages/rpcapd.8.html
-	produceHTML ../libpcap/rpcapd/rpcapd-config.manfile "$sedfile" manpages/rpcapd-config.5.html
+	# A while loop would not work because of the stty invocation within.
+	for f in $(printNon3PCAPFiles); do
+		ofb="${f##*/}"
+		ofb="${ofb%.*}.$(translateManSection "${ofb##*.}")"
+		produceTXT ../"$f" "manpages/${ofb}.txt"
+		produceHTML ../"$f" "$sedfile" "manpages/${ofb}.html"
+	done
 
 	for f in ../libpcap/*.3pcap; do
 		[ "$(known3PCAPFile "$f")" = 'no' ] && echo "WARNING: file $f is not in the 3PCAP map"
-	done
-
-	for f in ../libpcap/*.3pcap ../libpcap/pcap-config.1 ../tcpdump/tcpdump.1 ../tcpslice/tcpslice.1; do
 		produceTXT "$f" "manpages/$(basename "$f").txt"
 		produceHTML "$f" "$sedfile" "manpages/$(basename "$f").html"
 	done
