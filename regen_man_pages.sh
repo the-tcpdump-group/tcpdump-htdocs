@@ -311,7 +311,6 @@ maybeBoldToCode()
 	done <<-EOF
 		pcap
 		pcap-filter
-		rpcapd-config
 		tcpdump
 	EOF
 	"$mbtc_filter"

@@ -47,7 +47,7 @@ DESCRIPTION
 
        NullAuthPermit
               value is either YES or NO.  YES means that  null  authentication
-              is permitted; No means that it is not permitted.
+              is permitted; NO means that it is not permitted.
 
 SEE ALSO
        rpcapd(8)

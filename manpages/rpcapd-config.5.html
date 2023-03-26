@@ -22,14 +22,17 @@ rpcapd-config - rpcapd configuration file format
 <H2 id="lbAC">DESCRIPTION</H2>
 
 An
-<B>rpcapd</B>
+<I>rpcapd</I>
 
 configuration file allows parameters to be set for
 <B><A HREF="./rpcapd.8.html">rpcapd</A></B>(8).
 
 <P>
 
-A # introduces a comment that runs to the end of the line.  Blank lines,
+A
+<CODE>#</CODE>
+
+introduces a comment that runs to the end of the line.  Blank lines,
 and lines with only a comment, are ignored.  Leading and trailing white
 space on a line are also ignored.
 <P>
@@ -41,7 +44,10 @@ Lines that set a parameter are of the form
 </DL>
 <P>
 
-Whitespace preceding or following the = is ignored.
+Whitespace preceding or following the
+<CODE>=</CODE>
+
+is ignored.
 <P>
 
 The
@@ -49,55 +55,55 @@ The
 
 are:
 <DL>
-<DT><B>ActiveClient</B>
+<DT><CODE>ActiveClient</CODE>
 
 <DD>
 <I>value</I>
 
 is a host name or IP address, followed by a comma,
 semicolon, or space, followed by a port name and address or
-<B>DEFAULT</B>.
+<CODE>DEFAULT</CODE>.
 
-<B>DEFAULT</B>
+<CODE>DEFAULT</CODE>
 
 specifies the default active mode port for rpcapd, port 2003.
 Each
-<B>ActiveClient</B>
+<CODE>ActiveClient</CODE>
 
 line adds the host and port to the list of clients to which the server
 should connect in active mode.
-<DT><B>PassiveClient</B>
+<DT><CODE>PassiveClient</CODE>
 
 <DD>
 <I>value</I>
 
 is a host name or IP address, followed by a comma,
 semicolon, or space, followed by a port name and address or
-<B>DEFAULT</B>.
+<CODE>DEFAULT</CODE>.
 
-<B>DEFAULT</B>
+<CODE>DEFAULT</CODE>
 
 specifies the default passive mode port for rpcapd, port 2002.
 Each
-<B>PassiveClient</B>
+<CODE>PassiveClient</CODE>
 
 line adds the host and port to the list of clients addresses and ports
 that are allowed to connect to the server in passive mode.
-<DT><B>NullAuthPermit</B>
+<DT><CODE>NullAuthPermit</CODE>
 
 <DD>
 <I>value</I>
 
 is either
-<B>YES</B>
+<CODE>YES</CODE>
 
 or
-<B>NO</B>.
+<CODE>NO</CODE>.
 
-<B>YES</B>
+<CODE>YES</CODE>
 
 means that null authentication is permitted;
-<B>No</B>
+<CODE>NO</CODE>
 
 means that it is not permitted.
 </DL>
@@ -109,7 +115,7 @@ means that it is not permitted.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:03 GMT, November 01, 2021
+This HTML man page was generated at 13:19:27 GMT, March 26, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
