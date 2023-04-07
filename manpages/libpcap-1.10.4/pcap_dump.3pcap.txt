@@ -1,0 +1,34 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.4.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_DUMP(3PCAP)                                              PCAP_DUMP(3PCAP)
+
+NAME
+       pcap_dump - write a packet to a capture file
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       void pcap_dump(u_char *user, struct pcap_pkthdr *h,
+               u_char *sp);
+
+DESCRIPTION
+       pcap_dump()   outputs   a   packet  to  the  ``savefile''  opened  with
+       pcap_dump_open(3PCAP).  Note that its calling  arguments  are  suitable
+       for  use  with pcap_dispatch(3PCAP) or pcap_loop(3PCAP).  If called di-
+       rectly, the user parameter is of  type  pcap_dumper_t  as  returned  by
+       pcap_dump_open().
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                 8 March 2015                 PCAP_DUMP(3PCAP)

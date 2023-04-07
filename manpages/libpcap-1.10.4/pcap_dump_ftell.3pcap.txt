@@ -1,0 +1,44 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.4.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_DUMP_FTELL(3PCAP)                                  PCAP_DUMP_FTELL(3PCAP)
+
+NAME
+       pcap_dump_ftell,  pcap_dump_ftell64 - get the current file offset for a
+       savefile being written
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       long pcap_dump_ftell(pcap_dumper_t *p);
+       int64_t pcap_dump_ftell64(pcap_dumper_t *p);
+
+DESCRIPTION
+       pcap_dump_ftell() returns the current file  position  for  the  ``save-
+       file'',    representing    the    number    of    bytes    written   by
+       pcap_dump_open(3PCAP) and pcap_dump(3PCAP).  PCAP_ERROR is returned  on
+       error.  If the current file position does not fit in a long, it will be
+       truncated; this can happen on 32-bit UNIX-like systems with large  file
+       support  and  on Windows.  pcap_dump_ftell64() returns the current file
+       position in a int64_t, so if file offsets that don't fit in a long  but
+       that  fit  in a int64_t are supported, this will return the file offset
+       without truncation.  PCAP_ERROR is returned on error.
+
+BACKWARD COMPATIBILITY
+       The function pcap_dump_ftell64() became available  in  libpcap  release
+       1.9.0.   In  previous releases, there was no mechanism to obtain a file
+       offset that is too large to fit in a long.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                 25 July 2018           PCAP_DUMP_FTELL(3PCAP)

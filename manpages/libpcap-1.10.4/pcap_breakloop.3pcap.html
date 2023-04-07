@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_BREAKLOOP</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_BREAKLOOP</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 8 December 2022<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.4.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_breakloop - force a pcap_dispatch() or pcap_loop() call to return
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>void pcap_breakloop(pcap_t *);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_breakloop</B>()
+
+sets a flag that will force
+<A HREF='./pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP)
+
+or
+<A HREF='./pcap_loop.3pcap.html'><B>pcap_loop</B></A>(3PCAP)
+
+to return rather than looping; they will return the number of packets
+that have been processed so far, or
+<CODE>PCAP_ERROR_BREAK</CODE>
+
+if no packets have been processed so far.  If the loop is currently
+blocked waiting for packets to arrive,
+<B>pcap_breakloop</B>()
+
+will also, on some platforms, wake up the thread that is blocked.  In
+this version of libpcap, the only platforms on which a wakeup is caused
+by
+<B>pcap_breakloop</B>()
+
+are Linux and Windows, and the wakeup will only be caused when capturing
+on network interfaces; it will not be caused on other operating systems,
+and will not be caused on any OS when capturing on other types of
+devices.
+<P>
+
+This routine is safe to use inside a signal handler on UNIX or a console
+control handler on Windows, or in a thread other than the one in which
+the loop is running, as it merely sets a flag that is checked within the
+loop and, on some platforms, performs a signal-safe and thread-safe API
+call.
+<P>
+
+The flag is checked in loops reading packets from the OS - a signal by
+itself will not necessarily terminate those loops - as well as in loops
+processing a set of packets returned by the OS.
+<B>
+Note that if you are catching signals on UNIX systems that support
+restarting system calls after a signal, and calling pcap_breakloop()
+in the signal handler, you must specify, when catching those signals,
+that system calls should NOT be restarted by that signal.  Otherwise,
+if the signal interrupted a call reading packets in a live capture,
+when your signal handler returns after calling pcap_breakloop(), the
+call will be restarted, and the loop will not terminate until more
+packets arrive and the call completes.
+</B>
+<P>
+
+<B>
+Note also that, in a multi-threaded application, if one thread is
+blocked in pcap_dispatch(), pcap_loop(), <A HREF='./pcap_next_ex.3pcap.html'>pcap_next</A>(3PCAP), or
+<A HREF='./pcap_next_ex.3pcap.html'>pcap_next_ex</A>(3PCAP), a call to pcap_breakloop() in a different thread
+will only unblock that thread on the platforms and capture devices
+listed above.
+<P>
+
+If a non-zero packet buffer timeout is set on the
+pcap_t</B>,
+
+and you are capturing on a network interface, the thread will be
+unblocked with the timeout expires.  This is not guaranteed to happen
+unless at least one packet has arrived; the only platforms on which it
+happens are macOS, the BSDs, Solaris 11, AIX, Tru64 UNIX, and Windows.
+<P>
+
+If you want to ensure that the loop will eventually be unblocked on any
+other platforms, or unblocked when capturing on a device other than a
+network interface, you will need to use whatever mechanism the OS
+provides for breaking a thread out of blocking calls in order to unblock
+the thread, such as thread cancellation or thread signalling in systems
+that support POSIX threads.
+
+<P>
+
+<B>
+Note that if pcap_breakloop() unblocks the thread capturing packets, and
+you are running on a platform that supports packet buffering, there may
+be packets in the buffer that arrived before pcap_breakloop() were
+called but that weren't yet provided to libpcap, those packets will not
+have been processed by pcap_dispatch() or pcap_loop().  If
+pcap_breakloop() was called in order to terminate the capture process,
+then, in order to process those packets, you would have to call
+pcap_dispatch() one time in order to process the last batch of packets.
+This may block until the packet buffer timeout expires, so a non-zero
+packet buffer timeout must be used.
+</B>
+<P>
+
+Note that
+<B>pcap_next</B>()
+
+and
+<B>pcap_next_ex</B>()
+
+will, on some platforms, loop reading packets from the OS; that loop
+will not necessarily be terminated by a signal, so
+<B>pcap_breakloop</B>()
+
+should be used to terminate packet processing even if
+<B>pcap_next</B>()
+
+or
+<B>pcap_next_ex</B>()
+
+is being used.
+<P>
+
+<B>pcap_breakloop</B>()
+
+does not guarantee that no further packets will be processed by
+<B>pcap_dispatch</B>()
+
+or
+<B>pcap_loop</B>()
+
+after it is called; at most one more packet might be processed.
+<P>
+
+If
+<CODE>PCAP_ERROR_BREAK</CODE>
+
+is returned from
+<B>pcap_dispatch</B>()
+
+or
+<B>pcap_loop</B>(),
+
+the flag is cleared, so a subsequent call will resume reading packets.
+If a positive number is returned, the flag is not cleared, so a
+subsequent call will return
+<CODE>PCAP_ERROR_BREAK</CODE>
+
+and clear the flag.
+<H2 id="lbAE">BACKWARD COMPATIBILITY</H2>
+
+<P>
+
+This function became available in libpcap release 0.8.1.
+<P>
+
+In releases prior to libpcap 1.10.0,
+<B>pcap_breakloop</B>()
+
+will not wake up a blocked thread on any platform.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 21:18:19 GMT, April 07, 2023
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

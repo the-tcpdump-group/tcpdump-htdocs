@@ -186,29 +186,34 @@ Original license : Creative Commons Attribution 2.5 License
               tcpdump
             </h3>
             <p>
-              <strong>Version:</strong> 4.99.3<br>
-              <strong>Release Date:</strong> January 12, 2023<br>
-              <strong>Download:</strong> <a href="release/tcpdump-4.99.3.tar.gz">tcpdump-4.99.3.tar.gz</a>
+              <strong>Version:</strong> 4.99.4<br>
+              <strong>Release Date:</strong> April 7, 2023<br>
+              <strong>Download:</strong> <a href="release/tcpdump-4.99.4.tar.gz">tcpdump-4.99.4.tar.gz</a>
                 (<a href="https://git.tcpdump.org/tcpdump/blob/HEAD:/CHANGES">change log</a>)
-                (PGP <a href="release/tcpdump-4.99.3.tar.gz.sig">signature</a> and
+                (PGP <a href="release/tcpdump-4.99.4.tar.gz.sig">signature</a> and
                 <a href="release/signing-key-RSA-E089DEF1D9C15D0D.asc">key</a>)
             </p>
             <p>
-                This tcpdump release makes many various improvements and bug fixes
-                available whilst the future 5.0 release still remains a work in
-                progress.  This release requires libpcap 1.10.0 or later to pass all
-                test cases.
+                This tcpdump release fixes an out-of-bounds write vulnerability
+                (CVE-2023-1801) present in the previous release (4.99.3) in the SMB
+                printer, which is not compiled by default.  It also makes various
+                minor improvements.  This release requires libpcap 1.10.0 or later to
+                pass all test cases.
             </p>
             <h3 class="subtitle">
               libpcap
             </h3>
             <p>
-              <strong>Version:</strong> 1.10.3<br>
-              <strong>Release Date:</strong> January 12, 2023<br>
-              <strong>Download:</strong> <a href="release/libpcap-1.10.3.tar.gz">libpcap-1.10.3.tar.gz</a>
+              <strong>Version:</strong> 1.10.4<br>
+              <strong>Release Date:</strong> April 7, 2023<br>
+              <strong>Download:</strong> <a href="release/libpcap-1.10.4.tar.gz">libpcap-1.10.4.tar.gz</a>
                 (<a href="https://git.tcpdump.org/libpcap/blob/HEAD:/CHANGES">change log</a>)
-                (PGP <a href="release/libpcap-1.10.3.tar.gz.sig">signature</a> and
+                (PGP <a href="release/libpcap-1.10.4.tar.gz.sig">signature</a> and
                 <a href="release/signing-key-RSA-E089DEF1D9C15D0D.asc">key</a>)
+            </p>
+            <p>
+                This libpcap release makes minor improvements to the build system,
+                documentation and code style.
             </p>
           </div>
         </div>

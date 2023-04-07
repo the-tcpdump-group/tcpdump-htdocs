@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP-SAVEFILE</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP-SAVEFILE</H1>
+Section: File Formats (5)<BR>Updated: 24 April 2020<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.4.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap-savefile - libpcap savefile format
+<H2 id="lbAC">DESCRIPTION</H2>
+
+NOTE: applications and libraries should, if possible, use libpcap to
+read savefiles, rather than having their own code to read savefiles.
+If, in the future, a new file format is supported by libpcap,
+applications and libraries using libpcap to read savefiles will be able
+to read the new format of savefiles, but applications and libraries
+using their own code to read savefiles will have to be changed to
+support the new file format.
+<P>
+
+``Savefiles'' read and written by libpcap and applications using libpcap
+start with a per-file header.  The format of the per-file header is:
+<DL><DT><DD>
+<TABLE BORDER><TR><TD><TABLE>
+<TR VALIGN=top><TD ALIGN=center COLSPAN=2>Magic number<BR></TD></TR>
+<TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center>Major version</TD><TD ALIGN=center>Minor version<BR></TD></TR>
+<TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center COLSPAN=2>Time zone offset<BR></TD></TR>
+<TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center COLSPAN=2>Time stamp accuracy<BR></TD></TR>
+<TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center COLSPAN=2>Snapshot length<BR></TD></TR>
+<TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center COLSPAN=2>Link-layer header type<BR></TD></TR>
+</TABLE></TABLE>
+
+</DL>
+
+<P>
+
+The per-file header length is 24 octets.
+<P>
+
+All fields in the per-file header are in the byte order of the host
+writing the file.  Normally, the first field in the per-file header is a
+4-byte magic number, with the value 0xa1b2c3d4.  The magic number, when
+read by a host with the same byte order as the host that wrote the file,
+will have the value 0xa1b2c3d4, and, when read by a host with the
+opposite byte order as the host that wrote the file, will have the value
+0xd4c3b2a1.  That allows software reading the file to determine whether
+the byte order of the host that wrote the file is the same as the byte
+order of the host on which the file is being read, and thus whether the
+values in the per-file and per-packet headers need to be byte-swapped.
+<P>
+
+If the magic number has the value 0xa1b23c4d (with the two nibbles of
+the two lower-order bytes of the magic number swapped), which would be
+read as 0xa1b23c4d by a host with the same byte order as the host that
+wrote the file and as 0x4d3cb2a1 by a host with the opposite byte order
+as the host that wrote the file, the file format is the same as for
+regular files, except that the time stamps for packets are given in
+seconds and nanoseconds rather than seconds and microseconds.
+<P>
+
+Following this are:
+<DL>
+<DT><DD>
+A 2-byte file format major version number; the current version number is
+2.
+<DT><DD>
+A 2-byte file format minor version number; the current version number is
+4.
+<DT><DD>
+A 4-byte time zone offset; this is always 0.
+<DT><DD>
+A 4-byte number giving the accuracy of time stamps in the file; this is
+always 0.
+<DT><DD>
+A 4-byte number giving the &quot;snapshot length&quot; of the capture; packets
+longer than the snapshot length are truncated to the snapshot length, so
+that, if the snapshot length is
+<I>N</I>,
+
+only the first
+<I>N</I>
+
+bytes of a packet longer than
+<I>N</I>
+
+bytes will be saved in the capture.
+<DT><DD>
+a 4-byte number giving the link-layer header type for packets in the
+capture; see
+<B><A HREF="./pcap-linktype.7.html">pcap-linktype</A></B>(7)
+
+for the
+<CODE>LINKTYPE_</CODE>
+
+values that can appear in this field.
+</DL>
+<P>
+
+Following the per-file header are zero or more packets; each packet
+begins with a per-packet header, which is immediately followed by the
+raw packet data.  The format of the per-packet header is:
+<DL><DT><DD>
+<TABLE BORDER><TR><TD><TABLE>
+<TR VALIGN=top><TD ALIGN=center>Time stamp, seconds value<BR></TD></TR>
+<TR VALIGN=top><TD><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center>Time stamp, microseconds or nanoseconds value<BR></TD></TR>
+<TR VALIGN=top><TD><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center>Length of captured packet data<BR></TD></TR>
+<TR VALIGN=top><TD><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center>Un-truncated length of the packet data<BR></TD></TR>
+</TABLE></TABLE>
+
+</DL>
+
+<P>
+
+The per-packet header length is 16 octets.
+<P>
+
+All fields in the per-packet header are in the byte order of the host
+writing the file.  The per-packet header begins with a time stamp giving
+the approximate time the packet was captured; the time stamp consists of
+a 4-byte value, giving the time in seconds since January 1, 1970,
+00:00:00 UTC, followed by a 4-byte value, giving the time in
+microseconds or nanoseconds since that second, depending on the magic
+number in the file header.  Following that are a 4-byte value giving the
+number of bytes of captured data that follow the per-packet header and a
+4-byte value giving the number of bytes that would have been present had
+the packet not been truncated by the snapshot length.  The two lengths
+will be equal if the number of bytes of packet data are less than or
+equal to the snapshot length.
+<H2 id="lbAD">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 21:18:18 GMT, April 07, 2023
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

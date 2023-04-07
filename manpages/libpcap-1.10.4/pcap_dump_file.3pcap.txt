@@ -1,0 +1,31 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.4.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_DUMP_FILE(3PCAP)                                    PCAP_DUMP_FILE(3PCAP)
+
+NAME
+       pcap_dump_file - get the standard I/O stream for a savefile being writ-
+       ten
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       FILE *pcap_dump_file(pcap_dumper_t *p);
+
+DESCRIPTION
+       pcap_dump_file() returns the standard I/O stream  of  the  ``savefile''
+       opened by pcap_dump_open(3PCAP).
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                3 January 2014           PCAP_DUMP_FILE(3PCAP)

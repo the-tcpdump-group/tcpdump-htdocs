@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_FINDALLDEVS</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_FINDALLDEVS</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 23 August 2018<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.4.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_findalldevs, pcap_freealldevs - get a list of capture devices, and
+free that list
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>int pcap_findalldevs(pcap_if_t **alldevsp, char *errbuf);
+void pcap_freealldevs(pcap_if_t *alldevs);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_findalldevs</B>()
+
+constructs a list of network devices that can be opened with
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+
+and
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
+
+or with
+<A HREF='./pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP).
+
+(Note that there may be network devices that cannot be opened by the
+process calling
+<B>pcap_findalldevs</B>(),
+
+because, for example, that process does not have sufficient privileges
+to open them for capturing; if so, those devices will not appear on the
+list.)
+If
+<B>pcap_findalldevs</B>()
+
+succeeds, the pointer pointed to by
+<I>alldevsp</I>
+
+is set to point to the first element of the list, or to
+<CODE>NULL</CODE>
+
+if no devices were found (this is considered success).
+Each element of the list is of type
+<CODE>pcap_if_t</CODE>,
+
+and has the following members:
+<DL><DT><DD>
+<DL>
+<DT><CODE>next</CODE>
+
+<DD>
+if not
+<CODE>NULL</CODE>,
+
+a pointer to the next element in the list;
+<CODE>NULL</CODE>
+
+for the last element of the list
+<DT><CODE>name</CODE>
+
+<DD>
+a pointer to a string giving a name for the device to pass to
+<B>pcap_open_live</B>()
+
+<DT><CODE>description</CODE>
+
+<DD>
+if not
+<CODE>NULL</CODE>,
+
+a pointer to a string giving a human-readable description of the device
+<DT><CODE>addresses</CODE>
+
+<DD>
+a pointer to the first element of a list of network addresses for the
+device,
+or
+<CODE>NULL</CODE>
+
+if the device has no addresses
+<DT><CODE>flags</CODE>
+
+<DD>
+device flags:
+<DL><DT><DD>
+<DL>
+<DT><CODE>PCAP_IF_LOOPBACK</CODE>
+
+<DD>
+set if the device is a loopback interface
+<DT><CODE>PCAP_IF_UP</CODE>
+
+<DD>
+set if the device is up
+<DT><CODE>PCAP_IF_RUNNING</CODE>
+
+<DD>
+set if the device is running
+<DT><CODE>PCAP_IF_WIRELESS</CODE>
+
+<DD>
+set if the device is a wireless interface; this includes IrDA as well as
+radio-based networks such as IEEE 802.15.4 and IEEE 802.11, so it
+doesn't just mean Wi-Fi
+<DT><CODE>PCAP_IF_CONNECTION_STATUS</CODE>
+
+<DD>
+a bitmask for an indication of whether the adapter is connected or not;
+for wireless interfaces, &quot;connected&quot; means &quot;associated with a network&quot;
+<DT>The possible values for the connection status bits are:<DD>
+<DT><CODE>PCAP_IF_CONNECTION_STATUS_UNKNOWN</CODE>
+
+<DD>
+it's unknown whether the adapter is connected or not
+<DT><CODE>PCAP_IF_CONNECTION_STATUS_CONNECTED</CODE>
+
+<DD>
+the adapter is connected
+<DT><CODE>PCAP_IF_CONNECTION_STATUS_DISCONNECTED</CODE>
+
+<DD>
+the adapter is disconnected
+<DT><CODE>PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE</CODE>
+
+<DD>
+the notion of &quot;connected&quot; and &quot;disconnected&quot; don't apply to this
+interface; for example, it doesn't apply to a loopback device
+</DL>
+</DL>
+
+</DL>
+</DL>
+
+<P>
+
+Each element of the list of addresses is of type
+<CODE>pcap_addr_t</CODE>,
+
+and has the following members:
+<DL><DT><DD>
+<DL>
+<DT><CODE>next</CODE>
+
+<DD>
+if not
+<CODE>NULL</CODE>,
+
+a pointer to the next element in the list;
+<CODE>NULL</CODE>
+
+for the last element of the list
+<DT><CODE>addr</CODE>
+
+<DD>
+a pointer to a
+<CODE>struct sockaddr</CODE>
+
+containing an address
+<DT><CODE>netmask</CODE>
+
+<DD>
+if not
+<CODE>NULL</CODE>,
+
+a pointer to a
+<CODE>struct sockaddr</CODE>
+
+that contains the netmask corresponding to the address pointed to by
+<CODE>addr</CODE>
+
+<DT><CODE>broadaddr</CODE>
+
+<DD>
+if not
+<CODE>NULL</CODE>,
+
+a pointer to a
+<CODE>struct sockaddr</CODE>
+
+that contains the broadcast address corresponding to the address pointed
+to by
+<CODE>addr</CODE>;
+
+may be null if the device doesn't support broadcasts
+<DT><CODE>dstaddr</CODE>
+
+<DD>
+if not
+<CODE>NULL</CODE>,
+
+a pointer to a
+<CODE>struct sockaddr</CODE>
+
+that contains the destination address corresponding to the address pointed
+to by
+<CODE>addr</CODE>;
+
+may be null if the device isn't a point-to-point interface
+</DL>
+</DL>
+
+<P>
+
+Note that the addresses in the list of addresses might be IPv4
+addresses, IPv6 addresses, or some other type of addresses, so you must
+check the
+<CODE>sa_family</CODE>
+
+member of the
+<CODE>struct sockaddr</CODE>
+
+before interpreting the contents of the address; do not assume that the
+addresses are all IPv4 addresses, or even all IPv4 or IPv6 addresses.
+IPv4 addresses have the value
+<CODE>AF_INET</CODE>,
+
+IPv6 addresses have the value
+<CODE>AF_INET6</CODE>
+
+(which older operating systems that don't support IPv6 might not
+define), and other addresses have other values.  Whether other addresses
+are returned, and what types they might have is platform-dependent.
+For IPv4 addresses, the
+<CODE>struct sockaddr</CODE>
+
+pointer can be interpreted as if it pointed to a
+<CODE>struct sockaddr_in</CODE>;
+
+for IPv6 addresses, it can be interpreted as if it pointed to a
+<CODE>struct sockaddr_in6.</CODE>
+
+<P>
+
+The list of devices must be freed with
+<A HREF='./pcap_findalldevs.3pcap.html'><B>pcap_freealldevs</B></A>(3PCAP),
+
+which frees the list pointed to by
+<I>alldevs</I>.
+
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_findalldevs</B>()
+
+returns
+<B>0</B>
+
+on success and
+<CODE>PCAP_ERROR</CODE>
+
+on failure; as indicated, finding no
+devices is considered success, rather than failure, so
+<B>0</B>
+
+will be
+returned in that case. If
+<CODE>PCAP_ERROR</CODE>
+
+is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<I>errbuf</I>
+
+is assumed to be able to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
+
+chars.
+<H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
+
+<P>
+
+The
+<CODE>PCAP_IF_UP</CODE>
+
+and
+<CODE>PCAP_IF_RUNNING</CODE>
+
+constants became available in libpcap release 1.6.1.  The
+<CODE>PCAP_IF_WIRELESS</CODE>,
+
+<CODE>PCAP_IF_CONNECTION_STATUS</CODE>,
+
+<CODE>PCAP_IF_CONNECTION_STATUS_UNKNOWN</CODE>,
+
+<CODE>PCAP_IF_CONNECTION_STATUS_CONNECTED</CODE>,
+
+<CODE>PCAP_IF_CONNECTION_STATUS_DISCONNECTED</CODE>,
+
+and
+<CODE>PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE</CODE>
+
+constants became available in libpcap release 1.9.0.
+<H2 id="lbAG">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 21:18:20 GMT, April 07, 2023
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

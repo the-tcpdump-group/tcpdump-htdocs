@@ -1,0 +1,50 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.4.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_DATALINK(3PCAP)                                      PCAP_DATALINK(3PCAP)
+
+NAME
+       pcap_datalink - get the link-layer header type
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_datalink(pcap_t *p);
+
+DESCRIPTION
+       pcap_datalink() returns the link-layer header type for the live capture
+       or ``savefile'' specified by p.
+
+       It  must  not   be   called   on   a   pcap   descriptor   created   by
+       pcap_create(3PCAP)    that    has    not    yet   been   activated   by
+       pcap_activate(3PCAP).
+
+       https://www.tcpdump.org/linktypes.html lists the values pcap_datalink()
+       can  return  and  describes the packet formats that correspond to those
+       values.
+
+       Do NOT assume that the packets for a given capture or ``savefile`` will
+       have any given link-layer header type, such as DLT_EN10MB for Ethernet.
+       For example, the "any" device on Linux will have  a  link-layer  header
+       type of DLT_LINUX_SLL or DLT_LINUX_SLL2 even if all devices on the sys-
+       tem at the time the "any" device is opened have some  other  data  link
+       type, such as DLT_EN10MB for Ethernet.
+
+RETURN VALUE
+       pcap_datalink()  returns  the  link-layer  header  type  on success and
+       PCAP_ERROR_NOT_ACTIVATED if called on a capture handle  that  has  been
+       created but not activated.
+
+SEE ALSO
+       pcap(3PCAP), pcap-linktype(7)
+
+                                 7 April 2014             PCAP_DATALINK(3PCAP)

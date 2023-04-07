@@ -1,0 +1,73 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.4.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_OPEN_OFFLINE(3PCAP)                              PCAP_OPEN_OFFLINE(3PCAP)
+
+NAME
+       pcap_open_offline,             pcap_open_offline_with_tstamp_precision,
+       pcap_fopen_offline, pcap_fopen_offline_with_tstamp_precision -  open  a
+       saved capture file for reading
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       char errbuf[PCAP_ERRBUF_SIZE];
+
+       pcap_t *pcap_open_offline(const char *fname, char *errbuf);
+       pcap_t *pcap_open_offline_with_tstamp_precision(const char *fname,
+           u_int precision, char *errbuf);
+       pcap_t *pcap_fopen_offline(FILE *fp, char *errbuf);
+       pcap_t *pcap_fopen_offline_with_tstamp_precision(FILE *fp,
+           u_int precision, char *errbuf);
+
+DESCRIPTION
+       pcap_open_offline()  and  pcap_open_offline_with_tstamp_precision() are
+       called to open a ``savefile'' for reading.
+
+       fname specifies the name of the file to open. The  file  can  have  the
+       pcap  file  format  as described in pcap-savefile(5), which is the file
+       format used by, among other programs, tcpdump(1)  and  tcpslice(1),  or
+       can  have  the pcapng file format, although not all pcapng files can be
+       read.  The name "-" is a synonym for stdin.
+
+       pcap_open_offline_with_tstamp_precision() takes an additional precision
+       argument    specifying   the   time   stamp   precision   desired;   if
+       PCAP_TSTAMP_PRECISION_MICRO is specified, packet time  stamps  will  be
+       supplied in seconds and microseconds, and if PCAP_TSTAMP_PRECISION_NANO
+       is specified, packet time  stamps  will  be  supplied  in  seconds  and
+       nanoseconds.   If the time stamps in the file do not have the same pre-
+       cision as the requested precision, they will be scaled up  or  down  as
+       necessary before being supplied.
+
+       Alternatively,  you  may  call  pcap_fopen_offline() or pcap_fopen_off-
+       line_with_tstamp_precision() to read dumped data from an existing  open
+       stream  fp.   pcap_fopen_offline_with_tstamp_precision() takes an addi-
+       tional precision argument as described above.  Note  that  on  Windows,
+       that stream should be opened in binary mode.
+
+RETURN VALUE
+       pcap_open_offline(),         pcap_open_offline_with_tstamp_precision(),
+       pcap_fopen_offline(),  and   pcap_fopen_offline_with_tstamp_precision()
+       return a pcap_t * on success and NULL on failure.  If NULL is returned,
+       errbuf is filled in with an appropriate error message.  errbuf  is  as-
+       sumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
+
+BACKWARD COMPATIBILITY
+       pcap_open_offline_with_tstamp_precision()      and      pcap_fopen_off-
+       line_with_tstamp_precision() became available in libpcap release 1.5.1.
+       In  previous  releases, time stamps from a savefile are always given in
+       seconds and microseconds.
+
+SEE ALSO
+       pcap(3PCAP), pcap-savefile(5)
+
+                                23 August 2018        PCAP_OPEN_OFFLINE(3PCAP)
