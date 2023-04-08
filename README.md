@@ -28,3 +28,28 @@ in the browser.
 When ready, `git add` both the source and the output files and commit with a
 meaningful message.  With all changes committed and the git repository clean
 `regen_html_pages.sh` should exit with status 0 without warnings or errors.
+
+## history and credits
+[Michael Richardson](http://www.sandelman.ca/) started www.tcpdump.org in 1999.
+As was common at the time, it was a static web site with a few pages and a very
+simple design, which was probably contributed by someone known as "Mr. Man" or
+"JWS".  The web site grew with time.
+
+[Luis MartinGarcia](https://www.luismg.com/) upgraded the static web site to a
+more modern look in 2010 using a mix of original artwork and the
+"Collaboration" template from Free CSS Templates project, which later became
+known as "TEMPLATED", but eventually went offline.  That template's licence was
+Creative Commons Attribution 2.5.  The resulting design mostly remains to this
+day.
+
+The web site contents lived in a CVS repository from 1999 to 2011.  In 2012 it
+was migrated into this git repository; the contents was preserved, but the
+commit history wasn't.
+
+In 2013 [Denis Ovsienko](https://ovsienko.info/) started to introduce various
+scripting into the contents generation and delivery, this has been a slow work
+in progress ever since.
+
+Besides the developments above, over many years many other people contributed
+effort, contents and ideas to make www.tcpdump.org what it is now.  Thank you
+for that!

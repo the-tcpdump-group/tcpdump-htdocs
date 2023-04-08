@@ -151,11 +151,6 @@ print_html_page()
 
 	cat <<ENDOFTEXT
 <!DOCTYPE html>
-<!--
-Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
-Original design  : "Collaboration" by Free CSS Templates (later "TEMPLATED")
-Original license : Creative Commons Attribution 2.5 License
--->
 <html lang="en">
 
     <!-- HEAD -->
