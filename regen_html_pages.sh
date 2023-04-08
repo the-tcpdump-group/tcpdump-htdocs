@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 # Copyright (c) 2020 The TCPDUMP project
 # All rights reserved.
