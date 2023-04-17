@@ -64,15 +64,9 @@ pcap-config - write libpcap compiler and linker flags to standard output
 
 writes to the standard output various compiler and linker flags required to
 build a user program with libpcap.  By default, it writes flags appropriate
-for building with a dynamically-linked version of libpcap; see the
-<CODE>--static</CODE>
-
-and
-<CODE>--static-pcap-only</CODE>
-
-options for building with a statically-linked version.  Depending on the
-manner of libpcap installation, some options or their combinations may
-produce empty output - this is by design.
+for building with a dynamically-linked version of libpcap; see below
+for static linking.  Depending on the manner of libpcap installation, some
+options or their combinations may produce empty output - this is by design.
 <P>
 <H2 id="lbAE">OPTIONS</H2>
 
@@ -164,7 +158,10 @@ option, and with status 0 otherwise.
 
 <P>
 
-The
+Before libpcap release 1.10.2
+<I>pcap-config</I>
+
+did not treat invalid command-line options as an error. The
 <CODE>--static-pcap-only</CODE>
 
 flag became available in libpcap release 1.10.2.  The
@@ -182,7 +179,7 @@ flag became available in libpcap release 1.1.0.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:08:22 GMT, April 10, 2023
+This HTML man page was generated at 22:14:36 GMT, April 17, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
