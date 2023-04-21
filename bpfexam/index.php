@@ -86,6 +86,11 @@ $versions = array
 		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-git',
 		'filtertest' => '/usr/local/bin/filtertest-git-optdebug',
 	),
+	'1.10.4' => array
+	(
+		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.4',
+		'filtertest' => '/usr/local/bin/filtertest-1.10.4-optdebug',
+	),
 	'1.10.2' => array
 	(
 		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.2',
