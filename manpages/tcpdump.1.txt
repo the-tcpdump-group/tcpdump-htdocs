@@ -1342,24 +1342,6 @@ BUGS
        NIT doesn't let you watch your own outbound traffic, BPF will.  We rec-
        ommend that you use the latter.
 
-       On Linux systems with 2.0[.x] kernels:
-
-              packets on the loopback device will be seen twice;
-
-              packet filtering cannot be done in the kernel, so that all pack-
-              ets must be copied from the kernel in order to  be  filtered  in
-              user mode;
-
-              all  of  a  packet, not just the part that's within the snapshot
-              length, will be copied from the kernel (the 2.0[.x] packet  cap-
-              ture  mechanism,  if  asked  to  copy  only  part of a packet to
-              userspace, will not report the true length of the  packet;  this
-              would cause most IP packets to get an error from tcpdump);
-
-              capturing on some PPP devices won't work correctly.
-
-       We recommend that you upgrade to a 2.2 or later kernel.
-
        Some  attempt should be made to reassemble IP fragments or, at least to
        compute the right length for the higher level protocol.
 

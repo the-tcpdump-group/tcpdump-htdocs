@@ -2547,29 +2547,6 @@ NIT doesn't let you watch your own outbound traffic, BPF will.
 We recommend that you use the latter.
 <P>
 
-On Linux systems with 2.0[.x] kernels:
-<DL>
-<DT><DD>
-packets on the loopback device will be seen twice;
-<DT><DD>
-packet filtering cannot be done in the kernel, so that all packets must
-be copied from the kernel in order to be filtered in user mode;
-<DT><DD>
-all of a packet, not just the part that's within the snapshot length,
-will be copied from the kernel (the 2.0[.x] packet capture mechanism, if
-asked to copy only part of a packet to userspace, will not report the
-true length of the packet; this would cause most IP packets to get an
-error from
-<B>tcpdump</B>);
-
-<DT><DD>
-capturing on some PPP devices won't work correctly.
-</DL>
-<P>
-
-We recommend that you upgrade to a 2.2 or later kernel.
-<P>
-
 Some attempt should be made to reassemble IP fragments or, at least
 to compute the right length for the higher level protocol.
 <P>
@@ -2639,7 +2616,7 @@ It only looks at IPv4 packets.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 23:17:53 GMT, March 25, 2023
+This HTML man page was generated at 00:19:43 GMT, May 08, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
