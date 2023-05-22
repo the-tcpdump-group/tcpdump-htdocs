@@ -71,4 +71,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pkg-config(1), pcap(3PCAP)
 
-                                 10 April 2023                  PCAP-CONFIG(1)
+                                 17 April 2023                  PCAP-CONFIG(1)
