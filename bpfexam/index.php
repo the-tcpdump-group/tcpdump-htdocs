@@ -51,6 +51,7 @@ define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 # Enforce an RPS limit for requests that submit the form, as these spawn
 # external processes, which together take a while (0.5s to 1.0s) to complete.
 define ('MAX_RPS_LIMIT', 1.0);
+define ('PROCESS_TIMEOUT', 1);
 define
 (
 	'RPS_EXCEEDED_MESSAGE',
@@ -706,7 +707,7 @@ function pipe_process (array $argv, string $stdin = ''): array
 	$bin = array_shift ($argv);
 	if (would_not_run ($bin))
 		throw new Exception ("the binary ${bin} is not executable!");
-	array_unshift ($argv, $bin);
+	array_unshift ($argv, 'timeout', PROCESS_TIMEOUT, $bin);
 	$po = proc_open
 	(
 		$argv,
