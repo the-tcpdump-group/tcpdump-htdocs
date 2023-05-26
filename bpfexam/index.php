@@ -67,6 +67,8 @@ define ('RADARE2_BIN', '/usr/bin/r2');
 define ('DOT_BIN', '/usr/bin/dot');
 # To compile, see https://gitlab.com/niksu/caper/-/blob/master/Vagrantfile
 # and use a separate VM with the same distribution as the production server.
+# Pay attention to run build.sh using CAPER_WITH_ENGLISH=1 and to have all
+# dependencies installed as described in the script.
 define ('CAPER_BIN', '/usr/local/bin/caper.native');
 
 $actions = array
@@ -551,6 +553,9 @@ echo preg_replace
 						<A class=away
 						href="http://www.cs.iit.edu/~nsultana1/files/pcap_semantics.pdf">this
 						document</A>.
+						The second output, also produced using Caper, is present only if the
+						first output is present and is an automatic English interpretation of
+						the filter expression.
 						Then follows the compiled filter (also known as "filter program" or
 						"packet-matching code") as a sequence of BPF instructions in two
 						formats: an output of <code>tcpdump -d</code> (which is explained in
@@ -915,7 +920,7 @@ function r2_graph (object $bytecode): string
 	return on_stderr_throw_escaped ($stdout, $stderr);
 }
 
-function run_caper (object $bytecode): string
+function caper_expand (object $bytecode): string
 {
 	list ($stdout, $stderr) = pipe_process
 	(
@@ -928,6 +933,23 @@ function run_caper (object $bytecode): string
 			'-HTML', # produce HTML
 			'-p', # pretty-print the result
 			'-e', # input expression follows
+			$bytecode->filter
+		)
+	);
+	return on_stderr_throw ($stdout, $stderr);
+}
+
+function caper_translate (object $bytecode): string
+{
+	list ($stdout, $stderr) = pipe_process
+	(
+		array
+		(
+			CAPER_BIN,
+			'-engl-out', # translate into English
+			'-q',
+			'-n',
+			'-e',
 			$bytecode->filter
 		)
 	);
@@ -983,7 +1005,8 @@ function process_request
 		$r2_graph_before =
 		$r2_disasm_after =
 		$r2_graph_after =
-		$caper_output =
+		$caper_expansion =
+		$caper_translation =
 		'(N/A)';
 	$optimizer_steps = NULL;
 	try
@@ -1015,14 +1038,22 @@ function process_request
 		# Also have this output conditional to the requested DLT because Caper
 		# implements logic that is hard-coded to Ethernet.
 		if ($bytecode->dlt_name == 'EN10MB')
-			$caper_output = run_caper ($bytecode);
+		{
+			$caper_expansion = caper_expand ($bytecode);
+			$caper_translation = caper_translate ($bytecode);
+		}
 	}
 	finally
 	{
 		echo <<<"ENDOFTEXT"
 		<H2 class=title>Equivalent filter (Caper expansion)</H2>
 		<DIV class=entry>
-			<PRE class=caper>${caper_output}</PRE>
+			<PRE class=caper>${caper_expansion}</PRE>
+		</DIV>
+
+		<H2 class=title>English meaning (Caper translation)</H2>
+		<DIV class=entry>
+			<PRE class=caper>${caper_translation}</PRE>
 		</DIV>
 
 		<H2 class=title>Final packet-matching code</H2>
