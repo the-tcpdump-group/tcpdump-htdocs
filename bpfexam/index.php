@@ -863,7 +863,7 @@ function restyle_libpcap_graph (string $graphdef): string
 function restyle_r2_graph (string $graphdef): string
 {
 	# Drop the default background.
-	$ret = preg_replace ('/^([[:space:]]*graph \[)bgcolor=azure /m', '\1', $graphdef);
+	$ret = preg_replace ('/^([[:space:]]*graph \[.*)bgcolor=azure /m', '\1', $graphdef);
 	# Label the coloured true/false edges for consistency with libpcap format.
 	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[color="#13a10e")(];)/m', '\1 xlabel="T"\2', $ret);
 	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[color="#c50f1f")(];)/m', '\1 xlabel="F"\2', $ret);
