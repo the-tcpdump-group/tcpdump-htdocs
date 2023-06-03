@@ -62,6 +62,8 @@ define
 # package from [1].  However, if it is necessary to try a git master snapshot
 # of Radare2, the recommended way is to build a Debian package in a separate,
 # non-production Debian 11 VM using sys/debian.sh in a Radare2 git clone.
+# Since release 5.8.6 Radare2 also publishes an arm64.deb package at the same
+# place, the package can be installed and works on Ubuntu 22.04 and Debian 11.
 # 1: https://github.com/radareorg/radare2/releases
 define ('RADARE2_BIN', '/usr/bin/r2');
 define ('DOT_BIN', '/usr/bin/dot');
