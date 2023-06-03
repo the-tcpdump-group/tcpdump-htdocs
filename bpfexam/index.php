@@ -1047,17 +1047,22 @@ function process_request
 	}
 	finally
 	{
+		if ($bytecode->dlt_name == 'EN10MB')
+		{
+			echo <<<"ENDOFTEXT"
+			<H2 class=title>Equivalent filter (Caper expansion)</H2>
+			<DIV class=entry>
+				<PRE class=caper>${caper_expansion}</PRE>
+			</DIV>
+
+			<H2 class=title>English meaning (Caper translation)</H2>
+			<DIV class=entry>
+				<PRE class=caper>${caper_translation}</PRE>
+			</DIV>
+ENDOFTEXT;
+		}
+
 		echo <<<"ENDOFTEXT"
-		<H2 class=title>Equivalent filter (Caper expansion)</H2>
-		<DIV class=entry>
-			<PRE class=caper>${caper_expansion}</PRE>
-		</DIV>
-
-		<H2 class=title>English meaning (Caper translation)</H2>
-		<DIV class=entry>
-			<PRE class=caper>${caper_translation}</PRE>
-		</DIV>
-
 		<H2 class=title>Final packet-matching code</H2>
 		<DIV class=entry>
 		<TABLE>
