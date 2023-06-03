@@ -922,7 +922,7 @@ function r2_graph (object $bytecode): string
 	return on_stderr_throw_escaped ($stdout, $stderr);
 }
 
-function caper_expand (object $bytecode): string
+function caper_expand (string $filter): string
 {
 	list ($stdout, $stderr) = pipe_process
 	(
@@ -935,13 +935,13 @@ function caper_expand (object $bytecode): string
 			'-HTML', # produce HTML
 			'-p', # pretty-print the result
 			'-e', # input expression follows
-			$bytecode->filter
+			$filter
 		)
 	);
 	return on_stderr_throw ($stdout, $stderr);
 }
 
-function caper_translate (object $bytecode): string
+function caper_translate (string $filter): string
 {
 	list ($stdout, $stderr) = pipe_process
 	(
@@ -952,7 +952,7 @@ function caper_translate (object $bytecode): string
 			'-q',
 			'-n',
 			'-e',
-			$bytecode->filter
+			$filter
 		)
 	);
 	return on_stderr_throw ($stdout, $stderr);
@@ -1041,8 +1041,8 @@ function process_request
 		# implements logic that is hard-coded to Ethernet.
 		if ($bytecode->dlt_name == 'EN10MB')
 		{
-			$caper_expansion = caper_expand ($bytecode);
-			$caper_translation = caper_translate ($bytecode);
+			$caper_expansion = caper_expand ($bytecode->filter);
+			$caper_translation = caper_translate ($bytecode->filter);
 		}
 	}
 	finally
