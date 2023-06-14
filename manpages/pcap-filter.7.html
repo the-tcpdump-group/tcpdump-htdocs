@@ -647,6 +647,9 @@ Packet was sent by the host performing the capture rather than being
 received by that host.  This is only supported for certain link-layer types,
 such as SLIP and the ``cooked'' Linux capture mode
 used for the ``any'' device and for some other device types.
+<DT><B>ifindex </B><I>interface_index</I><DD>
+True if the packet was logged via the specified interface (applies only to
+packets logged by the Linux &quot;any&quot; cooked v2 interface).
 <DT><B>ifname </B><I>interface</I><DD>
 True if the packet was logged as coming from the specified interface (applies
 only to packets logged by OpenBSD's or FreeBSD's
@@ -1475,6 +1478,12 @@ The
 <B>geneve</B>
 
 keyword became available in libpcap 1.8.0.
+<P>
+
+The
+<B>ifindex</B>
+
+keyword became available in libpcap 1.10.0.
 <H2 id="lbAF">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
@@ -1513,7 +1522,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 23:17:49 GMT, March 25, 2023
+This HTML man page was generated at 13:45:55 GMT, June 14, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

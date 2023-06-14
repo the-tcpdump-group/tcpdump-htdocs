@@ -33,9 +33,9 @@ DESCRIPTION
               +--------------+---------------+
               |Major version | Minor version |
               +--------------+---------------+
-              |      Time zone offset        |
+              |          Reverved1           |
               +------------------------------+
-              |     Time stamp accuracy      |
+              |          Reverved2           |
               +------------------------------+
               |       Snapshot length        |
               +------------------------------+
@@ -71,10 +71,17 @@ DESCRIPTION
               A 2-byte file format minor version number; the  current  version
               number is 4.
 
-              A 4-byte time zone offset; this is always 0.
+              A  4-byte  not used - SHOULD be filled with 0 by pcap file writ-
+              ers, and MUST be ignored by pcap file readers.  This  value  was
+              documented  by  some older implementations as "gmt to local cor-
+              rection" or "time zone offset".  Some older  pcap  file  writers
+              stored non-zero values in this field.
 
-              A  4-byte number giving the accuracy of time stamps in the file;
-              this is always 0.
+              A  4-byte  not used - SHOULD be filled with 0 by pcap file writ-
+              ers, and MUST be ignored by pcap file readers.  This  value  was
+              documented  by  some older implementations as "accuracy of time-
+              stamps".  Some older pcap file writers stored non-zero values in
+              this field.
 
               A 4-byte number giving the "snapshot  length"  of  the  capture;
               packets  longer  than  the  snapshot length are truncated to the

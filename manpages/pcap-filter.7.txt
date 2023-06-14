@@ -421,6 +421,11 @@ DESCRIPTION
               mode used for the ``any''  device  and  for  some  other  device
               types.
 
+       ifindex interface_index
+              True  if  the packet was logged via the specified interface (ap-
+              plies only to packets logged by the Linux "any" cooked v2 inter-
+              face).
+
        ifname interface
               True  if  the packet was logged as coming from the specified in-
               terface (applies only to packets logged by  OpenBSD's  or  Free-
@@ -799,6 +804,8 @@ BACKWARD COMPATIBILITY
        names became available in libpcap 1.9.0.
 
        The geneve keyword became available in libpcap 1.8.0.
+
+       The ifindex keyword became available in libpcap 1.10.0.
 
 SEE ALSO
        pcap(3PCAP)

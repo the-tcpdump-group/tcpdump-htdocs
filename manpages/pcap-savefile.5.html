@@ -38,9 +38,9 @@ start with a per-file header.  The format of the per-file header is:
 <TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
 <TR VALIGN=top><TD ALIGN=center>Major version</TD><TD ALIGN=center>Minor version<BR></TD></TR>
 <TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
-<TR VALIGN=top><TD ALIGN=center COLSPAN=2>Time zone offset<BR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center COLSPAN=2>Reverved1<BR></TD></TR>
 <TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
-<TR VALIGN=top><TD ALIGN=center COLSPAN=2>Time stamp accuracy<BR></TD></TR>
+<TR VALIGN=top><TD ALIGN=center COLSPAN=2>Reverved2<BR></TD></TR>
 <TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
 <TR VALIGN=top><TD ALIGN=center COLSPAN=2>Snapshot length<BR></TD></TR>
 <TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
@@ -84,10 +84,15 @@ A 2-byte file format major version number; the current version number is
 A 2-byte file format minor version number; the current version number is
 4.
 <DT><DD>
-A 4-byte time zone offset; this is always 0.
+A 4-byte not used - SHOULD be filled with 0 by pcap file writers, and MUST
+be ignored by pcap file readers.  This value was documented by some older
+implementations as &quot;gmt to local correction&quot; or &quot;time zone offset&quot;.
+Some older pcap file writers stored non-zero values in this field.
 <DT><DD>
-A 4-byte number giving the accuracy of time stamps in the file; this is
-always 0.
+A 4-byte not used - SHOULD be filled with 0 by pcap file writers, and MUST
+be ignored by pcap file readers.  This value was documented by some older
+implementations as &quot;accuracy of timestamps&quot;.  Some older pcap file
+writers stored non-zero values in this field.
 <DT><DD>
 A 4-byte number giving the &quot;snapshot length&quot; of the capture; packets
 longer than the snapshot length are truncated to the snapshot length, so
@@ -154,7 +159,7 @@ equal to the snapshot length.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:50:54 GMT, February 26, 2023
+This HTML man page was generated at 13:45:56 GMT, June 14, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
