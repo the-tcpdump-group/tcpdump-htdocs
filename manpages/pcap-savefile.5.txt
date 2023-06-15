@@ -33,9 +33,9 @@ DESCRIPTION
               +--------------+---------------+
               |Major version | Minor version |
               +--------------+---------------+
-              |          Reverved1           |
+              |          Reserved1           |
               +------------------------------+
-              |          Reverved2           |
+              |          Reserved2           |
               +------------------------------+
               |       Snapshot length        |
               +------------------------------+
@@ -124,4 +124,4 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP)
 
-                                 24 April 2020                PCAP-SAVEFILE(5)
+                                  23 May 2023                 PCAP-SAVEFILE(5)
