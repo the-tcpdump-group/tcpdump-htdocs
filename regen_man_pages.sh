@@ -113,7 +113,7 @@ printSedFile()
 		bn="${f##*/}"
 		mansection="$(translateManSection "${bn##*.}")"
 		manpage="${bn%.*}"
-		echo "s@<A HREF=\"${MAN2HTML_PFX}?\($mansection\)+\($manpage\)\"@<A HREF=\"$WEBSITE_PFX/\\\\2.\\\\1.html\"@g"
+		printf '%s\n' "s@<A HREF=\"${MAN2HTML_PFX}?\($mansection\)+\($manpage\)\"@<A HREF=\"$WEBSITE_PFX/\2.\1.html\"@g"
 	done
 
 	# Fixup links to local pages, part 2.
@@ -128,7 +128,7 @@ printSedFile()
 	done
 
 	# Hyperlinks to any other man pages are non-local, convert these to plain text.
-	echo "s@<A HREF=\"$MAN2HTML_PFX?[1-9][a-zA-Z]\?+.\+\">\(.\+\)</A>@\\\\1@g"
+	printf '%s\n' "s@<A HREF=\"$MAN2HTML_PFX?[1-9][a-zA-Z]\?+.\+\">\(.\+\)</A>@\1@g"
 }
 
 printNon3PCAPFiles()
