@@ -960,7 +960,7 @@ function caper_translate (string $filter): string
 	return on_stderr_throw ($stdout, $stderr);
 }
 
-function caper_disasm (string $filter, bool $optimize): string
+function caper_disasm (string $filter, bool $optimize, int $snaplen): string
 {
 	list ($stdout, $stderr) = pipe_process
 	(
@@ -971,6 +971,7 @@ function caper_disasm (string $filter, bool $optimize): string
 			'-not_undistribute',
 			'-q',
 			'-n',
+			'-s', $snaplen,
 			'-e',
 			$filter
 		)
@@ -1065,8 +1066,8 @@ function process_request
 		{
 			$caper_expansion = caper_expand ($bytecode->filter);
 			$caper_translation = caper_translate ($bytecode->filter);
-			$caper_disasm_before = caper_disasm ($bytecode->filter, FALSE);
-			$caper_disasm_after = caper_disasm ($bytecode->filter, TRUE);
+			$caper_disasm_before = caper_disasm ($bytecode->filter, FALSE, $bytecode->snaplen);
+			$caper_disasm_after = caper_disasm ($bytecode->filter, TRUE, $bytecode->snaplen);
 		}
 	}
 	finally
