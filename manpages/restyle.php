@@ -132,14 +132,14 @@ function fail (int $status): void
 	if (! array_key_exists ($status, $statusmap))
 		$status = 500;
 	$line = sprintf ('%u %s', $status, $statusmap[$status]);
-	header ("${_SERVER['SERVER_PROTOCOL']} ${line}");
+	header ("{$_SERVER['SERVER_PROTOCOL']} {$line}");
 	echo "<!DOCTYPE html>
 <HTML lang='en'>
 <HEAD>
-<TITLE>${line}</TITLE>
+<TITLE>{$line}</TITLE>
 </HEAD>
 <BODY>
-<H1>${line}</H1>
+<H1>{$line}</H1>
 </BODY>
 </HTML>
 ";
@@ -216,7 +216,7 @@ foreach ($taxonomy as $pname => $project)
 		),
 		array
 		(
-			"@(<H4>This man page documents ${pname} version .+)(.</H4>)@",
+			"@(<H4>This man page documents {$pname} version .+)(.</H4>)@",
 			"\$1 ($see_also)\$2"
 		),
 		array
@@ -242,12 +242,12 @@ foreach ($taxonomy as $pname => $project)
 		array
 		(
 			'@^(Updated: [12]?[0-9] [[:alpha:]]+ 20[0-9][0-9])<BR>$@m',
-			"\$1 &bull; <A href='${txt_href}'>View in plain text</A> &bull; "
+			"\$1 &bull; <A href='{$txt_href}'>View in plain text</A> &bull; "
 		),
 		array
 		(
 			'@^(</HEAD>.*)$@m',
-			"<link href=\"${txt_href}\" rel=\"alternate\" type=\"text/plain\">\n\$1"
+			"<link href=\"{$txt_href}\" rel=\"alternate\" type=\"text/plain\">\n\$1"
 		),
 		array
 		(
@@ -314,7 +314,7 @@ foreach ($taxonomy as $pname => $project)
 		in_array ("\"{$etag}\"", explode (', ', $_SERVER['HTTP_IF_NONE_MATCH']))
 	)
 	{
-		header ("${_SERVER['SERVER_PROTOCOL']} 304 Not Modified");
+		header ("{$_SERVER['SERVER_PROTOCOL']} 304 Not Modified");
 		exit;
 	}
 	# Omit Last-Modified so the client omits If-Modified-Since and there is
