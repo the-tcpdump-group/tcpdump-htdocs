@@ -345,18 +345,18 @@ class ByteCode
 		# The instruction counter.
 		$line = array_shift ($lines);
 		if (1 !== preg_match ('/^\d+$/', $line, $m))
-			throw new InvalidArgumentException ("malformed instruction counter line: '${line}'");
+			throw new InvalidArgumentException ("malformed instruction counter line: '{$line}'");
 		$declared = (int) $m[0];
 		if ($declared < 1)
-			throw new InvalidArgumentException ("instruction counter ${declared} declared too low");
+			throw new InvalidArgumentException ("instruction counter {$declared} declared too low");
 		if ($declared != count ($lines))
-			throw new InvalidArgumentException ("instruction counter ${declared} does not match the contents");
+			throw new InvalidArgumentException ("instruction counter {$declared} does not match the contents");
 
 		# The instructions.
 		foreach ($lines as $line)
 		{
 			if (1 !== preg_match ('/^(?P<opcode>\d+) (?P<jt>\d+) (?P<jf>\d+) (?P<k>\d+)$/', $line, $m))
-				throw new InvalidArgumentException ("malformed instruction line: '${line}'");
+				throw new InvalidArgumentException ("malformed instruction line: '{$line}'");
 			$this->statements []= array
 			(
 				'opcode' => $m['opcode'],
@@ -453,17 +453,17 @@ function fail (int $status, string $message = ''): void
 	if (! array_key_exists ($status, $statusmap))
 		$status = 500;
 	$line = sprintf ('%u %s', $status, $statusmap[$status]);
-	header ("${_SERVER['SERVER_PROTOCOL']} ${line}");
+	header ("{$_SERVER['SERVER_PROTOCOL']} {$line}");
 	echo <<<"ENDOFTEXT"
 <!DOCTYPE html>
 <HTML lang='en'>
 	<HEAD>
 		<META charset="utf-8">
-		<TITLE>${line}</TITLE>
+		<TITLE>{$line}</TITLE>
 	</HEAD>
 	<BODY>
-		<H1>${line}</H1>
-		${message}
+		<H1>{$line}</H1>
+		{$message}
 	</BODY>
 </HTML>
 ENDOFTEXT;
@@ -621,10 +621,10 @@ foreach ($versions as $ver => $vdata)
 	$optlabel = array_fetch ($vdata, 'descr', $ver);
 	if (array_key_exists ('filtertest', $vdata))
 		$optlabel .= ' (with optimizer debugging)';
-	echo "<OPTION value='${ver}'";
+	echo "<OPTION value='{$ver}'";
 	if ($ver == $req_ver)
 		echo ' selected';
-	echo ">${optlabel}</OPTION>\n";
+	echo ">{$optlabel}</OPTION>\n";
 }
 echo "</SELECT>\n</TD>\n</TR>\n";
 
@@ -637,11 +637,11 @@ printf
 printf ("<TD><SELECT name='%s' tabindex=200>\n", DLT_INPUT_NAME);
 foreach ($dltlist as $dlt_code => $dlt)
 {
-	echo "<OPTION value=${dlt_code}";
+	echo "<OPTION value={$dlt_code}";
 	if ($dlt_code == $req_dlt_name)
 		echo ' selected';
-	$dlt_descr = array_key_exists ('descr', $dlt) ? " (${dlt['descr']})" : '';
-	echo ">${dlt['val']}: DLT_${dlt_code}${dlt_descr}</OPTION>\n";
+	$dlt_descr = array_key_exists ('descr', $dlt) ? " ({$dlt['descr']})" : '';
+	echo ">{$dlt['val']}: DLT_{$dlt_code}{$dlt_descr}</OPTION>\n";
 }
 echo "</SELECT>\n</TD>\n</TR>\n";
 
@@ -683,7 +683,7 @@ printf
 );
 printf ("<TD><SELECT name='%s' tabindex=400>\n", ACTION_INPUT_NAME);
 foreach ($actions as $value => $label)
-	echo "<OPTION value=${value}>${label}</OPTION>\n";
+	echo "<OPTION value={$value}>{$label}</OPTION>\n";
 echo "</SELECT>\n</TD>\n</TR>\n";
 
 ?>
@@ -715,7 +715,7 @@ function pipe_process (array $argv, string $stdin = ''): array
 		throw new Exception ('$argv must have at least one element');
 	$bin = array_shift ($argv);
 	if (would_not_run ($bin))
-		throw new Exception ("the binary ${bin} is not executable!");
+		throw new Exception ("the binary {$bin} is not executable!");
 	array_unshift ($argv, 'timeout', PROCESS_TIMEOUT, $bin);
 	$po = proc_open
 	(
@@ -731,7 +731,7 @@ function pipe_process (array $argv, string $stdin = ''): array
 	# FIXME: When trying to execute a non-existent binary, proc_open() returns
 	# a resource that is indistinguishable from a successful invocation.
 	if ($po === FALSE)
-		throw new Exception ("failed to run the ${bin} binary!");
+		throw new Exception ("failed to run the {$bin} binary!");
 	if ($stdin != '' && FALSE === fwrite ($pipes[0], $stdin))
 		throw new Exception ("failed to write to a child process stdin");
 	fclose ($pipes[0]);
@@ -825,7 +825,7 @@ function detect_graphs (string $text): array
 			break;
 		case S_TITLE:
 			if ($line !== 'digraph BPF {')
-				throw new Exception ("FSM error: unexpected line ${line}");
+				throw new Exception ("FSM error: unexpected line {$line}");
 			$deflines = array ($line);
 			$state = S_DEF;
 			break;
@@ -833,7 +833,7 @@ function detect_graphs (string $text): array
 			$deflines[] = $line;
 			if ($line == '}')
 			{
-				$ret["${i}. ${title}"] = implode ("\n", $deflines);
+				$ret["{$i}. {$title}"] = implode ("\n", $deflines);
 				$i++;
 				$state = S_SKIP;
 			}
@@ -1077,12 +1077,12 @@ function process_request
 			echo <<<"ENDOFTEXT"
 			<H2 class=title>Equivalent filter (Caper expansion)</H2>
 			<DIV class=entry>
-				<PRE class=caper>${caper_expansion}</PRE>
+				<PRE class=caper>{$caper_expansion}</PRE>
 			</DIV>
 
 			<H2 class=title>English meaning (Caper translation)</H2>
 			<DIV class=entry>
-				<PRE class=caper>${caper_translation}</PRE>
+				<PRE class=caper>{$caper_translation}</PRE>
 			</DIV>
 ENDOFTEXT;
 		}
@@ -1094,23 +1094,23 @@ ENDOFTEXT;
 			<TR>
 				<TD>
 					<H3 class=subtitle>without optimization (libpcap dump)</H3>
-					<PRE>${libpcap_before}</PRE>
+					<PRE>{$libpcap_before}</PRE>
 				</TD>
 				<TD>
 					<H3 class=subtitle>with optimization (libpcap dump)</H3>
-					<PRE>${libpcap_after}</PRE>
+					<PRE>{$libpcap_after}</PRE>
 				</TD>
 			</TR>
 			<TR>
 				<TD colspan=2>
 					<H3 class=subtitle>without optimization (Radare2 bytecode disassembly)</H3>
-					<PRE>${r2_disasm_before}</PRE>
+					<PRE>{$r2_disasm_before}</PRE>
 				</TD>
 			</TR>
 			<TR>
 				<TD colspan=2>
 					<H3 class=subtitle>with optimization (Radare2 bytecode disassembly)</H3>
-					<PRE>${r2_disasm_after}</PRE>
+					<PRE>{$r2_disasm_after}</PRE>
 				</TD>
 			</TR>
 ENDOFTEXT;
@@ -1119,11 +1119,11 @@ ENDOFTEXT;
 			<TR>
 				<TD>
 					<H3 class=subtitle>without optimization (Caper BPF generator)</H3>
-					<PRE>${caper_disasm_before}</PRE>
+					<PRE>{$caper_disasm_before}</PRE>
 				</TD>
 				<TD>
 					<H3 class=subtitle>with optimization (Caper BPF generator)</H3>
-					<PRE>${caper_disasm_after}</PRE>
+					<PRE>{$caper_disasm_after}</PRE>
 				</TD>
 			</TR>
 ENDOFTEXT;
@@ -1135,11 +1135,11 @@ ENDOFTEXT;
 		<DIV class=entry>
 			<H3 class=subtitle>without optimization</H3>
 			<P>
-				${r2_graph_before}
+				{$r2_graph_before}
 			</P>
 			<H3 class=subtitle>with optimization</H3>
 			<P>
-				${r2_graph_after}
+				{$r2_graph_after}
 			</P>
 		</DIV>
 ENDOFTEXT;
@@ -1148,7 +1148,7 @@ ENDOFTEXT;
 			echo <<<"ENDOFTEXT"
 		<H2 class=title>Optimization step-by-step (libpcap)</H2>
 		<DIV class=entry>
-			${optimizer_steps}
+			{$optimizer_steps}
 		</DIV>
 ENDOFTEXT;
 	}
@@ -1267,7 +1267,7 @@ try
 				$bytecode->optreq ? 'optimized' : 'unoptimized',
 				$req_dlt_name
 			);
-			header ("Content-Disposition: attachment; filename=\"${filename}\"");
+			header ("Content-Disposition: attachment; filename=\"{$filename}\"");
 			echo $data;
 			break;
 		default:
