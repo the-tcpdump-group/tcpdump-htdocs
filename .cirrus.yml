@@ -1,35 +1,22 @@
 env:
   CIRRUS_CLONE_DEPTH: 3
+  LANG: C
 
-# GNU sed, test everything.
-linux_task:
-  name: Linux
-  container:
-    image: ubuntu:22.04
+freebsd_task:
+  name: FreeBSD
+  freebsd_instance:
     cpu: 1
-    memory: 512M
-  env:
-    DEBIAN_FRONTEND: noninteractive
+    memory: 1G
+    image_family: freebsd-13-2
   script:
-    - apt-get -qy update >/dev/null
-    - apt-get -qy install git php-cli shellcheck >/dev/null
+    - pkg install -qy git-tiny gsed hs-ShellCheck php82
     - ./regen_html_pages.sh
+    - git status
+    - test "$(git status --porcelain | wc -l)" -eq 0
+    - SED=gsed ./regen_html_pages.sh
     - git status
     - test "$(git status --porcelain | wc -l)" -eq 0
     - php --syntax-check bpfexam/index.php
     - php --syntax-check manpages/restyle.php
     - shellcheck regen_man_pages.sh
     - shellcheck regen_html_pages.sh
-
-# BSD sed, test one script only.
-freebsd_task:
-  name: FreeBSD
-  freebsd_instance:
-    cpu: 1
-    memory: 1G
-    image_family: freebsd-13-1
-  script:
-    - pkg install -qy git-tiny
-    - ./regen_html_pages.sh
-    - git status
-    - test "$(git status --porcelain | wc -l)" -eq 0
