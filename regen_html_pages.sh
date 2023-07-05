@@ -46,6 +46,7 @@ TOP_MENU='htmlsrc/_top_menu.html'
 BODY_HEADER='htmlsrc/_body_header.html'
 SIDEBAR='htmlsrc/_sidebar.html'
 BODY_FOOTER='htmlsrc/_body_footer.html'
+: "${SED:=sed}"
 
 substitute_page_title()
 {
@@ -102,7 +103,7 @@ substitute_page_title()
 		echo "Internal error: cannot tell page title for $1" >&2
 		exit 10
 	esac
-	sed "s#%PAGE_TITLE%#${title}TCPDUMP \&amp; LIBPCAP#"
+	"$SED" "s#%PAGE_TITLE%#${title}TCPDUMP \&amp; LIBPCAP#"
 }
 
 # Instead of using absolute hyperlinks in all .html files use relative ones
@@ -113,16 +114,16 @@ substitute_page_title()
 rewrite_URLs()
 {
 	if [ "${1:?}" != "${1#linktypes/}" ]; then
-		sed 's#\(<link href="\)\(images/\)#\1../\2#' |
-			sed 's#\(<link href="\)\(style.css\)#\1../\2#' |
-			sed 's#\(<img src="\)\(images/\)#\1../\2#' |
-			sed 's#\(<a href="\)\(manpages/\)#\1../\2#' |
-			sed 's#\(<a href="\)\(bpfexam/\)#\1../\2#' |
-			sed 's#\(<a href="\)\([a-z_-]\{1,\}.html\)#\1../\2#'
+		"$SED" 's#\(<link href="\)\(images/\)#\1../\2#' |
+			"$SED" 's#\(<link href="\)\(style.css\)#\1../\2#' |
+			"$SED" 's#\(<img src="\)\(images/\)#\1../\2#' |
+			"$SED" 's#\(<a href="\)\(manpages/\)#\1../\2#' |
+			"$SED" 's#\(<a href="\)\(bpfexam/\)#\1../\2#' |
+			"$SED" 's#\(<a href="\)\([a-z_-]\{1,\}.html\)#\1../\2#'
 	elif [ "$1" = autoindex_header.html ]; then
-		sed 's#\(<img src="\)\(images/\)#\1/\2#' |
-			sed 's#\(<a href="\)\([a-z]\{1,\}/\)#\1/\2#' |
-			sed 's#\(<a href="\)\([a-z_-]\{1,\}.html\)#\1/\2#'
+		"$SED" 's#\(<img src="\)\(images/\)#\1/\2#' |
+			"$SED" 's#\(<a href="\)\([a-z]\{1,\}/\)#\1/\2#' |
+			"$SED" 's#\(<a href="\)\([a-z_-]\{1,\}.html\)#\1/\2#'
 	else
 		cat
 	fi
@@ -130,7 +131,7 @@ rewrite_URLs()
 
 highlight_top_menu()
 {
-	sed "s#<li><a href=\"${1:?}\">#<li class=\"current_page_item\"><a href=\"${1}\">#"
+	"$SED" "s#<li><a href=\"${1:?}\">#<li class=\"current_page_item\"><a href=\"${1}\">#"
 }
 
 print_html_page()
@@ -261,7 +262,7 @@ command -v git >/dev/null 2>&1 || {
 	echo "git must be installed to proceed" >&2
 	exit 12
 }
-command -v sed >/dev/null 2>&1 || {
+command -v "$SED" >/dev/null 2>&1 || {
 	echo "sed must be installed to proceed" >&2
 	exit 13
 }
