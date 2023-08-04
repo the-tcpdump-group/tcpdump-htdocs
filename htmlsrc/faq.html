@@ -11,6 +11,7 @@
                    -->
                     <div class="entry">
                         <ul>
+                          <li> <a href="#q17">I have a program that uses libpcap, is there a way to print out debug statements at runtime?</a> </li>
                           <li> <a href="#q15">I get packets from libpcap after a long delay, is this a bug?</a> </li>
                           <li> <a href="#q14">Why is the <code>pcap-int.h</code> header file missing from libpcap?</a> </li>
                           <li> <a href="#q13">Why my VLAN/MPLS packet filter does not work?</a> </li>
@@ -39,6 +40,127 @@
                 </div>
                 <!-- End of QUESTION INDEX section -->
 
+                <!-- Start of QUESTION #17 section -->
+                <div class="post">
+                    <h2 class="title" id="q17">
+			I have a program that uses libpcap, is there a way to print out debug statements at runtime?
+                    </h2>
+                    <div class="entry">
+                        <p>
+                            <span class=initial>A:</span>
+			    In addition to the usual methods (Add printf() or fprintf(stderr, ...) in your code or in libpcap source files),
+			    you can enable function instrumentation to help debugging or learning a program linked to libpcap.
+                        </p>
+                        <p>
+			    The goal is to generate instrumentation calls for entry and exit to functions.
+			    Just after function entry and just before function exit, the profiling functions are called and print the function names with indentation and call level.
+			    If entering in a function, print also the calling function name with file name and line number. There may be a small shift in the line number.
+                        </p>
+                        <p>
+			    Steps to do that:
+                        </p>
+                        <p>
+			    1) Get the GNU binary utilities (BFD development files):
+                        </p>
+<pre>
+$ sudo apt install binutils-dev
+</pre>
+                        <p>
+			    2) git clone (or pull) the libpcap project, main branch.  configure and build with:
+                        </p>
+<pre>
+$ ./autogen.sh
+$ ./configure --quiet --enable-instrument-functions
+$ make -s clean all
+</pre>
+                        <p>
+			    3) To test the method, create a project directory in the same parent directory than libpcap.
+                        </p>
+<pre>
+|-- libpcap
+|-- my_project
+</pre>
+                        <p>
+			    4) cd in the project directory.
+			    Copy an existing program to test or use your program.
+<pre>
+$ cp -vai ../libpcap/testprogs/findalldevstest.c my_program.c
+</pre>
+                        <p>
+			    5) Build with the following Makefile:
+                        </p>
+<pre>
+PROG = my_program
+
+all: $(PROG)
+
+$(PROG): ../libpcap/libpcap.a
+	gcc -O0 -ggdb -finstrument-functions \
+	-I../libpcap \
+	-o $(PROG) $(PROG).c ../libpcap/instrument-functions.c \
+	-lbfd -no-pie \
+	../libpcap/libpcap.a \
+	$$(../libpcap/pcap-config --additional-libs --static-pcap-only)
+
+clean:
+	@rm $(PROG)
+</pre>
+                        <p>
+			    6) Run the program.
+                        </p>
+                        <p>
+			    If the environment variable <code>INSTRUMENT</code> is
+                        </p>
+			<ul>
+			    <li>
+				unset or set to an empty string, print nothing, like with no instrumentation;
+			    </li>
+			    <li>
+				set to <code>all</code> or <code>a</code>, print all the functions names;
+			    </li>
+			    <li>
+				set to <code>global</code> or <code>g</code>, print only the global functions names.
+			    </li>
+			</ul>
+                        <p>
+This allows to run with tcpdump, tcpslice or any program linked to libpcap:
+                        </p>
+<pre>
+$ INSTRUMENT=a ./my_program ...
+$ INSTRUMENT=g ./my_program ...
+$ INSTRUMENT= ./my_program ...
+</pre>
+                        <p>
+or
+                        </p>
+<pre>
+$ export INSTRUMENT=global
+$ ./my_program ...
+</pre>
+                        <p>
+			    This also allows to run the statically compiled binary on another host after copying it.
+                        </p>
+                        <p>
+			    You should get something like:
+<pre>
+[>> main (0)
+ [>> pcap_findalldevs (1) from main my_program.c:144]
+  [>> pcap_platform_finddevs (2) from pcap_findalldevs pcap.c:730]
+   [>> pcap_findalldevs_interfaces (3) from pcap_platform_finddevs pcap-linux.c:1769]
+    [>> can_be_bound (4) from pcap_findalldevs_interfaces fad-getad.c:207]
+    [<< can_be_bound (4)
+    [>> get_sa_len (4) from pcap_findalldevs_interfaces fad-getad.c:223]
+    [<< get_sa_len (4)
+    [>> pcap_add_addr_to_if (4) from pcap_findalldevs_interfaces fad-getad.c:270]
+     [>> pcap_find_or_add_if (5) from pcap_add_addr_to_if pcap.c:1094]
+      [>> get_if_description (6) from pcap_find_or_add_if pcap.c:1059]
+      [<< get_if_description (6)
+      [>> pcap_find_or_add_dev (6) from pcap_find_or_add_if pcap.c:1058]
+[...]
+</pre>
+                    </div>
+                </div>
+                <!-- End of QUESTION #17 section -->
 
                 <!-- Start of QUESTION #15 section -->
                 <div class="post">
