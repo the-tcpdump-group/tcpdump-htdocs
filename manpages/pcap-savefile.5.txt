@@ -28,19 +28,19 @@ DESCRIPTION
        cap start with a per-file header.  The format of  the  per-file  header
        is:
 
-              +------------------------------+
-              |        Magic number          |
-              +--------------+---------------+
-              |Major version | Minor version |
-              +--------------+---------------+
-              |          Reserved1           |
-              +------------------------------+
-              |          Reserved2           |
-              +------------------------------+
-              |       Snapshot length        |
-              +------------------------------+
-              |   Link-layer header type     |
-              +------------------------------+
+              +--------------------------------------------------+
+              |                  Magic number                    |
+              +------------------------+-------------------------+
+              |     Major version      |      Minor version      |
+              +------------------------+-------------------------+
+              |                    Reserved1                     |
+              +--------------------------------------------------+
+              |                    Reserved2                     |
+              +--------------------------------------------------+
+              |                 Snapshot length                  |
+              +--------------------------------------------------+
+              |Link-layer header type and additional information |
+              +--------------------------------------------------+
        The per-file header length is 24 octets.
 
        All  fields  in  the  per-file header are in the byte order of the host
@@ -83,15 +83,51 @@ DESCRIPTION
               stamps".  Some older pcap file writers stored non-zero values in
               this field.
 
-              A 4-byte number giving the "snapshot  length"  of  the  capture;
-              packets  longer  than  the  snapshot length are truncated to the
-              snapshot length, so that, if the snapshot length is N, only  the
-              first  N  bytes of a packet longer than N bytes will be saved in
+              A  4-byte  number  giving  the "snapshot length" of the capture;
+              packets longer than the snapshot length  are  truncated  to  the
+              snapshot  length, so that, if the snapshot length is N, only the
+              first N bytes of a packet longer than N bytes will be  saved  in
               the capture.
 
-              a 4-byte number giving the link-layer header type for packets in
-              the  capture; see pcap-linktype(7) for the LINKTYPE_ values that
-              can appear in this field.
+              A 4-byte number giving the link-layer header type for packets in
+              the capture and optional additional information.
+
+              This format of this field is:
+
+                                   1                   2                   3
+               0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+
+              +---------------------------------------------------------------+
+              |FCS len|R|P|     Reserved3     |        Link-layer type        |
+              +---------------------------------------------------------------+
+              The field is shown as if it were in the byte order of  the  host
+              reading  or writing the file, with bit 0 being the most-signifi-
+              cant bit of the field and bit 31 being the least-significant bit
+              of the field.
+
+              Link-layer  type (16 bits): A 16-bit value giving the link-layer
+              header type for packets in the file;  see  pcap-linktype(7)  for
+              the LINKTYPE_ values that can appear in this field.
+
+              Reserved3  (10  bits):  not  used  - MUST be set to zero by pcap
+              writers, and MUST NOT be interpreted by pcap readers;  a  reader
+              SHOULD treat a non-zero value as an error.
+
+              P  (1  bit):  A bit that, if set, indicates that the Frame Check
+              Sequence (FCS) length value is present and, if  not  set,  indi-
+              cates that the FCS value is not present.
+
+              R  (1  bit): not used - MUST be set to zero by pcap writers, and
+              MUST NOT be interpreted by pcap readers; a reader SHOULD treat a
+              non-zero value as an error.
+
+              FCS  len  (4  bits): A 4-bit unsigned value giving the number of
+              16-bit (2-octet) words of FCS that are appended to each  packet,
+              if the P bit is set; if the P bit is not set, and the FCS length
+              is not indicated by the link-layer type value, the FCS length is
+              unknown.   The  valid  values of the FCS len field are between 0
+              and 15; Ethernet, for example, would have an FCS length value of
+              2, corresponding to a 4-octet FCS.
 
        Following the per-file header are zero or more packets; each packet be-
        gins with a per-packet header, which is immediately followed by the raw
@@ -108,20 +144,20 @@ DESCRIPTION
               +----------------------------------------------+
        The per-packet header length is 16 octets.
 
-       All fields in the per-packet header are in the byte order of  the  host
-       writing  the file.  The per-packet header begins with a time stamp giv-
-       ing the approximate time the packet was captured; the time  stamp  con-
-       sists  of  a  4-byte value, giving the time in seconds since January 1,
-       1970, 00:00:00 UTC, followed by a 4-byte value, giving the time in  mi-
-       croseconds  or  nanoseconds  since  that second, depending on the magic
-       number in the file header.  Following that are a  4-byte  value  giving
-       the  number of bytes of captured data that follow the per-packet header
-       and a 4-byte value giving the number of  bytes  that  would  have  been
-       present  had the packet not been truncated by the snapshot length.  The
-       two lengths will be equal if the number of bytes  of  packet  data  are
+       All  fields  in the per-packet header are in the byte order of the host
+       writing the file.  The per-packet header begins with a time stamp  giv-
+       ing  the  approximate time the packet was captured; the time stamp con-
+       sists of a 4-byte value, giving the time in seconds  since  January  1,
+       1970,  00:00:00 UTC, followed by a 4-byte value, giving the time in mi-
+       croseconds or nanoseconds since that second,  depending  on  the  magic
+       number  in  the  file header.  Following that are a 4-byte value giving
+       the number of bytes of captured data that follow the per-packet  header
+       and  a  4-byte  value  giving  the number of bytes that would have been
+       present had the packet not been truncated by the snapshot length.   The
+       two  lengths  will  be  equal if the number of bytes of packet data are
        less than or equal to the snapshot length.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                  23 May 2023                 PCAP-SAVEFILE(5)
+                                  2 Aug 2023                  PCAP-SAVEFILE(5)
