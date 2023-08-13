@@ -550,7 +550,7 @@ echo preg_replace
 						expression that should have
 						the same effect as the input filter expression, but includes all the
 						implied predicates explicitly as determined using
-						<A class=away href="https://gitlab.com/niksu/caper">Caper</A>, which
+						<A class=away href="http://caper.cs.iit.edu/">Caper</A>, which
 						implements the theory set out in
 						<A class=away
 						href="http://www.cs.iit.edu/~nsultana1/files/pcap_semantics.pdf">this
