@@ -94,12 +94,12 @@ DESCRIPTION
 
               This format of this field is:
 
-                                   1                   2                   3
-               0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+                            1                   2                   3
+        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       |FCS len|R|P|     Reserved3     |        Link-layer type        |
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-              +---------------------------------------------------------------+
-              |FCS len|R|P|     Reserved3     |        Link-layer type        |
-              +---------------------------------------------------------------+
               The field is shown as if it were in the byte order of  the  host
               reading  or writing the file, with bit 0 being the most-signifi-
               cant bit of the field and bit 31 being the least-significant bit
@@ -160,4 +160,4 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP)
 
-                                  2 Aug 2023                  PCAP-SAVEFILE(5)
+                                  16 Aug 2023                 PCAP-SAVEFILE(5)
