@@ -7,10 +7,6 @@
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
-		<loc>https://www.tcpdump.org/papers/ethereal-tcpdump.pdf</loc>
-		<changefreq>never</changefreq>
-	</url>
-	<url>
 		<loc>https://www.tcpdump.org/papers/bpf-usenix93.pdf</loc>
 		<changefreq>never</changefreq>
 	</url>
