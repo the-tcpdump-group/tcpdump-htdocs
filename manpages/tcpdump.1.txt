@@ -219,8 +219,8 @@ OPTIONS
               specified by -w which should include a time format as defined by
               strftime(3).  If no time format is specified, each new file will
               overwrite the previous.  Whenever a generated  filename  is  not
-              unique,  tcpdump will overwrite the pre-existing data; providing
-              a time specification that is coarser than the capture period  is
+              unique, tcpdump will overwrite the preexisting data; providing a
+              time specification that is coarser than the  capture  period  is
               therefore not advised.
 
               If  used  in conjunction with the -C option, filenames will take
@@ -1094,7 +1094,7 @@ OUTPUT FORMAT
        (NoError) were omitted, as was the class (C_IN) of the A record.
 
        In the second example, helios responds to query 2 with a response  code
-       of  non-existent domain (NXDomain) with no answers, one name server and
+       of  nonexistent  domain (NXDomain) with no answers, one name server and
        no authority records.  The `*' indicates that the authoritative  answer
        bit  was set.  Since there were no answers, no type, class or data were
        printed.
