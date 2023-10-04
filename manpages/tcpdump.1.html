@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 12 March 2023<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 09 Sep 2023<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents tcpdump version 5.0.0-PRE-GIT.</H4>
@@ -1438,7 +1438,18 @@ packet from the network and the time when an interrupt was delivered to
 the kernel to get it to read the packet and a delay between the time
 when the kernel serviced the `new packet' interrupt and the time when it
 applied a time stamp to the packet.
-<H3 id="lbAI">Link Level Headers</H3>
+<H3 id="lbAI">Interface</H3>
+
+<P>
+
+When the <I>any</I> interface is selected on capture or when a link-type
+<I>LINUX_SLL2</I> capture file is read the
+interface name is printed after the timestamp. This is followed by the packet
+type with <I>In</I> and <I>Out</I> denoting a packet destined for this host or
+originating from this host respectively. Other possible values are <I>B</I>
+for broadcast packets, <I>M</I> for multicast packets, and <I>P</I> for packets
+destined for other hosts.
+<H3 id="lbAJ">Link Level Headers</H3>
 
 <P>
 
@@ -1512,7 +1523,7 @@ data and 6 bytes of compressed header:
 
 </DL>
 
-<H3 id="lbAJ">ARP/RARP Packets</H3>
+<H3 id="lbAK">ARP/RARP Packets</H3>
 
 <P>
 
@@ -1565,7 +1576,7 @@ CSAM RTSG 0806  64: arp reply csam is-at CSAM
 For the first packet this says the Ethernet source address is RTSG, the
 destination is the Ethernet broadcast address, the type field
 contained hex 0806 (type ETHER_ARP) and the total length was 64 bytes.
-<H3 id="lbAK">IPv4 Packets</H3>
+<H3 id="lbAL">IPv4 Packets</H3>
 
 <P>
 
@@ -1617,7 +1628,7 @@ the
 <B>-v</B>
 
 flag, in the IP header information, as described above.
-<H3 id="lbAL">TCP Packets</H3>
+<H3 id="lbAM">TCP Packets</H3>
 
 <P>
 
@@ -1736,7 +1747,7 @@ If the header
 length indicates options are present but the IP datagram length is not
 long enough for the options to actually be there, <I>tcpdump</I> reports
 it as ``[<I>bad hdr length</I>]''.
-<H3 id="lbAM">Particular TCP Flag Combinations (SYN-ACK, URG-ACK, etc.)</H3>
+<H3 id="lbAN">Particular TCP Flag Combinations (SYN-ACK, URG-ACK, etc.)</H3>
 
 <P>
 
@@ -1998,7 +2009,7 @@ This can be demonstrated as:
 Note that you should use single quotes or a backslash
 in the expression to hide the AND ('&amp;') special character
 from the shell.
-<H3 id="lbAN">UDP Packets</H3>
+<H3 id="lbAO">UDP Packets</H3>
 
 <P>
 
@@ -2022,7 +2033,7 @@ Some UDP services are recognized (from the source or destination
 port number) and the higher level protocol information printed.
 In particular, Domain Name service requests (RFC 1034/1035) and Sun
 RPC calls (RFC 1050) to NFS.
-<H3 id="lbAO">TCP or UDP Name Server Requests</H3>
+<H3 id="lbAP">TCP or UDP Name Server Requests</H3>
 
 <P>
 
@@ -2077,7 +2088,7 @@ is the appropriate count.
 If any of the response bits are set (AA, RA or rcode) or any of the
 `must be zero' bits are set in bytes two and three, `[b2&amp;3=<I>x</I>]'
 is printed, where <I>x</I> is the hex value of header bytes two and three.
-<H3 id="lbAP">TCP or UDP Name Server Responses</H3>
+<H3 id="lbAQ">TCP or UDP Name Server Responses</H3>
 
 <P>
 
@@ -2118,7 +2129,7 @@ RA, <I>not</I> set) and `|' (truncated message, TC, set).
 If the
 `question' section doesn't contain exactly one entry, `[<I>n</I>q]'
 is printed.
-<H3 id="lbAQ">SMB/CIFS Decoding</H3>
+<H3 id="lbAR">SMB/CIFS Decoding</H3>
 
 <P>
 
@@ -2139,7 +2150,7 @@ For information on SMB packet formats and what all the fields mean see
 <A HREF="https://download.samba.org/pub/samba/specs/">https://download.samba.org/pub/samba/specs/</A> and other online resources.
 The SMB patches were written by Andrew Tridgell
 (tridge@samba.org).
-<H3 id="lbAR">NFS Requests and Replies</H3>
+<H3 id="lbAS">NFS Requests and Replies</H3>
 
 <P>
 
@@ -2232,7 +2243,7 @@ Instead,
 replies using the transaction ID.
 If a reply does not closely follow the
 corresponding request, it might not be parsable.
-<H3 id="lbAS">AFS Requests and Replies</H3>
+<H3 id="lbAT">AFS Requests and Replies</H3>
 
 <P>
 
@@ -2311,7 +2322,7 @@ If a reply does not closely
 follow the
 corresponding request, it might not be parsable.
 <P>
-<H3 id="lbAT">KIP AppleTalk (DDP in UDP)</H3>
+<H3 id="lbAU">KIP AppleTalk (DDP in UDP)</H3>
 
 <P>
 
@@ -2386,7 +2397,7 @@ Other protocols just dump
 the protocol name (or number if no name is registered for the
 protocol) and packet size.
 <P>
-<H3 id="lbAU">NBP Packets</H3>
+<H3 id="lbAV">NBP Packets</H3>
 
 NBP packets are formatted like the following examples:
 <DL><DT><DD>
@@ -2410,7 +2421,7 @@ The third line is
 another reply to the same request saying host techpit has laserwriter
 &quot;techpit&quot; registered on port 186.
 <P>
-<H3 id="lbAV">ATP Packets</H3>
+<H3 id="lbAW">ATP Packets</H3>
 
 ATP packet formatting is demonstrated by the following example:
 <DL><DT><DD>
@@ -2458,7 +2469,7 @@ jssmag.209 initiates the next request.
 The `*' on the request
 indicates that XO (`exactly once') was <I>not</I> set.
 <P>
-<H2 id="lbAW">BACKWARD COMPATIBILITY</H2>
+<H2 id="lbAX">BACKWARD COMPATIBILITY</H2>
 
 The TCP flag names
 <B>tcp-ece</B>
@@ -2468,7 +2479,7 @@ and
 
 became available when linking with libpcap 1.9.0 or later.
 <P>
-<H2 id="lbAX">SEE ALSO</H2>
+<H2 id="lbAY">SEE ALSO</H2>
 
 <B>stty</B>(1),
 
@@ -2495,7 +2506,7 @@ became available when linking with libpcap 1.9.0 or later.
 
 <P>
 
-<H2 id="lbAY">AUTHORS</H2>
+<H2 id="lbAZ">AUTHORS</H2>
 
 The original authors are:
 <P>
@@ -2531,7 +2542,7 @@ The original distribution is available via anonymous ftp:
 
 IPv6/IPsec support is added by WIDE/KAME project.
 This program uses OpenSSL/LibreSSL, under specific configurations.
-<H2 id="lbAZ">BUGS</H2>
+<H2 id="lbBA">BUGS</H2>
 
 To report a security issue please send an e-mail to security@tcpdump.org.
 <P>
@@ -2594,29 +2605,30 @@ It only looks at IPv4 packets.
 <DT><A HREF="#lbAG">OUTPUT FORMAT</A><DD>
 <DL>
 <DT><A HREF="#lbAH">Timestamps</A><DD>
-<DT><A HREF="#lbAI">Link Level Headers</A><DD>
-<DT><A HREF="#lbAJ">ARP/RARP Packets</A><DD>
-<DT><A HREF="#lbAK">IPv4 Packets</A><DD>
-<DT><A HREF="#lbAL">TCP Packets</A><DD>
-<DT><A HREF="#lbAM">Particular TCP Flag Combinations (SYN-ACK, URG-ACK, etc.)</A><DD>
-<DT><A HREF="#lbAN">UDP Packets</A><DD>
-<DT><A HREF="#lbAO">TCP or UDP Name Server Requests</A><DD>
-<DT><A HREF="#lbAP">TCP or UDP Name Server Responses</A><DD>
-<DT><A HREF="#lbAQ">SMB/CIFS Decoding</A><DD>
-<DT><A HREF="#lbAR">NFS Requests and Replies</A><DD>
-<DT><A HREF="#lbAS">AFS Requests and Replies</A><DD>
-<DT><A HREF="#lbAT">KIP AppleTalk (DDP in UDP)</A><DD>
-<DT><A HREF="#lbAU">NBP Packets</A><DD>
-<DT><A HREF="#lbAV">ATP Packets</A><DD>
+<DT><A HREF="#lbAI">Interface</A><DD>
+<DT><A HREF="#lbAJ">Link Level Headers</A><DD>
+<DT><A HREF="#lbAK">ARP/RARP Packets</A><DD>
+<DT><A HREF="#lbAL">IPv4 Packets</A><DD>
+<DT><A HREF="#lbAM">TCP Packets</A><DD>
+<DT><A HREF="#lbAN">Particular TCP Flag Combinations (SYN-ACK, URG-ACK, etc.)</A><DD>
+<DT><A HREF="#lbAO">UDP Packets</A><DD>
+<DT><A HREF="#lbAP">TCP or UDP Name Server Requests</A><DD>
+<DT><A HREF="#lbAQ">TCP or UDP Name Server Responses</A><DD>
+<DT><A HREF="#lbAR">SMB/CIFS Decoding</A><DD>
+<DT><A HREF="#lbAS">NFS Requests and Replies</A><DD>
+<DT><A HREF="#lbAT">AFS Requests and Replies</A><DD>
+<DT><A HREF="#lbAU">KIP AppleTalk (DDP in UDP)</A><DD>
+<DT><A HREF="#lbAV">NBP Packets</A><DD>
+<DT><A HREF="#lbAW">ATP Packets</A><DD>
 </DL>
-<DT><A HREF="#lbAW">BACKWARD COMPATIBILITY</A><DD>
-<DT><A HREF="#lbAX">SEE ALSO</A><DD>
-<DT><A HREF="#lbAY">AUTHORS</A><DD>
-<DT><A HREF="#lbAZ">BUGS</A><DD>
+<DT><A HREF="#lbAX">BACKWARD COMPATIBILITY</A><DD>
+<DT><A HREF="#lbAY">SEE ALSO</A><DD>
+<DT><A HREF="#lbAZ">AUTHORS</A><DD>
+<DT><A HREF="#lbBA">BUGS</A><DD>
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 22:12:21 GMT, September 29, 2023
+This HTML man page was generated at 17:41:35 GMT, October 04, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
