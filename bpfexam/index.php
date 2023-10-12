@@ -47,9 +47,11 @@ define ('DEFAULT_FILTER', 'icmp or udp port 53 or bootpc');
 define ('ACTION_EXAMINE', 'none');
 define ('ACTION_OPTCBPF', 'opt');
 define ('ACTION_UNOPTCBPF', 'unopt');
-define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
+define ('DOT_BIN', '/usr/bin/dot');
+
 # Enforce an RPS limit for requests that submit the form, as these spawn
 # external processes, which together take a while (0.5s to 1.0s) to complete.
+define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
 define ('MAX_RPS_LIMIT', 1.0);
 define ('PROCESS_TIMEOUT', 1);
 define
@@ -58,6 +60,7 @@ define
 	'When you think the server is ready to process new requests again, ' .
 	'just reload this page.'
 );
+
 # Starting with Radare2 5.7.6 it should be sufficient to install the amd64.deb
 # package from [1].  However, if it is necessary to try a git master snapshot
 # of Radare2, the recommended way is to build a Debian package in a separate,
@@ -66,11 +69,15 @@ define
 # place, the package can be installed and works on Ubuntu 22.04 and Debian 11.
 # 1: https://github.com/radareorg/radare2/releases
 define ('RADARE2_BIN', '/usr/bin/r2');
-define ('DOT_BIN', '/usr/bin/dot');
-# To compile, see https://gitlab.com/niksu/caper/-/blob/master/Vagrantfile
-# and use a separate VM with the same distribution as the production server.
-# Pay attention to run build.sh using CAPER_WITH_ENGLISH=1 and to have all
-# dependencies installed as described in the script.
+
+# To compile caper.native, use a separate VM with the same distribution as the
+# production server, have all dependencies installed as described in [2] and in
+# the Caper repository run:
+# $ rm -rf _build/
+# $ CAPER_WITH_ENGLISH=1 ./build.sh caper.native
+# $ strip _build/caper.native
+# Then copy _build/caper.native to the production environment.
+# 2: https://gitlab.com/niksu/caper/-/blob/master/Vagrantfile
 define ('CAPER_BIN', '/usr/local/bin/caper.native');
 
 $actions = array
