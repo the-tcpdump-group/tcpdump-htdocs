@@ -809,7 +809,9 @@ OUTPUT FORMAT
        fragmented datagram or not.  flags are the MF and DF flags;  +  is  re-
        ported  if  MF  is set, and DF is reported if F is set.  If neither are
        set, . is reported.  proto is the protocol ID field.  length is the to-
-       tal length field.  options are the IP options, if any.
+       tal  length  field;  if  the packet is a presumed TSO (TCP Segmentation
+       Offload) send, [was 0, presumed TSO] is reported.  options are  the  IP
+       options, if any.
 
        Next,  for TCP and UDP packets, the source and destination IP addresses
        and TCP or UDP ports, with a dot between each IP address and its corre-
@@ -987,7 +989,7 @@ OUTPUT FORMAT
 
        We can use this expression as the filter for tcpdump in order to  watch
        packets which have only SYN set:
-              tcpdump -i xl0 tcp[13] == 2
+              tcpdump -i xl0 'tcp[13] == 2'
 
        The expression says "let the 13th octet of a TCP datagram have the dec-
        imal value 2", which is exactly what we want.
@@ -1374,4 +1376,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                  09 Sep 2023                       TCPDUMP(1)
+                                21 October 2023                     TCPDUMP(1)

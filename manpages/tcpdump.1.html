@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 09 Sep 2023<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 21 October 2023<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents tcpdump version 5.0.0-PRE-GIT.</H4>
@@ -1609,7 +1609,8 @@ part of a fragmented datagram or not.
 and <B>DF</B> is reported if F is set.  If neither are set, <B>.</B> is
 reported.
 <I>proto</I> is the protocol ID field.
-<I>length</I> is the total length field.
+<I>length</I> is the total length field; if the packet is a presumed TSO
+(TCP Segmentation Offload) send, [was 0, presumed TSO] is reported.
 <I>options</I> are the IP options, if any.
 <P>
 
@@ -1900,7 +1901,7 @@ This relationship can be expressed as
 We can use this expression as the filter for <I>tcpdump</I> in order
 to watch packets which have only SYN set:
 <DL><DT><DD>
-<B>tcpdump -i xl0 tcp[13] == 2</B>
+<B>tcpdump -i xl0 'tcp[13] == 2'</B>
 
 </DL>
 
@@ -2628,7 +2629,7 @@ It only looks at IPv4 packets.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 17:41:35 GMT, October 04, 2023
+This HTML man page was generated at 11:10:01 GMT, October 22, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
