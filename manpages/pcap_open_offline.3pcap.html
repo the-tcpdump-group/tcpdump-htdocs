@@ -100,6 +100,14 @@ takes an additional
 
 argument as described above.
 Note that on Windows, that stream should be opened in binary mode.
+<P>
+
+<I>errbuf</I>
+
+is a buffer large enough to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
+
+chars.
 <H2 id="lbAE">RETURN VALUE</H2>
 
 <B>pcap_open_offline</B>(),
@@ -125,12 +133,6 @@ is returned,
 <I>errbuf</I>
 
 is filled in with an appropriate error message.
-<I>errbuf</I>
-
-is assumed to be able to hold at least
-<CODE>PCAP_ERRBUF_SIZE</CODE>
-
-chars.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
 
 <B>pcap_open_offline_with_tstamp_precision</B>()
@@ -150,7 +152,7 @@ stamps from a savefile are always given in seconds and microseconds.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 11:36:16 GMT, March 05, 2023
+This HTML man page was generated at 10:38:36 GMT, December 01, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

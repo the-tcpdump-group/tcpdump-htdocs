@@ -51,6 +51,19 @@ process calling
 because, for example, that process does not have sufficient privileges
 to open them for capturing; if so, those devices will not appear on the
 list.)
+<I>alldevsp</I>
+
+is a pointer to a
+<B>pcap_if_t</B>*;
+
+<I>errbuf</I>
+
+is a buffer large enough to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
+
+chars.
+<P>
+
 If
 <B>pcap_findalldevs</B>()
 
@@ -286,12 +299,6 @@ is returned,
 <I>errbuf</I>
 
 is filled in with an appropriate error message.
-<I>errbuf</I>
-
-is assumed to be able to hold at least
-<CODE>PCAP_ERRBUF_SIZE</CODE>
-
-chars.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
 
 <P>
@@ -325,7 +332,7 @@ constants became available in libpcap release 1.9.0.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 20:50:41 GMT, February 26, 2023
+This HTML man page was generated at 10:38:35 GMT, December 01, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

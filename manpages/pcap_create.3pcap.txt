@@ -27,17 +27,17 @@ DESCRIPTION
        packets on the network.  source is a string that specifies the  network
        device  to  open;  on Linux systems with 2.2 or later kernels, a source
        argument of "any" or NULL can be used to capture packets from  all  in-
-       terfaces.
+       terfaces.   errbuf  is  a buffer large enough to hold at least PCAP_ER-
+       RBUF_SIZE chars.
 
-       The  returned handle must be activated with pcap_activate(3PCAP) before
-       packets can be captured with it; options for the capture, such as  pro-
+       The returned handle must be activated with pcap_activate(3PCAP)  before
+       packets  can be captured with it; options for the capture, such as pro-
        miscuous mode, can be set on the handle before activating it.
 
 RETURN VALUE
-       pcap_create()  returns  a  pcap_t * on success and NULL on failure.  If
-       NULL is returned, errbuf is filled in with an  appropriate  error  mes-
-       sage.   errbuf  is assumed to be able to hold at least PCAP_ERRBUF_SIZE
-       chars.
+       pcap_create() returns a pcap_t * on success and NULL  on  failure.   If
+       NULL  is  returned,  errbuf is filled in with an appropriate error mes-
+       sage.
 
 SEE ALSO
        pcap(3PCAP)

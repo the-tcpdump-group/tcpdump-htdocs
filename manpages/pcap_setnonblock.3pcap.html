@@ -40,16 +40,12 @@ of ``non-blocking'' mode, depending on whether the
 <I>nonblock</I>
 
 argument is non-zero or zero.  It has no effect on ``savefiles''.
-If there is an error,
-<CODE>PCAP_ERROR</CODE>
-
-is returned and
 <I>errbuf</I>
 
-is filled in with an appropriate error message; otherwise,
-<B>0</B>
+is a buffer large enough to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
 
-is returned.
+chars.
 <P>
 
 In
@@ -97,32 +93,38 @@ a capture handle is not in ``non-blocking mode''; a call to
 is required in order to put it into ``non-blocking'' mode.
 <H2 id="lbAE">RETURN VALUE</H2>
 
+<CODE>pcap_setnonblock()</CODE>
+
+return 0 on success,
+<CODE>PCAP_ERROR_NOT_ACTIVATED</CODE>
+
+if called on a capture handle that has been created but not activated,
+and
+<CODE>PCAP_ERROR</CODE>
+
+for other errors.
 <B>pcap_getnonblock</B>()
 
-returns the current ``non-blocking'' state of the capture descriptor; it
-always returns
+returns the current ``non-blocking'' state of the capture descriptor on
+success; it always returns
 <B>0</B>
 
 on ``savefiles''.
-If called on a capture handle that has been created but not activated,
+It returns
 <CODE>PCAP_ERROR_NOT_ACTIVATED</CODE>
 
-is returned.
-If there is another error,
+if called on a capture handle that has been created but not activated,
+and
 <CODE>PCAP_ERROR</CODE>
 
-is returned and
+for other errors.
+If
+<CODE>PCAP_ERROR</CODE>
+
+is returned,
 <I>errbuf</I>
 
 is filled in with an appropriate error message.
-<P>
-
-<I>errbuf</I>
-
-is assumed to be able to hold at least
-<CODE>PCAP_ERRBUF_SIZE</CODE>
-
-chars.
 <H2 id="lbAF">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
@@ -135,7 +137,7 @@ chars.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 23:10:36 GMT, March 07, 2023
+This HTML man page was generated at 10:38:37 GMT, December 01, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

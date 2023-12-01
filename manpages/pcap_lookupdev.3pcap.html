@@ -41,6 +41,12 @@ To find a default device on which to capture, call
 and, if the list it returns is not empty, use the first device in the
 list.  (If the list is empty, there are no devices on which capture is
 possible.)
+<I>errbuf</I>
+
+is a buffer large enough to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
+
+chars.
 <P>
 
 <B>If</B>
@@ -79,12 +85,6 @@ is returned and
 <I>errbuf</I>
 
 is filled in with an appropriate error message.
-<I>errbuf</I>
-
-is assumed to be able to hold at least
-<CODE>PCAP_ERRBUF_SIZE</CODE>
-
-chars.
 <H2 id="lbAE">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
@@ -109,7 +109,7 @@ than an ASCII or UTF-8 string.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 08:07:01 GMT, March 10, 2023
+This HTML man page was generated at 10:38:36 GMT, December 01, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

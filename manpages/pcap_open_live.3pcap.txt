@@ -40,14 +40,16 @@ DESCRIPTION
        milliseconds.  (See pcap(3PCAP) for an explanation of the packet buffer
        timeout.)
 
+       errbuf  is  a  buffer  large  enough  to hold at least PCAP_ERRBUF_SIZE
+       chars.
+
 RETURN VALUE
        pcap_open_live() returns a pcap_t * on success and NULL on failure.  If
-       NULL is returned, errbuf is filled in with an  appropriate  error  mes-
-       sage.   errbuf  may  also  be set to warning text when pcap_open_live()
-       succeeds; to detect this case the caller  should  store  a  zero-length
-       string  in errbuf before calling pcap_open_live() and display the warn-
-       ing to the user if errbuf is no longer a zero-length string.  errbuf is
-       assumed to be able to hold at least PCAP_ERRBUF_SIZE chars.
+       NULL  is  returned,  errbuf is filled in with an appropriate error mes-
+       sage.  errbuf may also be set to  warning  text  when  pcap_open_live()
+       succeeds;  to  detect  this  case the caller should store a zero-length
+       string in errbuf before calling pcap_open_live() and display the  warn-
+       ing to the user if errbuf is no longer a zero-length string.
 
 SEE ALSO
        pcap_create(3PCAP), pcap_activate(3PCAP)

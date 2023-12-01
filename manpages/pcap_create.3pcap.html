@@ -45,6 +45,12 @@ argument of &quot;any&quot; or
 <CODE>NULL</CODE>
 
 can be used to capture packets from all interfaces.
+<I>errbuf</I>
+
+is a buffer large enough to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
+
+chars.
 <P>
 
 The returned handle must be activated with
@@ -71,12 +77,6 @@ is returned,
 <I>errbuf</I>
 
 is filled in with an appropriate error message.
-<I>errbuf</I>
-
-is assumed to be able to hold at least
-<CODE>PCAP_ERRBUF_SIZE</CODE>
-
-chars.
 <H2 id="lbAF">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
@@ -85,7 +85,7 @@ chars.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 11:36:14 GMT, March 05, 2023
+This HTML man page was generated at 10:38:34 GMT, December 01, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

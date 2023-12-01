@@ -37,7 +37,18 @@ is used to initialize the Packet Capture library.
 <I>opts</I>
 
 specifies options for the library;
-currently, the options are:
+<I>errbuf</I>
+
+is a buffer large enough to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
+
+chars.
+<P>
+
+Currently, the options that can be specified in
+<I>opts</I>
+
+are:
 <DL>
 <DT><CODE>PCAP_MMAP_32BIT</CODE>
 
@@ -109,12 +120,6 @@ is returned,
 <I>errbuf</I>
 
 is filled in with an appropriate error message.
-<I>errbuf</I>
-
-is assumed to be able to hold at least
-<CODE>PCAP_ERRBUF_SIZE</CODE>
-
-chars.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
 
 This function became available in libpcap release 1.9.0.  In previous
@@ -128,7 +133,7 @@ returned to the caller, are in the local character encoding.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:50:55 GMT, February 26, 2023
+This HTML man page was generated at 10:38:35 GMT, December 01, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

@@ -26,7 +26,9 @@ DESCRIPTION
        This  interface is obsoleted by pcap_findalldevs(3PCAP).  To find a de-
        fault device on which to capture, call pcap_findalldevs() and,  if  the
        list  it  returns  is not empty, use the first device in the list.  (If
-       the list is empty, there are no devices on which capture is possible.)
+       the list is empty, there are no devices on which capture is  possible.)
+       errbuf  is  a  buffer  large  enough  to hold at least PCAP_ERRBUF_SIZE
+       chars.
 
        If pcap_init(3PCAP) has been  called,  this  interface  always  returns
        NULL.
@@ -36,18 +38,17 @@ DESCRIPTION
        pcap_activate(3PCAP),   or   with   pcap_open_live(3PCAP),   and   with
        pcap_lookupnet(3PCAP).  If there is an error,  or  if  pcap_init(3PCAP)
        has  been  called, NULL is returned and errbuf is filled in with an ap-
-       propriate error message.  errbuf is assumed to be able to hold at least
-       PCAP_ERRBUF_SIZE chars.
+       propriate error message.
 
 SEE ALSO
        pcap(3PCAP)
 
 BUGS
-       The  pointer  returned  by  pcap_lookupdev() points to a static buffer;
-       subsequent calls to pcap_lookupdev() in the same thread,  or  calls  to
+       The pointer returned by pcap_lookupdev() points  to  a  static  buffer;
+       subsequent  calls  to  pcap_lookupdev() in the same thread, or calls to
        pcap_lookupdev() in another thread, may overwrite that buffer.
 
-       In  WinPcap  and Npcap, this function may return a UTF-16 string rather
+       In WinPcap and Npcap, this function may return a UTF-16  string  rather
        than an ASCII or UTF-8 string.
 
                                8 September 2017          PCAP_LOOKUPDEV(3PCAP)
