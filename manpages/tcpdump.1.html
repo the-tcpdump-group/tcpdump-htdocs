@@ -91,6 +91,12 @@ tcpdump - dump traffic on a network
 <I>tstamp_type</I>
 
 ]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[
+<B>--lengths</B>
+
+]
 [
 <B>-m</B>
 
@@ -220,7 +226,7 @@ tcpdump - dump traffic on a network
 
 <P>
 
-<I>Tcpdump</I> prints out a description of the contents of packets on a
+<I>tcpdump</I> prints out a description of the contents of packets on a
 network interface that match the Boolean <I>expression</I> (see
 <B><A HREF="./pcap-filter.7.html">pcap-filter</A></B>(7)
 
@@ -247,7 +253,7 @@ will be processed by
 
 <P>
 
-<I>Tcpdump</I>
+<I>tcpdump</I>
 
 will, if not run with the
 <B>-c</B>
@@ -782,6 +788,14 @@ example, it might support only fake Ethernet headers, or might support
 and another set of data link types when in monitor mode (for example, it
 might support 802.11 headers, or 802.11 headers with radio information,
 only in monitor mode).
+<DT><B>--lengths</B>
+
+<DD>
+Print the captured and original packet lengths.
+The lengths are printed at the beginning of the line or after the packet
+number, if any.
+<I>caplen</I> is the captured packet length (See <B>-s</B> option).
+<I>len</I> is the original (on wire) packet length.
 <DT><B>-m</B><I> module</I>
 
 <DD>
@@ -1095,7 +1109,7 @@ flag to cause packets to be written as soon as they are received.
 The MIME type <I>application/vnd.tcpdump.pcap</I> has been registered
 with IANA for <I>pcap</I> files. The filename extension <I>.pcap</I>
 appears to be the most commonly used along with <I>.cap</I> and
-<I>.dmp</I>. <I>Tcpdump</I> itself doesn't check the extension when
+<I>.dmp</I>. <I>tcpdump</I> itself doesn't check the extension when
 reading capture files and doesn't add an extension when writing them
 (it uses magic numbers in the file header instead). However, many
 operating systems and applications will use the extension if it is
@@ -2629,7 +2643,7 @@ It only looks at IPv4 packets.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 11:10:01 GMT, October 22, 2023
+This HTML man page was generated at 09:53:41 GMT, December 29, 2023
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

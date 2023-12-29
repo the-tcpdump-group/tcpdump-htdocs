@@ -20,7 +20,8 @@ SYNOPSIS
                [ -c count ] [ --count ] [ -C file_size ]
                [ -E spi@ipaddr algo:secret,...  ]
                [ -F file ] [ -G rotate_seconds ] [ -i interface ]
-               [ --immediate-mode ] [ -j tstamp_type ] [ -m module ]
+               [ --immediate-mode ] [ -j tstamp_type ]
+               [ --lengths ] [ -m module ]
                [ -M secret ] [ --number ] [ --print ]
                [ --print-sampling nth ] [ -Q in|out|inout ] [ -r file ]
                [ -s snaplen ] [ -T type ] [ --version ] [ -V file ]
@@ -31,7 +32,7 @@ SYNOPSIS
                [ expression ]
 
 DESCRIPTION
-       Tcpdump  prints  out a description of the contents of packets on a net-
+       tcpdump  prints  out a description of the contents of packets on a net-
        work interface that match the Boolean  expression  (see  pcap-filter(7)
        for  the  expression  syntax);  the  description  is preceded by a time
        stamp, printed, by default, as hours, minutes, seconds,  and  fractions
@@ -43,7 +44,7 @@ DESCRIPTION
        files. In all cases, only packets that match expression  will  be  pro-
        cessed by tcpdump.
 
-       Tcpdump  will,  if not run with the -c flag, continue capturing packets
+       tcpdump  will,  if not run with the -c flag, continue capturing packets
        until it is interrupted by a SIGINT signal (generated, for example,  by
        typing your interrupt character, typically control-C) or a SIGTERM sig-
        nal (typically generated with the kill(1) command); if run with the  -c
@@ -361,6 +362,12 @@ OPTIONS
               port  802.11  headers, or 802.11 headers with radio information,
               only in monitor mode).
 
+       --lengths
+              Print the captured and original packet lengths.  The lengths are
+              printed at the beginning of the line or after the packet number,
+              if any.  caplen is the captured packet length (See  -s  option).
+              len is the original (on wire) packet length.
+
        -m module
               Load SMI MIB module definitions from file module.   This  option
               can  be used several times to load several MIB modules into tcp-
@@ -552,7 +559,7 @@ OPTIONS
 
               The  MIME  type application/vnd.tcpdump.pcap has been registered
               with IANA for pcap files. The filename extension  .pcap  appears
-              to  be  the most commonly used along with .cap and .dmp. Tcpdump
+              to  be  the most commonly used along with .cap and .dmp. tcpdump
               itself doesn't check the extension when  reading  capture  files
               and  doesn't  add  an extension when writing them (it uses magic
               numbers in the file header  instead).  However,  many  operating
