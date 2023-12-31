@@ -258,17 +258,7 @@ link-layer header type for them.
 <td class="number">0</td>
 <td class="symbol">DLT_NULL</td>
 <td>
-BSD loopback encapsulation; the link layer header is a 4-byte field, in
-host byte order, containing a value of 2 for IPv4 packets, a
-value of either 24, 28, or 30 for IPv6 packets,
-a value of 7 for OSI packets, or
-a value of 23 for IPX packets.  All of the IPv6 values correspond to
-IPv6 packets; code reading files should check for all of them.
-<p>Note that ``host byte order'' is the byte order of the machine on
-that the packets are captured; if a live capture is being done, ``host
-byte order'' is the byte order of the machine capturing the packets, but
-if a ``savefile'' is being read, the byte order is not necessarily that
-of the machine reading the capture file.
+<a href="linktypes/LINKTYPE_NULL.html">BSD loopback encapsulation</a>.
 </td>
 </tr>
 
@@ -497,13 +487,7 @@ FCS at the end of the frame.
 <td class="number">108</td>
 <td class="symbol">DLT_LOOP</td>
 <td>
-OpenBSD loopback encapsulation; the link-layer header is a 4-byte field,
-in <em>network</em> byte order, containing a value of 2 for IPv4
-packets, a value of either 24, 28, or 30 for
-IPv6 packets, a value of 7 for OSI packets, or a value of
-23 for IPX packets.  All of the IPv6
-values correspond to IPv6 packets; code reading files should check for
-all of them.
+<a href="linktypes/LINKTYPE_NULL.html">OpenBSD loopback encapsulation</a>.
 </td>
 </tr>
 

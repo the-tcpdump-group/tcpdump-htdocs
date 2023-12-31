@@ -1,0 +1,38 @@
+          <!-- Start of LINKTYPE_LOOP section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_LOOP
+            </h2>
+            <div class="entry">
+                <h2 class="subtitle">Packet structure for BSD loopback encapsulation</h2>
+<pre>
++---------------------------+
+|       Protocol type       |
+|         (4 Octets)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h2 class="subtitle">Description</h2>
+<p>
+The protocol type field is in big-endian byte order.  The values for
+that field are:
+</p>
+<ul>
+<li><code>2</code> - payload is an IPv4 packet;</li>
+<li><code>24</code> - payload is an IPv6 packet;</li>
+<li><code>28</code> - payload is an IPv6 packet;</li>
+<li><code>30</code> - payload is an IPv6 packet;</li>
+<li><code>7</code> - payload is an OSI packet;</li>
+<li><code>23</code> - payload is an IPX packet.</li>
+</ul>
+<p>
+All of the IPv6 values correspond to IPv6 packets; code reading files
+should check for all of them.
+</p>
+            </div>
+            <!-- End of LINKTYPE_LOOP section -->
+          </div>

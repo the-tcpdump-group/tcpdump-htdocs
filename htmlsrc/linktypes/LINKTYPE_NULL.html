@@ -1,0 +1,45 @@
+          <!-- Start of LINKTYPE_NULL section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_NULL
+            </h2>
+            <div class="entry">
+                <h2 class="subtitle">Packet structure for BSD loopback encapsulation</h2>
+<pre>
++---------------------------+
+|       Protocol type       |
+|         (4 Octets)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h2 class="subtitle">Description</h2>
+<p>
+The protocol type field is in the host byte order of the machine on
+which the capture was done.  The values for that field are:
+</p>
+<ul>
+<li><code>2</code> - payload is an IPv4 packet;</li>
+<li><code>24</code> - payload is an IPv6 packet;</li>
+<li><code>28</code> - payload is an IPv6 packet;</li>
+<li><code>30</code> - payload is an IPv6 packet;</li>
+<li><code>7</code> - payload is an OSI packet;</li>
+<li><code>23</code> - payload is an IPX packet.</li>
+</ul>
+<p>
+All of the IPv6 values correspond to IPv6 packets; code reading files
+should check for all of them.
+</p>
+<p>
+Note that ``host byte order'' is the byte order of the machine on that
+the packets are captured; if a live capture is being done, ``host byte
+order'' is the byte order of the machine capturing the packets, but if a
+``savefile'' is being read, the byte order is not necessarily that of
+the machine reading the capture file.
+</p>
+            </div>
+            <!-- End of LINKTYPE_NULL section -->
+          </div>

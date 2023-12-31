@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>LINKTYPE_LOOP | TCPDUMP &amp; LIBPCAP</title>
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="../images/T-32x32.png" rel="shortcut icon" type="image/png">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../manpages/">Man Pages</a></li>
+                <li><a href="../ci.html">CI</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../bpfexam/">BPF Exam</a></li>
+                <li><a href="../related.html">See Also</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_LOOP section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_LOOP
+            </h2>
+            <div class="entry">
+                <h2 class="subtitle">Packet structure for BSD loopback encapsulation</h2>
+<pre>
++---------------------------+
+|       Protocol type       |
+|         (4 Octets)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h2 class="subtitle">Description</h2>
+<p>
+The protocol type field is in big-endian byte order.  The values for
+that field are:
+</p>
+<ul>
+<li><code>2</code> - payload is an IPv4 packet;</li>
+<li><code>24</code> - payload is an IPv6 packet;</li>
+<li><code>28</code> - payload is an IPv6 packet;</li>
+<li><code>30</code> - payload is an IPv6 packet;</li>
+<li><code>7</code> - payload is an OSI packet;</li>
+<li><code>23</code> - payload is an IPX packet.</li>
+</ul>
+<p>
+All of the IPv6 values correspond to IPv6 packets; code reading files
+should check for all of them.
+</p>
+            </div>
+            <!-- End of LINKTYPE_LOOP section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                This web site is &copy; 1999&ndash;2023 The Tcpdump Group
+                (<a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">more
+                information</a>).
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
