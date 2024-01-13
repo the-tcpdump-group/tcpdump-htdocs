@@ -50,9 +50,9 @@ define ('ACTION_UNOPTCBPF', 'unopt');
 define ('DOT_BIN', '/usr/bin/dot');
 
 # Enforce an RPS limit for requests that submit the form, as these spawn
-# external processes, which together take a while (0.5s to 1.0s) to complete.
+# external processes, which together take a while (around 3s) to complete.
 define ('TIMESTAMP_FILE', '/tmp/bpf_timestamp.txt');
-define ('MAX_RPS_LIMIT', 1.0);
+define ('MAX_RPS_LIMIT', 0.125);
 define ('PROCESS_TIMEOUT', 1);
 define
 (
@@ -64,20 +64,21 @@ define
 # Starting with Radare2 5.7.6 it should be sufficient to install the amd64.deb
 # package from [1].  However, if it is necessary to try a git master snapshot
 # of Radare2, the recommended way is to build a Debian package in a separate,
-# non-production Debian 11 VM using sys/debian.sh in a Radare2 git clone.
+# non-production Debian 12 VM using sys/debian.sh in a Radare2 git clone.
 # Since release 5.8.6 Radare2 also publishes an arm64.deb package at the same
-# place, the package can be installed and works on Ubuntu 22.04 and Debian 11.
+# place, the package can be installed and works on Ubuntu 22.04 and Debian 12.
 # 1: https://github.com/radareorg/radare2/releases
 define ('RADARE2_BIN', '/usr/bin/r2');
 
 # To compile caper.native, use a separate VM with the same distribution as the
-# production server, have all dependencies installed as described in [2] and in
-# the Caper repository run:
+# production server, have all dependencies installed as described in [2] and
+# [3] and in the Caper repository run:
 # $ rm -rf _build/
 # $ CAPER_WITH_ENGLISH=1 ./build.sh caper.native
 # $ strip _build/caper.native
 # Then copy _build/caper.native to the production environment.
 # 2: https://gitlab.com/niksu/caper/-/blob/master/Vagrantfile
+# 3: https://gitlab.com/niksu/caper/-/blob/master/build.sh
 define ('CAPER_BIN', '/usr/local/bin/caper.native');
 
 $actions = array
@@ -135,7 +136,9 @@ $versions = array
 		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.5.3',
 	),
 	# libpcap 1.9.1 in Ubuntu 20.04 (/usr/sbin/tcpdump, v4.9.3)
+	# libpcap 1.10.1 in Ubuntu 22.04 (/usr/bin/tcpdump, v4.99.1)
 	# libpcap 1.10.0 in Debian 11 (/usr/bin/tcpdump, v4.99.0)
+	# libpcap 1.10.3 in Debian 12 (/usr/bin/tcpdump, v4.99.3)
 	'random' => array
 	(
 		'descr' => 'random (OS default)',
