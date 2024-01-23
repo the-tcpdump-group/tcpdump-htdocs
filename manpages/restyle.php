@@ -234,16 +234,27 @@ foreach ($taxonomy as $pname => $project)
 				sprintf ('$1%s(%s) man page$3', $m[1], strtoupper ($m[2])) :
 				'$1$2$3'
 		),
+		# In those few pages that still have a ToC put the index
+		# hyperlink on a separate line to make it easier for the next
+		# two substitutions to match their input.  Insert an extra
+		# delimiter in the same go.
+		array
+		(
+			'@(<BR>)(<A HREF="#index">Index</A>)$@m',
+			"\$1\n\$2 &bull;"
+		),
 		array
 		(
 			'@^Section: .+<BR>(.+<BR>)$@m',
 			'$1'
 		),
 		# Combine two header lines into one and make it a mini-menu.
+		# Month days can occur both with and without leading zeroes,
+		# which comes from the man pages rather than man2html.
 		array
 		(
-			'@^(Updated: [12]?[0-9] [[:alpha:]]+ 20[0-9][0-9])<BR>$@m',
-			"\$1 &bull; <A href='{$txt_href}'>View in plain text</A> &bull; "
+			'@^(Updated: [0123]?[0-9] [[:alpha:]]+ 20[0-9][0-9])<BR>$@m',
+			"\$1 &bull;\n<A href='{$txt_href}'>View in plain text</A> &bull;"
 		),
 		array
 		(
