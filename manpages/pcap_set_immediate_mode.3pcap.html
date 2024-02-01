@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_SET_IMMEDIATE_MODE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 23 August 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 27 January 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -80,25 +80,6 @@ turned on by using a read timeout of 0 when opening the device (this
 will not provide immediate delivery of packets on other platforms, so
 don't assume it's sufficient);
 <DT><DD>
-on Digital UNIX/Tru64 UNIX, immediate mode must be turned on by doing a
-<CODE>BIOCMBIC</CODE>
-
-<B>ioctl</B>(),
-
-as documented in
-<B>packetfilter</B>(7),
-
-to clear the
-<CODE>ENBATCH</CODE>
-
-flag on the descriptor returned by
-<A HREF='./pcap_fileno.3pcap.html'><B>pcap_fileno</B></A>(3PCAP),
-
-after
-<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
-
-is called;
-<DT><DD>
 on Windows, immediate mode must be turned on by calling
 <B>pcap_setmintocopy</B>()
 
@@ -129,7 +110,7 @@ On other platforms, capture devices are always in immediate mode.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 08:15:37 GMT, February 28, 2023
+This HTML man page was generated at 15:49:22 GMT, February 01, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

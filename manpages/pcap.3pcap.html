@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 9 September 2020<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 28 January 2024<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -352,15 +352,6 @@ The time stamp type is set with
 Reading packets from a network interface may require that you have
 special privileges:
 <DL>
-<DT><B>Under SunOS 3.x or 4.x with NIT or BPF:</B>
-
-<DD>
-You must have read access to
-<I>/dev/nit</I>
-
-or
-<I>/dev/bpf*</I>.
-
 <DT><B>Under Solaris with DLPI:</B>
 
 <DD>
@@ -396,11 +387,6 @@ command.
 <DD>
 You must be root or the application capturing packets must be installed
 setuid to root.
-<DT><B>Under IRIX with snoop:</B>
-
-<DD>
-You must be root or the application capturing packets must be installed
-setuid to root.
 <DT><B>Under Linux:</B>
 
 <DD>
@@ -410,26 +396,6 @@ that supports capability bits such as CAP_NET_RAW and code to allow
 those capability bits to be given to particular accounts and to cause
 those bits to be set on a user's initial processes when they log in, in
 which case you must have CAP_NET_RAW in order to capture.
-<DT><B>Under ULTRIX and Digital UNIX/Tru64 UNIX:</B>
-
-<DD>
-Any user may capture network traffic.
-However, no user (not even the super-user) can capture in promiscuous
-mode on an interface unless the super-user has enabled promiscuous-mode
-operation on that interface using
-<I>pfconfig</I>(8),
-
-and no user (not even the super-user) can capture unicast traffic
-received by or sent by the machine on an interface unless the super-user
-has enabled copy-all-mode operation on that interface using
-<I>pfconfig</I>,
-
-so
-<I>useful</I>
-
-packet capture on an interface probably requires that either
-promiscuous-mode or copy-all-mode operation, or both modes of
-operation, be enabled on that interface.
 <DT><B>Under BSD (this includes macOS):</B>
 
 <DD>
@@ -1515,7 +1481,7 @@ in the libpcap source tree root.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 23:17:50 GMT, March 25, 2023
+This HTML man page was generated at 15:49:19 GMT, February 01, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

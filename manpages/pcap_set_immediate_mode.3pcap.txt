@@ -46,16 +46,11 @@ BACKWARD COMPATIBILITY
               device  (this  will not provide immediate delivery of packets on
               other platforms, so don't assume it's sufficient);
 
-              on Digital UNIX/Tru64 UNIX, immediate mode must be turned on  by
-              doing  a  BIOCMBIC ioctl(), as documented in packetfilter(7), to
-              clear  the  ENBATCH  flag  on   the   descriptor   returned   by
-              pcap_fileno(3PCAP), after pcap_activate(3PCAP) is called;
-
               on  Windows,  immediate  mode  must  be  turned  on  by  calling
               pcap_setmintocopy() with a size of 0.
 
        On Linux, with previous releases of libpcap, capture devices are always
-       in  immediate  mode; however, in 1.5.0 and later, they are, by default,
+       in immediate mode; however, in 1.5.0 and later, they are,  by  default,
        not in immediate mode, so if pcap_set_immediate_mode() is available, it
        should be used.
 
@@ -64,4 +59,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP), pcap_create(3PCAP), pcap_activate(3PCAP)
 
-                                23 August 2018  PCAP_SET_IMMEDIATE_MODE(3PCAP)
+                                27 January 2024 PCAP_SET_IMMEDIATE_MODE(3PCAP)

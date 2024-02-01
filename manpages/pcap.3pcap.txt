@@ -231,9 +231,6 @@ DESCRIPTION
        Reading packets from a network interface may require that you have spe-
        cial privileges:
 
-       Under SunOS 3.x or 4.x with NIT or BPF:
-              You must have read access to /dev/nit or /dev/bpf*.
-
        Under Solaris with DLPI:
               You  must  have  read/write access to the network pseudo device,
               e.g.  /dev/le.  On at least some versions of  Solaris,  however,
@@ -256,30 +253,14 @@ DESCRIPTION
               You must be root or the application capturing  packets  must  be
               installed setuid to root.
 
-       Under IRIX with snoop:
-              You  must  be  root or the application capturing packets must be
-              installed setuid to root.
-
        Under Linux:
-              You must be root or the application capturing  packets  must  be
-              installed  setuid to root, unless your distribution has a kernel
-              that supports capability bits such as CAP_NET_RAW  and  code  to
-              allow  those  capability bits to be given to particular accounts
-              and to cause those bits to be set on a user's initial  processes
+              You  must  be  root or the application capturing packets must be
+              installed setuid to root, unless your distribution has a  kernel
+              that  supports  capability  bits such as CAP_NET_RAW and code to
+              allow those capability bits to be given to  particular  accounts
+              and  to cause those bits to be set on a user's initial processes
               when they log in, in which case you must have CAP_NET_RAW in or-
               der to capture.
-
-       Under ULTRIX and Digital UNIX/Tru64 UNIX:
-              Any user may capture network traffic.   However,  no  user  (not
-              even  the  super-user) can capture in promiscuous mode on an in-
-              terface unless the super-user has enabled promiscuous-mode oper-
-              ation on that interface using pfconfig(8), and no user (not even
-              the super-user) can capture unicast traffic received by or  sent
-              by the machine on an interface unless the super-user has enabled
-              copy-all-mode operation on that  interface  using  pfconfig,  so
-              useful packet capture on an interface probably requires that ei-
-              ther promiscuous-mode or copy-all-mode operation, or both  modes
-              of operation, be enabled on that interface.
 
        Under BSD (this includes macOS):
               You  must  have  read  access to /dev/bpf* on systems that don't
@@ -760,4 +741,4 @@ BUGS
        ture, provide generic feedback etc please see the file  CONTRIBUTING.md
        in the libpcap source tree root.
 
-                               9 September 2020                    PCAP(3PCAP)
+                                28 January 2024                    PCAP(3PCAP)
