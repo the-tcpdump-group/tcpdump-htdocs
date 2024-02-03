@@ -75,13 +75,13 @@ DESCRIPTION
               reported as 0).
 
        On  platforms  that  support the SIGINFO signal, such as most BSDs (in-
-       cluding macOS) and Digital/Tru64 UNIX, it will report those counts when
-       it  receives  a  SIGINFO signal (generated, for example, by typing your
-       ``status'' character, typically control-T, although on some  platforms,
-       such  as  macOS, the ``status'' character is not set by default, so you
-       must set it with stty(1) in order to use it) and will continue  captur-
-       ing  packets.  On platforms that do not support the SIGINFO signal, the
-       same can be achieved by using the SIGUSR1 signal.
+       cluding macOS), it will report those counts when it receives a  SIGINFO
+       signal  (generated,  for  example, by typing your ``status'' character,
+       typically control-T, although on some platforms,  such  as  macOS,  the
+       ``status''  character  is  not  set by default, so you must set it with
+       stty(1) in order to use it) and will  continue  capturing  packets.  On
+       platforms  that  do  not  support  the  SIGINFO signal, the same can be
+       achieved by using the SIGUSR1 signal.
 
        Using the SIGUSR2 signal along with the -w flag will forcibly flush the
        packet buffer into the output file.
@@ -1383,4 +1383,4 @@ BUGS
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                               19 December 2023                     TCPDUMP(1)
+                                28 January 2024                     TCPDUMP(1)
