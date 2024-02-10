@@ -47,8 +47,17 @@
             <h2 class="title">
                 LINKTYPE_CAN_SOCKETCAN
             </h2>
+<p>This format supports classic CAN, CAN FD. and CAN XL frames.  The
+same header is used for classic CAN and CAN FD frames; a different
+header is used for CAN XL frames.
+</p>
+<p>
+The <code>0x80</code> bit of the fifth octet of the header is clear for
+CAN and CAN FD frames, and set for CAN XL frames.
+</p>
             <div class="entry">
-                <h3>Packet structure</h3>
+                <h3>CAN and CAN FD frames</h3>
+                <h4>Packet structure</h4>
 <pre>
 +---------------------------+
 |      CAN ID and flags     |
@@ -77,7 +86,7 @@
 .                           .
 </pre>
 
-                <h3>Description</h3>
+                <h4>Description</h4>
 
 <p>
 The CAN ID and flags field is in network byte order (big-endian).
@@ -150,7 +159,8 @@ Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> frames:
   <li>Must set the <code>CANFD_FDF</code> bit of the "FD flags" field in CAN FD frames,
     and don't set any bits in that field other than the <code>CANFD_BRS</code> and <code>CANFD_ESI</code> bits
     unless and until Linux assigns them a meaning.</li>
-  <li>Must make the "Reserved/Padding" fields 0 unless and until Linux assigns it a meaning.</li>
+  <li>Must make the "Reserved/Padding" fields 0 unless and until Linux assigns
+that particular field a meaning.</li>
   <li>May strip trailing padding bytes to save disk space if all above statements are satisfied.</li>
 </ul>
 
@@ -189,6 +199,78 @@ header.
 <li>sixth, seventh, and eighth bytes - controller-specific additional
 information.
 </ul>
+            </div>
+            <div class="entry">
+                <h3>CAN XL frames</h3>
+                <h4>Packet structure</h4>
+<pre>
++---------------------------+
+|      Priority ID/VCID     |
+|         (4 Octets)        |
++---------------------------+
+|           Flags           |
+|         (1 Octet)         |
++---------------------------+
+|         SDU type          |
+|         (1 Octet)         |
++---------------------------+
+|       Payload length      |
+|         (2 Octets)        |
++---------------------------+
+|      Acceptance Field     |
+|         (4 Octets)        |
++---------------------------+
+|           Payload         |
+.                           .
+.                           .
+.                           .
++---------------------------+
+|           Padding         |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h4>Description</h4>
+<p>
+<em>Multi-byte integral-valued fields in this header are
+little-endian, not big-endian as they are for fields in the classic CAN
+and CAN FD header.</em>
+</p>
+
+<p>
+The Prioritiy ID/VCID field is in little-endian byte order.
+The bottom 11 bits contain the priority of the frame.  The 5 bits above
+that are reserved.  The 8 bits above that contain a virtual CAN
+network identifier (VCID).  The 8 bits above that are reserved.
+</p>
+
+<p>
+The flags field contains CAN XL specific flags.  The bits are:
+</p>
+<ul>
+  <li><code>CANFD_SEC</code> (<code>0x01</code>) - Simple Extended Context.</li>
+  <li><code>CANXL_XLF</code> (<code>0x80</code>) - if set, the frame is a CAN XL frame; if not set,
+the frame is a CAN frame or a CAN FD frame.</li>
+</ul>
+
+<p>
+The SDU type field contains an indication of the higher-layer protocol
+used by the payload.  The values of this field are specified by CAN in
+Automation (CiA) specification 611-1 "CAN XL higher-layer functions -
+Part 1: Definition of service data unit types (SDT)".
+</p>
+
+<p>
+The frame payload length is in little-endian byte order.
+It indicates the number of bytes of payload
+following the header.  All packet bytes after those bytes of payload are
+padding.
+</p>
+
+<p>
+The Acceptance Field is in network byte order (big-endian).
+</p>
             </div>
             <!-- End of LINKTYPE_CAN_SOCKETCAN section -->
           </div>
