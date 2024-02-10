@@ -39,6 +39,7 @@
 # This script has been tested to work on the following Linux systems:
 #
 # * Debian 11
+# * Debian 12
 # * Ubuntu 22.04
 #
 # Please mind that the generated contents of the .txt files may change much
