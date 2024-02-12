@@ -233,13 +233,12 @@ information.
 
                 <h4>Description</h4>
 <p>
-<em>Multi-byte integral-valued fields in this header are
-little-endian, not big-endian as they are for fields in the classic CAN
-and CAN FD header.</em>
+<em>The Priority ID/VCID field is big-endian, but the payload length and
+acceptance field are little-endian.</em>
 </p>
 
 <p>
-The Prioritiy ID/VCID field is in little-endian byte order.
+The Prioritiy ID/VCID field is in big-endian byte order.
 The bottom 11 bits contain the priority of the frame.  The 5 bits above
 that are reserved.  The 8 bits above that contain a virtual CAN
 network identifier (VCID).  The 8 bits above that are reserved.
@@ -269,7 +268,7 @@ padding.
 </p>
 
 <p>
-The Acceptance Field is in network byte order (big-endian).
+The Acceptance Field is in little-endian byte order.
 </p>
             </div>
             <!-- End of LINKTYPE_CAN_SOCKETCAN section -->
