@@ -667,10 +667,10 @@ DESCRIPTION
               The % and ^ operators are currently only supported for filtering
               in the kernel on  particular  operating  systems  (for  example:
               FreeBSD, Linux with 3.7 and later kernels, NetBSD); on all other
-              systems (for example: AIX, illumos, Solaris, OpenBSD), if  those
-              operators  are  used, filtering will be done in user mode, which
-              will increase the overhead of capturing packets  and  may  cause
-              more packets to be dropped.
+              systems (for example: AIX, Hurd, illumos, Solaris, OpenBSD),  if
+              those  operators  are used, filtering will be done in user mode,
+              which will increase the overhead of capturing  packets  and  may
+              cause more packets to be dropped.
 
               The  length  operator,  indicated  by the keyword len, gives the
               length of the packet.
@@ -832,4 +832,4 @@ BUGS
        Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                 13 June 2023                   PCAP-FILTER(7)
+                               12 February 2024                 PCAP-FILTER(7)
