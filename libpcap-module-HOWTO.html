@@ -78,7 +78,7 @@
             routine has to do (such as setting the list of <code>DLT_</code>s)?
           </p>
           <p>
-            On Linux, *BSD, macOS, Solaris, AIX, HP-UX, IRIX, and Tru64 UNIX,
+            On Linux, *BSD, macOS, Solaris, AIX, HP-UX, illumos, Hurd and Haiku,
             Libpcap supports capturing on network interfaces as supported by the
             operating system networking stack, using the native packet capture
             mechanism provided by the OS.  On Windows, it supports it with the
@@ -92,7 +92,7 @@
             <li>specialized capture cards, such as Endace DAG cards;</li>
             <li>network adapters that provide special high-performance code
               paths, such as CSPI Myricom adapters;</li>
-            <li>buses such as USB;</li>
+            <li>buses such as USB and CAN bus;</li>
             <li>software communication channels such as D-Bus and Linux netlink;
               </li>
             <li>etc.</li>
@@ -201,11 +201,12 @@
             <code>pcap_if_t</code> that was added to the list of devices.  If it
             fails, it will return <code>NULL</code>; in this case, the error
             message buffer has been filled in with an error string, and your
-            routine must return -1 to indicate the error.
+            routine must return <code>PCAP_ERROR</code> to indicate the error.
           </p>
           <p>
             If your routine succeeds, it must return 0.  If it fails, it must
-            fill in the error message buffer with an error string and return -1.
+            fill in the error message buffer with an error string and return
+            <code>PCAP_ERROR</code>.
           </p>
         </div>
 
