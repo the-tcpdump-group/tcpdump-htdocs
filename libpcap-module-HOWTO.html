@@ -524,22 +524,36 @@ to the callback.
           </p>
           <p>
             If that failed because the program was too large, or used BPF
-            features not supported by that mechanism, the module should fall
+            features not supported by that mechanism&mdash;typically the
+            <code>BPF_MOD</code> or <code>BPF_XOR</code> instructions&mdash;the
+            module should fall
             back on filtering in userland by saving a copy of the filter with a
             call to <code>install_bpf_program()</code>, setting a flag in the
             private data instructure indicating that filtering is being done by
             the module and, in the read routine's main loop, checking the flag
-            and, if it's set, calling
-            <a href="manpages/pcap_filter.3pcap.html"><b>pcap_filter</b></a>(3PCAP),
+            and, if it's set, calling <b>pcapint_filter</b>(),
             passing it the <code>fcode.bf_insns</code> member of the
             <code>pcap_t</code>, the raw packet data, the on-the-wire length of
             the packet, and the captured length of the packet, and only passing
             the packet to the callback routine, and counting it, if
-            <b>pcap_filter</b>() returns a non-zero value.  (If the flag is not
+            <b>pcapint_filter</b>() returns a non-zero value.  (If the flag is not
             set, all packets should be passed to the callback routine and
             counted, as the filtering is being done by the mechanism used by the
             module.)  If <code>install_bpf_program()</code> returns a negative
             value,  the routine should return <code>PCAP_ERROR</code>.
+          </p>
+          <p>
+            The "captured length of the packet" above is the amount of data
+            the read routine has received for each specific packet.  It should
+            not be confused with the snapshot length, which is constant while
+            the handle is active, because in <b>pcapint_filter</b>() it is
+            essential to know exactly how much of the current packet data is
+            available in order to interpret the program correctly.  That
+            notwithstanding, if <b>pcapint_filter</b>() tells to accept the
+            packet, the read routine should deliver no more than the snapshot
+            length worth of the packet data to the callback routine.  This way
+            userland filtering and kernel filtering would produce very similar
+            results until buffering, throughput, latency, etc. becomes a factor.
           </p>
           <p>
             If the attempt to set the filter failed for any other reason, the
