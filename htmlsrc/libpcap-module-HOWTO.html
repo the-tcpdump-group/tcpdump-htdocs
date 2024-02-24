@@ -102,7 +102,7 @@
           </p>
         </div>
 
-        <h2 class="title">The list device instances routine</h2>
+        <h2 class="title">The list device instances routine (most generic case)</h2>
         <div class="entry">
           <p>
             The "list of device instances" routine takes, as arguments:
@@ -129,8 +129,8 @@
           </p>
           <p>
             The routine should add devices to the list by calling the
-            <code>add_dev()</code> routine in libpcap, declared in the
-            <code>pcap-int.h header</code>.  It takes, as arguments:
+            <b>pcapint_add_dev</b>() routine in libpcap, declared in the
+            <code>pcap-int.h</code> header.  It takes, as arguments:
           </p>
           <ul>
             <li>
@@ -153,11 +153,79 @@
             </li>
           </ul>
           <p>
-            <code>add_dev()</code> will, if it succeeds, return a pointer to a
+            <b>pcapint_add_dev</b>() will, if it succeeds, return a pointer to a
             <code>pcap_if_t</code> that was added to the list of devices.  If it
             fails, it will return <code>NULL</code>; in this case, the error
             message buffer has been filled in with an error string, and your
             routine must return <code>PCAP_ERROR</code> to indicate the error.
+          </p>
+          <p>
+            If your routine succeeds, it must return 0.  If it fails, it must
+            fill in the error message buffer with an error string and return
+            <code>PCAP_ERROR</code>.
+          </p>
+        </div>
+
+        <h2 class="title">The list device instances routine (OS network interfaces)</h2>
+        <div class="entry">
+          <p>
+            If the list of capture devices above is a subset of the OS network
+            interfaces, the easiest way to implement the routine is through
+            <b>pcapint_findalldevs_interfaces</b>(), which uses the
+            correct API for the OS (<b>getifaddrs</b>(),
+            <code>SIOCGIFCONF</code> or <code>SIOCGLIFCONF</code>).  The helper
+            function takes two additional arguments:
+          </p>
+          <ul>
+            <li>
+              a pointer to an "interface is usable" routine;
+            </li>
+            <li>
+              a pointer to a "get interface flags" routine.
+            </li>
+          </ul>
+        </div>
+
+        <h2 class="title">The interface is usable routine</h2>
+        <div class="entry">
+          <p>
+            The "interface is usable" routine takes a pointer to a network
+            interface name and returns 0 if the module does not support the
+            interface, otherwise any other value.
+          </p>
+          <p>
+            One of the possible ways to do this could be to check whether the
+            interface name looks like a name that this module would handle; for
+            example, it should begin with one of the interface name prefixes
+            for your module and, if your devices have instance numbers, be
+            followed by a number.
+          </p>
+        </div>
+
+        <h2 class="title">The get interface flags routine</h2>
+        <div class="entry">
+          <p>
+            The "get interface flags" routine takes, as arguments:
+          </p>
+          <ul>
+            <li>
+              a pointer to a device name;
+            </li>
+            <li>
+              a pointer to a 32-bit integer with a bitmask;
+            </li>
+            <li>
+              a pointer to an error message buffer.
+            </li>
+          </ul>
+          <p>
+            This routine interprets the bitmask of most basic libpcap interface
+            flags (e.g. <code>PCAP_IF_UP</code> corresponding to the OS API
+            <code>IFF_UP</code>) and modifies the bitmask if necessary.  A
+            common reason to do this is to set the correct
+            <code>PCAP_IF_CONNECTION_STATUS</code> bit according to the
+            interface properties.  The resulting bitmask will be available in
+            the <code>pcap_if_t.flags</code> output of <b>pcap_findalldevs</b>().
           </p>
           <p>
             If your routine succeeds, it must return 0.  If it fails, it must
@@ -177,14 +245,17 @@
               a pointer to a device name;
             </li>
             <li>
-              a pointer to an error message buffer;
-            </li>
-            <li>
-              a pointer to an <code>int</code>.
+              a pointer to an error message buffer.
             </li>
           </ul>
           <p>
           It returns a pointer to a <code>pcap_t</code>.
+          </p>
+          <p>
+            It is a good idea before doing anything else to use the "interface
+            is usable" routine above, this way <b>pcap_create</b>() will fail
+            immediately for any device that <b>pcap_findalldevs</b>() does not
+            return and the module behaviour will be consistent.
           </p>
           <p>
             Your module will probably need, for each <code>pcap_t</code> for an
@@ -199,21 +270,12 @@
             you will have to maintain that yourself.
           </p>
           <p>
-            The routine should first check the device to see whether it looks
-            like a device that this module would handle; for example, it should
-            begin with one of the device name prefixes for your module and, if
-            your devices have instance numbers, be followed by a number.  If it
-            is not one of those devices, you must set the integer pointed to by
-            the third argument to 0, to indicate that this is
-            <strong>not</strong> one of the devices for your module, and return
+            The routine should use the <b>PCAP_CREATE_COMMON</b>() macro, passing
+            to it the error message buffer as the first argument and the C data
+            type of the per-opened instance data structure as the second
+            argument.  If it fails, it will fill the buffer with an appropriate
+            message and return <code>NULL</code>; in this case you must return
             <code>NULL</code>.
-          </p>
-          <p>
-            If it <strong>is</strong> one of those devices, it should call
-            <code>pcap_create_common()</code>, passing to it the error message
-            buffer as the first argument and the size of the per-opened instance
-            data structure as the second argument.  If it fails, it will return
-            <code>NULL</code>; you must return <code>NULL</code> in this case.
           </p>
           <p>
             If it succeeds, the <code>pcap_t</code> pointed to by the return
@@ -239,7 +301,7 @@
               <a href="manpages/pcap_can_set_rfmon.3pcap.html"><b>pcap_can_set_rfmon</b></a>(3PCAP)
               is done on the <code>pcap_t</code>&mdash;if your device doesn't
               support 802.11 monitor mode, you can leave this as initialized by
-              <code>pcap_create_common()</code>, as that routine will return
+              <b>PCAP_CREATE_COMMON</b>(), as that routine will return
               "no, monitor mode isn't supported".
             </dd>
           </dl>
@@ -260,7 +322,7 @@
           <p>
             The parameters set for the device in the
             <a href="manpages/pcap_create.3pcap.html"><b>pcap_create</b></a>(3PCAP)
-            call, and after that <code>call()</code>, are mostly in the
+            call, and after that call, are mostly in the
             <code>opt</code> member of the <code>pcap_t</code>:
           </p>
           <dl>
@@ -378,7 +440,7 @@
           </p>
           <p>
             On UN*Xes, if the device supports waiting for packets to arrive with
-            <code>select()</code>/<code>poll()</code>/<code>epoll()</code>/kqueues
+            <b>select</b>()/<b>poll</b>()/<b>epoll</b>()/kqueues
             etc., it should set the <code>selectable_fd</code> member of the
             structure to the descriptor you would use with those calls.  If it
             does not, then, if that's because the device polls for packets
@@ -484,7 +546,7 @@ to the callback.
             <code>BPF_MOD</code> or <code>BPF_XOR</code> instructions&mdash;the
             module should fall
             back on filtering in userland by saving a copy of the filter with a
-            call to <code>install_bpf_program()</code>, setting a flag in the
+            call to <b>install_bpf_program</b>(), setting a flag in the
             private data instructure indicating that filtering is being done by
             the module and, in the read routine's main loop, checking the flag
             and, if it's set, calling <b>pcapint_filter</b>(),
@@ -495,7 +557,7 @@ to the callback.
             <b>pcapint_filter</b>() returns a non-zero value.  (If the flag is not
             set, all packets should be passed to the callback routine and
             counted, as the filtering is being done by the mechanism used by the
-            module.)  If <code>install_bpf_program()</code> returns a negative
+            module.)  If <b>install_bpf_program</b>() returns a negative
             value,  the routine should return <code>PCAP_ERROR</code>.
           </p>
           <p>
@@ -520,13 +582,13 @@ to the callback.
           <p>
             If the attempt to set the filter succeeded, or it failed because the
             mechanism used by the module rejected it and the call to
-            <code>install_bpf_program()</code> succeeded, the routine should
+            <b>install_bpf_program</b>() succeeded, the routine should
             return 0.
           </p>
           <p>
             If the mechanism the module uses doesn't support filtering, the
             pointer to the setfilter routine can just be set to point to
-            <code>install_bpf_program()</code>; the module does not need a
+            <b>install_bpf_program</b>(); the module does not need a
             routine of its own to handle that.
           </p>
         </div>
