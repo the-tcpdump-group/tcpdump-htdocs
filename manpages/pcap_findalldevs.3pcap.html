@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_FINDALLDEVS</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 23 August 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 4 March 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -260,6 +260,16 @@ IPv6 addresses have the value
 (which older operating systems that don't support IPv6 might not
 define), and other addresses have other values.  Whether other addresses
 are returned, and what types they might have is platform-dependent.
+Namely, link-layer addresses, such as Ethernet MAC addresses, have the value
+<CODE>AF_PACKET</CODE>
+
+(on Linux) or
+<CODE>AF_LINK</CODE>
+
+(on FreeBSD, Haiku, illumos, NetBSD and OpenBSD) or are not returned at all
+(on GNU/Hurd and Solaris).
+<P>
+
 For IPv4 addresses, the
 <CODE>struct sockaddr</CODE>
 
@@ -268,6 +278,18 @@ pointer can be interpreted as if it pointed to a
 
 for IPv6 addresses, it can be interpreted as if it pointed to a
 <CODE>struct sockaddr_in6.</CODE>
+
+For link-layer addresses, it can be interpreted as if it pointed to a
+<CODE>struct sockaddr_ll</CODE>
+
+(for
+<CODE>AF_PACKET</CODE>)
+
+or a
+<CODE>struct sockaddr_dl</CODE>
+
+(for
+<CODE>AF_LINK</CODE>).
 
 <P>
 
@@ -332,7 +354,7 @@ constants became available in libpcap release 1.9.0.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 10:38:35 GMT, December 01, 2023
+This HTML man page was generated at 01:41:15 GMT, March 05, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
