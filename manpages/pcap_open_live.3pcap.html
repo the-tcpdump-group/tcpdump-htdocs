@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_OPEN_LIVE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 December 2023<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 4 March 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -54,7 +54,10 @@ which may also include D-Bus, USB etc.
 
 <I>snaplen</I>
 
-specifies the snapshot length to be set on the handle.
+specifies the snapshot length to be set on the handle.  If the packet
+data should not be truncated at the end, a value of 262144 should be
+sufficient for most devices, but D-Bus devices require a value of 128Mb
+(128*1024*1024).
 <P>
 
 <I>promisc</I>
@@ -124,7 +127,7 @@ is no longer a zero-length string.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 23:20:09 GMT, December 05, 2023
+This HTML man page was generated at 11:15:59 GMT, March 05, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

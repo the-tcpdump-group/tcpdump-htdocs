@@ -32,28 +32,31 @@ DESCRIPTION
        should not be confused with all available capture devices  as  seen  by
        pcap_findalldevs(3PCAP), which may also include D-Bus, USB etc.
 
-       snaplen specifies the snapshot length to be set on the handle.
+       snaplen  specifies the snapshot length to be set on the handle.  If the
+       packet data should not be truncated at  the  end,  a  value  of  262144
+       should  be  sufficient  for  most  devices, but D-Bus devices require a
+       value of 128Mb (128*1024*1024).
 
-       promisc  specifies  whether the interface is to be put into promiscuous
-       mode.  If promisc is non-zero, promiscuous mode will be set,  otherwise
+       promisc specifies whether the interface is to be put  into  promiscuous
+       mode.   If promisc is non-zero, promiscuous mode will be set, otherwise
        it will not be set.
 
-       to_ms  specifies the packet buffer timeout, as a non-negative value, in
+       to_ms specifies the packet buffer timeout, as a non-negative value,  in
        milliseconds.  (See pcap(3PCAP) for an explanation of the packet buffer
        timeout.)
 
-       errbuf  is  a  buffer  large  enough  to hold at least PCAP_ERRBUF_SIZE
+       errbuf is a buffer large  enough  to  hold  at  least  PCAP_ERRBUF_SIZE
        chars.
 
 RETURN VALUE
        pcap_open_live() returns a pcap_t * on success and NULL on failure.  If
-       NULL  is  returned,  errbuf is filled in with an appropriate error mes-
-       sage.  errbuf may also be set to  warning  text  when  pcap_open_live()
-       succeeds;  to  detect  this  case the caller should store a zero-length
-       string in errbuf before calling pcap_open_live() and display the  warn-
+       NULL is returned, errbuf is filled in with an  appropriate  error  mes-
+       sage.   errbuf  may  also  be set to warning text when pcap_open_live()
+       succeeds; to detect this case the caller  should  store  a  zero-length
+       string  in errbuf before calling pcap_open_live() and display the warn-
        ing to the user if errbuf is no longer a zero-length string.
 
 SEE ALSO
        pcap_create(3PCAP), pcap_activate(3PCAP)
 
-                                5 December 2023          PCAP_OPEN_LIVE(3PCAP)
+                                 4 March 2024            PCAP_OPEN_LIVE(3PCAP)

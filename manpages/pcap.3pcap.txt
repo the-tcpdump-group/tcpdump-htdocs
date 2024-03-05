@@ -453,18 +453,22 @@ DESCRIPTION
 
               len    a  bpf_u_int32  giving the length of the packet, in bytes
                      (which might be more than the number of  bytes  available
-                     from  the  capture, if the length of the packet is larger
-                     than the maximum number of bytes to capture).
+                     from  the capture, if the length of the packet was larger
+                     than the snapshot length or than some  limit  imposed  by
+                     the capture mechanism).
 
-       The callback is also supplied a  const  u_char  pointer  to  the  first
-       caplen  (as  given  in the struct pcap_pkthdr mentioned above) bytes of
-       data from the packet.  This won't necessarily be the entire packet;  to
-       capture the entire packet, you will have to provide a value for snaplen
-       in your call to pcap_set_snaplen() that is sufficiently  large  to  get
-       all  of  the  packet's  data - a value of 65535 should be sufficient on
-       most if not all networks).  When reading from a ``savefile'', the snap-
-       shot  length  specified  when  the capture was performed will limit the
-       amount of packet data available.
+       The  callback  is  also  supplied  a  const u_char pointer to the first
+       caplen (as given in the struct pcap_pkthdr mentioned  above)  bytes  of
+       data from the packet.  This won't necessarily be the entire packet; the
+       default value used if pcap_create() and  pcap_activate()  are  used  to
+       open a capture device, and no call to pcap_set_snaplen() is made before
+       pcap_activate() is called, should be sufficient for that device.   How-
+       ever,  if  a smaller value is set with a call to pcap_set_snaplen(), if
+       the default isn't sufficient for that device, or if the mechanism  used
+       by  libpcap  to capture the traffic imposes a separate limit, some cap-
+       tured packets may not contain all the  data  sent  or  received.   When
+       reading  from  a  ``savefile'',  the snapshot length specified when the
+       capture was performed will limit the amount of packet data available.
 
        pcap_next() is passed an argument that points to a  struct  pcap_pkthdr
        structure,  and  fills  it in with the time stamp and length values for
@@ -741,4 +745,4 @@ BUGS
        ture, provide generic feedback etc please see the file  CONTRIBUTING.md
        in the libpcap source tree root.
 
-                                28 January 2024                    PCAP(3PCAP)
+                                 4 March 2024                      PCAP(3PCAP)

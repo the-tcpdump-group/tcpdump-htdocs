@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 28 January 2024<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 4 March 2024<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -788,7 +788,8 @@ a
 
 giving the length of the packet, in bytes (which might be more than the
 number of bytes available from the capture, if the length of the packet
-is larger than the maximum number of bytes to capture).
+was larger than the snapshot length or than some limit imposed by the
+capture mechanism).
 </DL>
 </DL>
 
@@ -805,17 +806,27 @@ pointer to the first
 
 mentioned above)
 bytes of data from the packet.  This won't necessarily be the entire
-packet; to capture the entire packet, you will have to provide a value
-for
-<I>snaplen</I>
+packet; the default value used if
+<B>pcap_create</B>()
 
-in your call to
+and
+<B>pcap_activate</B>()
+
+are used to open a capture device, and no call to
 <B>pcap_set_snaplen</B>()
 
-that is sufficiently large to get all of the packet's data - a value of
-65535 should be sufficient on most if not all networks).  When reading
-from a ``savefile'', the snapshot length specified when the capture was
-performed will limit the amount of packet data available.
+is made before
+<B>pcap_activate</B>()
+
+is called, should be sufficient for that device.  However, if a smaller
+value is set with a call to
+<B>pcap_set_snaplen</B>(),
+
+if the default isn't sufficient for that device, or if the mechanism
+used by libpcap to capture the traffic imposes a separate limit,
+some captured packets may not contain all the data sent or received.
+When reading from a ``savefile'', the snapshot length specified when the
+capture was performed will limit the amount of packet data available.
 <P>
 
 <B>pcap_next</B>()
@@ -1481,7 +1492,7 @@ in the libpcap source tree root.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:49:19 GMT, February 01, 2024
+This HTML man page was generated at 11:15:56 GMT, March 05, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
