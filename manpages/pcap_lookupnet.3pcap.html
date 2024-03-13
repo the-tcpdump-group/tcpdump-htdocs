@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_LOOKUPNET</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 13 March 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -54,6 +54,14 @@ is a buffer large enough to hold at least
 <CODE>PCAP_ERRBUF_SIZE</CODE>
 
 chars.
+<P>
+
+This function is not available on Windows.  It supports neither IPv6 nor
+multiple IPv4 addresses per interface, which obviously is not practical in
+modern networks.  See
+<A HREF='./pcap_findalldevs.3pcap.html'><B>pcap_findalldevs</B></A>(3PCAP)
+
+for a more elaborate solution to the problem.
 <H2 id="lbAE">RETURN VALUE</H2>
 
 <B>pcap_lookupnet</B>()
@@ -79,7 +87,7 @@ is filled in with an appropriate error message.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 10:38:36 GMT, December 01, 2023
+This HTML man page was generated at 13:30:15 GMT, March 13, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
