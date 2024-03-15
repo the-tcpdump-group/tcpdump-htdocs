@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_STRERROR</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 January 2014<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 12 March 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -29,15 +29,19 @@ pcap_strerror - convert an errno value to a string
 
 <H2 id="lbAD">DESCRIPTION</H2>
 
-<B>pcap_strerror</B>()
-
-is provided in case
-<B>strerror</B>(3)
-
-isn't available.  It returns an error message string corresponding to
+This function returns an error message string corresponding to
 <I>error</I>.
 
-<H2 id="lbAE">SEE ALSO</H2>
+It uses either
+<B>strerror</B>(3)
+
+or its thread-safe variant if one is available, which currently is the case in
+every supported OS.
+<H2 id="lbAE">BACKWARD COMPATIBILITY</H2>
+
+This function was not thread-safe in libpcap before 1.8.1 on Windows and
+in libpcap before 1.11.0 on all other OSes.
+<H2 id="lbAF">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
@@ -45,7 +49,7 @@ isn't available.  It returns an error message string corresponding to
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:07 GMT, November 01, 2021
+This HTML man page was generated at 19:07:27 GMT, March 15, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
