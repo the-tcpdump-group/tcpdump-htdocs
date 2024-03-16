@@ -31,7 +31,7 @@ DESCRIPTION
        cannot  be  opened  by the process calling pcap_findalldevs(), because,
        for example, that process does not have sufficient privileges  to  open
        them  for capturing; if so, those devices will not appear on the list.)
-       alldevsp is a pointer to a pcap_if_t*; errbuf is a buffer large  enough
+       alldevsp is a pointer to a pcap_if_t *; errbuf is a buffer large enough
        to hold at least PCAP_ERRBUF_SIZE chars.
 
        If  pcap_findalldevs()  succeeds, the pointer pointed to by alldevsp is
