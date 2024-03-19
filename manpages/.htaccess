@@ -7,6 +7,5 @@ IndexIgnore restyle.php
 
 RewriteEngine On
 # Have the script process requests for all existing .html files.
-RewriteCond "%{REQUEST_FILENAME}" "\.html$"
 RewriteCond "%{REQUEST_FILENAME}" -f
-RewriteRule "." "restyle.php" [L,PT]
+RewriteRule "\.html$" "restyle.php" [L,PT]
