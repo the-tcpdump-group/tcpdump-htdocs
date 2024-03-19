@@ -157,12 +157,24 @@ function read_file (string $filename): string
 if (! in_array ($_SERVER['REQUEST_METHOD'], array ('GET', 'HEAD')))
 	fail (405);
 
-if (! array_key_exists ('REQUEST_URI', $_SERVER))
-	fail (400);
 $uri_path = $_SERVER['REQUEST_URI'];
-if ($uri_path == $_SERVER['SCRIPT_NAME'])
+# Make the following two checks in the PHP space because in the server
+# configuration space it would be notably more complicated.
+if (! array_key_exists ('REDIRECT_URL', $_SERVER))
+	# The request did not come via the RewriteRule in .htaccess.
 	fail (403);
+# REDIRECT_URL contains an URI path in the nominal form (with neither
+# duplicate slashes nor a query string nor percent-encoding).  If the client
+# is trying to use any other form, normalize it explicitly.
+if ($uri_path != $_SERVER['REDIRECT_URL'])
+{
+	# The value is just the path, so the reference is relative.
+	header ("Location: ${_SERVER['REDIRECT_URL']}");
+	exit;
+}
 
+# On a correctly configured server this condition is always false, but let's
+# not fail to fail correctly.
 if (0 !== strpos ($uri_path, URI_PREFIX))
 	fail (400);
 $uri_path = str_replace (URI_PREFIX, '', $uri_path);
