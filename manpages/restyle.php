@@ -169,7 +169,7 @@ if (! array_key_exists ('REDIRECT_URL', $_SERVER))
 if ($uri_path != $_SERVER['REDIRECT_URL'])
 {
 	# The value is just the path, so the reference is relative.
-	header ("Location: ${_SERVER['REDIRECT_URL']}");
+	header ("Location: ${_SERVER['REDIRECT_URL']}", TRUE, 301);
 	exit;
 }
 
