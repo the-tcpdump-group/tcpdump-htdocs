@@ -1007,7 +1007,10 @@ function limit_request_rate(): void
 	if ($prev > $now)
 		fail (500);
 	if ($now - $prev < 1.0 / MAX_RPS_LIMIT)
+	{
+		header ('Retry-After: 5');
 		fail (429, RPS_EXCEEDED_MESSAGE);
+	}
 	# It is certainly fine to proceed.  Update the timestamp and release
 	# the lock early so any concurrent requests can bounce without a delay.
 	if (FALSE === ftruncate ($f, 0))
