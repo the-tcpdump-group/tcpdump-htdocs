@@ -253,6 +253,25 @@
                                  Pcap4J wraps a native packet capture library (libpcap, WinPcap, or
                                  Npcap) via JNA and provides you Java-oriented APIs.
                             </dd>
+
+                            <dt>
+                                <a class=away href="https://lib.rs/crates/pcap">rust-pcap</a>
+                            </dt>
+                            <dd>
+                                 This is a Rust language crate for accessing the packet sniffing
+                                 capabilities of libpcap (or Npcap on Windows).  It implements
+                                 the following features:
+                                 <ul>
+                                     <li>list devices</li>
+                                     <li>open capture handle on a device or savefiles</li>
+                                     <li>get packets from the capture handle</li>
+                                     <li>filter packets using BPF programs</li>
+                                     <li>list/set/get datalink link types</li>
+                                     <li>configure some parameters like promiscuity and buffer length</li>
+                                     <li>write packets to savefiles</li>
+                                     <li>inject packets into an interface</li>
+                                 </ul>
+                            </dd>
                         </dl>
                     </div>
                 </div>
