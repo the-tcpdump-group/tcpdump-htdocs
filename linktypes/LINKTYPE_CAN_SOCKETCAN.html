@@ -47,16 +47,16 @@
             <h2 class="title">
                 LINKTYPE_CAN_SOCKETCAN
             </h2>
-<p>This format supports classic CAN, CAN FD. and CAN XL frames.  The
-same header is used for classic CAN and CAN FD frames; a different
+<p>This format supports CAN CC (aka Classical CAN, CAN2.0B), CAN FD and CAN XL frames.  The
+same header is used for CAN CC and CAN FD frames; a different
 header is used for CAN XL frames.
 </p>
 <p>
 The <code>0x80</code> bit of the fifth octet of the header is clear for
-CAN and CAN FD frames, and set for CAN XL frames.
+CAN CC and CAN FD frames, and set for CAN XL frames.
 </p>
             <div class="entry">
-                <h3>CAN and CAN FD frames</h3>
+                <h3>CAN CC and CAN FD frames</h3>
                 <h4>Packet structure</h4>
 <pre>
 +---------------------------+
@@ -66,13 +66,13 @@ CAN and CAN FD frames, and set for CAN XL frames.
 |       Payload length      |
 |         (1 Octet)         |
 +---------------------------+
-|          FD flags         |
+|     FD flags (CAN FD)     |
 |         (1 Octet)         |
 +---------------------------+
 |      Reserved/Padding     |
 |         (1 Octet)         |
 +---------------------------+
-|      Reserved/Padding     |
+|    Len 8 DLC (CAN CC)     |
 |         (1 Octet)         |
 +---------------------------+
 |           Payload         |
@@ -94,8 +94,8 @@ The bottom 29 bits contain the CAN ID of the frame.
 The remaining bits are:
 </p>
 <ul>
-  <li><code>0x20000000</code> - set if the frame is an error message rather than a data frame.</li>
-  <li><code>0x40000000</code> - set if the frame is a remote transmission request frame.</li>
+  <li><code>0x20000000</code> - set if the frame is an error message rather than a data frame (CAN CC only).</li>
+  <li><code>0x40000000</code> - set if the frame is a remote transmission request frame (CAN CC only).</li>
   <li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather than a standard 11-bit frame.</li>
 </ul>
 
@@ -106,72 +106,66 @@ padding.
 </p>
 
 <p>
-The FD flags field contains CAN FD specific flags; for CAN frames, this
+The CAN frame types CAN CC and CAN FD can be distinguished by the frame length:
+<ul>
+  <li>if the frame size (including the header and padding) is 16, it's a CAN CC frame
+  <li>if the frame size (including the header and padding) is 72, it's a CAN FD frame
+</ul>
+</p>
+
+<p>
+The FD flags field contains CAN FD specific flags; for CAN CC frames, this
 field is 0.  The bits are:
 </p>
 <ul>
   <li><code>CANFD_BRS</code> (<code>0x01</code>) - bit rate switch (second bitrate for payload data).</li>
   <li><code>CANFD_ESI</code> (<code>0x02</code>) - error state indicator of the transmitting node.</li>
-  <li><code>CANFD_FDF</code> (<code>0x04</code>) - if set, the frame is a CAN FD frame; if not set,
-the frame may be a CAN frame or a CAN FD frame.</li>
+  <li><code>CANFD_FDF</code> (<code>0x04</code>) - mark CAN FD for dual use of struct canfd_frame.</li>
 </ul>
 
 <p>
-Older software and firmware writing packets with this link type did not
-use the <code>CANFD_FDF</code> flag for CAN FD frames, so if the <code>CANFD_FDF</code> flag is
-not set, the frame is not guaranteed to be a CAN frame.  If that flag is
-not set:
+As the <code>CANFD_FDF</code> flag for CAN FD frames is not set reliably by the Linux kernel,
+this flag can be used to identify CAN FD frames when using the struct canfd_frame as a container
+for CAN FD and CAN CC frames in user space applications.
+</p>
+
+<p>
+Software that reads <code>LINKTYPE_CAN_SOCKETCAN</code> frames must distinguish between CAN CC and CAN FD
+ONLY by the frame length (16 or 72). Additionally the <code>0x80</code> bit of the fifth octet of the
+header has to be clear for CAN CC and CAN FD frames.
+</p>
+
+<p>
+Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> CAN CC anc CAN FD frames:
 </p>
 <ul>
-  <li>if the frame size (including the header and padding) is 16, it's
-   a CAN frame;
-  <li>if the frame size (including the header and padding) is 72, it's
-   a CAN FD frame.
-</ul>
-
-<p>
-In addition, older software and firmware may not have explicitly set
-that field, so that the bit corresponding to the <code>CANFD_FDF</code> flag might be
-set even for classic CAN frames.  Therefore, code that reads
-<code>LINKTYPE_CAN_SOCKETCAN</code> frames must perform some heuristic checks to make
-sure that it doesn't incorrectly interpret a classic CAN frame as a CAN
-FD frame, and code that generates <code>LINKTYPE_CAN_SOCKETCAN</code> frames must
-follow certain rules to make sure that those checks don't cause
-software that reads those fromes to treat a CAN FD frame as a classic
-CAN frame.
-</p>
-
-<p>
-Software that reads <code>LINKTYPE_CAN_SOCKETCAN</code> frames must not treat a frame
-with the <code>CANFD_FDF</code> bit set as a CAN FD frame if any bits other than
-<code>CANFD_BRS</code> and <code>CANFD_ESI</code> are set in that field, or if either of the
-Reserved/Padding fields are non-zero, as that is an indication that the
-header fields might not have been explicitly set, and the <code>CANFD_FDF</code> flag
-might happen to be set even thugh the frame is not a CAN FD frame. 
-</p>
-
-<p>
-Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> frames:
-</p>
-<ul>
-  <li>Must check the frame MTU when receiving frames from the Linux kernel in order to classify them as classic CAN frames or CAN FD frames.</li>
-  <li>Must make the "FD flags" field 0 for classic CAN frames.</li>
-  <li>Must set the <code>CANFD_FDF</code> bit of the "FD flags" field in CAN FD frames,
-    and don't set any bits in that field other than the <code>CANFD_BRS</code> and <code>CANFD_ESI</code> bits
-    unless and until Linux assigns them a meaning.</li>
+  <li>Must create a the frame length according to the Linux kernel MTU definitions in order
+    to classify them as CAN CC frames (MTU = 16) or CAN FD frames (MTU = 72).</li>
+  <li>Must make the "FD flags" field 0 for CAN CC frames.</li>
+  <li>Should set the <code>CANFD_FDF</code> bit of the "FD flags" field in CAN FD frames,
+    and <code>CANFD_BRS</code> and <code>CANFD_ESI</code> bits when needed. Unassigned bits in
+  the "FD flags" field should be set to 0</li>
   <li>Must make the "Reserved/Padding" fields 0 unless and until Linux assigns
-that particular field a meaning.</li>
+    that particular field a meaning.</li>
+  <li>Might set a Len 8 DLC value for CAN CC frames or set this field to 0.</li>
   <li>May strip trailing padding bytes to save disk space if all above statements are satisfied.</li>
 </ul>
 
 <p>
-For a data frame, the payload is the data field of the CAN or CAN FD
+For a data frame, the payload is the data field of the CAN CC or CAN FD
 packet.
 <p>
 
 <p>
-For a remote retransmission request, the payload length must be 0, so
-the payload is empty.
+A remote retransmission request (RTR) is only possible with CAN CC frames and the
+(real) payload length on the CAN bus is always 0.
+But as the 4-bit DLC value is always send inside a CAN CC frame all possible values (0 .. 15)
+can be defined by the Linktype protocol.
+<ul>
+  <li> DLC 0 .. 8: The data length value is set to 0 .. 8. The Len 8 DLC value is set to 0.</li>
+  <li> DLC 9 .. 15: The data length value is set to 8. The Len 8 DLC value is set to 9 .. 15.</li>
+</ul>
+The Len 8 DLC value is applicable to CAN CC data frames and CAN CC RTR frames.
 <p>
 
 <p>
@@ -250,7 +244,7 @@ The flags field contains CAN XL specific flags.  The bits are:
 <ul>
   <li><code>CANFD_SEC</code> (<code>0x01</code>) - Simple Extended Context.</li>
   <li><code>CANXL_XLF</code> (<code>0x80</code>) - if set, the frame is a CAN XL frame; if not set,
-the frame is a CAN frame or a CAN FD frame.</li>
+the frame is a CAN CC frame or a CAN FD frame.</li>
 </ul>
 
 <p>
