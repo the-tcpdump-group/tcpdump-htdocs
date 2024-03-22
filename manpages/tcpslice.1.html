@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPSLICE</H1>
-Section: User Commands  (1)<BR>Updated: 01 January 2022<BR>
+Section: User Commands  (1)<BR>Updated: 22 March 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents tcpslice version 1.8-PRE-GIT.</H4>
@@ -71,12 +71,18 @@ tcpslice - extract pieces of and/or merge together pcap files
 
 <I>Tcpslice</I>
 
-is a program for extracting portions of packet-trace files generated using
+is a program for extracting portions of
+<CODE>.pcap</CODE>
+
+(but not
+<CODE>.pcapng</CODE>)
+
+files produced using
 <B><A HREF="./tcpdump.1.html">tcpdump</A></B>(1)'s
 
 <CODE>-w</CODE>
 
-flag.
+flag or many other programs.
 It can also be used to merge together several such files, as discussed
 below.
 <P>
@@ -162,7 +168,10 @@ through 500 seconds after the
 
 Times may also be specified in terms of years (y), months (m), days (d),
 hours (h), minutes (m), seconds (s), and microseconds(u).  For example,
-the Unix timestamp 654321098.7654 discussed above could also be expressed
+the Unix timestamp
+<CODE>654321098.7654</CODE>
+
+discussed above could also be expressed
 as
 <CODE>1990y9m25d20h51m38s765400u</CODE>.
 
@@ -550,6 +559,12 @@ to rummage through its input files.
 
 <I>tcpslice</I>
 
+cannot process an otherwise valid input file that contains fewer than two
+packets.
+<P>
+
+<I>tcpslice</I>
+
 refuses to write to its output if it is a terminal
 (as indicated by
 <B>isatty</B>(3)).
@@ -605,7 +620,7 @@ supported more general editing of trace files.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:46:39 GMT, January 23, 2024
+This HTML man page was generated at 18:06:37 GMT, March 22, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
