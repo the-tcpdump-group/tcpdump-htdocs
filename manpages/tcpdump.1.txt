@@ -1356,31 +1356,28 @@ BUGS
        ture, provide generic feedback etc. please see the file CONTRIBUTING.md
        in the tcpdump source tree root.
 
-       NIT doesn't let you watch your own outbound traffic, BPF will.  We rec-
-       ommend that you use the latter.
-
-       Some  attempt should be made to reassemble IP fragments or, at least to
+       Some attempt should be made to reassemble IP fragments or, at least  to
        compute the right length for the higher level protocol.
 
        Name server inverse queries are not dumped correctly: the (empty) ques-
-       tion  section  is printed rather than real query in the answer section.
-       Some believe that inverse queries are themselves a bug  and  prefer  to
+       tion section is printed rather than real query in the  answer  section.
+       Some  believe  that  inverse queries are themselves a bug and prefer to
        fix the program generating them rather than tcpdump.
 
-       A  packet  trace  that crosses a daylight savings time change will give
+       A packet trace that crosses a daylight savings time  change  will  give
        skewed time stamps (the time change is ignored).
 
-       Filter expressions on fields other than those  in  Token  Ring  headers
+       Filter  expressions  on  fields  other than those in Token Ring headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter  expressions  on  fields other than those in 802.11 headers will
-       not correctly handle 802.11 data packets with both To DS  and  From  DS
+       Filter expressions on fields other than those in  802.11  headers  will
+       not  correctly  handle  802.11 data packets with both To DS and From DS
        set.
 
-       ip6  proto  should  chase header chain, but at this moment it does not.
+       ip6 proto should chase header chain, but at this moment  it  does  not.
        ip6 protochain is supplied for this behavior.
 
-       Arithmetic expression against transport  layer  headers,  like  tcp[0],
+       Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
                                 28 January 2024                     TCPDUMP(1)
