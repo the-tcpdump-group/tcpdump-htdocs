@@ -1323,8 +1323,8 @@ BACKWARD COMPATIBILITY
        with libpcap 1.9.0 or later.
 
 SEE ALSO
-       stty(1),     pcap(3PCAP),     bpf(4),     nit(4P),    pcap-savefile(5),
-       pcap-filter(7), pcap-tstamp(7)
+       stty(1),   pcap(3PCAP),   bpf(4),   pcap-savefile(5),   pcap-filter(7),
+       pcap-tstamp(7)
 
               https://www.iana.org/assignments/media-types/applica-
               tion/vnd.tcpdump.pcap
