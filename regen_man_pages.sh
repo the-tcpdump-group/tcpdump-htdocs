@@ -293,8 +293,8 @@ definitelyBoldToCode()
 	# regexps do not support negative matching and this function is the
 	# only source of <CODE> tags in the page.
 	sed -E '/^<H2 .+>DESCRIPTION/,$s@^<DT><B>([^<>]+)</B>@<DT><CODE>\1</CODE>@' |
-		sed -E '/^<H2 .+>DESCRIPTION/,$s@^(non-<|\(<|<)B(>[^<>]+</)B(>(,|\.|;|\)|\),|\)\.|\);|s)?)$@\1CODE\2CODE\3@' |
-		sed -E 's@<CODE>(NOT|not|0|1|-1|If|This .+|has been .+)</CODE>@<B>\1</B>@'
+		sed -E '/^<H2 .+>DESCRIPTION/,$s@^(non-<|\(<|<)B(>[^<>]+</)B(>(,|\.|;|:|\)|\),|\)\.|\);|s)?)$@\1CODE\2CODE\3@' |
+		sed -E 's@<CODE>(NOT|not|0|1|-1|If|This .+|has been .+|NOTE)</CODE>@<B>\1</B>@'
 }
 
 # The substitution does not produce good results for every page, so do not
@@ -312,7 +312,6 @@ maybeBoldToCode()
 	done <<-EOF
 		pcap
 		pcap-filter
-		tcpdump
 	EOF
 	"$mbtc_filter"
 }
