@@ -724,8 +724,8 @@ BACKWARD COMPATIBILITY
        are.
 
 SEE ALSO
-       autoconf(1),  tcpdump(1),  tcpslice(1),  pcap-filter(7),   pfconfig(8),
-       usermod(8)
+       autoconf(1), tcpdump(1),  tcpslice(1),  pcap-filter(7),  bpf(4),  user-
+       mod(8)
 
 AUTHORS
        The original authors of libpcap are:

@@ -234,15 +234,15 @@ for the <I>expression</I> syntax); the
 description is preceded by a time stamp, printed, by default, as hours,
 minutes, seconds, and fractions of a second since midnight.  It can also
 be run with the
-<B>-w</B>
+<CODE>-w</CODE>
 
 flag, which causes it to save the packet data to a file for later
 analysis, and/or with the
-<B>-r</B>
+<CODE>-r</CODE>
 
 flag, which causes it to read from a saved packet file rather than to
 read packets from a network interface.  It can also be run with the
-<B>-V</B>
+<CODE>-V</CODE>
 
 flag, which causes it to read a list of saved packet files. In all cases,
 only packets that match
@@ -256,18 +256,28 @@ will be processed by
 <I>tcpdump</I>
 
 will, if not run with the
-<B>-c</B>
+<CODE>-c</CODE>
 
-flag, continue capturing packets until it is interrupted by a SIGINT
+flag, continue capturing packets until it is interrupted by a
+<CODE>SIGINT</CODE>
+
 signal (generated, for example, by typing your interrupt character,
-typically control-C) or a SIGTERM signal (typically generated with the
+typically control-C) or a
+<CODE>SIGTERM</CODE>
+
+signal (typically generated with the
 <B>kill</B>(1)
 
 command); if run with the
-<B>-c</B>
+<CODE>-c</CODE>
 
-flag, it will capture packets until it is interrupted by a SIGINT or
-SIGTERM signal or the specified number of packets have been processed.
+flag, it will capture packets until it is interrupted by a
+<CODE>SIGINT</CODE>
+
+or
+<CODE>SIGTERM</CODE>
+
+signal or the specified number of packets have been processed.
 <P>
 
 When
@@ -310,21 +320,35 @@ it will be reported as 0).
 </DL>
 <P>
 
-On platforms that support the SIGINFO signal, such as most BSDs
+On platforms that support the
+<CODE>SIGINFO</CODE>
+
+signal, such as most BSDs
 (including macOS), it will report those counts
-when it receives a SIGINFO signal (generated, for example, by typing
+when it receives a
+<CODE>SIGINFO</CODE>
+
+signal (generated, for example, by typing
 your ``status'' character, typically control-T, although on some
 platforms, such as macOS, the ``status'' character is not set by
 default, so you must set it with
 <B>stty</B>(1)
 
 in order to use it) and will continue capturing packets. On platforms that
-do not support the SIGINFO signal, the same can be achieved by using the
-SIGUSR1 signal.
+do not support the
+<CODE>SIGINFO</CODE>
+
+signal, the same can be achieved by using the
+<CODE>SIGUSR1</CODE>
+
+signal.
 <P>
 
-Using the SIGUSR2 signal along with the
-<B>-w</B>
+Using the
+<CODE>SIGUSR2</CODE>
+
+signal along with the
+<CODE>-w</CODE>
 
 flag will forcibly flush the packet buffer into the output file.
 <P>
@@ -338,45 +362,45 @@ special privileges.
 <H2 id="lbAE">OPTIONS</H2>
 
 <DL>
-<DT><B>-A</B>
+<DT><CODE>-A</CODE>
 
 <DD>
 Print each packet (minus its link level header) in ASCII.  Handy for
 capturing web pages.
-<DT><B>-b</B>
+<DT><CODE>-b</CODE>
 
 <DD>
-Print the AS number in BGP packets in ASDOT notation rather than ASPLAIN
-notation.
-<DT><B>-B</B><I> buffer_size</I>
+Print the AS number in BGP packets using &quot;asdot&quot; rather than &quot;asplain&quot;
+representation, in RFC 5396 terms.
+<DT><CODE>-B</CODE><I> buffer_size</I>
 
 <DD>
 
-<DT><B>--buffer-size=</B><I>buffer_size</I>
+<DT><CODE>--buffer-size=</CODE><I>buffer_size</I>
 
 <DD>
 
 Set the operating system capture buffer size to <I>buffer_size</I>, in
 units of KiB (1024 bytes).
-<DT><B>-c</B><I> count</I>
+<DT><CODE>-c</CODE><I> count</I>
 
 <DD>
 Exit after receiving <I>count</I> packets.
-<DT><B>--count</B>
+<DT><CODE>--count</CODE>
 
 <DD>
 Print only on stdout the packet count when reading capture file(s) instead
 of parsing/printing the packets. If a filter is specified on the command
 line, <I>tcpdump</I> counts only packets that were matched by the filter
 expression.
-<DT><B>-C</B><I> file_size</I>
+<DT><CODE>-C</CODE><I> file_size</I>
 
 <DD>
 Before writing a raw packet to a savefile, check whether the file is
 currently larger than <I>file_size</I> and, if so, close the current
 savefile and open a new one.  Savefiles after the first savefile will
 have the name specified with the
-<B>-w</B>
+<CODE>-w</CODE>
 
 flag, with a number after it, starting at 1 and continuing upward.
 The default unit of <I>file_size</I> is millions of bytes (1,000,000 bytes,
@@ -385,7 +409,7 @@ not 1,048,576 bytes).
 By adding a suffix of k/K, m/M or g/G to the value, the unit
 can be changed to 1,024 (KiB), 1,048,576 (MiB), or 1,073,741,824 (GiB)
 respectively.
-<DT><B>-d</B>
+<DT><CODE>-d</CODE>
 
 <DD>
 Dump the compiled packet-matching code in a human readable form to
@@ -395,54 +419,54 @@ Please mind that although code compilation is always DLT-specific,
 typically it is impossible (and unnecessary) to specify which DLT to use
 for the dump because <I>tcpdump</I> uses either the DLT of the input pcap
 file specified with
-<B>-r</B>,
+<CODE>-r</CODE>,
 
 or the default DLT of the network interface specified with
-<B>-i</B>,
+<CODE>-i</CODE>,
 
 or the particular DLT of the network interface specified with
-<B>-y</B>
+<CODE>-y</CODE>
 
 and
-<B>-i</B>
+<CODE>-i</CODE>
 
 respectively. In these cases the dump shows the same exact code that
 would filter the input file or the network interface without
-<B>-d</B>.
+<CODE>-d</CODE>.
 
 <DT><DD>
 However, when neither
-<B>-r</B>
+<CODE>-r</CODE>
 
 nor
-<B>-i</B>
+<CODE>-i</CODE>
 
 is specified, specifying
-<B>-d</B>
+<CODE>-d</CODE>
 
 prevents <I>tcpdump</I> from guessing a suitable network interface (see
-<B>-i</B>).
+<CODE>-i</CODE>).
 
 In this case the DLT defaults to EN10MB and can be set to another valid
 value manually with
-<B>-y</B>.
+<CODE>-y</CODE>.
 
-<DT><B>-dd</B>
+<DT><CODE>-dd</CODE>
 
 <DD>
-Dump packet-matching code as a
-<B>C</B>
+Dump packet-matching code as a C array of
+<CODE>struct bpf_insn</CODE>
 
-program fragment.
-<DT><B>-ddd</B>
+structures.
+<DT><CODE>-ddd</CODE>
 
 <DD>
 Dump packet-matching code as decimal numbers (preceded with a count).
-<DT><B>-D</B>
+<DT><CODE>-D</CODE>
 
 <DD>
 
-<DT><B>--list-interfaces</B>
+<DT><CODE>--list-interfaces</CODE>
 
 <DD>
 
@@ -454,19 +478,19 @@ can capture packets.  For each network interface, a number and an
 interface name, possibly followed by a text description of the
 interface, are printed.  The interface name or the number can be supplied
 to the
-<B>-i</B>
+<CODE>-i</CODE>
 
 flag to specify an interface on which to capture.
 <DT><DD>
 This can be useful on systems that don't have a command to list them
 (e.g., Windows systems, or UNIX systems lacking
-<B>ifconfig -a</B>);
+<CODE>ifconfig -a</CODE>);
 
 the number can be useful on Windows 2000 and later systems, where the
 interface name is a somewhat complex string.
 <DT><DD>
 The
-<B>-D</B>
+<CODE>-D</CODE>
 
 flag will not be supported if
 <I>tcpdump</I>
@@ -478,13 +502,13 @@ that lacks the
 <A HREF='./pcap_findalldevs.3pcap.html'><B>pcap_findalldevs</B></A>(3PCAP)
 
 function.
-<DT><B>-e</B>
+<DT><CODE>-e</CODE>
 
 <DD>
 Print the link-level header on each dump line.  This can be used, for
 example, to print MAC layer addresses for protocols such as Ethernet and
 IEEE 802.11.
-<DT><B>-E</B>
+<DT><CODE>-E</CODE>
 
 <DD>
 Use <I>spi@ipaddr algo:secret</I> for decrypting IPsec ESP packets that
@@ -494,13 +518,16 @@ are addressed to <I>addr</I> and contain Security Parameter Index value
 Note that setting the secret for IPv4 ESP packets is supported at this time.
 <DT><DD>
 Algorithms may be
-<B>des-cbc</B>,
-<B>3des-cbc</B>,
-<B>blowfish-cbc</B>,
-<B>rc3-cbc</B>,
-<B>cast128-cbc</B>, or
-<B>none</B>.
-The default is <B>des-cbc</B>.
+<CODE>des-cbc</CODE>,
+<CODE>3des-cbc</CODE>,
+<CODE>blowfish-cbc</CODE>,
+<CODE>rc3-cbc</CODE>,
+<CODE>cast128-cbc</CODE>,
+or
+<CODE>none</CODE>.
+The default is
+<CODE>des-cbc</CODE>.
+
 The ability to decrypt packets is only present if <I>tcpdump</I> was compiled
 with cryptography enabled.
 <DT><DD>
@@ -512,7 +539,7 @@ The option is only for debugging purposes, and
 the use of this option with a true `secret' key is discouraged.
 By presenting IPsec secret key onto command line
 you make it visible to others, via
-<I>ps</I>(1)
+<B>ps</B>(1)
 
 and other occasions.
 <DT><DD>
@@ -520,7 +547,7 @@ In addition to the above syntax, the syntax <I>file name</I> may be used
 to have tcpdump read the provided file in. The file is opened upon
 receiving the first ESP packet, so any special permissions that tcpdump
 may have been given should already have been given up.
-<DT><B>-f</B>
+<DT><CODE>-f</CODE>
 
 <DD>
 Print `foreign' IPv4 addresses numerically rather than symbolically
@@ -536,20 +563,20 @@ because it is the &quot;any&quot; pseudo-interface, which is
 available in Linux and in recent versions of macOS and Solaris, and which
 can capture on more than one interface, this option will not work
 correctly.
-<DT><B>-F</B><I> file</I>
+<DT><CODE>-F</CODE><I> file</I>
 
 <DD>
 Use <I>file</I> as input for the filter expression.
 An additional expression given on the command line is ignored.
-<DT><B>-G</B><I> rotate_seconds</I>
+<DT><CODE>-G</CODE><I> rotate_seconds</I>
 
 <DD>
 If specified, rotates the dump file specified with the
-<B>-w</B>
+<CODE>-w</CODE>
 
 option every <I>rotate_seconds</I> seconds.
 Savefiles will have the name specified by
-<B>-w</B>
+<CODE>-w</CODE>
 
 which should include a time format as defined by
 <B>strftime</B>(3).
@@ -560,40 +587,40 @@ preexisting data; providing a time specification that is coarser than the
 capture period is therefore not advised.
 <DT><DD>
 If used in conjunction with the
-<B>-C</B>
+<CODE>-C</CODE>
 
 option, filenames will take the form of `<I>file</I>&lt;count&gt;'.
-<DT><B>-h</B>
+<DT><CODE>-h</CODE>
 
 <DD>
 
-<DT><B>--help</B>
+<DT><CODE>--help</CODE>
 
 <DD>
 
 Print the tcpdump and libpcap version strings, print a usage message,
 and exit.
-<DT><B>--version</B>
+<DT><CODE>--version</CODE>
 
 <DD>
 
 Print the tcpdump and libpcap version strings and exit.
-<DT><B>-H</B>
+<DT><CODE>-H</CODE>
 
 <DD>
 Attempt to detect 802.11s draft mesh headers.
-<DT><B>-i</B><I> interface</I>
+<DT><CODE>-i</CODE><I> interface</I>
 
 <DD>
 
-<DT><B>--interface=</B><I>interface</I>
+<DT><CODE>--interface=</CODE><I>interface</I>
 
 <DD>
 
 Listen, report the list of link-layer types, report the list of time
 stamp types, or report the results of compiling a filter expression on
 <I>interface</I>.  If unspecified and if the
-<B>-d</B>
+<CODE>-d</CODE>
 
 flag is not given, <I>tcpdump</I> searches the system
 interface list for the lowest numbered, configured up interface
@@ -608,18 +635,18 @@ Note that captures on the ``any'' pseudo-interface will not be done in promiscuo
 mode.
 <DT><DD>
 If the
-<B>-D</B>
+<CODE>-D</CODE>
 
 flag is supported, an interface number as printed by that flag can be
 used as the
 <I>interface</I>
 
 argument, if no interface on the system has that number as a name.
-<DT><B>-I</B>
+<DT><CODE>-I</CODE>
 
 <DD>
 
-<DT><B>--monitor-mode</B>
+<DT><CODE>--monitor-mode</CODE>
 
 <DD>
 
@@ -634,18 +661,18 @@ if you are capturing in monitor mode and are not connected to another
 network with another adapter.
 <DT><DD>
 This flag will affect the output of the
-<B>-L</B>
+<CODE>-L</CODE>
 
 flag.  If
-<B>-I</B>
+<CODE>-I</CODE>
 
 isn't specified, only those link-layer types available when not in
 monitor mode will be shown; if
-<B>-I</B>
+<CODE>-I</CODE>
 
 is specified, only those link-layer types available when in monitor mode
 will be shown.
-<DT><B>--immediate-mode</B>
+<DT><CODE>--immediate-mode</CODE>
 
 <DD>
 Capture in &quot;immediate mode&quot;.  In this mode, packets are delivered to
@@ -653,11 +680,11 @@ tcpdump as soon as they arrive, rather than being buffered for
 efficiency.  This is the default when printing packets rather than
 saving packets to a ``savefile'' if the packets are being printed to a
 terminal rather than to a file or pipe.
-<DT><B>-j</B><I> tstamp_type</I>
+<DT><CODE>-j</CODE><I> tstamp_type</I>
 
 <DD>
 
-<DT><B>--time-stamp-type=</B><I>tstamp_type</I>
+<DT><CODE>--time-stamp-type=</CODE><I>tstamp_type</I>
 
 <DD>
 
@@ -667,18 +694,18 @@ to use for the time stamp types are given in
 
 not all the types listed there will necessarily be valid for any given
 interface.
-<DT><B>-J</B>
+<DT><CODE>-J</CODE>
 
 <DD>
 
-<DT><B>--list-time-stamp-types</B>
+<DT><CODE>--list-time-stamp-types</CODE>
 
 <DD>
 
 List the supported time stamp types for the interface and exit.  If the
 time stamp type cannot be set for the interface, no time stamp types are
 listed.
-<DT><B>--time-stamp-precision=</B><I>tstamp_precision</I>
+<DT><CODE>--time-stamp-precision=</CODE><I>tstamp_precision</I>
 
 <DD>
 When capturing, set the time stamp precision for the capture to
@@ -698,33 +725,42 @@ file, the conversion will lose precision.
 The supported values for <I>timestamp_precision</I> are <B>micro</B> for
 microsecond resolution and <B>nano</B> for nanosecond resolution.  The
 default is microsecond resolution.
-<DT><B>--micro</B>
+<DT><CODE>--micro</CODE>
 
 <DD>
 
-<DT><B>--nano</B>
+<DT><CODE>--nano</CODE>
 
 <DD>
 
-Shorthands for <B>--time-stamp-precision=micro</B> or
-<B>--time-stamp-precision=nano</B>, adjusting the time stamp
+Shorthands for
+<CODE>--time-stamp-precision=micro</CODE>
+
+or
+<CODE>--time-stamp-precision=nano</CODE>,
+
+adjusting the time stamp
 precision accordingly.  When reading packets from a savefile, using
-<B>--micro</B> truncates time stamps if the savefile was created with
+<CODE>--micro</CODE>
+
+truncates time stamps if the savefile was created with
 nanosecond precision.  In contrast, a savefile created with microsecond
 precision will have trailing zeroes added to the time stamp when
-<B>--nano</B> is used.
-<DT><B>-K</B>
+<CODE>--nano</CODE>
+
+is used.
+<DT><CODE>-K</CODE>
 
 <DD>
 
-<DT><B>--dont-verify-checksums</B>
+<DT><CODE>--dont-verify-checksums</CODE>
 
 <DD>
 
 Don't attempt to verify IP, TCP, or UDP checksums.  This is useful for
 interfaces that perform some or all of those checksum calculation in
 hardware; otherwise, all outgoing TCP checksums will be flagged as bad.
-<DT><B>-l</B>
+<DT><CODE>-l</CODE>
 
 <DD>
 Make stdout line buffered.
@@ -735,7 +771,7 @@ E.g.,
 <DL><DT><DD>
 <DL><DT><DD>
 <PRE>
-<B>tcpdump -l | tee dat</B>
+<CODE>tcpdump -l | tee dat</CODE>
 </PRE>
 
 </DL>
@@ -748,7 +784,7 @@ or
 <DL><DT><DD>
 <DL><DT><DD>
 <PRE>
-<B>tcpdump -l &gt; dat &amp; tail -f dat</B>
+<CODE>tcpdump -l &gt; dat &amp; tail -f dat</CODE>
 </PRE>
 
 </DL>
@@ -757,25 +793,25 @@ or
 
 <DT><DD>
 Note that on Windows,``line buffered'' means ``unbuffered'', so that
-WinDump will write each character individually if
-<B>-l</B>
+tcpdump will write each character individually if
+<CODE>-l</CODE>
 
 is specified.
 <DT><DD>
-<B>-U</B>
+<CODE>-U</CODE>
 
 is similar to
-<B>-l</B>
+<CODE>-l</CODE>
 
 in its behavior, but it will cause output to be ``packet-buffered'', so
 that the output is written to stdout at the end of each packet rather
 than at the end of each line; this is buffered on all platforms,
 including Windows.
-<DT><B>-L</B>
+<DT><CODE>-L</CODE>
 
 <DD>
 
-<DT><B>--list-data-link-types</B>
+<DT><CODE>--list-data-link-types</CODE>
 
 <DD>
 
@@ -788,128 +824,141 @@ example, it might support only fake Ethernet headers, or might support
 and another set of data link types when in monitor mode (for example, it
 might support 802.11 headers, or 802.11 headers with radio information,
 only in monitor mode).
-<DT><B>--lengths</B>
+<DT><CODE>--lengths</CODE>
 
 <DD>
 Print the captured and original packet lengths.
 The lengths are printed at the beginning of the line or after the packet
 number, if any.
-<I>caplen</I> is the captured packet length (See <B>-s</B> option).
+<I>caplen</I> is the captured packet length (see the
+<CODE>-s</CODE>
+
+option).
 <I>len</I> is the original (on wire) packet length.
-<DT><B>-m</B><I> module</I>
+<DT><CODE>-m</CODE><I> module</I>
 
 <DD>
 Load SMI MIB module definitions from file <I>module</I>.
 This option
 can be used several times to load several MIB modules into <I>tcpdump</I>.
-<DT><B>-M</B><I> secret</I>
+<DT><CODE>-M</CODE><I> secret</I>
 
 <DD>
 Use <I>secret</I> as a shared secret for validating the digests found in
 TCP segments with the TCP-MD5 option (RFC 2385), if present.
-<DT><B>-n</B>
+<DT><CODE>-n</CODE>
 
 <DD>
 Don't convert addresses (i.e., host addresses, port numbers, etc.) to names.
-<DT><B>-N</B>
+<DT><CODE>-N</CODE>
 
 <DD>
 Don't print domain name qualification of host names.
 E.g.,
 if you give this flag then <I>tcpdump</I> will print ``nic''
 instead of ``nic.ddn.mil''.
-<DT><B>-#</B>
+<DT><CODE>-#</CODE>
 
 <DD>
 
-<DT><B>--number</B>
+<DT><CODE>--number</CODE>
 
 <DD>
 
 Print an optional packet number at the beginning of the line.
-<DT><B>-O</B>
+<DT><CODE>-O</CODE>
 
 <DD>
 
-<DT><B>--no-optimize</B>
+<DT><CODE>--no-optimize</CODE>
 
 <DD>
 
 Do not run the packet-matching code optimizer.
 This is useful only
 if you suspect a bug in the optimizer.
-<DT><B>-p</B>
+<DT><CODE>-p</CODE>
 
 <DD>
 
-<DT><B>--no-promiscuous-mode</B>
+<DT><CODE>--no-promiscuous-mode</CODE>
 
 <DD>
 
 <I>Don't</I> put the interface
 into promiscuous mode.
 Note that the interface might be in promiscuous
-mode for some other reason; hence, `-p' cannot be used as an abbreviation for
-`ether host {local-hw-addr} or ether broadcast'.
-<DT><B>--print</B>
+mode for some other reason; hence,
+<CODE>-p</CODE>
+
+cannot be used as an abbreviation for
+<CODE>ether host {local-hw-addr} or ether broadcast</CODE>.
+
+<DT><CODE>--print</CODE>
 
 <DD>
 Print parsed packet output, even if the raw packets are being saved to a
 file with the
-<B>-w</B>
+<CODE>-w</CODE>
 
 flag.
-<DT><B>--print-sampling=</B><I>nth</I>
+<DT><CODE>--print-sampling=</CODE><I>nth</I>
 
 <DD>
 
-Print every <I>nth</I> packet. This option enables the <B>--print</B> flag.
+Print every <I>nth</I> packet. This option enables the
+<CODE>--print</CODE>
+
+flag.
 <DT><DD>
 Unprinted packets are not parsed, which decreases processing time. Setting
 <I>nth</I> to <B>100</B> for example, will (counting from 1) parse and print the
 100th packet, 200th packet, 300th packet, and so on.
 <DT><DD>
-This option also enables the <B>-S</B> flag, as relative TCP sequence
+This option also enables the
+<CODE>-S</CODE>
+
+flag, as relative TCP sequence
 numbers are not tracked for unprinted packets.
-<DT><B>-Q</B><I> direction</I>
+<DT><CODE>-Q</CODE><I> direction</I>
 
 <DD>
 
-<DT><B>--direction=</B><I>direction</I>
+<DT><CODE>--direction=</CODE><I>direction</I>
 
 <DD>
 
 Choose send/receive direction <I>direction</I> for which packets should be
 captured. Possible values are `in', `out' and `inout'. Not available
 on all platforms.
-<DT><B>-q</B>
+<DT><CODE>-q</CODE>
 
 <DD>
-Quick (quiet?) output.
+Quick output.
 Print less protocol information so output
 lines are shorter.
-<DT><B>-r</B><I> file</I>
+<DT><CODE>-r</CODE><I> file</I>
 
 <DD>
 Read packets from <I>file</I> (which was created with the
-<B>-w</B>
+<CODE>-w</CODE>
 
 option or by other tools that write pcap or pcapng files).
 Standard input is used if <I>file</I> is ``-''.
-<DT><B>-S</B>
+<DT><CODE>-S</CODE>
 
 <DD>
 
-<DT><B>--absolute-tcp-sequence-numbers</B>
+<DT><CODE>--absolute-tcp-sequence-numbers</CODE>
 
 <DD>
 
 Print absolute, rather than relative, TCP sequence numbers.
-<DT><B>-s</B><I> snaplen</I>
+<DT><CODE>-s</CODE><I> snaplen</I>
 
 <DD>
 
-<DT><B>--snapshot-length=</B><I>snaplen</I>
+<DT><CODE>--snapshot-length=</CODE><I>snaplen</I>
 
 <DD>
 
@@ -937,7 +986,7 @@ protocol information you're interested in.  Setting
 for backwards compatibility with recent older versions of
 <I>tcpdump</I>.
 
-<DT><B>-T</B><I> type</I>
+<DT><CODE>-T</CODE><I> type</I>
 
 <DD>
 Force packets selected by &quot;<I>expression</I>&quot; to be interpreted the
@@ -975,53 +1024,53 @@ PGM and UDP at once. During the native PGM decoding the application data of an
 ODATA/RDATA packet would be decoded as a ZeroMQ datagram with ZMTP/1.0 frames.
 During the UDP decoding in addition to that any UDP packet would be treated as
 an encapsulated PGM packet.
-<DT><B>-t</B>
+<DT><CODE>-t</CODE>
 
 <DD>
 <I>Don't</I> print a timestamp on each dump line.
-<DT><B>-tt</B>
+<DT><CODE>-tt</CODE>
 
 <DD>
 Print the timestamp, as seconds since January 1, 1970, 00:00:00, UTC, and
 fractions of a second since that time, on each dump line.
-<DT><B>-ttt</B>
+<DT><CODE>-ttt</CODE>
 
 <DD>
 Print a delta (microsecond or nanosecond resolution depending on the
-<B>--time-stamp-precision</B>
+<CODE>--time-stamp-precision</CODE>
 
 option) between current and previous line on each dump line.
 The default is microsecond resolution.
-<DT><B>-tttt</B>
+<DT><CODE>-tttt</CODE>
 
 <DD>
 Print a timestamp, as hours, minutes, seconds, and fractions of a second
 since midnight, preceded by the date, on each dump line.
-<DT><B>-ttttt</B>
+<DT><CODE>-ttttt</CODE>
 
 <DD>
 Print a delta (microsecond or nanosecond resolution depending on the
-<B>--time-stamp-precision</B>
+<CODE>--time-stamp-precision</CODE>
 
 option) between current and first line on each dump line.
 The default is microsecond resolution.
-<DT><B>-u</B>
+<DT><CODE>-u</CODE>
 
 <DD>
 Print undecoded NFS handles.
-<DT><B>-U</B>
+<DT><CODE>-U</CODE>
 
 <DD>
 
-<DT><B>--packet-buffered</B>
+<DT><CODE>--packet-buffered</CODE>
 
 <DD>
 
 If the
-<B>-w</B>
+<CODE>-w</CODE>
 
 option is not specified, or if it is specified but the
-<B>--print</B>
+<CODE>--print</CODE>
 
 flag is also specified, make the printed packet output
 ``packet-buffered''; i.e., as the description of the contents of each
@@ -1030,7 +1079,7 @@ than, when not writing to a terminal, being written only when the output
 buffer fills.
 <DT><DD>
 If the
-<B>-w</B>
+<CODE>-w</CODE>
 
 option is specified, make the saved raw packet output
 ``packet-buffered''; i.e., as each packet is saved, it will be written
@@ -1038,7 +1087,7 @@ to the output file, rather than being written only when the output
 buffer fills.
 <DT><DD>
 The
-<B>-U</B>
+<CODE>-U</CODE>
 
 flag will not be supported if
 <I>tcpdump</I>
@@ -1050,7 +1099,7 @@ that lacks the
 <A HREF='./pcap_dump_flush.3pcap.html'><B>pcap_dump_flush</B></A>(3PCAP)
 
 function.
-<DT><B>-v</B>
+<DT><CODE>-v</CODE>
 
 <DD>
 When parsing and printing, produce (slightly more) verbose output.
@@ -1060,38 +1109,39 @@ Also enables additional packet integrity checks such as verifying the
 IP and ICMP header checksum.
 <DT><DD>
 When writing to a file with the
-<B>-w</B>
+<CODE>-w</CODE>
 
 option and at the same time not reading from a file with the
-<B>-r</B>
+<CODE>-r</CODE>
 
 option, report to stderr, once per second, the number of packets captured. In
 Solaris, FreeBSD and possibly other operating systems this periodic update
 currently can cause loss of captured packets on their way from the kernel to
 tcpdump.
-<DT><B>-vv</B>
+<DT><CODE>-vv</CODE>
 
 <DD>
 Even more verbose output.
 For example, additional fields are
 printed from NFS reply packets, and SMB packets are fully decoded.
-<DT><B>-vvv</B>
+<DT><CODE>-vvv</CODE>
 
 <DD>
 Even more verbose output.
 For example,
-telnet <B>SB</B> ... <B>SE</B> options
-are printed in full.
-With
-<B>-X</B>
+telnet
+<B>SB</B>...<B>SE</B>
 
-Telnet options are printed in hex as well.
-<DT><B>-V</B><I> file</I>
+options are printed in full.  With
+<CODE>-X</CODE>
+
+telnet options are printed in hex as well.
+<DT><CODE>-V</CODE><I> file</I>
 
 <DD>
 Read a list of filenames from <I>file</I>. Standard input is used
 if <I>file</I> is ``-''.
-<DT><B>-w</B><I> file</I>
+<DT><CODE>-w</CODE><I> file</I>
 
 <DD>
 Write the raw packets to <I>file</I> rather than parsing and printing
@@ -1102,7 +1152,7 @@ Standard output is used if <I>file</I> is ``-''.
 This output will be buffered if written to a file or pipe, so a program
 reading from the file or pipe may not see packets for an arbitrary
 amount of time after they are received.  Use the
-<B>-U</B>
+<CODE>-U</CODE>
 
 flag to cause packets to be written as soon as they are received.
 <DT><DD>
@@ -1119,11 +1169,11 @@ See
 <B><A HREF="./pcap-savefile.5.html">pcap-savefile</A></B>(5)
 
 for a description of the file format.
-<DT><B>-W</B><I> filecount</I>
+<DT><CODE>-W</CODE><I> filecount</I>
 
 <DD>
 Used in conjunction with the
-<B>-C</B>
+<CODE>-C</CODE>
 
 option, this will limit the number
 of files created to the specified number, and begin overwriting files
@@ -1133,22 +1183,22 @@ the files with enough leading 0s to support the maximum number of
 files, allowing them to sort correctly.
 <DT><DD>
 Used in conjunction with the
-<B>-G</B>
+<CODE>-G</CODE>
 
 option, this will limit the number of rotated dump files that get
 created, exiting with status 0 when reaching the limit.
 <DT><DD>
 If used in conjunction with both
-<B>-C</B>
+<CODE>-C</CODE>
 
 and
-<B>-G,</B>
+<CODE>-G,</CODE>
 
 the
-<B>-W</B>
+<CODE>-W</CODE>
 
 option will currently be ignored, and will only affect the file name.
-<DT><B>-x</B>
+<DT><CODE>-x</CODE>
 
 <DD>
 When parsing and printing,
@@ -1162,10 +1212,10 @@ packet, so for link layers that pad (e.g. Ethernet), the padding bytes
 will also be printed when the higher layer packet is shorter than the
 required padding.
 In the current implementation this flag may have the same effect as
-<B>-xx</B>
+<CODE>-xx</CODE>
 
 if the packet is truncated.
-<DT><B>-xx</B>
+<DT><CODE>-xx</CODE>
 
 <DD>
 When parsing and printing,
@@ -1174,7 +1224,7 @@ each packet,
 <I>including</I>
 
 its link level header, in hex.
-<DT><B>-X</B>
+<DT><CODE>-X</CODE>
 
 <DD>
 When parsing and printing,
@@ -1182,10 +1232,10 @@ in addition to printing the headers of each packet, print the data of
 each packet (minus its link level header) in hex and ASCII.
 This is very handy for analysing new protocols.
 In the current implementation this flag may have the same effect as
-<B>-XX</B>
+<CODE>-XX</CODE>
 
 if the packet is truncated.
-<DT><B>-XX</B>
+<DT><CODE>-XX</CODE>
 
 <DD>
 When parsing and printing,
@@ -1194,29 +1244,29 @@ each packet,
 <I>including</I>
 
 its link level header, in hex and ASCII.
-<DT><B>-y</B><I> datalinktype</I>
+<DT><CODE>-y</CODE><I> datalinktype</I>
 
 <DD>
 
-<DT><B>--linktype=</B><I>datalinktype</I>
+<DT><CODE>--linktype=</CODE><I>datalinktype</I>
 
 <DD>
 
 Set the data link type to use while capturing packets (see
-<B>-L</B>)
+<CODE>-L</CODE>)
 
 or just compiling and dumping packet-matching code (see
-<B>-d</B>)
+<CODE>-d</CODE>)
 
 to <I>datalinktype</I>.
-<DT><B>-z</B><I> postrotate-command</I>
+<DT><CODE>-z</CODE><I> postrotate-command</I>
 
 <DD>
 Used in conjunction with the
-<B>-C</B>
+<CODE>-C</CODE>
 
 or
-<B>-G</B>
+<CODE>-G</CODE>
 
 options, this will make
 <I>tcpdump</I>
@@ -1228,10 +1278,10 @@ run &quot;
 <I>file</I>
 
 is the savefile being closed after each rotation. For example, specifying
-<B>-z gzip</B>
+<CODE>-z gzip</CODE>
 
 or
-<B>-z bzip2</B>
+<CODE>-z bzip2</CODE>
 
 will compress each savefile using gzip or bzip2.
 <DT><DD>
@@ -1242,11 +1292,11 @@ And in case you would like to use a command that itself takes flags or
 different arguments, you can always write a shell script that will take the
 savefile name as the only argument, make the flags &amp; arguments arrangements
 and execute the command that you want.
-<DT><B>-Z</B><I> user</I>
+<DT><CODE>-Z</CODE><I> user</I>
 
 <DD>
 
-<DT><B>--relinquish-privileges=</B><I>user</I>
+<DT><CODE>--relinquish-privileges=</CODE><I>user</I>
 
 <DD>
 
@@ -1268,7 +1318,7 @@ selects which packets will be dumped.
 If no <I>expression</I>
 is given, all packets on the net will be dumped.
 Otherwise,
-only packets for which <I>expression</I> is `true' will be dumped.
+only packets for that <I>expression</I> is `true' will be dumped.
 <P>
 
 For the <I>expression</I> syntax, see
@@ -1292,7 +1342,7 @@ Multiple arguments are concatenated with spaces before being parsed.
 To print all packets arriving at or departing from <I>sundown</I>:
 <DL><DT><DD>
 <PRE>
-<B>tcpdump host sundown</B>
+<CODE>tcpdump host sundown</CODE>
 </PRE>
 
 </DL>
@@ -1302,7 +1352,7 @@ To print all packets arriving at or departing from <I>sundown</I>:
 To print traffic between <I>helios</I> and either <I>hot</I> or <I>ace</I>:
 <DL><DT><DD>
 <PRE>
-<B>tcpdump host helios and \( hot or ace \)</B>
+<CODE>tcpdump host helios and \( hot or ace \)</CODE>
 </PRE>
 
 </DL>
@@ -1312,7 +1362,7 @@ To print traffic between <I>helios</I> and either <I>hot</I> or <I>ace</I>:
 To print all IP packets between <I>ace</I> and any host except <I>helios</I>:
 <DL><DT><DD>
 <PRE>
-<B>tcpdump ip host ace and not helios</B>
+<CODE>tcpdump ip host ace and not helios</CODE>
 </PRE>
 
 </DL>
@@ -1322,7 +1372,7 @@ To print all IP packets between <I>ace</I> and any host except <I>helios</I>:
 To print all traffic between local hosts and hosts at Berkeley:
 <DL><DT><DD>
 <PRE>
-<B>tcpdump net ucb-ether</B>
+<CODE>tcpdump net ucb-ether</CODE>
 </PRE>
 
 </DL>
@@ -1334,7 +1384,7 @@ To print all ftp traffic through internet gateway <I>snup</I>:
 (mis-)interpreting the parentheses):
 <DL><DT><DD>
 <PRE>
-<B>tcpdump 'gateway snup and (port ftp or ftp-data)'</B>
+<CODE>tcpdump 'gateway snup and (port ftp or ftp-data)'</CODE>
 </PRE>
 
 </DL>
@@ -1369,7 +1419,7 @@ To print the TCP packets with flags RST and ACK both set.
 is &quot;RST and ACK both set&quot;, match)
 <DL><DT><DD>
 <PRE>
-<B>tcpdump 'tcp[tcpflags] &amp; (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)'</B>
+<CODE>tcpdump 'tcp[tcpflags] &amp; (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)'</CODE>
 </PRE>
 
 </DL>
@@ -1381,7 +1431,7 @@ packets that contain data, not, for example, SYN and FIN packets and
 ACK-only packets.  (IPv6 is left as an exercise for the reader.)
 <DL><DT><DD>
 <PRE>
-<B>tcpdump 'tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)'</B>
+<CODE>tcpdump 'tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)'</CODE>
 </PRE>
 
 </DL>
@@ -1391,7 +1441,7 @@ ACK-only packets.  (IPv6 is left as an exercise for the reader.)
 To print IP packets longer than 576 bytes sent through gateway <I>snup</I>:
 <DL><DT><DD>
 <PRE>
-<B>tcpdump 'gateway snup and ip[2:2] &gt; 576'</B>
+<CODE>tcpdump 'gateway snup and ip[2:2] &gt; 576'</CODE>
 </PRE>
 
 </DL>
@@ -1404,7 +1454,7 @@ To print IP broadcast or multicast packets that were
 sent via Ethernet broadcast or multicast:
 <DL><DT><DD>
 <PRE>
-<B>tcpdump 'ether[0] &amp; 1 = 0 and ip[16] &gt;= 224'</B>
+<CODE>tcpdump 'ether[0] &amp; 1 = 0 and ip[16] &gt;= 224'</CODE>
 </PRE>
 
 </DL>
@@ -1415,7 +1465,7 @@ To print all ICMP packets that are not echo requests/replies (i.e., not
 ping packets):
 <DL><DT><DD>
 <PRE>
-<B>tcpdump 'icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply'</B>
+<CODE>tcpdump 'icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply'</CODE>
 </PRE>
 
 </DL>
@@ -1456,8 +1506,10 @@ applied a time stamp to the packet.
 
 <P>
 
-When the <I>any</I> interface is selected on capture or when a link-type
-<I>LINUX_SLL2</I> capture file is read the
+When the <I>any</I> interface is selected on capture or when a
+<CODE>LINKTYPE_LINUX_SLL2</CODE>
+
+capture file is read, the
 interface name is printed after the timestamp. This is followed by the packet
 type with <I>In</I> and <I>Out</I> denoting a packet destined for this host or
 originating from this host respectively. Other possible values are <I>B</I>
@@ -1467,12 +1519,18 @@ destined for other hosts.
 
 <P>
 
-If the '-e' option is given, the link level header is printed out.
+If the
+<CODE>-e</CODE>
+
+option is given, the link level header is printed out.
 On Ethernets, the source and destination addresses, protocol,
 and packet length are printed.
 <P>
 
-On FDDI networks, the  '-e' option causes <I>tcpdump</I> to print
+On FDDI networks, the
+<CODE>-e</CODE>
+
+option causes <I>tcpdump</I> to print
 the `frame control' field,  the source and destination addresses,
 and the packet length.
 (The `frame control' field governs the
@@ -1486,17 +1544,26 @@ the LLC header is printed if it is <I>not</I> an ISO datagram or a
 so-called SNAP packet.
 <P>
 
-On Token Ring networks, the '-e' option causes <I>tcpdump</I> to print
+On Token Ring networks, the
+<CODE>-e</CODE>
+
+option causes <I>tcpdump</I> to print
 the `access control' and `frame control' fields, the source and
 destination addresses, and the packet length.
 As on FDDI networks,
 packets are assumed to contain an LLC packet.
 Regardless of whether
-the '-e' option is specified or not, the source routing information is
+the
+<CODE>-e</CODE>
+
+option is specified or not, the source routing information is
 printed for source-routed packets.
 <P>
 
-On 802.11 networks, the '-e' option causes <I>tcpdump</I> to print
+On 802.11 networks, the
+<CODE>-e</CODE>
+
+option causes <I>tcpdump</I> to print
 the `frame control' fields, all of the addresses in the 802.11 header,
 and the packet length.
 As on FDDI networks,
@@ -1532,7 +1599,7 @@ the sequence number by 49, and the packet ID by 6; there are 3 bytes of
 data and 6 bytes of compressed header:
 <DL><DT><DD>
 <PRE>
-<B>O ctcp * A+6 S+49 I+6 3 (6)</B>
+<CODE>O ctcp * A+6 S+49 I+6 3 (6)</CODE>
 </PRE>
 
 </DL>
@@ -1563,7 +1630,9 @@ replies with its Ethernet address (in this example, Ethernet addresses
 are in caps and internet addresses in lower case).
 <P>
 
-This would look less redundant if we had done <I>tcpdump -n</I>:
+This would look less redundant if we had done
+<CODE>tcpdump -n</CODE>:
+
 <DL><DT><DD>
 <PRE>
 
@@ -1575,7 +1644,10 @@ arp reply 128.3.254.6 is-at 02:07:01:00:01:c4
 
 <P>
 
-If we had done <I>tcpdump -e</I>, the fact that the first packet is
+If we had done
+<CODE>tcpdump -e</CODE>,
+
+the fact that the first packet is
 broadcast and the second is point-to-point would be visible:
 <DL><DT><DD>
 <PRE>
@@ -1589,7 +1661,10 @@ CSAM RTSG 0806  64: arp reply csam is-at CSAM
 
 For the first packet this says the Ethernet source address is RTSG, the
 destination is the Ethernet broadcast address, the type field
-contained hex 0806 (type ETHER_ARP) and the total length was 64 bytes.
+contained hex 0806
+(<CODE>ETHERTYPE_ARP</CODE>)
+
+and the total length was 64 bytes.
 <H3 id="lbAL">IPv4 Packets</H3>
 
 <P>
@@ -1599,7 +1674,7 @@ If the link-layer header is not being printed, for IPv4 packets,
 <P>
 
 If the
-<B>-v</B>
+<CODE>-v</CODE>
 
 flag is specified, information from the IPv4 header is shown in
 parentheses after the <B>IP</B> or the link-layer header.
@@ -1640,7 +1715,7 @@ For fragmented IP datagrams, the first fragment contains the higher
 level protocol header; fragments after the first contain no higher level
 protocol header.  Fragmentation information will be printed only with
 the
-<B>-v</B>
+<CODE>-v</CODE>
 
 flag, in the IP header information, as described above.
 <H3 id="lbAM">TCP Packets</H3>
@@ -1734,7 +1809,9 @@ This means that sequence numbers after the
 first can be interpreted
 as relative byte positions in the conversation's data stream (with the
 first data byte each direction being `1').
-`-S' will override this
+<CODE>-S</CODE>
+
+will override this
 feature, causing the original sequence numbers to be output.
 <P>
 
@@ -1906,7 +1983,7 @@ as a 8-bit unsigned integer in network byte order, must be exactly 2.
 
 This relationship can be expressed as
 <DL><DT><DD>
-<B>tcp[13] == 2</B>
+<CODE>tcp[13] == 2</CODE>
 
 </DL>
 
@@ -1915,7 +1992,7 @@ This relationship can be expressed as
 We can use this expression as the filter for <I>tcpdump</I> in order
 to watch packets which have only SYN set:
 <DL><DT><DD>
-<B>tcpdump -i xl0 'tcp[13] == 2'</B>
+<CODE>tcpdump -i xl0 'tcp[13] == 2'</CODE>
 
 </DL>
 
@@ -1961,7 +2038,10 @@ which translates to decimal
 
 <P>
 
-Now we can't just use 'tcp[13] == 18' in the <I>tcpdump</I> filter
+Now we can't just use
+<CODE>tcp[13] == 18</CODE>
+
+in the <I>tcpdump</I> filter
 expression, because that would select only those packets that have
 SYN-ACK set, but not those with only SYN set.
 Remember that we don't care
@@ -2000,22 +2080,27 @@ relation must hold true:
 
 This points us to the <I>tcpdump</I> filter expression
 <DL><DT><DD>
-<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tcpdump&nbsp;-i&nbsp;xl0&nbsp;'tcp[13]&nbsp;&amp;&nbsp;2&nbsp;==&nbsp;2'</B>
+<CODE>tcpdump -i xl0 'tcp[13] &amp; 2 == 2'</CODE>
 
 </DL>
 
 <P>
 
 Some offsets and field values may be expressed as names
-rather than as numeric values. For example tcp[13] may
-be replaced with tcp[tcpflags]. The following TCP flag
+rather than as numeric values. For example,
+<CODE>tcp[13]</CODE>
+
+may be replaced with
+<CODE>tcp[tcpflags]</CODE>.
+
+The following TCP flag
 field values are also available: tcp-fin, tcp-syn, tcp-rst,
 tcp-push, tcp-ack, tcp-urg, tcp-ece and tcp-cwr.
 <P>
 
 This can be demonstrated as:
 <DL><DT><DD>
-<B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tcpdump&nbsp;-i&nbsp;xl0&nbsp;'tcp[tcpflags]&nbsp;&amp;&nbsp;tcp-push&nbsp;!=&nbsp;0'</B>
+<CODE>tcpdump -i xl0 'tcp[tcpflags] &amp; tcp-push != 0'</CODE>
 
 </DL>
 
@@ -2083,7 +2168,9 @@ so the op field was omitted.
 If the op had been anything else, it would
 have been printed between the `3' and the `+'.
 Similarly, the qclass was the normal one,
-<I>C_IN</I>, and omitted.
+<CODE>C_IN</CODE>,
+
+and omitted.
 Any other qclass would have been printed
 immediately after the `A'.
 <P>
@@ -2127,7 +2214,10 @@ address 128.32.137.3.
 The total size of the response was 273 bytes,
 excluding TCP or UDP and IP headers.
 The op (Query) and response code
-(NoError) were omitted, as was the class (C_IN) of the A record.
+(NoError) were omitted, as was the class
+(<CODE>C_IN</CODE>)
+
+of the A record.
 <P>
 
 In the second example, <I>helios</I> responds to query 2 with a
@@ -2155,10 +2245,16 @@ NetBEUI SMB data is also done.
 <P>
 
 By default a fairly minimal decode is done, with a much more detailed
-decode done if -v is used.
-Be warned that with -v a single SMB packet
-may take up a page or more, so only use -v if you really want all the
-gory details.
+decode done if
+<CODE>-v</CODE>
+
+is used.  Be warned that with
+<CODE>-v</CODE>
+
+a single SMB packet may take up a page or more, so only use
+<CODE>-v</CODE>
+
+if you really want all the gory details.
 <P>
 
 For information on SMB packet formats and what all the fields mean see
@@ -2169,7 +2265,7 @@ The SMB patches were written by Andrew Tridgell
 
 <P>
 
-Sun NFS (Network File System) requests and replies are printed as:
+Network File System requests and replies are printed as:
 <DL><DT><DD>
 <PRE>
 
@@ -2218,7 +2314,10 @@ slightly different format: the transaction id (xid) would be printed
 instead of the non-NFS port number of the packet.
 <P>
 
-If the -v (verbose) flag is given, additional information is printed.
+If the
+<CODE>-v</CODE>
+
+(verbose) flag is given, additional information is printed.
 For example:
 <DL><DT><DD>
 <PRE>
@@ -2234,7 +2333,9 @@ wrl.nfs &gt; sushi.1023: NFS reply xid 79658
 
 </DL>
 
-(-v also prints the IP header TTL, ID, length, and fragmentation fields,
+(<CODE>-v</CODE>
+
+also prints the IP header TTL, ID, length, and fragmentation fields,
 which have been omitted from this example.)  In the first line,
 <I>sushi</I> asks <I>wrl</I> to read 8192 bytes from file 21,11/12.195,
 at byte offset 24576.
@@ -2249,7 +2350,10 @@ to the file data) are printed: the file type (``REG'', for regular file),
 the file mode (in octal), the UID and GID, and the file size.
 <P>
 
-If the -v flag is given more than once, even more details are printed.
+If the
+<CODE>-v</CODE>
+
+flag is given more than once, even more details are printed.
 <P>
 
 NFS reply packets do not explicitly identify the RPC operation.
@@ -2262,7 +2366,7 @@ corresponding request, it might not be parsable.
 
 <P>
 
-Transarc AFS (Andrew File System) requests and replies are printed
+Andrew File System requests and replies are printed
 as:
 
 <P>
@@ -2310,17 +2414,26 @@ not be useful to people who are not familiar with the workings of
 AFS and RX.
 <P>
 
-If the -v (verbose) flag is given twice, acknowledgement packets and
+If the
+<CODE>-v</CODE>
+
+(verbose) flag is given, acknowledgement packets and
 additional header information is printed, such as the RX call ID,
 call number, sequence number, serial number, and the RX packet flags.
 <P>
 
-If the -v flag is given twice, additional information is printed,
+If the
+<CODE>-v</CODE>
+
+flag is given twice, additional information is printed,
 such as the RX call ID, serial number, and the RX packet flags.
 The MTU negotiation information is also printed from RX ack packets.
 <P>
 
-If the -v flag is given three times, the security index and service id
+If the
+<CODE>-v</CODE>
+
+flag is given three times, the security index and service id
 are printed.
 <P>
 
@@ -2487,10 +2600,10 @@ indicates that XO (`exactly once') was <I>not</I> set.
 <H2 id="lbAX">BACKWARD COMPATIBILITY</H2>
 
 The TCP flag names
-<B>tcp-ece</B>
+<CODE>tcp-ece</CODE>
 
 and
-<B>tcp-cwr</B>
+<CODE>tcp-cwr</CODE>
 
 became available when linking with libpcap 1.9.0 or later.
 <P>
@@ -2499,8 +2612,6 @@ became available when linking with libpcap 1.9.0 or later.
 <B>stty</B>(1),
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
-
-<B>bpf</B>(4),
 
 <B><A HREF="./pcap-savefile.5.html">pcap-savefile</A></B>(5),
 
@@ -2543,7 +2654,7 @@ The current version is available via HTTPS:
 
 <P>
 
-The original distribution is available via anonymous ftp:
+The original distribution is available via anonymous FTP:
 <P>
 
 <DL><DT><DD>
@@ -2582,27 +2693,6 @@ A packet trace that crosses a daylight savings time change will give
 skewed time stamps (the time change is ignored).
 <P>
 
-Filter expressions on fields other than those in Token Ring headers will
-not correctly handle source-routed Token Ring packets.
-<P>
-
-Filter expressions on fields other than those in 802.11 headers will not
-correctly handle 802.11 data packets with both To DS and From DS set.
-<P>
-
-<B>ip6 proto</B>
-
-should chase header chain, but at this moment it does not.
-<B>ip6 protochain</B>
-
-is supplied for this behavior.
-<P>
-
-Arithmetic expression against transport layer headers, like <B>tcp[0]</B>,
-does not work against IPv6 packets.
-It only looks at IPv4 packets.
-<P>
-
 <HR>
 <H2 id="index">Index</H2>
 <DL>
@@ -2637,7 +2727,7 @@ It only looks at IPv4 packets.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 17:02:29 GMT, March 23, 2024
+This HTML man page was generated at 21:38:35 GMT, March 25, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
