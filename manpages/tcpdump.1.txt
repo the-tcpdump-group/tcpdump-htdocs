@@ -387,7 +387,7 @@ OPTIONS
 
        -#
        --number
-              Print an optional packet number at the beginning of the line.
+              Print a packet number at the beginning of the line.
 
        -O
        --no-optimize
@@ -1368,4 +1368,4 @@ BUGS
        A  packet  trace  that crosses a daylight savings time change will give
        skewed time stamps (the time change is ignored).
 
-                                28 January 2024                     TCPDUMP(1)
+                                 26 March 2024                      TCPDUMP(1)
