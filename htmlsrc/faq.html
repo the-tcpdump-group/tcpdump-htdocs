@@ -45,8 +45,8 @@
                     <div class="entry">
                         <p>
                             <span class=initial>A:</span>
-			    In addition to the usual methods (Add printf() or fprintf(stderr, ...) in your code or in libpcap source files),
-			    you can enable function instrumentation to help debugging or learning a program linked to libpcap.
+			    In addition to the usual methods (using <code>printf()</code> or <code>fprintf(stderr, ...)</code> in your code or in libpcap source files),
+			    you can enable function instrumentation to help debugging or learning a program linked with libpcap.
                         </p>
                         <p>
 			    The goal is to generate instrumentation calls for entry and exit to functions.
@@ -54,37 +54,53 @@
 			    If entering in a function, print also the calling function name with file name and line number. There may be a small shift in the line number.
                         </p>
                         <p>
-			    Steps to do that:
+			    Step-by-step usage example for Debian Linux and derived distributions:
                         </p>
+                        <ol>
+
+                        <li>
                         <p>
-			    1) Get the GNU binary utilities (BFD development files):
+			    Get the GNU binary utilities (BFD development files):
                         </p>
 <pre>
 $ sudo apt install binutils-dev
 </pre>
+                        </li>
+
+                        <li>
                         <p>
-			    2) git clone (or pull) the libpcap project, main branch.  configure and build with:
+			    <code>git clone</code> (or <code>git pull</code>) the libpcap repository and checkout the required branch/tag.  Configure and build with:
                         </p>
 <pre>
 $ [ -x autogen.sh ] && ./autogen.sh
 $ ./configure --quiet --enable-instrument-functions
-$ make -s clean all
+$ make -s clean
+$ make -s all
 </pre>
+                        </li>
+
+                        <li>
                         <p>
-			    3) To test the method, create a project directory in the same parent directory than libpcap.
+			    Create a project directory in the same parent directory as libpcap.
                         </p>
 <pre>
 |-- libpcap
 |-- my_project
 </pre>
+                        </li>
+
+                        <li>
                         <p>
-			    4) cd in the project directory.
+			    <code>cd</code> into the project directory.
 			    Copy an existing program to test or use your program.
 <pre>
 $ cp -vai ../libpcap/testprogs/findalldevstest.c my_program.c
 </pre>
+                        </li>
+
+                        <li>
                         <p>
-			    5) Build with the following Makefile:
+			    Build using the following <code>Makefile</code>:
                         </p>
 <pre>
 PROG = my_program
@@ -102,10 +118,11 @@ $(PROG): ../libpcap/libpcap.a
 clean:
 	@rm $(PROG)
 </pre>
+                        </li>
+
+                        <li>
                         <p>
-			    6) Run the program.
-                        </p>
-                        <p>
+			    Run the program.
 			    If the environment variable <code>INSTRUMENT</code> is
                         </p>
 			<ul>
@@ -120,7 +137,7 @@ clean:
 			    </li>
 			</ul>
                         <p>
-This allows to run with tcpdump, tcpslice or any program linked to libpcap:
+This allows to run with tcpdump, tcpslice or any program linked with libpcap:
                         </p>
 <pre>
 $ INSTRUMENT=a ./my_program ...
@@ -136,9 +153,8 @@ $ ./my_program ...
 </pre>
                         <p>
 			    This also allows to run the statically compiled binary on another host after copying it.
-                        </p>
-                        <p>
 			    You should get something like:
+                        </p>
 <pre>
 [>> main (0)
  [>> pcap_findalldevs (1) from main my_program.c:144]
@@ -155,6 +171,8 @@ $ ./my_program ...
       [>> pcap_find_or_add_dev (6) from pcap_find_or_add_if pcap.c:1058]
 [...]
 </pre>
+                        </li>
+                        </ol>
                     </div>
                 </div>
                 <!-- End of QUESTION #17 section -->
