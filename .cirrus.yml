@@ -20,3 +20,4 @@ freebsd_task:
     - php --syntax-check manpages/restyle.php
     - shellcheck regen_man_pages.sh
     - shellcheck regen_html_pages.sh
+    - shellcheck release/tarballdiff.sh
