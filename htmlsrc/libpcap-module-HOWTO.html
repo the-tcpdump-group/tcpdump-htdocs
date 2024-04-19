@@ -8,13 +8,9 @@
             <a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">
               this document</a> explains how to do it.
           </p>
-        </div>
-
-        <h2 class="title">Introduction</h2>
-        <div class="entry">
-          <p>
-            <strong>WARNING:</strong> this document describes an unstable
-            interface; future releases of libpcap may, and some probably will,
+          <div class=version_boilerplate>
+            <h4>This document is a work in progress, it describes an unstable interface.</h4>
+            Future releases of libpcap may, and some probably will,
             change the interface in an incompatible fashion.  If you submit your
             module to the libpcap developers for inclusion in libpcap, not only
             does that make it more likely that it will be available in the
@@ -24,7 +20,7 @@
             capabilities, we may have to ask you how to provide those additional
             capabilities if you're using an underlying mechanism for which we
             have neither the source code nor the documentation.
-          </p>
+          </div>
           <p>
             <strong>NOTE:</strong> this document assumes familiarity with the
             entire libpcap API.
@@ -33,6 +29,10 @@
             <strong>TODO:</strong> more routines, more stuff that the activate
             routine has to do (such as setting the list of <code>DLT_</code>s)?
           </p>
+        </div>
+
+        <h2 class="title">Introduction</h2>
+        <div class="entry">
           <p>
             On Linux, *BSD, macOS, Solaris, AIX, HP-UX, illumos, Hurd and Haiku,
             Libpcap supports capturing on network interfaces as supported by the
