@@ -94,8 +94,15 @@ The link-layer address length field is unused.
 <p>
 The link-layer address field is unused.
 </p>
-<p>The protocol type field is in network byte order; it should contain
+<p>
+The protocol type field is in network byte order; it should contain
 the value <code>0x0017</code>.
+</p>
+<p>
+The payload is an IrDA frame beginning with by the IrLAP header as
+defined by the
+<a class=away href="https://archive.org/details/ir-lap-11">IrDA Link
+Access Protocol specification.</a>
 </p>
             </div>
             <!-- End of LINKTYPE_LINUX_IRDA section -->
