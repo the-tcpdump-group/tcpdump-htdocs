@@ -1,51 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <!-- HEAD -->
-    <head>
-        <meta charset="utf-8">
-        <title>LINKTYPE_IPMB_LINUX | TCPDUMP &amp; LIBPCAP</title>
-        <meta name="description" content="Web site of Tcpdump and Libpcap">
-        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
-        <link href="../images/T-32x32.png" rel="shortcut icon" type="image/png">
-    </head>
-    <!-- END OF HTML HEAD -->
-
-    <!-- BODY -->
-    <body>
-
-        <!-- TOP MENU -->
-        <div id="menu">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../security.html">Security</a></li>
-                <li><a href="../faq.html">FAQ</a></li>
-                <li><a href="../manpages/">Man Pages</a></li>
-                <li><a href="../ci.html">CI</a></li>
-                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
-                <li><a href="../bpfexam/">BPF Exam</a></li>
-                <li><a href="../related.html">See Also</a></li>
-                <li><a href="../old_releases.html">Old Releases</a></li>
-            </ul>
-        </div>
-        <!-- END OF TOP MENU -->
-
-        <!-- PAGE HEADER -->
-        <div id="splash">
-            <br><img src="../images/logo.png" alt="">
-        </div>
-        <div id="logo">
-            <hr>
-        </div>
-        <!-- END OF PAGE HEADER -->
-
-        <!-- PAGE CONTENTS -->
-        <div id="page">
-
-          <!-- Start of LINKTYPE_IPMB_LINUX section -->
+          <!-- Start of LINKTYPE_I2C_LINUX section -->
           <div class="post">
             <h2 class="title">
-                LINKTYPE_IPMB_LINUX
+                LINKTYPE_I2C_LINUX
             </h2>
             <div class="entry">
                 <h3>Packet structure</h3>
@@ -82,8 +38,10 @@ If the packet is a regular packet, the flag bits are:
 <li><code>0x00000001</code> - if set, the packet is a read.</li>
 </ul>
 <p>
-The upper 7 bits of the hardware address field contain the slave address
-for the packet.  The payload is an IPMB packet.
+The upper 7 bits of the hardware address field contain a 7-bit target
+<a class=away
+href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">I2C</a>address
+for the packet.
 </p>
 <p>
 If the packet is an event, the lower-order 16 bits indicate what type of
@@ -114,22 +72,9 @@ indicate that:
 <li><code>0x00200000</code> - the I2C controller was physically disconnected from the bus;</li>
 <li><code>0x00400000</code> - an undiagnosed failure occurred;</li>
 </ul>
+<p>
+For regular packets, the payload is the data of an I2C message.
+</p>
             </div>
-            <!-- End of LINKTYPE_IPMB_LINUX section -->
+            <!-- End of LINKTYPE_I2C_LINUX section -->
           </div>
-        </div>
-        <!-- END OF PAGE CONTENTS -->
-
-        <!-- FOOTER -->
-        <div id="footer">
-            <p>
-                This web site is &copy; 1999&ndash;2024 The Tcpdump Group
-                (<a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">more
-                information</a>).
-            </p>
-        </div>
-        <!-- END OF FOOTER -->
-
-    </body>
-    <!-- END OF HTML BODY -->
-</html>
