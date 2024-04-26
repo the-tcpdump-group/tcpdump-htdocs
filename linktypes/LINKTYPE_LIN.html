@@ -167,12 +167,12 @@
 	<tr>
 		<td>PID</td>
 		<td>8</td>
-		<td>Protected Identifier, as described in section 5.2.2.5 "PID field" of ISO 17987-3:2016.</td>
+		<td>Protected Identifier, as described in section 5.2.2.5 "PID field" of <a href="https://www.iso.org/standard/61224.html">ISO 17987-3:2016</a>.</td>
 	</tr>
 	<tr>
 		<td>checksum</td>
 		<td>8</td>
-		<td>Checksum, as described in section 5.2.2.7 "Checksum" of ISO 17987-3:2016.</td>
+		<td>Checksum, as described in section 5.2.2.7 "Checksum" of <a href="https://www.iso.org/standard/61224.html">ISO 17987-3:2016</a>.</td>
 	</tr>
 	<tr>
 		<td>errors</td>
@@ -237,7 +237,7 @@
 		<td>e_noslaveresp</td>
 		<td><code>0x01</code></td>
 		<td>No Slave Response Error; no slave wrote the Response
-		part of the frame, as per section 4.2.2 "Frames" of ISO 17987-3:2016.</td>
+		part of the frame, as per section 4.2.2 "Frames" of <a href="https://www.iso.org/standard/61224.html">ISO 17987-3:2016</a>.</td>
 	</tr>
 </tbody>
 </table>
@@ -245,7 +245,8 @@
 
 <h3><strong>LIN Frame</strong></h3>
 If a message is a LIN-Frame, the payload is a LIN N_PDU, as described in
-section 7.4 "Transport layer protocol data units" of ISO 17987-2.
+section 7.4 "Transport layer protocol data units" of
+<a href="https://www.iso.org/standard/61223.html">ISO 17987-2:2016</a>.
 
 <h3><strong>LIN Event</strong></h3>
 If a message is a LIN-Event, the following rules apply:
