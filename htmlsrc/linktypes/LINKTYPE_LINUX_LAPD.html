@@ -51,8 +51,17 @@ The link-layer address length field is unused.
 <p>
 The link-layer address field is unused.
 </p>
-<p>The protocol type field is in network byte order; it should contain
+<p>
+The protocol type field is in network byte order; it should contain
 the value <code>0x0030</code>.
+</p>
+<p>
+The payload is a <a
+href="https://web.archive.org/web/20120911130602/http://www.visdn.org/">vISDN</a>
+Link Access Procedures on the D Channel (LAPD) frame, as described by <a class=away
+href="https://www.itu.int/rec/T-REC-Q.921/en">ITU-T Recommendation
+Q.921</a> section 2 "Frame structure for peer-to-peer communication",
+starting with the address field.
 </p>
             </div>
             <!-- End of LINKTYPE_LINUX_LAPD section -->
