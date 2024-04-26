@@ -54,12 +54,6 @@
 |        Direction        |
 |        (1 Octet)        |
 +-------------------------+
-|       Packet type       |
-|        (1 Octet)        |
-+-------------------------+
-| Compression information |
-|       (14 Octets)       |
-+-------------------------+
 |         Payload         |
 .                         .
 .                         .
@@ -74,22 +68,11 @@ The direction field contains a value that is one of:
 <li>0, if the packet was received by the machine;</li>
 <li>1, if the packet was sent by the machine.</li>
 </ul>
-<p>If the uppermost bit of the packet type is set, the packet is a
-compressed TCP packet.  Otherwise, the upper 4 bits of the packet type
-are one of:
-<ul>
-<li><code>0x40</code>, if the packet was an unmodified IP datagram;
-<li><code>0x70</code>, if the packet was a uncompressed TCP segment.
-</ul>
 <p>
-If the packet was an uncompressed TCP segment, the lower 4 bits of the
-packet type are the connection ID.  If the packet was a compressed TCP
-segment, the packet type and compression information are the header of a
-compressed TCP/IP datagram, as per Figure 5 of
-<a class=away href="https://www.rfc-editor.org/rfc/rfc1144.pdf">RFC 1144</a>.
-<p>
-The payload begins with an IP header; regardless of the value of the
-packet type, the IP and TCP headers are uncompressed.
+The payload is either an IP packet or a compressed packet as
+per <a class=away
+href="https://datatracker.ietf.org/doc/html/rfc1144">RFC 1144</a>,
+without framing and byte-stuffing.
 </p>
             </div>
             <!-- End of LINKTYPE_SLIP section -->
