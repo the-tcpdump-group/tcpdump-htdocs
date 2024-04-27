@@ -18,6 +18,7 @@ Redirect permanent /pcap.htm /pcap.html
 Redirect permanent /tcpdump-workers.asc /release/signing-key-RSA-E089DEF1D9C15D0D.asc
 Redirect permanent /release/signing-key.asc /release/signing-key-RSA-E089DEF1D9C15D0D.asc
 Redirect permanent /sniffex.c /other/sniffex.c
+Redirect permanent /linktypes/LINKTYPE_IPMB_LINUX.html /linktypes/LINKTYPE_I2C_LINUX.html
 
 # removed
 Redirect permanent /mirrors.html /
