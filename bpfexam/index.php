@@ -57,8 +57,7 @@ define ('PROCESS_TIMEOUT', 1);
 define
 (
 	'RPS_EXCEEDED_MESSAGE',
-	'When you think the server is ready to process new requests again, ' .
-	'just reload this page.'
+	'Try reloading this page in ' . (int) ceil (1.0 / MAX_RPS_LIMIT) . ' second(s).'
 );
 
 # Starting with Radare2 5.7.6 it should be sufficient to install the amd64.deb
@@ -1008,7 +1007,8 @@ function limit_request_rate(): void
 		fail (500);
 	if ($now - $prev < 1.0 / MAX_RPS_LIMIT)
 	{
-		header ('Retry-After: 5');
+		# That's at least one second.
+		header ('Retry-After: ' . (int) ceil (1.0 / MAX_RPS_LIMIT));
 		fail (429, RPS_EXCEEDED_MESSAGE);
 	}
 	# It is certainly fine to proceed.  Update the timestamp and release
