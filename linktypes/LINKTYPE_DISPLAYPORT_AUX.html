@@ -57,7 +57,9 @@
 |          Packet Type          |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |             Payload           |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+.                               .
+.                               .
+.                               .
 </pre>
 
                 <h3>Packet Type DATA</h3>
@@ -68,10 +70,14 @@
 |  From Sink(0x00)/Source(0x01) |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |        AUX channel data       |
+.                               .
+.                               .
+.                               .
 </pre>
 <p>
-This is the actual Data as specified by the DisplayPort standard. It
-is preceded by the information if the Data was sent from the Sink (e.g.
+This is the actual Data as specified by the AUX channel transaction
+syntax in the VESA DisplayPort (DP) Standard. It is preceded by a
+one-byte field indicating whether the Data was sent from the Sink (e.g.
 a display) or from the Source (e.g. a graphics card).
 </p>
 
@@ -83,12 +89,15 @@ a display) or from the Source (e.g. a graphics card).
 |          Input Status         |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 </pre>
-
-<p>One of the monitored input signals has changed its value.
-<p>Input status encoding:
+<p>
+One of the monitored input signals has changed its value.
+</p>
+<p>
+The Input Status field contains a set of flag bits:
+</p>
 <ul>
-<li>Bit 0: HPD (Hot Plug Detect)
-<li>Bit 1&ndash;7: Application specific
+<li>0x01 - HPD (Hot Plug Detect)
+<li>0x02-0x80 - Application specific
 </ul>
 
                 <h3>Packet Type START</h3>
@@ -99,16 +108,19 @@ a display) or from the Source (e.g. a graphics card).
 |          Input Status         |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 </pre>
-
+<p>
 A monitor session was started.
-Inputs status encoding as specified in EVENT packet description.
-
+Input status encoding as specified in the EVENT packet description.
+</p>
                 <h3>Packet Type STOP</h3>
 <pre>
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |        Type STOP(0x04)        |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 </pre>
+<p>
+A monitor session was stopped.
+</p>
             </div>
             <!-- End of LINKTYPE_DISPLAYPORT_AUX section -->
           </div>
