@@ -1,0 +1,28 @@
+          <!-- Start of LINKTYPE_DSA_TAG_BRCM section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_DSA_TAG_BRCM
+            </h2>
+            <div class="entry">
+                <h2 class="subtitle">Packet structure for Ethernet frames with a Broadcom switch tag inserted</h2>
+<pre>
++--------------------------------+
+| Destination Address (6 octets) |
++--------------------------------+
+|    Source Address (6 octets)   |
++--------------------------------+
+| Broadcom switch tag (4 octets) |
++--------------------------------+
+|     Type/Length (2 octets)     |
++--------------------------------+
+|            Payload             |
+.                                .
+.                                .
+.                                .
+                <h2 class="subtitle">Description</h2>
+<p>
+A <a href="../linktypes/broadcom-switch-tag.html">Broadcom switch tag</a>
+is inserted in the Ethernet header before the Type/Length field.
+</p>
+            </div>
+            <!-- End of LINKTYPE_DSA_TAG_BRCM section -->
