@@ -6,29 +6,27 @@
             <div class="entry">
                 <h3>Packet structure</h3>
 <pre>
-+-------------+
-|    Msgcode  |
-|  (4 Octets) |
-+-------------+
-|    Msglen   |
-|  (4 Octets) |
-+-------------+
-| Device name |
-| (16 Octets) |
-+------------++-----------+------------+------------+
-|     DID    |   Status   |   Length   |    Data    |
-| (4 Octets) | (2 Octets) | (2 Octets) | (n Octets) |
-+------------+------------+------------+------------+
-.                                                   .
-.                                                   .
-.                                                   .
-+---------------------------------------------------+
-|                      Payload                      |
-.                                                   .
-.                                                   .
-.                                                   .
++-------------------+
+|       Msgcode     |
+|     (4 Octets)    |
++-------------------+
+|       Msglen      |
+|     (4 Octets)    |
++-------------------+
+|    Device name    |
+|    (16 Octets)    |
++-------------------+
+| Tagged data items |
+| (variable length) |
+.                   .
+.                   .
+.                   .
++-------------------+
+|   802.11 frame    |
+.                   .
+.                   .
+.                   .
 </pre>
-
                 <h3>Description</h3>
 <p>
 All fields are in the host byte order of the machine on which the
@@ -42,11 +40,22 @@ In practice, it is almost always, if not always, 144 octets.  The device
 name is the interface name of the adapter.
 </p>
 <p>
-There could be, in theory, zero or more instances of the {DID, Status,
-Length, Data} quadruplet; in practice, there are almost always, if not
-always, 10 instances.  Each quadruplet represents the value of a
-parameter.  The DID field indicates what the parameter is.  For packets
-with the msgcode value <code>0x00000041</code>, the DID field values are:
+Tagged data items are of the form
+</p>
+<pre>
++------------+------------+------------+------------+
+|     DID    |   Status   |   Length   |    Data    |
+| (4 Octets) | (2 Octets) | (2 Octets) | (n Octets) |
++------------+------------+------------+------------+
+</pre>
+<p>
+Each item represents the value of a parameter. There could be, in
+theory, zero or more items; in practice, there are almost always, if not
+always, 10 instances.
+</p>
+<p>
+The DID field indicates what the parameter is. For packets with the
+msgcode value <code>0x00000041</code>, the DID field values are:
 </p>
 <ul>
 <li><code>0x00001041</code> - host time;</li>
@@ -77,16 +86,23 @@ For packets with the msgcode value 0x00000044, the DID field values are:
 </ul>
 <p>
 The Status field is 0 if the value of that parameter is supplied and 1
-if it is not supplied.  The Length field indicates the length of the
-following Data field; in theory, it could have any value, but it is
-almost always, if not always, 4.  The Data field contains the value of
-the parameter.
+if it is not supplied.
+</p>
+<p>
+The Length field indicates the length of the following Data field; in
+theory, it could have any value, but it is almost always, if not always,
+4.
+</p>
+<p>
+The Data field contains the value of the parameter.
 </p>
 <p>
 The representation of the values may differ between different network
-adapters.  There is no official specification for the Prism header; <a class=away
-href="http://www.martin.cc/linux/prism">this person's page on the Prism
-header</a> describes what he found from examining some adapter drivers.
+adapters. There is no official specification for the Prism header; <a
+class=away
+href="https://web.archive.org/web/20230323070544/http://www.martin.cc/linux/prism">this
+person's page on the Prism header</a> describes what he found from
+examining some adapter drivers.
 </p>
             </div>
             <!-- End of LINKTYPE_IEEE802_11_PRISM section -->
