@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>netANALYZER header | TCPDUMP &amp; LIBPCAP</title>
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="../images/T-32x32.png" rel="shortcut icon" type="image/png">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../manpages/">Man Pages</a></li>
+                <li><a href="../ci.html">CI</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../bpfexam/">BPF Exam</a></li>
+                <li><a href="../related.html">See Also</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of netANALYZER header section -->
+          <div class="post">
+            <h2 class="title">
+                Hilscher netANALYZER header
+            </h2>
+            <div class="entry">
+                <h3>Header structure</h3>
+<pre>
+ 3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1
+ 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
++-------+-----------------------+---+-------+-+-+---------------+
+| Rsvd  |      Frame length     |CP |  Vers |T|G| Error flags   |
++-------+-----------------------+---+-------+-+-+---------------+
+</pre>
+
+                <h3>Description</h3>
+<p>
+The header field contains a 32-bit value in little-endian byte order.
+</p>
+<p>
+The low-order 8 bits are a set of error flags for the packet:
+</p>
+<ul>
+<li><code>0x00000001</code> - MII RX_ER</li>
+<li><code>0x00000002</code> - alignment error</li>
+<li><code>0x00000004</code> - FCS error</li>
+<li><code>0x00000008</code> - frame too long</li>
+<li><code>0x00000010</code> - SFD error</li>
+<li><code>0x00000020</code> - frame shorter than 64 bytes</li>
+<li><code>0x00000040</code> - preamble shorter than 7 bytes</li>
+<li><code>0x00000080</code> - preamble longer than 7 bytes</li>
+</ul>
+<p>
+The next bit, <code>0x00000100</code>, is set if the packet arrived on the GPIO
+port rather than the Ethernet port.
+</p>
+<p>
+The next bit, <code>0x00000200</code>, is set if the packet was received in
+transparent capture mode.  That should never be set for
+<code>LINKTYPE_NETANALYZER</code> and should always be set for
+<code>LINKTYPE_NETANALYZER_TRANSPARENT</code>.
+</p>
+<p>
+The next 4 bits, <code>0x00003C00</code>, are a bitfield giving the version of the
+header field; the current version is 1.
+</p>
+<p>The next 2 bits, <code>0x0000C000</code>, are the capture port/GPIO number, from 0
+to 3.
+</p>
+<p>
+The next 12 bits, <code>0x0FFF0000</code>, are the frame length, in bytes.
+</p>
+<p>
+The topmost 4 bits, <code>0xF0000000</code>, are reserved.
+</p>
+            </div>
+            <!-- End of netANALYZER header section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                This web site is &copy; 1999&ndash;2024 The Tcpdump Group
+                (<a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">more
+                information</a>).
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
