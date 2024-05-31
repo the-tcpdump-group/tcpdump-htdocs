@@ -37,15 +37,17 @@
 
 All multi-byte numerical fields are little-endian.  All primitive types
 in this document are from Windows and their size can be found on <a class=away
-href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/efda8314-6e41-4837-8299-38ba0ee04b92">section
+href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/efda8314-6e41-4837-8299-38ba0ee04b92">section
 2.2 "Common Data Types"</a> of
 <a class=away
-href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/cca27429-5689-4a16-b2b4-9325d93e4ba2">[MS-DTYP]:
+href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/cca27429-5689-4a16-b2b4-9325d93e4ba2">[MS-DTYP]:
 Windows Data Types</a>.
 
 </p>
 <p>
-EVENT_HEADER is 80 bytes long data struct defined by Microsoft. It is declared on <a class=away href="https://docs.microsoft.com/en-us/windows/win32/api/evntcons/ns-evntcons-event_header">this MSDN page</a>.
+EVENT_HEADER is 80 bytes long; its structure is described on <a class=away
+href="https://learn.microsoft.com/en-us/windows/win32/api/evntcons/ns-evntcons-event_header">Microsoft's
+page for the EVENT_HEADER structure</a>.
 </p>
 <p>
 The bit values of Flags in EVENT_HEADER are:
@@ -69,7 +71,9 @@ The bit values of EventProperty in EVENT_HEADER are:
 #define EVENT_HEADER_PROPERTY_LEGACY_EVENTLOG   0x0004
 </pre>
 <p>
-ETW_BUFFER_CONTEXT is 4 bytes long data struct defined by Microsoft. It is declared on <a class=away href="https://docs.microsoft.com/en-us/windows/win32/api/relogger/ns-relogger-etw_buffer_context">this MSDN page</a>.
+ETW_BUFFER_CONTEXT is 4 bytes long; its structure is described on <a class=away
+href="https://learn.microsoft.com/en-us/windows/win32/api/relogger/ns-relogger-etw_buffer_context">Microsoft's
+page for the ETW_BUFFER_CONTEXT structure</a>.
 </p>
 <p>
 UserDataLength is the length of UserData, the UserDataLength doesn't include the padding bytes of UserData.
