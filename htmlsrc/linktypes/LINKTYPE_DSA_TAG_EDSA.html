@@ -1,0 +1,30 @@
+          <!-- Start of LINKTYPE_DSA_TAG_EDSA section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_DSA_TAG_EDSA
+            </h2>
+            <div class="entry">
+                <h2 class="subtitle">Packet structure for Ethernet frames with a Marvell EDSA switch tag inserted</h2>
+                <h3>Switch tag structure</h3>
+<pre>
++------------------------------------+
+|   Destination Address (6 octets)   |
++------------------------------------+
+|      Source Address (6 octets)     |
++------------------------------------+
+| Marvell EDSA switch tag (8 octets) |
++------------------------------------+
+|       Type/Length (2 octets)       |
++------------------------------------+
+|              Payload               |
+.                                    .
+.                                    .
+.                                    .
+</pre>
+                <h2 class="subtitle">Description</h2>
+<p>
+A <a href="../linktypes/marvell-switch-tag.html">Marvell EDSA switch
+tag</a> is inserted in the Ethernet header before the Type/Length field.
+</p>
+            </div>
+            <!-- End of LINKTYPE_DSA_TAG_EDSA section -->

@@ -1,1 +1,89 @@
-marvell-switch-tag.html
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>LINKTYPE_DSA_TAG_DSA | TCPDUMP &amp; LIBPCAP</title>
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="../images/T-32x32.png" rel="shortcut icon" type="image/png">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../manpages/">Man Pages</a></li>
+                <li><a href="../ci.html">CI</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../bpfexam/">BPF Exam</a></li>
+                <li><a href="../related.html">See Also</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_DSA_TAG_DSA section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_DSA_TAG_DSA
+            </h2>
+            <div class="entry">
+                <h2 class="subtitle">Packet structure for Ethernet frames with a Marvell DSA switch tag inserted</h2>
+<pre>
++-----------------------------------+
+|   Destination Address (6 octets)  |
++-----------------------------------+
+|      Source Address (6 octets)    |
++-----------------------------------+
+| Marvell DSA switch tag (4 octets) |
++-----------------------------------+
+|       Type/Length (2 octets)      |
++-----------------------------------+
+|              Payload              |
+.                                   .
+.                                   .
+.                                   .
+</pre>
+                <h2 class="subtitle">Description</h2>
+<p>
+A <a href="../linktypes/marvell-switch-tag.html">Marvell DSA switch tag</a>
+is inserted in the Ethernet header before the Type/Length field.
+</p>
+            </div>
+            <!-- End of LINKTYPE_DSA_TAG_DSA section -->
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                This web site is &copy; 1999&ndash;2024 The Tcpdump Group
+                (<a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">more
+                information</a>).
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>

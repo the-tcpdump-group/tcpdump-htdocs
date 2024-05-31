@@ -19,11 +19,7 @@ two reserved bytes (always 0), and a standard DSA tag.
 <pre>
      7   6   5   4   3   2   1   0  
    .   .   .   .   .   .   .   .   .
- 0 +---+---+---+---+---+---+---+---+
-   |   Ether Destination Address   |
-+6 +---+---+---+---+---+---+---+---+
-   |     Ether Source Address      |
-+6 +---+---+---+---+---+---+---+---+  --
+ 0 +---+---+---+---+---+---+---+---+  --
    |  Prog. DSA Ether Type [15:8]  |  |
 +1 +---+---+---+---+---+---+---+---+  |
    |  Prog. DSA Ether Type [7:0]   |  | EDSA tag
@@ -38,9 +34,6 @@ two reserved bytes (always 0), and a standard DSA tag.
 +1 +---+---+---+---+---+---+---+---+  |  |
    |           VID [7:0]           |  |  |
 +1 +---+---+---+---+---+---+---+---+  -- --
-   |       Ether Length/Type       |
-+2 +---+---+---+---+---+---+---+---+
-   .   .   .   .   .   .   .   .   .
 </pre>
 
 <h4>To_CPU frame mode (ingress)</h4>
