@@ -90,6 +90,9 @@ substitute_page_title()
 	marvell-switch-tag)
 		title='Marvell switch tag | '
 		;;
+	netanalyzer-header)
+		title='netANALYZER header | '
+		;;
 	season-of-docs)
 		title='Season of Docs | '
 		;;
