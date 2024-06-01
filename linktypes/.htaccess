@@ -1,3 +1,1 @@
 IndexOptions +SuppressSize +IgnoreClient
-IndexIgnore broadcom-switch-tag.html
-IndexIgnore marvell-switch-tag.html
