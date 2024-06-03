@@ -70,16 +70,19 @@ RETURN VALUE
        PCAP_ERROR_IFACE_NOT_UP
               The capture source device is not up.
 
+       PCAP_ERROR_CAPTURE_NOTSUP
+              Packet capture is not supported on the capture source.
+
        PCAP_ERROR
               Another error occurred.  pcap_geterr() or pcap_perror()  may  be
               called  with  p as an argument to fetch or display a message de-
               scribing the error.
 
-       If PCAP_WARNING_PROMISC_NOTSUP, PCAP_ERROR_NO_SUCH_DEVICE, or  PCAP_ER-
-       ROR_PERM_DENIED  is  returned,  pcap_geterr()  or  pcap_perror() may be
-       called with p as an argument to fetch or display an message giving  ad-
-       ditional  details  about the problem that might be useful for debugging
-       the problem if it's unexpected.
+       If  PCAP_WARNING_PROMISC_NOTSUP,  PCAP_ERROR_NO_SUCH_DEVICE,   PCAP_ER-
+       ROR_PERM_DENIED,     or    PCAP_ERROR_CAPTURE_NOTSUP    is    returned,
+       pcap_geterr() or pcap_perror() may be called with p as an  argument  to
+       fetch or display an message giving additional details about the problem
+       that might be useful for debugging the problem if it's unexpected.
 
        Additional warning and error codes may be added in the future;  a  pro-
        gram  should  check  for positive, negative, and zero return codes, and
