@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 12 February 2024<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 9 July 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -944,6 +944,21 @@ For example:
 filters IPv4 protocol encapsulated in Geneve with VNI 0xb. This will
 match both IPv4 directly encapsulated in Geneve as well as IPv4 contained
 inside an Ethernet frame.
+<DT><B>vxlan </B><I>[vni]</I><DD>
+True if the packet is a VXLAN packet (UDP port 4789). If the optional
+<I>vni</I> is specified, only true if the packet has the specified
+<I>vni</I>.  Note that when the <B>vxlan</B> keyword is encountered in
+an expression, it changes the decoding offsets for the remainder of
+the expression on the assumption that the packet is a VXLAN packet.
+<DT><DD>
+For example:
+
+<PRE>
+<B>vxlan</B> 0x7 <B>&amp;&amp; ip6 </B>
+</PRE>
+
+
+filters IPv6 protocol encapsulated in VXLAN with VNI 0x7.
 <DT><B>iso proto </B><I>protocol</I><DD>
 True if the packet is an OSI packet of protocol type <I>protocol</I>.
 <I>Protocol</I> can be a number or one of the names
@@ -1484,6 +1499,12 @@ The
 <B>ifindex</B>
 
 keyword became available in libpcap 1.10.0.
+<P>
+
+The
+<B>vxlan</B>
+
+keyword became available in libpcap 1.11.0.
 <H2 id="lbAF">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
@@ -1522,7 +1543,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 16:48:14 GMT, February 14, 2024
+This HTML man page was generated at 11:36:41 GMT, July 23, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
