@@ -145,11 +145,12 @@ RETURN VALUE
        pcap_findalldevs() returns 0 on success and PCAP_ERROR on  failure;  as
        indicated,  finding no devices is considered success, rather than fail-
        ure, so 0 will be returned in that case. If PCAP_ERROR is returned, er-
-       rbuf is filled in with an appropriate error message.
+       rbuf  is  filled  in with an appropriate error message, and the pointer
+       pointed to by alldevsp is set to NULL.
 
 BACKWARD COMPATIBILITY
-       The  PCAP_IF_UP and PCAP_IF_RUNNING constants became available in libp-
-       cap release 1.6.1.   The  PCAP_IF_WIRELESS,  PCAP_IF_CONNECTION_STATUS,
+       The PCAP_IF_UP and PCAP_IF_RUNNING constants became available in  libp-
+       cap  release  1.6.1.   The PCAP_IF_WIRELESS, PCAP_IF_CONNECTION_STATUS,
        PCAP_IF_CONNECTION_STATUS_UNKNOWN, PCAP_IF_CONNECTION_STATUS_CONNECTED,
        PCAP_IF_CONNECTION_STATUS_DISCONNECTED,   and   PCAP_IF_CONNECTION_STA-
        TUS_NOT_APPLICABLE constants became available in libpcap release 1.9.0.
