@@ -1326,6 +1326,8 @@ BACKWARD COMPATIBILITY
        The TCP flag names tcp-ece and tcp-cwr became  available  when  linking
        with libpcap 1.9.0 or later.
 
+       This version of tcpdump requires libpcap 1.0 or later.
+
 SEE ALSO
        stty(1), pcap(3PCAP), pcap-savefile(5), pcap-filter(7), pcap-tstamp(7)
 
@@ -1370,4 +1372,4 @@ BUGS
        A  packet  trace  that crosses a daylight savings time change will give
        skewed time stamps (the time change is ignored).
 
-                                 26 March 2024                      TCPDUMP(1)
+                                  15 May 2024                       TCPDUMP(1)

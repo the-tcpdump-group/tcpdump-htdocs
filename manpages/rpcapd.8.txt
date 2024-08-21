@@ -165,7 +165,7 @@ OPTIONS
        -C     With SSL enabled, XXX - I'm not sure how *fetching* the list  of
               compression mechanisms does anything to compression.
 
-       -S ssl_keyfile
+       -K ssl_keyfile
               With SSL enabled, use ssl_keyfile as the SSL key file.
 
        -X ssl_certfile
@@ -174,4 +174,4 @@ OPTIONS
 SEE ALSO
        pcap(3PCAP), rpcapd-config(5)
 
-                                20 January 2023                      RPCAPD(8)
+                                21 August 2024                       RPCAPD(8)
