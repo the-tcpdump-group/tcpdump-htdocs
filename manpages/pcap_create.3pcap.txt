@@ -42,4 +42,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP)
 
-                                3 January 2014              PCAP_CREATE(3PCAP)
+                               30 November 2023             PCAP_CREATE(3PCAP)

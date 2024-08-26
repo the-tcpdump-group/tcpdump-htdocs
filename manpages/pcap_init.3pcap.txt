@@ -69,4 +69,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP)
 
-                                17 January 2023               PCAP_INIT(3PCAP)
+                               30 November 2023               PCAP_INIT(3PCAP)

@@ -60,4 +60,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP), pcap_next_ex(3PCAP), pcap_geterr(3PCAP)
 
-                                 5 March 2022          PCAP_SETNONBLOCK(3PCAP)
+                               30 November 2023        PCAP_SETNONBLOCK(3PCAP)
