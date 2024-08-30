@@ -136,34 +136,36 @@
               tcpdump
             </h3>
             <p>
-              <strong>Version:</strong> 4.99.4<br>
-              <strong>Release Date:</strong> April 7, 2023<br>
-              <strong>Download:</strong> <a href="release/tcpdump-4.99.4.tar.xz">tcpdump-4.99.4.tar.xz</a>
+              <strong>Version:</strong> 4.99.5<br>
+              <strong>Release Date:</strong> August 30, 2024<br>
+              <strong>Download:</strong> <a href="release/tcpdump-4.99.5.tar.xz">tcpdump-4.99.5.tar.xz</a>
                 (<a href="https://git.tcpdump.org/tcpdump/blob/HEAD:/CHANGES">change log</a>)
-                (PGP <a href="release/tcpdump-4.99.4.tar.xz.sig">signature</a> and
+                (PGP <a href="release/tcpdump-4.99.5.tar.xz.sig">signature</a> and
                 <a href="release/signing-key-RSA-E089DEF1D9C15D0D.asc">key</a>)
             </p>
             <p>
-                This tcpdump release fixes an out-of-bounds write vulnerability
-                (CVE-2023-1801) present in the previous release (4.99.3) in the SMB
-                printer, which is not compiled by default.  It also makes various
-                minor improvements.  This release requires libpcap 1.10.0 or later to
-                pass all test cases.
+                This tcpdump release makes various improvements and bug fixes
+                available whilst the work on tcpdump 5.0 is still in progress.
+                This release requires libpcap 1.10.0 or later to pass all test cases.
             </p>
             <h3 class="subtitle">
               libpcap
             </h3>
             <p>
-              <strong>Version:</strong> 1.10.4<br>
-              <strong>Release Date:</strong> April 7, 2023<br>
-              <strong>Download:</strong> <a href="release/libpcap-1.10.4.tar.xz">libpcap-1.10.4.tar.xz</a>
+              <strong>Version:</strong> 1.10.5<br>
+              <strong>Release Date:</strong> August 30, 2024<br>
+              <strong>Download:</strong> <a href="release/libpcap-1.10.5.tar.xz">libpcap-1.10.5.tar.xz</a>
                 (<a href="https://git.tcpdump.org/libpcap/blob/HEAD:/CHANGES">change log</a>)
-                (PGP <a href="release/libpcap-1.10.4.tar.xz.sig">signature</a> and
+                (PGP <a href="release/libpcap-1.10.5.tar.xz.sig">signature</a> and
                 <a href="release/signing-key-RSA-E089DEF1D9C15D0D.asc">key</a>)
             </p>
             <p>
-                This libpcap release makes minor improvements to the build system,
-                documentation and code style.
+                This libpcap release makes various improvements and bug fixes
+                available whilst the work on libpcap 1.11 is still in progress.
+                Among other things this includes the fixes to two vulnerabilities
+                (CVE-2023-7256 discovered by Dora Sweet and CVE-2024-8006 discovered
+                by Flavio Toffalini and reported by Nicolas Badoux) in the remote
+                packet capture code, which is disabled by default.
             </p>
           </div>
         </div>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_INJECT</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_INJECT</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 March 2022<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.5.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_inject, pcap_sendpacket - transmit a packet
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_inject(pcap_t *p, const void *buf, size_t size);
+int pcap_sendpacket(pcap_t *p, const u_char *buf, int size);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_inject</B>()
+
+sends a raw packet through the network interface;
+<I>buf</I>
+
+points to the data of the packet, including the link-layer header, and
+<I>size</I>
+
+is the number of bytes in the packet.
+<P>
+
+Note that, even if you successfully open the network interface, you
+might not have permission to send packets on it, or it might not support
+sending packets; as
+<A HREF='./pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP)
+
+doesn't have a flag to indicate whether to open for capturing, sending,
+or capturing and sending, you cannot request an open that supports
+sending and be notified at open time whether sending will be possible.
+Note also that some devices might not support sending packets.
+<P>
+
+Note that, on some platforms, the link-layer header of the packet that's
+sent might not be the same as the link-layer header of the packet
+supplied to
+<B>pcap_inject</B>(),
+
+as the source link-layer address, if the header contains such an
+address, might be changed to be the address assigned to the interface on
+which the packet it sent, if the platform doesn't support sending
+completely raw and unchanged packets.  Even worse, some drivers on some
+platforms might change the link-layer type field to whatever value
+libpcap used when attaching to the device, even on platforms that
+<I>do</I>
+
+nominally support sending completely raw and unchanged packets.
+<P>
+
+<B>pcap_sendpacket</B>()
+
+is like
+<B>pcap_inject</B>(),
+
+but it returns
+<B>0</B>
+
+on success, rather than returning the number of bytes
+written.
+(<B>pcap_inject</B>()
+
+comes from OpenBSD;
+<B>pcap_sendpacket</B>()
+
+comes from WinPcap/Npcap.  Both are provided for compatibility.)
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_inject</B>()
+
+returns the number of bytes written on success,
+<CODE>PCAP_ERROR_NOT_ACTIVATED</CODE>
+
+if called on a capture handle that has been created but not activated, and
+<CODE>PCAP_ERROR</CODE>
+
+on other errors.
+<P>
+
+<B>pcap_sendpacket</B>()
+
+returns
+<B>0</B>
+
+on success,
+<CODE>PCAP_ERROR_NOT_ACTIVATED</CODE>
+
+if called on a capture handle that has been created but not activated, and
+<CODE>PCAP_ERROR</CODE>
+
+on other errors.
+<P>
+
+If
+<CODE>PCAP_ERROR</CODE>
+
+is returned,
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
+
+or
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_perror</B></A>(3PCAP)
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display the error text.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 22:47:15 GMT, August 30, 2024
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

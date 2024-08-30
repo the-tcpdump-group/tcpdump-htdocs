@@ -1,0 +1,45 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.5.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_LOOKUPNET(3PCAP)                                    PCAP_LOOKUPNET(3PCAP)
+
+NAME
+       pcap_lookupnet - find the IPv4 network number and netmask for a device
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       char errbuf[PCAP_ERRBUF_SIZE];
+
+       int pcap_lookupnet(const char *device, bpf_u_int32 *netp,
+           bpf_u_int32 *maskp, char *errbuf);
+
+DESCRIPTION
+       pcap_lookupnet()  is used to determine the IPv4 network number and mask
+       associated with the network device device.  Both  netp  and  maskp  are
+       bpf_u_int32 pointers.  errbuf is a buffer large enough to hold at least
+       PCAP_ERRBUF_SIZE chars.
+
+       This function is not available on Windows.  It  supports  neither  IPv6
+       nor multiple IPv4 addresses per interface, which obviously is not prac-
+       tical in modern networks.  See pcap_findalldevs(3PCAP) for a more elab-
+       orate solution to the problem.
+
+RETURN VALUE
+       pcap_lookupnet()  returns  0  on  success and PCAP_ERROR on failure. If
+       PCAP_ERROR is returned, errbuf is filled in with an  appropriate  error
+       message.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                 13 March 2024           PCAP_LOOKUPNET(3PCAP)

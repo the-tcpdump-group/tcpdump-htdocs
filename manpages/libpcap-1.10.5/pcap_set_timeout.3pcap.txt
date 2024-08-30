@@ -1,0 +1,43 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.5.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_SET_TIMEOUT(3PCAP)                                PCAP_SET_TIMEOUT(3PCAP)
+
+NAME
+       pcap_set_timeout  -  set  the packet buffer timeout for a not-yet-acti-
+       vated capture handle
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_timeout(pcap_t *p, int to_ms);
+
+DESCRIPTION
+       pcap_set_timeout() sets the packet buffer timeout that will be used  on
+       a  capture  handle  when  the handle is activated to to_ms, which is in
+       units of milliseconds.  (See pcap(3PCAP)  for  an  explanation  of  the
+       packet buffer timeout.)
+
+       The  behavior,  if the timeout isn't specified, is undefined, as is the
+       behavior if the timeout is set to zero or to a negative value.  We rec-
+       ommend  always setting the timeout to a non-zero value unless immediate
+       mode is set, in which case the timeout has no effect.
+
+RETURN VALUE
+       pcap_set_timeout() returns 0  on  success  or  PCAP_ERROR_ACTIVATED  if
+       called on a capture handle that has been activated.
+
+SEE ALSO
+       pcap_create(3PCAP),                               pcap_activate(3PCAP),
+       pcap_set_immediate_mode(3PCAP)
+
+                                6 December 2017        PCAP_SET_TIMEOUT(3PCAP)

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_INIT</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_INIT</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 30 November 2023<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.5.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_init - initialize the library
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>int pcap_init(unsigned int opts, char *errbuf);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_init</B>()
+
+is used to initialize the Packet Capture library.
+<I>opts</I>
+
+specifies options for the library;
+<I>errbuf</I>
+
+is a buffer large enough to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
+
+chars.
+<P>
+
+Currently, the options that can be specified in
+<I>opts</I>
+
+are:
+<DL>
+<DT><CODE>PCAP_CHAR_ENC_LOCAL</CODE>
+
+<DD>
+Treat all strings supplied as arguments, and return all strings to the
+caller, as being in the local character encoding.
+<DT><CODE>PCAP_CHAR_ENC_UTF_8</CODE>
+
+<DD>
+Treat all strings supplied as arguments, and return all strings to the
+caller, as being in UTF-8.
+</DL>
+<P>
+
+On UNIX-like systems, the local character encoding is assumed to be
+UTF-8, so no character encoding transformations are done.
+<P>
+
+On Windows, the local character encoding is the local ANSI code page.
+<P>
+
+If
+<B>pcap_init</B>()
+
+is not called, strings are treated as being in the local ANSI code page
+on Windows,
+<A HREF='./pcap_lookupdev.3pcap.html'><B>pcap_lookupdev</B></A>(3PCAP)
+
+will succeed if there is a device on which to capture, and
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+
+makes an attempt to check whether the string passed as an argument is a
+UTF-16LE string - note that this attempt is unsafe, as it may run past
+the end of the string - to handle
+<B>pcap_lookupdev</B>()
+
+returning a UTF-16LE string. Programs that don't call
+<B>pcap_init</B>()
+
+should, on Windows, call
+<B>pcap_wsockinit</B>()
+
+to initialize Winsock; this is not necessary if
+<B>pcap_init</B>()
+
+is called, as
+<B>pcap_init</B>()
+
+will initialize Winsock itself on Windows.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_init</B>()
+
+returns
+<B>0</B>
+
+on success and
+<CODE>PCAP_ERROR</CODE>
+
+on failure.
+If
+<CODE>PCAP_ERROR</CODE>
+
+is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
+
+This function became available in libpcap release 1.9.0.  In previous
+releases, on Windows, all strings supplied as arguments, and all strings
+returned to the caller, are in the local character encoding.
+<H2 id="lbAG">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 22:47:15 GMT, August 30, 2024
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

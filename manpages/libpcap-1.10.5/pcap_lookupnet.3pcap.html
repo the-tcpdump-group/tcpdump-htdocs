@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_LOOKUPNET</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_LOOKUPNET</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 13 March 2024<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.5.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_lookupnet - find the IPv4 network number and netmask for a device
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>int pcap_lookupnet(const char *device, bpf_u_int32 *netp,
+    bpf_u_int32 *maskp, char *errbuf);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_lookupnet</B>()
+
+is used to determine the IPv4 network number and mask
+associated with the network device
+<I>device</I>.
+
+Both
+<I>netp</I>
+
+and
+<I>maskp</I>
+
+are
+<CODE>bpf_u_int32</CODE>
+
+pointers.
+<I>errbuf</I>
+
+is a buffer large enough to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
+
+chars.
+<P>
+
+This function is not available on Windows.  It supports neither IPv6 nor
+multiple IPv4 addresses per interface, which obviously is not practical in
+modern networks.  See
+<A HREF='./pcap_findalldevs.3pcap.html'><B>pcap_findalldevs</B></A>(3PCAP)
+
+for a more elaborate solution to the problem.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_lookupnet</B>()
+
+returns
+<B>0</B>
+
+on success and
+<CODE>PCAP_ERROR</CODE>
+
+on failure. If
+<CODE>PCAP_ERROR</CODE>
+
+is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 22:47:16 GMT, August 30, 2024
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>
