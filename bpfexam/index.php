@@ -38,7 +38,7 @@ define ('EXPR_INPUT_NAME', 'filter');
 define ('SUBMIT_INPUT_NAME', 'examine');
 define ('SNAPLEN_INPUT_NAME', 'snaplen');
 define ('ACTION_INPUT_NAME', 'cbpf');
-define ('DEFAULT_VER', '1.10.4');
+define ('DEFAULT_VER', '1.10.5');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('MIN_SNAPLEN', 10);
 define ('DEFAULT_SNAPLEN', 65535);
