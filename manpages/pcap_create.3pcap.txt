@@ -25,10 +25,12 @@ SYNOPSIS
 DESCRIPTION
        pcap_create()  is  used  to  create  a packet capture handle to look at
        packets on the network.  source is a string that specifies the  network
-       device  to  open;  on Linux systems with 2.2 or later kernels, a source
-       argument of "any" or NULL can be used to capture packets from  all  in-
-       terfaces.   errbuf  is  a buffer large enough to hold at least PCAP_ER-
-       RBUF_SIZE chars.
+       device  to  open;  on all supported Linux systems, as well as on recent
+       versions of macOS and Solaris, a source argument of "any" or  NULL  can
+       be  used  to  capture  packets from all network interfaces.  The latter
+       should not be confused with all available capture devices  as  seen  by
+       pcap_findalldevs(3PCAP), which may also include D-Bus, USB etc.  errbuf
+       is a buffer large enough to hold at least PCAP_ERRBUF_SIZE chars.
 
        The returned handle must be activated with pcap_activate(3PCAP)  before
        packets  can be captured with it; options for the capture, such as pro-
@@ -42,4 +44,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP)
 
-                               30 November 2023             PCAP_CREATE(3PCAP)
+                               6 September 2024             PCAP_CREATE(3PCAP)

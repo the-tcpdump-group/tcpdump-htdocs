@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_CREATE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 30 November 2023<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -37,14 +37,18 @@ is used to create a packet capture handle to look
 at packets on the network.
 <I>source</I>
 
-is a string that specifies the network device to open; on Linux systems
-with 2.2 or later kernels, a
+is a string that specifies the network device to open; on all supported Linux
+systems, as well as on recent versions of macOS and Solaris, a
 <I>source</I>
 
 argument of &quot;any&quot; or
 <CODE>NULL</CODE>
 
-can be used to capture packets from all interfaces.
+can be used to capture packets from all network interfaces.  The latter should
+not be confused with all available capture devices as seen by
+<A HREF='./pcap_findalldevs.3pcap.html'><B>pcap_findalldevs</B></A>(3PCAP),
+
+which may also include D-Bus, USB etc.
 <I>errbuf</I>
 
 is a buffer large enough to hold at least
@@ -85,7 +89,7 @@ is filled in with an appropriate error message.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 14:23:42 GMT, August 26, 2024
+This HTML man page was generated at 22:27:13 GMT, September 06, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
