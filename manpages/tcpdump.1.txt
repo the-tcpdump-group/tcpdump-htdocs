@@ -202,10 +202,8 @@ OPTIONS
               dress and netmask of the interface  on  that  capture  is  being
               done.   If that address or netmask are not available, either be-
               cause the interface on that capture is being done has no address
-              or netmask or because it is the "any" pseudo-interface, which is
-              available in Linux and in recent versions of macOS and  Solaris,
-              and  which  can  capture on more than one interface, this option
-              will not work correctly.
+              or  netmask or because it is the "any" pseudo-interface (see the
+              -i flag below), this option will not work correctly.
 
        -F file
               Use file as input for the filter expression.  An additional  ex-
@@ -242,11 +240,13 @@ OPTIONS
               lowest numbered, configured up interface  (excluding  loopback),
               which may turn out to be, for example, ``eth0''.
 
-              On  Linux  systems  with 2.2 or later kernels and on recent ver-
-              sions of macOS and Solaris, an interface argument of ``any'' can
-              be  used to capture packets from all interfaces.  Note that cap-
-              tures on the ``any'' pseudo-interface will not be done  in  pro-
-              miscuous mode.
+              On all supported Linux systems, as well as on recent versions of
+              macOS and Solaris, an interface argument of ``any'' can be  used
+              to  capture  packets  from  all  network interfaces.  The latter
+              should not be confused with all  available  capture  devices  as
+              printed  by  the -D flag, which may also include D-Bus, USB etc.
+              Note that captures on the ``any'' pseudo-interface will  not  be
+              done in promiscuous mode.
 
               An interface number as printed by the -D flag can be used as the
               interface argument, if no interface on the system has that  num-
@@ -1372,4 +1372,4 @@ BUGS
        A  packet  trace  that crosses a daylight savings time change will give
        skewed time stamps (the time change is ignored).
 
-                                  15 May 2024                       TCPDUMP(1)
+                               7 September 2024                     TCPDUMP(1)
