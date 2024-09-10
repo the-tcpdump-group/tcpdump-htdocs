@@ -729,6 +729,73 @@
                                 aggregating found VLAN-tags (if any). Found tags can then be
                                 sorted and displayed.
                             </dd>
+
+                            <dt>
+                                <a class=away href="http://dns.measurement-factory.com/tools/dnstop/">dnstop</a>
+                            </dt>
+                            <dd>
+                                dnstop is a libpcap application (like tcpdump) that displays various
+                                tables of DNS traffic on your network.  dnstop supports both IPv4
+                                and IPv6 addresses.  To help find especially undesirable DNS
+                                queries, dnstop provides a number of filters.  dnstop can either read
+                                packets from the live capture device, or from a pcap savefile.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/irino/softflowd">softflowd</a>
+                            </dt>
+                            <dd>
+                                softflowd is a flow-based network monitor.  It listens promiscuously
+                                on a network interface and semi-statefully tracks network flows.
+                                These flows can be reported using NetFlow version 1, 5 or 9 datagrams.
+                                softflowd is fully IPv6 capable: it can track IPv6 flows and export
+                                to IPv6 hosts.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/fln/addrwatch">addrwatch</a>
+                            </dt>
+                            <dd>
+                                Addrwatch is a tool similar to arpwatch.  It main purpose is to
+                                monitor network and log discovered Ethernet/IP address pairings.
+                                Addrwatch is extremely useful in networks with IPv6
+                                autoconfiguration (RFC 4862) enabled.  It allows to track IPv6
+                                addresses of hosts using IPv6 privacy extensions (RFC 4941).
+                                The main difference between arpwatch and addrwatch is the format
+                                of output files.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/mwarning/device-observatory/">Device Observatory</a>
+                            </dt>
+                            <dd>
+                                Device Observatory shows the activities of WiFi devices on
+                                a network on a local website. It is meant to raise the
+                                awareness for private data leaking from devices such as
+                                smartphones.  Features:
+                                <ul>
+                                  <li>Devices accessing the info page only see own data
+                                    (except for the local host).</li>
+                                  <li>Shows MAC address, DHCP device host name, device
+                                    manufacturer.</li>
+                                  <li>Shows accessed domains, IP addresses and ports.</li>
+                                  <li>Shows first/last time a website was accessed.</li>
+                                  <li>Show SSIDs from active scanning.</li>
+                                  <li>Show traffic by destination.</li>
+                                </ul>
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/lemoer/bpfcountd">bpfcountd</a>
+                            </dt>
+                            <dd>
+                                This daemon was created to obtain packet statistics in larger
+                                networks without stressing the CPU resources.  bpfcountd will
+                                count the amount of packets and bytes over time (for each
+                                defined rule).  The rules are defined using the libpcap filter
+                                syntax (BPF).  The collected data is provided on Unix socket
+                                in plaintext.
+                            </dd>
                         </dl>
                     </div>
                 </div>
@@ -907,6 +974,32 @@
                             <dd>
                                 dhcp-probe is intended to be used by network administrators to
                                 locate unknown BootP and DHCP servers on a directly-attached network.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/antirez/hping">hping3</a>
+                            </dt>
+                            <dd>
+                                hping3 is a network tool able to send custom TCP/IP packets
+                                and to display target replies like ping do with ICMP replies.
+                                hping3 can handle fragmentation, and almost arbitrary packet
+                                size and content, using the command line interface.  Since
+                                version 3, hping implements scripting capabilties.  As a
+                                command line utility, hping is useful to test many kind of
+                                networking devices like firewalls, routers, and so on.  It
+                                can be used as a traceroute alike program over all the
+                                supported protocols, firewalk usage, OS fingerprinting,
+                                port-scanner, TCP/IP stack auditing.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/netdiscover-scanner/netdiscover">Netdiscover</a>
+                            </dt>
+                            <dd>
+                                Netdiscover is a network address discovering tool, developed
+                                mainly for those wireless networks without a DHCP server, it
+                                also works on hub/switched networks.  It is based on ARP
+                                packets, it will send ARP requests and sniff for replies.
                             </dd>
                         </dl>
                     </div>
