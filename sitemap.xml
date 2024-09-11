@@ -86,10 +86,6 @@
 		<changefreq>never</changefreq>
 	</url>
 	<url>
-		<loc>https://www.tcpdump.org/other/pktdump.c</loc>
-		<changefreq>never</changefreq>
-	</url>
-	<url>
 		<loc>https://www.tcpdump.org/wpcap.html</loc>
 		<changefreq>monthly</changefreq>
 	</url>
