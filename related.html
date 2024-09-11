@@ -296,6 +296,21 @@
                                  development on top of JVM languages (Java, Kotlin, Scala, Groovy,
                                  Clojure, JRuby and Jython).
                             </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/pcaprub/pcaprub">pcaprub</a>
+                            </dt>
+                            <dd>
+                                 This goal of this project is to provide a consistent Ruby
+                                 interface to the libpcap packet capture library.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://metacpan.org/dist/Net-Pcap">Net::Pcap</a>
+                            </dt>
+                            <dd>
+                                 The Net::Pcap module is a Perl binding to libpcap.
+                            </dd>
                         </dl>
                     </div>
                 </div>
@@ -430,6 +445,28 @@
                                 reduced storage needs comes longer retention periods.
                                 TrimPCAP has been shown to reduce most PCAP datasets
                                 by over 90 percent!
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://www.icir.org/mallman/software/tcpsplit/">tcpsplit</a>
+                            </dt>
+                            <dd>
+                                The tcpsplit utility breaks a single libpcap packet trace into
+                                some number of sub-traces, breaking the trace along TCP
+                                connection boundaries so that a TCP connection doesn't end up
+                                split across two sub-traces.  This is useful for making large
+                                trace files tractable for in-depth analysis and for subsetting
+                                a trace for developing analysis on only part of a trace.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://www.dns-oarc.net/tools/packetq">PacketQ</a>
+                            </dt>
+                            <dd>
+                                packetq is a command line tool to run SQL queries directly on
+                                PCAP files, the results can be outputted as JSON (default),
+                                formatted/compact CSV and XML.  It also contains a very
+                                simplistic web-server in order to inspect PCAP files remotely.
                             </dd>
                         </dl>
                     </div>
@@ -753,6 +790,18 @@
                             </dd>
 
                             <dt>
+                                <a class=away href="https://ee.lbl.gov/downloads/arpwatch/">arpwatch</a>
+                            </dt>
+                            <dd>
+                                arpwatch is a computer software tool for monitoring Address
+                                Resolution Protocol traffic on a computer network.  It generates
+                                a log of observed pairing of IP addresses with MAC addresses
+                                along with a timestamp when the pairing appeared on the network.
+                                It also has the option of sending an e-mail to an administrator
+                                when a pairing changes or is added.
+                            </dd>
+
+                            <dt>
                                 <a class=away href="https://github.com/fln/addrwatch">addrwatch</a>
                             </dt>
                             <dd>
@@ -795,6 +844,36 @@
                                 defined rule).  The rules are defined using the libpcap filter
                                 syntax (BPF).  The collected data is provided on Unix socket
                                 in plaintext.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://bitbucket.org/caia-swin/spp/">SPP</a>
+                            </dt>
+                            <dd>
+                                This software is a flexible, standalone packet processor that
+                                implements the SPP algorithm.  RTT calculations can be generated
+                                from saved PCAP format files or local or remote interfaces in
+                                real time.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://www.dns-oarc.net/tools/dnscap">dnscap</a>
+                            </dt>
+                            <dd>
+                                dnscap is a network capture utility designed specifically for DNS
+                                traffic.  It produces binary data in pcap format.  This utility
+                                is similar to tcpdump, but has a number of features tailored to
+                                DNS transactions and protocol options.  Some of its features
+                                include:
+                                <ul>
+                                  <li>Understands both IPv4 and IPv6.</li>
+                                  <li>Captures UDP, TCP, and IP fragments.</li>
+                                  <li>Collects only queries, responses, or both.</li>
+                                  <li>Collects for only certain source/destination addresses.</li>
+                                  <li>Periodically creates new pcap files.</li>
+                                  <li>Spawns an upload script after closing a pcap file.</li>
+                                  <li>Will start and stop collecting at specific times.</li>
+                                </ul>
                             </dd>
                         </dl>
                     </div>
@@ -1000,6 +1079,35 @@
                                 mainly for those wireless networks without a DHCP server, it
                                 also works on hub/switched networks.  It is based on ARP
                                 packets, it will send ARP requests and sniff for replies.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://www.dns-oarc.net/tools/drool">drool (DNS Replay Tool)</a>
+                            </dt>
+                            <dd>
+                                drool can replay DNS traffic from PCAP files and send it to a
+                                specified server, with options such as to manipulate the timing
+                                between packets, as well as loop packets infinitely or for a set
+                                number of iterations.  This tool's goal is to be able to produce
+                                a high amount of UDP packets per second and TCP sessions per
+                                second on common hardware.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://www.dns-oarc.net/tools/dnsjit">dnsjit</a>
+                            </dt>
+                            <dd>
+                                dnsjit is a combination of parts taken from dsc, dnscap, drool,
+                                and put together around Lua to create a script-based engine for
+                                easy capturing, parsing and statistics gathering of DNS messages
+                                while also providing facilities for replaying DNS traffic.
+                                <br><br>
+                                One of the core functionality that dnsjit brings is to tie
+                                together C and Lua modules through a receiver/receive interface.
+                                This allows creation of custom chains of functionality to meet
+                                various requirements.  Another core functionality is the ability
+                                to parse and process DNS messages even if the messages are
+                                non-compliant with the DNS standards.
                             </dd>
                         </dl>
                     </div>
