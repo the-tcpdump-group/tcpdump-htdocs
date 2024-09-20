@@ -41,12 +41,12 @@ packets from a ``savefile''.
 initializes the library.  It takes an argument giving options;
 currently, the options are:
 <DL>
-<DT><B>PCAP_CHAR_ENC_LOCAL</B>
+<DT><CODE>PCAP_CHAR_ENC_LOCAL</CODE>
 
 <DD>
 Treat all strings supplied as arguments, and return all strings to the
 caller, as being in the local character encoding.
-<DT><B>PCAP_CHAR_ENC_UTF_8</B>
+<DT><CODE>PCAP_CHAR_ENC_UTF_8</CODE>
 
 <DD>
 Treat all strings supplied as arguments, and return all strings to the
@@ -152,7 +152,7 @@ pathname of the ``savefile'', call
 <B>pcap_open_offline</B>();
 
 to set up a handle for a ``savefile'', given a
-<B>FILE&nbsp;*</B>
+<CODE>FILE&nbsp;*</CODE>
 
 referring to a file already opened for reading, call
 <B>pcap_fopen_offline</B>().
@@ -160,10 +160,10 @@ referring to a file already opened for reading, call
 <P>
 
 In order to get a ``fake''
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for use in routines that require a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 as an argument, such as routines to open a ``savefile'' for writing and
 to compile a filter expression, call
@@ -181,7 +181,7 @@ and
 <B>pcap_open_dead</B>()
 
 return a pointer to a
-<B>pcap_t</B>,
+<CODE>pcap_t</CODE>,
 
 which is the handle used for reading packets from the capture stream or
 the ``savefile'', and for finding out information about the capture
@@ -237,7 +237,7 @@ adapter could well be in promiscuous mode for some other reason.
 <DT><DD>
 For now, this doesn't work on the &quot;any&quot; device; if an argument of &quot;any&quot;
 or
-<B>NULL</B>
+<CODE>NULL</CODE>
 
 is supplied, the setting of promiscuous mode is ignored.
 <DT><DD>
@@ -370,13 +370,13 @@ in promiscuous mode, you will not see any outgoing packets, so a capture
 not done in promiscuous mode may not be very useful.
 <DT><DD>
 In newer versions of Solaris, you must have been given the
-<B>net_rawaccess</B>
+<CODE>net_rawaccess</CODE>
 
 privilege; this is both necessary and sufficient to give you access to the
 network pseudo-device - there is no need to change the privileges on
 that device.  A user can be given that privilege by, for example, adding
 that privilege to the user's
-<B>defaultpriv</B>
+<CODE>defaultpriv</CODE>
 
 key with the
 <B>usermod</B>(8)
@@ -392,10 +392,16 @@ setuid to root.
 <DD>
 You must be root or the application capturing packets must be installed
 setuid to root, unless your distribution has a kernel
-that supports capability bits such as CAP_NET_RAW and code to allow
+that supports capability bits such as
+<CODE>CAP_NET_RAW</CODE>
+
+and code to allow
 those capability bits to be given to particular accounts and to cause
 those bits to be set on a user's initial processes when they log in, in
-which case you must have CAP_NET_RAW in order to capture.
+which case you must have
+<CODE>CAP_NET_RAW</CODE>
+
+in order to capture.
 <DT><B>Under BSD (this includes macOS):</B>
 
 <DD>
@@ -436,27 +442,27 @@ Do
 
 assume that the packets for a given capture or ``savefile`` will have
 any given link-layer header type, such as
-<B>DLT_EN10MB</B>
+<CODE>DLT_EN10MB</CODE>
 
 for Ethernet.  For example, the &quot;any&quot; device on Linux will have a
 link-layer header type of
-<B>DLT_LINUX_SLL</B>
+<CODE>DLT_LINUX_SLL</CODE>
 
 or
-<B>DLT_LINUX_SLL2</B>
+<CODE>DLT_LINUX_SLL2</CODE>
 
 even if all devices on the system at the time the &quot;any&quot; device is opened
 have some other data link type, such as
-<B>DLT_EN10MB</B>
+<CODE>DLT_EN10MB</CODE>
 
 for Ethernet.
 <P>
 
 To obtain the
-<B>FILE&nbsp;*</B>
+<CODE>FILE&nbsp;*</CODE>
 
 corresponding to a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 opened for a ``savefile'', call
 <B>pcap_file</B>().
@@ -471,14 +477,14 @@ opened for a ``savefile'', call
 
 <DD>
 get a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
 
 <DD>
 activate a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_findalldevs.3pcap.html'><B>pcap_findalldevs</B></A>(3PCAP)
@@ -497,14 +503,14 @@ get first non-loopback device on that list
 
 <DD>
 open a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for a ``savefile'', given a pathname
 <DT><A HREF='./pcap_open_offline.3pcap.html'><B>pcap_open_offline_with_tstamp_precision</B></A>(3PCAP)
 
 <DD>
 open a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for a ``savefile'', given a pathname, and specify the precision to
 provide for packet time stamps
@@ -512,107 +518,107 @@ provide for packet time stamps
 
 <DD>
 open a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for a ``savefile'', given a
-<B>FILE&nbsp;*</B>
+<CODE>FILE&nbsp;*</CODE>
 
 <DT><A HREF='./pcap_open_offline.3pcap.html'><B>pcap_fopen_offline_with_tstamp_precision</B></A>(3PCAP)
 
 <DD>
 open a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for a ``savefile'', given a
-<B>FILE&nbsp;*</B>,
+<CODE>FILE&nbsp;*</CODE>,
 
 and specify the precision to provide for packet time stamps
 <DT><A HREF='./pcap_open_dead.3pcap.html'><B>pcap_open_dead</B></A>(3PCAP)
 
 <DD>
 create a ``fake''
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 <DT><A HREF='./pcap_close.3pcap.html'><B>pcap_close</B></A>(3PCAP)
 
 <DD>
 close a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 <DT><A HREF='./pcap_set_snaplen.3pcap.html'><B>pcap_set_snaplen</B></A>(3PCAP)
 
 <DD>
 set the snapshot length for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_snapshot.3pcap.html'><B>pcap_snapshot</B></A>(3PCAP)
 
 <DD>
 get the snapshot length for a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 <DT><A HREF='./pcap_set_promisc.3pcap.html'><B>pcap_set_promisc</B></A>(3PCAP)
 
 <DD>
 set promiscuous mode for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_set_protocol_linux.3pcap.html'><B>pcap_set_protocol_linux</B></A>(3PCAP)
 
 <DD>
 set capture protocol for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture (Linux only)
 <DT><A HREF='./pcap_set_rfmon.3pcap.html'><B>pcap_set_rfmon</B></A>(3PCAP)
 
 <DD>
 set monitor mode for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_can_set_rfmon.3pcap.html'><B>pcap_can_set_rfmon</B></A>(3PCAP)
 
 <DD>
 determine whether monitor mode can be set for a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_set_timeout.3pcap.html'><B>pcap_set_timeout</B></A>(3PCAP)
 
 <DD>
 set packet buffer timeout for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_set_immediate_mode.3pcap.html'><B>pcap_set_immediate_mode</B></A>(3PCAP)
 
 <DD>
 set immediate mode for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_set_buffer_size.3pcap.html'><B>pcap_set_buffer_size</B></A>(3PCAP)
 
 <DD>
 set buffer size for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_set_tstamp_type.3pcap.html'><B>pcap_set_tstamp_type</B></A>(3PCAP)
 
 <DD>
 set time stamp type for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_list_tstamp_types.3pcap.html'><B>pcap_list_tstamp_types</B></A>(3PCAP)
 
 <DD>
 get list of available time stamp types for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_list_tstamp_types.3pcap.html'><B>pcap_free_tstamp_types</B></A>(3PCAP)
@@ -635,30 +641,30 @@ get time stamp type corresponding to a name
 
 <DD>
 set time stamp precision for a not-yet-activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_get_tstamp_precision.3pcap.html'><B>pcap_get_tstamp_precision</B></A>(3PCAP)
 
 <DD>
 get the time stamp precision of a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for live capture
 <DT><A HREF='./pcap_datalink.3pcap.html'><B>pcap_datalink</B></A>(3PCAP)
 
 <DD>
 get link-layer header type for a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 <DT><A HREF='./pcap_file.3pcap.html'><B>pcap_file</B></A>(3PCAP)
 
 <DD>
 get the
-<B>FILE&nbsp;*</B>
+<CODE>FILE&nbsp;*</CODE>
 
 for a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 opened for a ``savefile''
 <DT><A HREF='./pcap_is_swapped.3pcap.html'><B>pcap_is_swapped</B></A>(3PCAP)
@@ -687,7 +693,7 @@ obtain a list of all link-layer header types provided by a device, call
 <B>pcap_list_datalinks</B>()
 
 on an activated
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for the device.
 To free a list of link-layer header types, call
@@ -760,31 +766,31 @@ and
 <B>pcap_loop</B>()
 
 is supplied a pointer to a
-<B>struct pcap_pkthdr</B>,
+<CODE>struct pcap_pkthdr</CODE>,
 
 which includes the following members:
 <DL><DT><DD>
 <DL>
-<DT><B>ts</B>
+<DT><CODE>ts</CODE>
 
 <DD>
 a
-<B>struct timeval</B>
+<CODE>struct timeval</CODE>
 
 containing the time when the packet was captured
-<DT><B>caplen</B>
+<DT><CODE>caplen</CODE>
 
 <DD>
 a
-<B>bpf_u_int32</B>
+<CODE>bpf_u_int32</CODE>
 
 giving the number of bytes of the packet that are available from the
 capture
-<DT><B>len</B>
+<DT><CODE>len</CODE>
 
 <DD>
 a
-<B>bpf_u_int32</B>
+<CODE>bpf_u_int32</CODE>
 
 giving the length of the packet, in bytes (which might be more than the
 number of bytes available from the capture, if the length of the packet
@@ -796,13 +802,13 @@ capture mechanism).
 <P>
 
 The callback is also supplied a
-<B>const u_char</B>
+<CODE>const u_char</CODE>
 
 pointer to the first
-<B>caplen</B>
+<CODE>caplen</CODE>
 
 (as given in the
-<B>struct pcap_pkthdr</B>
+<CODE>struct pcap_pkthdr</CODE>
 
 mentioned above)
 bytes of data from the packet.  This won't necessarily be the entire
@@ -832,17 +838,17 @@ capture was performed will limit the amount of packet data available.
 <B>pcap_next</B>()
 
 is passed an argument that points to a
-<B>struct pcap_pkthdr</B>
+<CODE>struct pcap_pkthdr</CODE>
 
 structure, and fills it in with the time stamp and length values for the
 packet.  It returns a
-<B>const u_char *</B>
+<CODE>const u_char *</CODE>
 
 to the first
-<B>caplen</B>
+<CODE>caplen</CODE>
 
 bytes of the packet on success, and
-<B>NULL</B>
+<CODE>NULL</CODE>
 
 on error.
 <P>
@@ -850,17 +856,17 @@ on error.
 <B>pcap_next_ex</B>()
 
 is passed two pointer arguments, one of which points to a
-<B>struct pcap_pkthdr *</B>
+<CODE>struct pcap_pkthdr *</CODE>
 
 and the other points to a
-<B>const u_char *</B>.
+<CODE>const u_char *</CODE>.
 
 It sets the first pointer to point to a
-<B>struct pcap_pkthdr</B>
+<CODE>struct pcap_pkthdr</CODE>
 
 structure with the time stamp and length values for the packet, and sets
 the second pointer to point to the first
-<B>caplen</B>
+<CODE>caplen</CODE>
 
 bytes of the packet.
 <P>
@@ -939,7 +945,7 @@ periodically for packets; in that case,
 <B>pcap_get_required_select_timeout</B>()
 
 will return a pointer to a
-<B>struct timeval</B>
+<CODE>struct timeval</CODE>
 
 whose value can be used as a timeout in those routines.  When the
 routine returns, an attempt should be made to read packets from the
@@ -947,7 +953,7 @@ device.  If
 <B>pcap_get_required_select_timeout</B>()
 
 returns
-<B>NULL</B>,
+<CODE>NULL</CODE>,
 
 no such timeout is available, and those routines cannot be
 used with the device.
@@ -959,7 +965,7 @@ descriptor; the documentation for
 <B>pcap_get_selectable_fd</B>()
 
 gives details.  Note that, just as an attempt to read packets from a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 may not return any packets if the packet buffer timeout expires, a
 <B>select</B>(),
@@ -979,31 +985,31 @@ available to read.
 
 <DD>
 read a bufferful of packets from a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 open for a live capture or the full set of packets from a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 open for a ``savefile''
 <DT><A HREF='./pcap_loop.3pcap.html'><B>pcap_loop</B></A>(3PCAP)
 
 <DD>
 read packets from a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 until an interrupt or error occurs
 <DT><A HREF='./pcap_next_ex.3pcap.html'><B>pcap_next</B></A>(3PCAP)
 
 <DD>
 read the next packet from a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 without an indication whether an error occurred
 <DT><A HREF='./pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP)
 
 <DD>
 read the next packet from a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 with an error indication on an error
 <DT><A HREF='./pcap_breakloop.3pcap.html'><B>pcap_breakloop</B></A>(3PCAP)
@@ -1019,19 +1025,19 @@ or
 
 <DD>
 set or clear non-blocking mode on a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 <DT><A HREF='./pcap_setnonblock.3pcap.html'><B>pcap_getnonblock</B></A>(3PCAP)
 
 <DD>
 get the state of non-blocking mode for a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 <DT><A HREF='./pcap_get_selectable_fd.3pcap.html'><B>pcap_get_selectable_fd</B></A>(3PCAP)
 
 <DD>
 attempt to get a descriptor for a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 that can be used in calls such as
 <B>select</B>()
@@ -1043,7 +1049,7 @@ and
 
 <DD>
 attempt to get a timeout required for using a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 in calls such as
 <B>select</B>()
@@ -1111,7 +1117,7 @@ free a filter program
 
 <DD>
 set filter for a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 <DT><A HREF='./pcap_lookupnet.3pcap.html'><B>pcap_lookupnet</B></A>(3PCAP)
 
@@ -1171,26 +1177,22 @@ get capture statistics
 
 To open a ``savefile`` to which to write packets, given the pathname the
 ``savefile'' should have, call
-<B>pcap_dump_open</B>().
-
-To open a ``savefile`` to which to write packets, given the pathname the
-``savefile'' should have, call
 <B>pcap_dump_open</B>();
 
 to set up a handle for a ``savefile'', given a
-<B>FILE&nbsp;*</B>
+<CODE>FILE&nbsp;*</CODE>
 
 referring to a file already opened for writing, call
 <B>pcap_dump_fopen</B>().
 
 They each return pointers to a
-<B>pcap_dumper_t</B>,
+<CODE>pcap_dumper_t</CODE>,
 
 which is the handle used for writing packets to the ``savefile''.  If it
 succeeds, it will have created the file if it doesn't exist and
 truncated the file if it does exist.
 To close a
-<B>pcap_dumper_t</B>,
+<CODE>pcap_dumper_t</CODE>,
 
 call
 <B>pcap_dump_close</B>().
@@ -1205,40 +1207,40 @@ call
 
 <DD>
 open a
-<B>pcap_dumper_t</B>
+<CODE>pcap_dumper_t</CODE>
 
 for a ``savefile``, given a pathname, replacing any existing data
 <DT><A HREF='./pcap_dump_open.3pcap.html'><B>pcap_dump_open_append</B></A>(3PCAP)
 
 <DD>
 open a
-<B>pcap_dumper_t</B>
+<CODE>pcap_dumper_t</CODE>
 
 for a ``savefile``, given a pathname, appending to the existing data
 <DT><A HREF='./pcap_dump_open.3pcap.html'><B>pcap_dump_fopen</B></A>(3PCAP)
 
 <DD>
 open a
-<B>pcap_dumper_t</B>
+<CODE>pcap_dumper_t</CODE>
 
 for a ``savefile``, given a
-<B>FILE&nbsp;*</B>,
+<CODE>FILE&nbsp;*</CODE>,
 
 assuming an empty file
 <DT><A HREF='./pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP)
 
 <DD>
 close a
-<B>pcap_dumper_t</B>
+<CODE>pcap_dumper_t</CODE>
 
 <DT><A HREF='./pcap_dump_file.3pcap.html'><B>pcap_dump_file</B></A>(3PCAP)
 
 <DD>
 get the
-<B>FILE&nbsp;*</B>
+<CODE>FILE&nbsp;*</CODE>
 
 for a
-<B>pcap_dumper_t</B>
+<CODE>pcap_dumper_t</CODE>
 
 opened for a ``savefile''
 </DL>
@@ -1248,7 +1250,7 @@ opened for a ``savefile''
 <H3 id="lbAM">Writing packets</H3>
 
 To write a packet to a
-<B>pcap_dumper_t</B>,
+<CODE>pcap_dumper_t</CODE>,
 
 call
 <B>pcap_dump</B>().
@@ -1258,18 +1260,18 @@ Packets written with
 
 may be buffered, rather than being immediately written to the
 ``savefile''.  Closing the
-<B>pcap_dumper_t</B>
+<CODE>pcap_dumper_t</CODE>
 
 will cause all buffered-but-not-yet-written packets to be written to the
 ``savefile''.
 To force all packets written to the
-<B>pcap_dumper_t</B>,
+<CODE>pcap_dumper_t</CODE>,
 
 and not yet written to the ``savefile'' because they're buffered by the
-<B>pcap_dumper_t</B>,
+<CODE>pcap_dumper_t</CODE>,
 
 to be written to the ``savefile'', without closing the
-<B>pcap_dumper_t</B>,
+<CODE>pcap_dumper_t</CODE>,
 
 call
 <B>pcap_dump_flush</B>().
@@ -1284,20 +1286,20 @@ call
 
 <DD>
 write packet to a
-<B>pcap_dumper_t</B>
+<CODE>pcap_dumper_t</CODE>
 
 <DT><A HREF='./pcap_dump_flush.3pcap.html'><B>pcap_dump_flush</B></A>(3PCAP)
 
 <DD>
 flush buffered packets written to a
-<B>pcap_dumper_t</B>
+<CODE>pcap_dumper_t</CODE>
 
 to the ``savefile''
 <DT><A HREF='./pcap_dump_ftell.3pcap.html'><B>pcap_dump_ftell</B></A>(3PCAP)
 
 <DD>
 get current file position for a
-<B>pcap_dumper_t</B>
+<CODE>pcap_dumper_t</CODE>
 
 </DL>
 </DL>
@@ -1307,7 +1309,7 @@ get current file position for a
 
 If you have the required privileges, you can inject packets onto a
 network with a
-<B>pcap_t</B>
+<CODE>pcap_t</CODE>
 
 for a live capture, using
 <B>pcap_inject</B>()
@@ -1381,20 +1383,20 @@ get library version string
 <P>
 
 In versions of libpcap prior to 1.0, the
-<B>pcap.h</B>
+<CODE>pcap.h</CODE>
 
 header file was not in a
-<B>pcap</B>
+<CODE>pcap</CODE>
 
 directory on most platforms; if you are writing an application that must
 work on versions of libpcap prior to 1.0, include
-<B>&lt;pcap.h&gt;</B>,
+<CODE>&lt;pcap.h&gt;</CODE>,
 
 which will include
-<B>&lt;pcap/pcap.h&gt;</B>
+<CODE>&lt;pcap/pcap.h&gt;</CODE>
 
 for you, rather than including
-<B>&lt;pcap/pcap.h&gt;</B>.
+<CODE>&lt;pcap/pcap.h&gt;</CODE>.
 
 <P>
 
@@ -1492,7 +1494,7 @@ in the libpcap source tree root.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 21:38:35 GMT, March 25, 2024
+This HTML man page was generated at 13:01:30 GMT, September 20, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

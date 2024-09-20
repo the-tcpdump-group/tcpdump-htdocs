@@ -623,15 +623,13 @@ DESCRIPTION
 
    Opening a handle for writing captured packets
        To open a ``savefile`` to which to write packets,  given  the  pathname
-       the ``savefile'' should have, call pcap_dump_open().  To open a ``save-
-       file`` to which to write packets, given the pathname  the  ``savefile''
-       should  have,  call  pcap_dump_open(); to set up a handle for a ``save-
-       file'', given a FILE * referring to a file already opened for  writing,
-       call  pcap_dump_fopen().  They each return pointers to a pcap_dumper_t,
-       which is the handle used for writing packets to the  ``savefile''.   If
-       it  succeeds,  it  will  have  created the file if it doesn't exist and
-       truncated the file if it does exist.  To close  a  pcap_dumper_t,  call
-       pcap_dump_close().
+       the ``savefile'' should have, call pcap_dump_open(); to set up a handle
+       for a ``savefile'', given a FILE * referring to a file  already  opened
+       for  writing,  call  pcap_dump_fopen().  They each return pointers to a
+       pcap_dumper_t, which is the handle used  for  writing  packets  to  the
+       ``savefile''.   If  it  succeeds,  it  will have created the file if it
+       doesn't exist and truncated the file if it  does  exist.   To  close  a
+       pcap_dumper_t, call pcap_dump_close().
 
        Routines
 
