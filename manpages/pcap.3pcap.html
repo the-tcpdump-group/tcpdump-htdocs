@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 4 March 2024<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 18 September 2024<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -88,19 +88,7 @@ UTF-16LE string - note that this attempt is unsafe, as it may run past
 the end of the string - to handle
 <B>pcap_lookupdev</B>()
 
-returning a UTF-16LE string. Programs that don't call
-<B>pcap_init</B>()
-
-should, on Windows, call
-<B>pcap_wsockinit</B>()
-
-to initialize Winsock; this is not necessary if
-<B>pcap_init</B>()
-
-is called, as
-<B>pcap_init</B>()
-
-will initialize Winsock itself on Windows.
+returning a UTF-16LE string.
 <DL>
 <DT><B>Routines</B>
 
@@ -1494,7 +1482,7 @@ in the libpcap source tree root.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:01:30 GMT, September 20, 2024
+This HTML man page was generated at 14:21:01 GMT, September 23, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
