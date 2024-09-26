@@ -21,7 +21,7 @@ SYNOPSIS
        void pcap_dump_close(pcap_dumper_t *p);
 
 DESCRIPTION
-       pcap_dump_close() closes the ``savefile.''
+       pcap_dump_close() closes the ``savefile''.
 
 SEE ALSO
        pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)

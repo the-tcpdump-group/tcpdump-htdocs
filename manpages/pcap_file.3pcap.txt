@@ -21,7 +21,7 @@ SYNOPSIS
        FILE *pcap_file(pcap_t *p);
 
 DESCRIPTION
-       pcap_file()  returns  the standard I/O stream of the ``savefile,'' if a
+       pcap_file()  returns  the standard I/O stream of the ``savefile'', if a
        ``savefile'' was opened with pcap_open_offline(3PCAP), or  NULL,  if  a
        network    device    was    opened    with    pcap_create(3PCAP)    and
        pcap_activate(3PCAP), or with pcap_open_live(3PCAP).

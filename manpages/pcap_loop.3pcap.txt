@@ -98,7 +98,7 @@ RETURN VALUE
        before  any  packets arrive, the timeout expires before any packets ar-
        rive, or if the file descriptor for the capture device is in non-block-
        ing  mode and no packets were available to be read) or if no more pack-
-       ets are available in a ``savefile.'' It returns PCAP_ERROR_BREAK if the
+       ets are available in a ``savefile''. It returns PCAP_ERROR_BREAK if the
        loop  terminated  due  to a call to pcap_breakloop() before any packets
        were processed, PCAP_ERROR_NOT_ACTIVATED if called on a capture  handle
        that has been created but not activated, or PCAP_ERROR if another error
