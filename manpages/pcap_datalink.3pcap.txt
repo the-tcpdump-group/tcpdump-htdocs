@@ -45,6 +45,7 @@ RETURN VALUE
        created but not activated.
 
 SEE ALSO
-       pcap(3PCAP), pcap-linktype(7)
+       pcap(3PCAP),                          pcap_datalink_val_to_name(3PCAP),
+       pcap_set_datalink(3PCAP), pcap_list_datalinks(3PCAP), pcap-linktype(7)
 
                                  7 April 2014             PCAP_DATALINK(3PCAP)

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-LINKTYPE</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 6 April 2020<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 1 October 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -37,6 +37,27 @@ the network adapter or the network adapter driver generates from the
 so they are sometimes called &quot;DLT_ values&quot;.
 <P>
 
+The
+<A HREF='./pcap_datalink_val_to_name.3pcap.html'><B>pcap_datalink_val_to_name</B></A>(3PCAP)
+
+and
+<A HREF='./pcap_datalink_name_to_val.3pcap.html'><B>pcap_datalink_name_to_val</B></A>(3PCAP)
+
+routines can be used to translate between
+<CODE>DLT_</CODE>
+
+values and names.  Some capture devices support more than one link-layer
+header type.  The
+<A HREF='./pcap_list_datalinks.3pcap.html'><B>pcap_list_datalinks</B></A>(3PCAP)
+
+routine can be used to retrieve the supported link-layer header types of
+a capture device and the
+<A HREF='./pcap_set_datalink.3pcap.html'><B>pcap_set_datalink</B></A>(3PCAP)
+
+routine can be used to change the link-layer header type of a capture
+device.
+<P>
+
 The values stored in the link-layer header type field in the savefile
 header are, in most but not all cases, the same as the values returned
 by
@@ -57,7 +78,7 @@ The link-layer header types supported by libpcap are described at
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:50:54 GMT, February 26, 2023
+This HTML man page was generated at 11:25:53 GMT, October 01, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

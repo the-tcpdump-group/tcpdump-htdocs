@@ -46,6 +46,7 @@ BACKWARD COMPATIBILITY
        stamp type offered by a capture source is available.
 
 SEE ALSO
-       pcap(3PCAP), pcap_tstamp_type_name_to_val(3PCAP)
+       pcap(3PCAP),    pcap_list_tstamp_types(3PCAP),   pcap_set_tstamp_preci-
+       sion(3PCAP), pcap_tstamp_type_name_to_val(3PCAP)
 
                                8 September 2019    PCAP_SET_TSTAMP_TYPE(3PCAP)

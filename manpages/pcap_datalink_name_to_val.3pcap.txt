@@ -31,6 +31,6 @@ RETURN VALUE
        PCAP_ERROR if the name is not a known type name.
 
 SEE ALSO
-       pcap(3PCAP)
+       pcap(3PCAP), pcap_set_datalink(3PCAP), pcap_datalink_val_to_name(3PCAP)
 
                                  25 July 2018 PCAP_DATALINK_NAME_TO_VAL(3PCAP)

@@ -151,9 +151,9 @@ DESCRIPTION
        lution are discarded.
 
        The  pcap_set_tstamp_precision(3PCAP)  routine  can  be  used  after  a
-       pcap_create() call and after a pcap_activate() call to specify the res-
-       olution  of  the time stamps to get for the device.  If the hardware or
-       software  cannot   supply   a   higher-resolution   time   stamp,   the
+       pcap_create() call and before a pcap_activate()  call  to  specify  the
+       resolution  of  the time stamps to get for the device.  If the hardware
+       or  software  cannot  supply  a  higher-resolution  time   stamp,   the
        pcap_set_tstamp_precision()  call  will  fail, and the time stamps sup-
        plied after the pcap_activate() call will have microsecond resolution.
 
@@ -174,4 +174,4 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP)
 
-                                 14 July 2020                   PCAP-TSTAMP(7)
+                                1 October 2024                  PCAP-TSTAMP(7)

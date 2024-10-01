@@ -33,6 +33,7 @@ RETURN VALUE
        gument to fetch or display the error text.
 
 SEE ALSO
-       pcap(3PCAP), pcap_datalink_name_to_val(3PCAP)
+       pcap(3PCAP),      pcap_datalink(3PCAP),     pcap_list_datalinks(3PCAP),
+       pcap_datalink_name_to_val(3PCAP)
 
                                  5 March 2022         PCAP_SET_DATALINK(3PCAP)

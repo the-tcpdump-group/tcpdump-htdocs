@@ -48,6 +48,7 @@ BACKWARD COMPATIBILITY
        returned NULL, a default string would have to be constructed.
 
 SEE ALSO
-       pcap(3PCAP)
+       pcap(3PCAP),     pcap_datalink(3PCAP),      pcap_list_datalinks(3PCAP),
+       pcap_datalink_name_to_val(3PCAP)
 
                                   4 May 2022  PCAP_DATALINK_VAL_TO_NAME(3PCAP)
