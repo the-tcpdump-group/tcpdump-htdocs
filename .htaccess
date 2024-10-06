@@ -19,11 +19,45 @@ Redirect permanent /tcpdump-workers.asc /release/signing-key-RSA-E089DEF1D9C15D0
 Redirect permanent /release/signing-key.asc /release/signing-key-RSA-E089DEF1D9C15D0D.asc
 Redirect permanent /sniffex.c /other/sniffex.c
 Redirect permanent /linktypes/LINKTYPE_IPMB_LINUX.html /linktypes/LINKTYPE_I2C_LINUX.html
+Redirect permanent /pcap/pcap.html https://ietf-opsawg-wg.github.io/draft-ietf-opsawg-pcap/draft-ietf-opsawg-pcap.html
 
 # removed
 Redirect permanent /mirrors.html /
 # merged
 Redirect permanent /license.html /#license
+# removed and cannot be redirected because other mailing list archives
+# use different URLs
+Redirect gone /lists/
+# removed and is intended to stay this way
+Redirect gone /other/bpfext42.tar.Z
+Redirect gone /other/pktdump.c
+Redirect gone /papers/ethereal-tcpdump.pdf
+Redirect gone /manpages/libpcap-1.9.0/
+Redirect gone /style_manpages.css
+Redirect gone /oldweb/
+Redirect gone /cgi-bin/cvsweb
+Redirect gone /daily/
+Redirect gone /weekly/
+Redirect gone /release/libpcap-1.1.0.tar.gz
+Redirect gone /release/libpcap-1.1.0.tar.gz.sig
+Redirect gone /release/libpcap-1.5.1.tar.gz
+Redirect gone /release/libpcap-1.5.1.tar.gz.sig
+Redirect gone /release/libpcap-1.5.2.tar.gz
+Redirect gone /release/libpcap-1.5.2.tar.gz.sig
+Redirect gone /release/libpcap-1.6.1.tar.gz
+Redirect gone /release/libpcap-1.6.1.tar.gz.sig
+Redirect gone /release/tcpdump-4.1.0.tar.gz
+Redirect gone /release/tcpdump-4.1.0.tar.gz.sig
+Redirect gone /release/tcpdump-4.6.1.tar.gz
+Redirect gone /release/tcpdump-4.6.1.tar.gz.sig
+Redirect gone /release/tcpdump-4.7.2.tar.gz
+Redirect gone /release/tcpdump-4.7.2.tar.gz.sig
+Redirect gone /beta/libpcap-1.2.0rc1.tar.gz
+Redirect gone /beta/libpcap-1.2.0rc1.tar.gz.sig
+Redirect gone /beta/libpcap-1.10.1rc2.tar.gz
+Redirect gone /beta/libpcap-1.10.1rc2.tar.gz.sig
+Redirect gone /beta/tcpdump-4.99.1rc2.tar.gz
+Redirect gone /beta/tcpdump-4.99.1rc2.tar.gz.sig
 
 # These replace manual copies with the master branch revisions.
 Redirect permanent /libpcap-changes.txt https://git.tcpdump.org/libpcap/blob/HEAD:/CHANGES
