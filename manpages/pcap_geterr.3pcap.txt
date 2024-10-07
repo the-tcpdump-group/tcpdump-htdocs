@@ -31,6 +31,6 @@ DESCRIPTION
        prefixed by prefix.
 
 SEE ALSO
-       pcap(3PCAP)
+       pcap(3PCAP), pcap_strerror(3PCAP)
 
                                 15 January 2016             PCAP_GETERR(3PCAP)
