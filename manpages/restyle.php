@@ -157,7 +157,7 @@ function read_file (string $filename): string
 	return $ret;
 }
 
-if (! in_array ($_SERVER['REQUEST_METHOD'], array ('GET', 'HEAD')))
+if ($_SERVER['REQUEST_METHOD'] != 'GET')
 	fail (405);
 
 $uri_path = $_SERVER['REQUEST_URI'];
@@ -348,8 +348,7 @@ foreach ($taxonomy as $pname => $project)
 	# less logic to implement in this script.
 	header ("ETag: \"$etag\"");
 	header ('Content-Length: ' . strlen ($html));
-	if ($_SERVER['REQUEST_METHOD'] == 'GET')
-		echo $html;
+	echo $html;
 	exit;
 }
 fail (400);
