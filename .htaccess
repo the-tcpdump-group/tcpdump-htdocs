@@ -1,5 +1,5 @@
 Options +Indexes
-IndexOptions +FancyIndexing +HTMLTable +SuppressDescription +SuppressLastModified +FoldersFirst +VersionSort
+IndexOptions +FancyIndexing +HTMLTable +SuppressDescription +SuppressLastModified +FoldersFirst +VersionSort +IgnoreClient
 IndexStyleSheet /style.css
 IndexHeadInsert "  <link rel=\"shortcut icon\" href=\"/images/T-32x32.png\" type=\"image/png\">"
 HeaderName /autoindex_header.html

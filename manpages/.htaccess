@@ -1,4 +1,4 @@
-IndexOptions +SuppressSize +IgnoreClient
+IndexOptions +SuppressSize
 # In this context these symlinks are only distractors.
 IndexIgnore images
 IndexIgnore style.css
