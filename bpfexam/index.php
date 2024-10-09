@@ -47,7 +47,12 @@ define ('DEFAULT_FILTER', 'icmp or udp port 53 or bootpc');
 define ('ACTION_EXAMINE', 'none');
 define ('ACTION_OPTCBPF', 'opt');
 define ('ACTION_UNOPTCBPF', 'unopt');
-define ('DOT_BIN', '/usr/bin/dot');
+$actions = array
+(
+	ACTION_EXAMINE => 'no',
+	ACTION_UNOPTCBPF => 'yes, without optimization',
+	ACTION_OPTCBPF => 'yes, with optimization',
+);
 
 # Enforce an RPS limit for requests that submit the form, as these spawn
 # external processes, which together take a while (around 3s) to complete.
@@ -59,6 +64,8 @@ define
 	'RPS_EXCEEDED_MESSAGE',
 	'Try reloading this page in ' . (int) ceil (1.0 / MAX_RPS_LIMIT) . ' second(s).'
 );
+
+define ('DOT_BIN', '/usr/bin/dot');
 
 # Starting with Radare2 5.7.6 it should be sufficient to install the amd64.deb
 # package from [1].  However, if it is necessary to try a git master snapshot
@@ -79,13 +86,6 @@ define ('RADARE2_BIN', '/usr/bin/r2');
 # 2: https://gitlab.com/niksu/caper/-/blob/master/Vagrantfile
 # 3: https://gitlab.com/niksu/caper/-/blob/master/build.sh
 define ('CAPER_BIN', '/usr/local/bin/caper.native');
-
-$actions = array
-(
-	ACTION_EXAMINE => 'no',
-	ACTION_UNOPTCBPF => 'yes, without optimization',
-	ACTION_OPTCBPF => 'yes, with optimization',
-);
 
 # filtertest, where specified, was copied from libpcap built
 # using "./configure --enable-optimizer-dbg".  tcpdump in each case was linked
