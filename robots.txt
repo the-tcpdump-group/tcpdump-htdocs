@@ -1,4 +1,16 @@
+User-agent: Applebot-Extended
+User-agent: Bytespider
+User-agent: CCBot
+User-agent: ClaudeBot
+User-agent: Diffbot
+User-agent: FacebookBot
+User-agent: Google-Extended
 User-agent: GPTBot
+User-agent: Kangaroo Bot
+User-agent: Meta-ExternalAgent
+User-agent: omgili
+User-agent: Timpibot
+User-agent: Webzio-Extended
 Disallow: /
 
 User-agent: *
