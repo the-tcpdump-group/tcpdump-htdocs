@@ -19,6 +19,7 @@ Redirect permanent /tcpdump-workers.asc /release/signing-key-RSA-E089DEF1D9C15D0
 Redirect permanent /release/signing-key.asc /release/signing-key-RSA-E089DEF1D9C15D0D.asc
 Redirect permanent /sniffex.c /other/sniffex.c
 Redirect permanent /linktypes/LINKTYPE_IPMB_LINUX.html /linktypes/LINKTYPE_I2C_LINUX.html
+Redirect permanent /linktypes/LINKTYPE_OPENVIZSLA.html https://github.com/matwey/libopenvizsla/wiki/OpenVizsla-protocol-description
 Redirect permanent /pcap/pcap.html https://ietf-opsawg-wg.github.io/draft-ietf-opsawg-pcap/draft-ietf-opsawg-pcap.html
 
 # removed
