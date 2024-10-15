@@ -755,10 +755,10 @@ function pipe_process (array $argv, string $stdin = ''): array
 	return array ($stdout, $stderr);
 }
 
-function on_stderr_throw (string $stdout, string $stderr, string $prefix = ''): string
+function on_stderr_throw (string $stdout, string $stderr): string
 {
 	if ($stderr != '')
-		throw new Exception ($prefix . $stderr);
+		throw new Exception ($stderr);
 	return $stdout;
 }
 
