@@ -461,6 +461,7 @@ function fail (int $status, string $message = ''): void
 	(
 		400 => 'Bad Request',
 		405 => 'Method Not Allowed',
+		422 => 'Unprocessable Content',
 		429 => 'Too Many Requests',
 		500 => 'Internal Server Error',
 	);
@@ -1274,7 +1275,17 @@ try
 		case ACTION_OPTCBPF:
 		case ACTION_UNOPTCBPF:
 			$bytecode->optreq = $req_action == ACTION_OPTCBPF;
-			$bytecode->setStatements (run_tcpdump (array ($versions[$req_ver]['tcpdump'], '-ddd'), $bytecode));
+			try
+			{
+				$tcpdump_ddd = run_tcpdump (array ($versions[$req_ver]['tcpdump'], '-ddd'), $bytecode);
+			}
+			catch (Exception $e)
+			{
+				if (preg_match ('/syntax error in filter expression$/', $e->getMessage()))
+					fail (422);
+				throw $e;
+			}
+			$bytecode->setStatements ($tcpdump_ddd);
 			$data = $bytecode->getSavefile();
 			header ('Content-Type: application/octet-stream');
 			header ('Content-Length: ' . strlen ($data));
