@@ -23,7 +23,7 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_tstamp_type_name_to_val() translates a time stamp type name to the
-       corresponding  time stamp type value.  The translation is case-insensi-
+       corresponding time stamp type value.  The translation is  case-insensi-
        tive.
 
 RETURN VALUE

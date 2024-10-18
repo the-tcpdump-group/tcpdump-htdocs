@@ -29,16 +29,16 @@ DESCRIPTION
        *tstamp_typesp to point to the array.  See pcap-tstamp(7) for a list of
        all the time stamp types.
 
-       The   caller   is   responsible   for   freeing    the    array    with
-       pcap_free_tstamp_types(),   which   frees   the   list  pointed  to  by
+       The    caller    is    responsible   for   freeing   the   array   with
+       pcap_free_tstamp_types(),  which  frees  the   list   pointed   to   by
        tstamp_types.
 
 RETURN VALUE
-       pcap_list_tstamp_types() returns the number of time stamp types in  the
-       array  on  success  and  PCAP_ERROR  on failure.  A return value of one
-       means that the only time stamp type supported is the one in  the  list,
-       which  is the capture device's default time stamp type.  A return value
-       of  zero  means  that  the  only   time   stamp   type   supported   is
+       pcap_list_tstamp_types()  returns the number of time stamp types in the
+       array on success and PCAP_ERROR on failure.   A  return  value  of  one
+       means  that  the only time stamp type supported is the one in the list,
+       which is the capture device's default time stamp type.  A return  value
+       of   zero   means   that   the   only  time  stamp  type  supported  is
        PCAP_TSTAMP_HOST, which is the capture device's default time stamp type
        (only older versions of libpcap will return that; newer  versions  will
        always   return  one  or  more  types).   If  PCAP_ERROR  is  returned,

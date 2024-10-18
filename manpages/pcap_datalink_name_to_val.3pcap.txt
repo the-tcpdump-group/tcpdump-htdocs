@@ -22,12 +22,12 @@ SYNOPSIS
        int pcap_datalink_name_to_val(const char *name);
 
 DESCRIPTION
-       pcap_datalink_name_to_val() translates a link-layer header  type  name,
-       which  is a DLT_ name with the DLT_ removed, to the corresponding link-
+       pcap_datalink_name_to_val()  translates  a link-layer header type name,
+       which is a DLT_ name with the DLT_ removed, to the corresponding  link-
        layer header type value.  The translation is case-insensitive.
 
 RETURN VALUE
-       pcap_datalink_name_to_val() returns  the  type  value  on  success  and
+       pcap_datalink_name_to_val()  returns  the  type  value  on  success and
        PCAP_ERROR if the name is not a known type name.
 
 SEE ALSO

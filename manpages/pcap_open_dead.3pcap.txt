@@ -36,17 +36,17 @@ DESCRIPTION
        snaplen specifies the snapshot length for the pcap_t.
 
        When pcap_open_dead_with_tstamp_precision(), is used to create a pcap_t
-       for use with pcap_dump_open(), precision specifies the time stamp  pre-
-       cision  for packets; PCAP_TSTAMP_PRECISION_MICRO should be specified if
+       for  use with pcap_dump_open(), precision specifies the time stamp pre-
+       cision for packets; PCAP_TSTAMP_PRECISION_MICRO should be specified  if
        the packets to be written have time stamps in seconds and microseconds,
        and PCAP_TSTAMP_PRECISION_NANO should be specified if the packets to be
-       written have time stamps in seconds and nanoseconds.   Its  value  does
+       written  have  time  stamps in seconds and nanoseconds.  Its value does
        not affect pcap_compile(3PCAP).
 
 BACKWARD COMPATIBILITY
        The pcap_open_dead_with_tstamp_precision() function became available in
        libpcap release 1.5.1.  In previous releases, there was no mechanism to
-       open  a  savefile  for  writing  with  time stamps given in seconds and
+       open a savefile for writing with  time  stamps  given  in  seconds  and
        nanoseconds.
 
 SEE ALSO

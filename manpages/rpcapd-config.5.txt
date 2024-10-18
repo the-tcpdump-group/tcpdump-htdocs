@@ -33,7 +33,7 @@ DESCRIPTION
        ActiveClient
               value  is  a host name or IP address, followed by a comma, semi-
               colon, or space, followed by a port name and address or DEFAULT.
-              DEFAULT  specifies the default active mode port for rpcapd, port
+              DEFAULT specifies the default active mode port for rpcapd,  port
               2003.  Each ActiveClient line adds the host and port to the list
               of clients to which the server should connect in active mode.
 

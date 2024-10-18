@@ -25,15 +25,15 @@ DESCRIPTION
        pcap-config writes to the standard output various compiler  and  linker
        flags  required  to  build a user program with libpcap.  By default, it
        writes flags appropriate for building with a dynamically-linked version
-       of  libpcap;  see below for static linking.  Depending on the manner of
-       libpcap installation, some options or their  combinations  may  produce
+       of libpcap; see below for static linking.  Depending on the  manner  of
+       libpcap  installation,  some  options or their combinations may produce
        empty output - this is by design.
 
 OPTIONS
        --help Produce a help message and exit.
 
        --version
-              Produce  libpcap  version and exit.  The version is the contents
+              Produce libpcap version and exit.  The version is  the  contents
               of VERSION file in libpcap source tree rather than the result of
               pcap_lib_version(3PCAP).
 
@@ -55,17 +55,17 @@ OPTIONS
        --static-pcap-only
               This  option  causes  --libs  and  --additional-libs  to produce
               linker flags appropriate for static linking with libpcap and dy-
-              namic  linking with all other libraries, including libraries re-
+              namic linking with all other libraries, including libraries  re-
               quired by libpcap.
 
 EXIT STATUS
-       pcap-config exits with a non-zero status when invoked with  an  invalid
+       pcap-config  exits  with a non-zero status when invoked with an invalid
        command-line option, and with status 0 otherwise.
 
 BACKWARD COMPATIBILITY
-       Before  libpcap  release  1.10.2 pcap-config did not treat invalid com-
-       mand-line options as  an  error.  The  --static-pcap-only  flag  became
-       available  in  libpcap release 1.10.2.  The --static flag became avail-
+       Before libpcap release 1.10.2 pcap-config did not  treat  invalid  com-
+       mand-line  options  as  an  error.  The  --static-pcap-only flag became
+       available in libpcap release 1.10.2.  The --static flag  became  avail-
        able in libpcap release 1.1.0.
 
 SEE ALSO

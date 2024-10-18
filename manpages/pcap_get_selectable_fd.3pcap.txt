@@ -23,8 +23,8 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_get_selectable_fd() returns, on UNIX, a file descriptor number for
-       a   file   descriptor  on  which  one  can  do  a  select(2),  poll(2),
-       epoll_wait(2), kevent(2), or other such call to wait for it to be  pos-
+       a  file  descriptor  on  which  one  can  do  a   select(2),   poll(2),
+       epoll_wait(2),  kevent(2), or other such call to wait for it to be pos-
        sible to read packets without blocking, if such a descriptor exists, or
        -1, if no such descriptor exists.
 
@@ -55,7 +55,7 @@ DESCRIPTION
 
               Mac OS X prior to Mac OS X 10.7;
 
-       select(),  poll(),  and  kevent() do not work correctly on BPF devices;
+       select(), poll(), and kevent() do not work correctly  on  BPF  devices;
        pcap_get_selectable_fd() will return a file descriptor on most of those
        versions  (the  exceptions being FreeBSD 4.3 and 4.4), but a simple se-
        lect(), poll(), or kevent() call will not indicate that the  descriptor
@@ -72,16 +72,16 @@ DESCRIPTION
 
        Note also that poll() and kevent() doesn't work  on  character  special
        files,  including BPF devices, in Mac OS X 10.4 and 10.5, so, while se-
-       lect()  can  be  used  on  the  descriptor  returned  by   pcap_get_se-
-       lectable_fd(),  poll() and kevent() cannot be used on it those versions
-       of Mac OS X.  poll(), but not kevent(), works on that descriptor in Mac
-       OS  X releases prior to 10.4; poll() and kevent() work on that descrip-
-       tor in Mac OS X 10.6 and later.
+       lect() can be  used  on  the  descriptor  returned  by  pcap_get_selec-
+       table_fd(),  poll() and kevent() cannot be used on it those versions of
+       Mac OS X.  poll(), but not kevent(), works on that descriptor in Mac OS
+       X releases prior to 10.4; poll() and kevent() work on  that  descriptor
+       in Mac OS X 10.6 and later.
 
        pcap_get_selectable_fd() is not available on Windows.
 
 RETURN VALUE
-       A selectable file descriptor is returned if one exists;  otherwise,  -1
+       A  selectable  file descriptor is returned if one exists; otherwise, -1
        is returned.
 
 SEE ALSO

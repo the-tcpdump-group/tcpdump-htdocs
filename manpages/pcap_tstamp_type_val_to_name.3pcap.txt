@@ -23,7 +23,7 @@ SYNOPSIS
        const char *pcap_tstamp_type_val_to_description(int tstamp_type);
 
 DESCRIPTION
-       pcap_tstamp_type_val_to_name() translates a time stamp  type  value  to
+       pcap_tstamp_type_val_to_name()  translates  a  time stamp type value to
        the corresponding time stamp type name.  NULL is returned on failure.
 
        pcap_tstamp_type_val_to_description()  translates  a  time  stamp  type

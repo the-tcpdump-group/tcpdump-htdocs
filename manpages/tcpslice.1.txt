@@ -59,37 +59,37 @@ TIME FORMATS
 
        Times may also be specified in terms of years  (y),  months  (m),  days
        (d), hours (h), minutes (m), seconds (s), and microseconds(u).  For ex-
-       ample, the Unix timestamp 654321098.7654 discussed above could also  be
-       expressed  as  1990y9m25d20h51m38s765400u.   2  or 4 digit years may be
+       ample,  the Unix timestamp 654321098.7654 discussed above could also be
+       expressed as 1990y9m25d20h51m38s765400u.  2 or 4  digit  years  may  be
        used; 2 digits can specify years from 1970 to 2069.
 
        When specifying times using this style, fields that are omitted default
        as  follows.   If  the omitted field is a unit greater than that of the
        first specified field, then its value  defaults  to  the  corresponding
        value taken from either first time (if the starting time is being spec-
-       ified) or the starting time (if the ending time  is  being  specified).
-       If  the  omitted  field is a unit less than that of the first specified
-       field, then it defaults to zero (1 for  days).   For  example,  suppose
-       that  the  input  file has a first time of the Unix timestamp mentioned
-       above, i.e., 38 seconds and  765,400  microseconds  after  8:51PM  PDT,
-       Sept.  25,  1990.   To specify 9:36PM PDT (exactly) on the same date we
-       could use 21h36m.  To specify a range from 9:36PM  PDT  through  1:54AM
+       ified)  or  the  starting time (if the ending time is being specified).
+       If the omitted field is a unit less than that of  the  first  specified
+       field,  then  it  defaults  to zero (1 for days).  For example, suppose
+       that the input file has a first time of the  Unix  timestamp  mentioned
+       above,  i.e.,  38  seconds  and  765,400 microseconds after 8:51PM PDT,
+       Sept. 25, 1990.  To specify 9:36PM PDT (exactly) on the  same  date  we
+       could  use  21h36m.   To specify a range from 9:36PM PDT through 1:54AM
        PDT the next day we could use 21h36m 26d1h54m.
 
-       Relative  times  can  also  be specified when using the ymdhmsu format.
-       Omitted fields then default to 0 if the unit of the  field  is  greater
-       than  that of the first specified field, and to the corresponding value
-       taken from either the first time or the starting time  if  the  omitted
-       field's  unit  is less than that of the first specified field.  Given a
-       first time of the Unix timestamp mentioned above, 22h +1h10m  specifies
-       a  range  from  10:00PM  PDT  on that date through 11:10PM PDT, and +1h
-       +1h10m specifies a range from 38.7654 seconds after 9:51PM PDT  through
+       Relative times can also be specified when  using  the  ymdhmsu  format.
+       Omitted  fields  then  default to 0 if the unit of the field is greater
+       than that of the first specified field, and to the corresponding  value
+       taken  from  either  the first time or the starting time if the omitted
+       field's unit is less than that of the first specified field.   Given  a
+       first  time of the Unix timestamp mentioned above, 22h +1h10m specifies
+       a range from 10:00PM PDT on that date  through  11:10PM  PDT,  and  +1h
+       +1h10m  specifies a range from 38.7654 seconds after 9:51PM PDT through
        38.7654 seconds after 11:01PM PDT.  The first hour of the file could be
        extracted using +0 +1h.
 
        Note that with the ymdhmsu format there is an ambiguity between using m
-       for  `month' or for `minute'.  The ambiguity is resolved as follows: if
-       an m field is followed by a d field then it is interpreted as  specify-
+       for `month' or for `minute'.  The ambiguity is resolved as follows:  if
+       an  m field is followed by a d field then it is interpreted as specify-
        ing months; otherwise it specifies minutes.
 
 MULTIPLE INPUT FILES
@@ -102,14 +102,14 @@ MULTIPLE INPUT FILES
        minus the time stamp of the first packet in the input file in which the
        given packet occurs.
 
-       When merging files, by default  tcpslice  will  discard  any  duplicate
-       packet  it  finds  in more than one file.  A duplicate is a packet that
-       has an identical timestamp (either relative or absolute) and  identical
-       packet  contents (for as much as was captured) as another packet previ-
-       ously seen in a different file.  Note that it is possible for the  net-
-       work  to  generate true replicates of packets, and for systems that can
-       return the same timestamp for multiple packets, these can  be  mistaken
-       for  duplicates  and discarded.  Accordingly, tcpslice will not discard
+       When  merging  files,  by  default  tcpslice will discard any duplicate
+       packet it finds in more than one file.  A duplicate is  a  packet  that
+       has  an identical timestamp (either relative or absolute) and identical
+       packet contents (for as much as was captured) as another packet  previ-
+       ously  seen in a different file.  Note that it is possible for the net-
+       work to generate true replicates of packets, and for systems  that  can
+       return  the  same timestamp for multiple packets, these can be mistaken
+       for duplicates and discarded.  Accordingly, tcpslice will  not  discard
        duplicates in the same trace file.  In addition, you can use the -D op-
        tion to suppress any discarding of duplicates.
 
@@ -133,7 +133,7 @@ OPTIONS
        -e seconds
               Specify  a  number  of seconds to wait after the last packet was
               seen before considering a session to be expired (default: 0 = do
-              not  expire  inactive sessions). This is only effective when the
+              not expire inactive sessions). This is only effective  when  the
               -s option is used to track sessions.
 
        -f format
@@ -148,25 +148,25 @@ OPTIONS
        -l     When merging more than one file, merge on the basis of  relative
               time,  rather  than absolute time.  Normally, when merging files
               is done, packets are merged based on absolute time stamps.  With
-              -l  packets  are  merged  based on the relative time between the
-              start of the file in which the packet  is  found  and  the  time
-              stamp  of  the  packet itself.  The time stamp of packets in the
-              output file is calculated as the relative time  for  the  packet
+              -l packets are merged based on the  relative  time  between  the
+              start  of  the  file  in  which the packet is found and the time
+              stamp of the packet itself.  The time stamp of  packets  in  the
+              output  file  is  calculated as the relative time for the packet
               within its file plus first time.
 
-       -R     Dump  the timestamps of the first and last packets in each input
+       -R     Dump the timestamps of the first and last packets in each  input
               file as raw timestamps (i.e., in the form  sssssssss.uuuuuu).
 
-       -r     Same as -R except the timestamps are  dumped  in  human-readable
+       -r     Same  as  -R  except the timestamps are dumped in human-readable
               format, similar to that used by date(1).
 
        -s types
-              Enable  session  tracking  for  the  specified  types which is a
+              Enable session tracking for  the  specified  types  which  is  a
               comma-separated list of the following:
 
               tcp    track all TCP connections
 
-              sip    track SIP-based VoIP calls, which may enable tracking  of
+              sip    track  SIP-based VoIP calls, which may enable tracking of
                      TCP connections but only the ones that are related to SIP
                      calls.  This feature is only available  if  tcpslice  was
                      linked  against  Aymeric  Moizard's  GNU oSIP library; if
@@ -182,7 +182,7 @@ OPTIONS
                      from https://sourceforge.net/projects/ooh323c/ and recom-
                      pile tcpslice.
 
-              Session tracking altogether is only available  if  tcpslice  was
+              Session  tracking  altogether  is only available if tcpslice was
               linked against a recent version (>1.20) of Rafal Wojtczuk's Net-
               work Intrusion Detection System library;  if  not,  install  the
               latest  version  of libnids from http://libnids.sourceforge.net/
@@ -225,25 +225,25 @@ BUGS
 
               tcpdump-workers@lists.tcpdump.org
 
-       Please  send source code contributions as git pull requests through the
+       Please send source code contributions as git pull requests through  the
        project page above.
 
-       An input filename that exactly  matches  the  sssssssss.uuuuuu  or  the
-       ymdhmsu  format  discussed  above can be confused with a start/end time
-       (regardless if the date and the time are valid  in  the  latter  case).
+       An  input  filename  that  exactly  matches the sssssssss.uuuuuu or the
+       ymdhmsu format discussed above can be confused with  a  start/end  time
+       (regardless  if  the  date  and the time are valid in the latter case).
        Such filenames can be specified with a leading `./'; for example, spec-
        ify the file 1976y07m04d as ./1976y07m04d and 00000123  as  ./00000123.
        Alternatively, renaming the files to 1976y07m04d.pcap and 00000123.pcap
        respectively would resolve this ambiguity.
 
-       tcpslice cannot read its input from stdin, since it uses  random-access
+       tcpslice  cannot read its input from stdin, since it uses random-access
        to rummage through its input files.
 
-       tcpslice  cannot  process  an  otherwise valid input file that contains
+       tcpslice cannot process an otherwise valid  input  file  that  contains
        fewer than two packets.
 
-       tcpslice refuses to write to its output if it is a terminal  (as  indi-
-       cated  by  isatty(3)).   This is not a bug but a feature, to prevent it
+       tcpslice  refuses  to write to its output if it is a terminal (as indi-
+       cated by isatty(3)).  This is not a bug but a feature,  to  prevent  it
        from spraying binary data to the user's terminal.  Note that this means
        you must either redirect stdout or specify an output file via -w.
 
@@ -259,7 +259,7 @@ BUGS
        tially present, typically due to tcpdump being ungracefully killed).
 
        Adding -l has broken some compatibility with older versions, since tcp-
-       slice  now merges its input files, rather than (approximately) concate-
+       slice now merges its input files, rather than (approximately)  concate-
        nating them together as it did previously.
 
        It would sometimes be convenient if you could specify a clock offset to

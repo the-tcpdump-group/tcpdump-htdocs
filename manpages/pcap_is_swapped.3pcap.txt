@@ -31,7 +31,7 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_is_swapped() returns true (1) or false (0) on success and PCAP_ER-
-       ROR_NOT_ACTIVATED if called on a capture handle that has  been  created
+       ROR_NOT_ACTIVATED  if  called on a capture handle that has been created
        but not activated.
 
 SEE ALSO

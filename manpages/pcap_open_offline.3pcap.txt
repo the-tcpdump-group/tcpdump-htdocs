@@ -40,34 +40,34 @@ DESCRIPTION
        read.  The name "-" is a synonym for stdin.
 
        pcap_open_offline_with_tstamp_precision() takes an additional precision
-       argument    specifying   the   time   stamp   precision   desired;   if
-       PCAP_TSTAMP_PRECISION_MICRO is specified, packet time  stamps  will  be
+       argument   specifying   the   time   stamp   precision   desired;    if
+       PCAP_TSTAMP_PRECISION_MICRO  is  specified,  packet time stamps will be
        supplied in seconds and microseconds, and if PCAP_TSTAMP_PRECISION_NANO
        is specified, packet time  stamps  will  be  supplied  in  seconds  and
        nanoseconds.   If the time stamps in the file do not have the same pre-
        cision as the requested precision, they will be scaled up  or  down  as
        necessary before being supplied.
 
-       Alternatively,  you  may  call  pcap_fopen_offline() or pcap_fopen_off-
-       line_with_tstamp_precision() to read dumped data from an existing  open
-       stream  fp.   pcap_fopen_offline_with_tstamp_precision() takes an addi-
-       tional precision argument as described above.  Note  that  on  Windows,
+       Alternatively,  you  may  call  pcap_fopen_offline()  or pcap_fopen_of-
+       fline_with_tstamp_precision() to read dumped data from an existing open
+       stream fp.  pcap_fopen_offline_with_tstamp_precision() takes  an  addi-
+       tional  precision  argument  as described above.  Note that on Windows,
        that stream should be opened in binary mode.
 
-       errbuf  is  a  buffer  large  enough  to hold at least PCAP_ERRBUF_SIZE
+       errbuf is a buffer large  enough  to  hold  at  least  PCAP_ERRBUF_SIZE
        chars.
 
 RETURN VALUE
        pcap_open_offline(),         pcap_open_offline_with_tstamp_precision(),
-       pcap_fopen_offline(),   and  pcap_fopen_offline_with_tstamp_precision()
+       pcap_fopen_offline(),  and   pcap_fopen_offline_with_tstamp_precision()
        return a pcap_t * on success and NULL on failure.  If NULL is returned,
        errbuf is filled in with an appropriate error message.
 
 BACKWARD COMPATIBILITY
-       pcap_open_offline_with_tstamp_precision()      and      pcap_fopen_off-
-       line_with_tstamp_precision() became available in libpcap release 1.5.1.
-       In  previous  releases, time stamps from a savefile are always given in
-       seconds and microseconds.
+       pcap_open_offline_with_tstamp_precision()       and      pcap_fopen_of-
+       fline_with_tstamp_precision()  became  available  in  libpcap   release
+       1.5.1.   In  previous  releases, time stamps from a savefile are always
+       given in seconds and microseconds.
 
 SEE ALSO
        pcap(3PCAP), pcap-savefile(5)

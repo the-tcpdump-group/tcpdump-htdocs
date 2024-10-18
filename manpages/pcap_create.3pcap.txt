@@ -32,13 +32,13 @@ DESCRIPTION
        pcap_findalldevs(3PCAP), which may also include D-Bus, USB etc.  errbuf
        is a buffer large enough to hold at least PCAP_ERRBUF_SIZE chars.
 
-       The returned handle must be activated with pcap_activate(3PCAP)  before
-       packets  can be captured with it; options for the capture, such as pro-
-       miscuous mode, can be set on the handle before activating it.
+       The  returned handle must be activated with pcap_activate(3PCAP) before
+       packets can be captured with it;  options  for  the  capture,  such  as
+       promiscuous mode, can be set on the handle before activating it.
 
 RETURN VALUE
-       pcap_create() returns a pcap_t * on success and NULL  on  failure.   If
-       NULL  is  returned,  errbuf is filled in with an appropriate error mes-
+       pcap_create()  returns  a  pcap_t * on success and NULL on failure.  If
+       NULL is returned, errbuf is filled in with an  appropriate  error  mes-
        sage.
 
 SEE ALSO
