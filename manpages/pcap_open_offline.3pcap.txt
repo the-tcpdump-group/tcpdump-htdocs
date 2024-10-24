@@ -51,7 +51,7 @@ DESCRIPTION
        Alternatively,  you  may  call  pcap_fopen_offline() or pcap_fopen_off-
        line_with_tstamp_precision() to read dumped data from an existing  open
        stream  fp;  this  stream  will  be  closed  by  a  subsequent  call to
-       pcap_close   (3PCAP)   unless    it    is    stdin.     pcap_fopen_off-
+       pcap_close(3PCAP)    unless    it    is     stdin.      pcap_fopen_off-
        line_with_tstamp_precision()  takes an additional precision argument as
        described above.  Note that on Windows, that stream should be opened in
        binary mode.
