@@ -24,28 +24,28 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_list_datalinks() is used to get a list of the supported link-layer
-       header types of the interface  associated  with  the  pcap  descriptor.
-       pcap_list_datalinks()  allocates  an  array  to  hold the list and sets
+       header  types  of  the  interface  associated with the pcap descriptor.
+       pcap_list_datalinks() allocates an array to  hold  the  list  and  sets
        *dlt_buf to point to that array.
 
-       The   caller   is   responsible   for   freeing    the    array    with
-       pcap_free_datalinks(),  which frees the list of link-layer header types
+       The    caller    is    responsible   for   freeing   the   array   with
+       pcap_free_datalinks(), which frees the list of link-layer header  types
        pointed to by dlt_list.
 
-       It  must  not   be   called   on   a   pcap   descriptor   created   by
-       pcap_create(3PCAP)    that    has    not    yet   been   activated   by
+       It   must   not   be   called   on   a   pcap   descriptor  created  by
+       pcap_create(3PCAP)   that   has   not    yet    been    activated    by
        pcap_activate(3PCAP).
 
 RETURN VALUE
-       pcap_list_datalinks() returns the number of link-layer header types  in
-       the  array  on success, PCAP_ERROR_NOT_ACTIVATED if called on a capture
+       pcap_list_datalinks()  returns the number of link-layer header types in
+       the array on success, PCAP_ERROR_NOT_ACTIVATED if called on  a  capture
        handle that has been created but not activated, and PCAP_ERROR on other
        errors.    If   PCAP_ERROR   is   returned,    pcap_geterr(3PCAP)    or
        pcap_perror(3PCAP) may be called with p as an argument to fetch or dis-
        play the error text.
 
 SEE ALSO
-       pcap(3PCAP),   pcap_datalink_val_to_name(3PCAP),  pcap_datalink(3PCAP),
+       pcap(3PCAP),  pcap_datalink_val_to_name(3PCAP),   pcap_datalink(3PCAP),
        pcap_set_datalink(3PCAP), pcap-linktype(7)
 
                                  25 July 2018       PCAP_LIST_DATALINKS(3PCAP)

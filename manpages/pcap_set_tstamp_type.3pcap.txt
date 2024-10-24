@@ -32,21 +32,21 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_set_tstamp_type() returns 0 on success if the specified time stamp
-       type is expected to be supported  by  the  capture  device,  PCAP_WARN-
-       ING_TSTAMP_TYPE_NOTSUP  if  the  specified  time stamp type is not sup-
-       ported by the capture device, PCAP_ERROR_ACTIVATED if called on a  cap-
+       type  is  expected  to  be  supported by the capture device, PCAP_WARN-
+       ING_TSTAMP_TYPE_NOTSUP if the specified time stamp  type  is  not  sup-
+       ported  by the capture device, PCAP_ERROR_ACTIVATED if called on a cap-
        ture handle that has been activated, and PCAP_ERROR_CANTSET_TSTAMP_TYPE
        if the capture device doesn't support setting the time stamp type (only
-       older  versions of libpcap will return that; newer versions will always
+       older versions of libpcap will return that; newer versions will  always
        allow the time stamp type to be set to the default type).
 
 BACKWARD COMPATIBILITY
-       This function became available in libpcap release 1.2.1.   In  previous
-       releases,  the  time  stamp  type  cannot be set; only the default time
+       This  function  became available in libpcap release 1.2.1.  In previous
+       releases, the time stamp type cannot be  set;  only  the  default  time
        stamp type offered by a capture source is available.
 
 SEE ALSO
-       pcap(3PCAP),   pcap_list_tstamp_types(3PCAP),    pcap_set_tstamp_preci-
+       pcap(3PCAP),    pcap_list_tstamp_types(3PCAP),   pcap_set_tstamp_preci-
        sion(3PCAP), pcap_tstamp_type_name_to_val(3PCAP)
 
                                8 September 2019    PCAP_SET_TSTAMP_TYPE(3PCAP)

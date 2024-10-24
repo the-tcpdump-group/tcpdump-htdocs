@@ -27,24 +27,24 @@ DESCRIPTION
 
 RETURN VALUE
        pcap_activate() returns 0 on success without warnings, a non-zero posi-
-       tive  value on success with warnings, and a negative value on error.  A
-       non-zero return value indicates what warning  or  error  condition  oc-
+       tive value on success with warnings, and a negative value on error.   A
+       non-zero  return  value  indicates  what warning or error condition oc-
        curred.
 
        The possible warning values are:
 
        PCAP_WARNING_PROMISC_NOTSUP
-              Promiscuous  mode  was requested, but the capture source doesn't
+              Promiscuous mode was requested, but the capture  source  doesn't
               support promiscuous mode.
 
        PCAP_WARNING_TSTAMP_TYPE_NOTSUP
               The    time    stamp    type    specified    in    a    previous
-              pcap_set_tstamp_type(3PCAP)  call isn't supported by the capture
+              pcap_set_tstamp_type(3PCAP) call isn't supported by the  capture
               source (the time stamp type is left as the default),
 
        PCAP_WARNING
-              Another  warning  condition  occurred;   pcap_geterr(3PCAP)   or
-              pcap_perror(3PCAP)  may be called with p as an argument to fetch
+              Another   warning   condition  occurred;  pcap_geterr(3PCAP)  or
+              pcap_perror(3PCAP) may be called with p as an argument to  fetch
               or display a message describing the warning condition.
 
        The possible error values are:
@@ -84,14 +84,14 @@ RETURN VALUE
        fetch or display an message giving additional details about the problem
        that might be useful for debugging the problem if it's unexpected.
 
-       Additional  warning  and error codes may be added in the future; a pro-
-       gram should check for positive, negative, and zero  return  codes,  and
-       treat  all  positive  return  codes as warnings and all negative return
+       Additional warning and error codes may be added in the future;  a  pro-
+       gram  should  check  for positive, negative, and zero return codes, and
+       treat all positive return codes as warnings  and  all  negative  return
        codes as errors.  pcap_statustostr(3PCAP) can be called, with a warning
        or error code as an argument, to fetch a message describing the warning
        or error code.
 
-       If pcap_activate() fails, the pcap_t * is  not  closed  and  freed;  it
+       If  pcap_activate()  fails,  the  pcap_t  * is not closed and freed; it
        should be closed using pcap_close(3PCAP).
 
 SEE ALSO

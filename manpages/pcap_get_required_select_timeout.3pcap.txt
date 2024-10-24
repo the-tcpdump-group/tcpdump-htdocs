@@ -10,7 +10,7 @@
 |                                                                            |
 +----------------------------------------------------------------------------+
 
-PCAP_GET_REQUI...SELECT_TIMEOUT(3PCAP)  PCAP_GET_REQUI...SELECT_TIMEOUT(3PCAP)
+PCAP_GET_REQUIRED_SELECT_TIMEOUT(3PCAP)PCAP_GET_REQUIRED_SELECT_TIMEOUT(3PCAP)
 
 NAME
        pcap_get_required_select_timeout  - get a timeout to be used when doing
@@ -29,31 +29,31 @@ DESCRIPTION
        must be used regardless of  whether  pcap_get_selectable_fd(3PCAP)  re-
        turns  -1  for  any  descriptor  on  which  those calls are being done.
        pcap_get_required_select_timeout() should be called for all pcap_ts be-
-       fore a call to select(), poll(), epoll_wait(),  or  kevent(),  and  any
-       timeouts  used  for  those calls should be updated as appropriate given
+       fore  a  call  to  select(), poll(), epoll_wait(), or kevent(), and any
+       timeouts used for those calls should be updated  as  appropriate  given
        the new value of the timeout.
 
-       For kevent(), one EVFILT_TIMER filter per selectable descriptor can  be
-       used,  rather  than  using  the  timeout  argument  to kevent(); if the
-       EVFILT_TIMER event for a particular selectable  descriptor  signals  an
-       event,  pcap_dispatch(3PCAP)  should  be  called  for the corresponding
+       For  kevent(), one EVFILT_TIMER filter per selectable descriptor can be
+       used, rather than using the timeout argument to kevent();  if  the  EV-
+       FILT_TIMER  event  for  a  particular  selectable descriptor signals an
+       event, pcap_dispatch(3PCAP) should  be  called  for  the  corresponding
        pcap_t.
 
-       On Linux systems with timerfd_create(2), one timer  object  created  by
+       On  Linux  systems  with timerfd_create(2), one timer object created by
        timerfd_create() per selectable descriptor can be used, rather than us-
        ing  the  timeout  argument  to epoll_wait(); if the timer object for a
        particular selectable descriptor signals an event, pcap_dispatch(3PCAP)
        should be called for the corresponding pcap_t.
 
-       Otherwise, a timeout value no larger than the smallest of all  timeouts
-       returned  by  pcap_get_required_select_timeout() for devices from which
-       packets will be captured and any other timeouts to be used in the  call
+       Otherwise,  a timeout value no larger than the smallest of all timeouts
+       returned by pcap_get_required_select_timeout() for devices  from  which
+       packets  will be captured and any other timeouts to be used in the call
        should be used as the timeout for the call, and, when the call returns,
        pcap_dispatch(3PCAP)  should be called for all pcap_ts for which a non-
        NULL timeout was returned, regardless of whether it's indicated as hav-
        ing anything to read from it or not.
 
-       All devices with a non-NULL timeout must be put  in  non-blocking  mode
+       All  devices  with  a non-NULL timeout must be put in non-blocking mode
        with pcap_setnonblock(3PCAP).
 
        Note that a device on which a read can be done without blocking may, on
@@ -87,4 +87,4 @@ SEE ALSO
        pcap(3PCAP),    pcap_get_selectable_fd(3PCAP),    select(2),   poll(2),
        epoll_wait(2), kqueue(2)
 
-                                29 JanuaPCAP_GET_REQUI...SELECT_TIMEOUT(3PCAP)
+                                29 JanuPCAP_GET_REQUIRED_SELECT_TIMEOUT(3PCAP)

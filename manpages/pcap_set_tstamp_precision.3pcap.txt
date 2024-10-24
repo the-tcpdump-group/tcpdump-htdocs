@@ -28,14 +28,14 @@ DESCRIPTION
        by tstamp_precision.  It must be called on a pcap descriptor created by
        pcap_create(3PCAP)  that  has  not  yet  been  activated  by pcap_acti-
        vate(3PCAP).  Two time stamp precisions are supported, microseconds and
-       nanoseconds.  One  can  use  options  PCAP_TSTAMP_PRECISION_MICRO   and
-       PCAP_TSTAMP_PRECISION_NANO  to  request  desired precision. By default,
+       nanoseconds.   One  can  use  options  PCAP_TSTAMP_PRECISION_MICRO  and
+       PCAP_TSTAMP_PRECISION_NANO to request desired  precision.  By  default,
        time stamps are in microseconds.
 
 RETURN VALUE
-       pcap_set_tstamp_precision() returns 0 on success if the specified  time
-       stamp  precision  is  expected  to  be supported by the capture device,
-       PCAP_ERROR_TSTAMP_PRECISION_NOTSUP if the capture device does not  sup-
+       pcap_set_tstamp_precision()  returns 0 on success if the specified time
+       stamp precision is expected to be  supported  by  the  capture  device,
+       PCAP_ERROR_TSTAMP_PRECISION_NOTSUP  if the capture device does not sup-
        port the requested time stamp precision, PCAP_ERROR_ACTIVATED if called
        on a capture handle that has been activated.
 

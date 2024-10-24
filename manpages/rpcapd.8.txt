@@ -36,9 +36,9 @@ DESCRIPTION
        client (e.g., a network sniffer). The client then sends the appropriate
        commands to rpcapd to start the capture.
 
-       Active mode is useful in case rpcapd is run behind a firewall and  can-
-       not  receive  connections from the external world. In this case, rpcapd
-       can be configured to establish the connection to a  given  host,  which
+       Active  mode is useful in case rpcapd is run behind a firewall and can-
+       not receive connections from the external world. In this  case,  rpcapd
+       can  be  configured  to establish the connection to a given host, which
        has to be configured in order to wait for that connection. After estab-
        lishing  the  connection,  the protocol continues its job in almost the
        same way in both active and passive mode.
@@ -47,10 +47,10 @@ Configuration file
        The user can create a configuration file in the same directory  as  the
        executable,  and  put the configuration commands in there. In order for
        rpcapd to execute the commands, it needs to be restarted on Win32, i.e.
-       the configuration file is parsed only at the beginning. The  UNIX  ver-
-       sion  of rpcapd will reread the configuration file upon receiving a HUP
-       signal. In that case, all the existing  connections  remain  in  place,
-       while  the new connections will be created according to the new parame-
+       the  configuration  file is parsed only at the beginning. The UNIX ver-
+       sion of rpcapd will reread the configuration file upon receiving a  HUP
+       signal.  In  that  case,  all the existing connections remain in place,
+       while the new connections will be created according to the new  parame-
        ters.
 
        In case a user does not want to create the configuration file manually,
@@ -74,9 +74,9 @@ Installing rpcapd on Win32
 
 Starting rpcapd on Win32
        The rpcapd executable can be launched directly, i.e.  it can run in the
-       foreground  as  well (not as a daemon/service).  The procedure is quite
-       simple: you have to invoke the executable from the  command  line  with
-       all  the  requested  parameters  except  for  the -d flag.  The capture
+       foreground as well (not as a daemon/service).  The procedure  is  quite
+       simple:  you  have  to invoke the executable from the command line with
+       all the requested parameters except  for  the  -d  flag.   The  capture
        server will start in the foreground.
 
 Installing rpcapd on Unix-like systems
@@ -115,31 +115,31 @@ OPTIONS
               port 2002.
 
        -t data_port
-              Use the port specified by data_port as the port for data  trans-
-              fer.   By  default,  rpcapd  uses a port chosen by the operating
+              Use  the port specified by data_port as the port for data trans-
+              fer.  By default, rpcapd uses a port  chosen  by  the  operating
               system.
 
-       -4     Listen only on IPv4 addresses.  By default,  rpcapd  listens  on
+       -4     Listen  only  on  IPv4 addresses.  By default, rpcapd listens on
               both IPv4 and IPv6 addresses.
 
        -l host_list
-              Only  allow hosts specified in the host_list argument to connect
-              to this server.  host_list is a list of host  names  or  IP  ad-
-              dresses,  separated  by  commas.   We  suggest that you use host
-              names rather than literal IP addresses in order to  avoid  prob-
+              Only allow hosts specified in the host_list argument to  connect
+              to  this  server.   host_list  is a list of host names or IP ad-
+              dresses, separated by commas.  We  suggest  that  you  use  host
+              names  rather  than literal IP addresses in order to avoid prob-
               lems with different address families.
 
        -n     Permit NULL authentication (usually used with the -l flag).
 
        -a host,port
-              Run  in  active  mode, connecting to host host on port port.  In
+              Run in active mode, connecting to host host on  port  port.   In
               case port is omitted, the default port (2003) is used.
 
-       -v     Run in active mode only; by default, if -a is specified,  rpcapd
+       -v     Run  in active mode only; by default, if -a is specified, rpcapd
               accepts passive connections as well.
 
-       -d     Run  in  daemon  mode  (UNIX only) or as a service (Win32 only).
-              Warning (Win32): this flag is specified automatically  when  the
+       -d     Run in daemon mode (UNIX only) or as  a  service  (Win32  only).
+              Warning  (Win32):  this flag is specified automatically when the
               service is started from the control panel.
 
        -i     Run in inetd mode (UNIX only).
@@ -147,12 +147,12 @@ OPTIONS
        -D     Log debugging messages.
 
        -s config_file
-              Save  the  current  configuration  to  config_file in the format
+              Save the current configuration  to  config_file  in  the  format
               specified by rpcapd-config(5).
 
        -f config_file
-              Load the current configuration from config_file  in  the  format
-              specified  by rpcapd-config(5) and ignore all flags specified on
+              Load  the  current  configuration from config_file in the format
+              specified by rpcapd-config(5) and ignore all flags specified  on
               the command line.
 
        -h     Print this help screen.

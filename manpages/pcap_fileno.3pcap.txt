@@ -29,7 +29,7 @@ DESCRIPTION
        If p refers to a ``savefile'' that was opened using functions  such  as
        pcap_open_offline(3PCAP)   or   pcap_fopen_offline(3PCAP),  a  ``dead''
        pcap_t opened using pcap_open_dead(3PCAP), or a pcap_t that was created
-       with pcap_create() but that has not yet been activated with  pcap_acti-
+       with  pcap_create() but that has not yet been activated with pcap_acti-
        vate(), it returns PCAP_ERROR.
 
 SEE ALSO

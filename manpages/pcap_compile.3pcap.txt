@@ -26,7 +26,7 @@ DESCRIPTION
        See pcap-filter(7) for the syntax of that string.  fp is a pointer to a
        bpf_program  struct  and is filled in by pcap_compile().  optimize con-
        trols whether optimization on the resulting code is performed.  netmask
-       specifies the IPv4 netmask of the network on which  packets  are  being
+       specifies  the  IPv4  netmask of the network on which packets are being
        captured; it is used only when checking for IPv4 broadcast addresses in
        the filter program.  If the netmask of the network on which packets are
        being captured isn't known to the program, or if packets are being cap-
@@ -47,7 +47,7 @@ RETURN VALUE
        called with p as an argument to fetch or display the error text.
 
 BACKWARD COMPATIBILITY
-       The  PCAP_NETMASK_UNKNOWN  constant became available in libpcap release
+       The PCAP_NETMASK_UNKNOWN constant became available in  libpcap  release
        1.1.0.
 
 SEE ALSO

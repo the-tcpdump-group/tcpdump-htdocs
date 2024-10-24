@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_DUMP_CLOSE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 January 2014<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 12 October 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -31,7 +31,18 @@ pcap_dump_close - close a savefile being written to
 
 <B>pcap_dump_close</B>()
 
-closes the ``savefile''.
+closes the ``savefile'' associated with
+<I>p</I>
+
+and deallocates resources. This means that, for example, if
+<I>p</I>
+
+refers to a savefile that was opened with
+<B>pcap_dump_fopen</B>(),
+
+the stream provided to that routine will be closed unless it is
+<CODE>stdout</CODE>.
+
 <H2 id="lbAE">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
@@ -44,7 +55,7 @@ closes the ``savefile''.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 11:35:51 GMT, September 26, 2024
+This HTML man page was generated at 01:06:33 GMT, October 24, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

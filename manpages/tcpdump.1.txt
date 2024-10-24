@@ -37,15 +37,15 @@ DESCRIPTION
        for  the  expression  syntax);  the  description  is preceded by a time
        stamp, printed, by default, as hours, minutes, seconds,  and  fractions
        of a second since midnight.  It can also be run with the -w flag, which
-       causes  it to save the packet data to a file for later analysis, and/or
-       with the -r flag, which causes it to read  from  a  saved  packet  file
-       rather  than  to read packets from a network interface.  It can also be
-       run with the -V flag, which causes it to read a list  of  saved  packet
-       files.  In  all  cases,  only  packets  that  match  expression will be
-       processed by tcpdump.
+       causes it to save the packet data to a file for later analysis,  and/or
+       with  the  -r  flag,  which  causes it to read from a saved packet file
+       rather than to read packets from a network interface.  It can  also  be
+       run  with  the  -V flag, which causes it to read a list of saved packet
+       files. In all cases, only packets that match expression  will  be  pro-
+       cessed by tcpdump.
 
-       tcpdump will, if not run with the -c flag, continue  capturing  packets
-       until  it is interrupted by a SIGINT signal (generated, for example, by
+       tcpdump  will,  if not run with the -c flag, continue capturing packets
+       until it is interrupted by a SIGINT signal (generated, for example,  by
        typing your interrupt character, typically control-C) or a SIGTERM sig-
        nal (typically generated with the kill(1) command); if run with the  -c
        flag,  it  will  capture packets until it is interrupted by a SIGINT or
@@ -56,38 +56,38 @@ DESCRIPTION
               packets ``captured'' (this is the number of packets that tcpdump
               has received and processed);
 
-              packets ``received by filter'' (the meaning of this  depends  on
-              the  OS on which you're running tcpdump, and possibly on the way
+              packets  ``received  by filter'' (the meaning of this depends on
+              the OS on which you're running tcpdump, and possibly on the  way
               the OS was configured - if a filter was specified on the command
               line, on some OSes it counts packets regardless of whether  they
               were  matched  by  the  filter expression and, even if they were
               matched by the filter expression, regardless of whether  tcpdump
               has  read  and  processed them yet, on other OSes it counts only
               packets that were matched by the filter expression regardless of
-              whether tcpdump has read and processed them yet,  and  on  other
-              OSes  it counts only packets that were matched by the filter ex-
+              whether  tcpdump  has  read and processed them yet, and on other
+              OSes it counts only packets that were matched by the filter  ex-
               pression and were processed by tcpdump);
 
-              packets ``dropped by kernel'' (this is  the  number  of  packets
-              that  were dropped, due to a lack of buffer space, by the packet
-              capture mechanism in the OS on which tcpdump is running, if  the
-              OS  reports that information to applications; if not, it will be
+              packets  ``dropped  by  kernel''  (this is the number of packets
+              that were dropped, due to a lack of buffer space, by the  packet
+              capture  mechanism in the OS on which tcpdump is running, if the
+              OS reports that information to applications; if not, it will  be
               reported as 0).
 
-       On platforms that support the SIGINFO signal, such as  most  BSDs  (in-
-       cluding  macOS), it will report those counts when it receives a SIGINFO
-       signal (generated, for example, by typing  your  ``status''  character,
-       typically  control-T,  although  on  some platforms, such as macOS, the
-       ``status'' character is not set by default, so you  must  set  it  with
-       stty(1)  in  order  to  use it) and will continue capturing packets. On
-       platforms that do not support the  SIGINFO  signal,  the  same  can  be
+       On  platforms  that  support the SIGINFO signal, such as most BSDs (in-
+       cluding macOS), it will report those counts when it receives a  SIGINFO
+       signal  (generated,  for  example, by typing your ``status'' character,
+       typically control-T, although on some platforms,  such  as  macOS,  the
+       ``status''  character  is  not  set by default, so you must set it with
+       stty(1) in order to use it) and will  continue  capturing  packets.  On
+       platforms  that  do  not  support  the  SIGINFO signal, the same can be
        achieved by using the SIGUSR1 signal.
 
        Using the SIGUSR2 signal along with the -w flag will forcibly flush the
        packet buffer into the output file.
 
        Reading packets from a network interface may require that you have spe-
-       cial  privileges;  see the pcap(3PCAP) man page for details.  Reading a
+       cial privileges; see the pcap(3PCAP) man page for details.   Reading  a
        saved packet file doesn't require special privileges.
 
 OPTIONS
@@ -121,15 +121,15 @@ OPTIONS
               not 1,048,576 bytes).
 
               By adding a suffix of k/K, m/M or g/G to the value, the unit can
-              be  changed  to  1,024  (KiB), 1,048,576 (MiB), or 1,073,741,824
+              be changed to 1,024 (KiB),  1,048,576  (MiB),  or  1,073,741,824
               (GiB) respectively.
 
-       -d     Dump the compiled packet-matching code in a human readable  form
+       -d     Dump  the compiled packet-matching code in a human readable form
               to standard output and stop.
 
-              Please  mind  that  although code compilation is always DLT-spe-
-              cific, typically it is impossible (and unnecessary)  to  specify
-              which  DLT  to  use for the dump because tcpdump uses either the
+              Please mind that although code compilation  is  always  DLT-spe-
+              cific,  typically  it is impossible (and unnecessary) to specify
+              which DLT to use for the dump because tcpdump  uses  either  the
               DLT of the input pcap file specified with -r, or the default DLT
               of the network interface specified with -i,  or  the  particular
               DLT  of  the  network interface specified with -y and -i respec-
@@ -137,8 +137,8 @@ OPTIONS
               would filter the input file or the network interface without -d.
 
               However, when neither -r nor -i is specified, specifying -d pre-
-              vents  tcpdump  from  guessing a suitable network interface (see
-              -i).  In this case the DLT defaults to EN10MB and can be set  to
+              vents tcpdump from guessing a suitable  network  interface  (see
+              -i).   In this case the DLT defaults to EN10MB and can be set to
               another valid value manually with -y.
 
        -dd    Dump packet-matching code as a C array of struct bpf_insn struc-
@@ -150,14 +150,14 @@ OPTIONS
        -D
        --list-interfaces
               Print the list of the network interfaces available on the system
-              and on which tcpdump can capture packets.  For each network  in-
-              terface,  a number and an interface name, possibly followed by a
-              text description of the interface, are printed.   The  interface
-              name  or the number can be supplied to the -i flag to specify an
+              and  on which tcpdump can capture packets.  For each network in-
+              terface, a number and an interface name, possibly followed by  a
+              text  description  of the interface, are printed.  The interface
+              name or the number can be supplied to the -i flag to specify  an
               interface on which to capture.
 
-              This can be useful on systems that don't have a command to  list
-              them  (e.g.,  Windows  systems, or UNIX systems lacking ifconfig
+              This  can be useful on systems that don't have a command to list
+              them (e.g., Windows systems, or UNIX  systems  lacking  ifconfig
               -a); the number can be useful on Windows 2000 and later systems,
               where the interface name is a somewhat complex string.
 
@@ -170,12 +170,12 @@ OPTIONS
               spi. This combination may be repeated with comma or newline sep-
               aration.
 
-              Note that setting the secret for IPv4 ESP packets  is  supported
+              Note  that  setting the secret for IPv4 ESP packets is supported
               at this time.
 
-              Algorithms  may  be  des-cbc,  3des-cbc,  blowfish-cbc, rc3-cbc,
-              cast128-cbc, or none.  The default is des-cbc.  The  ability  to
-              decrypt  packets  is  only  present if tcpdump was compiled with
+              Algorithms may  be  des-cbc,  3des-cbc,  blowfish-cbc,  rc3-cbc,
+              cast128-cbc,  or  none.  The default is des-cbc.  The ability to
+              decrypt packets is only present if  tcpdump  was  compiled  with
               cryptography enabled.
 
               secret is the ASCII text for ESP secret key.  If preceded by 0x,
@@ -199,8 +199,8 @@ OPTIONS
               non-local internet numbers).
 
               The test for `foreign' IPv4 addresses is done using the IPv4 ad-
-              dress  and  netmask  of  the  interface on that capture is being
-              done.  If that address or netmask are not available, either  be-
+              dress and netmask of the interface  on  that  capture  is  being
+              done.   If that address or netmask are not available, either be-
               cause the interface on that capture is being done has no address
               or  netmask or because it is the "any" pseudo-interface (see the
               -i flag below), this option will not work correctly.
@@ -211,10 +211,10 @@ OPTIONS
 
        -G rotate_seconds
               If specified, rotates the dump file specified with the -w option
-              every  rotate_seconds  seconds.   Savefiles  will  have the name
+              every rotate_seconds seconds.   Savefiles  will  have  the  name
               specified by -w which should include a time format as defined by
               strftime(3).  If no time format is specified, each new file will
-              overwrite the previous.  Whenever a generated  filename  is  not
+              overwrite  the  previous.   Whenever a generated filename is not
               unique, tcpdump will overwrite the preexisting data; providing a
               time  specification  that  is coarser than the capture period is
               therefore not advised.
@@ -241,11 +241,11 @@ OPTIONS
               which may turn out to be, for example, ``eth0''.
 
               On all supported Linux systems, as well as on recent versions of
-              macOS  and Solaris, an interface argument of ``any'' can be used
-              to capture packets from  all  network  interfaces.   The  latter
-              should  not  be  confused  with all available capture devices as
-              printed by the -D flag, which may also include D-Bus,  USB  etc.
-              Note  that  captures on the ``any'' pseudo-interface will not be
+              macOS and Solaris, an interface argument of ``any'' can be  used
+              to  capture  packets  from  all  network interfaces.  The latter
+              should not be confused with all  available  capture  devices  as
+              printed  by  the -D flag, which may also include D-Bus, USB etc.
+              Note that captures on the ``any'' pseudo-interface will  not  be
               done in promiscuous mode.
 
               An interface number as printed by the -D flag can be used as the
@@ -258,15 +258,15 @@ OPTIONS
               IEEE 802.11 Wi-Fi interfaces, and supported only on some operat-
               ing systems.
 
-              Note that in monitor mode the adapter  might  disassociate  from
-              the  network with which it's associated, so that you will not be
+              Note  that  in  monitor mode the adapter might disassociate from
+              the network with which it's associated, so that you will not  be
               able to use any wireless networks with that adapter.  This could
               prevent accessing files on a network server, or  resolving  host
               names or network addresses, if you are capturing in monitor mode
               and are not connected to another network with another adapter.
 
-              This  flag  will  affect the output of the -L flag.  If -I isn't
-              specified, only those link-layer types  available  when  not  in
+              This flag will affect the output of the -L flag.   If  -I  isn't
+              specified,  only  those  link-layer  types available when not in
               monitor mode will be shown; if -I is specified, only those link-
               layer types available when in monitor mode will be shown.
 
@@ -280,31 +280,31 @@ OPTIONS
 
        -j tstamp_type
        --time-stamp-type=tstamp_type
-              Set  the  time  stamp  type for the capture to tstamp_type.  The
-              names  to  use  for  the  time  stamp   types   are   given   in
-              pcap-tstamp(7);  not all the types listed there will necessarily
+              Set the time stamp type for the  capture  to  tstamp_type.   The
+              names   to   use   for   the  time  stamp  types  are  given  in
+              pcap-tstamp(7); not all the types listed there will  necessarily
               be valid for any given interface.
 
        -J
        --list-time-stamp-types
-              List the supported time stamp types for the interface and  exit.
-              If  the time stamp type cannot be set for the interface, no time
+              List  the supported time stamp types for the interface and exit.
+              If the time stamp type cannot be set for the interface, no  time
               stamp types are listed.
 
        --time-stamp-precision=tstamp_precision
-              When capturing, set the time stamp precision for the capture  to
+              When  capturing, set the time stamp precision for the capture to
               tstamp_precision.  Note that availability of high precision time
               stamps  (nanoseconds)  and their actual accuracy is platform and
               hardware dependent.  Also note that when writing  captures  made
               with  nanosecond  accuracy  to  a  savefile, the time stamps are
               written with nanosecond resolution, and the file is written with
-              a different magic number, to indicate that the time  stamps  are
-              in  seconds  and  nanoseconds;  not  all programs that read pcap
+              a  different  magic number, to indicate that the time stamps are
+              in seconds and nanoseconds; not  all  programs  that  read  pcap
               savefiles will be able to read those captures.
 
-              When reading a savefile, convert time stamps  to  the  precision
-              specified  by  timestamp_precision,  and  display them with that
-              resolution.  If the precision specified is less than the  preci-
+              When  reading  a  savefile, convert time stamps to the precision
+              specified by timestamp_precision, and  display  them  with  that
+              resolution.   If the precision specified is less than the preci-
               sion of time stamps in the file, the conversion will lose preci-
               sion.
 
@@ -314,11 +314,11 @@ OPTIONS
 
        --micro
        --nano Shorthands for --time-stamp-precision=micro or --time-stamp-pre-
-              cision=nano,  adjusting  the  time  stamp precision accordingly.
-              When reading packets from a savefile,  using  --micro  truncates
-              time  stamps  if the savefile was created with nanosecond preci-
-              sion.  In contrast, a savefile created with  microsecond  preci-
-              sion  will  have  trailing  zeroes  added to the time stamp when
+              cision=nano, adjusting the  time  stamp  precision  accordingly.
+              When  reading  packets  from a savefile, using --micro truncates
+              time stamps if the savefile was created with  nanosecond  preci-
+              sion.   In  contrast, a savefile created with microsecond preci-
+              sion will have trailing zeroes added  to  the  time  stamp  when
               --nano is used.
 
        -K
@@ -342,43 +342,43 @@ OPTIONS
               specified.
 
               -U is similar to -l in its behavior, but it will cause output to
-              be  ``packet-buffered'', so that the output is written to stdout
-              at the end of each packet rather than at the end of  each  line;
+              be ``packet-buffered'', so that the output is written to  stdout
+              at  the  end of each packet rather than at the end of each line;
               this is buffered on all platforms, including Windows.
 
        -L
        --list-data-link-types
-              List  the known data link types for the interface, in the speci-
-              fied mode, and exit.  The list of known data link types  may  be
+              List the known data link types for the interface, in the  speci-
+              fied  mode,  and exit.  The list of known data link types may be
               dependent on the specified mode; for example, on some platforms,
               a  Wi-Fi interface might support one set of data link types when
               not in monitor mode (for example, it  might  support  only  fake
               Ethernet  headers,  or might support 802.11 headers but not sup-
               port 802.11 headers with radio information) and another  set  of
               data link types when in monitor mode (for example, it might sup-
-              port  802.11  headers, or 802.11 headers with radio information,
+              port 802.11 headers, or 802.11 headers with  radio  information,
               only in monitor mode).
 
        --lengths
               Print the captured and original packet lengths.  The lengths are
               printed at the beginning of the line or after the packet number,
-              if any.  caplen is the captured packet length (see  the  -s  op-
+              if  any.   caplen  is the captured packet length (see the -s op-
               tion).  len is the original (on wire) packet length.
 
        -m module
-              Load  SMI  MIB module definitions from file module.  This option
-              can be used several times to load several MIB modules into  tcp-
+              Load SMI MIB module definitions from file module.   This  option
+              can  be used several times to load several MIB modules into tcp-
               dump.
 
        -M secret
-              Use  secret  as a shared secret for validating the digests found
+              Use secret as a shared secret for validating the  digests  found
               in TCP segments with the TCP-MD5 option (RFC 2385), if present.
 
-       -n     Don't convert addresses (i.e.,  host  addresses,  port  numbers,
+       -n     Don't  convert  addresses  (i.e.,  host addresses, port numbers,
               etc.) to names.
 
-       -N     Don't  print  domain name qualification of host names.  E.g., if
-              you give this flag then tcpdump will print  ``nic''  instead  of
+       -N     Don't print domain name qualification of host names.   E.g.,  if
+              you  give  this  flag then tcpdump will print ``nic'' instead of
               ``nic.ddn.mil''.
 
        -#
@@ -387,29 +387,29 @@ OPTIONS
 
        -O
        --no-optimize
-              Do  not  run the packet-matching code optimizer.  This is useful
+              Do not run the packet-matching code optimizer.  This  is  useful
               only if you suspect a bug in the optimizer.
 
        -p
        --no-promiscuous-mode
-              Don't put the interface into promiscuous mode.   Note  that  the
-              interface  might  be  in promiscuous mode for some other reason;
-              hence, -p cannot be used as an abbreviation for ether host  {lo-
+              Don't  put  the  interface into promiscuous mode.  Note that the
+              interface might be in promiscuous mode for  some  other  reason;
+              hence,  -p cannot be used as an abbreviation for ether host {lo-
               cal-hw-addr} or ether broadcast.
 
        --print
-              Print  parsed  packet  output, even if the raw packets are being
+              Print parsed packet output, even if the raw  packets  are  being
               saved to a file with the -w flag.
 
        --print-sampling=nth
               Print every nth packet. This option enables the --print flag.
 
-              Unprinted packets are not  parsed,  which  decreases  processing
-              time.  Setting  nth  to  100 for example, will (counting from 1)
-              parse and print the 100th packet, 200th  packet,  300th  packet,
+              Unprinted  packets  are  not  parsed, which decreases processing
+              time. Setting nth to 100 for example,  will  (counting  from  1)
+              parse  and  print  the 100th packet, 200th packet, 300th packet,
               and so on.
 
-              This  option  also enables the -S flag, as relative TCP sequence
+              This option also enables the -S flag, as relative  TCP  sequence
               numbers are not tracked for unprinted packets.
 
        -Q direction
@@ -440,16 +440,16 @@ OPTIONS
 
               Note that taking larger snapshots both increases the  amount  of
               time it takes to process packets and, effectively, decreases the
-              amount  of packet buffering.  This may cause packets to be lost.
-              Note also that taking smaller snapshots will discard  data  from
-              protocols  above  the  transport  layer, which loses information
-              that may be important.  NFS and AFS requests  and  replies,  for
-              example,  are very large, and much of the detail won't be avail-
+              amount of packet buffering.  This may cause packets to be  lost.
+              Note  also  that taking smaller snapshots will discard data from
+              protocols above the transport  layer,  which  loses  information
+              that  may  be  important.  NFS and AFS requests and replies, for
+              example, are very large, and much of the detail won't be  avail-
               able if a too-short snapshot length is selected.
 
-              If you need to reduce the snapshot size below the  default,  you
-              should  limit  snaplen  to the smallest number that will capture
-              the protocol information you're interested in.  Setting  snaplen
+              If  you  need to reduce the snapshot size below the default, you
+              should limit snaplen to the smallest number  that  will  capture
+              the  protocol information you're interested in.  Setting snaplen
               to 0 sets it to the default of 262144, for backwards compatibil-
               ity with recent older versions of tcpdump.
 
@@ -460,8 +460,8 @@ OPTIONS
               Protocol), cnfp (Cisco NetFlow protocol),  domain  (Domain  Name
               System),  lmp (Link Management Protocol), pgm (Pragmatic General
               Multicast), pgm_zmtp1 (ZMTP/1.0 inside PGM/EPGM), ptp (Precision
-              Time Protocol), quic (QUIC), radius (RADIUS), resp (REdis  Seri-
-              alization  Protocol),  rpc  (Remote Procedure Call), rtcp (Real-
+              Time  Protocol), quic (QUIC), radius (RADIUS), resp (REdis Seri-
+              alization Protocol), rpc (Remote Procedure  Call),  rtcp  (Real-
               Time Applications control protocol), rtp (Real-Time Applications
               protocol), snmp (Simple  Network  Management  Protocol),  someip
               (SOME/IP),  tftp  (Trivial  File Transfer Protocol), vat (Visual
@@ -487,11 +487,11 @@ OPTIONS
               line.
 
        -ttt   Print a delta (microsecond or nanosecond resolution depending on
-              the  --time-stamp-precision option) between current and previous
+              the --time-stamp-precision option) between current and  previous
               line on each dump line.  The default is microsecond resolution.
 
-       -tttt  Print a timestamp, as hours, minutes, seconds, and fractions  of
-              a  second  since  midnight,  preceded  by the date, on each dump
+       -tttt  Print  a timestamp, as hours, minutes, seconds, and fractions of
+              a second since midnight, preceded by  the  date,  on  each  dump
               line.
 
        -ttttt Print a delta (microsecond or nanosecond resolution depending on
@@ -503,7 +503,7 @@ OPTIONS
        -U
        --packet-buffered
               If the -w option is not specified, or if it is specified but the
-              --print  flag  is also specified, make the printed packet output
+              --print flag is also specified, make the printed  packet  output
               ``packet-buffered''; i.e., as the description of the contents of
               each packet is printed, it will be written to the standard  out-
               put,  rather than, when not writing to a terminal, being written
@@ -546,16 +546,16 @@ OPTIONS
 
               This  output will be buffered if written to a file or pipe, so a
               program reading from the file or pipe may not see packets for an
-              arbitrary amount of time after they are received.   Use  the  -U
-              flag  to  cause  packets  to  be written as soon as they are re-
+              arbitrary  amount  of  time after they are received.  Use the -U
+              flag to cause packets to be written as  soon  as  they  are  re-
               ceived.
 
-              The MIME type application/vnd.tcpdump.pcap has  been  registered
-              with  IANA  for pcap files. The filename extension .pcap appears
-              to be the most commonly used along with .cap and  .dmp.  tcpdump
-              itself  doesn't  check  the extension when reading capture files
-              and doesn't add an extension when writing them  (it  uses  magic
-              numbers  in  the  file  header instead). However, many operating
+              The  MIME  type application/vnd.tcpdump.pcap has been registered
+              with IANA for pcap files. The filename extension  .pcap  appears
+              to  be  the most commonly used along with .cap and .dmp. tcpdump
+              itself doesn't check the extension when  reading  capture  files
+              and  doesn't  add  an extension when writing them (it uses magic
+              numbers in the file header  instead).  However,  many  operating
               systems and applications will use the extension if it is present
               and adding one (e.g. .pcap) is recommended.
 
@@ -563,8 +563,8 @@ OPTIONS
 
        -W filecount
               Used in conjunction with the -C option, this will limit the num-
-              ber of files created to the specified number,  and  begin  over-
-              writing  files  from  the  beginning, thus creating a 'rotating'
+              ber  of  files  created to the specified number, and begin over-
+              writing files from the beginning,  thus  creating  a  'rotating'
               buffer.  In addition, it will name the files with enough leading
               0s to support the maximum number of files, allowing them to sort
               correctly.
@@ -583,37 +583,37 @@ OPTIONS
               link-layer packet, so for link layers that pad (e.g.  Ethernet),
               the  padding  bytes  will  also be printed when the higher layer
               packet is shorter than the required padding.  In the current im-
-              plementation this flag may have the same effect as  -xx  if  the
+              plementation  this  flag  may have the same effect as -xx if the
               packet is truncated.
 
-       -xx    When  parsing  and printing, in addition to printing the headers
-              of each packet, print the data of  each  packet,  including  its
+       -xx    When parsing and printing, in addition to printing  the  headers
+              of  each  packet,  print  the data of each packet, including its
               link level header, in hex.
 
-       -X     When  parsing  and printing, in addition to printing the headers
-              of each packet, print the data of each packet  (minus  its  link
-              level  header)  in  hex  and  ASCII.   This  is  very  handy for
-              analysing new protocols.  In  the  current  implementation  this
+       -X     When parsing and printing, in addition to printing  the  headers
+              of  each  packet,  print the data of each packet (minus its link
+              level header)  in  hex  and  ASCII.   This  is  very  handy  for
+              analysing  new  protocols.   In  the current implementation this
               flag may have the same effect as -XX if the packet is truncated.
 
-       -XX    When  parsing  and printing, in addition to printing the headers
-              of each packet, print the data of  each  packet,  including  its
+       -XX    When parsing and printing, in addition to printing  the  headers
+              of  each  packet,  print  the data of each packet, including its
               link level header, in hex and ASCII.
 
        -y datalinktype
        --linktype=datalinktype
-              Set  the  data link type to use while capturing packets (see -L)
-              or just compiling and dumping packet-matching code (see  -d)  to
+              Set the data link type to use while capturing packets  (see  -L)
+              or  just  compiling and dumping packet-matching code (see -d) to
               datalinktype.
 
        -z postrotate-command
-              Used  in  conjunction  with the -C or -G options, this will make
-              tcpdump run " postrotate-command file " where file is the  save-
-              file  being  closed after each rotation. For example, specifying
-              -z gzip or -z bzip2 will compress each savefile  using  gzip  or
+              Used in conjunction with the -C or -G options,  this  will  make
+              tcpdump  run " postrotate-command file " where file is the save-
+              file being closed after each rotation. For  example,  specifying
+              -z  gzip  or  -z bzip2 will compress each savefile using gzip or
               bzip2.
 
-              Note  that  tcpdump will run the command in parallel to the cap-
+              Note that tcpdump will run the command in parallel to  the  cap-
               ture, using the lowest priority so that this doesn't disturb the
               capture process.
 
@@ -633,18 +633,18 @@ OPTIONS
               This behavior can also be enabled by default at compile time.
 
         expression
-              selects which packets will  be  dumped.   If  no  expression  is
-              given,  all  packets on the net will be dumped.  Otherwise, only
+              selects  which  packets  will  be  dumped.   If no expression is
+              given, all packets on the net will be dumped.   Otherwise,  only
               packets for that expression is `true' will be dumped.
 
               For the expression syntax, see pcap-filter(7).
 
-              The expression argument can be passed to  tcpdump  as  either  a
+              The  expression  argument  can  be passed to tcpdump as either a
               single Shell argument, or as multiple Shell arguments, whichever
               is more convenient.  Generally, if the expression contains Shell
-              metacharacters,  such  as  backslashes  used  to escape protocol
-              names, it is easier to pass it  as  a  single,  quoted  argument
-              rather  than to escape the Shell metacharacters.  Multiple argu-
+              metacharacters, such as  backslashes  used  to  escape  protocol
+              names,  it  is  easier  to  pass it as a single, quoted argument
+              rather than to escape the Shell metacharacters.  Multiple  argu-
               ments are concatenated with spaces before being parsed.
 
 EXAMPLES
@@ -660,12 +660,12 @@ EXAMPLES
        To print all traffic between local hosts and hosts at Berkeley:
               tcpdump net ucb-ether
 
-       To print all ftp traffic through internet gateway snup: (note that  the
-       expression  is  quoted to prevent the shell from (mis-)interpreting the
+       To  print all ftp traffic through internet gateway snup: (note that the
+       expression is quoted to prevent the shell from  (mis-)interpreting  the
        parentheses):
               tcpdump 'gateway snup and (port ftp or ftp-data)'
 
-       To print traffic neither sourced from nor destined for local hosts  (if
+       To  print traffic neither sourced from nor destined for local hosts (if
        you gateway to one other net, this stuff should never make it onto your
        local net).
               tcpdump ip and not net localnet
@@ -675,19 +675,19 @@ EXAMPLES
               tcpdump 'tcp[tcpflags] & (tcp-syn|tcp-fin) != 0 and not src and dst net localnet'
 
        To print the TCP packets with flags RST and ACK both set.  (i.e. select
-       only the RST and ACK flags in the flags field, and  if  the  result  is
+       only  the  RST  and  ACK flags in the flags field, and if the result is
        "RST and ACK both set", match)
               tcpdump 'tcp[tcpflags] & (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)'
 
-       To  print  all  IPv4  HTTP packets to and from port 80, i.e. print only
-       packets that contain data, not, for example, SYN and  FIN  packets  and
+       To print all IPv4 HTTP packets to and from port  80,  i.e.  print  only
+       packets  that  contain  data, not, for example, SYN and FIN packets and
        ACK-only packets.  (IPv6 is left as an exercise for the reader.)
               tcpdump 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'
 
        To print IP packets longer than 576 bytes sent through gateway snup:
               tcpdump 'gateway snup and ip[2:2] > 576'
 
-       To  print IP broadcast or multicast packets that were not sent via Eth-
+       To print IP broadcast or multicast packets that were not sent via  Eth-
        ernet broadcast or multicast:
               tcpdump 'ether[0] & 1 = 0 and ip[16] >= 224'
 
@@ -711,11 +711,11 @@ OUTPUT FORMAT
        the  time  when  the network interface finished receiving a packet from
        the network and the time when an interrupt was delivered to the  kernel
        to get it to read the packet and a delay between the time when the ker-
-       nel  serviced the `new packet' interrupt and the time when it applied a
+       nel serviced the `new packet' interrupt and the time when it applied  a
        time stamp to the packet.
 
    Interface
-       When the  any  interface  is  selected  on  capture  or  when  a  LINK-
+       When  the  any  interface  is  selected  on  capture  or  when  a LINK-
        TYPE_LINUX_SLL2 capture file is read, the interface name is printed af-
        ter  the timestamp. This is followed by the packet type with In and Out
        denoting a packet destined for this host or originating from this  host
@@ -728,16 +728,16 @@ OUTPUT FORMAT
        length are printed.
 
        On FDDI networks, the -e option causes tcpdump to print the `frame con-
-       trol' field,  the source and  destination  addresses,  and  the  packet
-       length.   (The  `frame control' field governs the interpretation of the
-       rest of the packet.  Normal packets (such as those containing IP  data-
-       grams)  are `async' packets, with a priority value between 0 and 7; for
-       example, `async4'.  Such packets are assumed to contain an 802.2  Logi-
-       cal  Link  Control (LLC) packet; the LLC header is printed if it is not
+       trol'  field,   the  source  and  destination addresses, and the packet
+       length.  (The `frame control' field governs the interpretation  of  the
+       rest  of the packet.  Normal packets (such as those containing IP data-
+       grams) are `async' packets, with a priority value between 0 and 7;  for
+       example,  `async4'.  Such packets are assumed to contain an 802.2 Logi-
+       cal Link Control (LLC) packet; the LLC header is printed if it  is  not
        an ISO datagram or a so-called SNAP packet.
 
-       On Token Ring networks, the -e option causes tcpdump to print the  `ac-
-       cess  control'  and  `frame control' fields, the source and destination
+       On  Token Ring networks, the -e option causes tcpdump to print the `ac-
+       cess control' and `frame control' fields, the  source  and  destination
        addresses, and the packet length.  As on FDDI networks, packets are as-
        sumed to contain an LLC packet.  Regardless of whether the -e option is
        specified or not, the source routing information is printed for source-
@@ -762,11 +762,11 @@ OUTPUT FORMAT
        not a special case, zero or more changes are printed.  A change is  in-
        dicated  by  U  (urgent pointer), W (window), A (ack), S (sequence num-
        ber), and I (packet ID), followed by a delta (+n or -n), or a new value
-       (=n).  Finally, the amount of data in the packet and compressed  header
+       (=n).   Finally, the amount of data in the packet and compressed header
        length are printed.
 
-       For  example,  the  following  line  shows  an  outbound compressed TCP
-       packet, with an implicit connection identifier; the ack has changed  by
+       For example, the  following  line  shows  an  outbound  compressed  TCP
+       packet,  with an implicit connection identifier; the ack has changed by
        6, the sequence number by 49, and the packet ID by 6; there are 3 bytes
        of data and 6 bytes of compressed header:
               O ctcp * A+6 S+49 I+6 3 (6)
@@ -786,7 +786,7 @@ OUTPUT FORMAT
               arp who-has 128.3.254.6 tell 128.3.254.68
               arp reply 128.3.254.6 is-at 02:07:01:00:01:c4
 
-       If  we had done tcpdump -e, the fact that the first packet is broadcast
+       If we had done tcpdump -e, the fact that the first packet is  broadcast
        and the second is point-to-point would be visible:
               RTSG Broadcast 0806  64: arp who-has csam tell rtsg
               CSAM RTSG 0806  64: arp reply csam is-at CSAM
@@ -795,34 +795,34 @@ OUTPUT FORMAT
        hex 0806 (ETHERTYPE_ARP) and the total length was 64 bytes.
 
    IPv4 Packets
-       If the link-layer header is not being printed, for IPv4 packets, IP  is
+       If  the link-layer header is not being printed, for IPv4 packets, IP is
        printed after the time stamp.
 
-       If  the -v flag is specified, information from the IPv4 header is shown
+       If the -v flag is specified, information from the IPv4 header is  shown
        in parentheses after the IP or the link-layer header.  The general for-
        mat of this information is:
               tos tos, ttl ttl, id id, offset offset, flags [flags], proto proto, length length, options (options)
        tos is the type of service field; if the ECN bits are  non-zero,  those
        are  reported as ECT(1), ECT(0), or CE.  ttl is the time-to-live; it is
        not reported if it is zero.  id is the IP identification field.  offset
-       is the fragment offset field; it is printed whether this is part  of  a
-       fragmented  datagram  or  not.  flags are the MF and DF flags; + is re-
-       ported if MF is set, and DF is reported if F is set.   If  neither  are
+       is  the  fragment offset field; it is printed whether this is part of a
+       fragmented datagram or not.  flags are the MF and DF flags;  +  is  re-
+       ported  if  MF  is set, and DF is reported if F is set.  If neither are
        set, . is reported.  proto is the protocol ID field.  length is the to-
-       tal length field; if the packet is a presumed TSO (TCP Segmentation Of-
-       fload) send, [was 0, presumed TSO] is reported.  options are the IP op-
-       tions, if any.
+       tal  length  field;  if  the packet is a presumed TSO (TCP Segmentation
+       Offload) send, [was 0, presumed TSO] is reported.  options are  the  IP
+       options, if any.
 
        Next,  for TCP and UDP packets, the source and destination IP addresses
        and TCP or UDP ports, with a dot between each IP address and its corre-
        sponding port, will be printed, with a > separating the source and des-
        tination.  For other protocols, the addresses will be printed, with a >
-       separating the source and destination.  Higher level protocol  informa-
+       separating  the source and destination.  Higher level protocol informa-
        tion, if any, will be printed after that.
 
-       For  fragmented  IP  datagrams,  the first fragment contains the higher
-       level protocol header; fragments after  the  first  contain  no  higher
-       level  protocol header.  Fragmentation information will be printed only
+       For fragmented IP datagrams, the first  fragment  contains  the  higher
+       level  protocol  header;  fragments  after  the first contain no higher
+       level protocol header.  Fragmentation information will be printed  only
        with the -v flag, in the IP header information, as described above.
 
    TCP Packets
@@ -857,29 +857,29 @@ OUTPUT FORMAT
               IP csam.login > rtsg.1023: Flags [P.], seq 1:2, ack 21, win 4077, length 1
               IP csam.login > rtsg.1023: Flags [P.], seq 2:3, ack 21, win 4077, urg 1, length 1
               IP csam.login > rtsg.1023: Flags [P.], seq 3:4, ack 21, win 4077, urg 1, length 1
-       The  first  line  says that TCP port 1023 on rtsg sent a packet to port
-       login on csam.  The S indicates that the SYN flag was set.  The  packet
-       sequence  number was 768512 and it contained no data.  (The notation is
-       `first:last' which means `sequence numbers first up to but not  includ-
-       ing  last'.)  There was no piggy-backed ACK, the available receive win-
-       dow was 4096 bytes and there was a max-segment-size  option  requesting
+       The first line says that TCP port 1023 on rtsg sent a  packet  to  port
+       login  on csam.  The S indicates that the SYN flag was set.  The packet
+       sequence number was 768512 and it contained no data.  (The notation  is
+       `first:last'  which means `sequence numbers first up to but not includ-
+       ing last'.)  There was no piggy-backed ACK, the available receive  win-
+       dow  was  4096 bytes and there was a max-segment-size option requesting
        an MSS of 1024 bytes.
 
-       Csam  replies  with  a similar packet except it includes a piggy-backed
-       ACK for rtsg's SYN.  Rtsg then ACKs csam's SYN.  The `.' means the  ACK
-       flag  was  set.   The  packet contained no data so there is no data se-
-       quence number or length.  Note that the ACK sequence number is a  small
-       integer  (1).   The  first  time  tcpdump sees a TCP `conversation', it
-       prints the sequence number from the packet.  On subsequent  packets  of
-       the  conversation, the difference between the current packet's sequence
-       number and this initial sequence number is printed.   This  means  that
-       sequence  numbers  after  the first can be interpreted as relative byte
-       positions in the conversation's data stream (with the first  data  byte
-       each  direction being `1').  -S will override this feature, causing the
+       Csam replies with a similar packet except it  includes  a  piggy-backed
+       ACK  for rtsg's SYN.  Rtsg then ACKs csam's SYN.  The `.' means the ACK
+       flag was set.  The packet contained no data so there  is  no  data  se-
+       quence  number or length.  Note that the ACK sequence number is a small
+       integer (1).  The first time tcpdump  sees  a  TCP  `conversation',  it
+       prints  the  sequence number from the packet.  On subsequent packets of
+       the conversation, the difference between the current packet's  sequence
+       number  and  this  initial sequence number is printed.  This means that
+       sequence numbers after the first can be interpreted  as  relative  byte
+       positions  in  the conversation's data stream (with the first data byte
+       each direction being `1').  -S will override this feature, causing  the
        original sequence numbers to be output.
 
-       On the 6th line, rtsg sends csam 19 bytes of data (bytes 2  through  20
-       in  the rtsg -> csam side of the conversation).  The PSH flag is set in
+       On  the  6th line, rtsg sends csam 19 bytes of data (bytes 2 through 20
+       in the rtsg -> csam side of the conversation).  The PSH flag is set  in
        the packet.  On the 7th line, csam says it's received data sent by rtsg
        up to but not including byte 21.  Most of this data is apparently  sit-
        ting  in  the  socket  buffer since csam's receive window has gotten 19
@@ -938,7 +938,7 @@ OUTPUT FORMAT
        present.  The first line of the graph contains octets 0 - 3, the second
        line shows octets 4 - 7 etc.
 
-       Starting to count with 0, the relevant TCP control bits  are  contained
+       Starting  to  count with 0, the relevant TCP control bits are contained
        in octets 12 and 13:
 
         0             7|             15|             23|             31
@@ -959,11 +959,11 @@ OUTPUT FORMAT
                        |---------------|
                        |7   5   3     0|
 
-       These  are the TCP control bits we are interested in.  We have numbered
-       the bits in this octet from 0 to 7, right to left, so the  PSH  bit  is
+       These are the TCP control bits we are interested in.  We have  numbered
+       the  bits  in  this octet from 0 to 7, right to left, so the PSH bit is
        bit number 3, while the URG bit is number 5.
 
-       Recall  that  we  want to capture packets with only SYN set.  Let's see
+       Recall that we want to capture packets with only SYN  set.   Let's  see
        what happens to octet 13 if a TCP datagram arrives with the SYN bit set
        in its header:
 
@@ -978,7 +978,7 @@ OUTPUT FORMAT
        Looking at the control bits section we see that only bit number 1 (SYN)
        is set.
 
-       Assuming that octet number 13 is an 8-bit unsigned integer  in  network
+       Assuming  that  octet number 13 is an 8-bit unsigned integer in network
        byte order, the binary value of this octet is
 
               00000010
@@ -988,14 +988,14 @@ OUTPUT FORMAT
           7     6     5     4     3     2     1     0
        0*2 + 0*2 + 0*2 + 0*2 + 0*2 + 0*2 + 1*2 + 0*2  =  2
 
-       We're  almost  done,  because  now we know that if only SYN is set, the
-       value of the 13th octet in the TCP header, when interpreted as a  8-bit
+       We're almost done, because now we know that if only  SYN  is  set,  the
+       value  of the 13th octet in the TCP header, when interpreted as a 8-bit
        unsigned integer in network byte order, must be exactly 2.
 
        This relationship can be expressed as
               tcp[13] == 2
 
-       We  can use this expression as the filter for tcpdump in order to watch
+       We can use this expression as the filter for tcpdump in order to  watch
        packets which have only SYN set:
               tcpdump -i xl0 'tcp[13] == 2'
 
@@ -1015,7 +1015,7 @@ OUTPUT FORMAT
             |---------------|
             |7 6 5 4 3 2 1 0|
 
-       Now bits 1 and 4 are set in the 13th octet.  The binary value of  octet
+       Now  bits 1 and 4 are set in the 13th octet.  The binary value of octet
        13 is
 
                    00010010
@@ -1025,7 +1025,7 @@ OUTPUT FORMAT
           7     6     5     4     3     2     1     0
        0*2 + 0*2 + 0*2 + 1*2 + 0*2 + 0*2 + 1*2 + 0*2   = 18
 
-       Now  we  can't just use tcp[13] == 18 in the tcpdump filter expression,
+       Now we can't just use tcp[13] == 18 in the tcpdump  filter  expression,
        because that would select only those packets that have SYN-ACK set, but
        not those with only SYN set.  Remember that we don't care if ACK or any
        other control bit is set as long as SYN is set.
@@ -1066,39 +1066,39 @@ OUTPUT FORMAT
    UDP Packets
        UDP format is illustrated by this rwho packet:
               actinide.who > broadcast.who: udp 84
-       This says that port who on host actinide sent a UDP  datagram  to  port
+       This  says  that  port who on host actinide sent a UDP datagram to port
        who on host broadcast, the Internet broadcast address.  The packet con-
        tained 84 bytes of user data.
 
        Some  UDP  services are recognized (from the source or destination port
        number) and the higher level protocol information printed.  In particu-
-       lar, Domain Name service requests (RFC 1034/1035)  and  Sun  RPC  calls
+       lar,  Domain  Name  service  requests (RFC 1034/1035) and Sun RPC calls
        (RFC 1050) to NFS.
 
    TCP or UDP Name Server Requests
-       (N.B.:The  following  description  assumes  familiarity with the Domain
-       Service protocol described in RFC 1035.  If you are not  familiar  with
-       the  protocol,  the  following description will appear to be written in
+       (N.B.:The following description assumes  familiarity  with  the  Domain
+       Service  protocol  described in RFC 1035.  If you are not familiar with
+       the protocol, the following description will appear to  be  written  in
        Greek.)
 
        Name server requests are formatted as
               src > dst: id op? flags qtype qclass name (len)
               h2opolo.1538 > helios.domain: 3+ A? ucbvax.berkeley.edu. (37)
-       Host h2opolo asked the domain server on helios for  an  address  record
-       (qtype=A)  associated  with the name ucbvax.berkeley.edu.  The query id
-       was `3'.  The `+' indicates the recursion desired flag  was  set.   The
-       query  length  was  37  bytes, excluding the TCP or UDP and IP protocol
-       headers.  The query operation was the normal  one,  Query,  so  the  op
-       field  was  omitted.   If  the op had been anything else, it would have
-       been printed between the `3' and the `+'.  Similarly,  the  qclass  was
-       the  normal  one,  C_IN, and omitted.  Any other qclass would have been
+       Host  h2opolo  asked  the domain server on helios for an address record
+       (qtype=A) associated with the name ucbvax.berkeley.edu.  The  query  id
+       was  `3'.   The  `+' indicates the recursion desired flag was set.  The
+       query length was 37 bytes, excluding the TCP or  UDP  and  IP  protocol
+       headers.   The  query  operation  was  the normal one, Query, so the op
+       field was omitted.  If the op had been anything  else,  it  would  have
+       been  printed  between  the `3' and the `+'.  Similarly, the qclass was
+       the normal one, C_IN, and omitted.  Any other qclass  would  have  been
        printed immediately after the `A'.
 
-       A few anomalies are checked and may result in extra fields enclosed  in
-       square  brackets:   If a query contains an answer, authority records or
+       A  few anomalies are checked and may result in extra fields enclosed in
+       square brackets:  If a query contains an answer, authority  records  or
        additional records section, ancount, nscount, or arcount are printed as
        `[na]', `[nn]' or  `[nau]' where n is the appropriate count.  If any of
-       the response bits are set (AA, RA or rcode) or  any  of  the  `must  be
+       the  response  bits  are  set  (AA, RA or rcode) or any of the `must be
        zero' bits are set in bytes two and three, `[b2&3=x]' is printed, where
        x is the hex value of header bytes two and three.
 
@@ -1108,20 +1108,20 @@ OUTPUT FORMAT
               helios.domain > h2opolo.1538: 3 3/3/7 A 128.32.137.3 (273)
               helios.domain > h2opolo.1537: 2 NXDomain* 0/1/0 (97)
        In the first example, helios responds to query id 3 from h2opolo with 3
-       answer  records,  3  name server records and 7 additional records.  The
-       first answer record is type A (address) and its data  is  internet  ad-
-       dress  128.32.137.3.  The total size of the response was 273 bytes, ex-
-       cluding TCP or UDP and IP headers.  The op (Query)  and  response  code
+       answer records, 3 name server records and 7  additional  records.   The
+       first  answer  record  is type A (address) and its data is internet ad-
+       dress 128.32.137.3.  The total size of the response was 273 bytes,  ex-
+       cluding  TCP  or  UDP and IP headers.  The op (Query) and response code
        (NoError) were omitted, as was the class (C_IN) of the A record.
 
-       In  the second example, helios responds to query 2 with a response code
-       of nonexistent domain (NXDomain) with no answers, one name  server  and
-       no  authority records.  The `*' indicates that the authoritative answer
-       bit was set.  Since there were no answers, no type, class or data  were
+       In the second example, helios responds to query 2 with a response  code
+       of  nonexistent  domain (NXDomain) with no answers, one name server and
+       no authority records.  The `*' indicates that the authoritative  answer
+       bit  was set.  Since there were no answers, no type, class or data were
        printed.
 
-       Other  flag  characters that might appear are `-' (recursion available,
-       RA, not set) and `|' (truncated message, TC, set).  If  the  `question'
+       Other flag characters that might appear are `-'  (recursion  available,
+       RA,  not  set) and `|' (truncated message, TC, set).  If the `question'
        section doesn't contain exactly one entry, `[nq]' is printed.
 
    SMB/CIFS Decoding
@@ -1155,41 +1155,41 @@ OUTPUT FORMAT
        ation  was  a  readlink  (read  symbolic  link)  on  file  handle  (fh)
        21,24/10.731657119.  (If one is lucky, as in this case, the file handle
        can be interpreted as a major,minor device number pair, followed by the
-       inode  number  and  generation number.) In the second line, wrl replies
+       inode number and generation number.) In the second  line,  wrl  replies
        `ok' with the same transaction id and the contents of the link.
 
-       In the third line, sushi asks (using  a  new  transaction  id)  wrl  to
-       lookup  the  name  `xcolors'  in  directory file 9,74/4096.6878. In the
+       In  the  third  line,  sushi  asks  (using a new transaction id) wrl to
+       lookup the name `xcolors' in  directory  file  9,74/4096.6878.  In  the
        fourth line, wrl sends a reply with the respective transaction id.
 
-       Note that the data printed depends on the operation type.   The  format
-       is  intended  to be self explanatory if read in conjunction with an NFS
-       protocol spec.  Also note that older versions of  tcpdump  printed  NFS
-       packets  in a slightly different format: the transaction id (xid) would
+       Note  that  the data printed depends on the operation type.  The format
+       is intended to be self explanatory if read in conjunction with  an  NFS
+       protocol  spec.   Also  note that older versions of tcpdump printed NFS
+       packets in a slightly different format: the transaction id (xid)  would
        be printed instead of the non-NFS port number of the packet.
 
-       If the -v (verbose) flag is given, additional information  is  printed.
+       If  the  -v (verbose) flag is given, additional information is printed.
        For example:
               sushi.1023 > wrl.nfs: NFS request xid 79658
                    148 read fh 21,11/12.195 8192 bytes @ 24576
               wrl.nfs > sushi.1023: NFS reply xid 79658
                    reply ok 1472 read REG 100664 ids 417/0 sz 29388
-       (-v  also  prints  the  IP  header  TTL,  ID, length, and fragmentation
+       (-v also prints the  IP  header  TTL,  ID,  length,  and  fragmentation
        fields, which have been omitted from this example.)  In the first line,
        sushi asks wrl to read 8192 bytes from file 21,11/12.195, at byte  off-
        set  24576.   Wrl  replies `ok'; the packet shown on the second line is
        the first fragment of the reply, and hence is only 1472 bytes long (the
        other bytes will follow in subsequent fragments, but these fragments do
        not have NFS or even UDP headers and so might not be printed, depending
-       on the filter expression used).  Because the -v flag is given, some  of
-       the  file  attributes (which are returned in addition to the file data)
-       are printed: the file type (``REG'', for regular file), the  file  mode
+       on  the filter expression used).  Because the -v flag is given, some of
+       the file attributes (which are returned in addition to the  file  data)
+       are  printed:  the file type (``REG'', for regular file), the file mode
        (in octal), the UID and GID, and the file size.
 
        If the -v flag is given more than once, even more details are printed.
 
-       NFS  reply  packets  do not explicitly identify the RPC operation.  In-
-       stead, tcpdump keeps track of ``recent'' requests, and matches them  to
+       NFS reply packets do not explicitly identify the  RPC  operation.   In-
+       stead,  tcpdump keeps track of ``recent'' requests, and matches them to
        the replies using the transaction ID.  If a reply does not closely fol-
        low the corresponding request, it might not be parsable.
 
@@ -1204,8 +1204,8 @@ OUTPUT FORMAT
                    new fid 536876964/1/1 ".newsrc"
               pike.afsfs > elvis.7001: rx data fs reply rename
        In the first line, host elvis sends a RX packet to pike.  This was a RX
-       data  packet to the fs (fileserver) service, and is the start of an RPC
-       call.  The RPC call was a rename, with the old  directory  file  id  of
+       data packet to the fs (fileserver) service, and is the start of an  RPC
+       call.   The  RPC  call  was a rename, with the old directory file id of
        536876964/1/1 and an old filename of `.newsrc.new', and a new directory
        file  id  of  536876964/1/1  and a new filename of `.newsrc'.  The host
        pike responds with a RPC reply to the rename call (which  was  success-
@@ -1223,7 +1223,7 @@ OUTPUT FORMAT
        tional header information is printed, such as the RX call ID, call num-
        ber, sequence number, serial number, and the RX packet flags.
 
-       If the -v flag is given twice, additional information is printed,  such
+       If  the -v flag is given twice, additional information is printed, such
        as the RX call ID, serial number, and the RX packet flags.  The MTU ne-
        gotiation information is also printed from RX ack packets.
 
@@ -1268,13 +1268,13 @@ OUTPUT FORMAT
        In the first example, NBP (DDP port 2) on net 144.1 node 209 is sending
        to  whatever is listening on port 220 of net icsd node 112.  The second
        line is the same except the full name of the source node is known (`of-
-       fice').  The third line is a send from port 235 on net jssmag node  149
-       to  broadcast on the icsd-net NBP port (note that the broadcast address
-       (255) is indicated by a net name with no host number - for this  reason
-       it's  a  good  idea  to  keep  node  names  and  net  names distinct in
+       fice').   The third line is a send from port 235 on net jssmag node 149
+       to broadcast on the icsd-net NBP port (note that the broadcast  address
+       (255)  is indicated by a net name with no host number - for this reason
+       it's a good  idea  to  keep  node  names  and  net  names  distinct  in
        /etc/atalk.names).
 
-       NBP (name binding protocol) and ATP  (AppleTalk  transaction  protocol)
+       NBP  (name  binding  protocol) and ATP (AppleTalk transaction protocol)
        packets have their contents interpreted.  Other protocols just dump the
        protocol name (or number if no name is registered for the protocol) and
        packet size.
@@ -1284,12 +1284,12 @@ OUTPUT FORMAT
               icsd-net.112.220 > jssmag.2: nbp-lkup 190: "=:LaserWriter@*"
               jssmag.209.2 > icsd-net.112.220: nbp-reply 190: "RM1140:LaserWriter@*" 250
               techpit.2 > icsd-net.112.220: nbp-reply 190: "techpit:LaserWriter@*" 186
-       The  first  line  is a name lookup request for laserwriters sent by net
-       icsd host 112 and broadcast on net jssmag.  The nbp id for  the  lookup
-       is  190.   The second line shows a reply for this request (note that it
-       has the same id) from host jssmag.209 saying that it has a  laserwriter
-       resource  named "RM1140" registered on port 250.  The third line is an-
-       other reply to the same request saying  host  techpit  has  laserwriter
+       The first line is a name lookup request for laserwriters  sent  by  net
+       icsd  host  112 and broadcast on net jssmag.  The nbp id for the lookup
+       is 190.  The second line shows a reply for this request (note  that  it
+       has  the same id) from host jssmag.209 saying that it has a laserwriter
+       resource named "RM1140" registered on port 250.  The third line is  an-
+       other  reply  to  the  same request saying host techpit has laserwriter
        "techpit" registered on port 186.
 
    ATP Packets
@@ -1308,12 +1308,12 @@ OUTPUT FORMAT
               helios.132 > jssmag.209.165: atp-resp 12266:5 (512) 0xae040000
               jssmag.209.165 > helios.132: atp-rel  12266<0-7> 0xae030001
               jssmag.209.133 > helios.132: atp-req* 12267<0-7> 0xae030002
-       Jssmag.209  initiates transaction id 12266 with host helios by request-
-       ing up to 8 packets (the `<0-7>').  The hex number at the  end  of  the
+       Jssmag.209 initiates transaction id 12266 with host helios by  request-
+       ing  up  to  8 packets (the `<0-7>').  The hex number at the end of the
        line is the value of the `userdata' field in the request.
 
-       Helios  responds  with  8 512-byte packets.  The `:digit' following the
-       transaction id gives the packet sequence number in the transaction  and
+       Helios responds with 8 512-byte packets.  The  `:digit'  following  the
+       transaction  id gives the packet sequence number in the transaction and
        the number in parens is the amount of data in the packet, excluding the
        ATP header.  The `*' on packet 7 indicates that the EOM bit was set.
 
@@ -1337,7 +1337,7 @@ SEE ALSO
 AUTHORS
        The original authors are:
 
-       Van  Jacobson,  Craig  Leres  and  Steven  McCanne, all of the Lawrence
+       Van Jacobson, Craig Leres and  Steven  McCanne,  all  of  the  Lawrence
        Berkeley National Laboratory, University of California, Berkeley, CA.
 
        It is currently maintained by The Tcpdump Group.
@@ -1350,14 +1350,14 @@ AUTHORS
 
               ftp://ftp.ee.lbl.gov/old/tcpdump.tar.Z
 
-       IPv6/IPsec support is added by WIDE/KAME project.   This  program  uses
+       IPv6/IPsec  support  is  added by WIDE/KAME project.  This program uses
        OpenSSL/LibreSSL, under specific configurations.
 
 BUGS
-       To    report    a   security   issue   please   send   an   e-mail   to
+       To   report   a   security   issue   please   send   an    e-mail    to
        security@tcpdump.org.
 
-       To report bugs and other problems, contribute patches, request  a  fea-
+       To  report  bugs and other problems, contribute patches, request a fea-
        ture, provide generic feedback etc. please see the file CONTRIBUTING.md
        in the tcpdump source tree root.
 
@@ -1365,11 +1365,11 @@ BUGS
        compute the right length for the higher level protocol.
 
        Name server inverse queries are not dumped correctly: the (empty) ques-
-       tion section is printed rather than real query in the  answer  section.
-       Some  believe  that  inverse queries are themselves a bug and prefer to
+       tion  section  is printed rather than real query in the answer section.
+       Some believe that inverse queries are themselves a bug  and  prefer  to
        fix the program generating them rather than tcpdump.
 
-       A packet trace that crosses a daylight savings time  change  will  give
+       A  packet  trace  that crosses a daylight savings time change will give
        skewed time stamps (the time change is ignored).
 
                                7 September 2024                     TCPDUMP(1)

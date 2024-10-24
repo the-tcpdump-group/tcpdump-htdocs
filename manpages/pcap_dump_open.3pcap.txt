@@ -24,9 +24,9 @@ SYNOPSIS
        pcap_dumper_t *pcap_dump_fopen(pcap_t *p, FILE *fp);
 
 DESCRIPTION
-       pcap_dump_open()  is  called to open a ``savefile'' for writing.  fname
-       specifies the name of the file to open. The file  will  have  the  same
-       format  as  those used by tcpdump(1) and tcpslice(1).  If the file does
+       pcap_dump_open() is called to open a ``savefile'' for  writing.   fname
+       specifies  the  name  of  the file to open. The file will have the same
+       format as those used by tcpdump(1) and tcpslice(1).  If the  file  does
        not exist, it will be created; if the file exists, it will be truncated
        and overwritten.  The name "-" is a synonym for stdout.
 
@@ -34,20 +34,20 @@ DESCRIPTION
        fp;   this   stream   will   be   closed   by   a  subsequent  call  to
        pcap_dump_close(3PCAP).  The stream is assumed to be at  the  beginning
        of a file that has been newly created or truncated, so that writes will
-       start  at the beginning of the file.  Note that on Windows, that stream
+       start at the beginning of the file.  Note that on Windows, that  stream
        should be opened in binary mode.
 
-       p is a capture or ``savefile'' handle returned by an  earlier  call  to
-       pcap_create(3PCAP)    and    activated    by   an   earlier   call   to
-       pcap_activate(3PCAP),   or   returned   by   an   earlier    call    to
+       p  is  a  capture or ``savefile'' handle returned by an earlier call to
+       pcap_create(3PCAP)   and   activated   by   an    earlier    call    to
+       pcap_activate(3PCAP),    or    returned   by   an   earlier   call   to
        pcap_open_offline(3PCAP),           pcap_open_live(3PCAP),           or
-       pcap_open_dead(3PCAP).  The time stamp precision, link-layer type,  and
-       snapshot  length  from  p  are used as the link-layer type and snapshot
+       pcap_open_dead(3PCAP).   The time stamp precision, link-layer type, and
+       snapshot length from p are used as the  link-layer  type  and  snapshot
        length of the output file.
 
-       pcap_dump_open_append() is like pcap_dump_open() but, if the  file  al-
-       ready  exists,  and is a pcap file with the same byte order as the host
-       opening the file, and has the same  time  stamp  precision,  link-layer
+       pcap_dump_open_append()  is  like pcap_dump_open() but, if the file al-
+       ready exists, and is a pcap file with the same byte order as  the  host
+       opening  the  file,  and  has the same time stamp precision, link-layer
        header type, and snapshot length as p, it will write new packets at the
        end of the file.
 

@@ -30,15 +30,15 @@ DESCRIPTION
        pcap_datalink_name_to_val(3PCAP) routines can be used to translate  be-
        tween  DLT_  values  and names.  Some capture devices support more than
        one link-layer header type.  The pcap_list_datalinks(3PCAP) routine can
-       be used to retrieve the supported link-layer header types of a  capture
-       device  and  the pcap_set_datalink(3PCAP) routine can be used to change
+       be  used to retrieve the supported link-layer header types of a capture
+       device and the pcap_set_datalink(3PCAP) routine can be used  to  change
        the link-layer header type of a capture device.
 
-       The values stored in the link-layer header type field in  the  savefile
-       header  are, in most but not all cases, the same as the values returned
+       The  values  stored in the link-layer header type field in the savefile
+       header are, in most but not all cases, the same as the values  returned
        by pcap_datalink().  The names for those values begin with LINKTYPE_.
 
-       The link-layer header types  supported  by  libpcap  are  described  at
+       The  link-layer  header  types  supported  by  libpcap are described at
        https://www.tcpdump.org/linktypes.html .
 
 SEE ALSO

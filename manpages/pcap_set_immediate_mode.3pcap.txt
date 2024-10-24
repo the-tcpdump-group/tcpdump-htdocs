@@ -41,9 +41,9 @@ BACKWARD COMPATIBILITY
               ioctl(2), as documented in bpf(4), on the descriptor returned by
               pcap_fileno(3PCAP), after pcap_activate(3PCAP) is called;
 
-              on Solaris 10 and earlier versions of  Solaris,  immediate  mode
-              must  be turned on by using a read timeout of 0 when opening the
-              device (this will not provide immediate delivery of  packets  on
+              on  Solaris  10  and earlier versions of Solaris, immediate mode
+              must be turned on by using a read timeout of 0 when opening  the
+              device  (this  will not provide immediate delivery of packets on
               other platforms, so don't assume it's sufficient);
 
               on  Windows,  immediate  mode  must  be  turned  on  by  calling

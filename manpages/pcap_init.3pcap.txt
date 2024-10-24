@@ -46,20 +46,20 @@ DESCRIPTION
        On Windows, the local character encoding is the local ANSI code page.
 
        If pcap_init() is not called, strings are treated as being in the local
-       ANSI code page on Windows, pcap_lookupdev(3PCAP) will succeed if  there
-       is  a  device  on which to capture, and pcap_create(3PCAP) makes an at-
-       tempt to check whether the string passed as an argument is  a  UTF-16LE
-       string  -  note that this attempt is unsafe, as it may run past the end
+       ANSI  code page on Windows, pcap_lookupdev(3PCAP) will succeed if there
+       is a device on which to capture, and pcap_create(3PCAP)  makes  an  at-
+       tempt  to  check whether the string passed as an argument is a UTF-16LE
+       string - note that this attempt is unsafe, as it may run past  the  end
        of the string - to handle pcap_lookupdev() returning a UTF-16LE string.
 
 RETURN VALUE
-       pcap_init() returns  0  on  success  and  PCAP_ERROR  on  failure.   If
-       PCAP_ERROR  is  returned, errbuf is filled in with an appropriate error
+       pcap_init()  returns  0  on  success  and  PCAP_ERROR  on  failure.  If
+       PCAP_ERROR is returned, errbuf is filled in with an  appropriate  error
        message.
 
 BACKWARD COMPATIBILITY
-       This function became available in libpcap release 1.9.0.   In  previous
-       releases,  on  Windows,  all  strings  supplied  as  arguments, and all
+       This  function  became available in libpcap release 1.9.0.  In previous
+       releases, on Windows,  all  strings  supplied  as  arguments,  and  all
        strings returned to the caller, are in the local character encoding.
 
 SEE ALSO

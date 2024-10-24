@@ -21,9 +21,12 @@ SYNOPSIS
        void pcap_dump_close(pcap_dumper_t *p);
 
 DESCRIPTION
-       pcap_dump_close() closes the ``savefile''.
+       pcap_dump_close() closes the ``savefile'' associated with p and deallo-
+       cates resources. This means that, for example, if p refers to  a  save-
+       file  that  was  opened  with pcap_dump_fopen(), the stream provided to
+       that routine will be closed unless it is stdout.
 
 SEE ALSO
        pcap(3PCAP), pcap_dump_open(3PCAP), pcap_dump(3PCAP)
 
-                                3 January 2014          PCAP_DUMP_CLOSE(3PCAP)
+                                12 October 2024         PCAP_DUMP_CLOSE(3PCAP)

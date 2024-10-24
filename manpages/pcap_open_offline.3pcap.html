@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_OPEN_OFFLINE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 30 November 2023<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 12 October 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -91,7 +91,13 @@ or
 <B>pcap_fopen_offline_with_tstamp_precision</B>()
 
 to read dumped data from an existing open stream
-<I>fp</I>.
+<I>fp</I>;
+
+this stream will be closed by a subsequent call to
+<CODE>pcap_close (3PCAP)</CODE>
+
+unless it is
+<CODE>stdin</CODE>.
 
 <B>pcap_fopen_offline_with_tstamp_precision</B>()
 
@@ -152,7 +158,7 @@ stamps from a savefile are always given in seconds and microseconds.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 14:23:44 GMT, August 26, 2024
+This HTML man page was generated at 01:06:34 GMT, October 24, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

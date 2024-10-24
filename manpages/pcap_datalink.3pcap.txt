@@ -24,8 +24,8 @@ DESCRIPTION
        pcap_datalink() returns the link-layer header type for the live capture
        or ``savefile'' specified by p.
 
-       It   must   not   be   called   on   a   pcap   descriptor  created  by
-       pcap_create(3PCAP)   that   has   not    yet    been    activated    by
+       It  must  not   be   called   on   a   pcap   descriptor   created   by
+       pcap_create(3PCAP)    that    has    not    yet   been   activated   by
        pcap_activate(3PCAP).
 
        https://www.tcpdump.org/linktypes.html lists the values pcap_datalink()
@@ -36,12 +36,12 @@ DESCRIPTION
        have any given link-layer header type, such as DLT_EN10MB for Ethernet.
        For example, the "any" device on Linux will have  a  link-layer  header
        type of DLT_LINUX_SLL or DLT_LINUX_SLL2 even if all devices on the sys-
-       tem  at  the  time the "any" device is opened have some other data link
+       tem at the time the "any" device is opened have some  other  data  link
        type, such as DLT_EN10MB for Ethernet.
 
 RETURN VALUE
-       pcap_datalink() returns the  link-layer  header  type  on  success  and
-       PCAP_ERROR_NOT_ACTIVATED  if  called  on a capture handle that has been
+       pcap_datalink()  returns  the  link-layer  header  type  on success and
+       PCAP_ERROR_NOT_ACTIVATED if called on a capture handle  that  has  been
        created but not activated.
 
 SEE ALSO

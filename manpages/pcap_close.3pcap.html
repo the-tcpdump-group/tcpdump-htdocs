@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_CLOSE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 January 2014<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 12 October 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -34,16 +34,29 @@ pcap_close - close a capture device or savefile
 closes the files associated with
 <I>p</I>
 
-and deallocates resources.
+and deallocates resources. This means that, for example, if
+<I>p</I>
+
+refers to a savefile that was opened with
+<B>pcap_fopen_offline</B>()
+
+or
+<B>pcap_fopen_offline_with_tstamp_precision</B>(),
+
+the stream provided to the routine will be closed unless it is
+<CODE>stdin</CODE>.
+
 <H2 id="lbAE">SEE ALSO</H2>
 
-<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
+
+<A HREF='./pcap_open_offline.3pcap.html'><B>pcap_open_offline</B></A>(3PCAP)
 
 <P>
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:07:04 GMT, November 01, 2021
+This HTML man page was generated at 01:06:32 GMT, October 24, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

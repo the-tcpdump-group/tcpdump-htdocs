@@ -27,7 +27,7 @@ DESCRIPTION
        turned in packet captures on the pcap descriptor.
 
 RETURN VALUE
-       pcap_get_tstamp_precision()  returns   PCAP_TSTAMP_PRECISION_MICRO   or
+       pcap_get_tstamp_precision()   returns   PCAP_TSTAMP_PRECISION_MICRO  or
        PCAP_TSTAMP_PRECISION_NANO, which indicates that pcap captures contains
        time stamps in microseconds or nanoseconds respectively.
 

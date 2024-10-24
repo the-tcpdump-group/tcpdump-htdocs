@@ -22,12 +22,12 @@ SYNOPSIS
        int pcap_set_promisc(pcap_t *p, int promisc);
 
 DESCRIPTION
-       pcap_set_promisc()  sets  whether  promiscuous  mode should be set on a
-       capture handle when the handle is activated.  If promisc  is  non-zero,
+       pcap_set_promisc() sets whether promiscuous mode should  be  set  on  a
+       capture  handle  when the handle is activated.  If promisc is non-zero,
        promiscuous mode will be set, otherwise it will not be set.
 
 RETURN VALUE
-       pcap_set_promisc()  returns  0  on  success  or PCAP_ERROR_ACTIVATED if
+       pcap_set_promisc() returns 0  on  success  or  PCAP_ERROR_ACTIVATED  if
        called on a capture handle that has been activated.
 
 SEE ALSO

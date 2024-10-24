@@ -45,7 +45,7 @@ DESCRIPTION
        milliseconds.  (See pcap(3PCAP) for an explanation of the packet buffer
        timeout.)
 
-       errbuf  is  a  buffer  large  enough  to hold at least PCAP_ERRBUF_SIZE
+       errbuf is a buffer large  enough  to  hold  at  least  PCAP_ERRBUF_SIZE
        chars.
 
 RETURN VALUE

@@ -22,13 +22,13 @@ SYNOPSIS
        int pcap_set_datalink(pcap_t *p, int dlt);
 
 DESCRIPTION
-       pcap_set_datalink()  is  used to set the current link-layer header type
+       pcap_set_datalink() is used to set the current link-layer  header  type
        of the pcap descriptor to the type specified by dlt.
 
 RETURN VALUE
-       pcap_set_datalink() returns 0 on success,  PCAP_ERROR_NOT_ACTIVATED  if
-       called  on a capture handle that has been created but not activated, or
-       PCAP_ERROR   on   other   errors.   If    PCAP_ERROR    is    returned,
+       pcap_set_datalink()  returns  0 on success, PCAP_ERROR_NOT_ACTIVATED if
+       called on a capture handle that has been created but not activated,  or
+       PCAP_ERROR    on    other    errors.   If   PCAP_ERROR   is   returned,
        pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p as an ar-
        gument to fetch or display the error text.
 
