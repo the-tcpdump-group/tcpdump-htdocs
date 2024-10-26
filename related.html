@@ -916,6 +916,42 @@
                                 flexible components which can be combined in many ways to manage a
                                 wide variety of packet inspection tasks.
                             </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/raboof/nethogs">NetHogs</a>
+                            </dt>
+                            <dd>
+                                NetHogs is a small "net top" tool. Instead of breaking the traffic
+                                down per protocol or per subnet, like most tools do, it groups
+                                bandwidth by process.  NetHogs does not rely on a special kernel
+                                module to be loaded. If there's suddenly a lot of network traffic,
+                                you can fire up NetHogs and immediately see which PID is causing
+                                this.  This makes it easy to identify programs that have gone wild
+                                and are suddenly taking up your bandwidth.  Since NetHogs heavily
+                                relies on <code>/proc</code>, most features are only available on
+                                Linux. NetHogs can be built on Mac OS X and FreeBSD, but it will
+                                only show connections, not processes.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/kpcyrd/sniffglue">sniffglue</a>
+                            </dt>
+                            <dd>
+                                sniffglue is a network sniffer written in Rust.  Network packets
+                                are parsed concurrently using a thread pool to utilize all CPU
+                                cores.  Project goals are that you can run sniffglue securely on
+                                untrusted networks and that it must not crash when processing
+                                packets.  The output should be as useful as possible by default.
+                            </dd>
+
+                            <dt>
+                                radsniff (part of <a class=away href="https://www.freeradius.org/">FreeRADIUS</a>)
+                            </dt>
+                            <dd>
+                                radsniff is a simple wrapper around libpcap.  It can also print
+                                out the contents of RADIUS packets using the FreeRADIUS
+                                dictionaries.
+                            </dd>
                         </dl>
                     </div>
                 </div>
@@ -1193,6 +1229,42 @@
                                 </ul>
                                 Packit is also an excellent tool for learning TCP/IP.  However,
                                 this program does not support IPv6.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://github.com/jedisct1/UCarp">UCARP</a>
+                            </dt>
+                            <dd>
+                                UCARP allows a couple of hosts to share common virtual IP
+                                addresses in order to provide automatic failover.  It is a
+                                portable userland implementation of the secure and patent-free
+                                Common Address Redundancy Protocol (CARP, OpenBSD's alternative to
+                                the patents-bloated VRRP).  Strong points of the CARP protocol
+                                are: very low overhead, cryptographically signed messages,
+                                interoperability between different operating systems and no need
+                                for any dedicated extra network link between redundant hosts.
+                            </dd>
+
+                            <dt>
+                                <a class=away href="https://www.cs.uit.no/~daniels/PingTunnel/">Ping Tunnel</a>
+                            </dt>
+                            <dd>
+                                Ptunnel is an application that allows you to reliably tunnel TCP
+                                connections to a remote host using ICMP echo request and reply
+                                packets, commonly known as ping requests and replies.  Ptunnel is
+                                not a feature-rich tool by any means, but it does what it
+                                advertises:
+                                <ul>
+                                  <li>Tunnel TCP using ICMP echo request and reply packets.</li>
+                                  <li>Connections are reliable (lost packets are resent as
+                                    necessary).</li>
+                                  <li>Handles multiple connections.</li>
+                                  <li>Acceptable bandwidth (150 kb/s downstream and about 50 kb/s
+                                    upstream are the currently measured maxima for one tunnel,
+                                    but with tweaking this can be improved further).</li>
+                                  <li>Authentication, to prevent just anyone from using your
+                                    proxy.</li>
+                                <ul>
                             </dd>
                         </dl>
                     </div>
