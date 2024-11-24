@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_INJECT</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 March 2022<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 23 November 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -49,6 +49,12 @@ sending packets; as
 doesn't have a flag to indicate whether to open for capturing, sending,
 or capturing and sending, you cannot request an open that supports
 sending and be notified at open time whether sending will be possible.
+The same limitation applies to
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+
+and
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP).
+
 Note also that some devices might not support sending packets.
 <P>
 
@@ -132,7 +138,7 @@ as an argument to fetch or display the error text.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:50:55 GMT, February 26, 2023
+This HTML man page was generated at 18:47:26 GMT, November 24, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

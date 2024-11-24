@@ -65,8 +65,9 @@ EXIT STATUS
 BACKWARD COMPATIBILITY
        Before  libpcap  release  1.10.2 pcap-config did not treat invalid com-
        mand-line options as  an  error.  The  --static-pcap-only  flag  became
-       available  in  libpcap release 1.10.2.  The --static flag became avail-
-       able in libpcap release 1.1.0.
+       available in libpcap release 1.10.2.
+
+       The --static flag became available in libpcap release 1.1.0.
 
 SEE ALSO
        pkg-config(1), pcap(3PCAP)
