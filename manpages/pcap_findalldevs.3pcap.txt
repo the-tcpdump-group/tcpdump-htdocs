@@ -139,8 +139,8 @@ DESCRIPTION
        addr_ll  (for  AF_PACKET,  see  packet(7)) or a struct sockaddr_dl (for
        AF_LINK).
 
-       The list of devices must be freed with  pcap_freealldevs(3PCAP),  which
-       frees the list pointed to by alldevs.
+       The list of devices must be freed with pcap_freealldevs(), which  frees
+       the list pointed to by alldevs.
 
 RETURN VALUE
        pcap_findalldevs()  returns  0 on success and PCAP_ERROR on failure; as

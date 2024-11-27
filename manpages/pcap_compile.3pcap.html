@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_COMPILE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 August 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 November 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -63,20 +63,6 @@ than one network, a value of
 can be supplied; tests
 for IPv4 broadcast addresses will fail to compile, but all other tests in
 the filter program will be OK.
-<P>
-
-NOTE: in libpcap 1.8.0 and later,
-<B>pcap_compile</B>()
-
-can be used in multiple threads within a single process.  However, in
-earlier versions of libpcap, it is
-<I>not</I>
-
-safe to use
-<B>pcap_compile</B>()
-
-in multiple threads in a single process without some form of mutual
-exclusion allowing only one thread to call it at any given time.
 <H2 id="lbAE">RETURN VALUE</H2>
 
 <B>pcap_compile</B>()
@@ -108,6 +94,20 @@ The
 <CODE>PCAP_NETMASK_UNKNOWN</CODE>
 
 constant became available in libpcap release 1.1.0.
+<P>
+
+In libpcap 1.8.0 and later,
+<B>pcap_compile</B>()
+
+can be used in multiple threads within a single process.  However, in
+earlier versions of libpcap, it is
+<I>not</I>
+
+safe to use
+<B>pcap_compile</B>()
+
+in multiple threads in a single process without some form of mutual
+exclusion allowing only one thread to call it at any given time.
 <H2 id="lbAG">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
@@ -120,7 +120,7 @@ constant became available in libpcap release 1.1.0.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 12:32:46 GMT, March 11, 2023
+This HTML man page was generated at 00:58:37 GMT, November 27, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

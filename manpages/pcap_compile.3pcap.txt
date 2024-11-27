@@ -35,12 +35,6 @@ DESCRIPTION
        IPv4  broadcast  addresses will fail to compile, but all other tests in
        the filter program will be OK.
 
-       NOTE: in libpcap 1.8.0 and later, pcap_compile() can be used in  multi-
-       ple  threads  within a single process.  However, in earlier versions of
-       libpcap, it is not safe to use pcap_compile() in multiple threads in  a
-       single  process without some form of mutual exclusion allowing only one
-       thread to call it at any given time.
-
 RETURN VALUE
        pcap_compile() returns 0 on  success  and  PCAP_ERROR  on  failure.  If
        PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be
@@ -50,7 +44,13 @@ BACKWARD COMPATIBILITY
        The PCAP_NETMASK_UNKNOWN constant became available in  libpcap  release
        1.1.0.
 
+       In  libpcap  1.8.0  and  later,  pcap_compile() can be used in multiple
+       threads within a single process.  However, in earlier versions of libp-
+       cap, it is not safe to use pcap_compile() in multiple threads in a sin-
+       gle process without some form of mutual  exclusion  allowing  only  one
+       thread to call it at any given time.
+
 SEE ALSO
        pcap(3PCAP), pcap_setfilter(3PCAP), pcap_freecode(3PCAP)
 
-                                22 August 2018             PCAP_COMPILE(3PCAP)
+                               25 November 2024            PCAP_COMPILE(3PCAP)
