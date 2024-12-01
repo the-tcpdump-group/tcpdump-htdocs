@@ -149,7 +149,7 @@
         <h2 class="title">The list device instances routine (most generic case)</h2>
         <div class="entry">
           <p>
-            The "list of device instances" routine takes, as arguments:
+            The "list device instances" routine takes, as arguments:
           </p>
           <ul>
             <li>a pointer to a <code>pcap_if_list_t</code>;</li>
@@ -202,6 +202,13 @@
             fails, it will return <code>NULL</code>; in this case, the error
             message buffer has been filled in with an error string, and your
             routine must return <code>PCAP_ERROR</code> to indicate the error.
+          </p>
+          <p>
+            If the module is the only module that is adding network interfaces
+            to the list of capture devices and it supports the "any"
+            pseudo-interface, the "list device instances" routine can call the
+            <b>pcapint_add_any_dev</b>() routine to add the pseudo-interface to
+            the list.
           </p>
           <p>
             If your routine succeeds, it must return 0.  If it fails, it must
@@ -590,7 +597,7 @@ to the callback.
             <code>BPF_MOD</code> or <code>BPF_XOR</code> instructions&mdash;the
             module should fall
             back on filtering in userland by saving a copy of the filter with a
-            call to <b>install_bpf_program</b>(), setting a flag in the
+            call to <b>pcapint_install_bpf_program</b>(), setting a flag in the
             private data instructure indicating that filtering is being done by
             the module and, in the read routine's main loop, checking the flag
             and, if it's set, calling <b>pcapint_filter</b>(),
@@ -601,7 +608,7 @@ to the callback.
             <b>pcapint_filter</b>() returns a non-zero value.  (If the flag is not
             set, all packets should be passed to the callback routine and
             counted, as the filtering is being done by the mechanism used by the
-            module.)  If <b>install_bpf_program</b>() returns a negative
+            module.)  If <b>pcapint_install_bpf_program</b>() returns a negative
             value,  the routine should return <code>PCAP_ERROR</code>.
           </p>
           <p>
@@ -626,13 +633,13 @@ to the callback.
           <p>
             If the attempt to set the filter succeeded, or it failed because the
             mechanism used by the module rejected it and the call to
-            <b>install_bpf_program</b>() succeeded, the routine should
+            <b>pcapint_install_bpf_program</b>() succeeded, the routine should
             return 0.
           </p>
           <p>
             If the mechanism the module uses doesn't support filtering, the
             pointer to the setfilter routine can just be set to point to
-            <b>install_bpf_program</b>(); the module does not need a
+            <b>pcapint_install_bpf_program</b>(); the module does not need a
             routine of its own to handle that.
           </p>
         </div>
