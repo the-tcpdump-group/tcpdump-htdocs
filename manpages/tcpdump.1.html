@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 7 September 2024<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 30 November 2024<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents tcpdump version 5.0.0-PRE-GIT.</H4>
@@ -148,6 +148,12 @@ tcpdump - dump traffic on a network
 
 ]
 [
+<B>--skip</B>
+
+<I>count</I>
+
+]
+[
 <B>-T</B>
 
 <I>type</I>
@@ -157,14 +163,14 @@ tcpdump - dump traffic on a network
 <B>--version</B>
 
 ]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-V</B>
 
 <I>file</I>
 
 ]
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-w</B>
 
@@ -367,6 +373,13 @@ special privileges.
 <DD>
 Print each packet (minus its link level header) in ASCII.  Handy for
 capturing web pages.
+No effect when
+<CODE>-x[x]</CODE>
+
+or
+<CODE>-X[X]</CODE>
+
+options are used.
 <DT><CODE>-b</CODE>
 
 <DD>
@@ -385,7 +398,11 @@ units of KiB (1024 bytes).
 <DT><CODE>-c</CODE><I> count</I>
 
 <DD>
-Exit after receiving <I>count</I> packets.
+Exit after receiving or reading <I>count</I> packets.
+If the
+<CODE>--skip</CODE>
+
+option is used, the <I>count</I> starts after the skipped packets.
 <DT><CODE>--count</CODE>
 
 <DD>
@@ -976,6 +993,11 @@ protocol information you're interested in.  Setting
 for backwards compatibility with recent older versions of
 <I>tcpdump</I>.
 
+<DT><CODE>--skip</CODE><I> count</I>
+
+<DD>
+Skip <I>count</I> packets before writing or printing.
+<I>count</I> with value 0 is allowed.
 <DT><CODE>-T</CODE><I> type</I>
 
 <DD>
@@ -1191,6 +1213,10 @@ In the current implementation this flag may have the same effect as
 <CODE>-xx</CODE>
 
 if the packet is truncated.
+No effect when
+<CODE>-X[X]</CODE>
+
+option is used.
 <DT><CODE>-xx</CODE>
 
 <DD>
@@ -1200,6 +1226,10 @@ each packet,
 <I>including</I>
 
 its link level header, in hex.
+No effect when
+<CODE>-X[X]</CODE>
+
+option is used.
 <DT><CODE>-X</CODE>
 
 <DD>
@@ -2714,7 +2744,7 @@ skewed time stamps (the time change is ignored).
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 10:04:37 GMT, September 07, 2024
+This HTML man page was generated at 11:15:54 GMT, December 02, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
