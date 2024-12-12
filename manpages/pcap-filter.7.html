@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 9 July 2024<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 12 December 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -242,7 +242,7 @@ True if the Ethernet destination address is <I>ethernameaddr</I>.
 <I>ethernameaddr</I>
 may be either a name from /etc/ethers or a numerical MAC address of the
 form &quot;xx:xx:xx:xx:xx:xx&quot;, &quot;xx.xx.xx.xx.xx.xx&quot;, &quot;xx-xx-xx-xx-xx-xx&quot;,
-&quot;xxxx.xxxx.xxxx&quot;, &quot;xxxxxxxxxxxx&quot;, or various mixes of ':', '.', and '-',
+&quot;xxxx.xxxx.xxxx&quot; or &quot;xxxxxxxxxxxx&quot;,
 where each &quot;x&quot; is a hex digit (0-9, a-f, or A-F).
 <DT><B>ether src </B><I>ethernameaddr</I><DD>
 True if the Ethernet source address is <I>ethernameaddr</I>.
@@ -366,10 +366,7 @@ True if the packet is an IPv4 packet (see
 
 of protocol type <I>protocol</I>.
 <I>Protocol</I> can be a number or one of the names recognized by
-<B>getprotobyname</B>(3)
-
-(as in e.g. `<B>getent</B>(1) protocols'), typically from an entry in
-<I>/etc/protocols</I>,
+<B>getprotobyname</B>(3),
 
 for example:
 <B>ah</B>,
@@ -378,14 +375,14 @@ for example:
 
 <B>eigrp</B>
 
-(only in Linux, FreeBSD, NetBSD, DragonFly BSD, and macOS),
+(only in Linux with glibc, FreeBSD, NetBSD, DragonFly BSD, and macOS),
 <B>icmp</B>,
 
 <B>igmp</B>,
 
 <B>igrp</B>
 
-(only in OpenBSD),
+(only in Haiku and OpenBSD),
 <B>pim</B>,
 
 <B>sctp</B>,
@@ -400,11 +397,56 @@ or
 Note that most of these example identifiers
 are also keywords and must be escaped via backslash (\).
 Note that this primitive does not chase the protocol header chain.
+<DT><DD>
+Typically
+<B>getprotobyname</B>(3)
+
+parses the
+<I>/etc/protocols</I>
+
+file to translate protocol names to numbers, and the
+<B>getent protocols</B>
+
+command lists the protocols recognised by the function.  This is not entirely
+so in AIX (which does not have the command), Haiku (which has the file at
+<I>/system/data/network/protocols</I>
+
+and does not have the command), on Linux with musl libc (which hard-codes the
+list of protocols) and on hosts that use a network database to resolve
+protocol names to numbers (see
+<B>nsswitch.conf</B>(5)).
+
+If a protocol name fails to translate to a number, this version of libpcap
+will treat the filter expression as invalid.
+<DT><B>carp</B>, <B>vrrp</B><DD>
+Abbreviations for:
+
+<PRE>
+<B>ip proto</B> 112
+</PRE>
+
+
 <DT><B>icmp</B><DD>
 Abbreviation for:
 
 <PRE>
 <B>ip proto</B> 1
+</PRE>
+
+
+<DT><B>igmp</B><DD>
+Abbreviation for:
+
+<PRE>
+<B>ip proto</B> 2
+</PRE>
+
+
+<DT><B>igrp</B><DD>
+Abbreviation for:
+
+<PRE>
+<B>ip proto</B> 9
 </PRE>
 
 
@@ -414,7 +456,8 @@ True if the packet is an IPv6 packet of protocol type <I>protocol</I>.
 Note that the IPv6 variant of ICMP uses a different protocol number, named
 <B>ipv6-icmp</B>
 
-in AIX, FreeBSD, illumos, Linux, macOS, NetBSD, OpenBSD, Solaris and Windows.
+in AIX, FreeBSD, illumos, Haiku, GNU/Hurd, Linux, macOS, NetBSD, OpenBSD,
+Solaris and Windows.
 Note that this primitive does not chase the protocol header chain.
 <DT><B>icmp6</B><DD>
 Abbreviation for:
@@ -1480,6 +1523,12 @@ ping packets):
 
 <H2 id="lbAE">BACKWARD COMPATIBILITY</H2>
 
+The
+<B>carp</B>
+
+keyword became available in libpcap 1.2.1.
+<P>
+
 The ICMPv6 type code names, as well as the
 <B>tcp-ece</B>
 
@@ -1543,7 +1592,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 11:36:41 GMT, July 23, 2024
+This HTML man page was generated at 15:36:33 GMT, December 12, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

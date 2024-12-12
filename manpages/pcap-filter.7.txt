@@ -100,9 +100,9 @@ DESCRIPTION
               True if the Ethernet destination address is ethernameaddr.  eth-
               ernameaddr  may be either a name from /etc/ethers or a numerical
               MAC     address     of     the     form     "xx:xx:xx:xx:xx:xx",
-              "xx.xx.xx.xx.xx.xx",    "xx-xx-xx-xx-xx-xx",   "xxxx.xxxx.xxxx",
-              "xxxxxxxxxxxx", or various mixes of ':',  '.',  and  '-',  where
-              each "x" is a hex digit (0-9, a-f, or A-F).
+              "xx.xx.xx.xx.xx.xx",  "xx-xx-xx-xx-xx-xx",  "xxxx.xxxx.xxxx"  or
+              "xxxxxxxxxxxx", where each "x" is a hex digit (0-9, a-f,  or  A-
+              F).
 
        ether src ethernameaddr
               True if the Ethernet source address is ethernameaddr.
@@ -205,24 +205,44 @@ DESCRIPTION
        ip proto protocol
               True  if  the  packet is an IPv4 packet (see ip(4P)) of protocol
               type protocol.  Protocol can be a number or  one  of  the  names
-              recognized  by  getprotobyname(3)  (as in e.g. `getent(1) proto-
-              cols'), typically from an entry in /etc/protocols, for  example:
-              ah,  esp,  eigrp (only in Linux, FreeBSD, NetBSD, DragonFly BSD,
-              and macOS), icmp, igmp, igrp (only in OpenBSD), pim, sctp,  tcp,
-              udp  or  vrrp.   Note that most of these example identifiers are
-              also keywords and must be escaped via backslash (\).  Note  that
-              this primitive does not chase the protocol header chain.
+              recognized  by  getprotobyname(3),  for  example: ah, esp, eigrp
+              (only in Linux with glibc, FreeBSD, NetBSD, DragonFly  BSD,  and
+              macOS), icmp, igmp, igrp (only in Haiku and OpenBSD), pim, sctp,
+              tcp, udp or vrrp.  Note that most of these  example  identifiers
+              are  also  keywords and must be escaped via backslash (\).  Note
+              that this primitive does not chase the protocol header chain.
+
+              Typically getprotobyname(3) parses the  /etc/protocols  file  to
+              translate  protocol  names  to numbers, and the getent protocols
+              command lists the protocols recognised by the function.  This is
+              not  entirely so in AIX (which does not have the command), Haiku
+              (which has the file at /system/data/network/protocols  and  does
+              not have the command), on Linux with musl libc (which hard-codes
+              the list of protocols) and on hosts that use a network  database
+              to resolve protocol names to numbers (see nsswitch.conf(5)).  If
+              a protocol name fails to translate to a number, this version  of
+              libpcap will treat the filter expression as invalid.
+
+       carp, vrrp
+              Abbreviations for:
+                   ip proto 112
 
        icmp   Abbreviation for:
                    ip proto 1
+
+       igmp   Abbreviation for:
+                   ip proto 2
+
+       igrp   Abbreviation for:
+                   ip proto 9
 
        ip6 proto protocol
               True  if the packet is an IPv6 packet of protocol type protocol.
               (See `ip proto' above for the meaning of protocol.)   Note  that
               the IPv6 variant of ICMP uses a different protocol number, named
-              ipv6-icmp in AIX, FreeBSD, illumos, Linux, macOS, NetBSD,  Open-
-              BSD,  Solaris  and  Windows.   Note that this primitive does not
-              chase the protocol header chain.
+              ipv6-icmp in AIX,  FreeBSD,  illumos,  Haiku,  GNU/Hurd,  Linux,
+              macOS,  NetBSD,  OpenBSD,  Solaris  and Windows.  Note that this
+              primitive does not chase the protocol header chain.
 
        icmp6  Abbreviation for:
                    ip6 proto 58
@@ -812,6 +832,8 @@ EXAMPLES
               icmp6[icmp6type] != icmp6-echo and icmp6[icmp6type] != icmp6-echoreply
 
 BACKWARD COMPATIBILITY
+       The carp keyword became available in libpcap 1.2.1.
+
        The ICMPv6 type code names, as well as the tcp-ece and tcp-cwr TCP flag
        names became available in libpcap 1.9.0.
 
@@ -846,4 +868,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                  9 July 2024                   PCAP-FILTER(7)
+                               12 December 2024                 PCAP-FILTER(7)
