@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 12 December 2024<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 20 December 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -669,6 +669,8 @@ Unnumbered Information (UI) U PDUs
 Unnumbered Acknowledgment (UA) U PDUs
 <DT><B>disc</B><DD>
 Disconnect (DISC) U PDUs
+<DT><B>dm</B><DD>
+Disconnected Mode (DM) U PDUs
 <DT><B>sabme</B><DD>
 Set Asynchronous Balanced Mode Extended (SABME) U PDUs
 <DT><B>test</B><DD>
@@ -1068,6 +1070,24 @@ Connect Ack, Release, or Release Done message.
 True if the packet is an ATM packet, for SunATM on Solaris, and is
 on a meta signaling circuit and is a Q.2931 Setup, Call Proceeding, Connect,
 Release, or Release Done message.
+<DT><B>fisu</B><DD>
+True if the packet is a Fill-In Signal Unit (FISU) MTP2 packet.
+<DT><B>lssu</B><DD>
+True if the packet is a Link Status Signal Unit (LSSU) MTP2 packet.
+<DT><B>msu</B><DD>
+True if the packet is a Message Signal Unit (MSU) MTP2 packet.
+<DT><B>hfisu</B>, <B>hlssu</B>, <B>hmsu</B><DD>
+Same as
+<B>fisu</B>,
+
+<B>lssu</B>
+
+and
+<B>msu</B>
+
+respectively, but only if the MTP2 link uses the extended sequence numbers
+encoding specified for high speed signalling links (HSL) in ITU-T
+Recommendation Q.703 Annex A.
 <DT><I>expr1 relop expr2</I><DD>
 True if the relation holds.  <I>Relop</I> is one of
 {<B>&gt;</B>,
@@ -1234,7 +1254,26 @@ The expression
 `<B>ip[</B>6:2<B>] &amp;</B> 0x1fff <B>=</B> 0'
 catches only unfragmented IPv4 datagrams and frag zero of fragmented
 IPv4 datagrams.
-This check is implicitly applied to the <B>tcp</B> and <B>udp</B>
+This check is implicitly applied to the
+<B>tcp</B>,
+
+<B>udp</B>,
+
+<B>icmp</B>,
+
+<B>sctp</B>,
+
+<B>igmp</B>,
+
+<B>pim</B>,
+
+<B>igrp</B>,
+
+<B>vrrp</B>
+
+and
+<B>carp</B>
+
 index operations.
 For instance, <B>tcp[</B>0<B>]</B> always means the first
 byte of the TCP <I>header</I>, and never means the first byte of an
@@ -1592,7 +1631,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:36:33 GMT, December 12, 2024
+This HTML man page was generated at 20:44:46 GMT, December 20, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
