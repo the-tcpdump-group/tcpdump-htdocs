@@ -363,12 +363,14 @@ DESCRIPTION
                    ether proto \protocol
               where protocol is one of the above protocols.
 
-       lat, moprc, mopdl
+       lat, mopdl, moprc, sca
               Abbreviations for:
                    ether proto \protocol
-              where protocol is one of the above protocols.  Note that not all
-              applications using pcap(3PCAP) currently know how to parse these
-              protocols.
+              where protocol is one of the above protocols, all of which orig-
+              inated  at  DEC, but are not the same as DECnet.  Namely, lat is
+              Local Area Transport (LAT), mopdl is DNA Dump/Load (MOP),  moprc
+              is  DNA Remote Console (MOP) and sca is System Communication Ar-
+              chitecture (SCA).
 
        decnet src decnetaddr
               True if the DECnet source address is decnetaddr, which is an ad-
@@ -883,4 +885,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                               20 December 2024                 PCAP-FILTER(7)
+                               21 December 2024                 PCAP-FILTER(7)

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 20 December 2024<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 21 December 2024<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -598,7 +598,7 @@ Abbreviations for:
 
 
 where <I>protocol</I> is one of the above protocols.
-<DT><B>lat</B>, <B>moprc</B>, <B>mopdl</B><DD>
+<DT><B>lat</B>, <B>mopdl</B>, <B>moprc</B>, <B>sca</B><DD>
 Abbreviations for:
 
 <PRE>
@@ -606,11 +606,20 @@ Abbreviations for:
 </PRE>
 
 
-where <I>protocol</I> is one of the above protocols.
-Note that not all applications using
-<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+where <I>protocol</I> is one of the above protocols, all of which originated
+at DEC, but are not the same as DECnet.  Namely,
+<B>lat</B>
 
-currently know how to parse these protocols.
+is Local Area Transport (LAT),
+<B>mopdl</B>
+
+is DNA Dump/Load (MOP),
+<B>moprc</B>
+
+is DNA Remote Console (MOP) and
+<B>sca</B>
+
+is System Communication Architecture (SCA).
 <DT><B>decnet src </B><I>decnetaddr</I><DD>
 True if the DECnet source address is
 <I>decnetaddr</I>,
@@ -1631,7 +1640,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 20:44:46 GMT, December 20, 2024
+This HTML man page was generated at 15:36:20 GMT, December 21, 2024
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
