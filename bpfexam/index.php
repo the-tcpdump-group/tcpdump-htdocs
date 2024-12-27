@@ -271,6 +271,16 @@ $dltlist = array
 		'descr' => 'ARCNET, with Linux-style header',
 		'val' => 129,
 	),
+	'MTP2_WITH_PHDR' => array
+	(
+		'descr' => 'SS7 MTP2 with a pseudo-header',
+		'val' => 139,
+	),
+	'MTP2' => array
+	(
+		'descr' => 'SS7 MTP2',
+		'val' => 140,
+	),
 	'APPLE_IP_OVER_IEEE1394' => array
 	(
 		'val' => 138,
@@ -293,6 +303,11 @@ $dltlist = array
 	(
 		'descr' => 'Per Packet Information encapsulated packets',
 		'val' => 192,
+	),
+	'ERF' => array
+	(
+		'descr' => 'Endace Extensible Record Format',
+		'val' => 197,
 	),
 	'IPNET' => array
 	(
