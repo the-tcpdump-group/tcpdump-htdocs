@@ -655,10 +655,12 @@ DESCRIPTION
               lane  isn't  specified,  the tests are done under the assumption
               that the packet is an LLC-encapsulated packet.
 
-       oamf4s True if the packet is an ATM packet, for SunATM on Solaris,  and
+       oamf4sc
+              True if the packet is an ATM packet, for SunATM on Solaris,  and
               is a segment OAM F4 flow cell (VPI=0 & VCI=3).
 
-       oamf4e True  if the packet is an ATM packet, for SunATM on Solaris, and
+       oamf4ec
+              True  if the packet is an ATM packet, for SunATM on Solaris, and
               is an end-to-end OAM F4 flow cell (VPI=0 & VCI=4).
 
        oamf4  True if the packet is an ATM packet, for SunATM on Solaris,  and
@@ -909,4 +911,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                               29 December 2024                 PCAP-FILTER(7)
+                                4 January 2025                  PCAP-FILTER(7)
