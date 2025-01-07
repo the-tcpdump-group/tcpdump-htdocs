@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-SAVEFILE</H1>
-Section: File Formats (5)<BR>Updated: 16 Aug 2023<BR>
+Section: File Formats (5)<BR>Updated: 6 Jan 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -96,10 +96,10 @@ Following this are:
 <DL>
 <DT><DD>
 A 2-byte file format major version number; the current version number is
-2.
+2 (big-endian 0x00 0x02 or little-endian 0x02 0x00).
 <DT><DD>
 A 2-byte file format minor version number; the current version number is
-4.
+4 (big-endian 0x00 0x04 or little-endian 0x04 0x00).
 <DT><DD>
 A 4-byte not used - SHOULD be filled with 0 by pcap file writers, and MUST
 be ignored by pcap file readers.  This value was documented by some older
@@ -221,7 +221,7 @@ equal to the snapshot length.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 20:02:32 GMT, November 08, 2024
+This HTML man page was generated at 22:30:17 GMT, January 07, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

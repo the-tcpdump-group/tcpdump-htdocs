@@ -66,10 +66,10 @@ DESCRIPTION
        Following this are:
 
               A  2-byte  file format major version number; the current version
-              number is 2.
+              number is 2 (big-endian 0x00 0x02 or little-endian 0x02 0x00).
 
               A 2-byte file format minor version number; the  current  version
-              number is 4.
+              number is 4 (big-endian 0x00 0x04 or little-endian 0x04 0x00).
 
               A  4-byte  not used - SHOULD be filled with 0 by pcap file writ-
               ers, and MUST be ignored by pcap file readers.  This  value  was
@@ -160,4 +160,4 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP)
 
-                                  16 Aug 2023                 PCAP-SAVEFILE(5)
+                                  6 Jan 2025                  PCAP-SAVEFILE(5)
