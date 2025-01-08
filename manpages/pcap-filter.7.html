@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 4 January 2025<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 8 January 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -821,15 +821,23 @@ True if the fourth IEEE 802.11 address, if present, is
 
 The fourth address field is only used for
 WDS (Wireless Distribution System) frames.
-<DT><B>type </B><I>wlan_type</I><DD>
+<DT><B>wlan type </B><I>wlan_type</I><DD>
 True if the IEEE 802.11 frame type matches the specified <I>wlan_type</I>.
 Valid <I>wlan_type</I>s are:
 <B>mgt</B>,
 <B>ctl</B>
 and <B>data</B>.
-<DT><B>type </B><I>wlan_type </I><B>subtype </B><I>wlan_subtype</I><DD>
+The
+<B>wlan</B>
+
+keyword is optional.
+<DT><B>wlan type </B><I>wlan_type </I><B>subtype </B><I>wlan_subtype</I><DD>
 True if the IEEE 802.11 frame type matches the specified <I>wlan_type</I>
 and frame subtype matches the specified <I>wlan_subtype</I>.
+The
+<B>wlan</B>
+
+keyword is optional.
 <DT><DD>
 If the specified <I>wlan_type</I> is <B>mgt</B>,
 then valid <I>wlan_subtype</I>s are:
@@ -889,10 +897,14 @@ then valid <I>wlan_subtype</I>s are:
 and
 <B>qos-cf-ack-poll</B>.
 
-<DT><B>subtype </B><I>wlan_subtype</I><DD>
+<DT><B>wlan subtype </B><I>wlan_subtype</I><DD>
 True if the IEEE 802.11 frame subtype matches the specified <I>wlan_subtype</I>
 and frame has the type to which the specified <I>wlan_subtype</I> belongs.
-<DT><B>dir </B><I>direction</I><DD>
+The
+<B>wlan</B>
+
+keyword is optional.
+<DT><B>wlan dir </B><I>direction</I><DD>
 True if the IEEE 802.11 frame direction matches the specified
 <I>direction</I>.
 
@@ -906,6 +918,10 @@ Valid directions are:
 <B>dstods</B>,
 
 or a numeric value.
+The
+<B>wlan</B>
+
+keyword is optional.
 <DT><B>vlan </B><I>[vlan_id]</I><DD>
 True if the packet is an IEEE 802.1Q VLAN packet.
 If the optional <I>vlan_id</I> is specified, only true if the packet has the specified
@@ -1691,7 +1707,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 12:06:00 GMT, January 05, 2025
+This HTML man page was generated at 22:23:58 GMT, January 08, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

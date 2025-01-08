@@ -521,13 +521,15 @@ DESCRIPTION
               The  fourth address field is only used for WDS (Wireless Distri-
               bution System) frames.
 
-       type wlan_type
+       wlan type wlan_type
               True if  the  IEEE  802.11  frame  type  matches  the  specified
-              wlan_type.  Valid wlan_types are: mgt, ctl and data.
+              wlan_type.   Valid  wlan_types are: mgt, ctl and data.  The wlan
+              keyword is optional.
 
-       type wlan_type subtype wlan_subtype
-              True  if  the  IEEE  802.11  frame  type  matches  the specified
-              wlan_type and frame subtype matches the specified wlan_subtype.
+       wlan type wlan_type subtype wlan_subtype
+              True if  the  IEEE  802.11  frame  type  matches  the  specified
+              wlan_type  and frame subtype matches the specified wlan_subtype.
+              The wlan keyword is optional.
 
               If the specified wlan_type is mgt, then valid wlan_subtypes are:
               assoc-req,  assoc-resp,  reassoc-req,  reassoc-resp,  probe-req,
@@ -542,15 +544,15 @@ DESCRIPTION
               qos-data-cf-poll,  qos-data-cf-ack-poll,  qos,  qos-cf-poll  and
               qos-cf-ack-poll.
 
-       subtype wlan_subtype
+       wlan subtype wlan_subtype
               True  if  the  IEEE  802.11  frame subtype matches the specified
               wlan_subtype and frame has  the  type  to  which  the  specified
-              wlan_subtype belongs.
+              wlan_subtype belongs.  The wlan keyword is optional.
 
-       dir direction
+       wlan dir direction
               True  if  the  IEEE 802.11 frame direction matches the specified
               direction.  Valid directions are: nods, tods, fromds, dstods, or
-              a numeric value.
+              a numeric value.  The wlan keyword is optional.
 
        vlan [vlan_id]
               True  if  the  packet is an IEEE 802.1Q VLAN packet.  If the op-
@@ -911,4 +913,4 @@ BUGS
        Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                4 January 2025                  PCAP-FILTER(7)
+                                8 January 2025                  PCAP-FILTER(7)
