@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 8 January 2025<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 13 January 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -1044,16 +1044,67 @@ Abbreviations for:
 where <I>protocol</I> is one of the above protocols.
 <DT><B>l1</B>, <B>l2</B>, <B>iih</B>, <B>lsp</B>, <B>snp</B>, <B>csnp</B>, <B>psnp</B><DD>
 Abbreviations for IS-IS PDU types.
-<DT><B>vpi</B> <I>n</I><DD>
-True if the packet is an ATM packet, for SunATM on Solaris, with a
-virtual path identifier of
-<I>n</I>.
+<DT><I>atmfield relop val</I><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and the relation
+holds.
+<I>atmfield</I>
 
-<DT><B>vci</B> <I>n</I><DD>
-True if the packet is an ATM packet, for SunATM on Solaris, with a
-virtual channel identifier of
-<I>n</I>.
+is one of
+{<B>vpi</B>,
 
+<B>vci</B>};
+
+<I>relop</I>
+
+is one of
+{<B>&gt;</B>,
+
+<B>&lt;</B>,
+
+<B>&gt;=</B>,
+
+<B>&lt;=</B>,
+
+<B>=</B>,
+
+<B>==</B>,
+
+<B>!=</B>}
+
+(where
+<B>=</B>
+
+means the same as
+<B>==</B>);
+
+<I>val</I>
+
+is an integer.
+<B>vpi</B>
+
+and
+<B>vci</B>
+
+stand for the virtual path identifier (VPI) and the virtual channel
+identifier (VCI) fields respectively.
+<DT><I>atmfield</I> <I>val</I><DD>
+Abbreviation for
+
+<PRE>
+<I>atmfield</I> == <I>val</I>
+</PRE>
+
+
+in the expression above.
+<DT><I>atmfield</I> (<I>val1</I> <B>or</B> ... <B>or</B> <I>valN</I>)<DD>
+Abbreviation for
+
+<PRE>
+(<I>atmfield</I> == <I>val1</I> <B>or</B> ... <B>or</B> <I>atmfield</I> == <I>valN</I>)
+</PRE>
+
+
+in the expression above.
 <DT><B>lane</B><DD>
 True if the packet is an ATM packet, for SunATM on Solaris, and is
 an ATM LANE packet.
@@ -1101,30 +1152,78 @@ True if the packet is a Fill-In Signal Unit (FISU) MTP2 packet.
 True if the packet is a Link Status Signal Unit (LSSU) MTP2 packet.
 <DT><B>msu</B><DD>
 True if the packet is a Message Signal Unit (MSU) MTP2 packet.
-<DT><B>sio</B> <I>val</I><DD>
-True if the packet has the Service Information Octet (SIO) field of the MTP2
-MSU header set to the value
-<I>val</I>.
+<DT><I>mtpfield relop val</I><DD>
+True if the relation holds.
+<I>mtpfield</I>
 
-Note that this keyword does not test whether the packet is an MSU packet.
-<DT><B>dpc</B> <I>val</I><DD>
-True if the packet has the Destination Point Code (DPC) field of the MTP3
-standard routing label set to the value
-<I>val</I>.
+is one of
+{<B>sio</B>,
 
-Note that this keyword does not test whether the packet is an MTP3 packet.
-<DT><B>opc</B> <I>val</I><DD>
-True if the packet has the Originating Point Code (OPC) field of the MTP3
-standard routing label set to the value
-<I>val</I>.
+<B>dpc</B>,
 
-Note that this keyword does not test whether the packet is an MTP3 packet.
-<DT><B>sls</B> <I>val</I><DD>
-True if the packet has the Signalling Link Selection (SLS) field of the MTP3
-standard routing label set to the value
-<I>val</I>.
+<B>opc</B>,
 
-Note that this keyword does not test whether the packet is an MTP3 packet.
+<B>sls</B>};
+
+<I>relop</I>
+
+is one of
+{<B>&gt;</B>,
+
+<B>&lt;</B>,
+
+<B>&gt;=</B>,
+
+<B>&lt;=</B>,
+
+<B>=</B>,
+
+<B>==</B>,
+
+<B>!=</B>}
+
+(where
+<B>=</B>
+
+means the same as
+<B>==</B>);
+
+<I>val</I>
+
+is an integer.
+<B>sio</B>
+
+stands for the Service Information Octet (SIO) field of the MTP2 MSU header;
+note that this keyword does not test whether the packet is an MSU packet.
+<B>dpc</B>,
+
+<B>opc</B>
+
+and
+<B>sls</B>
+
+stand for the Destination Point Code (DPC), Originating Point Code (OPC) and
+Signalling Link Selection (SLS) fields respectively of the MTP3 standard
+routing label; note that these keywords do not test whether the packet is an
+MTP3 packet.
+<DT><I>mtpfield</I> <I>val</I><DD>
+Abbreviation for
+
+<PRE>
+<I>mtpfield</I> == <I>val</I>
+</PRE>
+
+
+in the expression above.
+<DT><I>mtpfield</I> (<I>val1</I> <B>or</B> ... <B>or</B> <I>valN</I>)<DD>
+Abbreviation for
+
+<PRE>
+(<I>mtpfield</I> == <I>val1</I> <B>or</B> ... <B>or</B> <I>mtpfield</I> == <I>valN</I>)
+</PRE>
+
+
+in the expression above.
 <DT><B>hfisu</B>, <B>hlssu</B>, <B>hmsu</B>, <B>hsio</B>, <B>hdpc</B>, <B>hopc</B>, <B>hsls</B><DD>
 Same as
 <B>fisu</B>,
@@ -1707,7 +1806,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 22:23:58 GMT, January 08, 2025
+This HTML man page was generated at 18:01:32 GMT, January 13, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
