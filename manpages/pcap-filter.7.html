@@ -297,10 +297,7 @@ May be qualified with <B>src</B> or <B>dst</B>.
 True if the packet is IPv4/v6 TCP, UDP or SCTP and has a
 destination port value of <I>portnamenum</I>.
 The <I>portnamenum</I> can be a number or a name used in /etc/services (see
-<B>tcp</B>(4P)
-
-and
-<B>udp</B>(4P)).
+<B>services</B>(5)).
 
 If a name is used, both the port
 number and protocol are checked.
@@ -361,10 +358,7 @@ This is equivalent to:
 
 
 <DT><B>ip proto </B><I>protocol</I><DD>
-True if the packet is an IPv4 packet (see
-<B>ip</B>(4P))
-
-of protocol type <I>protocol</I>.
+True if the packet is an IPv4 packet of protocol type <I>protocol</I>.
 <I>Protocol</I> can be a number or one of the names recognized by
 <B>getprotobyname</B>(3),
 
@@ -1806,7 +1800,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 18:01:32 GMT, January 13, 2025
+This HTML man page was generated at 16:00:20 GMT, January 19, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

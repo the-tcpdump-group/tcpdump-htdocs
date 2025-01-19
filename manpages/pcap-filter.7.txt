@@ -159,12 +159,12 @@ DESCRIPTION
        dst port portnamenum
               True  if the packet is IPv4/v6 TCP, UDP or SCTP and has a desti-
               nation port value of portnamenum.  The portnamenum can be a num-
-              ber  or  a name used in /etc/services (see tcp(4P) and udp(4P)).
-              If a name is  used,  both  the  port  number  and  protocol  are
-              checked.   If  a number or ambiguous name is used, only the port
-              number is checked (e.g., `dst port 513' will print both  tcp/lo-
-              gin  traffic  and  udp/who traffic, and `port domain' will print
-              both tcp/domain and udp/domain traffic).
+              ber  or  a  name  used in /etc/services (see services(5)).  If a
+              name is used, both the port number and protocol are checked.  If
+              a  number  or  ambiguous  name  is used, only the port number is
+              checked (e.g., `dst port 513' will print both tcp/login  traffic
+              and  udp/who  traffic, and `port domain' will print both tcp/do-
+              main and udp/domain traffic).
 
        src port portnamenum
               True if the packet has a source port value of portnamenum.
@@ -203,14 +203,14 @@ DESCRIPTION
                    len >= length
 
        ip proto protocol
-              True  if  the  packet is an IPv4 packet (see ip(4P)) of protocol
-              type protocol.  Protocol can be a number or  one  of  the  names
-              recognized  by  getprotobyname(3),  for  example: ah, esp, eigrp
-              (only in Linux with glibc, FreeBSD, NetBSD, DragonFly  BSD,  and
-              macOS), icmp, igmp, igrp (only in Haiku and OpenBSD), pim, sctp,
-              tcp, udp or vrrp.  Note that most of these  example  identifiers
-              are  also  keywords and must be escaped via backslash (\).  Note
-              that this primitive does not chase the protocol header chain.
+              True  if the packet is an IPv4 packet of protocol type protocol.
+              Protocol can be a number or one of the names recognized by  get-
+              protobyname(3),  for example: ah, esp, eigrp (only in Linux with
+              glibc, FreeBSD, NetBSD, DragonFly BSD, and macOS),  icmp,  igmp,
+              igrp  (only  in Haiku and OpenBSD), pim, sctp, tcp, udp or vrrp.
+              Note that most of these example identifiers  are  also  keywords
+              and must be escaped via backslash (\).  Note that this primitive
+              does not chase the protocol header chain.
 
               Typically getprotobyname(3) parses the  /etc/protocols  file  to
               translate  protocol  names  to numbers, and the getent protocols
