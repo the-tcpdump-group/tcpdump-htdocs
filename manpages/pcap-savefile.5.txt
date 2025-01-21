@@ -85,9 +85,13 @@ DESCRIPTION
 
               A  4-byte  number  giving  the "snapshot length" of the capture;
               packets longer than the snapshot length  are  truncated  to  the
-              snapshot  length, so that, if the snapshot length is N, only the
-              first N bytes of a packet longer than N bytes will be  saved  in
-              the capture.
+              snapshot  length.   Specifically,  when  libpcap is writing to a
+              savefile (from a live packet capture or otherwise), if the save-
+              file's  snapshot length is N, it writes to the savefile only the
+              first N bytes of a packet longer than N bytes; when  libpcap  is
+              reading  from  a  savefile,  it delivers at most N bytes for any
+              packet in the savefile.  Other software  that  needs  to  access
+              savefiles directly should implement the same logic.
 
               A 4-byte number giving the link-layer header type for packets in
               the capture and optional additional information.
@@ -160,4 +164,4 @@ DESCRIPTION
 SEE ALSO
        pcap(3PCAP)
 
-                                  6 Jan 2025                  PCAP-SAVEFILE(5)
+                                  21 Jan 2025                 PCAP-SAVEFILE(5)
