@@ -25,14 +25,21 @@ DESCRIPTION
        to  a  bpf_program  struct,  usually  the   result   of   a   call   to
        pcap_compile(3PCAP).
 
+       If the calls to pcap_compile() and pcap_setfilter() use the same pcap_t
+       handle, packet filtering should either work correctly or fail correctly
+       without  additional  efforts.   Otherwise  the filter program must have
+       been compiled for the same link-layer header type as the  one  used  by
+       the  pcap_t  handle;  also  on Linux the filter must not use BPF exten-
+       sions, see pcap_compile() for more information.
+
 RETURN VALUE
-       pcap_setfilter()  returns  0  on  success,  PCAP_ERROR_NOT_ACTIVATED if
-       called on a capture handle that has been created but not activated,  or
-       PCAP_ERROR    on    other   errors.    If   PCAP_ERROR   is   returned,
+       pcap_setfilter() returns  0  on  success,  PCAP_ERROR_NOT_ACTIVATED  if
+       called  on a capture handle that has been created but not activated, or
+       PCAP_ERROR   on   other   errors.    If   PCAP_ERROR    is    returned,
        pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p as an ar-
        gument to fetch or display the error text.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                 5 March 2022            PCAP_SETFILTER(3PCAP)
+                                24 January 2025          PCAP_SETFILTER(3PCAP)

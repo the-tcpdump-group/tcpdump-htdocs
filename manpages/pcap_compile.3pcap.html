@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_COMPILE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 November 2024<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 24 January 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -63,6 +63,52 @@ than one network, a value of
 can be supplied; tests
 for IPv4 broadcast addresses will fail to compile, but all other tests in
 the filter program will be OK.
+<P>
+
+On Linux, if the
+<CODE>pcap_t</CODE>
+
+handle corresponds to a live packet capture, the resulting filter program
+may use Linux BPF extensions.  This works transparently if the filter
+program is used to filter packets on the same
+<CODE>pcap_t</CODE>
+
+handle, which should be done when possible.  In other use cases trying to
+use a filter program with BPF extensions in
+<A HREF='./pcap_offline_filter.3pcap.html'><B>pcap_offline_filter</B></A>(3PCAP)
+
+or for filtering an input savefile would reject more packets than expected
+because the extensions depend on auxiliary packet data, which would not be
+available.  The workaround is to compile the filter without the extensions
+by using a
+<CODE>pcap_t</CODE>
+
+handle from
+<A HREF='./pcap_open_dead.3pcap.html'><B>pcap_open_dead</B></A>(3PCAP)
+
+or
+<A HREF='./pcap_open_offline.3pcap.html'><B>pcap_open_offline</B></A>(3PCAP)
+
+rather than a handle from
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+
+or
+<A HREF='./pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP).
+
+<P>
+
+If BPF extensions are disabled as described above or the OS is not Linux,
+<B>pcap_compile</B>()
+
+may start rejecting some filter expressions for some link-layer header types,
+this is the expected behaviour.  For example, the
+<CODE>ifindex</CODE>
+
+keyword is valid for any live capture on Linux, but when reading packets
+from a savefile, regardless of the OS it is valid for
+<CODE>DLT_LINUX_SLL2</CODE>
+
+only.
 <H2 id="lbAE">RETURN VALUE</H2>
 
 <B>pcap_compile</B>()
@@ -120,7 +166,7 @@ exclusion allowing only one thread to call it at any given time.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 00:58:37 GMT, November 27, 2024
+This HTML man page was generated at 00:20:11 GMT, January 28, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

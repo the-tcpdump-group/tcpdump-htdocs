@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_SETFILTER</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 5 March 2022<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 24 January 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -40,6 +40,26 @@ is a pointer to a
 struct, usually the result of a call to
 <A HREF='./pcap_compile.3pcap.html'><B>pcap_compile</B></A>(3PCAP).
 
+<P>
+
+If the calls to
+<B>pcap_compile</B>()
+
+and
+<B>pcap_setfilter</B>()
+
+use the same
+<CODE>pcap_t</CODE>
+
+handle, packet filtering should either work correctly or fail correctly
+without additional efforts.  Otherwise the filter program must have been
+compiled for the same link-layer header type as the one used by the
+<CODE>pcap_t</CODE>
+
+handle; also on Linux the filter must not use BPF extensions, see
+<B>pcap_compile</B>()
+
+for more information.
 <H2 id="lbAE">RETURN VALUE</H2>
 
 <B>pcap_setfilter</B>()
@@ -74,7 +94,7 @@ as an argument to fetch or display the error text.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:50:57 GMT, February 26, 2023
+This HTML man page was generated at 00:20:14 GMT, January 28, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

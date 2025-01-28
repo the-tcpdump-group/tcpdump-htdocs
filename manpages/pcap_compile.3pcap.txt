@@ -35,22 +35,41 @@ DESCRIPTION
        IPv4  broadcast  addresses will fail to compile, but all other tests in
        the filter program will be OK.
 
+       On Linux, if the pcap_t handle corresponds to a  live  packet  capture,
+       the  resulting filter program may use Linux BPF extensions.  This works
+       transparently if the filter program is used to filter  packets  on  the
+       same  pcap_t  handle, which should be done when possible.  In other use
+       cases  trying  to  use  a  filter  program  with  BPF   extensions   in
+       pcap_offline_filter(3PCAP) or for filtering an input savefile would re-
+       ject more packets than expected because the extensions depend on auxil-
+       iary  packet  data, which would not be available.  The workaround is to
+       compile the filter without the extensions by using a pcap_t handle from
+       pcap_open_dead(3PCAP)  or pcap_open_offline(3PCAP) rather than a handle
+       from pcap_create(3PCAP) or pcap_open_live(3PCAP).
+
+       If BPF extensions are disabled as described above  or  the  OS  is  not
+       Linux,  pcap_compile()  may start rejecting some filter expressions for
+       some link-layer header types, this is the expected behaviour.  For  ex-
+       ample,  the ifindex keyword is valid for any live capture on Linux, but
+       when reading packets from a savefile, regardless of the OS it is  valid
+       for DLT_LINUX_SLL2 only.
+
 RETURN VALUE
-       pcap_compile() returns 0 on  success  and  PCAP_ERROR  on  failure.  If
+       pcap_compile()  returns  0  on  success  and  PCAP_ERROR on failure. If
        PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be
        called with p as an argument to fetch or display the error text.
 
 BACKWARD COMPATIBILITY
-       The PCAP_NETMASK_UNKNOWN constant became available in  libpcap  release
+       The  PCAP_NETMASK_UNKNOWN  constant became available in libpcap release
        1.1.0.
 
-       In  libpcap  1.8.0  and  later,  pcap_compile() can be used in multiple
+       In libpcap 1.8.0 and later, pcap_compile()  can  be  used  in  multiple
        threads within a single process.  However, in earlier versions of libp-
        cap, it is not safe to use pcap_compile() in multiple threads in a sin-
-       gle process without some form of mutual  exclusion  allowing  only  one
+       gle  process  without  some  form of mutual exclusion allowing only one
        thread to call it at any given time.
 
 SEE ALSO
        pcap(3PCAP), pcap_setfilter(3PCAP), pcap_freecode(3PCAP)
 
-                               25 November 2024            PCAP_COMPILE(3PCAP)
+                                24 January 2025            PCAP_COMPILE(3PCAP)
