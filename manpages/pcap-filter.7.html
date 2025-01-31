@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 13 January 2025<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 29 January 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -1238,6 +1238,48 @@ and
 respectively, but only if the MTP2 link uses the extended sequence numbers
 encoding specified for high speed signalling links (HSL) in ITU-T
 Recommendation Q.703 Annex A.
+<DT><B>link src </B><I>arcnetaddr</I><DD>
+True, only for
+<B>DLT_ARCNET</B>
+
+or
+<B>DLT_ARCNET_LINUX</B>,
+
+if the ARCnet source address is
+<I>arcnetaddr</I>,
+
+which in this expression is a string of the form
+<B>$xx</B>
+
+or
+<B>$x</B>,
+
+where &quot;x&quot; is a hexadecimal digit (for example,
+<B>$2b</B>).
+
+Note that this address syntax clashes with the parameter expansion syntax
+in POSIX-compatible shells and elsewhere, so depending on the use case the
+filter string may require the use of single quotes or a backslash.
+<DT><B>link dst </B><I>arcnetaddr</I><DD>
+Same as the above, but for the destination ARCnet address; also in ARCnet
+context
+<B>broadcast</B>
+
+and
+<B>multicast</B>
+
+are equivalent to
+<B>link dst $0</B>.
+
+<DT><B>link host </B><I>arcnetaddr</I><DD>
+Abbreviation for:
+
+<PRE>
+<B>link src </B><I>arcnetaddr </I><B>or link dst </B><I>arcnetaddr</I>
+</PRE>
+
+
+in the expressions above.
 <DT><I>expr1 relop expr2</I><DD>
 True if the relation holds.  <I>Relop</I> is one of
 {<B>&gt;</B>,
@@ -1737,6 +1779,21 @@ and
 keywords became available in libpcap 1.5.3.
 <P>
 
+The modulo
+(<B>%</B>)
+
+and bitwise XOR
+(<B>^</B>)
+
+binary operators became available in libpcap 1.6.2.
+<P>
+
+The
+<B>geneve</B>
+
+keyword became available in libpcap 1.8.0.
+<P>
+
 The ICMPv6 type code names, as well as the
 <B>tcp-ece</B>
 
@@ -1744,12 +1801,6 @@ and
 <B>tcp-cwr</B>
 
 TCP flag names became available in libpcap 1.9.0.
-<P>
-
-The
-<B>geneve</B>
-
-keyword became available in libpcap 1.8.0.
 <P>
 
 The
@@ -1800,7 +1851,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 16:00:20 GMT, January 19, 2025
+This HTML man page was generated at 14:08:33 GMT, January 31, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
