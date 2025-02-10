@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_COMPILE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 24 January 2025<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 31 January 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -52,7 +52,8 @@ struct and is filled in by
 controls whether optimization on the resulting code is performed.
 <I>netmask</I>
 
-specifies the IPv4 netmask of the network on which packets are being
+specifies the IPv4 netmask (in host byte order) of the network on which
+packets are being
 captured; it is used only when checking for IPv4 broadcast addresses in
 the filter program.  If the netmask of the network on which packets are
 being captured isn't known to the program, or if packets are being
@@ -166,7 +167,7 @@ exclusion allowing only one thread to call it at any given time.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 00:20:11 GMT, January 28, 2025
+This HTML man page was generated at 12:24:38 GMT, February 10, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of CBPF-SAVEFILE</H1>
-Section: File Formats (5)<BR>Updated: 17 July 2022<BR>
+Section: File Formats (5)<BR>Updated: 9 February 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -18,7 +18,7 @@ installation.
 
 <H2 id="lbAB">NAME</H2>
 
-cbpf-savefile - cBPF savefile format (work in progress, DRAFT revision 6)
+cbpf-savefile - cBPF savefile format (work in progress, DRAFT revision 7)
 <H2 id="lbAC">DESCRIPTION</H2>
 
 This man page discusses a file format for cBPF, which is the &quot;classic&quot; (and
@@ -106,20 +106,22 @@ part of the header up to and including MinorVer identical.
 <PRE>
  b15 b14 b13 b12 b11 b10 b09 b08 b07 b06 b05 b04 b03 b02 b01 b00
 +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|                       reserved                |CPX|COP|XOR|MOD|
+|                       reserved            |RND|CPX|COP|XOR|MOD|
 +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 </PRE>
 
 <P>
-MOD, XOR, COP and CPX: if set to 1, in this BPF dialect
+MOD, XOR, COP, CPX and RND: if set to 1, in this BPF dialect
 <CODE>BPF_MOD</CODE>,
 
 <CODE>BPF_XOR</CODE>,
 
-<CODE>BPF_COP</CODE>
+<CODE>BPF_COP</CODE>,
+
+<CODE>BPF_COPX</CODE>
 
 and
-<CODE>BPF_COPX</CODE>
+<CODE>BPF_RND</CODE>
 
 respectively are valid instructions.  For the current list of OSes that
 support
@@ -143,6 +145,9 @@ and
 <CODE>BPF_COPX</CODE>
 
 are implemented in NetBSD kernel.
+<CODE>BPF_RND</CODE>
+
+is implemented in OpenBSD kernel.
 <P>
 
 Note that the fact an instruction is valid in a BPF dialect does not always
@@ -338,7 +343,7 @@ can produce a cBPF savefile from user input.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 08:15:34 GMT, February 28, 2023
+This HTML man page was generated at 12:24:37 GMT, February 10, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

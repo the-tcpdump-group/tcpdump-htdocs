@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 29 January 2025<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 9 February 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -440,10 +440,16 @@ Abbreviation for:
 Abbreviation for:
 
 <PRE>
-<B>ip proto</B> 9
+<B>ip proto </B><I>igrpval</I>
 </PRE>
 
 
+where
+<I>igrpval</I>
+
+is 88 on DragonFly BSD, FreeBSD and macOS, and 9 on all other OSes.  This
+abbreviation should not be used in portable applications and may be removed
+in future.
 <DT><B>ip6 proto </B><I>protocol</I><DD>
 True if the packet is an IPv6 packet of protocol type <I>protocol</I>.
 (See `<B>ip proto</B>' above for the meaning of <I>protocol</I>.)
@@ -1035,7 +1041,18 @@ Abbreviations for:
 </PRE>
 
 
-where <I>protocol</I> is one of the above protocols.
+where <I>protocol</I> is one of the above protocols.  Also in this context
+<B>es-is</B>
+
+is an alias for
+<B>esis</B>
+
+and
+<B>is-is</B>
+
+is an alias for
+<B>isis</B>.
+
 <DT><B>l1</B>, <B>l2</B>, <B>iih</B>, <B>lsp</B>, <B>snp</B>, <B>csnp</B>, <B>psnp</B><DD>
 Abbreviations for IS-IS PDU types.
 <DT><I>atmfield relop val</I><DD>
@@ -1851,7 +1868,7 @@ It only looks at IPv4 packets.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 14:08:33 GMT, January 31, 2025
+This HTML man page was generated at 12:24:37 GMT, February 10, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

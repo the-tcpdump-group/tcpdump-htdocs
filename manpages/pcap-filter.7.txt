@@ -234,7 +234,10 @@ DESCRIPTION
                    ip proto 2
 
        igrp   Abbreviation for:
-                   ip proto 9
+                   ip proto igrpval
+              where  igrpval  is 88 on DragonFly BSD, FreeBSD and macOS, and 9
+              on all other OSes.  This abbreviation should not be used in por-
+              table applications and may be removed in future.
 
        ip6 proto protocol
               True  if the packet is an IPv6 packet of protocol type protocol.
@@ -638,17 +641,18 @@ DESCRIPTION
        clnp, esis, isis
               Abbreviations for:
                    iso proto \protocol
-              where protocol is one of the above protocols.
+              where protocol is one of the above protocols.  Also in this con-
+              text es-is is an alias for esis and is-is is an alias for isis.
 
        l1, l2, iih, lsp, snp, csnp, psnp
               Abbreviations for IS-IS PDU types.
 
        atmfield relop val
-              True if the packet is an ATM packet, for SunATM on Solaris,  and
+              True  if the packet is an ATM packet, for SunATM on Solaris, and
               the relation holds.  atmfield is one of {vpi, vci}; relop is one
               of {>, <, >=, <=, =, ==, !=} (where = means the same as ==); val
-              is  an  integer.  vpi and vci stand for the virtual path identi-
-              fier (VPI) and the virtual channel identifier (VCI)  fields  re-
+              is an integer.  vpi and vci stand for the virtual  path  identi-
+              fier  (VPI)  and the virtual channel identifier (VCI) fields re-
               spectively.
 
        atmfield val
@@ -661,69 +665,69 @@ DESCRIPTION
                    (atmfield == val1 or ... or atmfield == valN)
               in the expression above.
 
-       lane   True  if the packet is an ATM packet, for SunATM on Solaris, and
+       lane   True if the packet is an ATM packet, for SunATM on Solaris,  and
               is an ATM LANE packet.  Note that the first lane keyword encoun-
-              tered  in  an expression changes the tests done in the remainder
-              of the expression on the assumption that the packet is either  a
-              LANE  emulated  Ethernet packet or a LANE LE Control packet.  If
-              lane isn't specified, the tests are done  under  the  assumption
+              tered in an expression changes the tests done in  the  remainder
+              of  the expression on the assumption that the packet is either a
+              LANE emulated Ethernet packet or a LANE LE Control  packet.   If
+              lane  isn't  specified,  the tests are done under the assumption
               that the packet is an LLC-encapsulated packet.
 
        oamf4sc
-              True  if the packet is an ATM packet, for SunATM on Solaris, and
+              True if the packet is an ATM packet, for SunATM on Solaris,  and
               is a segment OAM F4 flow cell (VPI=0 & VCI=3).
 
        oamf4ec
-              True if the packet is an ATM packet, for SunATM on Solaris,  and
+              True  if the packet is an ATM packet, for SunATM on Solaris, and
               is an end-to-end OAM F4 flow cell (VPI=0 & VCI=4).
 
-       oamf4  True  if the packet is an ATM packet, for SunATM on Solaris, and
-              is a segment or end-to-end OAM F4 flow cell (VPI=0  &  (VCI=3  |
+       oamf4  True if the packet is an ATM packet, for SunATM on Solaris,  and
+              is  a  segment  or end-to-end OAM F4 flow cell (VPI=0 & (VCI=3 |
               VCI=4)).
 
-       oam    True  if the packet is an ATM packet, for SunATM on Solaris, and
-              is a segment or end-to-end OAM F4 flow cell (VPI=0  &  (VCI=3  |
+       oam    True if the packet is an ATM packet, for SunATM on Solaris,  and
+              is  a  segment  or end-to-end OAM F4 flow cell (VPI=0 & (VCI=3 |
               VCI=4)).
 
-       metac  True  if the packet is an ATM packet, for SunATM on Solaris, and
+       metac  True if the packet is an ATM packet, for SunATM on Solaris,  and
               is on a meta signaling circuit (VPI=0 & VCI=1).
 
-       bcc    True if the packet is an ATM packet, for SunATM on Solaris,  and
+       bcc    True  if the packet is an ATM packet, for SunATM on Solaris, and
               is on a broadcast signaling circuit (VPI=0 & VCI=2).
 
-       sc     True  if the packet is an ATM packet, for SunATM on Solaris, and
+       sc     True if the packet is an ATM packet, for SunATM on Solaris,  and
               is on a signaling circuit (VPI=0 & VCI=5).
 
-       ilmic  True if the packet is an ATM packet, for SunATM on Solaris,  and
+       ilmic  True  if the packet is an ATM packet, for SunATM on Solaris, and
               is on an ILMI circuit (VPI=0 & VCI=16).
 
        connectmsg
-              True  if the packet is an ATM packet, for SunATM on Solaris, and
-              is on a signaling circuit and is a Q.2931 Setup,  Call  Proceed-
+              True if the packet is an ATM packet, for SunATM on Solaris,  and
+              is  on  a signaling circuit and is a Q.2931 Setup, Call Proceed-
               ing, Connect, Connect Ack, Release, or Release Done message.
 
        metaconnect
-              True  if the packet is an ATM packet, for SunATM on Solaris, and
-              is on a meta signaling circuit and is a Q.2931 Setup, Call  Pro-
+              True if the packet is an ATM packet, for SunATM on Solaris,  and
+              is  on a meta signaling circuit and is a Q.2931 Setup, Call Pro-
               ceeding, Connect, Release, or Release Done message.
 
        fisu   True if the packet is a Fill-In Signal Unit (FISU) MTP2 packet.
 
-       lssu   True  if  the  packet  is  a Link Status Signal Unit (LSSU) MTP2
+       lssu   True if the packet is a Link  Status  Signal  Unit  (LSSU)  MTP2
               packet.
 
        msu    True if the packet is a Message Signal Unit (MSU) MTP2 packet.
 
        mtpfield relop val
-              True if the relation holds.  mtpfield is one of {sio, dpc,  opc,
-              sls};  relop  is one of {>, <, >=, <=, =, ==, !=} (where = means
-              the same as ==); val is an integer.  sio stands for the  Service
-              Information  Octet (SIO) field of the MTP2 MSU header; note that
-              this keyword does not test whether the packet is an MSU  packet.
-              dpc,  opc  and  sls  stand for the Destination Point Code (DPC),
+              True  if the relation holds.  mtpfield is one of {sio, dpc, opc,
+              sls}; relop is one of {>, <, >=, <=, =, ==, !=} (where  =  means
+              the  same as ==); val is an integer.  sio stands for the Service
+              Information Octet (SIO) field of the MTP2 MSU header; note  that
+              this  keyword does not test whether the packet is an MSU packet.
+              dpc, opc and sls stand for the  Destination  Point  Code  (DPC),
               Originating Point Code (OPC) and Signalling Link Selection (SLS)
-              fields  respectively  of  the  MTP3 standard routing label; note
-              that these keywords do not test whether the packet  is  an  MTP3
+              fields respectively of the MTP3  standard  routing  label;  note
+              that  these  keywords  do not test whether the packet is an MTP3
               packet.
 
        mtpfield val
@@ -738,21 +742,21 @@ DESCRIPTION
 
        hfisu, hlssu, hmsu, hsio, hdpc, hopc, hsls
               Same as fisu, lssu, msu, sio, dpc, opc and sls respectively, but
-              only if the MTP2 link uses the extended sequence numbers  encod-
-              ing  specified  for  high  speed signalling links (HSL) in ITU-T
+              only  if the MTP2 link uses the extended sequence numbers encod-
+              ing specified for high speed signalling  links  (HSL)  in  ITU-T
               Recommendation Q.703 Annex A.
 
        link src arcnetaddr
-              True, only for DLT_ARCNET or  DLT_ARCNET_LINUX,  if  the  ARCnet
-              source  address  is  arcnetaddr,  which  in this expression is a
-              string of the form $xx or $x, where "x" is a  hexadecimal  digit
-              (for  example, $2b).  Note that this address syntax clashes with
-              the parameter expansion syntax in  POSIX-compatible  shells  and
-              elsewhere,  so  depending  on the use case the filter string may
+              True,  only  for  DLT_ARCNET  or DLT_ARCNET_LINUX, if the ARCnet
+              source address is arcnetaddr, which  in  this  expression  is  a
+              string  of  the form $xx or $x, where "x" is a hexadecimal digit
+              (for example, $2b).  Note that this address syntax clashes  with
+              the  parameter  expansion  syntax in POSIX-compatible shells and
+              elsewhere, so depending on the use case the  filter  string  may
               require the use of single quotes or a backslash.
 
        link dst arcnetaddr
-              Same as the above, but for the destination ARCnet address;  also
+              Same  as the above, but for the destination ARCnet address; also
               in ARCnet context broadcast and multicast are equivalent to link
               dst $0.
 
@@ -762,67 +766,67 @@ DESCRIPTION
               in the expressions above.
 
        expr1 relop expr2
-              True if the relation holds.  Relop is one of {>, <, >=,  <=,  =,
+              True  if  the relation holds.  Relop is one of {>, <, >=, <=, =,
               ==, !=} (where = means the same as ==).  Each of expr1 and expr2
-              is an arithmetic expression composed of integer  constants  (ex-
-              pressed  in  standard C syntax), the normal binary operators {+,
-              -, *, /, %, &, |, ^, <<, >>}, a  length  operator,  and  special
-              packet  data accessors.  Note that all comparisons are unsigned,
+              is  an  arithmetic expression composed of integer constants (ex-
+              pressed in standard C syntax), the normal binary  operators  {+,
+              -,  *,  /,  %,  &, |, ^, <<, >>}, a length operator, and special
+              packet data accessors.  Note that all comparisons are  unsigned,
               so that, for example, 0x80000000 and 0xffffffff are > 0.
 
               The % and ^ operators are currently only supported for filtering
-              in  the  kernel  on  particular  operating systems (for example:
+              in the kernel on  particular  operating  systems  (for  example:
               FreeBSD, Linux with 3.7 and later kernels, NetBSD); on all other
-              systems  (for example: AIX, Hurd, illumos, Solaris, OpenBSD), if
-              those operators are used, filtering will be done in  user  mode,
-              which  will  increase  the overhead of capturing packets and may
+              systems (for example: AIX, Hurd, illumos, Solaris, OpenBSD),  if
+              those  operators  are used, filtering will be done in user mode,
+              which will increase the overhead of capturing  packets  and  may
               cause more packets to be dropped.
 
-              The length operator, indicated by the  keyword  len,  gives  the
+              The  length  operator,  indicated  by the keyword len, gives the
               length of the packet.
 
               To access data inside the packet, use the following syntax:
                    proto [ expr : size ]
-              Proto  is  one  of  arp, atalk, carp, decnet, ether, fddi, icmp,
-              icmp6, igmp, igrp, ip, ip6, lat, link, mopdl, moprc,  pim,  ppp,
-              radio,  rarp,  sca,  sctp, slip, tcp, tr, udp, vrrp or wlan, and
-              indicates the protocol layer for the index  operation.   (ether,
-              fddi,  link, ppp, slip, tr and wlan all refer to the link layer.
-              radio refers to the "radio header" added  to  some  802.11  cap-
+              Proto is one of arp, atalk, carp,  decnet,  ether,  fddi,  icmp,
+              icmp6,  igmp,  igrp, ip, ip6, lat, link, mopdl, moprc, pim, ppp,
+              radio, rarp, sca, sctp, slip, tcp, tr, udp, vrrp  or  wlan,  and
+              indicates  the  protocol layer for the index operation.  (ether,
+              fddi, link, ppp, slip, tr and wlan all refer to the link  layer.
+              radio  refers  to  the  "radio header" added to some 802.11 cap-
               tures.)  Note that tcp, udp and other upper-layer protocol types
               only apply to IPv4, not IPv6 (this will be fixed in the future).
-              The  byte  offset,  relative to the indicated protocol layer, is
-              given by expr.  Size is optional and  indicates  the  number  of
-              bytes  in  the  field of interest; it can be either one, two, or
+              The byte offset, relative to the indicated  protocol  layer,  is
+              given  by  expr.   Size  is optional and indicates the number of
+              bytes in the field of interest; it can be either  one,  two,  or
               four, and defaults to one.
 
-              For example, `ether[0] & 1 != 0' catches all multicast  traffic.
-              The  expression `ip[0] & 0xf != 5' catches all IPv4 packets with
+              For  example, `ether[0] & 1 != 0' catches all multicast traffic.
+              The expression `ip[0] & 0xf != 5' catches all IPv4 packets  with
               options.  The expression `ip[6:2] & 0x1fff = 0' catches only un-
               fragmented IPv4 datagrams and frag zero of fragmented IPv4 data-
-              grams.  This check is implicitly applied to the tcp, udp,  icmp,
-              sctp,  igmp, pim, igrp, vrrp and carp index operations.  For in-
-              stance, tcp[0] always means the first byte of  the  TCP  header,
+              grams.   This check is implicitly applied to the tcp, udp, icmp,
+              sctp, igmp, pim, igrp, vrrp and carp index operations.  For  in-
+              stance,  tcp[0]  always  means the first byte of the TCP header,
               and never means the first byte of an intervening fragment.
 
-              Some  offsets  and field values may be expressed as names rather
-              than as numeric values.  The  following  protocol  header  field
-              offsets  are  available:  icmptype  (ICMP type field), icmp6type
-              (ICMPv6 type  field),  icmpcode  (ICMP  code  field),  icmp6code
+              Some offsets and field values may be expressed as  names  rather
+              than  as  numeric  values.   The following protocol header field
+              offsets are available: icmptype  (ICMP  type  field),  icmp6type
+              (ICMPv6  type  field),  icmpcode  (ICMP  code  field), icmp6code
               (ICMPv6 code field) and tcpflags (TCP flags field).
 
-              The   following   ICMP   type   field   values   are  available:
-              icmp-echoreply, icmp-unreach, icmp-sourcequench,  icmp-redirect,
+              The  following   ICMP   type   field   values   are   available:
+              icmp-echoreply,  icmp-unreach, icmp-sourcequench, icmp-redirect,
               icmp-echo, icmp-routeradvert, icmp-routersolicit, icmp-timxceed,
-              icmp-paramprob,   icmp-tstamp,   icmp-tstampreply,    icmp-ireq,
+              icmp-paramprob,    icmp-tstamp,   icmp-tstampreply,   icmp-ireq,
               icmp-ireqreply, icmp-maskreq, icmp-maskreply.
 
-              The   following   ICMPv6   type   field  values  are  available:
+              The  following  ICMPv6  type   field   values   are   available:
               icmp6-destinationunreach,                    icmp6-packettoobig,
-              icmp6-timeexceeded,      icmp6-parameterproblem,     icmp6-echo,
+              icmp6-timeexceeded,     icmp6-parameterproblem,      icmp6-echo,
               icmp6-echoreply,                   icmp6-multicastlistenerquery,
               icmp6-multicastlistenerreportv1,    icmp6-multicastlistenerdone,
-              icmp6-routersolicit, icmp6-routeradvert,  icmp6-neighborsolicit,
+              icmp6-routersolicit,  icmp6-routeradvert, icmp6-neighborsolicit,
               icmp6-neighboradvert,     icmp6-redirect,     icmp6-routerrenum,
               icmp6-nodeinformationquery,       icmp6-nodeinformationresponse,
               icmp6-ineighbordiscoverysolicit, icmp6-ineighbordiscoveryadvert,
@@ -833,7 +837,7 @@ DESCRIPTION
               icmp6-multicastrouteradvert,       icmp6-multicastroutersolicit,
               icmp6-multicastrouterterm.
 
-              The  following  TCP  flags  field values are available: tcp-fin,
+              The following TCP flags field  values  are  available:  tcp-fin,
               tcp-syn, tcp-rst, tcp-push, tcp-ack, tcp-urg, tcp-ece, tcp-cwr.
 
        Primitives may be combined using:
@@ -846,7 +850,7 @@ DESCRIPTION
 
               Alternation (`||' or `or').
 
-       Negation has the highest  precedence.   Alternation  and  concatenation
+       Negation  has  the  highest  precedence.  Alternation and concatenation
        have equal precedence and associate left to right.
 
        If an identifier is given without a keyword, the most recent keyword is
@@ -873,34 +877,34 @@ EXAMPLES
        To select all FTP traffic through Internet gateway `snup':
               gateway snup and (port ftp or ftp-data)
 
-       To select IPv4 traffic neither sourced  from  nor  destined  for  local
+       To  select  IPv4  traffic  neither  sourced from nor destined for local
        hosts (if you gateway to one other net, this stuff should never make it
        onto your local net).
               ip and not net localnet
 
-       To select the start and end packets (the SYN and FIN packets)  of  each
+       To  select  the start and end packets (the SYN and FIN packets) of each
        TCP conversation that involves a non-local host.
               tcp[tcpflags] & (tcp-syn|tcp-fin) != 0 and not src and dst net localnet
 
-       To  select  the TCP packets with flags RST and ACK both set.  (i.e. se-
-       lect only the RST and ACK flags in the flags field, and if  the  result
+       To select the TCP packets with flags RST and ACK both set.   (i.e.  se-
+       lect  only  the RST and ACK flags in the flags field, and if the result
        is "RST and ACK both set", match)
               tcp[tcpflags] & (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)
 
-       To  select  all  IPv4 HTTP packets to and from port 80, i.e. print only
-       packets that contain data, not, for example, SYN and  FIN  packets  and
+       To select all IPv4 HTTP packets to and from port 80,  i.e.  print  only
+       packets  that  contain  data, not, for example, SYN and FIN packets and
        ACK-only packets.  (IPv6 is left as an exercise for the reader.)
               tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)
 
-       To  select  IPv4  packets  longer  than  576 bytes sent through gateway
+       To select IPv4 packets longer  than  576  bytes  sent  through  gateway
        `snup':
               gateway snup and ip[2:2] > 576
 
-       To select IPv4 broadcast or multicast packets that were  not  sent  via
+       To  select  IPv4  broadcast or multicast packets that were not sent via
        Ethernet broadcast or multicast:
               ether[0] & 1 = 0 and ip[16] >= 224
 
-       To  select  all  ICMP packets that are not echo requests/replies (i.e.,
+       To select all ICMP packets that are not  echo  requests/replies  (i.e.,
        not ping packets):
               icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply
               icmp6[icmp6type] != icmp6-echo and icmp6[icmp6type] != icmp6-echoreply
@@ -908,7 +912,7 @@ EXAMPLES
 BACKWARD COMPATIBILITY
        The carp keyword became available in libpcap 1.2.1.
 
-       The hfisu, hlssu, hmsu, hsio,  hopc,  hdpc  and  hsls  keywords  became
+       The  hfisu,  hlssu,  hmsu,  hsio,  hopc,  hdpc and hsls keywords became
        available in libpcap 1.5.3.
 
        The modulo (%) and bitwise XOR (^) binary operators became available in
@@ -927,25 +931,25 @@ SEE ALSO
        pcap(3PCAP)
 
 BUGS
-       To    report    a   security   issue   please   send   an   e-mail   to
+       To   report   a   security   issue   please   send   an    e-mail    to
        security@tcpdump.org.
 
-       To report bugs and other problems, contribute patches, request  a  fea-
-       ture,  provide generic feedback etc please see the file CONTRIBUTING.md
+       To  report  bugs and other problems, contribute patches, request a fea-
+       ture, provide generic feedback etc please see the file  CONTRIBUTING.md
        in the libpcap source tree root.
 
-       Filter expressions on fields other than those  in  Token  Ring  headers
+       Filter  expressions  on  fields  other than those in Token Ring headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter  expressions  on  fields other than those in 802.11 headers will
-       not correctly handle 802.11 data packets with both To DS  and  From  DS
+       Filter expressions on fields other than those in  802.11  headers  will
+       not  correctly  handle  802.11 data packets with both To DS and From DS
        set.
 
-       `ip6  proto' should chase header chain, but at this moment it does not.
-       `ip6 protochain' is supplied for this behavior.  For example, to  match
+       `ip6 proto' should chase header chain, but at this moment it does  not.
+       `ip6  protochain' is supplied for this behavior.  For example, to match
        IPv6 fragments: `ip6 protochain 44'
 
-       Arithmetic  expression  against  transport  layer headers, like tcp[0],
+       Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-                                29 January 2025                 PCAP-FILTER(7)
+                                9 February 2025                 PCAP-FILTER(7)

@@ -26,14 +26,14 @@ DESCRIPTION
        See pcap-filter(7) for the syntax of that string.  fp is a pointer to a
        bpf_program  struct  and is filled in by pcap_compile().  optimize con-
        trols whether optimization on the resulting code is performed.  netmask
-       specifies  the  IPv4  netmask of the network on which packets are being
-       captured; it is used only when checking for IPv4 broadcast addresses in
-       the filter program.  If the netmask of the network on which packets are
-       being captured isn't known to the program, or if packets are being cap-
-       tured on the Linux "any" pseudo-interface that can capture on more than
-       one network, a value of PCAP_NETMASK_UNKNOWN can be supplied; tests for
-       IPv4  broadcast  addresses will fail to compile, but all other tests in
-       the filter program will be OK.
+       specifies the IPv4 netmask (in host byte order) of the network on which
+       packets are being captured; it is used  only  when  checking  for  IPv4
+       broadcast  addresses in the filter program.  If the netmask of the net-
+       work on which packets are being captured isn't known to the program, or
+       if  packets are being captured on the Linux "any" pseudo-interface that
+       can capture on more than one network, a value  of  PCAP_NETMASK_UNKNOWN
+       can  be  supplied; tests for IPv4 broadcast addresses will fail to com-
+       pile, but all other tests in the filter program will be OK.
 
        On Linux, if the pcap_t handle corresponds to a  live  packet  capture,
        the  resulting filter program may use Linux BPF extensions.  This works
@@ -72,4 +72,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP), pcap_setfilter(3PCAP), pcap_freecode(3PCAP)
 
-                                24 January 2025            PCAP_COMPILE(3PCAP)
+                                31 January 2025            PCAP_COMPILE(3PCAP)

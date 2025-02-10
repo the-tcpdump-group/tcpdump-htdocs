@@ -26,20 +26,21 @@ SYNOPSIS
 DESCRIPTION
        pcap_lookupnet()  is used to determine the IPv4 network number and mask
        associated with the network device device.  Both  netp  and  maskp  are
-       bpf_u_int32 pointers.  errbuf is a buffer large enough to hold at least
-       PCAP_ERRBUF_SIZE chars.
+       bpf_u_int32  pointers,  on  success  both values will be set in network
+       byte order.  errbuf is a buffer large enough to hold at least  PCAP_ER-
+       RBUF_SIZE chars.
 
-       This function is not available on Windows.  It  supports  neither  IPv6
+       This  function  is  not available on Windows.  It supports neither IPv6
        nor multiple IPv4 addresses per interface, which obviously is not prac-
        tical in modern networks.  See pcap_findalldevs(3PCAP) for a more elab-
        orate solution to the problem.
 
 RETURN VALUE
-       pcap_lookupnet()  returns  0  on  success and PCAP_ERROR on failure. If
-       PCAP_ERROR is returned, errbuf is filled in with an  appropriate  error
+       pcap_lookupnet() returns 0 on success and  PCAP_ERROR  on  failure.  If
+       PCAP_ERROR  is  returned, errbuf is filled in with an appropriate error
        message.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                 13 March 2024           PCAP_LOOKUPNET(3PCAP)
+                                31 January 2025          PCAP_LOOKUPNET(3PCAP)
