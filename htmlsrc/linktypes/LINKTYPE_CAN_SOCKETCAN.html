@@ -97,15 +97,16 @@ the frame may be a CAN CC frame or a CAN FD frame.</li>
 </ul>
 
 <p>
-The Len 8 DLC value is described in section 8.4.2.4 "DLC field" of ISO
-11898-1:2015.
+The Len 8 DLC value is described for CAN CC frames in section 8.4.2.4 "DLC field" of ISO
+11898-1:2015 and has a value range from 9 to 15. The Len 8 DLC value is only evaluated when
+the payload length of the CAN CC frame is set to 8.
 </p>
 
 <p>
 Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> CAN CC and CAN FD frames:
 </p>
 <ul>
-  <li>Must set the "Payload length" field to a value from 0 to 64.</li>
+  <li>Must set the "Payload length" field to a value from 0 to 8 (CAN CC) or 0 to 64 (CAN FD).</li>
   <li>In the "FD flags" field:</li>
   <ul>
     <li>in CAN CC frames, must clear all bits.</li>
@@ -124,9 +125,10 @@ packet.
 <p>
 
 <p>
-For a remote retransmission request, no payload is present, so the
-payload length should be zero.  A non-zero payload length does not
-indicate the presence of a payload.
+In CAN CC remote retransmission request (RTR) frames, no payload data is sent on the wire.
+But a data length code (DLC) can still be set in those data-less CAN CC RTR frames.
+This length information is then stored in the payload length and optionally in the Len 8 DLC value.
+A non-zero payload length does therefore not indicate the presence of payload data.
 <p>
 
 <p>
@@ -163,7 +165,7 @@ information.
 |      Priority ID/VCID     |
 |         (4 Octets)        |
 +---------------------------+
-|           Flags           |
+|         XL Flags          |
 |         (1 Octet)         |
 +---------------------------+
 |         SDU type          |
@@ -200,10 +202,10 @@ network identifier (VCID).  The 8 bits above that are reserved.
 </p>
 
 <p>
-The flags field contains CAN XL specific flags.  The bits are:
+The XL Flags field contains CAN XL specific flags.  The bits are:
 </p>
 <ul>
-  <li><code>CANXL_SEC</code> (<code>0x01</code>) - Simple Extended Context.</li>
+  <li><code>CANXL_SEC</code> (<code>0x01</code>) - Simple Extended Content.</li>
   <li><code>CANXL_XLF</code> (<code>0x80</code>) - if set, the frame is a CAN XL frame; if not set,
 the frame is a CAN CC frame or a CAN FD frame.</li>
 </ul>
@@ -230,11 +232,15 @@ The Acceptance Field is in little-endian byte order.
 Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> CAN XL frames:
 </p>
 <ul>
-  <li>In the "Flags" field, must set the <code>CANXL_XLF</code> bit
-    set the <code>CANFD_SEC</code> bit as appropriate for the frame,
-    and clear all other bits.</li>
+  <li>Must set the "Payload length" field to a value from 1 to 2048.</li>
+  <li>In the "XL Flags" field:</li>
+    <ul>
+      <li>must set the <code>CANXL_XLF</code> bit.</li>
+      <li>must set the <code>CANFD_SEC</code> bit as appropriate for the frame and clear all other bits.</li>
+    </ul>
   <li>May strip trailing padding bytes to save disk space if all above statements are satisfied.</li>
 </ul>
+The payload is the data field of the CAN XL packet.
             </div>
             <!-- End of LINKTYPE_CAN_SOCKETCAN section -->
           </div>
