@@ -202,10 +202,22 @@ OPTIONS
 
               The test for `foreign' IPv4 addresses is done using the IPv4 ad-
               dress and netmask of the interface  on  that  capture  is  being
-              done.   If that address or netmask are not available, either be-
-              cause the interface on that capture is being done has no address
-              or  netmask or because it is the "any" pseudo-interface (see the
-              -i flag below), this option will not work correctly.
+              done.   If the interface has no IPv4 addresses (which by conven-
+              tion applies to the "any" pseudo-interface (see the -i flag  be-
+              low),  the IPv4 netmask is assumed to be /0 and any IPv4 address
+              is considered non-foreign.  If the IPv4 netmask is /32, all IPv4
+              addresses except the interface's own address are considered for-
+              eign.  If the interface has more than one IPv4  address,  it  is
+              not trivial to predict which one will be used for the test.
+
+              Without the -f flag, or when the netmask is assumed to be /0 (as
+              discussed above), the ip broadcast primitive in the  filter  ex-
+              pression  matches  IPv4  packets  that  have  either  0.0.0.0 or
+              255.255.255.255 as the destination address.  With the flag,  the
+              primitive uses the same netmask (but not the network address) to
+              test the IPv4 destination address as the foreign  address  test.
+              One exception is the netmask /32, in which case the primitive is
+              considered invalid for the interface.
 
        -F file
               Use file as input for the filter expression.  An additional  ex-
@@ -1378,4 +1390,4 @@ BUGS
        A packet trace that crosses a daylight savings time  change  will  give
        skewed time stamps (the time change is ignored).
 
-                               30 November 2024                     TCPDUMP(1)
+                               22 February 2025                     TCPDUMP(1)

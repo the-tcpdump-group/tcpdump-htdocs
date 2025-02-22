@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 30 November 2024<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 22 February 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents tcpdump version 5.0.0-PRE-GIT.</H4>
@@ -559,13 +559,29 @@ Sun's NIS server --- usually it hangs forever translating non-local
 internet numbers).
 <DT><DD>
 The test for `foreign' IPv4 addresses is done using the IPv4 address and
-netmask of the interface on that capture is being done.  If that
-address or netmask are not available, either because the
-interface on that capture is being done has no address or netmask or
-because it is the &quot;any&quot; pseudo-interface (see the
+netmask of the interface on that capture is being done.  If the interface
+has no IPv4 addresses (which by convention applies to the &quot;any&quot;
+pseudo-interface (see the
 <CODE>-i</CODE>
 
-flag below), this option will not work correctly.
+flag below), the IPv4 netmask is assumed to be /0 and any IPv4 address is
+considered non-foreign.  If the IPv4 netmask is /32, all IPv4 addresses
+except the interface's own address are considered foreign.  If the
+interface has more than one IPv4 address, it is not trivial to predict
+which one will be used for the test.
+<DT><DD>
+Without the
+<CODE>-f</CODE>
+
+flag, or when the netmask is assumed to be /0 (as discussed above), the
+<CODE>ip broadcast</CODE>
+
+primitive in the filter expression matches IPv4 packets that have either
+0.0.0.0 or 255.255.255.255 as the destination address.  With the flag,
+the primitive uses the same netmask (but not the network address) to test
+the IPv4 destination address as the foreign address test.  One exception
+is the netmask /32, in which case the primitive is considered invalid for
+the interface.
 <DT><CODE>-F</CODE><I> file</I>
 
 <DD>
@@ -2744,7 +2760,7 @@ skewed time stamps (the time change is ignored).
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 11:15:54 GMT, December 02, 2024
+This HTML man page was generated at 21:02:04 GMT, February 22, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
