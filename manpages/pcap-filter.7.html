@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 22 February 2025<BR>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 27 February 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -48,7 +48,8 @@ The <I>filter expression</I> consists of one or more
 Primitives usually consist of an
 <I>id</I>
 
-(name or number) preceded by one or more qualifiers.
+(a name, a number or something slightly more complex, such as a CIDR prefix)
+preceded by one or more qualifiers.
 There are three
 different kinds of qualifier:
 <DL>
@@ -61,12 +62,15 @@ Possible types are
 
 <B>net</B>,
 
+<B>proto</B>,
+
 <B>port</B>
 
 and
 <B>portrange</B>.
 
-E.g., `<B>host</B> foo', `<B>net</B> 128.3', `<B>port</B> 20', `<B>portrange</B> 6000-6008'.
+E.g., `<B>host</B> foo', `<B>net</B> 128.3', `<B>port</B> 20', `<B>portrange</B> 6000-6008',
+`<B>proto </B> 17'.
 If there is no type
 qualifier,
 <B>host</B>
@@ -122,11 +126,17 @@ qualifiers are only valid for IEEE 802.11 Wireless LAN link layers.
 <I>proto</I>
 
 qualifiers restrict the match to a particular protocol.
+(This should not be confused with the
+<B>proto</B>
+
+type qualifier above.)
 Possible
 protocols are:
 <B>ether</B>,
 
 <B>fddi</B>,
+
+<B>link</B>,
 
 <B>tr</B>,
 
@@ -142,6 +152,8 @@ protocols are:
 
 <B>decnet</B>,
 
+<B>iso</B>,
+
 <B>sctp</B>,
 
 <B>tcp</B>
@@ -150,16 +162,47 @@ and
 <B>udp</B>.
 
 E.g., `<B>ether src</B> foo', `<B>arp net</B> 128.3', `<B>tcp port</B> 21',
+`<B>ip proto</B> ospf', `<B>ether proto</B> 0x88CC',
 `<B>udp portrange</B> 7000-7009', `<B>wlan addr2</B> 0:2:3:4:5:6'.
 If there is no
 <I>proto</I>
 
 qualifier, all protocols consistent with the type are assumed.
 E.g., `<B>src</B> foo' means `<B>(ip6 or ip or arp or rarp) src</B> foo',
-`<B>net</B> bar' means `<B>(ip or arp or rarp) net</B> bar' and
+`<B>proto</B> tcp' means `<B>(ip6 or ip) proto</B> tcp'
+`<B>net</B> bar' means `<B>(ip6 or ip or arp or rarp) net</B> bar' and
 `<B>port</B> 53' means `<B>(tcp or udp or sctp) port</B> 53'
 (note that these examples use invalid syntax to illustrate the principle).
 </DL>
+<P>
+
+In primitives that follow this pattern each qualifier kind may be present at
+most once, and if more than one kind is present, any
+<I>proto</I>
+
+qualifier must be the first qualifier and any
+<I>type</I>
+
+qualifier must be the last qualifier, for example, `<B>tcp dst port</B> 80'.
+Also not all combinations of these qualifier kinds are valid syntax.  Some
+make no sense in network protocols space, for example:
+<B>ether port</B>
+
+(Ethernet header has no ports),
+<B>tcp net</B>
+
+(TCP header does not have layer 3 fields),
+<B>dst proto</B>
+
+(in a protocol header the same protocol applies to both the source and the
+destination), and so on.  Some other combinations are not valid syntax because
+they are not implemented, even though hypothetically could make sense, for
+example:
+<B>iso net</B>,
+
+<B>aarp host</B>
+
+and so on.
 <P>
 
 [<B>fddi</B> is actually an alias for <B>ether</B>; the parser treats them
@@ -170,26 +213,44 @@ types, so you can filter on these FDDI fields just as with the
 analogous Ethernet fields.
 FDDI headers also contain other fields,
 but you cannot name them explicitly in a filter expression.
+Similarly, <B>tr</B> and <B>wlan</B> are aliases for <B>ether</B>; the
+statements about FDDI headers also apply to Token Ring and 802.11 wireless
+LAN headers.]
 <P>
 
-Similarly, <B>tr</B> and <B>wlan</B> are aliases for <B>ether</B>; the previous
-paragraph's statements about FDDI headers also apply to Token Ring
-and 802.11 wireless LAN headers.  For 802.11 headers, the destination
-address is the DA field and the source address is the SA field; the
-BSSID, RA, and TA fields aren't tested.]
+For IEEE 802.11 headers, the destination address is the DA field and the
+source address is the SA field.  For both ARP and RARP headers, the
+destination address is the TPA (Target Protocol Address) field and the
+source address is the SPA (Sender Protocol Address) field.
 <P>
 
 In addition to the above, there are some special `primitive' keywords
-that don't follow the pattern:
+that don't follow the pattern, for example:
 <B>gateway</B>,
 
 <B>broadcast</B>,
 
+<B>multicast</B>,
+
+<B>inbound</B>,
+
+<B>outbound</B>,
+
+<B>ifindex</B>,
+
+<B>llc</B>,
+
+<B>vlan</B>,
+
+<B>mpls</B>,
+
+<B>wlan</B>,
+
 <B>less</B>,
 
-<B>greater</B>
+<B>greater</B>,
 
-and arithmetic expressions.
+the index operation and arithmetic expressions.
 All of these are described below.
 <P>
 
@@ -212,90 +273,289 @@ E.g.,
 
 Allowable primitives are:
 <DL>
-<DT><B>dst host </B><I>hostnameaddr</I><DD>
-True if the IPv4/v6 destination field of the packet is <I>hostnameaddr</I>,
-which may be either an address or a name.
-<DT><B>src host </B><I>hostnameaddr</I><DD>
-True if the IPv4/v6 source field of the packet is <I>hostnameaddr</I>.
 <DT><B>host </B><I>hostnameaddr</I><DD>
-True if either the IPv4/v6 source or destination of the packet is <I>hostnameaddr</I>.
+True if the source or the destination ARP/IPv4/IPv6/RARP address of the packet is
+<I>hostnameaddr</I>.
+
+May be qualified with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>rarp</B>)
+
+and/or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>host</B>
+
+keyword is optional.  For example,
+
+<PRE>
+<B>ip src </B><I>hostnameaddr</I>
+</PRE>
+
+
+is equivalent to
+
+<PRE>
+<B>ether proto \</B>ip <B>and src host </B><I>hostnameaddr</I>
+</PRE>
+
+
 <DT><DD>
-Any of the above host expressions can be prepended with the keywords,
-<B>ip</B>, <B>arp</B>, <B>rarp</B>, or <B>ip6</B> as in:
+<I>hostnameaddr</I>
 
-<PRE>
-<B>ip host </B><I>hostnameaddr</I>
-</PRE>
+may be either an address or a name.  If it is a name with multiple IPv4/IPv6 addresses,
+each address will be checked for a match.
+<DT><B>ether host </B><I>ethernameaddr</I><DD>
+True if the source or the destination Ethernet/802.11/IPFC/FDDI/Token Ring
+address of the packet is
+<I>ethernameaddr</I>.
 
+May be qualified with a different direction
+(<B>src</B>,
 
-which is equivalent to:
+<B>dst</B>,
 
-<PRE>
-<B>ether proto \</B>ip <B>and host </B><I>hostnameaddr</I>
-</PRE>
+<B>src and dst</B>),
 
+in which case the
+<B>host</B>
 
-If <I>hostnameaddr</I> is a name with multiple IPv4/v6 addresses, each address will
-be checked for a match.
-<DT><B>ether dst </B><I>ethernameaddr</I><DD>
-True if the Ethernet destination address is <I>ethernameaddr</I>.
+keyword is optional.
+<DT><DD>
 <I>ethernameaddr</I>
 may be either a name from /etc/ethers or a numerical MAC address of the
 form &quot;xx:xx:xx:xx:xx:xx&quot;, &quot;xx.xx.xx.xx.xx.xx&quot;, &quot;xx-xx-xx-xx-xx-xx&quot;,
 &quot;xxxx.xxxx.xxxx&quot; or &quot;xxxxxxxxxxxx&quot;,
 where each &quot;x&quot; is a hex digit (0-9, a-f, or A-F).
-<DT><B>ether src </B><I>ethernameaddr</I><DD>
-True if the Ethernet source address is <I>ethernameaddr</I>.
-<DT><B>ether host </B><I>ethernameaddr</I><DD>
-True if either the Ethernet source or destination address is <I>ethernameaddr</I>.
 <DT><B>gateway</B> <I>host</I><DD>
 True if the packet used <I>host</I> as a gateway.
-I.e., the Ethernet
-source or destination address was <I>host</I> but neither the IP source
-nor the IP destination was <I>host</I>.
+I.e., the source or the destination Ethernet address was
+<I>host</I>
+
+but neither the source nor the destination ARP/IPv4/RARP address was
+<I>host</I>.
+
+In this implementation this primitive is not available in IPv6-enabled
+configuration.  May be qualified with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>rarp</B>).
+
+For example,
+
+<PRE>
+<B>ip gateway </B><I>host</I>
+</PRE>
+
+
+is equivalent to
+
+<PRE>
+<B>ether host </B><I>ethernameaddr </I><B>and not ip host </B><I>hostnameaddr</I>
+</PRE>
+
+
+which can be used with either names or numbers for
+<I>hostnameaddr</I>
+
+and
+<I>ethernameaddr</I>.
+
+<DT><DD>
 <I>Host</I> must be a name and
 must be found both by the machine's host-name-to-IP-address resolution
 mechanisms (host name file, DNS, NIS, etc.) and by the machine's
 host-name-to-Ethernet-address resolution mechanism (/etc/ethers, etc.).
-(An equivalent expression is
+<DT><B>net </B><I>netnameaddr</I><DD>
+True if the source or the destination ARP/IPv4/IPv6/RARP address of the packet
+belongs to the specified network.  May be qualified with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>rarp</B>)
+
+and/or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>net</B>
+
+keyword is optional.
+<I>netnameaddr</I>
+
+may be either a name from the networks database
+(/etc/networks, etc.) or a network number.
+<DT><DD>
+An IPv4 network number can be written as a dotted quad (e.g., 192.168.1.0),
+dotted triple (e.g., 192.168.1), dotted pair (e.g, 172.16), or single
+number (e.g., 10); the netmask is 255.255.255.255 (/32) for a dotted quad
+(which means that it's really a host match), 255.255.255.0 (/24) for a dotted
+triple, 255.255.0.0 (/16) for a dotted pair, or 255.0.0.0 (/8) for a single number.
+An IPv6 network number must be written out fully; the netmask is
+ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff (/128), so in this primitive IPv6
+&quot;network&quot; matches are really always host matches.  For an actual IPv6 network
+match see the `<B>net </B><I>netaddr</I>/<I>len</I>' primitive below.
+<DT><B>net </B><I>netaddr</I> <B>mask </B><I>netmask</I><DD>
+True if the source or the destination ARP/IPv4/RARP address of the packet
+belongs to <I>netaddr</I> with the specified <I>netmask</I>.  May be qualified
+with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>rarp</B>)
+
+and/or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>net</B>
+
+keyword remains mandatory.  In this implementation this primitive does not
+support IPv6 networks.
+<DT><DD>
+Both
+<I>netaddr</I>
+
+and
+<I>netmask</I>
+
+use the IPv4 network number notation described above, except the &quot;single
+number&quot; form is not valid in this primitive.  For example,
 
 <PRE>
-<B>ether host </B><I>ethernameaddr </I><B>and not host </B><I>hostnameaddr</I>
+<B>net </B>192.168 <B>mask </B>255.255
 </PRE>
 
 
-which can be used with either names or numbers for <I>hostnameaddr / ethernameaddr</I>.)
-This syntax does not work in IPv6-enabled configuration at this moment.
-<DT><B>dst net </B><I>netnameaddr</I><DD>
-True if the IPv4/v6 destination address of the packet has a network
-number of <I>netnameaddr</I>.
-<I>Net</I> may be either a name from the networks database
-(/etc/networks, etc.) or a network number.
-An IPv4 network number can be written as a dotted quad (e.g., 192.168.1.0),
-dotted triple (e.g., 192.168.1), dotted pair (e.g, 172.16), or single
-number (e.g., 10); the netmask is 255.255.255.255 for a dotted quad
-(which means that it's really a host match), 255.255.255.0 for a dotted
-triple, 255.255.0.0 for a dotted pair, or 255.0.0.0 for a single number.
-An IPv6 network number must be written out fully; the netmask is
-ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff, so IPv6 &quot;network&quot; matches are really always
-host matches, and a network match requires a netmask length.
-<DT><B>src net </B><I>netnameaddr</I><DD>
-True if the IPv4/v6 source address of the packet has a network
-number of <I>netnameaddr</I>.
-<DT><B>net </B><I>netnameaddr</I><DD>
-True if either the IPv4/v6 source or destination address of the packet has a network
-number of <I>netnameaddr</I>.
-<DT><B>net </B><I>netaddr</I> <B>mask </B><I>netmask</I><DD>
-True if the IPv4 address matches <I>netaddr</I> with the specific <I>netmask</I>.
-May be qualified with <B>src</B> or <B>dst</B>.
-Note that this syntax is not valid for IPv6 <I>netaddr</I>.
+is equivalent to
+
+<PRE>
+<B>net </B>192.168.0.0 <B>mask </B>255.255.0.0
+</PRE>
+
+
+<DT><DD>
+The
+<I>netmask</I>
+
+can represent any 32-bit value, which is why the
+`<B>net </B><I>netaddr</I>/<I>len</I>' primitive below is usually a better fit for
+use cases that require the value to be strictly one of the 33 CIDR masks (from
+/0 to /32).
 <DT><B>net </B><I>netaddr</I>/<I>len</I><DD>
-True if the IPv4/v6 address matches <I>netaddr</I> with a netmask <I>len</I>
-bits wide.
-May be qualified with <B>src</B> or <B>dst</B>.
-<DT><B>dst port </B><I>portnamenum</I><DD>
-True if the packet is IPv4/v6 TCP, UDP or SCTP and has a
-destination port value of <I>portnamenum</I>.
+True if the source or the destination ARP/IPv4/IPv6/RARP address of the packet
+belongs to
+<I>netaddr</I>
+
+where the bit-length of the network mask equals
+<I>len</I>
+
+(in other words, the address belongs to the specified CIDR prefix).  May be
+qualified with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>rarp</B>)
+
+and/or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>net</B>
+
+keyword is optional.
+<DT><DD>
+For IPv4,
+<I>len</I>
+
+is an integer between 0 and 32 (both inclusive) and
+<I>netaddr</I>
+
+is the same as the above.  For IPv6,
+<I>len</I>
+
+is an integer between 0 and 128 (both inclusive) and
+<I>netaddr</I>
+
+is an IPv6 address.  For the latter zero compression notation
+(<B>::</B>)
+
+is valid, but IPv4-mapped notation
+(<B>x:x:x:x:x:x:d.d.d.d</B>)
+
+is not.  For both IPv4 and IPv6 the maximum value of
+<I>len</I>
+
+is equivalent to a host match and the 0 value (which implies an all-zeroes
+value of
+<I>netaddr</I>)
+
+matches any address.  In the latter case this primitive reduces to matching
+the specified (or implied) protocols only.
+<DT><B>port </B><I>portnamenum</I><DD>
+True if the source or the destination TCP/UDP/SCTP port of an IPv4/IPv6 packet
+is
+<I>portnamenum</I>.
+
+For IPv4 this also implies that the packet is the first fragment or is not
+fragmented.  May be qualified with a specific layer 4 protocol
+(<B>tcp</B>,
+
+<B>udp</B>,
+
+<B>sctp</B>)
+
+or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>port</B>
+
+keyword remains mandatory.  Cannot be qualified with a specific layer 3
+protocol (IPv4/IPv6) in the same primitive, but can be trivially combined with
+other primitives to achieve the required effect, for example:
+
+<PRE>
+<B>ip and tcp dst port </B>80
+</PRE>
+
+
+<DT><DD>
 The <I>portnamenum</I> can be a number or a name used in /etc/services (see
 <B>services</B>(5)).
 
@@ -305,40 +565,26 @@ If a number or ambiguous name is used,
 only the port number is checked (e.g., `<B>dst port</B> 513' will print both
 tcp/login traffic and udp/who traffic, and `<B>port</B> domain' will print
 both tcp/domain and udp/domain traffic).
-<DT><B>src port </B><I>portnamenum</I><DD>
-True if the packet has a source port value of <I>portnamenum</I>.
-<DT><B>port </B><I>portnamenum</I><DD>
-True if either the source or destination port of the packet is <I>portnamenum</I>.
-<DT><B>dst portrange </B><I>portnamenum1-portnamenum2</I><DD>
-True if the packet is IPv4/v6 TCP, UDP or SCTP and has a
-destination port value between <I>portnamenum1</I> and <I>portnamenum2</I> (both inclusive).
+<DT><B>portrange </B><I>portnamenum1-portnamenum2</I><DD>
+This is a more generic form of the above: true if the port number in the
+packet is between
 <I>portnamenum1</I>
 
 and
 <I>portnamenum2</I>
 
-are interpreted in the same fashion as the
-<I>portnamenum</I>
+(both inclusive), everything else holds the same meaning.
+In this predicate
+<I>portnamenum1</I>
 
-parameter for
-<B>port</B>.
+and
+<I>portnamenum2</I>
 
-<DT><B>src portrange </B><I>portnamenum1-portnamenum2</I><DD>
-True if the packet has a source port value between <I>portnamenum1</I> and
-<I>portnamenum2</I> (both inclusive).
-<DT><B>portrange </B><I>portnamenum1-portnamenum2</I><DD>
-True if either the source or destination port of the packet is between
-<I>portnamenum1</I> and <I>portnamenum2</I> (both inclusive).
-<DT><DD>
-Any of the above port or port range expressions can be prepended with
-the keywords, <B>tcp</B>, <B>udp</B> or <B>sctp</B>, as in:
+can be specified in either order.  If the two values are equal, this primitive
+has the same effect as the
+<B>port</B>
 
-<PRE>
-<B>tcp src port </B><I>portnamenum</I>
-</PRE>
-
-
-which matches only TCP packets whose source port is <I>portnamenum</I>.
+primitive above.
 <DT><B>less </B><I>length</I><DD>
 True if the packet has a length less than or equal to <I>length</I>.
 This is equivalent to:
@@ -510,8 +756,13 @@ True if the packet is an IPv4 or IPv6 packet of protocol type
 <I>protocol</I>.)  Note that this primitive chases the protocol
 header chain.
 <DT><B>ether broadcast</B><DD>
-True if the packet is an Ethernet broadcast packet.
-The <B>ether</B>
+True if the destination Ethernet/802.11/IPFC/ARCnet/FDDI/Token Ring address of
+the packet is the broadcast address (e.g.
+<B>FF:FF:FF:FF:FF:FF</B>
+
+for Ethernet).  The
+<B>ether</B>
+
 keyword is optional.
 <DT><B>ip broadcast</B><DD>
 True if the packet is an IPv4 packet with the host part of the destination
@@ -554,10 +805,14 @@ address(es) explicitly, for example:
 
 
 <DT><B>ether multicast</B><DD>
-True if the packet is an Ethernet multicast packet.
-The <B>ether</B>
+True if the destination Ethernet/802.11/IPFC/ARCnet/FDDI/Token Ring address of
+the packet is a multicast address (e.g.
+<B>ether[0] &amp; 1 != 0</B>
+
+for Ethernet).  The
+<B>ether</B>
+
 keyword is optional.
-This is shorthand for `<B>ether[</B>0<B>] &amp; </B>1<B> != </B>0'.
 <DT><B>ip multicast</B><DD>
 True if the packet is an IPv4 multicast packet.
 <DT><B>ip6 multicast</B><DD>
@@ -649,23 +904,35 @@ is DNA Remote Console (MOP) and
 <B>sca</B>
 
 is System Communication Architecture (SCA).
-<DT><B>decnet src </B><I>decnetaddr</I><DD>
-True if the DECnet source address is
-<I>decnetaddr</I>,
-
-which is an address of the form
-<B>AREANUMBER.NODENUMBER</B>
-
-(for example, &quot;10.123&quot;), where the area number can be between 0 and 63
-and the node number can be between 0 and 1023 and both numbers always use
-decimal base.
-<DT><B>decnet dst </B><I>decnetaddr</I><DD>
-True if the DECnet destination address is
-<I>decnetaddr</I>.
-
 <DT><B>decnet host </B><I>decnetaddr</I><DD>
-True if either the DECnet source or destination address is
+True if the source or the destination DECnet address of the packet is
 <I>decnetaddr</I>.
+
+May be qualified with a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in which case the
+<B>host</B>
+
+keyword is optional.
+<DT><DD>
+<I>decnetaddr</I>
+
+is an address of the form
+<B>AREANUMBER.NODENUMBER</B>,
+
+where the area number can be between 0 and 63 (both inclusive) and the node
+number can be between 0 and 1023 (both inclusive) and both numbers always use
+decimal base.  For example:
+
+<PRE>
+<B>decnet src </B>10.123
+</PRE>
+
 
 <DT><B>llc</B><DD>
 True if the packet has an 802.2 LLC header.  This includes:
@@ -1284,31 +1551,45 @@ and
 respectively, but only if the MTP2 link uses the extended sequence numbers
 encoding specified for high speed signalling links (HSL) in ITU-T
 Recommendation Q.703 Annex A.
-<DT><B>link src </B><I>arcnetaddr</I><DD>
+<DT><B>link host </B><I>arcnetaddr</I><DD>
 True, only for
 <B>DLT_ARCNET</B>
 
 or
 <B>DLT_ARCNET_LINUX</B>,
 
-if the ARCnet source address is
-<I>arcnetaddr</I>,
+if the source or the destination ARCnet address of the packet is
+<I>arcnetaddr</I>.
 
-which in this expression is a string of the form
+May be qualified with a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in which case the
+<B>host</B>
+
+keyword is optional.
+<DT><DD>
+<I>arcnetaddr</I>
+
+is a string of the form
 <B>$xx</B>
 
 or
 <B>$x</B>,
 
-where &quot;x&quot; is a hexadecimal digit (for example,
-<B>$2b</B>).
+where &quot;x&quot; is a hexadecimal digit.  For example:
 
-Note that this address syntax clashes with the parameter expansion syntax
-in POSIX-compatible shells and elsewhere, so depending on the use case the
-filter string may require the use of single quotes or a backslash.
-<DT><B>link dst </B><I>arcnetaddr</I><DD>
-Same as the above, but for the destination ARCnet address; also in ARCnet
-context
+<PRE>
+<B>link host </B>$2b
+</PRE>
+
+
+<DT><DD>
+Also in ARCnet context
 <B>broadcast</B>
 
 and
@@ -1317,15 +1598,10 @@ and
 are equivalent to
 <B>link dst $0</B>.
 
-<DT><B>link host </B><I>arcnetaddr</I><DD>
-Abbreviation for:
-
-<PRE>
-<B>link src </B><I>arcnetaddr </I><B>or link dst </B><I>arcnetaddr</I>
-</PRE>
-
-
-in the expressions above.
+<DT><DD>
+Note that this address syntax clashes with the parameter expansion syntax
+in POSIX-compatible shells and elsewhere, so depending on the use case the
+filter string may require the use of single quotes or a backslash.
 <DT><I>expr1 relop expr2</I><DD>
 True if the relation holds.  <I>Relop</I> is one of
 {<B>&gt;</B>,
@@ -1895,9 +2171,14 @@ does not work against IPv6 packets.
 It only looks at IPv4 packets.
 <P>
 
+For ARP and RARP the current implementation assumes IPv4 over Ethernet and may
+incorrectly match packets that have a different combination of protocol and
+hardware.
+<P>
+
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 21:02:03 GMT, February 22, 2025
+This HTML man page was generated at 20:37:45 GMT, February 27, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
