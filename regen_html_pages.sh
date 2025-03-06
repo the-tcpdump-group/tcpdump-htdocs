@@ -31,7 +31,6 @@
 #
 # This script has been tested to work on the following systems:
 #
-# * AIX 7
 # * FreeBSD
 # * GNU/Linux
 # * Haiku
@@ -227,11 +226,7 @@ regenerate_page()
 	f_in=${1:?}
 	f_out=${2:?}
 	file_exists_in_repository "$f_in" || echo "Warning: input file $f_in does not exist in git" >&2
-	if file_exists_in_repository "$f_out"; then
-		file_differs_from_repository "$f_out" && echo "Warning: unsaved changes to $f_out were lost" >&2
-	else
-		echo "Warning: output file $f_out does not exist in git" >&2
-	fi
+	file_exists_in_repository "$f_out" || echo "Warning: output file $f_out does not exist in git" >&2
 
 	# None of the functions below read from $f_out, they only need to know
 	# what the filename is.
@@ -239,7 +234,7 @@ regenerate_page()
 	print_html_page "$f_in" |
 		substitute_page_title "$f_out" |
 		highlight_top_menu "$f_out" |
-		rewrite_URLs "$f_out" > "$f_out"
+		rewrite_URLs "$f_out" >"${f_tmp:?}"
 
 	# The pipeline is too long to fit into the "if" nicely.
 	# shellcheck disable=SC2181
@@ -247,18 +242,23 @@ regenerate_page()
 		echo "Error: failed to overwrite output file $f_out" >&2
 		return 1
 	fi
-	file_differs_from_repository "$f_out" && echo "Regenerated: $f_out"
+	if ! cmp -s "$f_tmp" "$f_out"; then
+		cp "$f_tmp" "$f_out"
+		echo "Updated: $f_out"
+	fi
 	return 0
 }
 
 regenerate_pages()
 {
+	f_tmp=$(mktemp -t regen_html_pages.XXXXXX)
 	for f_in in htmlsrc/[!_]*.html htmlsrc/linktypes/*.html; do
 		# Skip editor backup files.
 		[ "$f_in" != "${f_in#\~}" ] && continue
 		regenerate_page "$f_in" "${f_in#htmlsrc/}" || return 1
 	done
 	regenerate_page "$TOP_MENU" autoindex_header.html
+	rm -f "$f_tmp"
 }
 
 command -v git >/dev/null 2>&1 || {
