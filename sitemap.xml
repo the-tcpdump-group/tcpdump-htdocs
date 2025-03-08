@@ -103,4 +103,8 @@
 		<changefreq>monthly</changefreq>
 	</url>
 
+	<url>
+		<loc>https://www.tcpdump.org/thanks.html</loc>
+		<changefreq>monthly</changefreq>
+	</url>
 </urlset>

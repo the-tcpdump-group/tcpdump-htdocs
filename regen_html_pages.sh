@@ -99,7 +99,7 @@ substitute_page_title()
 		title='Continuous integration | '
 		;;
 	thanks)
-		title='Thanks | '
+		title='Thank you! | '
 		;;
 	LINKTYPE_*)
 		title="$basename | "
