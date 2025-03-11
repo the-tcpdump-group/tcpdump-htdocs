@@ -429,7 +429,7 @@ updateOutputFiles()
 		produceHTML ../"$f" "$sedfile" "manpages/${ofb}.html"
 	done
 
-	for f in ../libpcap/*.3pcap; do
+	for f in ../libpcap/[a-z]*.3pcap; do
 		[ "$(known3PCAPFile "$f")" = 'no' ] && echo "WARNING: file $f is not in the 3PCAP map"
 		produceTXT "$f" "manpages/$(basename "$f").txt"
 		produceHTML "$f" "$sedfile" "manpages/$(basename "$f").html"
