@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_FINDALLDEVS</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 9 August 2024<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 11 March 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -35,7 +35,8 @@ void pcap_freealldevs(pcap_if_t *alldevs);
 
 <B>pcap_findalldevs</B>()
 
-constructs a list of network devices that can be opened with
+constructs a list of packet capture devices that potentially can be opened
+with
 <A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
 
 and
@@ -44,13 +45,6 @@ and
 or with
 <A HREF='./pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP).
 
-(Note that there may be network devices that cannot be opened by the
-process calling
-<B>pcap_findalldevs</B>(),
-
-because, for example, that process does not have sufficient privileges
-to open them for capturing; if so, those devices will not appear on the
-list.)
 <I>alldevsp</I>
 
 is a pointer to a
@@ -62,6 +56,37 @@ is a buffer large enough to hold at least
 <CODE>PCAP_ERRBUF_SIZE</CODE>
 
 chars.
+<P>
+
+The most common type of a capture device is a regular network interface, in
+which case the capture device name is the same as the OS network interface
+name, for example, &quot;eth0&quot;.  All supported Linux systems, as well as recent
+versions of macOS and Solaris, implement a special &quot;any&quot; pseudo-interface,
+which captures packets from all regular network interfaces and does not
+support promiscuous mode.  If the &quot;any&quot; pseudo-interface is available, the
+list of capture devices includes it.  What is considered a regular network
+interface is an implementation detail of the OS (for example, on Linux this
+includes SocketCAN devices), so packets captured on the &quot;any&quot; pseudo-interface
+may represent more different network protocols than expected.  The list of
+capture devices, depending on how libpcap was compiled and how the host is
+configured, often also includes at least some of the following types:
+Bluetooth, DAG, D-Bus, Netlink, SNF and USB.
+<P>
+
+For most capture device types enumeration of devices does not require special
+privileges or a specific device state (i.e. being &quot;up&quot; or ready in any other
+sense).  However, capturing of packets on a device usually depends on some
+conditions, so
+<B>pcap_findalldevs</B>()
+
+may list devices that a subsequent call to
+<B>pcap_activate</B>()
+
+would reject -- then, for example, the error code
+<CODE>PCAP_ERROR_PERM_DENIED</CODE>
+
+would make the same sense as not being able to read from a particular file in
+a directory that allows to list the files.  This is the intended design.
 <P>
 
 If
@@ -94,6 +119,9 @@ for the last element of the list
 
 <DD>
 a pointer to a string giving a name for the device to pass to
+<B>pcap_create</B>()
+
+or
 <B>pcap_open_live</B>()
 
 <DT><CODE>description</CODE>
@@ -366,7 +394,7 @@ constants became available in libpcap release 1.9.0.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 00:58:38 GMT, November 27, 2024
+This HTML man page was generated at 18:57:56 GMT, March 11, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
