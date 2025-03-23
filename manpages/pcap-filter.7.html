@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 9 March 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 21 March 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -53,29 +53,57 @@ preceded by one or more qualifiers.
 There are three
 different kinds of qualifier:
 <DL>
-<DT><I>type</I><DD>
-<I>type</I>
+<DT><I>proto</I><DD>
+<I>proto</I>
 
-qualifiers say what kind of thing the id name or number refers to.
-Possible types are
-<B>host</B>,
+qualifiers restrict the match to a particular protocol.
+(This should not be confused with the
+<B>proto</B>
 
-<B>net</B>,
+type qualifier below.)
+Possible
+protocols are:
+<B>ether</B>,
 
-<B>proto</B>,
+<B>fddi</B>,
 
-<B>port</B>
+<B>link</B>,
+
+<B>tr</B>,
+
+<B>wlan</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>arp</B>,
+
+<B>rarp</B>,
+
+<B>decnet</B>,
+
+<B>iso</B>,
+
+<B>sctp</B>,
+
+<B>tcp</B>
 
 and
-<B>portrange</B>.
+<B>udp</B>.
 
-E.g., `<B>host</B> foo', `<B>net</B> 128.3', `<B>port</B> 20', `<B>portrange</B> 6000-6008',
-`<B>proto </B> 17'.
-If there is no type
-qualifier,
-<B>host</B>
+E.g., `<B>ether src</B> foo', `<B>arp net</B> 128.3', `<B>tcp port</B> 21',
+`<B>ip proto</B> ospf', `<B>ether proto</B> 0x88CC',
+`<B>udp portrange</B> 7000-7009', `<B>wlan addr2</B> 0:2:3:4:5:6'.
+If there is no
+<I>proto</I>
 
-is assumed.
+qualifier, all protocols consistent with the type are assumed.
+E.g., `<B>src</B> foo' means `<B>(ip6 or ip or arp or rarp) src</B> foo',
+`<B>proto</B> tcp' means `<B>(ip6 or ip) proto</B> tcp'
+`<B>net</B> bar' means `<B>(ip6 or ip or arp or rarp) net</B> bar' and
+`<B>port</B> 53' means `<B>(tcp or udp or sctp) port</B> 53'
+(note that these examples use invalid syntax to illustrate the principle).
 <DT><I>dir</I><DD>
 <I>dir</I>
 
@@ -122,57 +150,29 @@ and
 <B>addr4</B>
 
 qualifiers are only valid for IEEE 802.11 Wireless LAN link layers.
-<DT><I>proto</I><DD>
-<I>proto</I>
+<DT><I>type</I><DD>
+<I>type</I>
 
-qualifiers restrict the match to a particular protocol.
-(This should not be confused with the
-<B>proto</B>
+qualifiers say what kind of thing the id name or number refers to.
+Possible types are
+<B>host</B>,
 
-type qualifier above.)
-Possible
-protocols are:
-<B>ether</B>,
+<B>net</B>,
 
-<B>fddi</B>,
+<B>proto</B>,
 
-<B>link</B>,
-
-<B>tr</B>,
-
-<B>wlan</B>,
-
-<B>ip</B>,
-
-<B>ip6</B>,
-
-<B>arp</B>,
-
-<B>rarp</B>,
-
-<B>decnet</B>,
-
-<B>iso</B>,
-
-<B>sctp</B>,
-
-<B>tcp</B>
+<B>port</B>
 
 and
-<B>udp</B>.
+<B>portrange</B>.
 
-E.g., `<B>ether src</B> foo', `<B>arp net</B> 128.3', `<B>tcp port</B> 21',
-`<B>ip proto</B> ospf', `<B>ether proto</B> 0x88CC',
-`<B>udp portrange</B> 7000-7009', `<B>wlan addr2</B> 0:2:3:4:5:6'.
-If there is no
-<I>proto</I>
+E.g., `<B>host</B> foo', `<B>net</B> 128.3', `<B>port</B> 20', `<B>portrange</B> 6000-6008',
+`<B>proto </B> 17'.
+If there is no type
+qualifier,
+<B>host</B>
 
-qualifier, all protocols consistent with the type are assumed.
-E.g., `<B>src</B> foo' means `<B>(ip6 or ip or arp or rarp) src</B> foo',
-`<B>proto</B> tcp' means `<B>(ip6 or ip) proto</B> tcp'
-`<B>net</B> bar' means `<B>(ip6 or ip or arp or rarp) net</B> bar' and
-`<B>port</B> 53' means `<B>(tcp or udp or sctp) port</B> 53'
-(note that these examples use invalid syntax to illustrate the principle).
+is assumed.
 </DL>
 <P>
 
@@ -225,7 +225,7 @@ source address is the SPA (Sender Protocol Address) field.
 <P>
 
 In addition to the above, there are some special `primitive' keywords
-that don't follow the pattern, for example:
+that don't follow the pattern (for example:
 <B>gateway</B>,
 
 <B>broadcast</B>,
@@ -248,7 +248,7 @@ that don't follow the pattern, for example:
 
 <B>less</B>,
 
-<B>greater</B>,
+<B>greater</B>),
 
 packet data accessors and arithmetic expressions.
 All of these are described below.
@@ -302,10 +302,10 @@ keyword is optional.  For example,
 </PRE>
 
 
-is equivalent to
+for Ethernet-like link-layer types is equivalent to
 
 <PRE>
-<B>ether proto \</B>ip <B>and src host </B><I>hostnameaddr</I>
+<B>ether proto \</B>ip <B>and ip src host </B><I>hostnameaddr</I>
 </PRE>
 
 
@@ -315,7 +315,7 @@ is equivalent to
 may be either an address or a name.  If it is a name with multiple IPv4/IPv6 addresses,
 each address will be checked for a match.
 <DT><B>ether host </B><I>ethernameaddr</I><DD>
-True if the source or the destination Ethernet/802.11/IPFC/FDDI/Token Ring
+True if the source or the destination Ethernet/802.11/IPFC/ATM LANE/FDDI/Token Ring
 address of the packet is
 <I>ethernameaddr</I>.
 
@@ -755,7 +755,7 @@ True if the packet is an IPv4 or IPv6 packet of protocol type
 <I>protocol</I>.)  Note that this primitive chases the protocol
 header chain.
 <DT><B>ether broadcast</B><DD>
-True if the destination Ethernet/802.11/IPFC/ARCnet/FDDI/Token Ring address of
+True if the destination Ethernet/802.11/IPFC/ARCnet/ATM LANE/FDDI/Token Ring address of
 the packet is the broadcast address (e.g.
 <B>FF:FF:FF:FF:FF:FF</B>
 
@@ -804,7 +804,7 @@ address(es) explicitly, for example:
 
 
 <DT><B>ether multicast</B><DD>
-True if the destination Ethernet/802.11/IPFC/ARCnet/FDDI/Token Ring address of
+True if the destination Ethernet/802.11/IPFC/ARCnet/ATM LANE/FDDI/Token Ring address of
 the packet is a multicast address (e.g.
 <B>ether[0] &amp; 1 != 0</B>
 
@@ -1008,7 +1008,7 @@ only to packets logged by OpenBSD's or FreeBSD's
 Synonymous with the
 <B>ifname</B>
 
-modifier.
+primitive.
 <DT><B>rnr </B><I>num</I><DD>
 True if the packet was logged as matching the specified PF rule number
 (applies only to packets logged by OpenBSD's or FreeBSD's
@@ -1018,7 +1018,7 @@ True if the packet was logged as matching the specified PF rule number
 Synonymous with the
 <B>rnr</B>
 
-modifier.
+primitive.
 <DT><B>reason </B><I>code</I><DD>
 True if the packet was logged with the specified PF reason code.  The known
 codes are:
@@ -1048,7 +1048,7 @@ or FreeBSD's
 Synonymous with the
 <B>rset</B>
 
-modifier.
+primitive.
 <DT><B>srnr </B><I>num</I><DD>
 True if the packet was logged as matching the specified PF rule number
 of an anchored ruleset (applies only to packets logged by OpenBSD's or
@@ -1059,7 +1059,7 @@ FreeBSD's
 Synonymous with the
 <B>srnr</B>
 
-modifier.
+primitive.
 <DT><B>action </B><I>act</I><DD>
 True if PF took the specified action when the packet was logged.  Known actions
 are:
@@ -1420,6 +1420,16 @@ on the assumption that the packet is either a LANE emulated Ethernet
 packet or a LANE LE Control packet.  If <B>lane</B> isn't specified, the
 tests are done under the assumption that the packet is an
 LLC-encapsulated packet.
+<DT><DD>
+Also the first
+<B>lane</B>
+
+keyword enables primitives that do not apply to ATM in general, such as
+<B>link host</B>
+
+and
+<B>link multicast</B>.
+
 <DT><B>oamf4sc</B><DD>
 True if the packet is an ATM packet, for SunATM on Solaris, and is
 a segment OAM F4 flow cell (VPI=0 &amp; VCI=3).
@@ -2238,7 +2248,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 14:01:07 GMT, March 09, 2025
+This HTML man page was generated at 10:52:27 GMT, March 23, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
