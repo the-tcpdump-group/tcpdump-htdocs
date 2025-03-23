@@ -1119,16 +1119,8 @@ IEEE 802.16 MAC Common Part Sublayer.
 <td class="number">189</td>
 <td class="symbol">DLT_USB_LINUX</td>
 <td>
-USB packets, beginning with a Linux USB header, as specified by the
-<code>struct usbmon_packet</code> in the
-<code>Documentation/usb/usbmon.txt</code> file in the Linux source tree.
-Only the first 48 bytes of that header are present.  All fields in the
-header are in host byte order.  When performing a live capture, the
-host byte order is the byte order of the machine on that the packets
-are captured.  When reading a pcap file, the byte order is the byte
-order for the file, as specified by the file's magic number; when
-reading a pcapng file, the byte order is the byte order for the section
-of the pcapng file, as specified by the Section Header Block.
+<a href="linktypes/LINKTYPE_USB_LINUX.html">USB packets,
+beginning with a Linux USB header.</a>
 </td>
 </tr>
 
@@ -1466,18 +1458,8 @@ MPLS, with an MPLS label as the link-layer header.
 <td class="number">220</td>
 <td class="symbol">DLT_USB_LINUX_MMAPPED</td>
 <td>
-USB packets, beginning with a Linux USB header, as specified by the
-<code>struct usbmon_packet</code> in the
-<code>Documentation/usb/usbmon.txt</code> file in the Linux source tree.
-All 64 bytes of the header are present.  All fields in the header are in
-host byte order.  When performing a live capture, the host byte order is
-the byte order of the machine on that the packets are captured.  When
-reading a pcap file, the byte order is the byte order for the file, as
-specified by the file's magic number; when reading a pcapng file, the
-byte order is the byte order for the section of the pcapng file, as
-specified by the Section Header Block.  For isochronous transfers, the
-<code>ndesc</code> field specifies the number of isochronous descriptors
-that follow.
+<a href="linktypes/LINKTYPE_USB_LINUX_MMAPPED.html">USB packets,
+beginning with an mmapped Linux USB header.</a>
 </td>
 </tr>
 

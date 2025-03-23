@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>LINKTYPE_USB_LINUX | TCPDUMP &amp; LIBPCAP</title>
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="../images/T-32x32.png" rel="shortcut icon" type="image/png">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../manpages/">Man Pages</a></li>
+                <li><a href="../ci.html">CI</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../related.html">See Also</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+                <li><a href="../thanks.html">Thanks!</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_USB_LINUX section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_USB_LINUX
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++-------------------------------------------+
+|                  URB ID                   |
+|                (8 Octets)                 |
++-------------------------------------------+
+|                 Event type                |
+|                  (1 Octet)                |
++-------------------------------------------+
+|                Transfer type              |
+|                  (1 Octet)                |
++-------------------------------------------+
+|   Endpoint number and transfer direction  |
+|                  (1 Octet)                |
++-------------------------------------------+
+|               Device address              |
+|                  (1 Octet)                |
++-------------------------------------------+
+|                 Bus number                |
+|                 (2 Octets)                |
++-------------------------------------------+
+|                 Setup flag                |
+|                  (1 Octet)                |
++-------------------------------------------+
+|                  Data flag                |
+|                  (1 Octet)                |
++-------------------------------------------+
+|             Timestamp, seconds            |
+|                 (8 Octets)                |
++-------------------------------------------+
+|          Timestamp, microseconds          |
+|                 (4 Octets)                |
++-------------------------------------------+
+|                   Status                  |
+|                 (4 Octets)                |
++-------------------------------------------+
+|                Data length                |
+|                 (4 Octets)                |
++-------------------------------------------+
+|             Delivered data length         |
+|                 (4 Octets)                |
++-------------------------------------------+
+|        Setup/isochronous information      |
+|                 (8 Octets)                |
++-------------------------------------------+
+|                   Payload                 |
+.                                           .
+.                                           .
+.                                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+A packet corresponds either to a URB submitted to the USB subsystem, a
+completion report for a URB, or an error report for a URB.
+</p>
+All fields are in host byte order:
+<ul>
+<li>
+<p>
+  When performing a live capture, the host byte order is the byte order
+  of the machine on which the packets are being captured.
+</p>
+<li>
+<p>
+  When reading a pcap file, the host byte order is the byte order for
+  the file, as specified by the file's magic number.
+</p>
+<li>
+<p>
+  When reading a pcapng file, the host byte order is the byte order for
+  the section of the pcapng file in which the packet appears, as
+  specified by that section's Section Header Block.
+</p>
+</ul>
+</p>
+<p>
+The URB ID field is a unique ID for the URB to which this packet refers.
+</p>
+<p>
+The event type field is an ASCII character that indicates type type of
+the event; it is:
+</p>
+<ul>
+<li>'S' (0x53), if the event is a submission of a URB;</li>
+<li>'C' (0x43), if the event is a completion report for a URB;</li>
+<li>'E' (0x45), if the event reports an error from a URB
+submission.</li>
+</ul>
+<p>
+The transfer type field has a value that is one of:
+</p>
+<ul>
+<li>0, if the transfer to which the URB applies is a isochronous
+transfer;</li>
+<li>1, if the transfer to which the URB applies is a interrupt
+transfer;</li>
+<li>2, if the transfer to which the URB applies is a control
+transfer;</li>
+<li>3, if the transfer to which the URB applies is a bulk transfer.</li>
+</ul>
+<p>
+The uppermost bit of the endpoint number and transfer direction field
+is 1 if the transfer is an input transfer and 0 if it is an output
+transfer. The lowr 7 bits of the field contain the endpoint number.
+</p>
+<p>
+The setup flag field is zero if the event is a submission of a URB for a
+control transfer and non-zero otherwise.
+</p>
+<p>
+The data flag field is zero if the event conains data and non-zero if it
+contains no data.
+</p>
+<p>
+The timestamp fields contain a time stamp for the event, in seconds and
+microseconds since 1970-01-01 00:00:00 UTC; this MUST be the same as
+the timestamp for the packet.
+</p>
+<p>
+The status field contains zero if no error is being reported by the
+event or the negative of a Linux errno value for the error being
+reported if an error is being reported by the event.
+</p>
+<p>
+If the setup flag is zero, the setup/isochronous infomration field
+contains the setup data for a setup packet, as specified in the USB
+standard.
+</p>
+<p>
+If the setup flag is non-zero, and the transfer is an isochronous
+transfer, the setup/isochronous information field contains:
+</p>
+<pre>
++----------------------------------------+
+|              Error count               |
+|               (4 Octets)               |
++----------------------------------------+
+|         Number of descriptors          |
+|               (4 Octets)               |
++----------------------------------------+
+</pre>
+<p>
+where the error count field is the number of errors in the isochronous
+transfer and the number of descriptors field is the number of
+isochronous descriptors for the transfer.
+</p>
+<p>
+If the setup flag is non-zero, and the transfer is not an isochronous
+transfer, the setup/isochronous information field does not contain any
+information and should be ignored.
+</p>
+<p>
+The data, if any, for the event follows the setup/isochronous
+information field.
+</p>
+            </div>
+            <!-- End of Linux USB packet section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                This web site is &copy; 1999&ndash;2025 The Tcpdump Group
+                (<a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">more
+                information</a>).
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>

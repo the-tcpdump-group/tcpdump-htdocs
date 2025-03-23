@@ -1,0 +1,239 @@
+          <!-- Start of LINKTYPE_USB_LINUX_MMAPPED -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_USB_LINUX_MMAPPED
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++-------------------------------------------+
+|                  URB ID                   |
+|                (8 Octets)                 |
++-------------------------------------------+
+|                 Event type                |
+|                  (1 Octet)                |
++-------------------------------------------+
+|                Transfer type              |
+|                  (1 Octet)                |
++-------------------------------------------+
+|   Endpoint number and transfer direction  |
+|                  (1 Octet)                |
++-------------------------------------------+
+|               Device address              |
+|                  (1 Octet)                |
++-------------------------------------------+
+|                 Bus number                |
+|                 (2 Octets)                |
++-------------------------------------------+
+|                 Setup flag                |
+|                  (1 Octet)                |
++-------------------------------------------+
+|                  Data flag                |
+|                  (1 Octet)                |
++-------------------------------------------+
+|             Timestamp, seconds            |
+|                 (8 Octets)                |
++-------------------------------------------+
+|          Timestamp, microseconds          |
+|                 (4 Octets)                |
++-------------------------------------------+
+|                   Status                  |
+|                 (4 Octets)                |
++-------------------------------------------+
+|                Data length                |
+|                 (4 Octets)                |
++-------------------------------------------+
+|             Delivered data length         |
+|                 (4 Octets)                |
++-------------------------------------------+
+|        Setup/isochronous information      |
+|                 (8 Octets)                |
++-------------------------------------------+
+|                  Interval                 |
+|                 (4 Octets)                |
++-------------------------------------------+
+|                Start frame                |
+|                 (4 Octets)                |
++-------------------------------------------+
+|               Transfer flags              |
+|                 (4 Octets)                |
++-------------------------------------------+
+| Number of isochronous descriptors present |
+|                 (4 Octets)                |
++-------------------------------------------+
+|                   Payload                 |
+.                                           .
+.                                           .
+.                                           .
+</pre>
+
+                <h3>Description</h3>
+<p>
+A packet corresponds either to a URB submitted to the USB subsystem, a
+completion report for a URB, or an error report for a URB.
+</p>
+All fields are in host byte order:
+<ul>
+<li>
+<p>
+  When performing a live capture, the host byte order is the byte order
+  of the machine on which the packets are being captured.
+</p>
+<li>
+<p>
+  When reading a pcap file, the host byte order is the byte order for
+  the file, as specified by the file's magic number.
+</p>
+<li>
+<p>
+  When reading a pcapng file, the host byte order is the byte order for
+  the section of the pcapng file in which the packet appears, as
+  specified by that section's Section Header Block.
+</p>
+</ul>
+</p>
+<p>
+The URB ID field is a unique ID for the URB to which this packet refers.
+</p>
+<p>
+The event type field is an ASCII character that indicates type type of
+the event; it is:
+</p>
+<ul>
+<li>'S' (0x53), if the event is a submission of a URB;</li>
+<li>'C' (0x43), if the event is a completion report for a URB;</li>
+<li>'E' (0x45), if the event reports an error from a URB
+submission.</li>
+</ul>
+<p>
+The transfer type field has a value that is one of:
+</p>
+<ul>
+<li>0, if the transfer to which the URB applies is a isochronous
+transfer;</li>
+<li>1, if the transfer to which the URB applies is a interrupt
+transfer;</li>
+<li>2, if the transfer to which the URB applies is a control
+transfer;</li>
+<li>3, if the transfer to which the URB applies is a bulk transfer.</li>
+</ul>
+<p>
+The uppermost bit of the endpoint number and transfer direction field
+is 1 if the transfer is an input transfer and 0 if it is an output
+transfer. The lowr 7 bits of the field contain the endpoint number.
+</p>
+<p>
+The setup flag field is zero if the event is a submission of a URB for a
+control transfer and non-zero otherwise.
+</p>
+<p>
+The data flag field is zero if the event conains data and non-zero if it
+contains no data.
+</p>
+<p>
+The timestamp fields contain a time stamp for the event, in seconds and
+microseconds since 1970-01-01 00:00:00 UTC; this MUST be the same as
+the timestamp for the packet.
+</p>
+<p>
+The status field contains zero if no error is being reported by the
+event or the negative of a Linux errno value for the error being
+reported if an error is being reported by the event.
+</p>
+<p>
+If the setup flag is zero, the setup/isochronous infomration field
+contains the setup data for a setup packet, as specified in the USB
+standard.
+</p>
+<p>
+If the setup flag is non-zero, and the transfer is an isochronous
+transfer, the setup/isochronous information field contains:
+</p>
+<pre>
++----------------------------------------+
+|              Error count               |
+|               (4 Octets)               |
++----------------------------------------+
+|         Number of descriptors          |
+|               (4 Octets)               |
++----------------------------------------+
+</pre>
+<p>
+where the error count field is the number of errors in the isochronous
+transfer and the number of descriptors field is the number of
+isochronous descriptors for the transfer.
+</p>
+<p>
+If the setup flag is non-zero, and the transfer is not an isochronous
+transfer, the setup/isochronous information field does not contain any
+information and should be ignored.
+</p>
+<p>
+For interrupt and isochronous transfers, the interval field is the
+polling interval, in units of frames (milliseconds) for full-speed and
+low-speed devices and microframes (.125 millisecond) for high-speed and
+SuperSpeed devices. For other types of transfers, it does not contain a
+meaningful value.
+</p>
+<p>
+For isochoronous transfers, the start frame field contains the initial
+frame. For other types of transfers, it does not contain a meaningful
+value.
+</p>
+<p>
+For isochronous transfers, The number of isochronous descriptors present
+field indicates the number of isochronous descriptors in the event. Its
+value MUST be less than or equal to the value of the number of
+descriptors field; if it is less than that value, not all descriptors
+for the transfer are included in the event.
+<p>
+For isochronous transfers, the payload begins with a set of isochronous
+descriptors of the form
+</p>
+<pre>
++----------------------------------------+
+|                 Status                 |
+|               (4 Octets)               |
++----------------------------------------+
+|                 Offset                 |
+|               (4 Octets)               |
++----------------------------------------+
+|                 Length                 |
+|               (4 Octets)               |
++----------------------------------------+
+|                 Padding                |
+|               (4 Octets)               |
++----------------------------------------+
+</pre>
+<p>
+The status field contains zero if no error occurred for that descriptor
+or the negative of a Linux errno value for the error being reported if
+an error occurred for that descriptor.
+</p>
+<p>
+The offset field is the offset, in bytes, of the data for the descriptor
+from the beginning of the data portion of the payload.
+</p>
+<p>
+The length field is the length, in bytes, of the data for the
+descriptor. This may be zero.
+</p>
+<p>
+The padding field does not contain any information.
+</p>
+<p>
+The number of isochronous descriptors present field specifies the number
+of descriptors present in the event.
+</p>
+<p>
+For all other types of transfer, there are no isochronous descriptors;
+the number of isochronous descriptors present field contains no
+meaningful data.
+<p>
+The data, if any, for the event follows the isochronous descriptors, if
+any.
+</p>
+</p>
+            </div>
+            <!-- LINKTYPE_USB_LINUX_MMAPPED -->
+          </div>
