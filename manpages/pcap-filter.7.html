@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 21 March 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 24 March 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -65,11 +65,7 @@ Possible
 protocols are:
 <B>ether</B>,
 
-<B>fddi</B>,
-
 <B>link</B>,
-
-<B>tr</B>,
 
 <B>wlan</B>,
 
@@ -79,18 +75,28 @@ protocols are:
 
 <B>arp</B>,
 
+<B>tcp</B>,
+
+<B>udp</B>,
+
+<B>sctp</B>,
+
+<B>iso</B>,
+
+<B>isis</B>,
+
 <B>rarp</B>,
 
 <B>decnet</B>,
 
-<B>iso</B>,
+<B>fddi</B>,
 
-<B>sctp</B>,
+<B>tr</B>,
 
-<B>tcp</B>
+<B>ppp</B>
 
 and
-<B>udp</B>.
+<B>slip</B>.
 
 E.g., `<B>ether src</B> foo', `<B>arp net</B> 128.3', `<B>tcp port</B> 21',
 `<B>ip proto</B> ospf', `<B>ether proto</B> 0x88CC',
@@ -161,10 +167,14 @@ Possible types are
 
 <B>proto</B>,
 
-<B>port</B>
+<B>port</B>,
+
+<B>portrange</B>,
+
+<B>protochain</B>
 
 and
-<B>portrange</B>.
+<B>gateway.</B>
 
 E.g., `<B>host</B> foo', `<B>net</B> 128.3', `<B>port</B> 20', `<B>portrange</B> 6000-6008',
 `<B>proto </B> 17'.
@@ -215,7 +225,15 @@ FDDI headers also contain other fields,
 but you cannot name them explicitly in a filter expression.
 Similarly, <B>tr</B> and <B>wlan</B> are aliases for <B>ether</B>; the
 statements about FDDI headers also apply to Token Ring and 802.11 wireless
-LAN headers.]
+LAN headers.  The same stands for the
+<B>link</B>,
+
+<B>ppp</B>
+
+and
+<B>slip</B>
+
+keywords.]
 <P>
 
 For IEEE 802.11 headers, the destination address is the DA field and the
@@ -226,8 +244,6 @@ source address is the SPA (Sender Protocol Address) field.
 
 In addition to the above, there are some special `primitive' keywords
 that don't follow the pattern (for example:
-<B>gateway</B>,
-
 <B>broadcast</B>,
 
 <B>multicast</B>,
@@ -244,13 +260,11 @@ that don't follow the pattern (for example:
 
 <B>mpls</B>,
 
-<B>wlan</B>,
-
 <B>less</B>,
 
 <B>greater</B>),
 
-packet data accessors and arithmetic expressions.
+packet data accessors and relations of two arithmetic expressions.
 All of these are described below.
 <P>
 
@@ -1348,6 +1362,11 @@ and
 is an alias for
 <B>isis</B>.
 
+<DT><B>isis proto </B><I>protocol</I><DD>
+True if the packet is an IS-IS packet of protocol type
+<I>protocol</I>,
+
+which can be a number only.
 <DT><B>l1</B>, <B>l2</B>, <B>iih</B>, <B>lsp</B>, <B>snp</B>, <B>csnp</B>, <B>psnp</B><DD>
 Abbreviations for IS-IS PDU types.
 <DT><I>atmfield relop val</I><DD>
@@ -1972,7 +1991,85 @@ which should not be confused with
 </PRE>
 
 
-<H2 id="lbAI">EXAMPLES</H2>
+<H2 id="lbAI">PROTOCOL NAMES IN VARIOUS CONTEXTS</H2>
+
+The table below shows which protocol names can be used in which contexts of
+the currently implemented syntax.  The &quot;name&quot; column contains a protocol name,
+which often can be used as an ID in primitives that take a protocol name
+argument; in all cases except
+<B>loopback</B>
+
+the protocol name is also a keyword.  If the keyword is an alias, the &quot;see&quot;
+column refers to the main keyword.  The &quot;abbr&quot; column tells whether the
+keyword can be used as an abbreviation (that is, if the keyword is the only
+contents of a primitive, it means a more complex expression).  The &quot;PDA&quot;
+column tells whether the keyword can be used in a packet data accessor.  The
+&quot;pqual&quot; column tells whether the keyword can be used as a case of the
+<I>proto</I>
+
+qualifier kind.  If the name can be used as an ID for the
+<B>proto</B>
+
+case of the
+<I>type</I>
+
+qualifier kind, the &quot;tqual ID&quot; column shows the valid context(s).
+<P>
+<TABLE BORDER><TR><TD><TABLE>
+<TR VALIGN=top><TD>name</TD><TD>see</TD><TD>abbr</TD><TD>PDA</TD><TD>pqual</TD><TD>tqual ID<BR></TD></TR>
+<TR VALIGN=top><TD COLSPAN=6><HR></TD></TR>
+<TR VALIGN=top><TD><B>aarp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>link proto \aarp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ah</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>[ip|ip6] proto \ah</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>arp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \arp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>atalk</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \atalk</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>carp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \carp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>clnp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>iso proto \clnp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>csnp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>decnet</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \decnet</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>esis</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>iso proto \esis</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>es-is</B></TD><TD><B>esis</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>esp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>[ip|ip6] proto \esp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ether</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>fddi</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>icmp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \icmp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>icmp6</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>igmp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \igmp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>igrp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \igrp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>iih</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ip</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \ip</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ip6</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \ip6</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ipx</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>link proto \ipx</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>isis</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>yes</TD><TD><B>iso proto \isis</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>is-is</B></TD><TD><B>isis</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>iso</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>yes</TD><TD><B>link proto \iso</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>l1</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>l2</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>lat</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \lat</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>link</B></TD><TD><B></B></TD><TD>no</TD><TD>yes</TD><TD>yes</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>loopback</B></TD><TD><B></B></TD><TD></TD><TD></TD><TD></TD><TD><B>link proto loopback</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>lsp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>mopdl</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \mopdl</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>moprc</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \moprc</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>netbeui</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>link proto \netbeui</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>pim</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>[ip|ip6] proto \pim</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ppp</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>psnp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>radio</B></TD><TD><B></B></TD><TD>no</TD><TD>yes</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>rarp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \rarp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>sca</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \sca</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>sctp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>[ip|ip6] proto \sctp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>slip</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>snp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>stp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>link proto \stp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>tcp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>[ip|ip6] proto \tcp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>tr</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>udp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>[ip|ip6] proto \udp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>vrrp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \vrrp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>wlan</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+</TABLE></TABLE>
+
+<P>
+<H2 id="lbAJ">EXAMPLES</H2>
 
 <P>
 
@@ -2106,7 +2203,7 @@ ping packets):
 
 </DL>
 
-<H2 id="lbAJ">BACKWARD COMPATIBILITY</H2>
+<H2 id="lbAK">BACKWARD COMPATIBILITY</H2>
 
 The
 <B>carp</B>
@@ -2167,11 +2264,11 @@ The
 <B>vxlan</B>
 
 keyword became available in libpcap 1.11.0.
-<H2 id="lbAK">SEE ALSO</H2>
+<H2 id="lbAL">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
-<H2 id="lbAL">BUGS</H2>
+<H2 id="lbAM">BUGS</H2>
 
 To report a security issue please send an e-mail to security@tcpdump.org.
 <P>
@@ -2241,14 +2338,15 @@ hardware.
 <DT><A HREF="#lbAF">PACKET DATA ACCESSORS</A><DD>
 <DT><A HREF="#lbAG">NAMED VALUES</A><DD>
 <DT><A HREF="#lbAH">COMPOUND EXPRESSIONS</A><DD>
-<DT><A HREF="#lbAI">EXAMPLES</A><DD>
-<DT><A HREF="#lbAJ">BACKWARD COMPATIBILITY</A><DD>
-<DT><A HREF="#lbAK">SEE ALSO</A><DD>
-<DT><A HREF="#lbAL">BUGS</A><DD>
+<DT><A HREF="#lbAI">PROTOCOL NAMES IN VARIOUS CONTEXTS</A><DD>
+<DT><A HREF="#lbAJ">EXAMPLES</A><DD>
+<DT><A HREF="#lbAK">BACKWARD COMPATIBILITY</A><DD>
+<DT><A HREF="#lbAL">SEE ALSO</A><DD>
+<DT><A HREF="#lbAM">BUGS</A><DD>
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 10:52:27 GMT, March 23, 2025
+This HTML man page was generated at 20:09:30 GMT, March 24, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

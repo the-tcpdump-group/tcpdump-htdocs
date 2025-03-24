@@ -29,17 +29,17 @@ DESCRIPTION
 
        proto  proto qualifiers restrict the match to  a  particular  protocol.
               (This  should  not be confused with the proto type qualifier be-
-              low.)  Possible protocols are: ether, fddi, link, tr, wlan,  ip,
-              ip6,  arp,  rarp,  decnet, iso, sctp, tcp and udp.  E.g., `ether
-              src foo', `arp net 128.3',  `tcp  port  21',  `ip  proto  ospf',
-              `ether  proto  0x88CC',  `udp  portrange 7000-7009', `wlan addr2
-              0:2:3:4:5:6'.  If there is no  proto  qualifier,  all  protocols
-              consistent  with  the  type  are assumed.  E.g., `src foo' means
-              `(ip6 or ip or arp or rarp) src foo', `proto tcp' means `(ip6 or
-              ip)  proto  tcp' `net bar' means `(ip6 or ip or arp or rarp) net
-              bar' and `port 53' means `(tcp or udp or sctp)  port  53'  (note
-              that these examples use invalid syntax to illustrate the princi-
-              ple).
+              low.)  Possible protocols are: ether, link, wlan, ip, ip6,  arp,
+              tcp, udp, sctp, iso, isis, rarp, decnet, fddi, tr, ppp and slip.
+              E.g., `ether src foo', `arp net 128.3', `tcp port 21', `ip proto
+              ospf',  `ether  proto  0x88CC', `udp portrange 7000-7009', `wlan
+              addr2 0:2:3:4:5:6'.  If there is no proto qualifier, all  proto-
+              cols  consistent  with  the  type  are assumed.  E.g., `src foo'
+              means `(ip6 or ip or arp or rarp) src foo',  `proto  tcp'  means
+              `(ip6  or  ip)  proto tcp' `net bar' means `(ip6 or ip or arp or
+              rarp) net bar' and `port 53' means `(tcp or udp  or  sctp)  port
+              53'  (note  that these examples use invalid syntax to illustrate
+              the principle).
 
        dir    dir qualifiers specify a particular transfer direction to and/or
               from  id.  Possible directions are src, dst, src or dst, src and
@@ -50,10 +50,10 @@ DESCRIPTION
               less LAN link layers.
 
        type   type qualifiers say what kind of thing the  id  name  or  number
-              refers  to.   Possible types are host, net, proto, port and por-
-              trange.  E.g., `host foo', `net 128.3',  `port  20',  `portrange
-              6000-6008', `proto  17'.  If there is no type qualifier, host is
-              assumed.
+              refers   to.    Possible  types  are  host,  net,  proto,  port,
+              portrange, protochain  and  gateway.   E.g.,  `host  foo',  `net
+              128.3', `port 20', `portrange 6000-6008', `proto  17'.  If there
+              is no type qualifier, host is assumed.
 
        In primitives that follow this  pattern  each  qualifier  kind  may  be
        present  at  most once, and if more than one kind is present, any proto
@@ -76,24 +76,25 @@ DESCRIPTION
        FDDI headers also contain other fields, but you cannot  name  them  ex-
        plicitly  in  a  filter expression.  Similarly, tr and wlan are aliases
        for ether; the statements about FDDI headers also apply to  Token  Ring
-       and 802.11 wireless LAN headers.]
+       and 802.11 wireless LAN headers.  The same stands for the link, ppp and
+       slip keywords.]
 
-       For  IEEE  802.11  headers, the destination address is the DA field and
+       For IEEE 802.11 headers, the destination address is the  DA  field  and
        the source address is the SA field.  For both ARP and RARP headers, the
-       destination  address is the TPA (Target Protocol Address) field and the
+       destination address is the TPA (Target Protocol Address) field and  the
        source address is the SPA (Sender Protocol Address) field.
 
-       In addition to the above, there are some special  `primitive'  keywords
-       that  don't follow the pattern (for example: gateway, broadcast, multi-
-       cast,  inbound,  outbound,  ifindex,  llc,  vlan,  mpls,  wlan,   less,
-       greater),  packet  data  accessors  and arithmetic expressions.  All of
-       these are described below.
+       In  addition  to the above, there are some special `primitive' keywords
+       that don't follow the pattern (for example: broadcast,  multicast,  in-
+       bound,  outbound, ifindex, llc, vlan, mpls, less, greater), packet data
+       accessors and relations of two arithmetic expressions.   All  of  these
+       are described below.
 
        More complex filter expressions are built up by using the words and, or
-       and  not  (or equivalently: `&&', `||' and `!' respectively) to combine
-       primitives.  E.g., `host foo and not port ftp and not  port  ftp-data'.
-       To  save  typing, identical qualifier lists can be omitted.  E.g., `tcp
-       dst port ftp or ftp-data or domain' is exactly the  same  as  `tcp  dst
+       and not (or equivalently: `&&', `||' and `!' respectively)  to  combine
+       primitives.   E.g.,  `host foo and not port ftp and not port ftp-data'.
+       To save typing, identical qualifier lists can be omitted.   E.g.,  `tcp
+       dst  port  ftp  or  ftp-data or domain' is exactly the same as `tcp dst
        port ftp or tcp dst port ftp-data or tcp dst port domain'.
 
 PRIMITIVES
@@ -101,136 +102,136 @@ PRIMITIVES
               True if the source or the destination ARP/IPv4/IPv6/RARP address
               of the packet is hostnameaddr.  May be qualified with a specific
               protocol (arp, ip, ip6, rarp) and/or a different direction (src,
-              dst, src and dst), in the latter case the host  keyword  is  op-
+              dst,  src  and  dst), in the latter case the host keyword is op-
               tional.  For example,
                    ip src hostnameaddr
               for Ethernet-like link-layer types is equivalent to
                    ether proto \ip and ip src host hostnameaddr
 
-              hostnameaddr  may  be  either  an address or a name.  If it is a
-              name with multiple IPv4/IPv6 addresses,  each  address  will  be
+              hostnameaddr may be either an address or a name.   If  it  is  a
+              name  with  multiple  IPv4/IPv6  addresses, each address will be
               checked for a match.
 
        ether host ethernameaddr
-              True  if  the source or the destination Ethernet/802.11/IPFC/ATM
-              LANE/FDDI/Token Ring address of  the  packet  is  ethernameaddr.
-              May  be  qualified with a different direction (src, dst, src and
+              True if the source or the  destination  Ethernet/802.11/IPFC/ATM
+              LANE/FDDI/Token  Ring  address  of  the packet is ethernameaddr.
+              May be qualified with a different direction (src, dst,  src  and
               dst), in which case the host keyword is optional.
 
               ethernameaddr may be either a name from /etc/ethers or a numeri-
-              cal    MAC    address    of    the   form   "xx:xx:xx:xx:xx:xx",
+              cal   MAC   address    of    the    form    "xx:xx:xx:xx:xx:xx",
               "xx.xx.xx.xx.xx.xx",  "xx-xx-xx-xx-xx-xx",  "xxxx.xxxx.xxxx"  or
-              "xxxxxxxxxxxx",  where  each "x" is a hex digit (0-9, a-f, or A-
+              "xxxxxxxxxxxx", where each "x" is a hex digit (0-9, a-f,  or  A-
               F).
 
        gateway host
-              True if the packet used host as a gateway.  I.e., the source  or
+              True  if the packet used host as a gateway.  I.e., the source or
               the destination Ethernet address was host but neither the source
               nor the destination ARP/IPv4/RARP address was host.  In this im-
-              plementation  this  primitive  is  not available in IPv6-enabled
-              configuration.  May be qualified with a specific protocol  (arp,
+              plementation this primitive is  not  available  in  IPv6-enabled
+              configuration.   May be qualified with a specific protocol (arp,
               ip, rarp).  For example,
                    ip gateway host
               is equivalent to
                    ether host ethernameaddr and not ip host hostnameaddr
-              which  can be used with either names or numbers for hostnameaddr
+              which can be used with either names or numbers for  hostnameaddr
               and ethernameaddr.
 
-              Host must be a name and must be  found  both  by  the  machine's
-              host-name-to-IP-address  resolution  mechanisms (host name file,
-              DNS, NIS, etc.) and by the  machine's  host-name-to-Ethernet-ad-
+              Host  must  be  a  name  and must be found both by the machine's
+              host-name-to-IP-address resolution mechanisms (host  name  file,
+              DNS,  NIS,  etc.) and by the machine's host-name-to-Ethernet-ad-
               dress resolution mechanism (/etc/ethers, etc.).
 
        net netnameaddr
               True if the source or the destination ARP/IPv4/IPv6/RARP address
-              of the packet belongs to the specified network.  May  be  quali-
+              of  the  packet belongs to the specified network.  May be quali-
               fied with a specific protocol (arp, ip, ip6, rarp) and/or a dif-
               ferent direction (src, dst, src and dst), in the latter case the
               net keyword remains mandatory.  netnameaddr may be either a name
-              from the networks database (/etc/networks, etc.)  or  a  network
+              from  the  networks  database (/etc/networks, etc.) or a network
               number.
 
-              An  IPv4  network  number can be written as a dotted quad (e.g.,
+              An IPv4 network number can be written as a  dotted  quad  (e.g.,
               192.168.1.0), dotted triple (e.g., 192.168.1), dotted pair (e.g,
-              172.16),   or   single   number   (e.g.,  10);  the  netmask  is
-              255.255.255.255 (/32) for a dotted quad (which means  that  it's
-              really  a  host match), 255.255.255.0 (/24) for a dotted triple,
-              255.255.0.0 (/16) for a dotted pair, or  255.0.0.0  (/8)  for  a
-              single  number.   An  IPv6  network  number  must be written out
-              fully; the  netmask  is  ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
-              (/128),  so  in this primitive IPv6 "network" matches are really
-              always host matches.  For an actual IPv6 network match  see  the
+              172.16),  or  single  number  (e.g.,   10);   the   netmask   is
+              255.255.255.255  (/32)  for a dotted quad (which means that it's
+              really a host match), 255.255.255.0 (/24) for a  dotted  triple,
+              255.255.0.0  (/16)  for  a  dotted pair, or 255.0.0.0 (/8) for a
+              single number.  An IPv6  network  number  must  be  written  out
+              fully;  the  netmask  is ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+              (/128), so in this primitive IPv6 "network" matches  are  really
+              always  host  matches.  For an actual IPv6 network match see the
               `net netaddr/len' primitive below.
 
        net netaddr mask netmask
-              True  if  the source or the destination ARP/IPv4/RARP address of
-              the packet belongs to netaddr with the specified  netmask.   May
-              be  qualified  with a specific protocol (arp, ip, rarp) and/or a
-              different direction (src, dst, src and dst), in the latter  case
-              the  net keyword remains mandatory.  In this implementation this
+              True if the source or the destination ARP/IPv4/RARP  address  of
+              the  packet  belongs to netaddr with the specified netmask.  May
+              be qualified with a specific protocol (arp, ip, rarp)  and/or  a
+              different  direction (src, dst, src and dst), in the latter case
+              the net keyword remains mandatory.  In this implementation  this
               primitive does not support IPv6 networks.
 
-              Both netaddr and netmask use the IPv4  network  number  notation
+              Both  netaddr  and  netmask use the IPv4 network number notation
               described above, except the "single number" form is not valid in
               this primitive.  For example,
                    net 192.168 mask 255.255
               is equivalent to
                    net 192.168.0.0 mask 255.255.0.0
 
-              The netmask can represent any 32-bit value,  which  is  why  the
-              `net  netaddr/len'  primitive  below is usually a better fit for
-              use cases that require the value to be strictly one  of  the  33
+              The  netmask  can  represent  any 32-bit value, which is why the
+              `net netaddr/len' primitive below is usually a  better  fit  for
+              use  cases  that  require the value to be strictly one of the 33
               CIDR masks (from /0 to /32).
 
        net netaddr/len
               True if the source or the destination ARP/IPv4/IPv6/RARP address
-              of the packet belongs to netaddr where  the  bit-length  of  the
-              network  mask equals len (in other words, the address belongs to
-              the specified CIDR prefix).  May be qualified  with  a  specific
+              of  the  packet  belongs  to netaddr where the bit-length of the
+              network mask equals len (in other words, the address belongs  to
+              the  specified  CIDR  prefix).  May be qualified with a specific
               protocol (arp, ip, ip6, rarp) and/or a different direction (src,
-              dst, src and dst), in the latter case the  net  keyword  is  op-
+              dst,  src  and  dst),  in the latter case the net keyword is op-
               tional.
 
-              For  IPv4,  len  is an integer between 0 and 32 (both inclusive)
+              For IPv4, len is an integer between 0 and  32  (both  inclusive)
               and netaddr is the same as the above.  For IPv6, len is an inte-
-              ger  between  0  and 128 (both inclusive) and netaddr is an IPv6
-              address.  For the  latter  zero  compression  notation  (::)  is
-              valid,  but  IPv4-mapped  notation (x:x:x:x:x:x:d.d.d.d) is not.
+              ger between 0 and 128 (both inclusive) and netaddr  is  an  IPv6
+              address.   For  the  latter  zero  compression  notation (::) is
+              valid, but IPv4-mapped notation  (x:x:x:x:x:x:d.d.d.d)  is  not.
               For both IPv4 and IPv6 the maximum value of len is equivalent to
-              a  host match and the 0 value (which implies an all-zeroes value
+              a host match and the 0 value (which implies an all-zeroes  value
               of netaddr) matches any address.  In the latter case this primi-
-              tive  reduces  to  matching the specified (or implied) protocols
+              tive reduces to matching the specified  (or  implied)  protocols
               only.
 
        port portnamenum
-              True if the source or the destination TCP/UDP/SCTP  port  of  an
-              IPv4/IPv6  packet  is  portnamenum.   For IPv4 this also implies
+              True  if  the  source or the destination TCP/UDP/SCTP port of an
+              IPv4/IPv6 packet is portnamenum.  For  IPv4  this  also  implies
               that the packet is the first fragment or is not fragmented.  May
-              be  qualified  with a specific layer 4 protocol (tcp, udp, sctp)
-              or a different direction (src, dst, src and dst), in the  latter
-              case  the  port  keyword remains mandatory.  Cannot be qualified
-              with a specific layer 3 protocol (IPv4/IPv6) in the same  primi-
-              tive,  but  can  be  trivially combined with other primitives to
+              be qualified with a specific layer 4 protocol (tcp,  udp,  sctp)
+              or  a different direction (src, dst, src and dst), in the latter
+              case the port keyword remains mandatory.   Cannot  be  qualified
+              with  a specific layer 3 protocol (IPv4/IPv6) in the same primi-
+              tive, but can be trivially combined  with  other  primitives  to
               achieve the required effect, for example:
                    ip and tcp dst port 80
 
-              The portnamenum can be a number or a name used in  /etc/services
-              (see  services(5)).  If a name is used, both the port number and
-              protocol are checked.  If a number or ambiguous  name  is  used,
+              The  portnamenum can be a number or a name used in /etc/services
+              (see services(5)).  If a name is used, both the port number  and
+              protocol  are  checked.   If a number or ambiguous name is used,
               only the port number is checked (e.g., `dst port 513' will print
-              both tcp/login traffic and udp/who traffic,  and  `port  domain'
+              both  tcp/login  traffic  and udp/who traffic, and `port domain'
               will print both tcp/domain and udp/domain traffic).
 
        portrange portnamenum1-portnamenum2
-              This  is a more generic form of the above: true if the port num-
+              This is a more generic form of the above: true if the port  num-
               ber in the packet is between portnamenum1 and portnamenum2 (both
-              inclusive),  everything  else  holds  the same meaning.  In this
-              predicate portnamenum1 and portnamenum2 can be specified in  ei-
+              inclusive), everything else holds the  same  meaning.   In  this
+              predicate  portnamenum1 and portnamenum2 can be specified in ei-
               ther order.  If the two values are equal, this primitive has the
               same effect as the port primitive above.
 
        less length
-              True if the packet has a length less than or  equal  to  length.
+              True  if  the  packet has a length less than or equal to length.
               This is equivalent to:
                    len <= length
 
@@ -240,24 +241,24 @@ PRIMITIVES
                    len >= length
 
        ip proto protocol
-              True if the packet is an IPv4 packet of protocol type  protocol.
-              Protocol  can be a number or one of the names recognized by get-
-              protobyname(3), for example: ah, esp, eigrp (only in Linux  with
-              glibc,  FreeBSD,  NetBSD, DragonFly BSD, and macOS), icmp, igmp,
-              igrp (only in Haiku and OpenBSD), pim, sctp, tcp, udp  or  vrrp.
-              Note  that  most  of these example identifiers are also keywords
+              True  if the packet is an IPv4 packet of protocol type protocol.
+              Protocol can be a number or one of the names recognized by  get-
+              protobyname(3),  for example: ah, esp, eigrp (only in Linux with
+              glibc, FreeBSD, NetBSD, DragonFly BSD, and macOS),  icmp,  igmp,
+              igrp  (only  in Haiku and OpenBSD), pim, sctp, tcp, udp or vrrp.
+              Note that most of these example identifiers  are  also  keywords
               and must be escaped via backslash (\).  Note that this primitive
               does not chase the protocol header chain.
 
-              Typically  getprotobyname(3)  parses  the /etc/protocols file to
-              translate protocol names to numbers, and  the  getent  protocols
+              Typically getprotobyname(3) parses the  /etc/protocols  file  to
+              translate  protocol  names  to numbers, and the getent protocols
               command lists the protocols recognised by the function.  This is
-              not entirely so in AIX (which does not have the command),  Haiku
-              (which  has  the file at /system/data/network/protocols and does
+              not  entirely so in AIX (which does not have the command), Haiku
+              (which has the file at /system/data/network/protocols  and  does
               not have the command), on Linux with musl libc (which hard-codes
-              the  list of protocols) and on hosts that use a network database
+              the list of protocols) and on hosts that use a network  database
               to resolve protocol names to numbers (see nsswitch.conf(5)).  If
-              a  protocol name fails to translate to a number, this version of
+              a protocol name fails to translate to a number, this version  of
               libpcap will treat the filter expression as invalid.
 
        carp, vrrp
@@ -272,25 +273,25 @@ PRIMITIVES
 
        igrp   Abbreviation for:
                    ip proto igrpval
-              where igrpval is 88 on DragonFly BSD, FreeBSD and macOS,  and  9
+              where  igrpval  is 88 on DragonFly BSD, FreeBSD and macOS, and 9
               on all other OSes.  This abbreviation should not be used in por-
               table applications and may be removed in future.
 
        ip6 proto protocol
-              True if the packet is an IPv6 packet of protocol type  protocol.
-              (See  `ip  proto' above for the meaning of protocol.)  Note that
+              True  if the packet is an IPv6 packet of protocol type protocol.
+              (See `ip proto' above for the meaning of protocol.)   Note  that
               the IPv6 variant of ICMP uses a different protocol number, named
-              ipv6-icmp  in  AIX,  FreeBSD,  illumos,  Haiku, GNU/Hurd, Linux,
-              macOS, NetBSD, OpenBSD, Solaris and  Windows.   Note  that  this
+              ipv6-icmp in AIX,  FreeBSD,  illumos,  Haiku,  GNU/Hurd,  Linux,
+              macOS,  NetBSD,  OpenBSD,  Solaris  and Windows.  Note that this
               primitive does not chase the protocol header chain.
 
        icmp6  Abbreviation for:
                    ip6 proto 58
 
        proto protocol
-              True  if  the  packet is an IPv4 or IPv6 packet of protocol type
-              protocol.  (See `ip proto' above for the meaning  of  protocol.)
-              Note  that  this  primitive  does  not chase the protocol header
+              True if the packet is an IPv4 or IPv6 packet  of  protocol  type
+              protocol.   (See  `ip proto' above for the meaning of protocol.)
+              Note that this primitive does  not  chase  the  protocol  header
               chain.
 
        ah, esp, pim, sctp, tcp, udp
@@ -299,64 +300,64 @@ PRIMITIVES
               where protocol is one of the above protocols.
 
        ip6 protochain protocol
-              True if the packet is IPv6 packet, and contains protocol  header
-              with  type  protocol  in  its  protocol  header chain.  (See `ip
+              True  if the packet is IPv6 packet, and contains protocol header
+              with type protocol in  its  protocol  header  chain.   (See  `ip
               proto' above for the meaning of protocol.)  For example,
                    ip6 protochain 6
               matches any IPv6 packet with TCP protocol header in the protocol
-              header  chain.  The packet may contain, for example, authentica-
-              tion header, routing header, or hop-by-hop  option  header,  be-
-              tween  IPv6 header and TCP header.  The BPF code emitted by this
-              primitive is complex and cannot be optimized by  the  BPF  opti-
-              mizer  code,  and is not supported by filter engines in the ker-
+              header chain.  The packet may contain, for example,  authentica-
+              tion  header,  routing  header, or hop-by-hop option header, be-
+              tween IPv6 header and TCP header.  The BPF code emitted by  this
+              primitive  is  complex  and cannot be optimized by the BPF opti-
+              mizer code, and is not supported by filter engines in  the  ker-
               nel, so this can be somewhat slow, and may cause more packets to
               be dropped.
 
        ip protochain protocol
-              Equivalent  to  ip6  protochain  protocol, but this is for IPv4.
+              Equivalent to ip6 protochain protocol, but  this  is  for  IPv4.
               (See `ip proto' above for the meaning of protocol.)
 
        protochain protocol
-              True if the packet is an IPv4 or IPv6 packet  of  protocol  type
-              protocol.   (See  `ip proto' above for the meaning of protocol.)
+              True  if  the  packet is an IPv4 or IPv6 packet of protocol type
+              protocol.  (See `ip proto' above for the meaning  of  protocol.)
               Note that this primitive chases the protocol header chain.
 
        ether broadcast
-              True   if   the   destination    Ethernet/802.11/IPFC/ARCnet/ATM
-              LANE/FDDI/Token  Ring address of the packet is the broadcast ad-
+              True    if   the   destination   Ethernet/802.11/IPFC/ARCnet/ATM
+              LANE/FDDI/Token Ring address of the packet is the broadcast  ad-
               dress (e.g.  FF:FF:FF:FF:FF:FF for Ethernet).  The ether keyword
               is optional.
 
        ip broadcast
-              True  if  the packet is an IPv4 packet with the host part of the
-              destination address being either all-ones or  all-zeroes.   This
-              primitive  requires to specify the netmask, which cannot be done
-              in the filter expression; the only way to specify a  netmask  is
-              via  the  netmask argument of the pcap_compile() function.  If a
-              netmask has not been specified, an attempt to compile  a  filter
+              True if the packet is an IPv4 packet with the host part  of  the
+              destination  address  being either all-ones or all-zeroes.  This
+              primitive requires to specify the netmask, which cannot be  done
+              in  the  filter expression; the only way to specify a netmask is
+              via the netmask argument of the pcap_compile() function.   If  a
+              netmask  has  not been specified, an attempt to compile a filter
               expression with this primitive will return an error.
 
-              Note  that this primitive ignores the network part of the desti-
-              nation address, thus it can match more  packets  than  expected,
-              especially  if  the  interface  has multiple IPv4 addresses with
+              Note that this primitive ignores the network part of the  desti-
+              nation  address,  thus  it can match more packets than expected,
+              especially if the interface has  multiple  IPv4  addresses  with
               different netmasks.  For example, if the interface has addresses
-              10.1.2.100/29  and 192.168.202.200/24 configured and the netmask
-              argument corresponds to the first address,  its  value  will  be
-              0xFFFFFFF8  and  the  host  mask value will be 0x00000007.  This
-              will match the  expected  two  addresses  in  the  first  prefix
-              (10.1.2.96  and 10.1.2.103), as well as 64 addresses in the sec-
+              10.1.2.100/29 and 192.168.202.200/24 configured and the  netmask
+              argument  corresponds  to  the  first address, its value will be
+              0xFFFFFFF8 and the host mask value  will  be  0x00000007.   This
+              will  match  the  expected  two  addresses  in  the first prefix
+              (10.1.2.96 and 10.1.2.103), as well as 64 addresses in the  sec-
               ond   prefix   (192.168.202.0,   192.168.202.7,   192.168.202.8,
-              192.168.202.15,  192.168.202.16 and so on), as well as any other
+              192.168.202.15, 192.168.202.16 and so on), as well as any  other
               IPv4 address with the lowest 3 bits being all-ones or all-zeroes
-              (for  example:  10.73.74.151, 192.168.50.63, 172.19.0.128) -- in
-              other words, 25% of the complete IPv4 address  space.   This  is
-              why  in use cases that require more precision it would be better
+              (for example: 10.73.74.151, 192.168.50.63, 172.19.0.128)  --  in
+              other  words,  25%  of the complete IPv4 address space.  This is
+              why in use cases that require more precision it would be  better
               to match the required address(es) explicitly, for example:
                    ip dst host 10.1.2.96 or 10.1.2.103
 
        ether multicast
-              True   if   the   destination    Ethernet/802.11/IPFC/ARCnet/ATM
-              LANE/FDDI/Token  Ring  address  of the packet is a multicast ad-
+              True    if   the   destination   Ethernet/802.11/IPFC/ARCnet/ATM
+              LANE/FDDI/Token Ring address of the packet is  a  multicast  ad-
               dress (e.g.  ether[0] & 1 != 0 for Ethernet).  The ether keyword
               is optional.
 
@@ -368,27 +369,27 @@ PRIMITIVES
 
        ether proto protocol
               True if the packet is of ether type protocol.  Protocol can be a
-              number or one of the names aarp, arp, atalk,  decnet,  ip,  ip6,
-              ipx,  iso,  lat,  loopback,  mopdl, moprc, netbeui, rarp, sca or
+              number  or  one  of the names aarp, arp, atalk, decnet, ip, ip6,
+              ipx, iso, lat, loopback, mopdl, moprc,  netbeui,  rarp,  sca  or
               stp.  Note these identifiers (except loopback) are also keywords
               and must be escaped via backslash (\).
 
-              [In  the  case  of  FDDI  (e.g.,  `fddi proto \arp'), Token Ring
-              (e.g., `tr proto \arp'), and IEEE 802.11  wireless  LANs  (e.g.,
-              `wlan  proto  \arp'),  for most of those protocols, the protocol
-              identification comes from the 802.2 Logical Link  Control  (LLC)
+              [In the case of FDDI  (e.g.,  `fddi  proto  \arp'),  Token  Ring
+              (e.g.,  `tr  proto  \arp'), and IEEE 802.11 wireless LANs (e.g.,
+              `wlan proto \arp'), for most of those  protocols,  the  protocol
+              identification  comes  from the 802.2 Logical Link Control (LLC)
               header, which is usually layered on top of the FDDI, Token Ring,
               or 802.11 header.
 
-              When filtering for most  protocol  identifiers  on  FDDI,  Token
+              When  filtering  for  most  protocol  identifiers on FDDI, Token
               Ring, or 802.11, the filter checks only the protocol ID field of
-              an LLC header in so-called SNAP format  with  an  Organizational
+              an  LLC  header  in so-called SNAP format with an Organizational
               Unit Identifier (OUI) of 0x000000, for encapsulated Ethernet; it
-              doesn't check whether the packet is in SNAP format with  an  OUI
+              doesn't  check  whether the packet is in SNAP format with an OUI
               of 0x000000.  The exceptions are:
 
-              iso    the  filter  checks  the DSAP (Destination Service Access
-                     Point) and SSAP (Source Service Access Point)  fields  of
+              iso    the filter checks the DSAP  (Destination  Service  Access
+                     Point)  and  SSAP (Source Service Access Point) fields of
                      the LLC header;
 
               stp and netbeui
@@ -397,24 +398,24 @@ PRIMITIVES
               atalk  the filter checks for a SNAP-format packet with an OUI of
                      0x080007 and the AppleTalk etype.
 
-              In the case of Ethernet, the filter  checks  the  Ethernet  type
+              In  the  case  of  Ethernet, the filter checks the Ethernet type
               field for most of those protocols.  The exceptions are:
 
               iso, stp, and netbeui
-                     the  filter checks for an 802.3 frame and then checks the
+                     the filter checks for an 802.3 frame and then checks  the
                      LLC header as it does for FDDI, Token Ring, and 802.11;
 
               atalk  the filter checks both for the AppleTalk etype in an Eth-
-                     ernet  frame  and for a SNAP-format packet as it does for
+                     ernet frame and for a SNAP-format packet as it  does  for
                      FDDI, Token Ring, and 802.11;
 
-              aarp   the filter checks for the AppleTalk ARP etype  in  either
-                     an  Ethernet  frame or an 802.2 SNAP frame with an OUI of
+              aarp   the  filter  checks for the AppleTalk ARP etype in either
+                     an Ethernet frame or an 802.2 SNAP frame with an  OUI  of
                      0x000000;
 
               ipx    the filter checks for the IPX etype in an Ethernet frame,
-                     the  IPX  DSAP  in the LLC header, the 802.3-with-no-LLC-
-                     header encapsulation of IPX, and the IPX etype in a  SNAP
+                     the IPX DSAP in the LLC  header,  the  802.3-with-no-LLC-
+                     header  encapsulation of IPX, and the IPX etype in a SNAP
                      frame.
 
        ip, ip6, arp, rarp, atalk, aarp, decnet, iso, stp, ipx, netbeui
@@ -426,26 +427,26 @@ PRIMITIVES
               Abbreviations for:
                    ether proto \protocol
               where protocol is one of the above protocols, all of which orig-
-              inated at DEC, but are not the same as DECnet.  Namely,  lat  is
-              Local  Area Transport (LAT), mopdl is DNA Dump/Load (MOP), moprc
-              is DNA Remote Console (MOP) and sca is System Communication  Ar-
+              inated  at  DEC, but are not the same as DECnet.  Namely, lat is
+              Local Area Transport (LAT), mopdl is DNA Dump/Load (MOP),  moprc
+              is  DNA Remote Console (MOP) and sca is System Communication Ar-
               chitecture (SCA).
 
        decnet host decnetaddr
-              True  if  the  source  or  the destination DECnet address of the
-              packet is decnetaddr.  May be qualified with a different  direc-
-              tion  (src, dst, src and dst), in which case the host keyword is
+              True if the source or the  destination  DECnet  address  of  the
+              packet  is decnetaddr.  May be qualified with a different direc-
+              tion (src, dst, src and dst), in which case the host keyword  is
               optional.
 
-              decnetaddr is an  address  of  the  form  AREANUMBER.NODENUMBER,
-              where  the  area number can be between 0 and 63 (both inclusive)
-              and the node number can be between 0 and 1023  (both  inclusive)
+              decnetaddr  is  an  address  of  the form AREANUMBER.NODENUMBER,
+              where the area number can be between 0 and 63  (both  inclusive)
+              and  the  node number can be between 0 and 1023 (both inclusive)
               and both numbers always use decimal base.  For example:
                    decnet src 10.123
 
        llc    True if the packet has an 802.2 LLC header.  This includes:
 
-              Ethernet  packets  with  a length field rather than a type field
+              Ethernet packets with a length field rather than  a  type  field
               that aren't raw NetWare-over-802.3 packets;
 
               IEEE 802.11 data packets;
@@ -489,34 +490,34 @@ PRIMITIVES
               frmr   Frame Reject (FRMR) U PDUs
 
        inbound
-              Packet  was  received  by the host performing the capture rather
-              than being sent by that host.  This is only supported  for  cer-
-              tain  link-layer  types,  such  as SLIP and the ``cooked'' Linux
-              capture mode used for the ``any'' device and for some other  de-
+              Packet was received by the host performing  the  capture  rather
+              than  being  sent by that host.  This is only supported for cer-
+              tain link-layer types, such as SLIP  and  the  ``cooked''  Linux
+              capture  mode used for the ``any'' device and for some other de-
               vice types.
 
        outbound
-              Packet  was  sent by the host performing the capture rather than
+              Packet was sent by the host performing the capture  rather  than
               being received by that host.  This is only supported for certain
-              link-layer  types, such as SLIP and the ``cooked'' Linux capture
-              mode used for the ``any''  device  and  for  some  other  device
+              link-layer types, such as SLIP and the ``cooked'' Linux  capture
+              mode  used  for  the  ``any''  device  and for some other device
               types.
 
        ifindex interface_index
-              True  if  the packet was logged via the specified interface (ap-
+              True if the packet was logged via the specified  interface  (ap-
               plies only to packets logged by the Linux "any" cooked v2 inter-
               face).
 
        ifname interface
-              True  if  the packet was logged as coming from the specified in-
-              terface (applies only to packets logged by  OpenBSD's  or  Free-
+              True if the packet was logged as coming from the  specified  in-
+              terface  (applies  only  to packets logged by OpenBSD's or Free-
               BSD's pf(4)).
 
        on interface
               Synonymous with the ifname primitive.
 
        rnr num
-              True  if the packet was logged as matching the specified PF rule
+              True if the packet was logged as matching the specified PF  rule
               number (applies only to packets logged by OpenBSD's or FreeBSD's
               pf(4)).
 
@@ -525,20 +526,20 @@ PRIMITIVES
 
        reason code
               True if the packet was logged with the specified PF reason code.
-              The  known  codes  are:  match,  bad-offset,  fragment,   short,
-              normalize,  and  memory (applies only to packets logged by Open-
+              The   known  codes  are:  match,  bad-offset,  fragment,  short,
+              normalize, and memory (applies only to packets logged  by  Open-
               BSD's or FreeBSD's pf(4)).
 
        rset name
               True if the packet was logged as matching the specified PF rule-
-              set  name of an anchored ruleset (applies only to packets logged
+              set name of an anchored ruleset (applies only to packets  logged
               by OpenBSD's or FreeBSD's pf(4)).
 
        ruleset name
               Synonymous with the rset primitive.
 
        srnr num
-              True if the packet was logged as matching the specified PF  rule
+              True  if the packet was logged as matching the specified PF rule
               number of an anchored ruleset (applies only to packets logged by
               OpenBSD's or FreeBSD's pf(4)).
 
@@ -547,45 +548,45 @@ PRIMITIVES
 
        action act
               True if PF took the specified action when the packet was logged.
-              Known  actions  are:  pass and block and, with later versions of
+              Known actions are: pass and block and, with  later  versions  of
               pf(4), nat, rdr, binat and scrub (applies only to packets logged
               by OpenBSD's or FreeBSD's pf(4)).
 
        wlan ra ehost
-              True  if  the  IEEE 802.11 RA is ehost.  The RA field is used in
+              True if the IEEE 802.11 RA is ehost.  The RA field  is  used  in
               all frames except for management frames.
 
        wlan ta ehost
-              True if the IEEE 802.11 TA is ehost.  The TA field  is  used  in
-              all  frames except for management frames and CTS (Clear To Send)
+              True  if  the  IEEE 802.11 TA is ehost.  The TA field is used in
+              all frames except for management frames and CTS (Clear To  Send)
               and ACK (Acknowledgment) control frames.
 
        wlan addr1 ehost
               True if the first IEEE 802.11 address is ehost.
 
        wlan addr2 ehost
-              True if the second IEEE 802.11 address, if  present,  is  ehost.
-              The  second  address  field is used in all frames except for CTS
+              True  if  the  second IEEE 802.11 address, if present, is ehost.
+              The second address field is used in all frames  except  for  CTS
               (Clear To Send) and ACK (Acknowledgment) control frames.
 
        wlan addr3 ehost
-              True if the third IEEE 802.11 address,  if  present,  is  ehost.
-              The  third  address field is used in management and data frames,
+              True  if  the  third  IEEE 802.11 address, if present, is ehost.
+              The third address field is used in management and  data  frames,
               but not in control frames.
 
        wlan addr4 ehost
-              True if the fourth IEEE 802.11 address, if  present,  is  ehost.
-              The  fourth address field is only used for WDS (Wireless Distri-
+              True  if  the  fourth IEEE 802.11 address, if present, is ehost.
+              The fourth address field is only used for WDS (Wireless  Distri-
               bution System) frames.
 
        wlan type wlan_type
-              True if  the  IEEE  802.11  frame  type  matches  the  specified
-              wlan_type.   Valid  wlan_types are: mgt, ctl and data.  The wlan
+              True  if  the  IEEE  802.11  frame  type  matches  the specified
+              wlan_type.  Valid wlan_types are: mgt, ctl and data.   The  wlan
               keyword is optional.
 
        wlan type wlan_type subtype wlan_subtype
-              True if  the  IEEE  802.11  frame  type  matches  the  specified
-              wlan_type  and frame subtype matches the specified wlan_subtype.
+              True  if  the  IEEE  802.11  frame  type  matches  the specified
+              wlan_type and frame subtype matches the specified  wlan_subtype.
               The wlan keyword is optional.
 
               If the specified wlan_type is mgt, then valid wlan_subtypes are:
@@ -595,46 +596,46 @@ PRIMITIVES
               If the specified wlan_type is ctl, then valid wlan_subtypes are:
               bar, ba, ps-poll, rts, cts, ack, cf-end and cf-end-ack.
 
-              If  the  specified  wlan_type  is data, then valid wlan_subtypes
-              are: data, data-cf-ack,  data-cf-poll,  data-cf-ack-poll,  null,
+              If the specified wlan_type is  data,  then  valid  wlan_subtypes
+              are:  data,  data-cf-ack,  data-cf-poll, data-cf-ack-poll, null,
               cf-ack,   cf-poll,   cf-ack-poll,   qos-data,   qos-data-cf-ack,
               qos-data-cf-poll,  qos-data-cf-ack-poll,  qos,  qos-cf-poll  and
               qos-cf-ack-poll.
 
        wlan subtype wlan_subtype
-              True  if  the  IEEE  802.11  frame subtype matches the specified
-              wlan_subtype and frame has  the  type  to  which  the  specified
+              True if the IEEE 802.11  frame  subtype  matches  the  specified
+              wlan_subtype  and  frame  has  the  type  to which the specified
               wlan_subtype belongs.  The wlan keyword is optional.
 
        wlan dir direction
-              True  if  the  IEEE 802.11 frame direction matches the specified
+              True if the IEEE 802.11 frame direction  matches  the  specified
               direction.  Valid directions are: nods, tods, fromds, dstods, or
               a numeric value.  The wlan keyword is optional.
 
        vlan [vlan_id]
-              True  if  the  packet is an IEEE 802.1Q VLAN packet.  If the op-
-              tional vlan_id is specified, only true if  the  packet  has  the
+              True if the packet is an IEEE 802.1Q VLAN packet.   If  the  op-
+              tional  vlan_id  is  specified,  only true if the packet has the
               specified vlan_id.  Note that the first vlan keyword encountered
-              in an expression changes the decoding offsets for the  remainder
-              of  the  expression  on the assumption that the packet is a VLAN
-              packet.  The `vlan [vlan_id]` keyword  may  be  used  more  than
-              once,  to  filter on VLAN hierarchies.  Each use of that keyword
+              in  an expression changes the decoding offsets for the remainder
+              of the expression on the assumption that the packet  is  a  VLAN
+              packet.   The  `vlan  [vlan_id]`  keyword  may be used more than
+              once, to filter on VLAN hierarchies.  Each use of  that  keyword
               increments the filter offsets by 4.
 
               For example:
                    vlan 100 && vlan 200
               filters on VLAN 200 encapsulated within VLAN 100, and
                    vlan && vlan 300 && ip
-              filters IPv4 protocol  encapsulated  in  VLAN  300  encapsulated
+              filters  IPv4  protocol  encapsulated  in  VLAN 300 encapsulated
               within any higher order VLAN.
 
        mpls [label_num]
               True if the packet is an MPLS packet.  If the optional label_num
-              is specified, only true if the  packet  has  the  specified  la-
+              is  specified,  only  true  if  the packet has the specified la-
               bel_num.  Note that the first mpls keyword encountered in an ex-
-              pression changes the decoding offsets for the remainder  of  the
-              expression  on the assumption that the packet is a MPLS-encapsu-
-              lated IP packet.  The `mpls [label_num]`  keyword  may  be  used
+              pression  changes  the decoding offsets for the remainder of the
+              expression on the assumption that the packet is a  MPLS-encapsu-
+              lated  IP  packet.   The  `mpls [label_num]` keyword may be used
               more than once, to filter on MPLS hierarchies.  Each use of that
               keyword increments the filter offsets by 4.
 
@@ -643,7 +644,7 @@ PRIMITIVES
               filters packets with an outer label of 100000 and an inner label
               of 1024, and
                    mpls && mpls 1024 && host 192.9.200.1
-              filters  packets  to  or from 192.9.200.1 with an inner label of
+              filters packets to or from 192.9.200.1 with an  inner  label  of
               1024 and any outer label.
 
        pppoed True if the packet is a PPP-over-Ethernet Discovery packet (Eth-
@@ -652,9 +653,9 @@ PRIMITIVES
        pppoes [session_id]
               True if the packet is a PPP-over-Ethernet Session packet (Ether-
               net type 0x8864).  If the optional session_id is specified, only
-              true  if the packet has the specified session_id.  Note that the
-              first pppoes keyword encountered in an  expression  changes  the
-              decoding  offsets for the remainder of the expression on the as-
+              true if the packet has the specified session_id.  Note that  the
+              first  pppoes  keyword  encountered in an expression changes the
+              decoding offsets for the remainder of the expression on the  as-
               sumption that the packet is a PPPoE session packet.
 
               For example:
@@ -662,25 +663,25 @@ PRIMITIVES
               filters IPv4 protocol encapsulated in PPPoE session id 0x27.
 
        geneve [vni]
-              True if the packet is a Geneve packet (UDP port  6081).  If  the
+              True  if  the  packet is a Geneve packet (UDP port 6081). If the
               optional vni is specified, only true if the packet has the spec-
-              ified vni.  Note that when the geneve keyword is encountered  in
+              ified  vni.  Note that when the geneve keyword is encountered in
               an expression, it changes the decoding offsets for the remainder
-              of the expression on the assumption that the packet is a  Geneve
+              of  the expression on the assumption that the packet is a Geneve
               packet.
 
               For example:
                    geneve 0xb && ip
-              filters  IPv4 protocol encapsulated in Geneve with VNI 0xb. This
-              will match both IPv4 directly encapsulated in Geneve as well  as
+              filters IPv4 protocol encapsulated in Geneve with VNI 0xb.  This
+              will  match both IPv4 directly encapsulated in Geneve as well as
               IPv4 contained inside an Ethernet frame.
 
        vxlan [vni]
               True if the packet is a VXLAN packet (UDP port 4789). If the op-
-              tional vni is specified, only true if the packet has the  speci-
+              tional  vni is specified, only true if the packet has the speci-
               fied vni.  Note that when the vxlan keyword is encountered in an
               expression, it changes the decoding offsets for the remainder of
-              the  expression  on  the  assumption  that the packet is a VXLAN
+              the expression on the assumption that  the  packet  is  a  VXLAN
               packet.
 
               For example:
@@ -688,8 +689,8 @@ PRIMITIVES
               filters IPv6 protocol encapsulated in VXLAN with VNI 0x7.
 
        iso proto protocol
-              True if the packet is an OSI packet of protocol  type  protocol.
-              Protocol  can  be  a  number  or one of the names clnp, esis, or
+              True  if  the packet is an OSI packet of protocol type protocol.
+              Protocol can be a number or one of  the  names  clnp,  esis,  or
               isis.
 
        clnp, esis, isis
@@ -697,6 +698,10 @@ PRIMITIVES
                    iso proto \protocol
               where protocol is one of the above protocols.  Also in this con-
               text es-is is an alias for esis and is-is is an alias for isis.
+
+       isis proto protocol
+              True if the packet is an IS-IS packet of protocol type protocol,
+              which can be a number only.
 
        l1, l2, iih, lsp, snp, csnp, psnp
               Abbreviations for IS-IS PDU types.
@@ -922,6 +927,74 @@ COMPOUND EXPRESSIONS
        which should not be confused with
             not (host vs and host ace)
 
+PROTOCOL NAMES IN VARIOUS CONTEXTS
+       The table below shows which protocol names can be used  in  which  con-
+       texts  of the currently implemented syntax.  The "name" column contains
+       a protocol name, which often can be used as an ID  in  primitives  that
+       take  a protocol name argument; in all cases except loopback the proto-
+       col name is also a keyword.  If the keyword is an alias, the "see" col-
+       umn  refers  to  the main keyword.  The "abbr" column tells whether the
+       keyword can be used as an abbreviation (that is, if the keyword is  the
+       only contents of a primitive, it means a more complex expression).  The
+       "PDA" column tells whether the keyword can be used in a packet data ac-
+       cessor.   The "pqual" column tells whether the keyword can be used as a
+       case of the proto qualifier kind.  If the name can be used as an ID for
+       the  proto case of the type qualifier kind, the "tqual ID" column shows
+       the valid context(s).
+
+       +---------+------+------+-----+-------+----------------------+
+       |name     | see  | abbr | PDA | pqual | tqual ID             |
+       +---------+------+------+-----+-------+----------------------+
+       |aarp     |      | yes  | no  | no    | link proto \aarp     |
+       |ah       |      | yes  | no  | no    | [ip|ip6] proto \ah   |
+       |arp      |      | yes  | yes | yes   | link proto \arp      |
+       |atalk    |      | yes  | yes | no    | link proto \atalk    |
+       |carp     |      | yes  | yes | no    | ip proto \carp       |
+       |clnp     |      | yes  | no  | no    | iso proto \clnp      |
+       |csnp     |      | yes  | no  | no    |                      |
+       |decnet   |      | yes  | yes | yes   | link proto \decnet   |
+       |esis     |      | yes  | no  | no    | iso proto \esis      |
+       |es-is    | esis |      |     |       |                      |
+       |esp      |      | yes  | no  | no    | [ip|ip6] proto \esp  |
+       |ether    | link |      |     |       |                      |
+       |fddi     | link |      |     |       |                      |
+       |icmp     |      | yes  | yes | no    | ip proto \icmp       |
+       |icmp6    |      | yes  | yes | no    |                      |
+       |igmp     |      | yes  | yes | no    | ip proto \igmp       |
+       |igrp     |      | yes  | yes | no    | ip proto \igrp       |
+       |iih      |      | yes  | no  | no    |                      |
+       |ip       |      | yes  | yes | yes   | link proto \ip       |
+       |ip6      |      | yes  | yes | yes   | link proto \ip6      |
+       |ipx      |      | yes  | no  | no    | link proto \ipx      |
+       |isis     |      | yes  | no  | yes   | iso proto \isis      |
+       |is-is    | isis |      |     |       |                      |
+       |iso      |      | yes  | no  | yes   | link proto \iso      |
+       |l1       |      | yes  | no  | no    |                      |
+       |l2       |      | yes  | no  | no    |                      |
+       |lat      |      | yes  | yes | no    | link proto \lat      |
+       |link     |      | no   | yes | yes   |                      |
+       |loopback |      |      |     |       | link proto loopback  |
+       |lsp      |      | yes  | no  | no    |                      |
+       |mopdl    |      | yes  | yes | no    | link proto \mopdl    |
+       |moprc    |      | yes  | yes | no    | link proto \moprc    |
+       |netbeui  |      | yes  | no  | no    | link proto \netbeui  |
+       |pim      |      | yes  | yes | no    | [ip|ip6] proto \pim  |
+       |ppp      | link |      |     |       |                      |
+       |psnp     |      | yes  | no  | no    |                      |
+       |radio    |      | no   | yes | no    |                      |
+       |rarp     |      | yes  | yes | yes   | link proto \rarp     |
+       |sca      |      | yes  | yes | no    | link proto \sca      |
+       |sctp     |      | yes  | yes | yes   | [ip|ip6] proto \sctp |
+       |slip     | link |      |     |       |                      |
+       |snp      |      | yes  | no  | no    |                      |
+       |stp      |      | yes  | no  | no    | link proto \stp      |
+       |tcp      |      | yes  | yes | yes   | [ip|ip6] proto \tcp  |
+       |tr       | link |      |     |       |                      |
+       |udp      |      | yes  | yes | yes   | [ip|ip6] proto \udp  |
+       |vrrp     |      | yes  | yes | no    | ip proto \vrrp       |
+       |wlan     | link |      |     |       |                      |
+       +---------+------+------+-----+-------+----------------------+
+
 EXAMPLES
        To select all packets arriving at or departing from `sundown':
               host sundown
@@ -1021,4 +1094,4 @@ BUGS
        and  may incorrectly match packets that have a different combination of
        protocol and hardware.
 
-                                 21 March 2025                  PCAP-FILTER(7)
+                                 24 March 2025                  PCAP-FILTER(7)
