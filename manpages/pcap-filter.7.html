@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 24 March 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 25 March 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -1014,27 +1014,30 @@ used for the ``any'' device and for some other device types.
 True if the packet was logged via the specified interface (applies only to
 packets logged by the Linux &quot;any&quot; cooked v2 interface).
 <DT><B>ifname </B><I>interface</I><DD>
-True if the packet was logged as coming from the specified interface (applies
-only to packets logged by OpenBSD's or FreeBSD's
-<B>pf</B>(4)).
+True, for
+<B>DLT_PFLOG</B>
 
+only, if the packet was logged as coming from the specified interface.
 <DT><B>on </B><I>interface</I><DD>
 Synonymous with the
 <B>ifname</B>
 
 primitive.
 <DT><B>rnr </B><I>num</I><DD>
-True if the packet was logged as matching the specified PF rule number
-(applies only to packets logged by OpenBSD's or FreeBSD's
-<B>pf</B>(4)).
+True, for
+<B>DLT_PFLOG</B>
 
+only, if the packet was logged as matching the specified PF rule number.
 <DT><B>rulenum </B><I>num</I><DD>
 Synonymous with the
 <B>rnr</B>
 
 primitive.
 <DT><B>reason </B><I>code</I><DD>
-True if the packet was logged with the specified PF reason code.  The known
+True, for
+<B>DLT_PFLOG</B>
+
+only, if the packet was logged with the specified PF reason code.  Valid
 codes are:
 <B>match</B>,
 
@@ -1046,57 +1049,127 @@ codes are:
 
 <B>normalize</B>,
 
-and
-<B>memory</B>
+<B>memory</B>,
 
-(applies only to packets logged by OpenBSD's or FreeBSD's
-<B>pf</B>(4)).
+<B>bad-timestamp</B>,
 
+<B>congestion</B>,
+
+<B>ip-option</B>,
+
+<B>proto-cksum</B>,
+
+<B>state-mismatch</B>,
+
+<B>state-insert</B>,
+
+<B>state-limit</B>,
+
+<B>src-limit</B>,
+
+<B>synproxy</B>,
+
+<B>map-failed</B>
+
+(on FreeBSD only),
+<B>state-locked</B>
+
+(on NetBSD only),
+<B>translate</B>
+
+(on OpenBSD only),
+<B>no-route</B>
+
+(on OpenBSD only) and
+<B>dummynet</B>
+
+(on macOS only).
 <DT><B>rset </B><I>name</I><DD>
-True if the packet was logged as matching the specified PF ruleset
-name of an anchored ruleset (applies only to packets logged by OpenBSD's
-or FreeBSD's
-<B>pf</B>(4)).
+True, for
+<B>DLT_PFLOG</B>
 
+only, if the packet was logged as matching the specified PF ruleset
+name of an anchored ruleset.
 <DT><B>ruleset </B><I>name</I><DD>
 Synonymous with the
 <B>rset</B>
 
 primitive.
 <DT><B>srnr </B><I>num</I><DD>
-True if the packet was logged as matching the specified PF rule number
-of an anchored ruleset (applies only to packets logged by OpenBSD's or
-FreeBSD's
-<B>pf</B>(4)).
+True, for
+<B>DLT_PFLOG</B>
 
+only, if the packet was logged as matching the specified PF rule number
+of an anchored ruleset.
 <DT><B>subrulenum </B><I>num</I><DD>
 Synonymous with the
 <B>srnr</B>
 
 primitive.
 <DT><B>action </B><I>act</I><DD>
-True if PF took the specified action when the packet was logged.  Known actions
-are:
+True, for
+<B>DLT_PFLOG</B>
+
+only, if PF took the specified action when the packet was logged.  Valid
+actions are:
 <B>pass</B>
 
-and
+(or
+<B>accept</B>),
+
 <B>block</B>
+
+(or
+<B>drop</B>)
 
 and, with later versions of
 <B>pf</B>(4),
 
+<B>scrub</B>,
+
+<B>noscrub</B>,
+
 <B>nat</B>,
+
+<B>nonat</B>,
+
+<B>binat</B>,
+
+<B>nobinat</B>,
 
 <B>rdr</B>,
 
-<B>binat</B>
+<B>nordr</B>,
 
-and
-<B>scrub</B>
+<B>synproxy-drop</B>,
 
-(applies only to packets logged by OpenBSD's or FreeBSD's
-<B>pf</B>(4)).
+<B>defer</B>
 
+(on FreeBSD and OpenBSD only),
+<B>match</B>
+
+(on OpenBSD only),
+<B>divert</B>
+
+(on OpenBSD only),
+<B>rt</B>
+
+(on OpenBSD only),
+<B>afrt</B>
+
+(on OpenBSD only),
+<B>dummynet</B>
+
+(on macOS only),
+<B>nodummynet</B>
+
+(on macOS only),
+<B>nat64</B>
+
+(on macOS only) and
+<B>nonat64</B>
+
+(on macOS only).
 <DT><B>wlan ra </B><I>ehost</I><DD>
 True if the IEEE 802.11 RA is
 <I>ehost</I>.
@@ -2346,7 +2419,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 20:09:30 GMT, March 24, 2025
+This HTML man page was generated at 10:42:11 GMT, March 27, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
