@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 25 March 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 27 March 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -1701,6 +1701,48 @@ are equivalent to
 Note that this address syntax clashes with the parameter expansion syntax
 in POSIX-compatible shells and elsewhere, so depending on the use case the
 filter string may require the use of single quotes or a backslash.
+<DT><B>byte </B><I>idx op val</I><DD>
+True if the value of the link layer byte number
+<I>idx</I>
+
+satisfies a condition with regard to
+<I>val</I>,
+
+which can be a number only.  The condition is one of: &quot;equals to&quot; (if
+<I>op</I>
+
+is
+<B>=</B>),
+
+&quot;less than&quot; (if
+<I>op</I>
+
+is
+<B>&lt;</B>),
+
+&quot;greater than&quot; (if
+<I>op</I>
+
+is
+<B>&gt;</B>),
+
+&quot;the result of bitwise AND is not zero&quot; (if
+<I>op</I>
+
+is
+<B>&amp;</B>),
+
+&quot;the result of bitwise OR is not zero&quot; (if
+<I>op</I>
+
+is
+<B>|</B>).
+
+<DT><DD>
+The arithmetic expressions and packet data accessors below implement all of
+these and many other things much better, so this primitive will be removed in
+a future release and should not be used in applications that require forward
+compatibility.
 </DL>
 <H2 id="lbAE">ARITHMETIC EXPRESSIONS</H2>
 
@@ -2419,7 +2461,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 10:42:11 GMT, March 27, 2025
+This HTML man page was generated at 12:39:26 GMT, March 28, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

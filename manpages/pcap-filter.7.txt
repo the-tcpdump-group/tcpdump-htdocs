@@ -826,6 +826,19 @@ PRIMITIVES
               ing  on  the  use  case the filter string may require the use of
               single quotes or a backslash.
 
+       byte idx op val
+              True if the value of the link layer byte number idx satisfies  a
+              condition  with  regard to val, which can be a number only.  The
+              condition is one of: "equals to" (if op is =), "less  than"  (if
+              op  is  <),  "greater than" (if op is >), "the result of bitwise
+              AND is not zero" (if op is &), "the result of bitwise OR is  not
+              zero" (if op is |).
+
+              The  arithmetic  expressions and packet data accessors below im-
+              plement all of these and many other things much better, so  this
+              primitive  will be removed in a future release and should not be
+              used in applications that require forward compatibility.
+
 ARITHMETIC EXPRESSIONS
        Arithmetic expressions are the operands of a relational operator  in  a
        relation of the following form:
@@ -1097,4 +1110,4 @@ BUGS
        and may incorrectly match packets that have a different combination  of
        protocol and hardware.
 
-                                 25 March 2025                  PCAP-FILTER(7)
+                                 27 March 2025                  PCAP-FILTER(7)
