@@ -49,7 +49,30 @@
 </pre>
 
 <h3>Description</h3>
-<p>All multi-octet fields are expressed in little-endian format.  Fields with a corresponding Flags bit are only considered valid when the bit is set.</p><p>The RF Channel field ranges 0 to 78.  It reflects the value described in the Bluetooth specification Volume 2, Part A, Section 2.</p><p>The Signal Power and Noise Power fields are signed integers expressing values in dBm.</p><p>The Access Code Offenses field is an unsigned integer indicating the number of deviations from the valid access code that led to the packet capture.  Access codes are interpreted as described in Bluetooth specification Volume 2, Part B, Section 6.3.</p><p>The Payload Transport Rate field represents a column of Bluetooth specification Volume 2, Part B, Section 6.5, Table 6.2, and is interpreted as two nibbles as follows.
+<p>
+All multi-octet fields are expressed in little-endian format.
+Fields with a corresponding Flags bit are only considered valid
+when the bit is set.
+</p>
+<p>
+The RF Channel field ranges 0 to 78.  It reflects the value described in
+Volume 2, Part A, Section 2 "Frequency bands and channel arrangement" of
+the Bluetooth Core specification.
+</p>
+<p>
+The Signal Power and Noise Power fields are signed integers expressing
+values in dBm.
+</p>
+<p>
+The Access Code Offenses field is an unsigned integer indicating the
+number of deviations from the valid access code that led to the packet
+capture.  Access codes are interpreted as described in Volume 2, Part B,
+Section 6.3 "Access code" of the Bluetooth Core specification.
+</p>
+<p>
+The Payload Transport Rate field represents a column in Volume 2, Part
+B, Section 6.5 "Packet types", Table 6.2 of the Bluetooth Core
+specification, and is interpreted as two nibbles as follows.
 </p>
 <ul>
 <li><code>0x.0</code> indicates the BT payload was BR and captured with GFSK demodulation</li>
@@ -64,7 +87,48 @@
 </ul>
 <p>
 All other values of the Payload Transport Rate field are reserved.
-</p><p>The Corrected Header Bits field is an unsigned integer indicating the number of corrected bits in the 18-bit BT Packet Header.  The valid range is 0 to 18.</p><p>The Corrected Payload Bits field is a signed integer indicating the number of errored and corrected bits in the captured BT payload.  Interpretation of this field corresponds to the Payload Transport Rate. The value ranges from 0 to 80 when the BT payload was captured at R=1/3 as per Bluetooth specification Volume 2, Part B, Section 7.4.  The value ranges from -360 to +180 when the BT payload was captured at R=2/3 as per Bluetooth specification Volume 2, Part B, Section 7.5.  A negative number indicates the field absolute value is the sum of the number of corrected and uncorrectable bits.</p><p>The Lower Address Part field is the 24-bit value recovered from the captured SYNC WORD as defined in Bluetooth specification Volume 2, Part B, Section 6.3.3.  The most significant byte of this field is reserved and must be zero.</p><p>The Reference LAP field corresponds to the Lower Address Part configured into the capture tool that led to the capture of this packet.</p><p>The Reference UAP field corresponds to the Upper Address Part configured into the capture tool and corresponds to the Reference LAP.</p><p>The BT Packet Header field is the 18-bit value recovered from the packet capture, and is defined in Bluetooth specification Volume 2, Part B, Section 6.4.  The most significant 14 bits are reserved and must be zero.</p><p>The Flags field represents packed bits defined as follows.
+</p>
+<p>
+The Corrected Header Bits field is an unsigned integer indicating the
+number of corrected bits in the 18-bit BT Packet Header.  The valid
+range is 0 to 18.
+</p>
+<p>
+The Corrected Payload Bits field is a signed integer indicating the
+number of errored and corrected bits in the captured BT payload.
+Interpretation of this field corresponds to the Payload Transport Rate. 
+The value ranges from 0 to 80 when the BT payload was captured at R=1/3
+as per Volume 2, Part B, Section 7.4 "FEC code: rate 1/3" of the
+Bluetooth Core specification.  The value ranges from -360 to +180 when
+the BT payload was captured at R=2/3 as per Volume 2, Part B, Section
+7.5 "FEC code: rate 2/3" of the Bluetooth Core specification.  A
+negative number indicates the field absolute value is the sum of the
+number of corrected and uncorrectable bits.
+</p>
+<p>
+The Lower Address Part field is the 24-bit value recovered from the
+captured SYNC WORD as defined in Volume 2, Part B, Section 6.3.3 "Sync
+word" of the Bluetooth Core specification. The most significant octet
+of this field is reserved and must be zero.
+</p>
+<p>
+The Reference LAP field corresponds to
+the Lower Address Part configured into the capture tool that led to the
+capture of this packet.
+</p>
+<p>
+The Reference UAP field corresponds to the
+Upper Address Part configured into the capture tool and corresponds to
+the Reference LAP.
+</p>
+<p>
+The BT Packet Header field is the 18-bit value recovered from the packet
+capture, and is defined in Volume 2, Part B, Section 6.4 "Packet header"
+of the Bluetooth Core specification. The most significant 14 bits are
+reserved and must be zero.
+</p>
+<p>
+The Flags field represents packed bits defined as follows. 
 </p>
 <ul>
 <li><code>0x0001</code> indicates the BT Packet Header and BR or EDR Payload are de-whitened</li>
@@ -83,7 +147,17 @@ All other values of the Payload Transport Rate field are reserved.
 <li><code>0x2000</code> indicates the MIC portion of the decrypted BR or EDR Payload passed its check</li>
 </ul>
 <p>
-All other bit positions of the Flags field are reserved and must be zero.
-</p><p>The decoded BR or EDR Payload optionally follows the previous fields, and is formatted as detailed in Bluetooth specification Volume 2, Part B, Section 6.  The packet is decoded per Bluetooth specification Volume 2, Part B, Section 7.  All multi-octet values in the BR or EDR Payload are always expressed in little-endian format, as is the normal Bluetooth practice.</p>
+All other bit positions of the Flags field are reserved and must be
+zero. 
+</p>
+<p>
+The decoded BR or EDR Payload optionally follows the previous fields,
+and is formatted as detailed in Volume 2, Part B, Section 6 "Packets" of
+the Bluetooth Core specification.  The packet is decoded per Volume 2,
+Part B, Section 7 "Bit stream processing" of the Bluetooth Core
+specification.  All multi-octet values in the BR or EDR Payload are
+always expressed in little-endian format, as is the normal Bluetooth
+practice.
+</p>
 </div>
 </div>
