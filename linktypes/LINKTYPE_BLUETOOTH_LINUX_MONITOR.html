@@ -65,7 +65,7 @@
 
                 <h3>Description</h3>
 <p>
-All fields are in network byte order (big-endian).
+All fields are in big-endian byte order.
 </p>
 <p>
 The adapter ID field identifies the interface to which the packet
@@ -131,33 +131,17 @@ The name contains the name of the interface (typically
 <code>hci</code><i>N</i>, for example: <code>hci0</code>).
 </p>
 <h4>Delete Index Event</h4>
-<p>A Delete Index Event is a message that indicates the disappearance of
+<p>
+A Delete Index Event is a message that indicates the disappearance of
 an existing interface, with the adapter ID field giving the ID of the
 interface that disappeared.  It has no payload.
 </p>
 <h4>HCI packets</h4>
 <p>
-The remaining types are HCI packets as specified by the Host Controller
-Interface Functional Specification portion of the most recent
-<a class=away href="https://web.archive.org/web/20130314201541/https://www.bluetooth.org/Technical/Specifications/adopted.htm">Bluetooth
-Core Specification</a>:
-</p>
-<p>
-The payload of an HCI Command Packet is as specified by the "HCI Command
-Packet" section of that document.
-</p>
-<p>
-The payload of an HCI ACL Data Packet is as specified by the "HCI ACL
-Data Packets" section of that document.
-</p>
-<p>
-The payload of an HCI Command Packet is as specified by the "HCI
-Synchronous Data Packets" section of that document.
-</p>
-<p>
-The payload of an HCI Command Packet is as specified by the "HCI Event
-Packet" section of that document.
-</p>
+The remaining types are HCI packets, as specified by Volume 4, Part E "Host
+Controller Interface Functional Specification" of the Bluetooth Core
+specification, of the packet type indicated by the opcode field.
+value.
             </div>
             <!-- End of LINKTYPE_BLUETOOTH_LINUX_MONITOR section -->
           </div>
