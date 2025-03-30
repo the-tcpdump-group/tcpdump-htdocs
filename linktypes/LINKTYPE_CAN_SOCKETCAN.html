@@ -113,7 +113,7 @@ determine the frame type in the following fashion.
                 <h4>Description</h4>
 
 <p>
-The CAN ID and flags field is in network byte order (big-endian).
+The CAN ID and flags field is in big-endian byte order.
 The bottom 29 bits contain the CAN ID of the frame.
 The remaining bits are:
 </p>
@@ -124,8 +124,8 @@ The remaining bits are:
 </ul>
 
 <p>
-The frame payload length indicates the number of bytes of payload
-following the header.  All packet bytes after those bytes of payload are
+The payload length indicates the number of octets of payload
+following the header.  All packet octets after those octets of payload are
 padding.
 </p>
 
@@ -160,7 +160,7 @@ Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> CAN CC and CAN FD fr
   </ul>
   <li>Must set the "Reserved/Padding" field to 0.</li>
   <li>May set a Len 8 DLC value for CAN CC frames or set this field to 0.</li>
-  <li>May strip trailing padding bytes to save disk space if all above statements are satisfied.</li>
+  <li>May strip trailing padding octets to save disk space if all above statements are satisfied.</li>
 </ul>
 
 <p>
@@ -176,28 +176,28 @@ A non-zero payload length does therefore not indicate the presence of payload da
 <p>
 
 <p>
-For an error message, the payload is always 8 bytes.  The lower bits of
+For an error message, the payload is always 8 octets.  The lower bits of
 the CAN ID field contain an error class value, with bits specified by
 the first set of <code>CAN_ERR_</code> values in <a class=away
 href="https://github.com/torvalds/linux/blob/master/include/uapi/linux/can/error.h">the
-Linux <code>uapi/can/error.h</code> header</a>.  The bytes in the payload are:
+Linux <code>uapi/can/error.h</code> header</a>.  The octets in the payload are:
 </p>
 <ul>
-<li>first byte - if arbitration was lost, the bit number in the bitstream in which it was lost;
+<li>first octet - if arbitration was lost, the bit number in the bitstream in which it was lost;
 otherwise 0. 
-<li>second byte - the error status of the CAN controller, with bits
-specified by the <code>CAN_ERR_CRTL_</code> bits in the Linux <code>uapi/can/error.h</code>
+<li>second octet - the error status of the CAN controller, with bits
+specified by the <code>CAN_ERR_CTRL_</code> bits in the Linux <code>uapi/can/error.h</code>
 header.
-<li>third byte - flags indicating a CAN protocol error type, with bits
+<li>third octet - flags indicating a CAN protocol error type, with bits
 specified by the <code>CAN_ERR_PROT_</code> bits in the Linux <code>uapi/can/error.h</code>
 header.
-<li>fourth byte - flags indicating a CAN protocol error location, with
+<li>fourth octet - flags indicating a CAN protocol error location, with
 bits specified by the <code>CAN_ERR_LOC_</code> bits in the Linux <code>uapi/can/error.h</code>
 header.
-<li>fifth byte - the error status of the CAN transceiver, with values
+<li>fifth octet - the error status of the CAN transceiver, with values
 specified by the <code>CAN_ERR_TRX_</code> values in the Linux <code>uapi/can/error.h</code>
 header.
-<li>sixth, seventh, and eighth bytes - controller-specific additional
+<li>sixth, seventh, and eighth octets - controller-specific additional
 information.
 </ul>
             </div>
@@ -263,8 +263,8 @@ Part 1: Definition of service data unit types (SDT)".
 
 <p>
 The frame payload length is in little-endian byte order.
-It indicates the number of bytes of payload
-following the header.  All packet bytes after those bytes of payload are
+It indicates the number of octets of payload
+following the header.  All packet octets after those octets of payload are
 padding.
 </p>
 
@@ -282,7 +282,7 @@ Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> CAN XL frames:
       <li>must set the <code>CANXL_XLF</code> bit.</li>
       <li>must set the <code>CANFD_SEC</code> bit as appropriate for the frame and clear all other bits.</li>
     </ul>
-  <li>May strip trailing padding bytes to save disk space if all above statements are satisfied.</li>
+  <li>May strip trailing padding octets to save disk space if all above statements are satisfied.</li>
 </ul>
 The payload is the data field of the CAN XL packet.
             </div>
