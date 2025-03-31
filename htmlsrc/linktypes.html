@@ -1431,7 +1431,7 @@ Communication Foundation (IEC/PAS 62591).
 <td class="number">224</td>
 <td class="symbol">DLT_FC_2</td>
 <td>
-Fibre Channel FC-2 frames, beginning with a Frame_Header.
+<a href="linktypes/LINKTYPE_FC_2.html">Fibre Channel FC-2 frames</a>.
 </td>
 </tr>
 
@@ -1440,14 +1440,8 @@ Fibre Channel FC-2 frames, beginning with a Frame_Header.
 <td class="number">225</td>
 <td class="symbol">DLT_FC_2_WITH_FRAME_DELIMS</td>
 <td>
-Fibre Channel FC-2 frames, beginning an encoding of the SOF, followed by
-a Frame_Header, and ending with an encoding of the SOF.
-<p>
-The encodings represent the frame delimiters as 4-byte sequences
-representing the corresponding ordered sets, with K28.5 represented as
-<code>0xBC</code>, and the D symbols as the corresponding byte values; for example,
-SOFi2, which is K28.5 - D21.5 - D1.2 - D21.2, is represented as <code>0xBC
-0xB5 0x55 0x55</code>.
+<a href="linktypes/LINKTYPE_FC_2_WITH_FRAME_DELIMS.html">Fibre Channel
+FC-2 frames with SOF and EOF</a>.
 </td>
 </tr>
 
