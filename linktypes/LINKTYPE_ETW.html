@@ -56,7 +56,7 @@
 /                                                               /
 /                        EVENT_HEADER                           /
 /                                                               /
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 80 bytes
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 80 octets
 |                      ETW_BUFFER_CONTEXT                       |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                        UserDataLength                         |
@@ -79,8 +79,8 @@
                 <h3>Description</h3>
 <p>
 
-All multi-byte numerical fields are little-endian.  All primitive types
-in this document are from Windows and their size can be found on <a class=away
+All multi-octet numerical fields are little-endian.  All primitive types
+in this document are from Windows and their size can be found in <a class=away
 href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/efda8314-6e41-4837-8299-38ba0ee04b92">section
 2.2 "Common Data Types"</a> of
 <a class=away
@@ -89,7 +89,7 @@ Windows Data Types</a>.
 
 </p>
 <p>
-EVENT_HEADER is 80 bytes long; its structure is described on <a class=away
+EVENT_HEADER is 80 octets long; its structure is described on <a class=away
 href="https://learn.microsoft.com/en-us/windows/win32/api/evntcons/ns-evntcons-event_header">Microsoft's
 page for the EVENT_HEADER structure</a>.
 </p>
@@ -115,26 +115,26 @@ The bit values of EventProperty in EVENT_HEADER are:
 #define EVENT_HEADER_PROPERTY_LEGACY_EVENTLOG   0x0004
 </pre>
 <p>
-ETW_BUFFER_CONTEXT is 4 bytes long; its structure is described on <a class=away
+ETW_BUFFER_CONTEXT is 4 octets long; its structure is described on <a class=away
 href="https://learn.microsoft.com/en-us/windows/win32/api/relogger/ns-relogger-etw_buffer_context">Microsoft's
 page for the ETW_BUFFER_CONTEXT structure</a>.
 </p>
 <p>
-UserDataLength is the length of UserData, the UserDataLength doesn't include the padding bytes of UserData.
+UserDataLength is the length of UserData; it doesn't include the padding octets of UserData.
 <p>
-MessageLength is the length of Message, the MessageLength doesn't include the padding bytes of Message.
+MessageLength is the length of Message; it doesn't include the padding octets of Message.
 </p>
 <p>
-ProviderNameLength is the length of ProviderName, the ProviderNameLength doesn't include the padding bytes of ProviderName.
+ProviderNameLength is the length of ProviderName; it doesn't include the padding octets of ProviderName.
 </p>
 <p>
-UserData is specific event data of the provider, its format is defined by the provider.
+UserData is specific event data of the provider; its format is defined by the provider.
 </p>
 <p>
-Message is a null-terminated UTF-16 string that contains the event message string.
+Message is a null-terminated UTF-16LE string that contains the event message string.
 </p>
 <p>
-Providername is a null-terminated UTF-16 string that contains the event provider name string.
+Providername is a null-terminated UTF-16LE string that contains the event provider name string.
 </p>
             </div>
           </div>
