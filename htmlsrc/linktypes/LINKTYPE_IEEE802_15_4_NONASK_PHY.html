@@ -1,0 +1,45 @@
+<div class="post">
+<h2 class="title">LINKTYPE_IEEE802_15_4_NONASK_PHY</h2>
+<div class="entry">
+
+<h3>Packet structure</h3>
+<pre>
++---------------------------------------+
+|                Preamble               |
+|               (4 Octets)              |
++---------------------------------------+
+|                   SFD                 |
+|                (1 Octet)              |
++---------------------------------------+
+|                   PHR                 |
+|              (1-2 Octets)             |
++---------------------------------------+
+|            802.15.4 MAC frame         |
+.                                       .
+.                                       .
+.                                       .
+</pre>
+
+<h3>Description</h3>
+<p>
+The packets are IEEE 802.15.4 O-QPSK, BPSK, GFSK, MSK, and RCC DSSS BPSK
+PHY frames.
+</p>
+<p>
+The Preamble field is as described in the clauses for the respective
+PHYs in IEEE Std 802.15.4.
+</p>
+<p>
+The SFD is as described in the clauses for the respective PHYs in
+IEEE Std 802.15.4.
+</p>
+<p>
+The PHR is as described in the clauses for the respective PHYs in
+IEEE Std 802.15.4.
+</p>
+<p>
+The 802.15.4 MAC frame is as described by section 7.2 "General MAC frame
+format" of IEEE Std 802.15.4. (FCS?)
+</p>
+</div>
+</div>
