@@ -48,7 +48,7 @@
                 LINKTYPE_I2C_LINUX
             </h2>
             <div class="entry">
-                <h3>Packet structure</h3>
+                <h3 class="subtitle">Packet structure</h3>
 <pre>
 +-------------------------+
 |  Bus number+event flag  |
@@ -66,7 +66,7 @@
 .                         .
 </pre>
 
-                <h3>Description</h3>
+                <h3 class="subtitle">Description</h3>
 <p>The lower 7 bits of the bus number + event flag field contain the bus
 number; the upper bit indicates whether the packet is an event or a
 regular packet&mdash;if it's set, the packet is an event.
@@ -120,8 +120,8 @@ indicate that:
 For regular packets, the payload is the data of an I2C message.
 </p>
             </div>
-            <!-- End of LINKTYPE_I2C_LINUX section -->
           </div>
+          <!-- End of LINKTYPE_I2C_LINUX section -->
         </div>
         <!-- END OF PAGE CONTENTS -->
 

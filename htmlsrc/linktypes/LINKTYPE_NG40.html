@@ -4,7 +4,7 @@
                 LINKTYPE_NG40
             </h2>
             <div class="entry">
-                <h3>Packet structure</h3>
+                <h3 class="subtitle">Packet structure</h3>
 <pre>
 +---------------------------+
 |            Type           |
@@ -28,7 +28,7 @@
 .                           .
 </pre>
 
-                <h3>Description</h3>
+                <h3 class="subtitle">Description</h3>
 <p>All multi-byte fields are in network byte order (big-endian).
 <p>
 The type field contains a value that is one of:
@@ -67,7 +67,7 @@ The flags field contains the following flags:
 The form of the subheader following the header depends on the value in
 the type field.
 </p>
-                <h4>Subheaders</h4>
+                    <h4 class="subtitle">Subheaders</h4>
 <p>
 For ATM AAL2 traffic, the subheader is of the form:
 </p>
@@ -309,7 +309,7 @@ to NodeB (down-link message).</li>
 The IPv6 addresses and SCTP ports identify the endpoints of the path;
 the SCTP stream ID identifies the SCTP stream of the path.
 </p>
-                <h4>Payload</h4>
+                    <h4 class="subtitle">Payload</h4>
 <p>
 For AAL2, UDP-over-IPv4, and UDP-over-IPv6 traffic, context information
 for the Frame Protocol and for the RLC/MAC layer is provided following
@@ -611,5 +611,5 @@ header.
 <p>For SCTP-over-IPv4 and SCTP-over-IPv6, an NBAP packet follows the
 subheader.
             </div>
-            <!-- End of LINKTYPE_NG40 section -->
           </div>
+          <!-- End of LINKTYPE_NG40 section -->

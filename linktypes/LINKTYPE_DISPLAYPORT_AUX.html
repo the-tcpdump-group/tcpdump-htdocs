@@ -48,7 +48,7 @@
                 LINKTYPE_DISPLAYPORT_AUX
             </h2>
             <div class="entry">
-                <h3>Packet structure</h3>
+                <h3 class="subtitle">Packet structure</h3>
 <p>
 (All fields are 8 bits wide.)
 </p>
@@ -62,7 +62,7 @@
 .                               .
 </pre>
 
-                <h3>Packet Type DATA</h3>
+                <h3 class="subtitle">Packet Type DATA</h3>
 <pre>
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |        Type DATA(0x00)        |
@@ -81,7 +81,7 @@ one-byte field indicating whether the Data was sent from the Sink (e.g.
 a display) or from the Source (e.g. a graphics card).
 </p>
 
-                <h3>Packet Type EVENT</h3>
+                <h3 class="subtitle">Packet Type EVENT</h3>
 <pre>
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |        Type EVENT(0x02)       |
@@ -100,7 +100,7 @@ The Input Status field contains a set of flag bits:
 <li>0x02-0x80 - Application specific
 </ul>
 
-                <h3>Packet Type START</h3>
+                <h3 class="subtitle">Packet Type START</h3>
 <pre>
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |        Type START(0x03)       |
@@ -112,7 +112,8 @@ The Input Status field contains a set of flag bits:
 A monitor session was started.
 Input status encoding as specified in the EVENT packet description.
 </p>
-                <h3>Packet Type STOP</h3>
+
+                <h3 class="subtitle">Packet Type STOP</h3>
 <pre>
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |        Type STOP(0x04)        |
@@ -122,8 +123,8 @@ Input status encoding as specified in the EVENT packet description.
 A monitor session was stopped.
 </p>
             </div>
-            <!-- End of LINKTYPE_DISPLAYPORT_AUX section -->
           </div>
+          <!-- End of LINKTYPE_DISPLAYPORT_AUX section -->
         </div>
         <!-- END OF PAGE CONTENTS -->
 

@@ -4,7 +4,7 @@
                 LINKTYPE_MUX27010
             </h2>
             <div class="entry">
-                <h3>Packet structure</h3>
+                <h3 class="subtitle">Packet structure</h3>
 <pre>
 +-------------+
 | Header_Size |
@@ -29,7 +29,7 @@
                     
 </pre>
 
-                <h3>Description</h3>
+                <h3 class="subtitle">Description</h3>
 <p>
 Parts of the packets (the Flag_Mux octets and the octets between them)
 of this link type frames are based on the 3GPP standard
@@ -42,7 +42,7 @@ fields for PPP chunks and direction indication (the Msg_ID through Flag
 octets).
 </p>
 
-                <h3>Description for the Msg_ID through Flag octets</h3>
+                <h3 class="subtitle">Description for the Msg_ID through Flag octets</h3>
 <p>
 If there are PPP chunks surrounded by Flag_Mux octets, they
 will be indicated by the {Msg_ID, Freg_ID, Start_Pos, End_Pos, Flag}
@@ -72,5 +72,5 @@ of 1; the others have a Flag value of 0.</p>
 means from GSM Modem to the Host; "1" means from Host to GSM Modem.
 </p>
             </div>
-            <!-- End of LINKTYPE_MUX27010 section -->
           </div>
+          <!-- End of LINKTYPE_MUX27010 section -->

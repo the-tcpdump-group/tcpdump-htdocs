@@ -36,8 +36,8 @@ determine the frame type in the following fashion.
   </ul>
 </ul>
             <div class="entry">
-                <h3>CAN CC and CAN FD frames</h3>
-                <h4>Packet structure</h4>
+                <h3 class="subtitle">CAN CC and CAN FD frames</h3>
+                    <h4 class="subtitle">Packet structure</h4>
 <pre>
 +---------------------------+
 |      CAN ID and flags     |
@@ -66,7 +66,7 @@ determine the frame type in the following fashion.
 .                           .
 </pre>
 
-                <h4>Description</h4>
+                    <h4 class="subtitle">Description</h4>
 
 <p>
 The CAN ID and flags field is in big-endian byte order.
@@ -158,8 +158,8 @@ information.
 </ul>
             </div>
             <div class="entry">
-                <h3>CAN XL frames</h3>
-                <h4>Packet structure</h4>
+                <h3 class="subtitle">CAN XL frames</h3>
+                    <h4 class="subtitle">Packet structure</h4>
 <pre>
 +---------------------------+
 |      Priority ID/VCID     |
@@ -188,7 +188,7 @@ information.
 .                           .
 </pre>
 
-                <h4>Description</h4>
+                    <h4 class="subtitle">Description</h4>
 <p>
 <em>The Priority ID/VCID field is big-endian, but the payload length and
 acceptance field are little-endian.</em>
@@ -242,5 +242,5 @@ Software that generates <code>LINKTYPE_CAN_SOCKETCAN</code> CAN XL frames:
 </ul>
 The payload is the data field of the CAN XL packet.
             </div>
-            <!-- End of LINKTYPE_CAN_SOCKETCAN section -->
           </div>
+          <!-- End of LINKTYPE_CAN_SOCKETCAN section -->

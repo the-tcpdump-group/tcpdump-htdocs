@@ -4,7 +4,7 @@
                 LINKTYPE_PKTAP
             </h2>
             <div class="entry">
-                <h2 class="subtitle">Packet structure (PKTAP version 1)</h2>
+                <h3 class="subtitle">Packet structure (PKTAP version 1)</h3>
 <pre>
 +---------------------------+
 |   Length of PKTAP header  |
@@ -76,7 +76,7 @@
 .                           .
 </pre>
 
-                <h2 class="subtitle">Packet structure (PKTAP version 2)</h2>
+                <h3 class="subtitle">Packet structure (PKTAP version 2)</h3>
 <pre>
 +----------------------------------------+
 |         Length of PKTAP header         |
@@ -151,15 +151,15 @@
 .                                        .
 </pre>
 
-                <h2 class="subtitle">Description</h2>
+                <h3 class="subtitle">Description</h3>
 <p>
 All multi-byte fields currently appear to be little-endian, but Apple
 haven't indicated whether this is by design or merely a consequence of
 all Apple machines that write this format being little-endian.
 </p>
-<h3 class="subtitle">
+<h4 class="subtitle">
 In the PKTAP version 1 header:
-</h3>
+</h4>
 <p>
 The length field indicates how long the PKTAP header is; this value
 includes the length of the length field itself.  It should be
@@ -279,9 +279,9 @@ may be <code>IPPROTO_RAW</code> if the packet was written to a raw socket.
 All fields following the effective command name field are optional; the
 length field indicates how many fields are present.
 </p>
-<h3 class="subtitle">
+<h4 class="subtitle">
 In the PKTAP version 2 header:
-</h3>
+</h4>
 <p>
 The length field indicates how long the PKTAP header is; this value
 includes the length of the length field itself.  It should be
@@ -419,5 +419,5 @@ running in some process, truncated to 20 characters.  It may be a
 null string if the executable image name is unknown.
 </p>
             </div>
-            <!-- End of LINKTYPE_PKTAP section -->
           </div>
+          <!-- End of LINKTYPE_PKTAP section -->

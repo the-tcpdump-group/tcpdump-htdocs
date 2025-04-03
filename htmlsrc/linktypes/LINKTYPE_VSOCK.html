@@ -4,7 +4,7 @@
                 LINKTYPE_VSOCK
             </h2>
             <div class="entry">
-                <h3>Packet structure</h3>
+                <h3 class="subtitle">Packet structure</h3>
 <pre>
 +---------------------------+
 |         Source CID        |
@@ -39,7 +39,7 @@
 .                           .
 </pre>
 
-                <h3>Description</h3>
+                <h3 class="subtitle">Description</h3>
 <p>
 The source and destination CID fields are in little-endian byte order;
 they identify the source and destination vsock devices.
@@ -86,7 +86,7 @@ the transport header type is unknown.
 For packets with an operation field with a value of 4, the payload
 follows the transport header.
 </p>
-                <h3>Virtio transport header structure</h3>
+                <h3 class="subtitle">Virtio transport header structure</h3>
 <pre>
 +---------------------------+
 |         Source CID        |
@@ -121,7 +121,7 @@ follows the transport header.
 +---------------------------+
 </pre>
 
-                <h3>Description</h3>
+                <h3 class="subtitle">Description</h3>
 <p>
 The source and destination CID fields are in little-endian byte order;
 they identify the source and destination vsock devices.
@@ -171,5 +171,5 @@ The receive counter field is in little-endian byte order; it indicates
 how many bytes of payload data have been received.
 </p>
             </div>
-            <!-- End of LINKTYPE_VSOCK section -->
           </div>
+          <!-- End of LINKTYPE_VSOCK section -->

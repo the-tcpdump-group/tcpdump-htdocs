@@ -48,7 +48,7 @@
                 LINKTYPE_NULL
             </h2>
             <div class="entry">
-                <h2 class="subtitle">Packet structure for BSD loopback encapsulation</h2>
+                <h3 class="subtitle">Packet structure</h3>
 <pre>
 +---------------------------+
 |       Protocol type       |
@@ -60,7 +60,7 @@
 .                           .
 </pre>
 
-                <h2 class="subtitle">Description</h2>
+                <h3 class="subtitle">Description</h3>
 <p>
 The protocol type field is in the host byte order of the machine on
 which the capture was done.  The values for that field are:
@@ -75,7 +75,7 @@ which the capture was done.  The values for that field are:
 </ul>
 <p>
 All of the IPv6 values correspond to IPv6 packets; code reading files
-should check for all of them.
+must treat all of them as ndicating an IPv6 packet.
 </p>
 <p>
 Note that ``host byte order'' is the byte order of the machine on that
@@ -85,8 +85,8 @@ order'' is the byte order of the machine capturing the packets, but if a
 the machine reading the capture file.
 </p>
             </div>
-            <!-- End of LINKTYPE_NULL section -->
           </div>
+          <!-- End of LINKTYPE_NULL section -->
         </div>
         <!-- END OF PAGE CONTENTS -->
 

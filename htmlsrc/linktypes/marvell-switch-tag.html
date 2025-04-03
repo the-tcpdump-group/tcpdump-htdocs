@@ -4,7 +4,7 @@
                 Marvell switch tag
             </h2>
             <div class="entry">
-                <h3>Switch tag structure</h3>
+                <h3 class="subtitle">Switch tag structure</h3>
 The Marvell (Ethertyped or not) DSA tagged frames contain a
 proprietary tag inserted between the source address field and the
 type/length field in the Ethernet header.
@@ -36,7 +36,7 @@ two reserved octets (always 0), and a standard DSA tag.
 +1 +---+---+---+---+---+---+---+---+  -- --
 </pre>
 
-<h4>To_CPU frame mode (ingress)</h4>
+                    <h4 class="subtitle">To_CPU frame mode (ingress)</h4>
 The DSA tag mode <code>0x0</code> describes a To_CPU frame.
 
 If the <code>b29</code> bit is set, the original frame contained an IEEE tag
@@ -65,7 +65,7 @@ the source device.
 The VID bits define the VLAN identifier assigned to the frame when
 it entered the source device.
 
-<h4>From_CPU frame mode (egress)</h4>
+                    <h4 class="subtitle">From_CPU frame mode (egress)</h4>
 The DSA tag mode <code>0x1</code> describes a From_CPU frame.
 
 If the <code>b29</code> bit is set, the frame egresses the target port with an
@@ -84,7 +84,7 @@ frame is to be switched to.
 The VID bits define the IEEE VID of the frame if it egresses the
 target port tagged, otherwise they are ignored.
 
-<h4>To_Sniffer frame mode (ingress)</h4>
+                    <h4 class="subtitle">To_Sniffer frame mode (ingress)</h4>
 The DSA tag mode <code>0x2</code> describes a To_Sniffer frame.
 
 If the <code>b29</code> bit is set, the original frame contained an IEEE tag
@@ -105,7 +105,7 @@ the source device.
 The VID bits define the VLAN identifier assigned to the frame when
 it entered the source device.
 
-<h4>Forward DSA tag frame mode (egress)</h4>
+                    <h4 class="subtitle">Forward DSA tag frame mode (egress)</h4>
 The DSA tag mode <code>0x3</code> describes a Forward frame.
 
 The <code>b29</code> bit is used to inform the egress port to consider the frame
@@ -115,7 +115,7 @@ The PRI bits are used as the IEEE tag priority of the frame.
 
 The VID bits are used as the IEEE VID of the frame.
 
-<h4>Forward DSA tag frame mode (ingress)</h4>
+                    <h4 class="subtitle">Forward DSA tag frame mode (ingress)</h4>
 The DSA tag mode <code>0x3</code> describes a Forward frame.
 
 If the <code>b29</code> bit is set, the original frame contained an IEEE tag

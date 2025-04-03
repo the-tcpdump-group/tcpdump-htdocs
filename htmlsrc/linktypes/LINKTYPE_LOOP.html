@@ -4,7 +4,7 @@
                 LINKTYPE_LOOP
             </h2>
             <div class="entry">
-                <h2 class="subtitle">Packet structure for BSD loopback encapsulation</h2>
+                <h3 class="subtitle">Packet structure</h3>
 <pre>
 +---------------------------+
 |       Protocol type       |
@@ -16,7 +16,7 @@
 .                           .
 </pre>
 
-                <h2 class="subtitle">Description</h2>
+                <h3 class="subtitle">Description</h3>
 <p>
 The protocol type field is in big-endian byte order.  The values for
 that field are:
@@ -31,8 +31,8 @@ that field are:
 </ul>
 <p>
 All of the IPv6 values correspond to IPv6 packets; code reading files
-should check for all of them.
+must treat all of them as ndicating an IPv6 packet.
 </p>
             </div>
-            <!-- End of LINKTYPE_LOOP section -->
           </div>
+          <!-- End of LINKTYPE_LOOP section -->
