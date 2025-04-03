@@ -1194,16 +1194,8 @@ containing a type indicator.
 <td class="number">204</td>
 <td class="symbol">DLT_PPP_WITH_DIR</td>
 <td>
-PPP, as per
-<a class=away href="https://www.rfc-editor.org/rfc/rfc1661.html">RFC 1661</a>
-and
-<a class=away href="https://www.rfc-editor.org/rfc/rfc1662.html">RFC 1662</a>,
-preceded with a one-byte pseudo-header with a zero value meaning
-"received by this host" and a non-zero value meaning "sent by this
-host"; if the first 2 bytes are <code>0xff</code> and <code>0x03</code>, it's PPP in HDLC-like
-framing, with the PPP header following those two bytes, otherwise it's
-PPP without framing, and the packet begins with the PPP header.  The
-data in the frame is not octet-stuffed or bit-stuffed.
+<a href="linktypes/LINKTYPE_PPP_WITH_DIR.html">PPP, with a direction
+header</a>.
 </td>
 </tr>
 
