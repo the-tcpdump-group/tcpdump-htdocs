@@ -80,11 +80,58 @@
 
                 <h3>Description</h3>
 <p>
-The protocol type field is in network byte order.
+The protocol type field is in big-endian byte order.
 </p>
 <p>
-The <code>ARPHRD_</code> type field is in network byte order; it contains a Linux
+The interface index field is in big-endian byte order; its value is the
+interface index, on the machine on which the capture is done, of the
+interface on which the packet was sent or received.
+</p>
+<p>
+The <code>ARPHRD_</code> type field is in big-endian byte order; it contains a Linux
 <code>ARPHRD_</code> value for the link-layer device type.
+</p>
+<p>
+The packet type field is in big-endian byte order; it contains
+a value that is one of:
+</p>
+<ul>
+<li>0, if the packet was specifically sent to us by somebody else;</li>
+<li>1, if the packet was broadcast by somebody else;</li>
+<li>2, if the packet was multicast, but not broadcast, by somebody
+else;</li>
+<li>3, if the packet was sent to somebody else by somebody else;</li>
+<li>4, if the packet was sent by us.</li>
+</ul>
+<p>
+If the <code>ARPHRD_</code> type is <code>ARPHRD_IPGRE</code> (778), the protocol type field
+contains a <a class=away href="https://www.rfc-editor.org/rfc/rfc2784.html">GRE</a>
+protocol type.
+</p>
+<p>
+If the <code>ARPHRD_</code> type is <code>ARPHRD_IEEE80211_RADIOTAP</code> (803), the protocol
+type field is ignored, and the payload following the <code>LINKTYPE_LINUX_SLL</code>
+header begins with <a class=away href="http://www.radiotap.org/">Radiotap
+link-layer information</a> followed by an 802.11 header.
+</p>
+<p>
+The link-layer address length field is in big-endian byte order; it
+contains the length of the link-layer address of the sender of the
+packet.  That length could be zero.
+</p>
+<p>
+The link-layer address field contains the link-layer address of the
+sender of the packet; the number of octets of that field that are
+meaningful is specified by the link-layer address length field.  If
+there are more than 8 octets, only the first 8 octets are present, and
+if there are fewer than 8 octets, there are padding octets after the
+address to pad the field to 8 octets.
+</p>
+<p>
+If the <code>ARPHRD_</code> type is <code>ARPHRD_NETLINK</code> (824), the packet data,
+including the <code>LINKTYPE_LINUX_SLL</code> header, is <a
+href="LINKTYPE_NETLINK.html">a <code>LINKTYPE_NETLINK</code> packet</a>,
+with the protocol type field being the Netlink protocol type.
 </p>
 <p>
 If the <code>ARPHRD_</code> type is <code>ARPHRD_IPGRE</code> (778), the protocol type field
@@ -114,110 +161,23 @@ type for the packet, or one of:
 header;</li>
 <li><code>0x0003</code>, in some mysterious cases;</li>
 <li><code>0x0004</code>, if the frame begins with an 802.2 LLC header;</li>
-<li><code>0x000C</code>, if the frame is a CAN bus frame that begins with a header of
-the form:
-
-<pre>
-+---------------------------+
-|      CAN ID and flags     |
-|         (4 Octets)        |
-+---------------------------+
-|    Frame payload length   |
-|         (1 Octet)         |
-+---------------------------+
-|          Padding          |
-|         (1 Octet)         |
-+---------------------------+
-|      Reserved/Padding     |
-|         (1 Octet)         |
-+---------------------------+
-|      Reserved/Padding     |
-|         (1 Octet)         |
-+---------------------------+
-</pre>
-
-<p>
-where the field containing the CAN ID and flags is in host byte order.
-The bottom 29 bits contain the CAN ID of the frame.  The remaining bits
-are:
-</p>
-<ul>
-<li><code>0x20000000</code> - set if the frame is an error message rather than a data
+<li><code>0x000C</code>, if the frame is a CAN CC (classic CAN) frame;
+<li><code>0x000D</code>, if the frame is a CAN FD (CAN with Flexible Data-Rate)
 frame;
-<li><code>0x40000000</code> - set if the frame is a remote transmission request
-frame;
-<li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather
-than a standard 11-bit frame;
-</ul>
-and the header is followed by the payload.</li>
-
-<li><code>0x000D</code>, if the frame is a CAN FD (CAN with Flexible Data-Rate) frame
-that begins with a header of the form:
-
-<pre>
-+---------------------------+
-|      CAN ID and flags     |
-|         (4 Octets)        |
-+---------------------------+
-|    Frame payload length   |
-|         (1 Octet)         |
-+---------------------------+
-|         FD flags          |
-|         (1 Octet)         |
-+---------------------------+
-|      Reserved/Padding     |
-|         (1 Octet)         |
-+---------------------------+
-|      Reserved/Padding     |
-|         (1 Octet)         |
-+---------------------------+
-</pre>
-
-<p>
-where the field containing the CAN ID and flags is in host byte order.
-The bottom 29 bits of that field contain the CAN ID of the frame.  The
-remaining bits are:
-</p>
-<ul>
-<li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather
-than a standard 11-bit frame.</li>
-</ul>
-The bits of the FD flags field are:
-<ul>
-<li><code>0x01</code> - set if the bit rate switch flag is set for the frame;</li>
-<li><code>0x02</code> - set if the error state indicator is set for the frame;</li>
-</ul>
-and the header is followed by the payload.</li>
-</ul>
-<p>The "Reserved (MBZ)" field is reserved, and must be set to zero.
-</p>
-<p>
-The interface index field is a signed integer in network byte order and
-contains the 1-based index of the interface on which the packet was observed.
-</p>
-<p>
-The packet type field contains a value that is one of:
-</p>
-<ul>
-<li>0, if the packet was specifically sent to us by somebody else;</li>
-<li>1, if the packet was broadcast by somebody else;</li>
-<li>2, if the packet was multicast, but not broadcast, by somebody
-else;</li>
-<li>3, if the packet was sent to somebody else by somebody else;</li>
-<li>4, if the packet was sent by us.</li>
+<li><code>0x000E</code>, if the frame is a CAN XL frame.
 </ul>
 <p>
-The link-layer address length field contains the length of the link-layer
-address of the sender of the packet.  That length could be zero.
-</p>
-<p>
-The link-layer address field contains the link-layer address of the
-sender of the packet; the number of bytes of that field that are
-meaningful is specified by the link-layer address length field.  If
-there are more than 8 bytes, only the first 8 bytes are present, and
-if there are fewer than 8 bytes, there are padding bytes after the
-address to pad the field to 8 bytes.
-</p>
+CAN CC, CAN FD, and CAN XL frames are in a format similar to <a
+href="LINKTYPE_CAN_SOCKETCAN.html"><code>LINKTYPE_CAN_SOCKETCAN</code>
+frames</a>, except that:
+<ol>
+<li>all multi-octet fields in the <code>LINKTYPE_CAN_SOCKETCAN</code>
+header are in host byte order rather than big-endian or little-endian
+byte order;</li>
+<li>the protocol type field, rather than bits in the FD flags and XL
+flags fields, should be used to distinguish between CAN
+CC, CAN FD, and CAN XL frames.</li>
+</ol>
             </div>
             <!-- End of LINKTYPE_LINUX_SLL2 section -->
           </div>

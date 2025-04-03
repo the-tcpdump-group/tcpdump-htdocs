@@ -74,7 +74,7 @@
 
                 <h3>Description</h3>
 <p>
-The packet type field is in network byte order (big-endian); it contains
+The packet type field is in big-endian byte order; it contains
 a value that is one of:
 </p>
 <ul>
@@ -86,24 +86,24 @@ else;</li>
 <li>4, if the packet was sent by us.</li>
 </ul>
 <p>
-The <code>ARPHRD_</code> type field is in network byte order; it contains a Linux
+The <code>ARPHRD_</code> type field is in big-endian byte order; it contains a Linux
 <code>ARPHRD_</code> value for the link-layer device type.
 </p>
 <p>
-The link-layer address length field is in network byte order; it
+The link-layer address length field is in big-endian byte order; it
 contains the length of the link-layer address of the sender of the
 packet.  That length could be zero.
 </p>
 <p>
 The link-layer address field contains the link-layer address of the
-sender of the packet; the number of bytes of that field that are
+sender of the packet; the number of octets of that field that are
 meaningful is specified by the link-layer address length field.  If
-there are more than 8 bytes, only the first 8 bytes are present, and
-if there are fewer than 8 bytes, there are padding bytes after the
-address to pad the field to 8 bytes.
+there are more than 8 octets, only the first 8 octets are present, and
+if there are fewer than 8 octets, there are padding octets after the
+address to pad the field to 8 octets.
 </p>
 <p>
-The protocol type field is in network byte order.
+The protocol type field is in big-endian byte order.
 </p>
 <p>
 If the <code>ARPHRD_</code> type is <code>ARPHRD_NETLINK</code> (824), the packet data,
@@ -139,127 +139,23 @@ type for the packet, or one of:
 header;</li>
 <li><code>0x0003</code>, in some mysterious cases;</li>
 <li><code>0x0004</code>, if the frame begins with an 802.2 LLC header;</li>
-<li><code>0x000C</code>, if the frame is a CAN bus frame;
+<li><code>0x000C</code>, if the frame is a CAN CC (classic CAN) frame;
 <li><code>0x000D</code>, if the frame is a CAN FD (CAN with Flexible Data-Rate)
-frame.
-</ul>
-
-<p>
-A CAN bus frame begins with a header of the form:
-</p>
-
-<pre>
-+---------------------------+
-|      CAN ID and flags     |
-|         (4 Octets)        |
-+---------------------------+
-|    Frame payload length   |
-|         (1 Octet)         |
-+---------------------------+
-|          Padding          |
-|         (1 Octet)         |
-+---------------------------+
-|      Reserved/Padding     |
-|         (1 Octet)         |
-+---------------------------+
-|      Reserved/Padding     |
-|         (1 Octet)         |
-+---------------------------+
-</pre>
-
-<p>
-where the field containing the CAN ID and flags is in host byte order.
-The bottom 29 bits contain the CAN ID of the frame.  The remaining bits
-are:
-</p>
-<ul>
-<li><code>0x20000000</code> - set if the frame is an error message rather than a data
 frame;
-<li><code>0x40000000</code> - set if the frame is a remote transmission request
-frame;
-<li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather
-than a standard 11-bit frame;
+<li><code>0x000E</code>, if the frame is a CAN XL frame.
 </ul>
 <p>
-and the header is followed by the CAN bus payload.
-</p>
-
-<p>
-A CAN FD frame begins with a header of the form:
-</p>
-
-<pre>
-+---------------------------+
-|      CAN ID and flags     |
-|         (4 Octets)        |
-+---------------------------+
-|    Frame payload length   |
-|         (1 Octet)         |
-+---------------------------+
-|         FD flags          |
-|         (1 Octet)         |
-+---------------------------+
-|      Reserved/Padding     |
-|         (1 Octet)         |
-+---------------------------+
-|      Reserved/Padding     |
-|         (1 Octet)         |
-+---------------------------+
-</pre>
-
-<p>
-where the field containing the CAN ID and flags is in host byte order.
-The bottom 29 bits of that field contain the CAN ID of the frame.  The
-remaining bits are:
-</p>
-<ul>
-<li><code>0x80000000</code> - set if the frame is an extended 29-bit frame rather
-than a standard 11-bit frame.</li>
-</ul>
-The bits of the FD flags field are:
-<ul>
-<li><code>0x01</code> - set if the bit rate switch flag is set for the frame;</li>
-<li><code>0x02</code> - set if the error state indicator is set for the frame;</li>
-</ul>
-<p>
-and the header is followed by the CAN FD payload.
-</p>
-
-<p>
-For a CAN or CAN FD data frame, the payload is the data field of the
-packet.
-</p>
-
-<p>
-For a retransmission request, the length must be 0, so the payload is
-empty.
-<p>
-
-<p>
-For a CAN or CAN FD error message, the payload is always 8 bytes.  The
-lower bits of the CAN ID field contain an error class value, with bits
-specified by the first set of <code>CAN_ERR_</code> values in <a class=away
-href="https://github.com/torvalds/linux/blob/master/include/uapi/linux/can/error.h">the
-Linux <code>uapi/can/error.h</code> header</a>.  The bytes in the payload are:
-</p>
-<ul>
-<li>first byte - if arbitration was lost, the bit number in the bitstream in which it was lost;
-otherwise 0. 
-<li>second byte - the error status of the CAN controller, with bits
-specified by the <code>CAN_ERR_CRTL_</code> bits in the Linux <code>uapi/can/error.h</code>
-header.
-<li>third byte - flags indicating a CAN protocol error type, with bits
-specified by the <code>CAN_ERR_PROT_</code> bits in the Linux <code>uapi/can/error.h</code>
-header.
-<li>fourth byte - flags indicating a CAN protocol error location, with
-bits specified by the <code>CAN_ERR_LOC_</code> bits in the Linux <code>uapi/can/error.h</code>
-header.
-<li>fifth byte - the error status of the CAN transceiver, with values
-specified by the <code>CAN_ERR_TRX_</code> values in the Linux <code>uapi/can/error.h</code>
-header.
-<li>sixth, seventh, and eighth bytes - controller-specific additional
-information.
-</ul>
+CAN CC, CAN FD, and CAN XL frames are in a format similar to <a
+href="LINKTYPE_CAN_SOCKETCAN.html"><code>LINKTYPE_CAN_SOCKETCAN</code>
+frames</a>, except that:
+<ol>
+<li>all multi-octet fields in the <code>LINKTYPE_CAN_SOCKETCAN</code>
+header are in host byte order rather than big-endian or little-endian
+byte order;</li>
+<li>the protocol type field, rather than bits in the FD flags and XL
+flags fields, should be used to distinguish between CAN
+CC, CAN FD, and CAN XL frames.</li>
+</ol>
             </div>
             <!-- End of LINKTYPE_LINUX_SLL section -->
           </div>
