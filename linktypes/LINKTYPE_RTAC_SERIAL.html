@@ -52,19 +52,19 @@
 <pre>
 +---------------------------+
 | Relative TimeStamp (Left) |
-|          (4 Bytes)        |
+|         (4 Octets)        |
 +---------------------------+
 | Relative TimeStamp (Right)|
-|          (4 Bytes)        |
+|         (4 Octets)        |
 +---------------------------+
 |     Serial Event Type     |
-|          (1 Byte)         |
+|         (1 Octet)         |
 +---------------------------+
 |  UART Control Line State  |
-|          (1 Byte)         |
+|         (1 Octet)         |
 +---------------------------+
 |          Footer           |
-|         (2 Bytes)         |
+|        (2 Octets)         |
 +---------------------------+
 |          Payload          |
 .                           .
@@ -117,10 +117,13 @@ The Footer is reserved for future use.
 </p>
 <p>
 The payload is one of: <a class=away
-href="https://www.dnp.org/default.aspx">DNP3</a>,
-<a class=away href="https://www.modbus.org">Modbus</a>, <a class=away
-href="http://standards.ieee.org/findstds/standard/C37.118.1-2011.html">IEEE
-C37.118 Synchrophasor</a> or SELFM.  The packet
+href="https://www.dnp.org/default.aspx">DNP3</a> (<a class=away
+href="https://standards.ieee.org/ieee/1815/5414/">IEEE 1815-2012</a>),
+<a class=away href="https://www.modbus.org/specs.php">Modbus</a>, <a
+class=away
+href="https://standards.ieee.org/ieee/60255-118-1/5724/">IEEE/IEC
+60255-118-1-2018 Synchrophasor for power systems - Measurements</a> or
+Schweitzer Engineering Laboratories Fast Message (SELFM). The packet
 does not specify which it is; a program processing these packets must
 either have the payload type specified externally or must attempt to
 determine it heuristically.
