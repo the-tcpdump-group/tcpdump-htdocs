@@ -128,7 +128,7 @@
 +----------------------------------------+
 |             Offset of UUID             |
 |                (1 Octet)               |
------------------------------------------+
++----------------------------------------+
 |         Offset of effective UUID       |
 |                (1 Octet)               |
 +----------------------------------------+
@@ -197,7 +197,7 @@
 
                 <h3 class="subtitle">Description</h3>
 <p>
-All multi-byte fields currently appear to be little-endian, but Apple
+All multi-octet fields currently appear to be little-endian, but Apple
 haven't indicated whether this is by design or merely a consequence of
 all Apple machines that write this format being little-endian.
 </p>
@@ -266,7 +266,7 @@ The process ID field contains the process ID of the process that sent
 the packet; it may be 0 if the process ID is unknown.
 </p>
 <p>
-The command name contains a null-padded ASCII string giving the last
+The command name contains a null-padded UTF-8 string giving the last
 component of the path name of the executable image running in the
 process that sent the packet, truncated to 20 characters.  It may be
 a null string if the executable image name is unknown. <em>Do not</em>
@@ -305,7 +305,7 @@ The effective process ID field is assumed to contain a process ID of
 some sort; it may be 0 if the process ID is unknown.
 </p>
 <p>
-The effective command name contains a null-padded ASCII string giving
+The effective command name contains a null-padded UTF-8 string giving
 the last component of the path name of the executable image running in
 some process, truncated to 20 characters.  It may be a null string if
 the executable image name is unknown.  <em>Do not</em> assume that there
@@ -451,13 +451,13 @@ The interface name contains a null-terminated ASCII string giving the name
 of the interface on which the packet arrived.
 </p>
 <p>
-The command name contains a null-terminated ASCII string giving the last
+The command name contains a null-terminated UTF-8 string giving the last
 component of the path name of the executable image running in the
 process that sent the packet, truncated to 20 characters.  It may be
 a null string if the executable image name is unknown.
 </p>
 <p>
-The effective command name contains a null-terminated ASCII string
+The effective command name contains a null-terminated UTF-8 string
 giving the last component of the path name of the executable image
 running in some process, truncated to 20 characters.  It may be a
 null string if the executable image name is unknown.
