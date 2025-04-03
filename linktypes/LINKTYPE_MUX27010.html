@@ -70,7 +70,6 @@
 .                                                                                            .
 .                                                                                            .
 .                                                                                            .
-                    
 </pre>
 
                 <h3 class="subtitle">Description</h3>
@@ -78,7 +77,7 @@
 Parts of the packets (the Flag_Mux octets and the octets between them)
 of this link type frames are based on the 3GPP standard
 <a class=away href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=1516">TS 27.010</a>,
-but they are slight deviations to meet the actual implementation of
+but there are slight deviations to match the actual implementation of
 Cinterion and Siemens modules, e.g. no <code>I</code> frame support, but an
 additional <code>UIH_E</code> frame.  In addition, the original MUX_Frame (the
 Flag_Mux octets and the octets between them) is extended by some extra
@@ -103,8 +102,8 @@ invalid.
 <p>
 Start_Pos is the 1-origin index (from the octet after the Direction
 octet, so the index of the first Flag_Mux octet would be 1) of the first
-byte of the chunk, and End_Pos is the 1-origin index (from the octet
-after the Direction octet) of the last byte of the chunk.
+octet of the chunk, and End_Pos is the 1-origin index (from the octet
+after the Direction octet) of the last octet of the chunk.
 </p>
 <p>
 All the chunks of a given PPP packet have the same Msg_ID value. 
