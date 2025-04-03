@@ -37,7 +37,7 @@ IPv6.
 The version field is 0 for the current version of the pseudo-header.
 </p>
 <p>
-The resource ID is in network byte order (big-endian).  On one netlink
+The resource ID is in big-endian byte order.  On one netlink
 socket it's possible to listen to several nflog groups; the resource ID
 is the nflog group for the packet.
 </p>
@@ -119,8 +119,8 @@ The hardware address structure is:
 +-------------------------------+
 </pre>
 <p>
-All 32-bit integral values, and all multi-byte integral values in
-structures listed above, are in big-endian (network) byte order.
+All 32-bit integral values, and all multi-octet integral values in
+structures listed above, are in big-endian byte order.
             </div>
           </div>
           <!-- End of LINKTYPE_NFLOG section -->
