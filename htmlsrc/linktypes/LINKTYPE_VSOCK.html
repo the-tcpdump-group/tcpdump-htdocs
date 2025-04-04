@@ -69,9 +69,9 @@ contains a value that is one of:
 </ul>
 <p>
 The transport header length field is in little-endian byte order; it
-indicates how many bytes of transport header follow the length field.
-It may be non-zero even if the transport header type field has a value
-of 1; in that case, the bytes for the transport header should be
+indicates how many octets of transport header follow the length field.
+It might be non-zero even if the transport header type field has a value
+of 1; in that case, the octets for the transport header should be
 skipped.
 </p>
 <p>
@@ -133,7 +133,7 @@ destination devices.
 </p>
 <p>
 The payload length field is in little-endian byte order; it indicates
-how many bytes of data comprise the payload.
+how many octets of data comprise the payload.
 </p>
 <p>
 The socket type field is in little-endian byte order; it contains a
@@ -163,12 +163,12 @@ indicates that no more data will be sent.
 </p>
 <p>
 The available space field is in little-endian byte order; it indicates
-how many bytes of payload data can be received without risk of dropping
+how many octets of payload data can be received without risk of dropping
 packets.
 </p>
 <p>
 The receive counter field is in little-endian byte order; it indicates
-how many bytes of payload data have been received.
+how many octets of payload data have been received.
 </p>
             </div>
           </div>
