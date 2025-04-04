@@ -6,7 +6,7 @@
                 <h3 class="subtitle">Packet structure</h3>
 <pre>
 +-------------------------+
-|        Dongle Code      |
+|       Dongle Code       |
 |        (1 Octet)        |
 +-------------------------+
 |       Packet Delay      |
@@ -45,7 +45,7 @@ and are used in the lighting control industry.</p>
 </ul>
 
 <p>The Packet Delay field contains an integer value that is the
-number of milliseconds since the previous packet, in network byte order.</p>
+number of milliseconds since the previous packet, in big-endian byte order.</p>
 
 <p>The Preamble 1 and Preamble 2 fields should each contain <code>0xAA</code>.</p>
 
