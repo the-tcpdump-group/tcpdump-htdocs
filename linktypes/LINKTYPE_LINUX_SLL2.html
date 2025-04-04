@@ -128,10 +128,11 @@ if there are fewer than 8 octets, there are padding octets after the
 address to pad the field to 8 octets.
 </p>
 <p>
-If the <code>ARPHRD_</code> type is <code>ARPHRD_NETLINK</code> (824), the packet data,
-including the <code>LINKTYPE_LINUX_SLL</code> header, is <a
-href="LINKTYPE_NETLINK.html">a <code>LINKTYPE_NETLINK</code> packet</a>,
-with the protocol type field being the Netlink protocol type.
+If the <code>ARPHRD_</code> type is <code>ARPHRD_NETLINK</code> (824),
+the packet data, including the <code>LINKTYPE_LINUX_SLL</code> header,
+is <a href="../linktypes/LINKTYPE_NETLINK.html">a
+<code>LINKTYPE_NETLINK</code> packet</a>, with the protocol type field
+being the Netlink protocol type.
 </p>
 <p>
 If the <code>ARPHRD_</code> type is <code>ARPHRD_IPGRE</code> (778), the protocol type field
@@ -168,7 +169,7 @@ frame;
 </ul>
 <p>
 CAN CC, CAN FD, and CAN XL frames are in a format similar to <a
-href="LINKTYPE_CAN_SOCKETCAN.html"><code>LINKTYPE_CAN_SOCKETCAN</code>
+href="../linktypes/LINKTYPE_CAN_SOCKETCAN.html"><code>LINKTYPE_CAN_SOCKETCAN</code>
 frames</a>, except that:
 <ol>
 <li>all multi-octet fields in the <code>LINKTYPE_CAN_SOCKETCAN</code>
