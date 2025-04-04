@@ -1,4 +1,4 @@
-          <!-- Start of LINKTYPE_USB_LINUX_MMAPPED -->
+          <!-- Start of LINKTYPE_USB_LINUX_MMAPPED section -->
           <div class="post">
             <h2 class="title">
                 LINKTYPE_USB_LINUX_MMAPPED
@@ -61,7 +61,7 @@
 | Number of isochronous descriptors present |
 |                 (4 Octets)                |
 +-------------------------------------------+
-|                   Payload                 |
+|                  Payload                  |
 .                                           .
 .                                           .
 .                                           .
@@ -72,6 +72,7 @@
 A packet corresponds either to a URB submitted to the USB subsystem, a
 completion report for a URB, or an error report for a URB.
 </p>
+<p>
 All fields are in host byte order:
 <ul>
 <li>
@@ -100,9 +101,10 @@ The event type field is an ASCII character that indicates type type of
 the event; it is:
 </p>
 <ul>
-<li>'S' (0x53), if the event is a submission of a URB;</li>
-<li>'C' (0x43), if the event is a completion report for a URB;</li>
-<li>'E' (0x45), if the event reports an error from a URB
+<li><code>'S'</code> (0x53), if the event is a submission of a URB;</li>
+<li><code>'C'</code> (0x43), if the event is a completion report for a
+URB;</li>
+<li><code>'E'</code> (0x45), if the event reports an error from a URB
 submission.</li>
 </ul>
 <p>
@@ -176,14 +178,14 @@ SuperSpeed devices. For other types of transfers, it does not contain a
 meaningful value.
 </p>
 <p>
-For isochoronous transfers, the start frame field contains the initial
+For isochronous transfers, the start frame field contains the initial
 frame. For other types of transfers, it does not contain a meaningful
 value.
 </p>
 <p>
-For isochronous transfers, The number of isochronous descriptors present
+For isochronous transfers, the number of isochronous descriptors present
 field indicates the number of isochronous descriptors in the event. Its
-value MUST be less than or equal to the value of the number of
+value must be less than or equal to the value of the number of
 descriptors field; if it is less than that value, not all descriptors
 for the transfer are included in the event.
 <p>
@@ -211,12 +213,12 @@ or the negative of a Linux errno value for the error being reported if
 an error occurred for that descriptor.
 </p>
 <p>
-The offset field is the offset, in bytes, of the data for the descriptor
+The offset field is the offset, in octets, of the data for the descriptor
 from the beginning of the data portion of the payload.
 </p>
 <p>
-The length field is the length, in bytes, of the data for the
-descriptor. This may be zero.
+The length field is the length, in octets, of the data for the
+descriptor. This might be zero.
 </p>
 <p>
 The padding field does not contain any information.
@@ -229,11 +231,11 @@ of descriptors present in the event.
 For all other types of transfer, there are no isochronous descriptors;
 the number of isochronous descriptors present field contains no
 meaningful data.
-<p>
-The data, if any, for the event follows the isochronous descriptors, if
-any.
 </p>
+<p>
+The data, if any, for the event follows the setup/isochronous
+information field and, if there are any, the isochronous descriptors.
 </p>
             </div>
           </div>
-          <!-- LINKTYPE_USB_LINUX_MMAPPED -->
+          <!-- End of LINKTYPE_USB_LINUX_MMAPPED section -->

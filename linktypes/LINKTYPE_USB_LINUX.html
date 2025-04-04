@@ -93,7 +93,7 @@
 |        Setup/isochronous information      |
 |                 (8 Octets)                |
 +-------------------------------------------+
-|                   Payload                 |
+|                  Payload                  |
 .                                           .
 .                                           .
 .                                           .
@@ -104,6 +104,7 @@
 A packet corresponds either to a URB submitted to the USB subsystem, a
 completion report for a URB, or an error report for a URB.
 </p>
+<p>
 All fields are in host byte order:
 <ul>
 <li>
@@ -132,9 +133,10 @@ The event type field is an ASCII character that indicates type type of
 the event; it is:
 </p>
 <ul>
-<li>'S' (0x53), if the event is a submission of a URB;</li>
-<li>'C' (0x43), if the event is a completion report for a URB;</li>
-<li>'E' (0x45), if the event reports an error from a URB
+<li><code>'S'</code> (0x53), if the event is a submission of a URB;</li>
+<li><code>'C'</code> (0x43), if the event is a completion report for a
+URB;</li>
+<li><code>'E'</code> (0x45), if the event reports an error from a URB
 submission.</li>
 </ul>
 <p>
@@ -206,7 +208,7 @@ information field.
 </p>
             </div>
           </div>
-          <!-- End of Linux USB packet section -->
+          <!-- End of LINKTYPE_USB_LINUX section -->
         </div>
         <!-- END OF PAGE CONTENTS -->
 
