@@ -51,7 +51,7 @@
 
                 <h3 class="subtitle">Description</h3>
 <p>
-All multi-byte fields are little-endian.
+All multi-octet fields are little-endian.
 </p>
 <p>
 The version number field is a 2-octet value with the upper 8 bits
@@ -60,7 +60,7 @@ version number, and the next 4 bits giving the sub-minor version number.
 The current version is 1.0.0, so the value is <code>0x0100</code>.
 <p>
 The length field indicates how long the header is; this value
-includes the length of the length field itself.  It should be
+includes the length of the length field itself.  It must be
 at least 32; if it's larger, there is additional data in the header
 following the endpoint type.
 </p>
@@ -147,8 +147,8 @@ For isochronous endpoints:
 <ul>
 <li>If the packet indicates a completed request, the payload is a
 sequence of "number of isochronous frames following" isochronous frames. 
-Each isochronous frame begins with 0&ndash;3 bytes of padding to put the
-data following it on a 4-byte boundary.  After that is a header of the
+Each isochronous frame begins with 0&ndash;3 octets of padding to put the
+data following it on a 4-octet boundary.  After that is a header of the
 form:
 <pre>
 +----------------------------------------+
@@ -170,12 +170,12 @@ form:
 </pre>
 <p>
 The length field indicates how long the header is; this value
-includes the length of the length field itself.  It should be
+includes the length of the length field itself.  It must be
 at least 28; if it's larger, there is additional data in the header
 following the time in which the frame completed.
 </p>
 <p>
-The frame length field indicates how many bytes of data are in the
+The frame length field indicates how many octets of data are in the
 frame.
 </p>
 <p>
@@ -196,11 +196,11 @@ performed is available.
 </p>
 <p>
 Following the header is the data for the frame; the frame length field
-indicates how many bytes of data there are for that frame.
+indicates how many octets of data there are for that frame.
 </p>
 <li>If the packet indicates a submitted request, the payload is a
 sequence of "number of isochronous frames following" isochronous frame
-headers, with the frame length set to the number of bytes to be
+headers, with the frame length set to the number of octets to be
 transferred, the frame status field set to <code>0xe0000001</code>, and without any
 data following the header.</li>
 </ul>
