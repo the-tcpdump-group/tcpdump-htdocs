@@ -1,0 +1,55 @@
+          <!-- Start of LINKTYPE_MTP2_WITH_PHDR section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_MTP2_WITH_PHDR
+            </h2>
+            <div class="entry">
+                <h3 class="subtitle">Packet structure</h3>
+<pre>
++--------------------------------+
+|           Direction            |
+|           (1 Octet)            |
++--------------------------------+
+| Extended Sequence Numbers used |
+|           (1 Octet)            |
++--------------------------------+
+|           Link number          |
+|           (2 Octets)           |
++--------------------------------+
+|           MTP2 frame           |
+.                                .
+.                                .
+.                                .
+</pre>
+
+                <h3 class="subtitle">Description</h3>
+<p>
+The Direction field is 0 if the packet is going over the link in one
+direction and 1 if it's going over the link in the other direction. If
+the capture is being done by the device sending and receiving the
+packets, 0 should be used for packets received by the device and 1
+should be used for packets sent by the device.
+</p>
+<p>
+The Extended Sequence Numbers used field is 0 if extended sequence
+numbers, as specified by Annex A of <a class=away
+href="https://www.itu.int/rec/T-REC-Q.703/en/">ITU-T Recommendation
+Q.703</a>, are not being used, 1 if extended sequence numbers are being
+used, and 2 if it is unknown whether extended sequence numbers are being
+used.
+</p>
+<p>
+The Link number field is in big-endian byte order, and indicates the
+number of the signaling link.
+<p>
+The MTP2 frame is a Signaling System No. 7 Message Transfer Part Level
+2 (MTP2) packet, as specified by section 2.2 "Signal unit format" of <a
+class=away href="https://www.itu.int/rec/T-REC-Q.703/en/">ITU-T
+Recommendation Q.703</a> (note that the fields in Figure 3 are
+transmitted in right-to-left order).  The packet does not include the
+check bits.  The packet is not bit-stuffed, so it includes no flag
+fields.
+</p>
+            </div>
+          </div>
+          <!-- End of LINKTYPE_MTP2_WITH_PHDR section -->
