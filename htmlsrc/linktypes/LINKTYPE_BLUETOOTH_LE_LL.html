@@ -1,0 +1,36 @@
+          <!-- Start of LINKTYPE_BLUETOOTH_LE_LL section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_BLUETOOTH_LE_LL
+            </h2>
+            <div class="entry">
+                <h3 class="subtitle">Description</h3>
+<p>
+The packets are Bluetooth Low Energy air interface Link Layer packets:
+</p>
+<ul>
+<li>
+<p>
+A packet using the LE Uncoded PHYs (LE 1M PHY and LE 2M PHY), as defined
+in Volume 6, Part B, Section 2.1 "Packet format for the LE Uncoded PHYs"
+of the Bluetooth Core Specification, is represented as the four-octet
+access address, immediately followed by the PDU and CRC; it does not
+include the preamble.
+</p>
+</li>
+<li>
+<p>
+A packet using the LE Coded PHY, as defined in Volume 6, Part B, Section
+2.2 "Packet format for the LE Coded PHY" of the Bluetooth Core
+Specification, is represented as the four-octet access address, followed
+by the Coding Indicator (CI), stored in a one-octet field with the lower
+2 bits containing the CI value, immediately followed by the PDU and the
+CRC; it does not include the preamble.  Packets using the LE Coded PHY
+are represented in an uncoded form, so the TERM1 and TERM2 coding
+terminators are not included in the LE packet field.
+</p>
+</li>
+</ul>
+            </div>
+          </div>
+          <!-- End of LINKTYPE_BLUETOOTH_LE_LL section -->
