@@ -1001,6 +1001,7 @@ function caper_disasm (string $filter, bool $optimize, int $snaplen): string
 			'-not_undistribute',
 			'-q',
 			'-n',
+			'-max_rec', 4, # enable "protochain"
 			'-s', $snaplen,
 			'-e',
 			$filter
