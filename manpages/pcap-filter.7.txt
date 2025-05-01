@@ -126,11 +126,11 @@ PRIMITIVES
 
        gateway host
               True  if the packet used host as a gateway.  I.e., the source or
-              the destination Ethernet address was host but neither the source
-              nor the destination ARP/IPv4/RARP address was host.  In this im-
-              plementation this primitive is  not  available  in  IPv6-enabled
-              configuration.   May be qualified with a specific protocol (arp,
-              ip, rarp).  For example,
+              the destination Ethernet-like address is host  but  neither  the
+              source  nor the destination ARP/IPv4/RARP address is host.  This
+              primitive is valid only for the same  link-layer  types  as  the
+              ether  host  primitive  above.  May be qualified with a specific
+              protocol (arp, ip, rarp).  For example,
                    ip gateway host
               is equivalent to
                    ether host ethernameaddr and not ip host hostnameaddr
@@ -1110,4 +1110,4 @@ BUGS
        and may incorrectly match packets that have a different combination  of
        protocol and hardware.
 
-                                 27 March 2025                  PCAP-FILTER(7)
+                                 7 April 2025                   PCAP-FILTER(7)

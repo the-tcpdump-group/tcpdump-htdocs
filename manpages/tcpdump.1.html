@@ -1312,6 +1312,8 @@ or
 
 will compress each savefile using gzip or bzip2.
 <DT><DD>
+This option can only be used if fork subprocess is implemented (e.g. not on Windows systems).
+<DT><DD>
 Note that tcpdump will run the command in parallel to the capture, using
 the lowest priority so that this doesn't disturb the capture process.
 <DT><DD>
@@ -2765,7 +2767,7 @@ skewed time stamps (the time change is ignored).
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 18:57:54 GMT, March 11, 2025
+This HTML man page was generated at 21:01:00 GMT, May 01, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
