@@ -1,0 +1,37 @@
+          <!-- Start of LINKTYPE_EDK2_MM section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_EDK2_MM
+            </h2>
+            <div class="entry">
+<pre>
++---------------+
+|  Packet Type  |
+|  (4 octets)   |
++---------------+
+|    Payload    |
+.               .
+.               .
+.               .
+</pre>
+                <h3 class="subtitle">Description</h3>
+<p>
+  Request serialization protocol used by edk2 firmware to communicate
+  between normal mode and management mode ('MM' for short).
+</p>
+<p>
+  The QEMU UEFI variable store implementation reuses the request
+  serialization protocol for firmware &harr; QEMU communication.
+</p>
+<p>
+  There are three packet types (32-bit integer in little endian byte
+  order):
+</p>
+<ul>
+  <li>RESET (1) - machine reset</li>
+  <li>REQUEST (2) - normal mode &rarr; management mode request message</li>
+  <li>REPLY (3) - management mode &rarr; normal mode response message</li>
+</ul>
+            </div>
+          </div>
+          <!-- End of LINKTYPE_EDK2_MM section -->
