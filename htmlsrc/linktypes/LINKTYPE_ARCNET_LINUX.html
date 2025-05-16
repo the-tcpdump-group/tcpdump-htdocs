@@ -1,0 +1,70 @@
+          <!-- Start of LINKTYPE_ARCNET_LINUX section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_ARCNET_LINUX
+            </h2>
+            <div class="entry">
+                <h3 class="subtitle">Packet structure</h3>
+<pre>
++---------------+
+|    Source     |
+|   (1 octet)   |
++---------------+
+|  Destination  |
+|   (1 octet)   |
++---------------+
+|    Offset     |
+|  (2 octets)   |
++---------------+
+|  Protocol ID  |
+|   (1 octet)   |
++---------------+
+| other fields  |
+| (conditional) |
++---------------+
+|    Payload    |
+.               .
+.               .
+.               .
+</pre>
+
+                <h3 class="subtitle">Description</h3>
+<p>
+This encoding loosely corresponds to the "buffer" defined in Chapter 4 of
+<a class=away href="https://bitsavers.org/pdf/datapoint/arcnet/61610-01_ARCNET_Designers_Handbook_1983.pdf">ARCnet
+Designer's Handbook</a> (Datapoint document number 61610-01) and the "frame"
+defined in
+<a class=away href="https://www.rfc-editor.org/rfc/rfc1201.html#section-2.1">Section
+2.1 of RFC 1201</a>; both structures represent the "Data Packet (PAC)" defined
+in Section 3.1.5.3 of
+<a class=away href="https://arcnet.cc/resources/ata8781.pdf">ATA 878.1-1999</a>.
+</p>
+<p>
+The Source field is the "source" in the "frame" and the SID in the "buffer".
+</p>
+<p>
+The Destination field is the "destination" in the "frame" and the DID in the
+"buffer".
+</p>
+<p>
+The Offset field does not seem to have a purpose in this encoding: regardless
+of the value, there is no padding and the Protocol ID field always immediately
+follows the Offset field.
+</p>
+<p>
+The Protocol ID field is the "protocol ID" in the "frame" and the "System Code"
+in the "buffer" and the PAC.  In ATA 878.1-1999 Section 3.2.5 specifies this
+field as mandatory and Section 10 defines it as possibly two-octet.
+</p>
+<p>
+Depending on the value of Protocol ID, the header may include other fields
+before the payload.  Specifically, values 212 (IPv4), 213 (ARP) and 214 (RARP)
+mean RFC 1201 encoding, value 196 (IPv6) means RFC 2497 encoding; in both
+cases Protocol ID is followed by Split Flag (1 octet) and Frame Sequence
+Number (2 octets, big-endian byte order).  Values 240 (IPv4) and 241 (ARP)
+mean RFC 1051 encoding, in which case the header does not include any
+additional fields.
+</p>
+            </div>
+          </div>
+          <!-- End of LINKTYPE_ARCNET_LINUX section -->
