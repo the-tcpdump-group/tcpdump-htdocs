@@ -568,7 +568,7 @@ echo preg_replace
 						using the <code>optimize</code> argument to
 						<A href="/manpages/pcap_compile.3pcap.html"><B>pcap_compile</B></A>(3PCAP);
 						it optimizes the CFG as discussed in detail in
-						<A class=away href="https://sharkfestus.wireshark.org/sharkfest.11/presentations/McCanne-Sharkfest'11_Keynote_Address.pdf">this
+						<A class=away href="https://sharkfest.wireshark.org/retrospective/sfus/presentations11/McCanne-Sharkfest'11_Keynote_Address.pdf">this
 						document</A>. The third step translates the CFG into binary
 						bytecode, which can be used by the OS kernel.
 					</P>
