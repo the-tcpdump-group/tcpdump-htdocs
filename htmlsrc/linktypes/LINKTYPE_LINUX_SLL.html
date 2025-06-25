@@ -63,7 +63,7 @@ The protocol type field is in big-endian byte order.
 </p>
 <p>
 If the <code>ARPHRD_</code> type is <code>ARPHRD_NETLINK</code> (824),
-the packet data, including the <code>LINKTYPE_LINUX_SLL</code> header,
+the payload, including the <code>LINKTYPE_LINUX_SLL</code> header,
 is <a href="../linktypes/LINKTYPE_NETLINK.html">a
 <code>LINKTYPE_NETLINK</code> packet</a>, with the protocol type field
 being the Netlink protocol type.
@@ -71,35 +71,36 @@ being the Netlink protocol type.
 <p>
 If the <code>ARPHRD_</code> type is <code>ARPHRD_IPGRE</code> (778), the protocol type field
 contains a <a class=away href="https://datatracker.ietf.org/doc/html/rfc2784">GRE</a>
-protocol type.
+protocol type for the payload.
 </p>
 <p>
-If the <code>ARPHRD_</code> type is <code>ARPHRD_IEEE80211_RADIOTAP</code> (803), the protocol
-type field is ignored, and the payload following the <code>LINKTYPE_LINUX_SLL</code>
-header begins with <a class=away href="http://www.radiotap.org/">Radiotap
-link-layer information</a> followed by an 802.11 header.
+If the <code>ARPHRD_</code> type is
+<code>ARPHRD_IEEE80211_RADIOTAP</code> (803), the protocol type field is
+ignored, and the payload begins with <a class=away
+href="http://www.radiotap.org/">Radiotap link-layer information</a>
+followed by an 802.11 header.
 </p>
 <p>
-If the <code>ARPHRD_</code> type is <code>ARPHRD_FRAD</code> (770), the protocol type field is
-ignored, and the payload following the <code>LINKTYPE_LINUX_SLL</code> header is a
-Frame Relay LAPF frame, beginning with a <a class=away
+If the <code>ARPHRD_</code> type is <code>ARPHRD_FRAD</code> (770), the
+protocol type field is ignored, and the payload is a Frame Relay LAPF
+frame, beginning with a <a class=away
 href="https://www.itu.int/rec/T-REC-Q.922/en/">ITU-T Recommendation
 Q.922</a> LAPF header starting with the address field, and without an
-FCS at the end of the frame. 
+FCS at the end of the frame.
 </p>
 <p>
 Otherwise, the protocol type field contains the Ethernet protocol
-type for the packet, or one of:
+type for the payload, or one of:
 </p>
 <ul>
-<li><code>0x0001</code>, if the frame is a Novell 802.3 frame without an 802.2 LLC
-header;</li>
+<li><code>0x0001</code>, if the payload is a Novell 802.3 frame without
+an 802.2 LLC header;</li>
 <li><code>0x0003</code>, in some mysterious cases;</li>
-<li><code>0x0004</code>, if the frame begins with an 802.2 LLC header;</li>
-<li><code>0x000C</code>, if the frame is a CAN CC (classic CAN) frame;
-<li><code>0x000D</code>, if the frame is a CAN FD (CAN with Flexible Data-Rate)
+<li><code>0x0004</code>, if the payload begins with an 802.2 LLC header;</li>
+<li><code>0x000C</code>, if the payload is a CAN CC (classic CAN) frame;
+<li><code>0x000D</code>, if the payload is a CAN FD (CAN with Flexible Data-Rate)
 frame;
-<li><code>0x000E</code>, if the frame is a CAN XL frame.
+<li><code>0x000E</code>, if the payload is a CAN XL frame.
 </ul>
 <p>
 CAN CC, CAN FD, and CAN XL frames are in a format similar to <a
