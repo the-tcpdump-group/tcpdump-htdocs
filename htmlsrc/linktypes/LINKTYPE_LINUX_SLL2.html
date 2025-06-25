@@ -60,17 +60,6 @@ else;</li>
 <li>4, if the packet was sent by us.</li>
 </ul>
 <p>
-If the <code>ARPHRD_</code> type is <code>ARPHRD_IPGRE</code> (778), the protocol type field
-contains a <a class=away href="https://datatracker.ietf.org/doc/html/rfc2784">GRE</a>
-protocol type.
-</p>
-<p>
-If the <code>ARPHRD_</code> type is <code>ARPHRD_IEEE80211_RADIOTAP</code> (803), the protocol
-type field is ignored, and the payload following the <code>LINKTYPE_LINUX_SLL</code>
-header begins with <a class=away href="http://www.radiotap.org/">Radiotap
-link-layer information</a> followed by an 802.11 header.
-</p>
-<p>
 The link-layer address length field is in big-endian byte order; it
 contains the length of the link-layer address of the sender of the
 packet.  That length could be zero.
