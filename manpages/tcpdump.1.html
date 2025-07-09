@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 10 March 2025<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 30 June 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents tcpdump version 5.0.0-PRE-GIT.</H4>
@@ -25,7 +25,7 @@ tcpdump - dump traffic on a network
 <B>tcpdump</B>
 
 [
-<B>-AbdDefhHIJKlLnNOpqStuUvxX#</B>
+<B>-AbdDefghHIJKlLnNOpqStuUvxX#</B>
 
 ] [
 <B>-B</B>
@@ -33,6 +33,8 @@ tcpdump - dump traffic on a network
 <I>buffer_size</I>
 
 ]
+<BR>
+
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
@@ -52,6 +54,8 @@ tcpdump - dump traffic on a network
 
 ]
 <BR>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-E</B>
@@ -59,6 +63,8 @@ tcpdump - dump traffic on a network
 <I>spi@ipaddr algo:secret,...</I>
 
 ]
+<BR>
+
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
@@ -80,6 +86,8 @@ tcpdump - dump traffic on a network
 
 ]
 <BR>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>--immediate-mode</B>
@@ -91,8 +99,6 @@ tcpdump - dump traffic on a network
 <I>tstamp_type</I>
 
 ]
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>--lengths</B>
 
@@ -103,6 +109,8 @@ tcpdump - dump traffic on a network
 <I>module</I>
 
 ]
+<BR>
+
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
@@ -119,14 +127,16 @@ tcpdump - dump traffic on a network
 <B>--print</B>
 
 ]
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>--print-sampling</B>
 
 <I>nth</I>
 
 ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-Q</B>
 
@@ -139,8 +149,6 @@ tcpdump - dump traffic on a network
 <I>file</I>
 
 ]
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-s</B>
 
@@ -153,6 +161,10 @@ tcpdump - dump traffic on a network
 <I>count</I>
 
 ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-T</B>
 
@@ -163,8 +175,6 @@ tcpdump - dump traffic on a network
 <B>--version</B>
 
 ]
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-V</B>
 
@@ -183,14 +193,16 @@ tcpdump - dump traffic on a network
 <I>filecount</I>
 
 ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-y</B>
 
 <I>datalinktype</I>
 
 ]
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-z</B>
 
@@ -204,13 +216,13 @@ tcpdump - dump traffic on a network
 
 ]
 <BR>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>--time-stamp-precision=</B><I>tstamp_precision</I>
 
 ]
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>--micro</B>
 
@@ -219,6 +231,8 @@ tcpdump - dump traffic on a network
 <B>--nano</B>
 
 ]
+<BR>
+
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
@@ -587,6 +601,15 @@ the interface.
 <DD>
 Use <I>file</I> as input for the filter expression.
 An additional expression given on the command line is ignored.
+<DT><CODE>-g</CODE>
+
+<DD>
+
+<DT><CODE>--ip-oneline</CODE>
+
+<DD>
+
+Do not insert a line break after the IP header in verbose mode.
 <DT><CODE>-G</CODE><I> rotate_seconds</I>
 
 <DD>
@@ -2767,7 +2790,7 @@ skewed time stamps (the time change is ignored).
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 21:01:00 GMT, May 01, 2025
+This HTML man page was generated at 18:19:33 GMT, July 09, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
