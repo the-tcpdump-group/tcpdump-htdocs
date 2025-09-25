@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 7 April 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 18 September 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -834,12 +834,87 @@ True if the packet is an IPv4 multicast packet.
 True if the packet is an IPv6 multicast packet.
 <DT><B>ether proto </B><I>protocol</I><DD>
 True if the packet is of ether type <I>protocol</I>.
-<I>Protocol</I> can be a number or one of the names
-<B>aarp</B>, <B>arp</B>, <B>atalk</B>, <B>decnet</B>, <B>ip</B>, <B>ip6</B>,
-<B>ipx</B>, <B>iso</B>, <B>lat</B>, <B>loopback</B>, <B>mopdl</B>, <B>moprc</B>, <B>netbeui</B>,
-<B>rarp</B>, <B>sca</B> or <B>stp</B>.
-Note these identifiers (except <B>loopback</B>) are also keywords
-and must be escaped via backslash (\).
+<I>Protocol</I> can be a number or one of the names:
+<DL><DT><DD>
+<DL>
+<DT><B>aarp</B>
+
+<DD>
+AppleTalk ARP Protocol
+<DT><B>arp</B>
+
+<DD>
+ARP
+<DT><B>atalk</B>
+
+<DD>
+AppleTalk
+<DT><B>decnet</B>
+
+<DD>
+DECNet
+<DT><B>ip</B>
+
+<DD>
+IPv4
+<DT><B>ip6</B>
+
+<DD>
+IPv6
+<DT><B>ipx</B>
+
+<DD>
+Novell IPX
+<DT><B>iso</B>
+
+<DD>
+OSI protocols
+<DT><B>lat</B>
+
+<DD>
+DEC Local Area Transport (LAT)
+<DT><B>lldp</B>
+
+<DD>
+Link-Layer Discovery Protocol
+<DT><B>loopback</B>
+
+<DD>
+Loopback frames (DIX Ethernet Configuration Test Protocol)
+<DT><B>mopdl</B>
+
+<DD>
+DEC DNA Dump/Load (MOP),
+<DT><B>moprc</B>
+
+<DD>
+DEC DNA Remote Console (MOP)
+<DT><B>netbeui</B>
+
+<DD>
+NetBIOS Frame Protocol
+<DT><B>rarp</B>
+
+<DD>
+Reverse ARP
+<DT><B>sca</B>
+
+<DD>
+DEC System Communication Architecture (SCA)
+<DT><B>slow</B>
+
+<DD>
+IEEE Slow Protools
+<DT><B>stp</B>
+
+<DD>
+IEEE Spanning Tree Protocol
+</DL>
+</DL>
+
+<DT><DD>
+Note these identifiers (except <B>lldp</B>, <B>loopback</B> and <B>slow</B>)
+are also keywords and must be escaped via backslash (\).
 <DT><DD>
 [In the case of FDDI (e.g., `<B>fddi proto \arp</B>'), Token Ring
 (e.g., `<B>tr proto \arp</B>'), and IEEE 802.11 wireless LANs (e.g.,
@@ -906,19 +981,7 @@ Abbreviations for:
 
 
 where <I>protocol</I> is one of the above protocols, all of which originated
-at DEC, but are not the same as DECnet.  Namely,
-<B>lat</B>
-
-is Local Area Transport (LAT),
-<B>mopdl</B>
-
-is DNA Dump/Load (MOP),
-<B>moprc</B>
-
-is DNA Remote Console (MOP) and
-<B>sca</B>
-
-is System Communication Architecture (SCA).
+at DEC, but are not the same as DECnet.
 <DT><B>decnet host </B><I>decnetaddr</I><DD>
 True if the source or the destination DECnet address of the packet is
 <I>decnetaddr</I>.
@@ -2381,6 +2444,15 @@ The
 <B>vxlan</B>
 
 keyword became available in libpcap 1.11.0.
+<P>
+
+The
+<B>lldp</B>
+
+and
+<B>slow</B>
+
+protocols became available for &quot;ether proto&quot; in libpcap 1.11.0.
 <H2 id="lbAL">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
@@ -2463,7 +2535,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 21:01:00 GMT, May 01, 2025
+This HTML man page was generated at 11:19:22 GMT, September 25, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

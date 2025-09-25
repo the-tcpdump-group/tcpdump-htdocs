@@ -369,27 +369,66 @@ PRIMITIVES
 
        ether proto protocol
               True if the packet is of ether type protocol.  Protocol can be a
-              number  or  one  of the names aarp, arp, atalk, decnet, ip, ip6,
-              ipx, iso, lat, loopback, mopdl, moprc,  netbeui,  rarp,  sca  or
-              stp.  Note these identifiers (except loopback) are also keywords
-              and must be escaped via backslash (\).
+              number or one of the names:
 
-              [In the case of FDDI  (e.g.,  `fddi  proto  \arp'),  Token  Ring
-              (e.g.,  `tr  proto  \arp'), and IEEE 802.11 wireless LANs (e.g.,
-              `wlan proto \arp'), for most of those  protocols,  the  protocol
-              identification  comes  from the 802.2 Logical Link Control (LLC)
+                 aarp   AppleTalk ARP Protocol
+
+                 arp    ARP
+
+                 atalk  AppleTalk
+
+                 decnet DECNet
+
+                 ip     IPv4
+
+                 ip6    IPv6
+
+                 ipx    Novell IPX
+
+                 iso    OSI protocols
+
+                 lat    DEC Local Area Transport (LAT)
+
+                 lldp   Link-Layer Discovery Protocol
+
+                 loopback
+                        Loopback  frames (DIX Ethernet Configuration Test Pro-
+                        tocol)
+
+                 mopdl  DEC DNA Dump/Load (MOP),
+
+                 moprc  DEC DNA Remote Console (MOP)
+
+                 netbeui
+                        NetBIOS Frame Protocol
+
+                 rarp   Reverse ARP
+
+                 sca    DEC System Communication Architecture (SCA)
+
+                 slow   IEEE Slow Protools
+
+                 stp    IEEE Spanning Tree Protocol
+
+              Note these identifiers (except lldp, loopback and slow) are also
+              keywords and must be escaped via backslash (\).
+
+              [In  the  case  of  FDDI  (e.g.,  `fddi proto \arp'), Token Ring
+              (e.g., `tr proto \arp'), and IEEE 802.11  wireless  LANs  (e.g.,
+              `wlan  proto  \arp'),  for most of those protocols, the protocol
+              identification comes from the 802.2 Logical Link  Control  (LLC)
               header, which is usually layered on top of the FDDI, Token Ring,
               or 802.11 header.
 
-              When  filtering  for  most  protocol  identifiers on FDDI, Token
+              When filtering for most  protocol  identifiers  on  FDDI,  Token
               Ring, or 802.11, the filter checks only the protocol ID field of
-              an  LLC  header  in so-called SNAP format with an Organizational
+              an LLC header in so-called SNAP format  with  an  Organizational
               Unit Identifier (OUI) of 0x000000, for encapsulated Ethernet; it
-              doesn't  check  whether the packet is in SNAP format with an OUI
+              doesn't check whether the packet is in SNAP format with  an  OUI
               of 0x000000.  The exceptions are:
 
-              iso    the filter checks the DSAP  (Destination  Service  Access
-                     Point)  and  SSAP (Source Service Access Point) fields of
+              iso    the  filter  checks  the DSAP (Destination Service Access
+                     Point) and SSAP (Source Service Access Point)  fields  of
                      the LLC header;
 
               stp and netbeui
@@ -398,24 +437,24 @@ PRIMITIVES
               atalk  the filter checks for a SNAP-format packet with an OUI of
                      0x080007 and the AppleTalk etype.
 
-              In  the  case  of  Ethernet, the filter checks the Ethernet type
+              In the case of Ethernet, the filter  checks  the  Ethernet  type
               field for most of those protocols.  The exceptions are:
 
               iso, stp, and netbeui
-                     the filter checks for an 802.3 frame and then checks  the
+                     the  filter checks for an 802.3 frame and then checks the
                      LLC header as it does for FDDI, Token Ring, and 802.11;
 
               atalk  the filter checks both for the AppleTalk etype in an Eth-
-                     ernet frame and for a SNAP-format packet as it  does  for
+                     ernet  frame  and for a SNAP-format packet as it does for
                      FDDI, Token Ring, and 802.11;
 
-              aarp   the  filter  checks for the AppleTalk ARP etype in either
-                     an Ethernet frame or an 802.2 SNAP frame with an  OUI  of
+              aarp   the filter checks for the AppleTalk ARP etype  in  either
+                     an  Ethernet  frame or an 802.2 SNAP frame with an OUI of
                      0x000000;
 
               ipx    the filter checks for the IPX etype in an Ethernet frame,
-                     the IPX DSAP in the LLC  header,  the  802.3-with-no-LLC-
-                     header  encapsulation of IPX, and the IPX etype in a SNAP
+                     the  IPX  DSAP  in the LLC header, the 802.3-with-no-LLC-
+                     header encapsulation of IPX, and the IPX etype in a  SNAP
                      frame.
 
        ip, ip6, arp, rarp, atalk, aarp, decnet, iso, stp, ipx, netbeui
@@ -427,10 +466,7 @@ PRIMITIVES
               Abbreviations for:
                    ether proto \protocol
               where protocol is one of the above protocols, all of which orig-
-              inated  at  DEC, but are not the same as DECnet.  Namely, lat is
-              Local Area Transport (LAT), mopdl is DNA Dump/Load (MOP),  moprc
-              is  DNA Remote Console (MOP) and sca is System Communication Ar-
-              chitecture (SCA).
+              inated at DEC, but are not the same as DECnet.
 
        decnet host decnetaddr
               True if the source or the  destination  DECnet  address  of  the
@@ -1077,37 +1113,40 @@ BACKWARD COMPATIBILITY
 
        The vxlan keyword became available in libpcap 1.11.0.
 
+       The lldp and slow protocols became available for "ether proto" in libp-
+       cap 1.11.0.
+
 SEE ALSO
        pcap(3PCAP)
 
 BUGS
-       To   report   a   security   issue   please   send   an    e-mail    to
+       To    report    a   security   issue   please   send   an   e-mail   to
        security@tcpdump.org.
 
-       To  report  bugs and other problems, contribute patches, request a fea-
-       ture, provide generic feedback etc please see the file  CONTRIBUTING.md
+       To report bugs and other problems, contribute patches, request  a  fea-
+       ture,  provide generic feedback etc please see the file CONTRIBUTING.md
        in the libpcap source tree root.
 
-       Filter  expressions  on  fields  other than those in Token Ring headers
+       Filter expressions on fields other than those  in  Token  Ring  headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter expressions on fields other than those in  802.11  headers  will
-       not  correctly  handle  802.11 data packets with both To DS and From DS
+       Filter  expressions  on  fields other than those in 802.11 headers will
+       not correctly handle 802.11 data packets with both To DS  and  From  DS
        set.
 
-       `ip6 proto' should chase header chain, but at this moment it does  not.
-       `ip6  protochain' is supplied for this behavior.  For example, to match
+       `ip6  proto' should chase header chain, but at this moment it does not.
+       `ip6 protochain' is supplied for this behavior.  For example, to  match
        IPv6 fragments: `ip6 protochain 44'
 
-       Arithmetic expression against transport  layer  headers,  like  tcp[0],
+       Arithmetic  expression  against  transport  layer headers, like tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-       The  sio  and  hsio  keywords  do not test whether the packet is an MSU
-       packet.  The dpc, opc, sls, hdpc, hopc and hsls keywords  do  not  test
+       The sio and hsio keywords do not test whether  the  packet  is  an  MSU
+       packet.   The  dpc,  opc, sls, hdpc, hopc and hsls keywords do not test
        whether the packet is an MTP3 packet.
 
-       For  ARP and RARP the current implementation assumes IPv4 over Ethernet
-       and may incorrectly match packets that have a different combination  of
+       For ARP and RARP the current implementation assumes IPv4 over  Ethernet
+       and  may incorrectly match packets that have a different combination of
        protocol and hardware.
 
-                                 7 April 2025                   PCAP-FILTER(7)
+                               18 September 2025                PCAP-FILTER(7)
