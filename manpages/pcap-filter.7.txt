@@ -1025,6 +1025,7 @@ PROTOCOL NAMES IN VARIOUS CONTEXTS
        |l2       |      | yes  | no  | no    |                      |
        |lat      |      | yes  | yes | no    | link proto \lat      |
        |link     |      | no   | yes | yes   |                      |
+       |lldp     |      |      |     |       | link proto lldp      |
        |loopback |      |      |     |       | link proto loopback  |
        |lsp      |      | yes  | no  | no    |                      |
        |mopdl    |      | yes  | yes | no    | link proto \mopdl    |
@@ -1038,6 +1039,7 @@ PROTOCOL NAMES IN VARIOUS CONTEXTS
        |sca      |      | yes  | yes | no    | link proto \sca      |
        |sctp     |      | yes  | yes | yes   | [ip|ip6] proto \sctp |
        |slip     | link |      |     |       |                      |
+       |slow     |      |      |     |       | link proto slow      |
        |snp      |      | yes  | no  | no    |                      |
        |stp      |      | yes  | no  | no    | link proto \stp      |
        |tcp      |      | yes  | yes | yes   | [ip|ip6] proto \tcp  |
@@ -1149,4 +1151,4 @@ BUGS
        and  may incorrectly match packets that have a different combination of
        protocol and hardware.
 
-                               18 September 2025                PCAP-FILTER(7)
+                               25 September 2025                PCAP-FILTER(7)
