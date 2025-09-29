@@ -982,72 +982,73 @@ COMPOUND EXPRESSIONS
 PROTOCOL NAMES IN VARIOUS CONTEXTS
        The  table  below  shows which protocol names can be used in which con-
        texts of the currently implemented syntax.  The "name" column  contains
-       a  protocol  name,  which often can be used as an ID in primitives that
-       take a protocol name argument; in all cases except loopback the  proto-
-       col name is also a keyword.  If the keyword is an alias, the "see" col-
-       umn refers to the main keyword.  The "abbr" column  tells  whether  the
-       keyword  can be used as an abbreviation (that is, if the keyword is the
-       only contents of a primitive, it means a more complex expression).  The
-       "PDA" column tells whether the keyword can be used in a packet data ac-
-       cessor.  The "pqual" column tells whether the keyword can be used as  a
-       case of the proto qualifier kind.  If the name can be used as an ID for
-       the proto case of the type qualifier kind, the "tqual ID" column  shows
-       the valid context(s).
+       a protocol name, which can be used as a keyword and/or as an ID for the
+       proto case of the type qualifier kind.
 
-       +---------+------+------+-----+-------+----------------------+
-       |name     | see  | abbr | PDA | pqual | tqual ID             |
-       +---------+------+------+-----+-------+----------------------+
-       |aarp     |      | yes  | no  | no    | link proto \aarp     |
-       |ah       |      | yes  | no  | no    | [ip|ip6] proto \ah   |
-       |arp      |      | yes  | yes | yes   | link proto \arp      |
-       |atalk    |      | yes  | yes | no    | link proto \atalk    |
-       |carp     |      | yes  | yes | no    | ip proto \carp       |
-       |clnp     |      | yes  | no  | no    | iso proto \clnp      |
-       |csnp     |      | yes  | no  | no    |                      |
-       |decnet   |      | yes  | yes | yes   | link proto \decnet   |
-       |esis     |      | yes  | no  | no    | iso proto \esis      |
-       |es-is    | esis |      |     |       |                      |
-       |esp      |      | yes  | no  | no    | [ip|ip6] proto \esp  |
-       |ether    | link |      |     |       |                      |
-       |fddi     | link |      |     |       |                      |
-       |icmp     |      | yes  | yes | no    | ip proto \icmp       |
-       |icmp6    |      | yes  | yes | no    |                      |
-       |igmp     |      | yes  | yes | no    | ip proto \igmp       |
-       |igrp     |      | yes  | yes | no    | ip proto \igrp       |
-       |iih      |      | yes  | no  | no    |                      |
-       |ip       |      | yes  | yes | yes   | link proto \ip       |
-       |ip6      |      | yes  | yes | yes   | link proto \ip6      |
-       |ipx      |      | yes  | no  | no    | link proto \ipx      |
-       |isis     |      | yes  | no  | yes   | iso proto \isis      |
-       |is-is    | isis |      |     |       |                      |
-       |iso      |      | yes  | no  | yes   | link proto \iso      |
-       |l1       |      | yes  | no  | no    |                      |
-       |l2       |      | yes  | no  | no    |                      |
-       |lat      |      | yes  | yes | no    | link proto \lat      |
-       |link     |      | no   | yes | yes   |                      |
-       |lldp     |      |      |     |       | link proto lldp      |
-       |loopback |      |      |     |       | link proto loopback  |
-       |lsp      |      | yes  | no  | no    |                      |
-       |mopdl    |      | yes  | yes | no    | link proto \mopdl    |
-       |moprc    |      | yes  | yes | no    | link proto \moprc    |
-       |netbeui  |      | yes  | no  | no    | link proto \netbeui  |
-       |pim      |      | yes  | yes | no    | [ip|ip6] proto \pim  |
-       |ppp      | link |      |     |       |                      |
-       |psnp     |      | yes  | no  | no    |                      |
-       |radio    |      | no   | yes | no    |                      |
-       |rarp     |      | yes  | yes | yes   | link proto \rarp     |
-       |sca      |      | yes  | yes | no    | link proto \sca      |
-       |sctp     |      | yes  | yes | yes   | [ip|ip6] proto \sctp |
-       |slip     | link |      |     |       |                      |
-       |slow     |      |      |     |       | link proto slow      |
-       |snp      |      | yes  | no  | no    |                      |
-       |stp      |      | yes  | no  | no    | link proto \stp      |
-       |tcp      |      | yes  | yes | yes   | [ip|ip6] proto \tcp  |
-       |tr       | link |      |     |       |                      |
-       |udp      |      | yes  | yes | yes   | [ip|ip6] proto \udp  |
-       |vrrp     |      | yes  | yes | no    | ip proto \vrrp       |
-       |wlan     | link |      |     |       |                      |
-       +---------+------+------+-----+-------+----------------------+
+       For keywords: if the keyword is an alias, the "K/see" column refers  to
+       the  main keyword; the "K/abbr" column tells whether the keyword can be
+       used as an abbreviation (that is, if the keyword is the  only  contents
+       of a primitive, it means a more complex expression); the "K/PDA" column
+       tells whether the keyword can be used in a packet  data  accessor;  the
+       "K/pqual" column tells whether the keyword can be used as a case of the
+       proto qualifier kind.
+
+       For IDs: the "ID/tqual" column shows the valid context(s).
+
+       +---------+-------+--------+-------+---------+----------------------+
+       |name     | K/see | K/abbr | K/PDA | K/pqual | ID/tqual             |
+       +---------+-------+--------+-------+---------+----------------------+
+       |aarp     |       | yes    | no    | no      | link proto \aarp     |
+       |ah       |       | yes    | no    | no      | [ip|ip6] proto \ah   |
+       |arp      |       | yes    | yes   | yes     | link proto \arp      |
+       |atalk    |       | yes    | yes   | no      | link proto \atalk    |
+       |carp     |       | yes    | yes   | no      | ip proto \carp       |
+       |clnp     |       | yes    | no    | no      | iso proto \clnp      |
+       |csnp     |       | yes    | no    | no      |                      |
+       |decnet   |       | yes    | yes   | yes     | link proto \decnet   |
+       |esis     |       | yes    | no    | no      | iso proto \esis      |
+       |es-is    | esis  |        |       |         |                      |
+       |esp      |       | yes    | no    | no      | [ip|ip6] proto \esp  |
+       |ether    | link  |        |       |         |                      |
+       |fddi     | link  |        |       |         |                      |
+       |icmp     |       | yes    | yes   | no      | ip proto \icmp       |
+       |icmp6    |       | yes    | yes   | no      |                      |
+       |igmp     |       | yes    | yes   | no      | ip proto \igmp       |
+       |igrp     |       | yes    | yes   | no      | ip proto \igrp       |
+       |iih      |       | yes    | no    | no      |                      |
+       |ip       |       | yes    | yes   | yes     | link proto \ip       |
+       |ip6      |       | yes    | yes   | yes     | link proto \ip6      |
+       |ipx      |       | yes    | no    | no      | link proto \ipx      |
+       |isis     |       | yes    | no    | yes     | iso proto \isis      |
+       |is-is    | isis  |        |       |         |                      |
+       |iso      |       | yes    | no    | yes     | link proto \iso      |
+       |l1       |       | yes    | no    | no      |                      |
+       |l2       |       | yes    | no    | no      |                      |
+       |lat      |       | yes    | yes   | no      | link proto \lat      |
+       |link     |       | no     | yes   | yes     |                      |
+       |lldp     |       |        |       |         | link proto lldp      |
+       |loopback |       |        |       |         | link proto loopback  |
+       |lsp      |       | yes    | no    | no      |                      |
+       |mopdl    |       | yes    | yes   | no      | link proto \mopdl    |
+       |moprc    |       | yes    | yes   | no      | link proto \moprc    |
+       |netbeui  |       | yes    | no    | no      | link proto \netbeui  |
+       |pim      |       | yes    | yes   | no      | [ip|ip6] proto \pim  |
+       |ppp      | link  |        |       |         |                      |
+       |psnp     |       | yes    | no    | no      |                      |
+       |radio    |       | no     | yes   | no      |                      |
+       |rarp     |       | yes    | yes   | yes     | link proto \rarp     |
+       |sca      |       | yes    | yes   | no      | link proto \sca      |
+       |sctp     |       | yes    | yes   | yes     | [ip|ip6] proto \sctp |
+       |slip     | link  |        |       |         |                      |
+       |slow     |       |        |       |         | link proto slow      |
+       |snp      |       | yes    | no    | no      |                      |
+       |stp      |       | yes    | no    | no      | link proto \stp      |
+       |tcp      |       | yes    | yes   | yes     | [ip|ip6] proto \tcp  |
+       |tr       | link  |        |       |         |                      |
+       |udp      |       | yes    | yes   | yes     | [ip|ip6] proto \udp  |
+       |vrrp     |       | yes    | yes   | no      | ip proto \vrrp       |
+       |wlan     | link  |        |       |         |                      |
+       +---------+-------+--------+-------+---------+----------------------+
 
 EXAMPLES
        To select all packets arriving at or departing from `sundown':
@@ -1065,34 +1066,34 @@ EXAMPLES
        To select all FTP traffic through Internet gateway `snup':
               gateway snup and (port ftp or ftp-data)
 
-       To  select  IPv4  traffic  neither  sourced from nor destined for local
+       To select IPv4 traffic neither sourced  from  nor  destined  for  local
        hosts (if you gateway to one other net, this stuff should never make it
        onto your local net).
               ip and not net localnet
 
-       To  select  the start and end packets (the SYN and FIN packets) of each
+       To select the start and end packets (the SYN and FIN packets)  of  each
        TCP conversation that involves a non-local host.
               tcp[tcpflags] & (tcp-syn|tcp-fin) != 0 and not src and dst net localnet
 
-       To select the TCP packets with flags RST and ACK both set.   (i.e.  se-
-       lect  only  the RST and ACK flags in the flags field, and if the result
+       To  select  the TCP packets with flags RST and ACK both set.  (i.e. se-
+       lect only the RST and ACK flags in the flags field, and if  the  result
        is "RST and ACK both set", match)
               tcp[tcpflags] & (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)
 
-       To select all IPv4 HTTP packets to and from port 80,  i.e.  print  only
-       packets  that  contain  data, not, for example, SYN and FIN packets and
+       To  select  all  IPv4 HTTP packets to and from port 80, i.e. print only
+       packets that contain data, not, for example, SYN and  FIN  packets  and
        ACK-only packets.  (IPv6 is left as an exercise for the reader.)
               tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)
 
-       To select IPv4 packets longer  than  576  bytes  sent  through  gateway
+       To  select  IPv4  packets  longer  than  576 bytes sent through gateway
        `snup':
               gateway snup and ip[2:2] > 576
 
-       To  select  IPv4  broadcast or multicast packets that were not sent via
+       To select IPv4 broadcast or multicast packets that were  not  sent  via
        Ethernet broadcast or multicast:
               ether[0] & 1 = 0 and ip[16] >= 224
 
-       To select all ICMP packets that are not  echo  requests/replies  (i.e.,
+       To  select  all  ICMP packets that are not echo requests/replies (i.e.,
        not ping packets):
               icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply
               icmp6[icmp6type] != icmp6-echo and icmp6[icmp6type] != icmp6-echoreply
@@ -1100,7 +1101,7 @@ EXAMPLES
 BACKWARD COMPATIBILITY
        The carp keyword became available in libpcap 1.2.1.
 
-       The  hfisu,  hlssu,  hmsu,  hsio,  hopc,  hdpc and hsls keywords became
+       The hfisu, hlssu, hmsu, hsio,  hopc,  hdpc  and  hsls  keywords  became
        available in libpcap 1.5.3.
 
        The modulo (%) and bitwise XOR (^) binary operators became available in
@@ -1122,33 +1123,33 @@ SEE ALSO
        pcap(3PCAP)
 
 BUGS
-       To    report    a   security   issue   please   send   an   e-mail   to
+       To   report   a   security   issue   please   send   an    e-mail    to
        security@tcpdump.org.
 
-       To report bugs and other problems, contribute patches, request  a  fea-
-       ture,  provide generic feedback etc please see the file CONTRIBUTING.md
+       To  report  bugs and other problems, contribute patches, request a fea-
+       ture, provide generic feedback etc please see the file  CONTRIBUTING.md
        in the libpcap source tree root.
 
-       Filter expressions on fields other than those  in  Token  Ring  headers
+       Filter  expressions  on  fields  other than those in Token Ring headers
        will not correctly handle source-routed Token Ring packets.
 
-       Filter  expressions  on  fields other than those in 802.11 headers will
-       not correctly handle 802.11 data packets with both To DS  and  From  DS
+       Filter expressions on fields other than those in  802.11  headers  will
+       not  correctly  handle  802.11 data packets with both To DS and From DS
        set.
 
-       `ip6  proto' should chase header chain, but at this moment it does not.
-       `ip6 protochain' is supplied for this behavior.  For example, to  match
+       `ip6 proto' should chase header chain, but at this moment it does  not.
+       `ip6  protochain' is supplied for this behavior.  For example, to match
        IPv6 fragments: `ip6 protochain 44'
 
-       Arithmetic  expression  against  transport  layer headers, like tcp[0],
+       Arithmetic expression against transport  layer  headers,  like  tcp[0],
        does not work against IPv6 packets.  It only looks at IPv4 packets.
 
-       The sio and hsio keywords do not test whether  the  packet  is  an  MSU
-       packet.   The  dpc,  opc, sls, hdpc, hopc and hsls keywords do not test
+       The  sio  and  hsio  keywords  do not test whether the packet is an MSU
+       packet.  The dpc, opc, sls, hdpc, hopc and hsls keywords  do  not  test
        whether the packet is an MTP3 packet.
 
-       For ARP and RARP the current implementation assumes IPv4 over  Ethernet
-       and  may incorrectly match packets that have a different combination of
+       For  ARP and RARP the current implementation assumes IPv4 over Ethernet
+       and may incorrectly match packets that have a different combination  of
        protocol and hardware.
 
-                               25 September 2025                PCAP-FILTER(7)
+                               29 September 2025                PCAP-FILTER(7)
