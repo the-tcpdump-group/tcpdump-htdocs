@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of RPCAPD</H1>
-Section: Maintenance Commands (8)<BR>Updated: 21 August 2024<BR>
+Section: Maintenance Commands (8)<BR>Updated: 18 October 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents rpcapd version 1.11.0-PRE-GIT.</H4>
@@ -343,19 +343,28 @@ Permit NULL authentication (usually used with the
 <CODE>-l</CODE>
 
 flag).
-<DT><CODE>-a</CODE><I> host</I><B>,</B><I>port</I>
+<DT><CODE>-a</CODE><I> host1</I><B>,</B><I>port1</I><B>,</B><I>host2</I><B>,</B><I>port2</I><B>,</B><I>...</I><B>,</B><I>hostN</I><B>,</B><I>portN</I>
 
 <DD>
-Run in active mode, connecting to host
+Run in active mode, connecting to each host
 <I>host</I>
 
-on port
-<I>port</I>.
-
-In case
+(which may be a hostname or an address) on TCP port
 <I>port</I>
 
-is omitted, the default port (2003) is used.
+(which may be either a number or a service name recognized by
+<B>getaddrinfo</B>(3)
+
+or the word
+<CODE>DEFAULT</CODE>
+
+to mean port number 2003).  Only the very last value of the port may be
+omitted (for example,
+<B>-a</B><I> host</I>
+
+is a valid syntax), which means the same as
+<CODE>DEFAULT</CODE>.
+
 <DT><CODE>-v</CODE>
 
 <DD>
@@ -449,7 +458,7 @@ as the SSL certificate file.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:59:18 GMT, August 21, 2024
+This HTML man page was generated at 19:16:13 GMT, October 18, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

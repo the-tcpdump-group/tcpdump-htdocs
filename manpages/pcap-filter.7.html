@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 29 September 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 9 October 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -326,8 +326,42 @@ for Ethernet-like link-layer types is equivalent to
 <DT><DD>
 <I>hostnameaddr</I>
 
-may be either an address or a name.  If it is a name with multiple IPv4/IPv6 addresses,
-each address will be checked for a match.
+may be either an address or a name.  If it is a name, the name must resolve
+to at least one IPv4 address for
+<B>arp host</B>,
+
+<B>ip host</B>
+
+and
+<B>rarp host</B>,
+
+at least one IPv6 address for
+<B>ip6 host</B>
+
+and at least one IPv4/IPv6 address for
+<B>host</B>.
+
+<DT><DD>
+When not qualified with a protocol, this primitive matches all protocols that
+make sense for the address families of the specified/resolved addresses.  For
+example, for a name that resolves only to an IPv6 address
+<B>arp host</B>
+
+returns an error, but
+<B>host</B>
+
+is valid and means IPv6;
+likewise, for a name that resolves only to an IPv4 address
+<B>ip6 host</B>
+
+returns an error, but
+<B>host</B>
+
+is valid and means ARP/IPv4/RARP.
+<DT><DD>
+Whether qualified with a protocol or not, this primitive evaluates to true if
+the name resolves to more than one address and at least one of the addresses
+matches the packet.
 <DT><B>ether host </B><I>ethernameaddr</I><DD>
 True if the source or the destination Ethernet/802.11/IPFC/ATM LANE/FDDI/Token Ring
 address of the packet is
@@ -662,7 +696,7 @@ parses the
 file to translate protocol names to numbers, and the
 <B>getent protocols</B>
 
-command lists the protocols recognised by the function.  This is not entirely
+command lists the protocols recognized by the function.  This is not entirely
 so in AIX (which does not have the command), Haiku (which has the file at
 <I>/system/data/network/protocols</I>
 
@@ -1872,6 +1906,14 @@ Note that all comparisons are unsigned, so that, for example, both 0x80000000
 and 0xffffffff are &gt; 0.
 <P>
 
+Note that 32-bit octal integer constants in the [010000000000 .. 037777777777]
+interval, which includes 75% of all 32-bit integers, are interpreted as MAC-48
+addresses when prepended with a single zero (e.g., 012345670123 means
+01:23:45:67:01:23).  To disambiguate the expression, prepend such an octal
+number with more zeroes (0012345670123) or represent the same value using a
+decimal (1402433619) or hexadecimal (0x53977053) number.
+<P>
+
 The
 <B>%</B>
 
@@ -2539,7 +2581,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 22:00:17 GMT, September 29, 2025
+This HTML man page was generated at 19:16:12 GMT, October 18, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

@@ -32,18 +32,16 @@ DESCRIPTION
 
        ActiveClient
               value  is  a host name or IP address, followed by a comma, semi-
-              colon, or space, followed by a port name and address or DEFAULT.
-              DEFAULT  specifies the default active mode port for rpcapd, port
-              2003.  Each ActiveClient line adds the host and port to the list
-              of clients to which the server should connect in active mode.
+              colon, or space, followed by either a port number or  a  service
+              name  recognized  by  getaddrinfo(3) or the word DEFAULT to mean
+              port number 2003.  Each ActiveClient line adds the host and port
+              to the list of clients to which the server should connect in ac-
+              tive mode.
 
        PassiveClient
-              value  is  a host name or IP address, followed by a comma, semi-
-              colon, or space, followed by a port name and address or DEFAULT.
-              DEFAULT specifies the default passive mode port for rpcapd, port
-              2002.  Each PassiveClient line adds the host  and  port  to  the
-              list  of clients addresses and ports that are allowed to connect
-              to the server in passive mode.
+              value is a host name or IP  address.   Each  PassiveClient  line
+              adds  the  host  and  port  to the list of clients addresses and
+              ports that are allowed to connect to the server in passive mode.
 
        NullAuthPermit
               value is either YES or NO.  YES means that  null  authentication
@@ -52,4 +50,4 @@ DESCRIPTION
 SEE ALSO
        rpcapd(8)
 
-                                6 January 2019                RPCAPD-CONFIG(5)
+                                18 October 2025               RPCAPD-CONFIG(5)

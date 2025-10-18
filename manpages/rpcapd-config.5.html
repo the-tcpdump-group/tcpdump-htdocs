@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of RPCAPD-CONFIG</H1>
-Section: File Formats (5)<BR>Updated: 6 January 2019<BR>
+Section: File Formats (5)<BR>Updated: 18 October 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents rpcapd version 1.11.0-PRE-GIT.</H4>
@@ -61,12 +61,14 @@ are:
 <I>value</I>
 
 is a host name or IP address, followed by a comma,
-semicolon, or space, followed by a port name and address or
-<CODE>DEFAULT</CODE>.
+semicolon, or space, followed by either a port number or a service name
+recognized by
+<B>getaddrinfo</B>(3)
 
+or the word
 <CODE>DEFAULT</CODE>
 
-specifies the default active mode port for rpcapd, port 2003.
+to mean port number 2003.
 Each
 <CODE>ActiveClient</CODE>
 
@@ -77,13 +79,7 @@ should connect in active mode.
 <DD>
 <I>value</I>
 
-is a host name or IP address, followed by a comma,
-semicolon, or space, followed by a port name and address or
-<CODE>DEFAULT</CODE>.
-
-<CODE>DEFAULT</CODE>
-
-specifies the default passive mode port for rpcapd, port 2002.
+is a host name or IP address.
 Each
 <CODE>PassiveClient</CODE>
 
@@ -115,7 +111,7 @@ means that it is not permitted.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:19:27 GMT, March 26, 2023
+This HTML man page was generated at 19:16:13 GMT, October 18, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
