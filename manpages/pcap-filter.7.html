@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 9 October 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 18 October 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -326,8 +326,17 @@ for Ethernet-like link-layer types is equivalent to
 <DT><DD>
 <I>hostnameaddr</I>
 
-may be either an address or a name.  If it is a name, the name must resolve
-to at least one IPv4 address for
+may be either an address or a name.  If it is an IPv6 address, it may use both
+the zero compression
+(<B>::</B>)
+
+and the IPv4-mapped
+(<B>x:x:x:x:x:x:d.d.d.d</B>)
+
+notations as discussed in
+<B>inet_pton</B>(3).
+
+If it is a name, the name must resolve to at least one IPv4 address for
 <B>arp host</B>,
 
 <B>ip host</B>
@@ -459,7 +468,11 @@ dotted triple (e.g., 192.168.1), dotted pair (e.g, 172.16), or single
 number (e.g., 10); the netmask is 255.255.255.255 (/32) for a dotted quad
 (which means that it's really a host match), 255.255.255.0 (/24) for a dotted
 triple, 255.255.0.0 (/16) for a dotted pair, or 255.0.0.0 (/8) for a single number.
-An IPv6 network number must be written out fully; the netmask is
+<DT><DD>
+An IPv6 network number is an IPv6 address as discussed for the
+<B>host</B>
+
+primitive above; the implicit netmask is
 ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff (/128), so in this primitive IPv6
 &quot;network&quot; matches are really always host matches.  For an actual IPv6 network
 match see the `<B>net </B><I>netaddr</I>/<I>len</I>' primitive below.
@@ -557,13 +570,10 @@ is the same as the above.  For IPv6,
 is an integer between 0 and 128 (both inclusive) and
 <I>netaddr</I>
 
-is an IPv6 address.  For the latter zero compression notation
-(<B>::</B>)
+is an IPv6 address as discussed for the
+<B>host</B>
 
-is valid, but IPv4-mapped notation
-(<B>x:x:x:x:x:x:d.d.d.d</B>)
-
-is not.  For both IPv4 and IPv6 the maximum value of
+primitive above.  For both IPv4 and IPv6 the maximum value of
 <I>len</I>
 
 is equivalent to a host match and the 0 value (which implies an all-zeroes
@@ -2581,7 +2591,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 19:16:12 GMT, October 18, 2025
+This HTML man page was generated at 08:57:39 GMT, October 19, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
