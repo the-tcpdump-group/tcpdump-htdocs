@@ -40,8 +40,8 @@ DESCRIPTION
 
        PassiveClient
               value is a host name or IP  address.   Each  PassiveClient  line
-              adds  the  host  and  port  to the list of clients addresses and
-              ports that are allowed to connect to the server in passive mode.
+              adds  the  host to the list of client addresses that are allowed
+              to connect to the server in passive mode.
 
        NullAuthPermit
               value is either YES or NO.  YES means that  null  authentication
@@ -50,4 +50,4 @@ DESCRIPTION
 SEE ALSO
        rpcapd(8)
 
-                                18 October 2025               RPCAPD-CONFIG(5)
+                                21 October 2025               RPCAPD-CONFIG(5)

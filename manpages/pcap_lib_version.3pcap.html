@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_LIB_VERSION</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 22 December 2024<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 21 October 2025<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -33,13 +33,14 @@ pcap_lib_version - get the version information for libpcap
 
 returns a pointer to a string giving information about the version of
 the libpcap library being used.  The string begins with the words &quot;libpcap
-version&quot;.  Then follows the version, which consists of three dot-separated
-numbers and the optional &quot;-PRE-GIT&quot; suffix to indicate a development
-snapshot, same as in the output of
+version&quot; and a space.  Then follows the version, which consists of three
+dot-separated numbers and the optional &quot;-PRE-GIT&quot; suffix to indicate a
+development snapshot, same as in the output of
 <CODE>pcap-config --version</CODE>
 
-in sufficiently recent libpcap releases.  After the version often follows
-additional text to indicate particular features.  For example:
+in sufficiently recent libpcap releases.  After the version often follow
+a space and additional text in an arbitrary human-readable form to indicate
+particular features.  For example:
 <DL>
 <DT>an old release, on any OS<DD>
 <DL><DT><DD>
@@ -68,7 +69,7 @@ additional text to indicate particular features.  For example:
 <DT>a development snapshot on a FreeBSD host<DD>
 <DL><DT><DD>
 <PRE>
-<CODE>libpcap version 1.11.0-PRE-GIT (with zerocopy support)</CODE>
+<CODE>libpcap version 1.11.0-PRE-GIT (64-bit time_t, with zerocopy and netmap support)</CODE>
 </PRE>
 
 </DL>
@@ -84,7 +85,7 @@ additional text to indicate particular features.  For example:
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:35:52 GMT, December 22, 2024
+This HTML man page was generated at 21:58:22 GMT, October 23, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

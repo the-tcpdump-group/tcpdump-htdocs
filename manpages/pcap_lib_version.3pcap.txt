@@ -23,12 +23,13 @@ SYNOPSIS
 DESCRIPTION
        pcap_lib_version()  returns  a  pointer  to a string giving information
        about the version of the libpcap library being used.  The string begins
-       with the words "libpcap version".  Then follows the version, which con-
-       sists of three dot-separated numbers and the optional "-PRE-GIT" suffix
-       to  indicate a development snapshot, same as in the output of pcap-con-
-       fig --version in sufficiently recent libpcap releases.  After the  ver-
-       sion  often  follows  additional  text to indicate particular features.
-       For example:
+       with  the  words  "libpcap version" and a space.  Then follows the ver-
+       sion, which consists of three dot-separated numbers  and  the  optional
+       "-PRE-GIT"  suffix  to  indicate a development snapshot, same as in the
+       output of pcap-config --version  in  sufficiently  recent  libpcap  re-
+       leases.   After the version often follow a space and additional text in
+       an arbitrary human-readable form to indicate particular features.   For
+       example:
 
        an old release, on any OS
               libpcap version 1.5.3
@@ -40,9 +41,9 @@ DESCRIPTION
               libpcap version 1.10.4 (DAG-only)
 
        a development snapshot on a FreeBSD host
-              libpcap version 1.11.0-PRE-GIT (with zerocopy support)
+              libpcap version 1.11.0-PRE-GIT (64-bit time_t, with zerocopy and netmap support)
 
 SEE ALSO
        pcap-config(1), pcap(3PCAP)
 
-                               22 December 2024        PCAP_LIB_VERSION(3PCAP)
+                                21 October 2025        PCAP_LIB_VERSION(3PCAP)
