@@ -982,12 +982,12 @@ SSAP (Source Service Access Point) fields of the LLC header;
 the filter checks the DSAP of the LLC header;
 <DT><B>atalk</B><DD>
 the filter checks for a SNAP-format packet with an OUI of 0x080007
-and the AppleTalk etype.
+and the AppleTalk EtherType.
 </DL>
 </DL>
 
 <DT><DD>
-In the case of Ethernet, the filter checks the Ethernet type field
+In the case of Ethernet, the filter checks the EtherType field
 for most of those protocols.  The exceptions are:
 <DL><DT><DD>
 <DL>
@@ -995,15 +995,15 @@ for most of those protocols.  The exceptions are:
 the filter checks for an 802.3 frame and then checks the LLC header as
 it does for FDDI, Token Ring, and 802.11;
 <DT><B>atalk</B><DD>
-the filter checks both for the AppleTalk etype in an Ethernet frame and
+the filter checks both for the AppleTalk EtherType in an Ethernet frame and
 for a SNAP-format packet as it does for FDDI, Token Ring, and 802.11;
 <DT><B>aarp</B><DD>
-the filter checks for the AppleTalk ARP etype in either an Ethernet
+the filter checks for the AppleTalk ARP EtherType in either an Ethernet
 frame or an 802.2 SNAP frame with an OUI of 0x000000;
 <DT><B>ipx</B><DD>
-the filter checks for the IPX etype in an Ethernet frame, the IPX
+the filter checks for the IPX EtherType in an Ethernet frame, the IPX
 DSAP in the LLC header, the 802.3-with-no-LLC-header encapsulation of
-IPX, and the IPX etype in a SNAP frame.
+IPX, and the IPX EtherType in a SNAP frame.
 </DL>
 </DL>
 
@@ -2591,7 +2591,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 08:57:39 GMT, October 19, 2025
+This HTML man page was generated at 19:33:41 GMT, October 31, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
