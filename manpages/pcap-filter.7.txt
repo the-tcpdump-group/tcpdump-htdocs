@@ -703,12 +703,12 @@ PRIMITIVES
               filters packets to or from 192.9.200.1 with an  inner  label  of
               1024 and any outer label.
 
-       pppoed True if the packet is a PPP-over-Ethernet Discovery packet (Eth-
-              ernet type 0x8863).
+       pppoed True  if  the  packet  is  a  PPP-over-Ethernet Discovery packet
+              (EtherType 0x8863).
 
        pppoes [session_id]
               True if the packet is a PPP-over-Ethernet Session packet (Ether-
-              net type 0x8864).  If the optional session_id is specified, only
+              Type  0x8864).   If  the  optional session_id is specified, only
               true if the packet has the specified session_id.  Note that  the
               first  pppoes  keyword  encountered in an expression changes the
               decoding offsets for the remainder of the expression on the  as-
@@ -861,18 +861,20 @@ PRIMITIVES
               ing specified for high speed signalling  links  (HSL)  in  ITU-T
               Recommendation Q.703 Annex A.
 
-       link host arcnetaddr
-              True,  only for DLT_ARCNET or DLT_ARCNET_LINUX, if the source or
-              the destination ARCnet address of the packet is arcnetaddr.  May
-              be qualified with a different direction (src, dst, src and dst),
-              in which case the host keyword is optional.
+       link host mac8addr
+              True  if  the  source  or  the  destination  ARCnet node ID (for
+              DLT_ARCNET and DLT_ARCNET_LINUX only) or MS/TP  station  address
+              (for  DLT_BACNET_MS_TP only) is mac8addr.  May be qualified with
+              a different direction (src, dst, src and dst), in which case the
+              host keyword is optional.
 
-              arcnetaddr is a string of the form $xx or $x,  where  "x"  is  a
-              hexadecimal digit.  For example:
+              mac8addr is a string of the form $xx or $x, where "x" is a hexa-
+              decimal digit.  For example:
                    link host $2b
 
               Also in ARCnet context broadcast and multicast are equivalent to
-              link dst $0.
+              link  dst  $0,  and  in MS/TP context broadcast is equivalent to
+              link dst $ff.
 
               Note that this address syntax clashes with the parameter  expan-
               sion syntax in POSIX-compatible shells and elsewhere, so depend-
@@ -1177,4 +1179,4 @@ BUGS
        and  may incorrectly match packets that have a different combination of
        protocol and hardware.
 
-                                18 October 2025                 PCAP-FILTER(7)
+                                2 November 2025                 PCAP-FILTER(7)

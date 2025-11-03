@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 18 October 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 2 November 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -1469,11 +1469,9 @@ filters packets with an outer label of 100000 and an inner label of
 filters packets to or from 192.9.200.1 with an inner label of 1024 and
 any outer label.
 <DT><B>pppoed</B><DD>
-True if the packet is a PPP-over-Ethernet Discovery packet (Ethernet
-type 0x8863).
+True if the packet is a PPP-over-Ethernet Discovery packet (EtherType 0x8863).
 <DT><B>pppoes </B><I>[session_id]</I><DD>
-True if the packet is a PPP-over-Ethernet Session packet (Ethernet
-type 0x8864).
+True if the packet is a PPP-over-Ethernet Session packet (EtherType 0x8864).
 If the optional <I>session_id</I> is specified, only true if the packet has the specified
 <I>session_id</I>.
 Note that the first <B>pppoes</B> keyword encountered in an expression
@@ -1759,15 +1757,18 @@ and
 respectively, but only if the MTP2 link uses the extended sequence numbers
 encoding specified for high speed signalling links (HSL) in ITU-T
 Recommendation Q.703 Annex A.
-<DT><B>link host </B><I>arcnetaddr</I><DD>
-True, only for
+<DT><B>link host </B><I>mac8addr</I><DD>
+True if the source or the destination ARCnet node ID (for
 <B>DLT_ARCNET</B>
 
-or
-<B>DLT_ARCNET_LINUX</B>,
+and
+<B>DLT_ARCNET_LINUX</B>
 
-if the source or the destination ARCnet address of the packet is
-<I>arcnetaddr</I>.
+only) or MS/TP station address (for
+<B>DLT_BACNET_MS_TP</B>
+
+only) is
+<I>mac8addr</I>.
 
 May be qualified with a different direction
 (<B>src</B>,
@@ -1781,7 +1782,7 @@ in which case the
 
 keyword is optional.
 <DT><DD>
-<I>arcnetaddr</I>
+<I>mac8addr</I>
 
 is a string of the form
 <B>$xx</B>
@@ -1804,7 +1805,13 @@ and
 <B>multicast</B>
 
 are equivalent to
-<B>link dst $0</B>.
+<B>link dst $0</B>,
+
+and in MS/TP context
+<B>broadcast</B>
+
+is equivalent to
+<B>link dst $ff</B>.
 
 <DT><DD>
 Note that this address syntax clashes with the parameter expansion syntax
@@ -2591,7 +2598,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 19:33:41 GMT, October 31, 2025
+This HTML man page was generated at 16:08:47 GMT, November 03, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
