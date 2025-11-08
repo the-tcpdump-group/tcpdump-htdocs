@@ -1,0 +1,319 @@
+<div class="post">
+	<h2 class="title">Berkeley Packet Filter Instruction Set Architecture</h2>
+	<div class="entry">
+		<p>
+			Since the publication of <a href='papers/bpf-usenix93.pdf'>The
+			BSD Packet Filter: A New Architecture for User-level Packet Capture</a>
+			("the 1993 specification" hereinafter) both the reference userspace
+			implementation (libpcap) and various kernel implementations have
+			developed and at times diverged from the specification and one another
+			in various ways.  This page compares libpcap, other BPF implementations
+			and the 1993 specification, and clarifies various points of the
+			specification where required.
+		</p>
+		<p>
+			Mind that in BPF a "byte" is an 8-bit unsigned integer, a "halfword" is
+			a 16-bit unsigned integer, a "word" is a 32-bit unsigned integer and an
+			instruction is a 64-bit structure.  The accumulator, the index register
+			and the packet length register are a word each.
+		</p>
+
+		<h3 class="subtitle">Instruction Set</h2>
+		<table class=bpfmap>
+			<caption>
+				This table corresponds to Table 1 in the 1993 specification.
+			</caption>
+
+			<tr class=bbs>
+				<td class='brs header'>group</td>
+				<td class='brs header'>mnemonic</td>
+				<td class=header colspan=2>addressing mode(s)</td>
+			</tr>
+			<tr class=load>
+				<td rowspan=5 class=group>load</td>
+				<td class=op>ldb</td>
+				<td colspan=2 rowspan=4 class=subtable>
+					<table>
+						<tr>
+							<!-- ldb -->
+							<td colspan=3 class=brd>&nbsp;</td>
+							<td class='addr brd'>[k]</td>
+							<td class=addr>[x+k]</td>
+						</tr>
+						<tr>
+							<!-- ldh -->
+							<td colspan=3 class='brd bbd'>&nbsp;</td>
+							<td class='addr brd bbd'>[k]</td>
+							<td class='addr bbd'>[x+k]</td>
+						</tr>
+						<tr>
+							<!-- ld -->
+							<td class='addr brd bbd'>#k</td>
+							<td class='addr brd bbd'><span class=hl>#pktlen</span><sup>[<a href='#footnote1'>1</a>]</sup></td>
+							<td class='addr brd bbd'>M[k]</td>
+							<td class='addr brd bbd'>[k]</td>
+							<td class='addr bbd'>[x+k]</td>
+						</tr>
+						<tr>
+							<!-- ldx -->
+							<td class='addr brd bbd'>#k</td>
+							<td class='addr brd bbd'><span class=hl>#pktlen</span><sup>[<a href='#footnote1'>1</a>]</sup></td>
+							<td class='addr brd bbd'>M[k]</td>
+							<td colspan=2 class=bbd>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr class=load>
+				<td class='op bbd'>ldh</td>
+			</tr>
+			<tr class=load>
+				<td class='op bbd'>ld</td>
+			</tr>
+			<tr class=load>
+				<td class='op bbd'>ldx</td>
+			</tr>
+			<tr class='load bbs'>
+				<td class=op><span class=hl>ldxb</span><sup>[<a href='#footnote2'>2</a>]</sup></td>
+				<td class=addr colspan=2>4*([k]&amp;0xf)</td>
+			</tr>
+
+			<tr class=store>
+				<td rowspan=2 class=group>store</td>
+				<td class=op>st</td>
+				<td class=addr colspan=2>M[k]</td>
+			</tr>
+			<tr class='store bbs'>
+				<td class='op st'>stx</td>
+				<td class=addr colspan=2>M[k]</td>
+			</tr>
+
+			<tr class=branch>
+				<td rowspan=5 class=group>branch</td>
+				<td class='op bbd'><span class=hl>ja</span><sup>[<a href='#footnote3'>3</a>]</sup></td>
+				<td class='addr bbd' colspan=2>L</sup></td>
+			</tr>
+
+			<tr class=branch>
+				<td class=op>jeq</td>
+				<td class='addr brd'>#k,&nbsp;Lt,&nbsp;Lf</td>
+				<td class=addr><span class=hl>x,&nbsp;Lt,&nbsp;Lf</span><sup>[<a href='#footnote4'>4</a>]</sup></td>
+			</tr>
+			<tr class=branch>
+				<td class=op>jgt</td>
+				<td class='addr brd'>#k,&nbsp;Lt,&nbsp;Lf</td>
+				<td class=addr><span class=hl>x,&nbsp;Lt,&nbsp;Lf</span><sup>[<a href='#footnote4'>4</a>]</sup></td>
+			</tr>
+			<tr class=branch>
+				<td class=op>jge</td>
+				<td class='addr brd'>#k,&nbsp;Lt,&nbsp;Lf</td>
+				<td class=addr><span class=hl>x,&nbsp;Lt,&nbsp;Lf</span><sup>[<a href='#footnote4'>4</a>]</sup></td>
+			</tr>
+			<tr class='branch bbs'>
+				<td class=op>jset</td>
+				<td class='addr brd'>#k,&nbsp;Lt,&nbsp;Lf</td>
+				<td class=addr><span class=hl>x,&nbsp;Lt,&nbsp;Lf</span><sup>[<a href='#footnote4'>4</a>]</sup></td>
+			</tr>
+
+			<tr class=alu>
+				<td rowspan=11 class=group>ALU</td>
+				<td class='op bbd'><span class=hl>neg</span><sup>[<a href='#footnote5'>5</a>]</sup></td>
+				<td colspan=5 class=bbd>&nbsp;</td>
+			</tr>
+			<tr class=alu>
+				<td class=op>add</td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+			<tr class=alu>
+				<td class=op>sub</td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+			<tr class=alu>
+				<td class=op>mul</td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+			<tr class=alu>
+				<td class=op>div</td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+			<tr class=alu>
+				<td class=op><span class=hl>mod</span><sup>[<a href='#footnote6'>6</a>]</sup></td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+			<tr class=alu>
+				<td class=op><span class=hl>xor</span><sup>[<a href='#footnote6'>6</a>]</sup></td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+			<tr class=alu>
+				<td class=op>and</td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+			<tr class=alu>
+				<td class=op>or</td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+			<tr class=alu>
+				<td class=op>lsh</td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+			<tr class='alu bbs'>
+				<td class=op>rsh</td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>x</td>
+			</tr>
+
+			<tr class='return bbs'>
+				<td class=group>return</td>
+				<td class=op>ret</td>
+				<td class='addr brd'>#k</td>
+				<td class=addr>a</td>
+			</tr>
+
+			<tr class=misc>
+				<td rowspan=2 class=group>miscellaneous</td>
+				<td class=op>tax</td>
+				<td rowspan=2 colspan=2>&nbsp;</td>
+			</tr>
+			<tr class=misc>
+				<td class=op>txa</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="entry">
+		<h3 class="subtitle">Addressing Modes</h2>
+		<table class=bpfmap>
+			<caption>
+				This table corresponds to Table 2 in the 1993 specification.
+			</caption>
+			<tr class=bbs>
+				<td class='header brs'>mode</td>
+				<td class='header'>description</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>#k</td>
+				<td>
+					The immediate value <i>k</i>, that is, the word in the <code>k</code>
+					field of the instruction.
+				</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op><span class=hl>#pktlen</span><sup>[<a href='#footnote1'>1</a>]</sup></td>
+				<td>
+					The length of the packet
+					(the <em>wire</em> length, not the <em>captured</em> length).  Note
+					that although this address mode traditionally uses the immediate
+					value prefix <code>#</code>, the value comes from a read-only
+					register rather than the command.  The BPF machine initializes the
+					length register before each start of the filter program.
+				</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>M[k]</td>
+				<td>The word at the word offset <i>k</i> in the scratch memory store:
+					<code>M[0]</code> is the first word, <code>M[1]</code> is the second
+					word and so on.  In libpcap the scratch memory store comprises 16
+					words and any filter program that tries to access it beyond this
+					limit is considered invalid.
+				</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>[k]</td>
+				<td>
+					The byte, halfword, or word at the byte offset
+					<i>k</i> in the packet.  Offset 0 points to the first byte of the
+					packet.  The offset does not have to be a multiple of the data size.
+				</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>[x+k]</td>
+				<td>
+					Same as the above, but the offset is the sum of the current value in
+					the index register and the immediate value <i>k</i>.
+				</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>L</td>
+				<td>
+					The offset from the current instruction to L.  Zero means the next
+					instruction after the current.  Note that although the traditional
+					notation for this address mode is not <code>#k</code>, the offset is
+					the immediate value in the <code>k</code> field of the instruction.
+				</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>#k,&nbsp;Lt,&nbsp;Lf</td>
+				<td>
+					The offset to <code>Lt</code> if the predicate is true, otherwise
+					the offset to <code>Lf</code>.  Zero means the next instruction
+					after the current.  The first operand of the predicate is the
+					current value in the accumulator and the second is the immediate
+					value <i>k</i>.
+				</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op><span class=hl>x,&nbsp;Lt,&nbsp;Lf</span><sup>[<a href='#footnote4'>4</a>]</sup></td>
+				<td>
+					Same as the above, but the second operand is the current value in
+					the index register.
+				</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>x</td>
+				<td>The current value in the index register.</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>4*([k]&amp;0xf)</td>
+				<td>Four times the value of the low four bits of the byte at offset
+				<i>k</i> in the packet.</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="entry">
+		<h3 class="subtitle">Footnotes</h2>
+		<ol>
+			<li id='footnote1'>
+				In libpcap <code>#pktlen</code> is the same as <code>#len</code> in the
+				1993 specification.
+			</li>
+			<li id='footnote2'>
+				For the instruction that loads a 4-bit value from the packet and stores
+				a 6-bit value into the index register the mnemonic is <code>ldxb</code>
+				in libpcap and <code>ldx</code> in the 1993 specification.
+			</li>
+			<li id='footnote3'>
+				In libpcap <code>ja L</code> ("jump always") is the same as
+				<code>jmp L</code> in the 1993 specification.
+			</li>
+			<li id='footnote4'>
+				In libpcap all conditional branch instructions can also take the second
+				operand from the index register.  The 1993 specification says this in
+				Section 3.3, but not in tables 1 and 2.
+			</li>
+			<li id='footnote5'>
+				The <code>neg</code> (negation) ALU instruction is not a part of the
+				1993 specification.  libpcap implements it, kernel BPF implementations
+				typically implement it.  This instruction does not take an argument and
+				operates on the accumulator only.
+			</li>
+			<li id='footnote6'>
+				The <code>mod</code> (modulo) and <code>xor</code> (bitwise XOR) ALU
+				instructions are not a part of the 1993 specification.  These
+				instructions have the same semantics as the ALU instructions defined
+				in the 1993 specification.  Only FreeBSD, Linux 3.7 and later, and
+				NetBSD support these instructions in their kernel-mode BPF
+				implementations.
+			</li>
+		</ol>
+	</div>
+</div>

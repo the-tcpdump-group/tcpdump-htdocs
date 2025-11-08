@@ -101,6 +101,9 @@ substitute_page_title()
 	thanks)
 		title='Thank you! | '
 		;;
+	bpfisa)
+		title='BPF ISA | '
+		;;
 	LINKTYPE_*)
 		title="$basename | "
 		;;
