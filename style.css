@@ -313,7 +313,12 @@ table.bpfmap {
 	padding: 0;
 }
 
+table.bpfmap caption {
+	font-weight: bold;
+}
+
 table.bpfmap td {
+	vertical-align: top;
 	padding-left: 1em;
 	padding-right: 1em;
 }
@@ -326,6 +331,7 @@ table.bpfmap td.header {
 table.bpfmap td.group {
 	font-size: larger;
 	text-align: left;
+	vertical-align: middle;
 	border-right: 1px solid black;
 }
 

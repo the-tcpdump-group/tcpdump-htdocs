@@ -58,9 +58,86 @@
 		<p>
 			Mind that in BPF a "byte" is an 8-bit unsigned integer, a "halfword" is
 			a 16-bit unsigned integer, a "word" is a 32-bit unsigned integer and an
-			instruction is a 64-bit structure.  The accumulator, the index register
-			and the packet length register are a word each.
+			instruction is a 64-bit structure.  Each register is one word.  Loading
+			a byte or a halfword into a register implicitly resets all bits that are
+			not present in the loaded value.  The BPF machine performs all
+			initialization before every start of the program.
 		</p>
+
+		<h3 class="subtitle">Registers, Memory and Data</h2>
+		<table class=bpfmap>
+			<caption>
+				This table is a digest of the prose in Section 3.3 in the 1993 specification.
+			</caption>
+			<tr class=bbs>
+				<td class='header brs'>name</td>
+				<td class='header brs'>program access mode, type, size</td>
+				<td class='header brs'>description</td>
+				<td class=header>initialization</td>
+			</tr>
+			<tr class=bbs>
+				<td class=brs>&nbsp;</td>
+				<td class=brs>increment-only, register, unspecified</td>
+				<td class=brs>
+					The implicit program counter.  To execute a step of the program, the
+					BPF machine fetches the instruction this register points to,
+					increments the register by one, executes the instruction, and, if the
+					instruction is a branch instruction, again increments the register by
+					the immediate value of <code>L</code>, <code>Lt</code> or
+					<code>Lf</code>.
+				</td>
+				<td>to point to the first statement of the program</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>a</td>
+				<td class=brs>read-write, register, word</td>
+				<td class=brs>The accumulator register.</td>
+				<td>to 0</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>x</td>
+				<td class=brs>read-write, register, word</td>
+				<td class=brs>The index register.</td>
+				<td>to 0</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>M[]</td>
+				<td class=brs>read-write, memory, array of words</td>
+				<td class=brs>
+					The scratch memory store.  A program that attempts accessing beyond
+					the end of the array is invalid.  In libpcap an attempt to use such
+					a program fails, the scratch memory store comprises 16 words.
+				</td>
+				<td>to 0 in every element</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op><span class=hl>pktlen</span><sup>[<a href='#footnote1'>1</a>]</sup></td>
+				<td class=brs>read-only, register, word</td>
+				<td class=brs>The packet length register.</td>
+				<td>to the <em>wire</em> length</td>
+			</tr>
+			<tr class=bbs>
+				<td class='op brs'>[]</td>
+				<td class=brs>read-only, data, array of bytes</td>
+				<td class=brs>
+					The packet data.  The number of elements in the array is unknown, but
+					typically is greater than zero and different from one packet to
+					another; the number does not exceed the value of <code>pktlen</code>.
+					Attempting a load from beyond the end of the array immediately
+					terminates the program with the effect of <code>ret #0</code>.
+				</td>
+				<td>to the <em>captured</em> length worth of the packet bytes</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op><span class=hl>random</span><sup>[<a href='#footnote7'>7</a>]</sup></td>
+				<td class=brs>read-only, register, word</td>
+				<td class=brs>
+					The random value register.  Each load from this register produces a
+					random word.
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
 
 		<h3 class="subtitle">Instruction Set</h2>
 		<table class=bpfmap>
@@ -93,7 +170,10 @@
 						<tr>
 							<!-- ld -->
 							<td class='addr brd bbd'>#k</td>
-							<td class='addr brd bbd'><span class=hl>#pktlen</span><sup>[<a href='#footnote1'>1</a>]</sup></td>
+							<td class='addr brd bbd'>
+								<span class=hl>#pktlen</span><sup>[<a href='#footnote1'>1</a>]</sup> /
+								<span class=hl>#random</span><sup>[<a href='#footnote7'>7</a>]</sup>
+							</td>
 							<td class='addr brd bbd'>M[k]</td>
 							<td class='addr brd bbd'>[k]</td>
 							<td class='addr bbd'>[x+k]</td>
@@ -251,23 +331,29 @@
 				</td>
 			</tr>
 			<tr class=bbs>
-				<td class=op><span class=hl>#pktlen</span><sup>[<a href='#footnote1'>1</a>]</sup></td>
+				<td class=op>
+					a<br>
+					x
+				</td>
+				<td>The current value in the register.</td>
+			</tr>
+			<tr class=bbs>
+				<td class=op>
+					<span class=hl>#pktlen</span><sup>[<a href='#footnote1'>1</a>]</sup><br>
+					<span class=hl>#random</span><sup>[<a href='#footnote7'>7</a>]</sup>
+				</td>
 				<td>
-					The length of the packet
-					(the <em>wire</em> length, not the <em>captured</em> length).  Note
-					that although this address mode traditionally uses the immediate
-					value prefix <code>#</code>, the value comes from a read-only
-					register rather than the command.  The BPF machine initializes the
-					length register before each start of the filter program.
+					The value in the register.  Note that although this address mode
+					traditionally prefixes a register name with <code>#</code>, the value
+					comes from the register rather than from the instruction.
 				</td>
 			</tr>
 			<tr class=bbs>
 				<td class=op>M[k]</td>
-				<td>The word at the word offset <i>k</i> in the scratch memory store:
+				<td>
+					The word at the word offset <i>k</i> in the scratch memory store:
 					<code>M[0]</code> is the first word, <code>M[1]</code> is the second
-					word and so on.  In libpcap the scratch memory store comprises 16
-					words and any filter program that tries to access it beyond this
-					limit is considered invalid.
+					word and so on.
 				</td>
 			</tr>
 			<tr class=bbs>
@@ -275,7 +361,9 @@
 				<td>
 					The byte, halfword, or word at the byte offset
 					<i>k</i> in the packet.  Offset 0 points to the first byte of the
-					packet.  The offset does not have to be a multiple of the data size.
+					packet.  Offset 1 points to the second byte of the packet regardless
+					if the instruction loads a byte, a halfword or a word, and so on.
+					The offset does not have to be a multiple of the data size.
 				</td>
 			</tr>
 			<tr class=bbs>
@@ -297,11 +385,11 @@
 			<tr class=bbs>
 				<td class=op>#k, Lt, Lf</td>
 				<td>
-					The offset to <code>Lt</code> if the predicate is true, otherwise
-					the offset to <code>Lf</code>.  Zero means the next instruction
-					after the current.  The first operand of the predicate is the
-					current value in the accumulator and the second is the immediate
-					value <i>k</i>.
+					The offset, in the same sense as the above, to <code>Lt</code> if the
+					predicate is true, otherwise the offset to <code>Lf</code>.  The
+					first (implicit) operand of the predicate is the current value in the
+					accumulator and the second (explicit) operand is the immediate value
+					<i>k</i>.
 				</td>
 			</tr>
 			<tr class=bbs>
@@ -310,10 +398,6 @@
 					Same as the above, but the second operand is the current value in
 					the index register.
 				</td>
-			</tr>
-			<tr class=bbs>
-				<td class=op>x</td>
-				<td>The current value in the index register.</td>
 			</tr>
 			<tr class=bbs>
 				<td class=op>4*([k]&amp;0xf)</td>
@@ -327,7 +411,7 @@
 		<h3 class="subtitle">Footnotes</h2>
 		<ol>
 			<li id='footnote1'>
-				In libpcap <code>#pktlen</code> is the same as <code>#len</code> in the
+				In libpcap <code>pktlen</code> is the same as <code>len</code> in the
 				1993 specification.
 			</li>
 			<li id='footnote2'>
@@ -357,6 +441,11 @@
 				in the 1993 specification.  Only FreeBSD, Linux 3.7 and later, and
 				NetBSD support these instructions in their kernel-mode BPF
 				implementations.
+			</li>
+			<li id='footnote7'>
+				The <code>random</code> register is not a part of the 1993
+				specification, it is an extension that only OpenBSD kernel and OpenBSD
+				libpcap implement.
 			</li>
 		</ol>
 	</div>
