@@ -330,6 +330,7 @@ table.bpfmap td.group {
 }
 
 table.bpfmap td.op {
+	white-space: nowrap;
 	font-family: monospace;
 	font-size: larger;
 	text-align: left;
@@ -337,6 +338,7 @@ table.bpfmap td.op {
 }
 
 table.bpfmap td.addr {
+	white-space: nowrap;
 	font-family: monospace;
 	font-size: larger;
 	text-align: center;
