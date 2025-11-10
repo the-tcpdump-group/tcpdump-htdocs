@@ -303,13 +303,22 @@
 			</tr>
 
 			<tr class=misc>
-				<td rowspan=2 class=group>miscellaneous</td>
+				<td rowspan=4 class=group>miscellaneous</td>
 				<td class=op>tax</td>
-				<td rowspan=2 colspan=2>&nbsp;</td>
+				<td rowspan=2 colspan=2 class=bbd>&nbsp;</td>
 			</tr>
 			<tr class=misc>
-				<td class=op>txa</td>
+				<td class='op bbd'>txa</td>
 			</tr>
+			<tr class=misc>
+				<td class='op bbd'><span class=hl>cop</span><sup>[<a href='#footnote7'>7</a>]</sup></td>
+				<td class='addr bbd brd'>#k, a</td>
+				<td class=bbd>&nbsp;</td>
+			</tr>
+			<tr class=misc>
+				<td class=op><span class=hl>copx</span><sup>[<a href='#footnote7'>7</a>]</sup></td>
+				<td class='bbd brd'>&nbsp;</td>
+				<td class='addr bbd'>x, a</td>
 		</table>
 	</div>
 
@@ -447,7 +456,38 @@
 				specification, it is an extension that only OpenBSD kernel and OpenBSD
 				libpcap implement.
 			</li>
+			<li id='footnote8'>
+				The <code>cop</code> and <code>copx</code> instructions are not a part
+				of the 1993 specification, these are an extension that only NetBSD
+				kernel implements.  Note that NetBSD defines these as two distinct
+				instructions rather than one instruction with two addressing modes.
+			</li>
 		</ol>
+	</div>
+
+
+	<div class="entry">
+		<h3 class="subtitle">References</h2>
+		<ul>
+			<li>
+				<a href='https://man.freebsd.org/cgi/man.cgi?bpf(4)'>FreeBSD
+				<b>bpf</b>(4) man page</a>
+			</li>
+			<li>
+				<a href='https://www.kernel.org/doc/html/latest/networking/filter.html'>Linux
+				Socket Filtering aka Berkeley Packet Filter</a>
+			</li>
+			<li>
+				<a href='https://man.netbsd.org/bpf.4'>NetBSD <b>bpf</b>(4) man page</a>
+			</li>
+			<li>
+				<a href='https://man.openbsd.org/bpf.4'>OpenBSD <b>bpf</b>(4) man page</a>
+			</li>
+			<li>
+				<a href='https://docs.oracle.com/cd/E88353_01/html/E37851/bpf-4d.html'>Solaris
+				11.4 <b>bpf</b>(4D) man page</a>
+			</li>
+		</ul>
 	</div>
 </div>
         </div>
