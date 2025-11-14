@@ -4,7 +4,7 @@
                 Broadcom switch tag
             </h2>
             <div class="entry">
-                <h3 class="subtitle">Switch tag structure</h3>
+                <h3 class="subtitle">Ingress and Egress</h3>
 <p>
 The Broadcom switch tag is 4 octets long.
 </p>
@@ -18,17 +18,27 @@ The first octet of the tag has the format:
 The OPcode field has a value that is one of:
 </p>
 <ul>
-<li><code>0b000</code>, if the tag is an egress tag, for a packet going from the
-switch to the management port;
-<li><code>0b001</code>, if the tag is an ingress tag, for a packet going from the
-management port to the switch.
+<li><code>0b000</code>, if the tag is an egress tag.  This means a standard
+Ethernet frame enters a hardware switch (typically via a physical port with
+an external connector), the switch converts the standard Ethernet frame to a
+DSA packet, fills the DSA tag fields and sends the DSA packet into the
+management port (typically a hardwired internal connection between two chips
+on a PCB or between components of the same chip); at the other end of the
+management port the CPU receives the DSA packet, reconstructs the original
+standard Ethernet frame and can correctly process it further using the
+metadata encoded in the DSA tag earlier.</li>
+<li><code>0b001</code>, if the tag is an ingress tag.  This means the CPU
+prepares a standard Ethernet frame, produces a DSA packet from the Ethernet
+frame, fills the DSA tag fields as required and sends the DSA packet into the
+management port; at the other end of the management port the hardware switch
+receives the DSA packet, reconstructs the original standard Ethernet frame and
+sends the standard Ethernet frame to the physical port(s) using the metadata
+encoded in the DSA tag earlier.</li>
 </ul>
 <p>
 Other values are reserved.
 </p>
-<p>
-The format for an egress tag is:
-</p>
+<h3 class="subtitle">Ingress (CPU &rrarr; switch &rarr; port(s)) tag format</h3>
 <pre>
 +----------------------------------------------------------+
 | OPcode[7:5] | Traffic class[4:2] | Tag enforcement[1:0]  |
@@ -66,9 +76,7 @@ either one or multiple ports (e.g: broadcast/multicast), and the possible
 values are 0 through <code>0x1ff</code> (total of 9 ports). The switch takes care of
 copying the packet to multiple ports if specified.
 </p>
-<p>
-The format for an ingress tag is:
-</p>
+<h3 class="subtitle">Egress (CPU &llarr; switch &larr; port) tag format</h3>
 <pre>
 +----------------------------------------------------------+
 | OPcode[7:5] | Reserved[4:0]                              |
@@ -91,22 +99,28 @@ a match, it can eventually get copied to the management port and the
 classification ID will reflect which TCAM entry index was hit.
 </p>
 The reason code is set when the packets are sent to the management port;
-its value is one of:
+it is a bitmap of:
 <ul>
-<li>0: mirroring: the CPU is a capturing device.
-<li>1: MAC SA learning.
-<li>2: Switching: CPU is the intended destination port for the packet.
-<li>3: Protocol termination: 802.1 protocol that needs to be terminated
-by the CPU, e.g 802.1x/RADIUS.
-<li>4: Protocol snooping: the CPU needs to look at the packets: IGMP/MLD,
-RARP/ARP/DHCP etc.
-<li>5: Exception processing flooding.
+<li>bit 0: mirroring: the CPU is a capturing device.</li>
+<li>bit 1: MAC SA learning.</li>
+<li>bit 2: Switching: CPU is the intended destination port for the packet.</li>
+<li>bit 3: Protocol termination: 802.1 protocol that needs to be terminated
+by the CPU, e.g 802.1x/RADIUS.</li>
+<li>bit 4: Protocol snooping: the CPU needs to look at the packets: IGMP/MLD,
+RARP/ARP/DHCP etc.</li>
+<li>bit 5: Exception processing flooding.</li>
 </ul>
 <p>
-Values of 6 and 7 are reserved.
+Bits 6 and 7 are reserved.
 </p>
 <p>
 The traffic class (TC) field values map to 802.1p/CoS traffic classes.
+</p>
+<p>
+The Source port number is related to the Destination map field of the ingress
+tag format.  For example, port 0 corresponds to destination map
+<code>0b000000001</code>, port 1 &mdash; to <code>0b000000010</code>, port 2
+&mdash; to <code>0b000000100</code> and so on.
 </p>
             </div>
           </div>
