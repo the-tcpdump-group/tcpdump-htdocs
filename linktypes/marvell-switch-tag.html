@@ -49,24 +49,24 @@
             </h2>
             <div class="entry">
                 <h3 class="subtitle">Switch tag structure</h3>
-The Marvell (Ethertyped or not) DSA tagged frames contain a
+The Marvell (EtherType'd or not) DSA tagged frames contain a
 proprietary tag inserted between the source address field and the
-type/length field in the Ethernet header.
+EtherType/length field in the Ethernet header.
 
 The DSA tag is 4 octets. It contains the source (or target) switch
 device and port or trunk numbers. It is placed in the frame on top
 of the standard IEEE tag.
 
-The EDSA tag is 8 octets. It contains a programmable Ethernet type,
+The EDSA tag is 8 octets. It contains a programmable EtherType value,
 two reserved octets (always 0), and a standard DSA tag.
 
 <pre>
      7   6   5   4   3   2   1   0  
    .   .   .   .   .   .   .   .   .
  0 +---+---+---+---+---+---+---+---+  --
-   |  Prog. DSA Ether Type [15:8]  |  |
+   |  Progr. DSA EtherType [15:8]  |  |
 +1 +---+---+---+---+---+---+---+---+  |
-   |  Prog. DSA Ether Type [7:0]   |  | EDSA tag
+   |  Progr. DSA EtherType [7:0]   |  | EDSA tag
 +1 +---+---+---+---+---+---+---+---+  |
    |     Reserved (0x00 0x00)      |  |
 +2 +---+---+---+---+---+---+---+---+  |  --
