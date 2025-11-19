@@ -423,7 +423,7 @@ PRIMITIVES
 
                  sca    DEC System Communication Architecture (SCA)
 
-                 slow   IEEE Slow Protools
+                 slow   IEEE Slow Protocols, such as LACP, OAM and OSSP
 
                  stp    IEEE Spanning Tree Protocol
 
