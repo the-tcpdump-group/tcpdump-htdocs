@@ -115,12 +115,17 @@ The hardware address structure is:
 |           (2 Octets)          |
 +-------------------------------+
 |            Address            |
-| (8 Octets, including padding) |
+|           (8 Octets)          |
 +-------------------------------+
 </pre>
 <p>
 All 32-bit integral values, and all multi-octet integral values in
-structures listed above, are in big-endian byte order.
+structures listed above, are in big-endian byte order.  In the hardware
+address structure the <code>Address</code> field contains the first 8
+octets of a hardware address if the address length is greater than 8,
+otherwise the complete hardware address followed by any trailing padding
+if required.
+</p>
             </div>
           </div>
           <!-- End of LINKTYPE_NFLOG section -->
