@@ -39,8 +39,9 @@
 # This script has been tested to work on the following Linux systems:
 #
 # * Debian 11
-# * Debian 12
+# * Debian 12 <--- please use this one
 # * Ubuntu 22.04
+# * Ubuntu 24.04
 #
 # Please mind that the generated contents of the .txt files may change much
 # more than respective source man pages, sometimes even when the source man
