@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 2 November 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 22 November 2025<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -1110,15 +1110,35 @@ Frame Reject (FRMR) U PDUs
 </DL>
 
 <DT><B>inbound</B><DD>
-Packet was received by the host performing the capture rather than being
-sent by that host.  This is only supported for certain link-layer types,
-such as SLIP and the ``cooked'' Linux capture mode
-used for the ``any'' device and for some other device types.
+True if the packet was received by the host performing the capture rather than
+sent by that host.  This primitive is supported for certain link-layer types
+only, namely,
+<B>DLT_SLIP</B>,
+
+<B>DLT_IPNET</B>,
+
+<B>DLT_LINUX_SLL</B>,
+
+<B>DLT_LINUX_SLL2</B>,
+
+<B>DLT_PFLOG</B>,
+
+<B>DLT_PPP_PPPD</B>,
+
+a number of Juniper Networks private types and some types of Linux DSA tag.
+For reference, the ``any'' pseudo-interface uses
+<B>DLT_LINUX_SLL</B>
+
+or
+<B>DLT_LINUX_SLL2</B>
+
+on Linux, and
+<B>DLT_IPNET</B>
+
+on Solaris.
 <DT><B>outbound</B><DD>
-Packet was sent by the host performing the capture rather than being
-received by that host.  This is only supported for certain link-layer types,
-such as SLIP and the ``cooked'' Linux capture mode
-used for the ``any'' device and for some other device types.
+Same as the above, but for the opposite direction (from the capturing host
+to the network).
 <DT><B>ifindex </B><I>interface_index</I><DD>
 True if the packet was logged via the specified interface (applies only to
 packets logged by the Linux &quot;any&quot; cooked v2 interface).
@@ -2598,7 +2618,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 16:11:55 GMT, November 19, 2025
+This HTML man page was generated at 13:05:55 GMT, November 23, 2025
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
