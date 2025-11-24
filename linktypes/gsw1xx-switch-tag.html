@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>GSW1XX switch tag | TCPDUMP &amp; LIBPCAP</title>
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="../images/T-32x32.png" rel="shortcut icon" type="image/png">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../manpages/">Man Pages</a></li>
+                <li><a href="../ci.html">CI</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../related.html">See Also</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+                <li><a href="../thanks.html">Thanks!</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+<!-- Start of gsw1xx switch tag section -->
+<div class="post">
+  <h2 class="title">gsw1xx</h2>
+  <div class="entry">
+    The protocol
+    is used by GSW120, GSW140, GSW141, GSW145 chips and has a history with products from Infineon, Intel and MaxLinear.
+    The protocol information is based on the MaxLinear Data Sheet Revision 1.4.
+    <h4 class="subtitle">Switch tag structure</h4>
+    <ul>
+      The gsw1xx EDSA tagged frames contain a proprietary tag inserted between the source address field and the
+      EtherType/length field in the Ethernet header.
+      The EDSA tag is 8 octets. It contains a programmable EtherType value
+      and a standard DSA tag.
+      Ingress and Egress have different formats. If byte 6&7 is not
+      zero it is a egress packet.
+</ul>
+ Format of (Ethertyped) Ingress tagged frames:
+    <pre>
+ +0 +----+----+----+----+----+----+----+----+  +-
+    |    Prog. DSA Ether Type [15:8]        |  | (8-byte) EDSA Tag
+ +1 +----+----+----+----+----+----+----+----+  | Contains a programmable Ether type.
+    |    Prog. DSA Ether Type [7:0]         |  |  +
+ +1 +----+----+----+----+----+----+----+----+  |  | (6-byte) Special Tag Content
+    |PME[7] TCE[6] TSE[5] FNL[4]   TTC[3:0] |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    |         TEPML [7:0]                   |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    |         TEPMH [7:0]                   |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    |   Res[7:5]  IE[4]  SP[3:0]            |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    |          Res [7:0] all zero           |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    |          Res [7:0] all zero           |  |  |
+ +1 +----+----+----+----+----+----+----+----+  +- +-
+</pre>
+ Format of (Ethertyped) Egress tagged frames:
+    <pre>
+
+ +0 +----+----+----+----+----+----+----+----+  +-
+    |    Prog. DSA Ether Type [15:8]        |  | (8-byte) EDSA Tag
+ +1 +----+----+----+----+----+----+----+----+  | Contains a programmable Ether type.
+    |    Prog. DSA Ether Type [7:0]         |  |  +
+ +1 +----+----+----+----+----+----+----+----+  |  | (6-byte) Special Tag Content
+    |        TC[7:4]    IPN [3:0]           |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    | PPPOE[7] IPV[6]   IPO[5:0]            |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    |             DLPML [7:0]               |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    |             DLPMR [7:0]               |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    |  MI[7]  KL2UM[6] PLHB[5:0]            |  |  |
+ +1 +----+----+----+----+----+----+----+----+  |  |
+    |             PLLB [7:0]                |  |  |
+ +1 +----+----+----+----+----+----+----+----+  +- +-
+
+    </pre>
+    <div>
+      <h4 class="subtitle">Bit field abbreviations</h4>
+      <ul>
+<li>PME: Port map enable </li>
+<li>IPN: Ingress port number</li>
+<li>TCE: Traffic class enable</li>
+<li>TSE: Time stamp enable</li>
+<li>FNL: Force no learning</li>
+<li>TC: Traffic class</li>
+<li>IPV: IPv4 packet</li>
+<li>IPO: IP offset</li>
+<li>SP: Source port</li>
+<li>IE: Interrupt enable</li>
+<li>PPPOE: ppp-over-ethernet</li>
+<li>DLPML: Destination logical port map low bits.</li>
+<li>DLPMR: Destination logical port map high (reserved)</li>
+<li>MI: Mirror indication</li>
+<li>KL2UM Known l2 unicast/multicast mac.</li>
+<li>PLHB: Packet Length High Bits</li>
+<li>PLLB: Packet Length Low Bits</li>
+<li>TEPML: Target egress port maps low bits</li>
+<li>TEPMH: Target egress port maps high bits (reserved)</li>
+<li>Res: Reserved</li>
+</ul>
+    </div>
+    <h5 class="notes">Notes</h5>
+    Port mapping is a switch internal function for multi-cast and vlan
+    routing and need custom firmware rules to be active.
+    <br><br>
+    Precise Time Stamping indication according to IEEE 1588v2.
+  </div>
+</div>
+<!-- End of gsw1xx switch tag section -->
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                This web site is &copy; 1999&ndash;2025 The Tcpdump Group
+                (<a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">more
+                information</a>).
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
