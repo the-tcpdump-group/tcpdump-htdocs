@@ -197,7 +197,17 @@ the form:
 </pre>
 
 <p>
-EVENT_PACKET_ADVERTISING packets are always version 3 packets.
+For protocol versions prior to version 3, both advertising physical
+channel packets and data physical channel are provided in
+EVENT_PACKET_DATA messages. If the access address is
+<code>0x8e89bed6</code>, the packet is an advertising physical channel
+packet, otherwise it is a data physical channel packet.
+</p>
+
+<p>
+For protocol version 3, advertising physical channel packets are
+delivered in EVENT_PACKET_ADVERTISING messages and data physical channel
+packets are delivered in EVENT_PACKET_DATA messages.
 </p>
 
 <p>
@@ -208,7 +218,7 @@ header field.
 
 <p>
 The flags field contains the following flag bits for
-EVENT_PACKET_ADVERTISING packets:
+EVENT_PACKET_ADVERTISING messages:
 </p>
 <ul>
 <li><code>0000000x</code> - CRC status (0 = incorrect, 1 = OK);</li>
@@ -230,7 +240,7 @@ EVENT_PACKET_ADVERTISING packets:
 <li><code>x0000000</code> - reserved for future use:</li>
 </ul>
 <p>
-and for EVENT_PACKET packets:
+and for EVENT_PACKET messages:
 </p>
 <ul>
 <li><code>0000000x</code> - CRC status (0 = incorrect, 1 = OK);</li>
