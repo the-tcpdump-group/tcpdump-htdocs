@@ -48,17 +48,66 @@
                 LINKTYPE_NORDIC_BLE
             </h2>
             <div class="entry">
-                <h3 class="subtitle">Packet structure</h3>
+                <h3 class="subtitle">Version 0 packet format (legacy)</h3>
 <pre>
 +---------------------------+
-|           BoardID         |
+|        Magic number       |
+|         (2 Octets)        |
++---------------------------+
+|         Packet type       |
 |          (1 Octet)        |
 +---------------------------+
-|      Length of header     |
+|        Packet counter     |
+|          (2 Octets)       |
++---------------------------+
+|            Unused         |
+|          (2 Octets)       |
++---------------------------+
+|       Payload length      |
 |          (1 Octet)        |
 +---------------------------+
-|     Length of payload     |
+|          Payload          |
+.                           .
+.                           .
+.                           .
+</pre>
+
+
+                <h3 class="subtitle">Version 1 packet format</h3>
+<pre>
++---------------------------+
+|          Board ID         |
 |          (1 Octet)        |
++---------------------------+
+|        Header length      |
+|          (1 Octet)        |
++---------------------------+
+|       Payload length      |
+|          (1 Octet)        |
++---------------------------+
+|       Protocol version    |
+|          (1 Octet)        |
++---------------------------+
+|        Packet counter     |
+|          (2 Octets)       |
++---------------------------+
+|         Packet type       |
+|          (1 Octet)        |
++---------------------------+
+|          Payload          |
+.                           .
+.                           .
+.                           .
+</pre>
+
+                <h3 class="subtitle">Version 2 and later packet format</h3>
+<pre>
++---------------------------+
+|          Board ID         |
+|          (1 Octet)        |
++---------------------------+
+|       Payload length      |
+|         (2 Octets)        |
 +---------------------------+
 |       Protocol version    |
 |          (1 Octet)        |
@@ -77,21 +126,43 @@
 
                 <h3 class="subtitle">Description</h3>
 <p>
-The board ID field indicates which Sniffer device the message is to or
-from.  Its value is opaque, with different values for different devices.
+The magic number in version 0 packets has the first octet
+<code>0xBE</code> and the second octet <code>0xEF</code>.
 </p>
+
 <p>
-The length of header field contains the length of the header following
-the board ID, in octets, including the header length octet.
+To determine the packet version:
+<ul>
+<li>check the octets at offses of 0 and 1 - if they are
+<code>0xBE</code> and <code>0xEF</code>, respectively, the packet is
+version 0;</li>
+<li>otherwise, the octet at offset 3 gives the packet version
+number.</li>
+</ul>
 </p>
+
 <p>
-The length of payload field contains the length of the payload following
-the header, in octets.
+The board ID field for packet versions 1 and later indicates which
+Sniffer device the message is to or from. Its value is opaque, with
+different values for different devices.
 </p>
+
+<p>The header length field in packet version 1 contains the length
+of the header following the board ID, in octets, including the header
+length octet.
+</p>
+
 <p>
-The protocol version field contains the version of this protocol; the
-current version is 1.
+The payload length field contains the length of the payload following
+the header, in octets. In version 2 and later, it is in little-endian
+byte order.
 </p>
+
+<p>
+The protocol version field in packet versions 1 and later contains the
+version of this protocol.
+</p>
+
 <p>
 The packet counter field is in little-endian byte order.  In messages
 sent from the Sniffer to the host, it contains a count of messages sent
@@ -100,100 +171,156 @@ Sniffer, it contains a count of messages sent from the host to the
 Sniffer.  In both cases, the count is modulo 65536.  This can be used to
 detect missing packets.
 </p>
+
 <p>
 The packet type field contains a value that is one of:
 </p>
 <ul>
-<li><code>0x00</code>, for a REQ_FOLLOW message sent from the host to the Sniffer to
-only send packets received from a specific address;</li>
-<li><code>0x01</code>, for an EVENT_FOLLOW message sent from the Sniffer to the host
-to indicate that it has entered the FOLLOW state;</li>
-<li><code>0x05</code>, for an EVENT_CONNECT message sent from the Sniffer to the host
-to indicate that someone has connected to the unit we are
-following;</li>
-<li><code>0x06</code>, for an EVENT_PACKET message sent from the Sniffer to the host,
-containing a Bluetooth LE packet captured by the Sniffer;</li>
-<li><code>0x07</code>, for a REQ_SCAN_CONT message sent from the host to the Sniffer,
-telling it to scan continuously and hand over the packets ASAP;</li>
-<li><code>0x09</code>, for a EVENT_DISCONNECT message sent from the Sniffer to the
-host, telling it that the connected address we were following has
-received a disconnect packet;</li>
-<li><code>0x0C</code>, for a SET_TEMPORARY_KEY message, specifying a temporary key to
-use on encryption (for OOB and passkey);</li>
+<li><code>0x00</code>, for a REQ_FOLLOW message sent from the host to
+the Sniffer to only send packets received from a specific address;</li>
+<li><code>0x01</code>, for an EVENT_FOLLOW message sent from the Sniffer
+to the host to indicate that it has entered the FOLLOW state;</li>
+<li><code>0x02</code>, for an EVENT_PACKET_ADVERTISING message sent from
+the Sniffer to the host to indicate it has received an advertising
+physical channel PDU.
+<li><code>0x05</code>, for an EVENT_CONNECT message sent from the
+Sniffer to the host to indicate that someone has connected to the unit
+we are following;</li>
+<li><code>0x06</code>, for an EVENT_PACKET_DATA message sent from the
+Sniffer to the host, containing a Bluetooth LE packet captured by the
+Sniffer;</li>
+<li><code>0x07</code>, for a REQ_SCAN_CONT message sent from the host to
+the Sniffer, telling it to scan continuously and hand over the packets
+ASAP;</li>
+<li><code>0x09</code>, for a EVENT_DISCONNECT message sent from the
+Sniffer to the host, telling it that the connected address we were
+following has received a disconnect packet;</li>
+<li><code>0x0C</code>, for a SET_TEMPORARY_KEY message, specifying a
+temporary key to use on encryption (for OOB and passkey);</li>
 <li><code>0x0D</code>, for a PING_REQ message;</li>
 <li><code>0x0E</code>, for a PING_RESP message;</li>
 <li><code>0x13</code>, for a SWITCH_BAUD_RATE_REQ message;</li>
 <li><code>0x14</code>, for a SWITCH_BAUD_RATE_RESP message;</li>
-<li><code>0x17</code>, for a SET_ADV_CHANNEL_HOP_SEQ message sent from the host to
-the Sniffer, telling it which order to cycle through the channels when
-following an advertiser;</li>
-<li><code>0xFE</code>, for a GO_IDLE sent from the host to the Sniffer, telling it to
-stop sending UART traffic and listen for new commands.</li>
+<li><code>0x17</code>, for a SET_ADV_CHANNEL_HOP_SEQ message sent from
+the host to the Sniffer, telling it which order to cycle through the
+channels when following an advertiser;</li>
+<li><code>0xFE</code>, for a GO_IDLE sent from the host to the Sniffer,
+telling it to stop sending UART traffic and listen for new
+commands.</li>
 </ul>
+
 <p>
-For an EVENT_PACKET message, the payload has the form:
+For an EVENT_PACKET_ADVERTISING or EVENT_PACKET message, the payload has
+the form:
 </p>
 <pre>
-+---------------------------+
-|  Length of payload header |
-|          (1 Octet)        |
-+---------------------------+
-|            Flags          |
-|          (1 Octet)        |
-+---------------------------+
-|           Channel         |
-|          (1 Octet)        |
-+---------------------------+
-|            RSSI           |
-|          (1 Octet)        |
-+---------------------------+
-|        Event counter      |
-|          (2 Octets)       |
-+---------------------------+
-|          Delta time       |
-|          (4 Octets)       |
-+---------------------------+
-|         Bluetooth LE      |
-|      Link layer packet    |
-.                           .
-.                           .
-.                           .
++-------------------------------+
+|      Payload header length    |
+|            (1 Octet)          |
++-------------------------------+
+|              Flags            |
+|            (1 Octet)          |
++-------------------------------+
+|             Channel           |
+|            (1 Octet)          |
++-------------------------------+
+|           RSSI Sample         |
+|            (1 Octet)          |
++-------------------------------+
+|          Event counter        |
+|            (2 Octets)         |
++-------------------------------+
+| Delta time/Firmware timestamp |
+|            (4 Octets)         |
++-------------------------------+
+|           Bluetooth LE        |
+|        Link layer packet      |
+.                               .
+.                               .
+.                               .
 </pre>
 
 <p>
-The length of payload header field contains the length of the header
-preceding the Bluetooth LE packet, including the length of payload
+EVENT_PACKET_ADVERTISING packets are always version 3 packets.
+</p>
+
+<p>
+The payload header length field contains the length of the header
+preceding the Bluetooth LE packet, including the length of the payload
 header field.
 </p>
+
 <p>
-The flags field contains the following flag bits:
+The flags field contains the following flag bits for
+EVENT_PACKET_ADVERTISING packets:
 </p>
 <ul>
-<li><code>0x00000001</code> - the packet checksum is OK;</li>
-<li><code>0x00000010</code> - the packet is from the master to the slave;</li>
-<li><code>0x00000100</code> - the packet is encrypted.</li>
+<li><code>0000000x</code> - CRC status (0 = incorrect, 1 = OK);</li>
+<li><code>00000xx0</code> - reserved for future use (channels >= 37);</li>
+<li><code>00000xx0</code> - AUX_TYPE (channels < 37):</li>
+<ul>
+<li><code>0</code> - AUX_ADV_IND:</li>
+<li><code>1</code> - AUX_CHAIN_IND:</li>
+<li><code>2</code> - AUX_SYNC_IND:</li>
+<li><code>3</code> - AUX_SCAN_RSP.</li>
 </ul>
+<li><code>0000x000</code> - reserved for future use;</li>
+<li><code>0xxx0000</code> - PHY type:</li>
+<ul>
+<li><code>0</code> - 1M PHY;</li>
+<li><code>1</code> - 2M PHY;</li>
+<li><code>2</code> - coded.</li>
+</ul>
+<li><code>x0000000</code> - reserved for future use:</li>
+</ul>
+<p>
+and for EVENT_PACKET packets:
+</p>
+<ul>
+<li><code>0000000x</code> - CRC status (0 = incorrect, 1 = OK);</li>
+<li><code>000000x0</code> - packet direction (0 = peripheral ->
+control, 1 = control -> peripheral);</li>
+<li><code>00000x00</code> - packet encrypted (0 = no, 1 = yes);</li>
+<li><code>0000x000</code> - MIC status (0 = incorrect, 1 = OK);</li>
+<li><code>0xxx0000</code> - PHY type:</li>
+<ul>
+<li><code>0</code> - 1M PHY;</li>
+<li><code>1</code> - 2M PHY;</li>
+<li><code>2</code> - coded.</li>
+</ul>
+<li><code>x0000000</code> - reserved for future use.</li>
+</ul>
+
 <p>
 The channel field contains the Bluetooth LE channel index of the channel
 being used.
 </p>
+
 <p>
-The RSSI field contains the absolute value of RSSI of the packet, in
-dBm; the actual RSSI is the negative of that value.
+The RSSI sample field contains the absolute value of RSSI of the packet,
+in dBm; the actual RSSI is the negative of that value.
 </p>
+
 <p>
 The event counter field is in little-endian byte order.  For packets
 that are part of a connection, it contains the value of a counter of
 packets within the connection; there are separate counters for each
 direction of the connection.
 </p>
+
 <p>
-The delta time field is in little-endian byte order.  It contains the
-time in microseconds from the end of the previous received packet to the
-beginning of this packet.
+The delta time/firmware timestamp field is in little-endian byte order.
+In protocol versions prior to version 3, it contains the time in
+microseconds from the end of the previous received packet to the
+beginning of this packet. 
+In protocol version 3, it contains the timestamp of the start of the
+received packet captured by the firmware timer with microsecond
+resolution.
 </p>
+
 <p>
-Following the delta time field is a Bluetooth LE link-layer packet.
+Following the delta time/firmware timestamp field is a Bluetooth LE
+link-layer packet.
 </p>
             </div>
           </div>
