@@ -1,0 +1,30 @@
+<!-- Start of LINKTYPE_DSA_TAG_GSW1XX section -->
+<div class="post">
+  <h2 class="title">
+    LINKTYPE_DSA_TAG_GSW1XX
+  </h2>
+  <div class="entry">
+    <h3 class="subtitle">Packet structure</h3>
+    <pre>
++--------------------------------+
+| Destination Address (6 octets) |
++--------------------------------+
+|    Source Address (6 octets)   |
++--------------------------------+
+|   GSW1XX switch tag (8 octets) |
++--------------------------------+
+|   EtherType/Length (2 octets)  |
++--------------------------------+
+|            Payload             |
+.                                .
+.                                .
+.                                .
+    </pre>
+    <h3 class="subtitle">Description</h3>
+    <p>
+      A <a href="../linktypes/gsw1xx-switch-tag.html">GSW1XX switch tag</a>
+      is inserted in the Ethernet header before the EtherType/Length field.
+    </p>
+  </div>
+</div>
+<!-- End of LINKTYPE_DSA_TAG_GSW1XX section -->
