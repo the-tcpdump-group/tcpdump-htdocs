@@ -396,8 +396,9 @@
 			<li id='footnote5'>
 				The <code>neg</code> (negation) ALU instruction is not a part of the
 				1993 specification.  libpcap implements it, kernel BPF implementations
-				typically implement it.  This instruction does not take an argument and
-				operates on the accumulator only.
+				typically implement it.  This instruction does the same as
+				<code>tax; ld #0; sub x</code>, except it does not change the
+				<code>x</code> register.
 			</li>
 			<li id='footnote6'>
 				The <code>mod</code> (modulo) and <code>xor</code> (bitwise XOR) ALU
