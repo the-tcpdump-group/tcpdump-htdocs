@@ -14,10 +14,10 @@
 		<p>
 			Mind that in BPF a "byte" is an 8-bit unsigned integer, a "halfword" is
 			a 16-bit unsigned integer, a "word" is a 32-bit unsigned integer and an
-			instruction is a 64-bit structure.  Each register is one word.  Loading
-			a byte or a halfword into a register implicitly resets all bits that are
-			not present in the loaded value.  The BPF machine performs all
-			initialization before every start of the program.
+			instruction is a 64-bit structure.  Loading a byte or a halfword into a
+			register implicitly resets all bits that are not present in the loaded
+			value.  The BPF machine performs all initialization before every start of
+			the program.
 		</p>
 
 		<h3 class="subtitle">Registers, Memory and Data</h2>
@@ -33,7 +33,7 @@
 			</tr>
 			<tr class=bbs>
 				<td class=brs>&nbsp;</td>
-				<td class=brs>increment-only, register, unspecified</td>
+				<td class=brs>increment-only, register, unspecified-size integer</td>
 				<td class=brs>
 					The implicit program counter.  To execute a step of the program, the
 					BPF machine fetches the instruction this register points to,
