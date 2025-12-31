@@ -1,0 +1,68 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.6.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_INJECT(3PCAP)                                          PCAP_INJECT(3PCAP)
+
+NAME
+       pcap_inject, pcap_sendpacket - transmit a packet
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_inject(pcap_t *p, const void *buf, size_t size);
+       int pcap_sendpacket(pcap_t *p, const u_char *buf, int size);
+
+DESCRIPTION
+       pcap_inject()  sends  a  raw  packet through the network interface; buf
+       points to the data of the packet, including the link-layer header,  and
+       size is the number of bytes in the packet.
+
+       Note  that,  even  if  you successfully open the network interface, you
+       might not have permission to send packets on it, or it might  not  sup-
+       port  sending  packets; as pcap_open_live(3PCAP) doesn't have a flag to
+       indicate whether to open for capturing, sending, or capturing and send-
+       ing,  you  cannot request an open that supports sending and be notified
+       at open time whether sending will be possible.  Note also that some de-
+       vices might not support sending packets.
+
+       Note  that,  on  some  platforms,  the  link-layer header of the packet
+       that's sent might not be the same  as  the  link-layer  header  of  the
+       packet  supplied to pcap_inject(), as the source link-layer address, if
+       the header contains such an address, might be changed to be the address
+       assigned  to the interface on which the packet it sent, if the platform
+       doesn't support sending completely raw  and  unchanged  packets.   Even
+       worse,  some drivers on some platforms might change the link-layer type
+       field to whatever value libpcap used when attaching to the device, even
+       on  platforms  that do nominally support sending completely raw and un-
+       changed packets.
+
+       pcap_sendpacket() is like pcap_inject(), but it returns 0  on  success,
+       rather  than  returning  the  number  of bytes written.  (pcap_inject()
+       comes from OpenBSD; pcap_sendpacket() comes from  WinPcap/Npcap.   Both
+       are provided for compatibility.)
+
+RETURN VALUE
+       pcap_inject()  returns the number of bytes written on success, PCAP_ER-
+       ROR_NOT_ACTIVATED if called on a capture handle that has  been  created
+       but not activated, and PCAP_ERROR on other errors.
+
+       pcap_sendpacket()  returns  0  on  success, PCAP_ERROR_NOT_ACTIVATED if
+       called on a capture handle that has been created but not activated, and
+       PCAP_ERROR on other errors.
+
+       If PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may
+       be called with p as an argument to fetch or display the error text.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                 5 March 2022               PCAP_INJECT(3PCAP)

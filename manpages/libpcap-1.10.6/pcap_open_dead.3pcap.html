@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_OPEN_DEAD</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_OPEN_DEAD</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 January 2014<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.6.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_open_dead, pcap_open_dead_with_tstamp_precision - open a fake
+pcap_t for compiling filters or opening a capture for output
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>pcap_t *pcap_open_dead(int linktype, int snaplen);
+pcap_t *pcap_open_dead_with_tstamp_precision(int linktype, int snaplen,
+    u_int precision);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<P>
+
+<B>pcap_open_dead</B>()
+
+and
+<B>pcap_open_dead_with_tstamp_precision</B>()
+
+are used for creating a
+<CODE>pcap_t</CODE>
+
+structure to use when calling the other functions in libpcap.  It is
+typically used when just using libpcap for compiling BPF code; it can
+also be used if using
+<A HREF='./pcap_dump_open.3pcap.html'><B>pcap_dump_open</B></A>(3PCAP),
+
+<A HREF='./pcap_dump.3pcap.html'><B>pcap_dump</B></A>(3PCAP),
+
+and
+<A HREF='./pcap_dump_close.3pcap.html'><B>pcap_dump_close</B></A>(3PCAP)
+
+to write a savefile if there is no
+<CODE>pcap_t</CODE>
+
+that supplies the packets to be written.
+<P>
+
+<I>linktype</I>
+
+specifies the link-layer type for the
+<CODE>pcap_t</CODE>.
+
+<P>
+
+<I>snaplen</I>
+
+specifies the snapshot length for the
+<CODE>pcap_t</CODE>.
+
+<P>
+
+When
+<B>pcap_open_dead_with_tstamp_precision</B>(),
+
+is used to create a
+<CODE>pcap_t</CODE>
+
+for use with
+<B>pcap_dump_open</B>(),
+
+<I>precision</I>
+
+specifies the time stamp precision for packets;
+<CODE>PCAP_TSTAMP_PRECISION_MICRO</CODE>
+
+should be specified if the packets to be written have time stamps in
+seconds and microseconds, and
+<CODE>PCAP_TSTAMP_PRECISION_NANO</CODE>
+
+should be specified if the packets to be written have time stamps in
+seconds and nanoseconds.  Its value does not affect
+<A HREF='./pcap_compile.3pcap.html'><B>pcap_compile</B></A>(3PCAP).
+
+<H2 id="lbAE">BACKWARD COMPATIBILITY</H2>
+
+The
+<B>pcap_open_dead_with_tstamp_precision</B>()
+
+function became available in libpcap release 1.5.1.  In previous
+releases, there was no mechanism to open a savefile for writing with
+time stamps given in seconds and nanoseconds.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
+
+<B><A HREF="./pcap-linktype.7.html">pcap-linktype</A></B>(7)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:48:40 GMT, December 31, 2025
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of CBPF-SAVEFILE</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of CBPF-SAVEFILE</H1>
+Section: File Formats (5)<BR>Updated: 9 February 2025<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.6.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+cbpf-savefile - cBPF savefile format (work in progress, DRAFT revision 7)
+<H2 id="lbAC">DESCRIPTION</H2>
+
+This man page discusses a file format for cBPF, which is the &quot;classic&quot; (and
+for a long time the only) Berkeley Packet Filter.  It does
+<B>NOT</B>
+
+apply to the newer &quot;extended&quot; variety of BPF (eBPF).
+<P>
+
+The main purpose of this file format is to store BPF bytecode, most commonly
+compiled from a BPF filter expression (see
+<B><A HREF="./pcap-filter.7.html">pcap-filter</A></B>(7)
+
+for the filter syntax description) using libpcap.  Besides that, the format
+allows to encode some information about the context in which the compilation
+was done.  This meta-data can make it easier to reproduce the compilation
+later if required.  cBPF savefile design is based on the file format proposed
+by C.S. Peron in 2005.
+<P>
+
+Unless stated otherwise, in the following specification integer fields are
+big-endian unsigned, string fields do not use NUL character for termination
+or padding.
+<P>
+<H2 id="lbAD">FILE FORMAT</H2>
+
+A savefile consists of a fixed-size header and a variable-size body as
+follows:
+<P>
+
+<PRE>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|      0xA1     |      0xB2     |     0xC3      |     0xCB      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|      'c'      |      'B'      |     'P'       |     'F'       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|   MajorVer=1  |    MinorVer   |             Flags             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                            SnapLen                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|         LinkTypeValue         |       InstructionCount=n      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
+|                         instruction 1                         |
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
+|                         instruction 2                         |
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
+~                                                               ~
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
+|                         instruction n                         |
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
+|                   optional trailing TLV space                 |
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE>
+
+<P>
+
+The first four octets contain a fixed signature, also known as
+a magic number, to make it easy to identify the file type automatically.
+The next four octets contain the ASCII string &quot;cBPF&quot; to provide a hint for
+manual identification.
+<P>
+<H3 id="lbAE">MajorVer and MinorVer</H3>
+
+Contain the major and the minor version numbers of this format respectively.
+The current major version is 1 and the current minor version is 0.  Format
+changes that do not impact compatibility (e.g., new TLV types or flags)
+increment the minor version only.  Other format changes increment the major
+version and reset the minor version to 0.  All format versions have the first
+part of the header up to and including MinorVer identical.
+<P>
+<H3 id="lbAF">Flags</H3>
+
+<PRE>
+ b15 b14 b13 b12 b11 b10 b09 b08 b07 b06 b05 b04 b03 b02 b01 b00
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|                       reserved            |RND|CPX|COP|XOR|MOD|
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+</PRE>
+
+<P>
+MOD, XOR, COP, CPX and RND: if set to 1, in this BPF dialect
+<CODE>BPF_MOD</CODE>,
+
+<CODE>BPF_XOR</CODE>,
+
+<CODE>BPF_COP</CODE>,
+
+<CODE>BPF_COPX</CODE>
+
+and
+<CODE>BPF_RND</CODE>
+
+respectively are valid instructions.  For the current list of OSes that
+support
+<CODE>BPF_MOD</CODE>
+
+and
+<CODE>BPF_XOR</CODE>
+
+in the kernel see the
+<CODE>%</CODE>
+
+and
+<CODE>^</CODE>
+
+binary operators in
+<B><A HREF="./pcap-filter.7.html">pcap-filter</A></B>(7).
+
+<CODE>BPF_COP</CODE>
+
+and
+<CODE>BPF_COPX</CODE>
+
+are implemented in NetBSD kernel.
+<CODE>BPF_RND</CODE>
+
+is implemented in OpenBSD kernel.
+<P>
+
+Note that the fact an instruction is valid in a BPF dialect does not always
+mean the compiled bytecode in the savefile contains the instruction.  In other
+words, the purpose of the flags above is not to provide a digest of the file
+contents, but to enable conclusive automatic verification of the bytecode if
+required by the use case.
+<P>
+<P>
+<H3 id="lbAG">SnapLen</H3>
+
+Contains the snapshot length used for the compilation, usually this is the
+<I>snaplen</I>
+
+input argument to
+<A HREF='./pcap_open_dead.3pcap.html'><B>pcap_open_dead</B></A>(3PCAP)
+
+or
+<A HREF='./pcap_set_snaplen.3pcap.html'><B>pcap_set_snaplen</B></A>(3PCAP).
+
+<P>
+<H3 id="lbAH">LinkTypeValue</H3>
+
+Contains the link-layer header type value used for the compilation, usually
+this is either the
+<I>linktype</I>
+
+input argument to
+<B>pcap_open_dead</B>()
+
+or the
+<I>dlt</I>
+
+input argument to
+<A HREF='./pcap_set_datalink.3pcap.html'><B>pcap_set_datalink</B></A>(3PCAP)
+
+or the value(s) returned by
+<A HREF='./pcap_datalink.3pcap.html'><B>pcap_datalink</B></A>(3PCAP)
+
+and
+<A HREF='./pcap_list_datalinks.3pcap.html'><B>pcap_list_datalinks</B></A>(3PCAP).
+
+Although these functions take and return link-layer header type values via the
+<CODE>int</CODE>
+
+C type, by convention only the low 16 bits are in use.
+<P>
+<H3 id="lbAI">InstructionCount</H3>
+
+This is the last field of the fixed header in major version 1, it contains the
+number of bytecode instructions following the header.  By convention, valid
+BPF bytecode always ends with a
+<CODE>ret</CODE>
+
+instruction, so in a valid savefile this field value is at least 1.
+<P>
+<P>
+
+The file format thus far minimizes the overhead for software that uses the BPF
+bytecode.  If there is any data after the last instruction, it is the trailing
+TLV space, which mostly contains meta-data for human interpretation.  It
+contains TLVs in the format specified below.
+<P>
+<H2 id="lbAJ">INSTRUCTION FORMAT</H2>
+
+<P>
+
+<PRE>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|             opcode            |       jt      |       jf      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                               k                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE>
+
+<P>
+
+This is the traditional encoding of a BPF instruction (a 4-tuple of
+integers).  Note that usually the endianness depends on the machine, but in
+this format it is fixed.  Some opcodes interpret k as a signed integer.
+<P>
+<H2 id="lbAK">TLV FORMAT</H2>
+
+<P>
+
+<PRE>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|              Type             |            Length=m           |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
+~                        Value (m octets)                       ~
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE>
+
+<P>
+
+All TLVs are optional.  Every TLV may appear in the same savefile at most
+once.  Length value does not include Type and Length.  Code points for Type
+and the associated Length constraints are defined below.
+<P>
+<H3 id="lbAL">EOF TLV</H3>
+
+Allows to mark the end of TLV space (hence of the savefile) explicitly to make it
+clear that the file is not truncated.  If this TLV is present in the TLV
+space, it may appear the last only.
+<P>
+
+Type is 0, Length is 0, Value is empty.
+<P>
+<H3 id="lbAM">LinkTypeName TLV</H3>
+
+Allows to record the input argument to
+<A HREF='./pcap_datalink_name_to_val.3pcap.html'><B>pcap_datalink_name_to_val</B></A>(3PCAP)
+
+if the latter was used to translate a DLT name into LinkTypeValue (the same
+name can sometimes produce different values in different contexts).
+<P>
+
+Type is 1, Length is variable, Value contains an ASCII string.
+<P>
+<H3 id="lbAN">Filter TLV</H3>
+
+Allows to record the filter expression that was compiled into the
+bytecode, usually this is the
+<I>str</I>
+
+input argument to
+<A HREF='./pcap_compile.3pcap.html'><B>pcap_compile</B></A>(3PCAP).
+
+<P>
+
+Type is 2, Length is variable, Value contains an ASCII string.
+<P>
+<H3 id="lbAO">OptReq TLV</H3>
+
+Allows to record whether optimization was requested for the compilation or
+not, usually this is the
+<I>optimize</I>
+
+input argument to
+<B>pcap_compile</B>().
+
+Note that some link-layer header types and filter keywords disable the
+optimization automatically in libpcap.
+<P>
+
+Type is 3, Length is 1, Value contains 1 or 0.
+<P>
+<H3 id="lbAP">Netmask TLV</H3>
+
+Allows to record the value of
+<I>netmask</I>
+
+input argument to
+<B>pcap_compile</B>().
+
+<P>
+
+Type is 4, Length is 4, Value contains a 32-bit IPv4 netmask.
+<P>
+<H3 id="lbAQ">Comment TLV</H3>
+
+Allows to record a free-form text, for example, the name and version of the
+program that generated the file.
+<P>
+
+Type is 5, Length is variable, Value contains a UTF-8 string.
+<P>
+<H3 id="lbAR">Timestamp TLV</H3>
+
+Allows to record when the compilation was performed.
+<P>
+
+Type is 6, Length is 8, Value contains a 64-bit Unix timestamp.
+<P>
+<H2 id="lbAS">SOFTWARE SUPPORT</H2>
+
+BPF Exam at
+<I><A HREF="https://www.tcpdump.org/bpfexam/">https://www.tcpdump.org/bpfexam/</A></I>
+
+can produce a cBPF savefile from user input.
+<P>
+<H2 id="lbAT">SEE ALSO</H2>
+
+<B><A HREF="./pcap-savefile.5.html">pcap-savefile</A></B>(5)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:48:37 GMT, December 31, 2025
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

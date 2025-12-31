@@ -54,6 +54,10 @@
 		<changefreq>monthly</changefreq>
 	</url>
 	<url>
+		<loc>https://www.tcpdump.org/manpages/libpcap-1.10.6/</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
 		<loc>https://www.tcpdump.org/manpages/</loc>
 		<changefreq>weekly</changefreq>
 	</url>

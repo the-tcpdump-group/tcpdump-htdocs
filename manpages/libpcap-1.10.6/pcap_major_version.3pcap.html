@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_MAJOR_VERSION</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_MAJOR_VERSION</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 8 January 2018<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.6.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_major_version, pcap_minor_version - get the version number of a savefile
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_major_version(pcap_t *p);
+int pcap_minor_version(pcap_t *p);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+If
+<I>p</I>
+
+refers to a ``savefile'',
+<B>pcap_major_version</B>()
+
+returns the major number of the file format of the ``savefile'' and
+<B>pcap_minor_version</B>()
+
+returns the minor number of the file format of the ``savefile''.  The
+version number is stored in the ``savefile''; note that the meaning of
+its values depends on the type of ``savefile'' (for example, pcap or
+pcapng).
+<P>
+
+If
+<I>p</I>
+
+refers to a live capture, the values returned by
+<B>pcap_major_version</B>()
+
+and
+<B>pcap_minor_version</B>()
+
+are not meaningful.
+<H2 id="lbAE">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:48:39 GMT, December 31, 2025
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

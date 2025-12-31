@@ -1,0 +1,73 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.6.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_STATS(3PCAP)                                            PCAP_STATS(3PCAP)
+
+NAME
+       pcap_stats - get capture statistics
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_stats(pcap_t *p, struct pcap_stat *ps);
+
+DESCRIPTION
+       pcap_stats() fills in the struct pcap_stat pointed to by its second ar-
+       gument.  The values represent packet statistics from the start  of  the
+       run to the time of the call.
+
+       pcap_stats()  is supported only on live captures, not on ``savefiles'';
+       no statistics are stored in ``savefiles'', so no statistics are  avail-
+       able when reading from a ``savefile''.
+
+       A struct pcap_stat has the following members:
+
+              ps_recv
+                     number of packets received;
+
+              ps_drop
+                     number  of  packets  dropped because there was no room in
+                     the operating system's buffer when they arrived,  because
+                     packets weren't being read fast enough;
+
+              ps_ifdrop
+                     number of packets dropped by the network interface or its
+                     driver.
+
+       The statistics do not behave the same way on  all  platforms.   ps_recv
+       might  count  packets whether they passed any filter set with pcap_set-
+       filter(3PCAP) or not, or it might count only packets that pass the fil-
+       ter.   It also might, or might not, count packets dropped because there
+       was no room  in  the  operating  system's  buffer  when  they  arrived.
+       ps_drop  is  not  available  on  all platforms; it is zero on platforms
+       where it's not available.  If packet  filtering  is  done  in  libpcap,
+       rather  than in the operating system, it would count packets that don't
+       pass the filter.  Both ps_recv and ps_drop might, or might  not,  count
+       packets not yet read from the operating system and thus not yet seen by
+       the application.  ps_ifdrop might, or might  not,  be  implemented;  if
+       it's  zero,  that might mean that no packets were dropped by the inter-
+       face, or it might mean that the statistic is unavailable, so it  should
+       not  be  treated  as  an indication that the interface did not drop any
+       packets.
+
+RETURN VALUE
+       pcap_stats() returns 0 on success, PCAP_ERROR_NOT_ACTIVATED  if  called
+       on  a  capture  handle  that  has  been  created  but not activated, or
+       PCAP_ERROR if there is another error or if  p  doesn't  support  packet
+       statistics.  If PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_per-
+       ror(3PCAP) may be called with p as an argument to fetch or display  the
+       error text.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                 5 March 2022                PCAP_STATS(3PCAP)

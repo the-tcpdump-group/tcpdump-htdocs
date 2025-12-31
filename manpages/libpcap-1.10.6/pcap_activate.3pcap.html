@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_ACTIVATE</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_ACTIVATE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 3 June 2024<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.6.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_activate - activate a capture handle
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>int pcap_activate(pcap_t *p);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_activate</B>()
+
+is used to activate a packet capture handle to look
+at packets on the network, with the options that were set on the handle
+being in effect.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_activate</B>()
+
+returns
+<B>0</B>
+
+on success without warnings, a non-zero positive value on
+success with warnings, and a negative value on error.
+A non-zero return value indicates what warning or error condition
+occurred.
+<P>
+
+The possible warning values are:
+<DL>
+<DT><CODE>PCAP_WARNING_PROMISC_NOTSUP</CODE>
+
+<DD>
+Promiscuous mode was requested, but the capture source doesn't support
+promiscuous mode.
+<DT><CODE>PCAP_WARNING_TSTAMP_TYPE_NOTSUP</CODE>
+
+<DD>
+The time stamp type specified in a previous
+<A HREF='./pcap_set_tstamp_type.3pcap.html'><B>pcap_set_tstamp_type</B></A>(3PCAP)
+
+call isn't supported by the capture source (the time stamp type is
+left as the default),
+<DT><CODE>PCAP_WARNING</CODE>
+
+<DD>
+Another warning condition occurred;
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_geterr</B></A>(3PCAP)
+
+or
+<A HREF='./pcap_geterr.3pcap.html'><B>pcap_perror</B></A>(3PCAP)
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display a message describing the warning
+condition.
+</DL>
+<P>
+
+The possible error values are:
+<DL>
+<DT><CODE>PCAP_ERROR_ACTIVATED</CODE>
+
+<DD>
+The handle has already been activated.
+<DT><CODE>PCAP_ERROR_NO_SUCH_DEVICE</CODE>
+
+<DD>
+The capture source specified when the handle was created doesn't
+exist.
+<DT><CODE>PCAP_ERROR_PERM_DENIED</CODE>
+
+<DD>
+The process doesn't have permission to open the capture source.
+<DT><CODE>PCAP_ERROR_PROMISC_PERM_DENIED</CODE>
+
+<DD>
+The process has permission to open the capture source but doesn't
+have permission to put it into promiscuous mode.
+<DT><CODE>PCAP_ERROR_RFMON_NOTSUP</CODE>
+
+<DD>
+Monitor mode was specified but the capture source doesn't support
+monitor mode.
+<DT><CODE>PCAP_ERROR_IFACE_NOT_UP</CODE>
+
+<DD>
+The capture source device is not up.
+<DT><CODE>PCAP_ERROR_CAPTURE_NOTSUP</CODE>
+
+<DD>
+Packet capture is not supported on the capture source.
+<DT><CODE>PCAP_ERROR</CODE>
+
+<DD>
+Another error occurred.
+<B>pcap_geterr</B>()
+
+or
+<B>pcap_perror</B>()
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display a message describing the error.
+</DL>
+<P>
+
+If
+<CODE>PCAP_WARNING_PROMISC_NOTSUP</CODE>,
+
+<CODE>PCAP_ERROR_NO_SUCH_DEVICE</CODE>,
+
+<CODE>PCAP_ERROR_PERM_DENIED</CODE>,
+
+or
+<CODE>PCAP_ERROR_CAPTURE_NOTSUP</CODE>
+
+is returned,
+<B>pcap_geterr</B>()
+
+or
+<B>pcap_perror</B>()
+
+may be called with
+<I>p</I>
+
+as an argument to fetch or display an message giving additional details
+about the problem that might be useful for debugging the problem if it's
+unexpected.
+<P>
+
+Additional warning and error codes may be added in the future; a program
+should check for positive, negative, and zero return codes, and treat
+all positive return codes as warnings and all negative return
+codes as errors.
+<A HREF='./pcap_statustostr.3pcap.html'><B>pcap_statustostr</B></A>(3PCAP)
+
+can be called, with a warning or error code as an argument, to fetch a
+message describing the warning or error code.
+<P>
+
+If
+<B>pcap_activate</B>()
+
+fails, the
+<CODE>pcap_t *</CODE>
+
+is not closed and freed; it should be closed using
+<A HREF='./pcap_close.3pcap.html'><B>pcap_close</B></A>(3PCAP).
+
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:48:38 GMT, December 31, 2025
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

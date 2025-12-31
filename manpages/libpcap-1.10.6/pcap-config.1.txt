@@ -1,0 +1,74 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.6.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP-CONFIG(1)              General Commands Manual             PCAP-CONFIG(1)
+
+NAME
+       pcap-config  - write libpcap compiler and linker flags to standard out-
+       put
+
+SYNOPSIS
+       pcap-config [ --help ] [ --version ] [ --cflags ]
+                   [ --libs | --additional-libs ]
+                   [ --static | --static-pcap-only ]
+
+DESCRIPTION
+       pcap-config writes to the standard output various compiler  and  linker
+       flags  required  to  build a user program with libpcap.  By default, it
+       writes flags appropriate for building with a dynamically-linked version
+       of  libpcap;  see below for static linking.  Depending on the manner of
+       libpcap installation, some options or their  combinations  may  produce
+       empty output - this is by design.
+
+OPTIONS
+       --help Produce a help message and exit.
+
+       --version
+              Produce  libpcap  version and exit.  The version is the contents
+              of VERSION file in libpcap source tree rather than the result of
+              pcap_lib_version(3PCAP).
+
+       --cflags
+              Produce  the  -I  compiler  flag  required  to include libpcap's
+              header files.
+
+       --libs Produce the -L and -l linker flags required to link  with  libp-
+              cap, including -l flags for libraries required by libpcap.
+
+       --additional-libs
+              Produce  the  -L  and  -l linker flags for libraries required by
+              libpcap, but not the -l flag to link with libpcap itself.
+
+       --static
+              This option  causes  --libs  and  --additional-libs  to  produce
+              linker flags appropriate for static linking with libpcap.
+
+       --static-pcap-only
+              This  option  causes  --libs  and  --additional-libs  to produce
+              linker flags appropriate for static linking with libpcap and dy-
+              namic  linking with all other libraries, including libraries re-
+              quired by libpcap.
+
+EXIT STATUS
+       pcap-config exits with a non-zero status when invoked with  an  invalid
+       command-line option, and with status 0 otherwise.
+
+BACKWARD COMPATIBILITY
+       Before  libpcap  release  1.10.2 pcap-config did not treat invalid com-
+       mand-line options as  an  error.  The  --static-pcap-only  flag  became
+       available  in  libpcap release 1.10.2.  The --static flag became avail-
+       able in libpcap release 1.1.0.
+
+SEE ALSO
+       pkg-config(1), pcap(3PCAP)
+
+                                 17 April 2023                  PCAP-CONFIG(1)

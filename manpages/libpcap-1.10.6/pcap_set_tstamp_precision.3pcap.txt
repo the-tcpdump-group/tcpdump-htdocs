@@ -1,0 +1,50 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.6.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+
+PCAP_SET_TSTAMP_PRECISION(3PCAP)              PCAP_SET_TSTAMP_PRECISION(3PCAP)
+
+NAME
+       pcap_set_tstamp_precision  -  set  the time stamp precision returned in
+       captures
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_set_tstamp_precision(pcap_t *p, int tstamp_precision);
+
+DESCRIPTION
+       pcap_set_tstamp_precision() sets the precision of the  time  stamp  de-
+       sired for packets captured on the pcap descriptor to the type specified
+       by tstamp_precision.  It must be called on a pcap descriptor created by
+       pcap_create(3PCAP)  that  has  not  yet  been  activated  by pcap_acti-
+       vate(3PCAP).  Two time stamp precisions are supported, microseconds and
+       nanoseconds.   One  can  use  options  PCAP_TSTAMP_PRECISION_MICRO  and
+       PCAP_TSTAMP_PRECISION_NANO to request desired  precision.  By  default,
+       time stamps are in microseconds.
+
+RETURN VALUE
+       pcap_set_tstamp_precision()  returns 0 on success if the specified time
+       stamp precision is expected to be  supported  by  the  capture  device,
+       PCAP_ERROR_TSTAMP_PRECISION_NOTSUP  if the capture device does not sup-
+       port the requested time stamp precision, PCAP_ERROR_ACTIVATED if called
+       on a capture handle that has been activated.
+
+BACKWARD COMPATIBILITY
+       This  function  became available in libpcap release 1.5.1.  In previous
+       releases, time stamps from a capture  device  or  savefile  are  always
+       given in seconds and microseconds.
+
+SEE ALSO
+       pcap(3PCAP), pcap_get_tstamp_precision(3PCAP), pcap-tstamp(7)
+
+                                23 August 2018PCAP_SET_TSTAMP_PRECISION(3PCAP)

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP_OPEN_LIVE</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP_OPEN_LIVE</H1>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 4 March 2024<BR>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.10.6.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap_open_live - open a device for capturing
+<H2 id="lbAC">SYNOPSIS</H2>
+
+<PRE>
+<B>#include &lt;pcap/pcap.h&gt;
+</B>
+<B>char errbuf[PCAP_ERRBUF_SIZE];
+</B>
+<B>pcap_t *pcap_open_live(const char *device, int snaplen,
+    int promisc, int to_ms, char *errbuf);
+</B></PRE>
+
+<H2 id="lbAD">DESCRIPTION</H2>
+
+<B>pcap_open_live</B>()
+
+is used to obtain a packet capture handle to look
+at packets on the network.
+<I>device</I>
+
+is a string that specifies the network device to open; on all supported Linux
+systems, as well as on recent versions of macOS and Solaris, a
+<I>device</I>
+
+argument of &quot;any&quot; or
+<CODE>NULL</CODE>
+
+can be used to capture packets from all network interfaces.  The latter should
+not be confused with all available capture devices as seen by
+<A HREF='./pcap_findalldevs.3pcap.html'><B>pcap_findalldevs</B></A>(3PCAP),
+
+which may also include D-Bus, USB etc.
+<P>
+
+<I>snaplen</I>
+
+specifies the snapshot length to be set on the handle.  If the packet
+data should not be truncated at the end, a value of 262144 should be
+sufficient for most devices, but D-Bus devices require a value of 128MB
+(128*1024*1024).
+<P>
+
+<I>promisc</I>
+
+specifies whether the interface is to be put into promiscuous mode.
+If
+<I>promisc</I>
+
+is non-zero, promiscuous mode will be set, otherwise it will not be set.
+<P>
+
+<I>to_ms</I>
+
+specifies the packet buffer timeout, as a non-negative value, in
+milliseconds.  (See
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+for an explanation of the packet buffer timeout.)
+<P>
+
+<I>errbuf</I>
+
+is a buffer large enough to hold at least
+<CODE>PCAP_ERRBUF_SIZE</CODE>
+
+chars.
+<H2 id="lbAE">RETURN VALUE</H2>
+
+<B>pcap_open_live</B>()
+
+returns a
+<CODE>pcap_t *</CODE>
+
+on success and
+<CODE>NULL</CODE>
+
+on failure.
+If
+<CODE>NULL</CODE>
+
+is returned,
+<I>errbuf</I>
+
+is filled in with an appropriate error message.
+<I>errbuf</I>
+
+may also be set to warning text when
+<B>pcap_open_live</B>()
+
+succeeds; to detect this case the caller should store a zero-length string in
+<I>errbuf</I>
+
+before calling
+<B>pcap_open_live</B>()
+
+and display the warning to the user if
+<I>errbuf</I>
+
+is no longer a zero-length string.
+<H2 id="lbAF">SEE ALSO</H2>
+
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP),
+
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP)
+
+<P>
+
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 19:48:40 GMT, December 31, 2025
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>
