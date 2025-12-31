@@ -65,6 +65,8 @@ define
 	'Try reloading this page in ' . (int) ceil (1.0 / MAX_RPS_LIMIT) . ' second(s).'
 );
 
+define ('LIBEXEC_DIR', '/usr/local/libexec/bpfexam/');
+
 define ('DOT_BIN', '/usr/bin/dot');
 
 # Starting with Radare2 5.7.6 it should be sufficient to install the amd64.deb
@@ -85,7 +87,7 @@ define ('RADARE2_BIN', '/usr/bin/r2');
 # Then copy _build/caper.native to the production environment.
 # 2: https://gitlab.com/niksu/caper/-/blob/master/Vagrantfile
 # 3: https://gitlab.com/niksu/caper/-/blob/master/build.sh
-define ('CAPER_BIN', '/usr/local/bin/caper.native');
+define ('CAPER_BIN', LIBEXEC_DIR . 'caper.native-master');
 
 # filtertest, where specified, was copied from libpcap built
 # using "./configure --enable-optimizer-dbg".  tcpdump in each case was linked
@@ -95,49 +97,49 @@ $versions = array
 	'master' => array
 	(
 		'descr' => 'git master snapshot',
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-git',
-		'filtertest' => '/usr/local/bin/filtertest-git-optdebug',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-master',
+		'filtertest' => LIBEXEC_DIR . 'filtertest-master',
 	),
 	'1.10.5' => array
 	(
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.5',
-		'filtertest' => '/usr/local/bin/filtertest-1.10.5-optdebug',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.5',
+		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.5',
 	),
 	'1.10.4' => array
 	(
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.4',
-		'filtertest' => '/usr/local/bin/filtertest-1.10.4-optdebug',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.4',
+		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.4',
 	),
 	'1.10.2' => array
 	(
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.2',
-		'filtertest' => '/usr/local/bin/filtertest-1.10.2-optdebug',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.2',
+		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.2',
 	),
 	'1.10.1' => array
 	(
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.10.1',
-		'filtertest' => '/usr/local/bin/filtertest-1.10.1-optdebug',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.1',
+		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.1',
 	),
 	'1.9.1' => array
 	(
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.9.1',
-		'filtertest' => '/usr/local/bin/filtertest-1.9.1-optdebug',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.9.1',
+		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.9.1',
 	),
 	'1.8.1' => array
 	(
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.8.1',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.8.1',
 	),
 	'1.7.4' => array
 	(
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.7.4',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.7.4',
 	),
 	'1.6.2' => array
 	(
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.6.2',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.6.2',
 	),
 	'1.5.3' => array
 	(
-		'tcpdump' => '/usr/local/bin/tcpdump-libpcap-1.5.3',
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.5.3',
 	),
 	# libpcap 1.9.1 in Ubuntu 20.04 (/usr/sbin/tcpdump, v4.9.3)
 	# libpcap 1.10.1 in Ubuntu 22.04 (/usr/bin/tcpdump, v4.99.1)
