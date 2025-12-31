@@ -38,7 +38,7 @@ define ('EXPR_INPUT_NAME', 'filter');
 define ('SUBMIT_INPUT_NAME', 'examine');
 define ('SNAPLEN_INPUT_NAME', 'snaplen');
 define ('ACTION_INPUT_NAME', 'cbpf');
-define ('DEFAULT_VER', '1.10.5');
+define ('DEFAULT_VER', '1.10.6');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('MIN_SNAPLEN', 10);
 define ('DEFAULT_SNAPLEN', 65535);
@@ -94,11 +94,15 @@ define ('CAPER_BIN', LIBEXEC_DIR . 'caper.native-master');
 # with the same version of libpcap built _without_ "--enable-optimizer-dbg".
 $versions = array
 (
-	'master' => array
+	'1.11.0-PRE-GIT' => array
 	(
-		'descr' => 'git master snapshot',
 		'tcpdump' => LIBEXEC_DIR . 'tcpdump-master',
 		'filtertest' => LIBEXEC_DIR . 'filtertest-master',
+	),
+	'1.10.6' => array
+	(
+		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.6',
+		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.6',
 	),
 	'1.10.5' => array
 	(
@@ -141,10 +145,10 @@ $versions = array
 	(
 		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.5.3',
 	),
-	# libpcap 1.9.1 in Ubuntu 20.04 (/usr/sbin/tcpdump, v4.9.3)
 	# libpcap 1.10.1 in Ubuntu 22.04 (/usr/bin/tcpdump, v4.99.1)
-	# libpcap 1.10.0 in Debian 11 (/usr/bin/tcpdump, v4.99.0)
+	# libpcap 1.10.4 in Ubuntu 24.04 (/usr/bin/tcpdump, v4.99.4)
 	# libpcap 1.10.3 in Debian 12 (/usr/bin/tcpdump, v4.99.3)
+	# libpcap 1.10.5 in Debian 13 (/usr/bin/tcpdump, v4.99.5)
 	'random' => array
 	(
 		'descr' => 'random (OS default)',
@@ -790,31 +794,20 @@ function on_stderr_throw_escaped (string $stdout, string $stderr): string
 function run_tcpdump (array $argv, object $bytecode): string
 {
 	# tcpdump before 4.99.0, when run by an unprivileged user, fails trying to open
-	# a network interface even if provided with the "-y" flag.  To work around that,
-	# feed an empty .pcap file with the DLT of interest to stdin.  A side effect of
-	# feeding the .pcap file is that tcpdump uses snapshot length from the file
-	# header and disregards any "-s" flags.
+	# a network interface even if provided with the "-y" flag, so this script
+	# requires tcpdump >= 4.99.0.  To work with old libpcap versions, just compile
+	# a sufficiently recent tcpdump version with the required libpcap version.
 	if (count ($argv) < 1)
 		throw new Exception ('$argv must have at least one element');
-	$argv []= '-r';
-	$argv []= '-';
 	if (! $bytecode->optreq)
 		$argv []= '-O';
+	$argv []= '-y';
+	$argv []= $bytecode->dlt_name;
+	$argv []= '-s';
+	$argv []= $bytecode->snaplen;
 	$argv []= '--';
 	$argv []= $bytecode->filter;
-	$pcap_header = pack
-	(
-		'VvvVVVV',
-		0xA1B2C3D4, # magic number
-		2, # major version
-		4, # minor version
-		0, # time zone offset
-		0, # time stamp accuracy
-		$bytecode->snaplen,
-		$bytecode->dlt_value
-	);
-	list ($stdout, $stderr) = pipe_process ($argv, $pcap_header);
-	$stderr = preg_replace ('/^reading from file -, link-type .+\n/', '', $stderr);
+	list ($stdout, $stderr) = pipe_process ($argv);
 	$stderr = preg_replace ('/^Warning: interface names might be incorrect\n/', '', $stderr);
 	return on_stderr_throw ($stdout, $stderr);
 }
