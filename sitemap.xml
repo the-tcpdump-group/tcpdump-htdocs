@@ -11,6 +11,10 @@
 		<changefreq>never</changefreq>
 	</url>
 	<url>
+		<loc>https://www.tcpdump.org/bpfisa.html</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	<url>
 		<loc>https://www.tcpdump.org/pcap.html</loc>
 		<changefreq>monthly</changefreq>
 	</url>
