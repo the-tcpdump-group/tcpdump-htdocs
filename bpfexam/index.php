@@ -343,6 +343,16 @@ $dltlist = array
 		'descr' => 'Linux cooked v2',
 		'val' => 276,
 	),
+	'DSA_TAG_BRCM' => array
+	(
+		'descr' => 'Broadcom infix DSA tag',
+		'val' => 281,
+	),
+	'DSA_TAG_DSA' => array
+	(
+		'descr' => 'Marvell infix DSA tag',
+		'val' => 284,
+	),
 );
 
 # Throw this to indicate that the message has already been HTML-escaped
