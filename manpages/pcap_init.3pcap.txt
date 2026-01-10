@@ -58,11 +58,11 @@ RETURN VALUE
        message.
 
 BACKWARD COMPATIBILITY
-       This  function  became available in libpcap release 1.9.0.  In previous
+       This  function became available in libpcap release 1.10.0.  In previous
        releases, on Windows,  all  strings  supplied  as  arguments,  and  all
        strings returned to the caller, are in the local character encoding.
 
 SEE ALSO
        pcap(3PCAP)
 
-                               18 September 2024              PCAP_INIT(3PCAP)
+                               30 December 2025               PCAP_INIT(3PCAP)

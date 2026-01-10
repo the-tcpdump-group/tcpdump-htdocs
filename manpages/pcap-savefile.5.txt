@@ -73,7 +73,7 @@ DESCRIPTION
 
               A  4-byte  not used - SHOULD be filled with 0 by pcap file writ-
               ers, and MUST be ignored by pcap file readers.  This  value  was
-              documented  by  some older implementations as "gmt to local cor-
+              documented  by  some older implementations as "GMT to local cor-
               rection" or "time zone offset".  Some older  pcap  file  writers
               stored non-zero values in this field.
 
