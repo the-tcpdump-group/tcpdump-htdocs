@@ -629,9 +629,62 @@ echo preg_replace
 					<P>
 						The default filter expression is simple, but representative of
 						everyday BPF usage. You are welcome to experiment with different
-						filter expressions and link-layer header types. If you have any
-						feedback about this tool, please send it to the
-						<A href="/#mailing-lists">mailing list</A>.
+						filter expressions and link-layer header types.  To see the effects
+						of host name resolution on the filter program, you can use any
+						hostname that resolves on the public Internet, as well as any of
+						the following hostnames:
+					</P>
+					<TABLE class=linktypedlt>
+						<TR>
+							<TH>hostname</TH>
+							<TH>MAС-48 addresses</TH>
+							<TH>IPv4 addresses</TH>
+							<TH>IPv6 addresses</TH>
+						</TR>
+						<TR>
+							<TD class=symbol>eth-ipv4-ipv6.host123.libpcap.test</TD>
+							<TD>1</TD><TD>1</TD><TD>1</TD>
+						</TR>
+						<TR>
+							<TD class=symbol>eth-ipv4-noipv6.host123.libpcap.test</TD>
+							<TD>1</TD><TD>1</TD><TD>0</TD>
+						</TR>
+						<TR>
+							<TD class=symbol>eth-noipv4-ipv6.host123.libpcap.test</TD>
+							<TD>1</TD><TD>0</TD><TD>1</TD>
+						</TR>
+						<TR>
+							<TD class=symbol>eth-noipv4-noipv6.host123.libpcap.test</TD>
+							<TD>1</TD><TD>0</TD><TD>0</TD>
+						</TR>
+						<TR>
+							<TD class=symbol>noeth-ipv4-ipv6.host123.libpcap.test</TD>
+							<TD>0</TD><TD>1</TD><TD>1</TD>
+						</TR>
+						<TR>
+							<TD class=symbol>noeth-ipv4-noipv6.host123.libpcap.test</TD>
+							<TD>0</TD><TD>1</TD><TD>0</TD>
+						</TR>
+						<TR>
+							<TD class=symbol>noeth-noipv4-ipv6.host123.libpcap.test</TD>
+							<TD>0</TD><TD>0</TD><TD>1</TD>
+						</TR>
+						<TR>
+							<TD class=symbol>eth-noipv4-ipv6x2.host357.libpcap.test</TD>
+							<TD>1</TD><TD>0</TD><TD>2</TD>
+						</TR>
+						<TR>
+							<TD class=symbol>eth-ipv4x4-noipv6.host357.libpcap.test</TD>
+							<TD>1</TD><TD>4</TD><TD>0</TD>
+						</TR>
+						<TR>
+							<TD class=symbol>eth-ipv4x4-ipv6x2.host357.libpcap.test</TD>
+							<TD>1</TD><TD>4</TD><TD>2</TD>
+						</TR>
+					</TABLE>
+					<P>
+						<STRONG>If you have any feedback about this tool, please send it
+						to the <A href="/#mailing-lists">mailing list</A>.</STRONG>
 					</P>
 				</DIV>
 
