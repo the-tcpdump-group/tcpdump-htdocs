@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 22 November 2025<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 11 January 2026<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -404,7 +404,8 @@ but neither the source nor the destination ARP/IPv4/RARP address is
 This primitive is valid only for the same link-layer types as the
 <B>ether host</B>
 
-primitive above.  May be qualified with a specific protocol
+primitive above, also it cannot be applied to packets encapsulated in MPLS,
+VXLAN or Geneve.  May be qualified with a specific protocol
 (<B>arp</B>,
 
 <B>ip</B>,
@@ -421,7 +422,7 @@ For example,
 is equivalent to
 
 <PRE>
-<B>ether host </B><I>ethernameaddr </I><B>and not ip host </B><I>hostnameaddr</I>
+<B>ether host </B><I>ethernameaddr </I><B>and ip and not ip host </B><I>hostnameaddr</I>
 </PRE>
 
 
@@ -759,10 +760,8 @@ in future.
 True if the packet is an IPv6 packet of protocol type <I>protocol</I>.
 (See `<B>ip proto</B>' above for the meaning of <I>protocol</I>.)
 Note that the IPv6 variant of ICMP uses a different protocol number, named
-<B>ipv6-icmp</B>
+<B>ipv6-icmp</B>.
 
-in AIX, FreeBSD, illumos, Haiku, GNU/Hurd, Linux, macOS, NetBSD, OpenBSD,
-Solaris and Windows.
 Note that this primitive does not chase the protocol header chain.
 <DT><B>icmp6</B><DD>
 Abbreviation for:
@@ -2618,7 +2617,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:05:55 GMT, November 23, 2025
+This HTML man page was generated at 21:13:49 GMT, January 18, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

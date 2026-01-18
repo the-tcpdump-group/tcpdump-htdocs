@@ -145,110 +145,111 @@ PRIMITIVES
               the destination Ethernet-like address is host  but  neither  the
               source  nor the destination ARP/IPv4/RARP address is host.  This
               primitive is valid only for the same  link-layer  types  as  the
-              ether  host  primitive  above.  May be qualified with a specific
-              protocol (arp, ip, rarp).  For example,
+              ether host primitive above, also it cannot be applied to packets
+              encapsulated in MPLS, VXLAN or Geneve.  May be qualified with  a
+              specific protocol (arp, ip, rarp).  For example,
                    ip gateway host
               is equivalent to
-                   ether host ethernameaddr and not ip host hostnameaddr
-              which can be used with either names or numbers for  hostnameaddr
+                   ether host ethernameaddr and ip and not ip host hostnameaddr
+              which  can be used with either names or numbers for hostnameaddr
               and ethernameaddr.
 
-              Host  must  be  a  name  and must be found both by the machine's
-              host-name-to-IP-address resolution mechanisms (host  name  file,
-              DNS,  NIS,  etc.) and by the machine's host-name-to-Ethernet-ad-
+              Host must be a name and must be  found  both  by  the  machine's
+              host-name-to-IP-address  resolution  mechanisms (host name file,
+              DNS, NIS, etc.) and by the  machine's  host-name-to-Ethernet-ad-
               dress resolution mechanism (/etc/ethers, etc.).
 
        net netnameaddr
               True if the source or the destination ARP/IPv4/IPv6/RARP address
-              of  the  packet belongs to the specified network.  May be quali-
+              of the packet belongs to the specified network.  May  be  quali-
               fied with a specific protocol (arp, ip, ip6, rarp) and/or a dif-
               ferent direction (src, dst, src and dst), in the latter case the
               net keyword remains mandatory.  netnameaddr may be either a name
-              from  the  networks  database (/etc/networks, etc.) or a network
+              from the networks database (/etc/networks, etc.)  or  a  network
               number.
 
-              An IPv4 network number can be written as a  dotted  quad  (e.g.,
+              An  IPv4  network  number can be written as a dotted quad (e.g.,
               192.168.1.0), dotted triple (e.g., 192.168.1), dotted pair (e.g,
-              172.16),  or  single  number  (e.g.,   10);   the   netmask   is
-              255.255.255.255  (/32)  for a dotted quad (which means that it's
-              really a host match), 255.255.255.0 (/24) for a  dotted  triple,
-              255.255.0.0  (/16)  for  a  dotted pair, or 255.0.0.0 (/8) for a
+              172.16),   or   single   number   (e.g.,  10);  the  netmask  is
+              255.255.255.255 (/32) for a dotted quad (which means  that  it's
+              really  a  host match), 255.255.255.0 (/24) for a dotted triple,
+              255.255.0.0 (/16) for a dotted pair, or  255.0.0.0  (/8)  for  a
               single number.
 
-              An IPv6 network number is an IPv6 address as discussed  for  the
-              host     primitive    above;    the    implicit    netmask    is
+              An  IPv6  network number is an IPv6 address as discussed for the
+              host    primitive    above;    the    implicit    netmask     is
               ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff (/128), so in this prim-
-              itive  IPv6  "network"  matches  are really always host matches.
+              itive IPv6 "network" matches are  really  always  host  matches.
               For an actual IPv6 network match see the `net netaddr/len' prim-
               itive below.
 
        net netaddr mask netmask
-              True  if  the source or the destination ARP/IPv4/RARP address of
-              the packet belongs to netaddr with the specified  netmask.   May
-              be  qualified  with a specific protocol (arp, ip, rarp) and/or a
-              different direction (src, dst, src and dst), in the latter  case
-              the  net keyword remains mandatory.  In this implementation this
+              True if the source or the destination ARP/IPv4/RARP  address  of
+              the  packet  belongs to netaddr with the specified netmask.  May
+              be qualified with a specific protocol (arp, ip, rarp)  and/or  a
+              different  direction (src, dst, src and dst), in the latter case
+              the net keyword remains mandatory.  In this implementation  this
               primitive does not support IPv6 networks.
 
-              Both netaddr and netmask use the IPv4  network  number  notation
+              Both  netaddr  and  netmask use the IPv4 network number notation
               described above, except the "single number" form is not valid in
               this primitive.  For example,
                    net 192.168 mask 255.255
               is equivalent to
                    net 192.168.0.0 mask 255.255.0.0
 
-              The netmask can represent any 32-bit value,  which  is  why  the
-              `net  netaddr/len'  primitive  below is usually a better fit for
-              use cases that require the value to be strictly one  of  the  33
+              The  netmask  can  represent  any 32-bit value, which is why the
+              `net netaddr/len' primitive below is usually a  better  fit  for
+              use  cases  that  require the value to be strictly one of the 33
               CIDR masks (from /0 to /32).
 
        net netaddr/len
               True if the source or the destination ARP/IPv4/IPv6/RARP address
-              of the packet belongs to netaddr where  the  bit-length  of  the
-              network  mask equals len (in other words, the address belongs to
-              the specified CIDR prefix).  May be qualified  with  a  specific
+              of  the  packet  belongs  to netaddr where the bit-length of the
+              network mask equals len (in other words, the address belongs  to
+              the  specified  CIDR  prefix).  May be qualified with a specific
               protocol (arp, ip, ip6, rarp) and/or a different direction (src,
-              dst, src and dst), in the latter case the  net  keyword  is  op-
+              dst,  src  and  dst),  in the latter case the net keyword is op-
               tional.
 
-              For  IPv4,  len  is an integer between 0 and 32 (both inclusive)
+              For IPv4, len is an integer between 0 and  32  (both  inclusive)
               and netaddr is the same as the above.  For IPv6, len is an inte-
-              ger  between  0  and 128 (both inclusive) and netaddr is an IPv6
-              address as discussed for the host  primitive  above.   For  both
-              IPv4  and  IPv6 the maximum value of len is equivalent to a host
-              match and the 0 value (which implies an all-zeroes value of  ne-
-              taddr)  matches  any address.  In the latter case this primitive
+              ger between 0 and 128 (both inclusive) and netaddr  is  an  IPv6
+              address  as  discussed  for  the host primitive above.  For both
+              IPv4 and IPv6 the maximum value of len is equivalent to  a  host
+              match  and the 0 value (which implies an all-zeroes value of ne-
+              taddr) matches any address.  In the latter case  this  primitive
               reduces to matching the specified (or implied) protocols only.
 
        port portnamenum
-              True if the source or the destination TCP/UDP/SCTP  port  of  an
-              IPv4/IPv6  packet  is  portnamenum.   For IPv4 this also implies
+              True  if  the  source or the destination TCP/UDP/SCTP port of an
+              IPv4/IPv6 packet is portnamenum.  For  IPv4  this  also  implies
               that the packet is the first fragment or is not fragmented.  May
-              be  qualified  with a specific layer 4 protocol (tcp, udp, sctp)
-              or a different direction (src, dst, src and dst), in the  latter
-              case  the  port  keyword remains mandatory.  Cannot be qualified
-              with a specific layer 3 protocol (IPv4/IPv6) in the same  primi-
-              tive,  but  can  be  trivially combined with other primitives to
+              be qualified with a specific layer 4 protocol (tcp,  udp,  sctp)
+              or  a different direction (src, dst, src and dst), in the latter
+              case the port keyword remains mandatory.   Cannot  be  qualified
+              with  a specific layer 3 protocol (IPv4/IPv6) in the same primi-
+              tive, but can be trivially combined  with  other  primitives  to
               achieve the required effect, for example:
                    ip and tcp dst port 80
 
-              The portnamenum can be a number or a name used in  /etc/services
-              (see  services(5)).  If a name is used, both the port number and
-              protocol are checked.  If a number or ambiguous  name  is  used,
+              The  portnamenum can be a number or a name used in /etc/services
+              (see services(5)).  If a name is used, both the port number  and
+              protocol  are  checked.   If a number or ambiguous name is used,
               only the port number is checked (e.g., `dst port 513' will print
-              both tcp/login traffic and udp/who traffic,  and  `port  domain'
+              both  tcp/login  traffic  and udp/who traffic, and `port domain'
               will print both tcp/domain and udp/domain traffic).
 
        portrange portnamenum1-portnamenum2
-              This  is a more generic form of the above: true if the port num-
+              This is a more generic form of the above: true if the port  num-
               ber in the packet is between portnamenum1 and portnamenum2 (both
-              inclusive),  everything  else  holds  the same meaning.  In this
-              predicate portnamenum1 and portnamenum2 can be specified in  ei-
+              inclusive), everything else holds the  same  meaning.   In  this
+              predicate  portnamenum1 and portnamenum2 can be specified in ei-
               ther order.  If the two values are equal, this primitive has the
               same effect as the port primitive above.
 
        less length
-              True if the packet has a length less than or  equal  to  length.
+              True  if  the  packet has a length less than or equal to length.
               This is equivalent to:
                    len <= length
 
@@ -258,24 +259,24 @@ PRIMITIVES
                    len >= length
 
        ip proto protocol
-              True if the packet is an IPv4 packet of protocol type  protocol.
-              Protocol  can be a number or one of the names recognized by get-
-              protobyname(3), for example: ah, esp, eigrp (only in Linux  with
-              glibc,  FreeBSD,  NetBSD, DragonFly BSD, and macOS), icmp, igmp,
-              igrp (only in Haiku and OpenBSD), pim, sctp, tcp, udp  or  vrrp.
-              Note  that  most  of these example identifiers are also keywords
+              True  if the packet is an IPv4 packet of protocol type protocol.
+              Protocol can be a number or one of the names recognized by  get-
+              protobyname(3),  for example: ah, esp, eigrp (only in Linux with
+              glibc, FreeBSD, NetBSD, DragonFly BSD, and macOS),  icmp,  igmp,
+              igrp  (only  in Haiku and OpenBSD), pim, sctp, tcp, udp or vrrp.
+              Note that most of these example identifiers  are  also  keywords
               and must be escaped via backslash (\).  Note that this primitive
               does not chase the protocol header chain.
 
-              Typically  getprotobyname(3)  parses  the /etc/protocols file to
-              translate protocol names to numbers, and  the  getent  protocols
+              Typically getprotobyname(3) parses the  /etc/protocols  file  to
+              translate  protocol  names  to numbers, and the getent protocols
               command lists the protocols recognized by the function.  This is
-              not entirely so in AIX (which does not have the command),  Haiku
-              (which  has  the file at /system/data/network/protocols and does
+              not  entirely so in AIX (which does not have the command), Haiku
+              (which has the file at /system/data/network/protocols  and  does
               not have the command), on Linux with musl libc (which hard-codes
-              the  list of protocols) and on hosts that use a network database
+              the list of protocols) and on hosts that use a network  database
               to resolve protocol names to numbers (see nsswitch.conf(5)).  If
-              a  protocol name fails to translate to a number, this version of
+              a protocol name fails to translate to a number, this version  of
               libpcap will treat the filter expression as invalid.
 
        carp, vrrp
@@ -290,17 +291,16 @@ PRIMITIVES
 
        igrp   Abbreviation for:
                    ip proto igrpval
-              where igrpval is 88 on DragonFly BSD, FreeBSD and macOS,  and  9
+              where  igrpval  is 88 on DragonFly BSD, FreeBSD and macOS, and 9
               on all other OSes.  This abbreviation should not be used in por-
               table applications and may be removed in future.
 
        ip6 proto protocol
-              True if the packet is an IPv6 packet of protocol type  protocol.
-              (See  `ip  proto' above for the meaning of protocol.)  Note that
+              True  if the packet is an IPv6 packet of protocol type protocol.
+              (See `ip proto' above for the meaning of protocol.)   Note  that
               the IPv6 variant of ICMP uses a different protocol number, named
-              ipv6-icmp  in  AIX,  FreeBSD,  illumos,  Haiku, GNU/Hurd, Linux,
-              macOS, NetBSD, OpenBSD, Solaris and  Windows.   Note  that  this
-              primitive does not chase the protocol header chain.
+              ipv6-icmp.  Note that this primitive does not chase the protocol
+              header chain.
 
        icmp6  Abbreviation for:
                    ip6 proto 58
@@ -1179,4 +1179,4 @@ BUGS
        and  may incorrectly match packets that have a different combination of
        protocol and hardware.
 
-                               22 November 2025                 PCAP-FILTER(7)
+                                11 January 2026                 PCAP-FILTER(7)
