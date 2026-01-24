@@ -175,7 +175,7 @@ $dltlist = array
 	),
 	'ARCNET' => array
 	(
-		'descr' => 'ARCNET, with BSD-style header',
+		'descr' => 'ARCnet, with BSD-style header',
 		'val' => 7,
 	),
 	'SLIP' => array
@@ -185,7 +185,7 @@ $dltlist = array
 	),
 	'PPP' => array
 	(
-		'descr' => 'Point-to-point Protocol',
+		'descr' => 'Point-to-Point Protocol',
 		'val' => 9,
 	),
 	'FDDI' => array
@@ -205,7 +205,7 @@ $dltlist = array
 	),
 	'PPP_ETHER' => array
 	(
-		'descr' => 'PPP over Ethernet',
+		'descr' => 'PPPoE session packets',
 		'val' => 51,
 	),
 	'SYMANTEC_FIREWALL' => array
@@ -219,7 +219,7 @@ $dltlist = array
 	),
 	'RAW' => array
 	(
-		'descr' => 'Raw IP',
+		'descr' => 'raw IPv4/IPv6',
 		'val' => 101,
 	),
 	'C_HDLC' => array
@@ -244,7 +244,7 @@ $dltlist = array
 	),
 	'LINUX_SLL' => array
 	(
-		'descr' => 'Linux cooked',
+		'descr' => 'Linux cooked v1',
 		'val' => 113,
 	),
 	'LTALK' => array
@@ -274,7 +274,7 @@ $dltlist = array
 	),
 	'ARCNET_LINUX' => array
 	(
-		'descr' => 'ARCNET, with Linux-style header',
+		'descr' => 'ARCnet, with Linux-style header',
 		'val' => 129,
 	),
 	'MTP2_WITH_PHDR' => array
@@ -350,7 +350,7 @@ $dltlist = array
 	),
 	'DSA_TAG_DSA' => array
 	(
-		'descr' => 'Marvell infix DSA tag',
+		'descr' => 'Marvell infix 4-octet DSA tag',
 		'val' => 284,
 	),
 );
