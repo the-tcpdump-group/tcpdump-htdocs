@@ -104,6 +104,7 @@ printSedFile()
 		s@\(<A NAME="index">&nbsp;</A>\)\(<H2>Index</H2>\)@\1\n\2@
 		/^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H2>\(.*\)</H2>@<H2 id=\1>\2</H2>@}
 		/^<A NAME=.*>\$/ {N;s@<A NAME=\(".*"\)>&nbsp;</A>\n<H3>\(.*\)</H3>@<H3 id=\1>\2</H3>@}
+		s@ --- @ \&mdash; @
 		s@<A HREF="file://\(.*\)">\(.*\)</A>@\2@g
 		s@<A HREF="mailto:.*">\(.*\)</A>@\1@g
 		s@<A HREF="/cgi-bin/man/man2html?1+[123]:[234]">\([123]:[234]\)</A>(1)@\1(1)@
