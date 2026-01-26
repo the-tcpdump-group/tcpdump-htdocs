@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 11 January 2026<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 24 January 2026<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -389,10 +389,25 @@ in which case the
 keyword is optional.
 <DT><DD>
 <I>ethernameaddr</I>
-may be either a name from /etc/ethers or a numerical MAC address of the
-form &quot;xx:xx:xx:xx:xx:xx&quot;, &quot;xx.xx.xx.xx.xx.xx&quot;, &quot;xx-xx-xx-xx-xx-xx&quot;,
-&quot;xxxx.xxxx.xxxx&quot; or &quot;xxxxxxxxxxxx&quot;,
-where each &quot;x&quot; is a hex digit (0-9, a-f, or A-F).
+may be either a name from
+<B>ethers</B>(5)
+
+or a numerical MAC-48 address.  In the latter case a valid format is one of
+&quot;xx:xx:xx:xx:xx:xx&quot;,
+&quot;xx.xx.xx.xx.xx.xx&quot;
+or
+&quot;xx-xx-xx-xx-xx-xx&quot;,
+where every &quot;xx&quot; is a hexadecimal digit (0-9, a-f, or A-F) or a two-digit
+hexadecimal number &mdash; for example,
+&quot;aa:00:04:00:1d:04&quot;
+means the same as
+&quot;AA-0-4-0-1D-4&quot;.
+Another valid format is one of
+&quot;xxxx.xxxx.xxxx&quot;
+or
+&quot;xxxxxxxxxxxx&quot;,
+where each &quot;x&quot; is a hexadecimal digit &mdash; for example,
+&quot;aa0004001d04&quot;.
 <DT><B>gateway</B> <I>host</I><DD>
 True if the packet used <I>host</I> as a gateway.
 I.e., the source or the destination Ethernet-like address is
@@ -461,8 +476,8 @@ in the latter case the
 keyword remains mandatory.
 <I>netnameaddr</I>
 
-may be either a name from the networks database
-(/etc/networks, etc.) or a network number.
+may be either an IPv4 network number or an IPv6 network number or an IPv4
+network name.
 <DT><DD>
 An IPv4 network number can be written as a dotted quad (e.g., 192.168.1.0),
 dotted triple (e.g., 192.168.1), dotted pair (e.g, 172.16), or single
@@ -477,6 +492,27 @@ primitive above; the implicit netmask is
 ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff (/128), so in this primitive IPv6
 &quot;network&quot; matches are really always host matches.  For an actual IPv6 network
 match see the `<B>net </B><I>netaddr</I>/<I>len</I>' primitive below.
+<DT><DD>
+An IPv4 network name is a name from the networks database (traditionally
+<B>networks</B>(5),
+
+in OpenBSD
+<B>hosts</B>(5),
+
+also possibly NIS, LDAP, etc.).  Some operating systems do not implement a
+networks database, in those that do the implemented behaviour varies.  For
+example, POSIX does not specify a format of
+<B>networks</B>(5),
+
+so the line
+<B>somenet 192.168</B>
+
+therein can translate to either 192.168.0.0/32 or 192.168.0.0/16 depending on
+the implementation.  In this sense, the only reliable address notation to be
+used with an IPv4 network name would be a dotted quad (/32), in which case it
+would be simpler just to use a host match with a hostname, as well as DNS.
+For these reasons IPv4 network names should not be used in portable
+applications and this form of ID may be removed from this primitive in future.
 <DT><B>net </B><I>netaddr</I> <B>mask </B><I>netmask</I><DD>
 True if the source or the destination ARP/IPv4/RARP address of the packet
 belongs to <I>netaddr</I> with the specified <I>netmask</I>.  May be qualified
@@ -852,7 +888,7 @@ This will match the expected two addresses in the first prefix (10.1.2.96 and
 10.1.2.103), as well as 64 addresses in the second prefix (192.168.202.0,
 192.168.202.7, 192.168.202.8, 192.168.202.15, 192.168.202.16 and so on), as
 well as any other IPv4 address with the lowest 3 bits being all-ones or
-all-zeroes (for example: 10.73.74.151, 192.168.50.63, 172.19.0.128) -- in
+all-zeroes (for example: 10.73.74.151, 192.168.50.63, 172.19.0.128) &mdash; in
 other words, 25% of the complete IPv4 address space.  This is why in use
 cases that require more precision it would be better to match the required
 address(es) explicitly, for example:
@@ -2617,7 +2653,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 21:13:49 GMT, January 18, 2026
+This HTML man page was generated at 18:51:05 GMT, January 26, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
