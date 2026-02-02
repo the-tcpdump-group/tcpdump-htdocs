@@ -150,8 +150,8 @@ DESCRIPTION
        turned, and what types they might have is platform-dependent.   Namely,
        link-layer  addresses,  such  as Ethernet MAC addresses, have the value
        AF_PACKET (on Linux) or  AF_LINK  (on  AIX,  FreeBSD,  Haiku,  illumos,
-       macOS,  NetBSD and OpenBSD) or are not returned at all (on GNU/Hurd and
-       Solaris).
+       macOS, NetBSD, OpenBSD and QNX) or are not returned at all (on GNU/Hurd
+       and Solaris).
 
        For IPv4 addresses, the struct sockaddr pointer can be  interpreted  as
        if  it  pointed  to a struct sockaddr_in; for IPv6 addresses, it can be
@@ -182,4 +182,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP)
 
-                                 11 March 2025         PCAP_FINDALLDEVS(3PCAP)
+                                1 February 2026        PCAP_FINDALLDEVS(3PCAP)

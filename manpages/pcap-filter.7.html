@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP-FILTER</H1>
-Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 28 January 2026<BR><A HREF="#index">Index</A>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 1 February 2026<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -347,6 +347,9 @@ or the IPv4-mapped
 notations as discussed in
 <B>inet_pton</B>(3).
 
+In this primitive this version of libpcap tolerates an optional &quot;/128&quot; after
+an IPv6 host number, this behaviour is an implementation quirk and it may be
+removed in future.
 <DT><DD>
 A host name must resolve using
 <B>getaddrinfo</B>(3),
@@ -2677,7 +2680,7 @@ hardware.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 16:41:01 GMT, January 28, 2026
+This HTML man page was generated at 13:53:53 GMT, February 02, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

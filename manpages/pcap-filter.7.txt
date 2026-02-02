@@ -122,7 +122,9 @@ PRIMITIVES
               An IPv6 host number can be written as a complete 128-bit address
               (x:x:x:x:x:x:x:x) or using the zero compression  (x::x)  or  the
               IPv4-mapped  (x:x:x:x:x:x:d.d.d.d)  notations  as  discussed  in
-              inet_pton(3).
+              inet_pton(3).  In this primitive this version of libpcap  toler-
+              ates  an  optional "/128" after an IPv6 host number, this behav-
+              iour is an implementation quirk and it may be removed in future.
 
               A host name must resolve using getaddrinfo(3),  which  typically
               means  DNS  or  hosts(5),  to at least one IPv4 address for `arp
@@ -1212,4 +1214,4 @@ BUGS
        and may incorrectly match packets that have a different combination  of
        protocol and hardware.
 
-                                28 January 2026                 PCAP-FILTER(7)
+                                1 February 2026                 PCAP-FILTER(7)
