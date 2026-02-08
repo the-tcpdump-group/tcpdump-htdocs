@@ -938,7 +938,7 @@ ARITHMETIC EXPRESSIONS
        the  same  as ==).  Each of expr1 and expr2 is an arithmetic expression
        composed of integer constants (expressed in  standard  C  syntax),  the
        common  arithmetic  and bitwise binary operations {+, -, *, /, %, &, |,
-       ^, <<, >>}, a length operator, and packet data accessors.   All  arith-
+       ^, <<, >>}, a length accessor, and packet data accessors.   All  arith-
        metic  expressions regardless of the complexity and composition resolve
        to an integer value.  Note that all comparisons are unsigned, so  that,
        for example, both 0x80000000 and 0xffffffff are > 0.
@@ -958,8 +958,8 @@ ARITHMETIC EXPRESSIONS
        filtering  will  be done in user mode, which will increase the overhead
        of capturing packets and may cause more packets to be dropped.
 
-       The length operator, indicated by the keyword len, gives the length  of
-       the packet.
+       The length accessor, indicated by the keywords len or length, gives the
+       length of the packet.
 
 PACKET DATA ACCESSORS
        To  use  the packet data in an arithmetic expression, use the following
@@ -982,11 +982,11 @@ PACKET DATA ACCESSORS
        For example, `ether[0] & 1 != 0' catches all  multicast  traffic.   The
        expression  `ip[0]  &  0xf != 5' catches all IPv4 packets with options.
        The expression `ip[6:2] & 0x1fff = 0' catches  only  unfragmented  IPv4
-       datagrams  and  frag  zero of fragmented IPv4 datagrams.  This check is
-       implicitly applied to the tcp, udp, icmp, sctp, igmp, pim,  igrp,  vrrp
-       and carp index operations.  For instance, tcp[0] always means the first
-       byte of the TCP header, and never means the first byte of an  interven-
-       ing fragment.
+       datagrams  and  the  first fragment of fragmented IPv4 datagrams.  This
+       check is implicitly applied to the tcp, udp,  icmp,  sctp,  igmp,  pim,
+       igrp,  vrrp  and  carp  index  operations.  For instance, tcp[0] always
+       means the first byte of the TCP header, and never means the first  byte
+       of an intervening fragment.
 
 NAMED VALUES
        Some  offsets and field values may be expressed as names rather than as
