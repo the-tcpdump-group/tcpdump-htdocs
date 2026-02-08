@@ -7,9 +7,9 @@ freebsd_task:
   freebsd_instance:
     cpu: 1
     memory: 1G
-    image_family: freebsd-14-3
+    image_family: freebsd-15-0
   script:
-    - pkg install -qy git-tiny gsed hs-ShellCheck php84
+    - pkg install -qy git-tiny gsed hs-ShellCheck php85
     - ./regen_html_pages.sh
     - git status
     - test "$(git status --porcelain | wc -l)" -eq 0
