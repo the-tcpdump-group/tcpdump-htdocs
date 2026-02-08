@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of TCPDUMP</H1>
-Section: User Commands  (1)<BR>Updated: 30 June 2025<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: 8 February 2026<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents tcpdump version 5.0.0-PRE-GIT.</H4>
@@ -103,16 +103,16 @@ tcpdump - dump traffic on a network
 <B>--lengths</B>
 
 ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-m</B>
 
 <I>module</I>
 
-]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+] ...
 [
 <B>-M</B>
 
@@ -127,16 +127,16 @@ tcpdump - dump traffic on a network
 <B>--print</B>
 
 ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>--print-sampling</B>
 
 <I>nth</I>
 
 ]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-Q</B>
 
@@ -149,6 +149,10 @@ tcpdump - dump traffic on a network
 <I>file</I>
 
 ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-s</B>
 
@@ -161,10 +165,6 @@ tcpdump - dump traffic on a network
 <I>count</I>
 
 ]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-T</B>
 
@@ -175,6 +175,10 @@ tcpdump - dump traffic on a network
 <B>--version</B>
 
 ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-V</B>
 
@@ -193,16 +197,16 @@ tcpdump - dump traffic on a network
 <I>filecount</I>
 
 ]
-<BR>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-y</B>
 
 <I>datalinktype</I>
 
 ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>-z</B>
 
@@ -223,6 +227,10 @@ tcpdump - dump traffic on a network
 <B>--time-stamp-precision=</B><I>tstamp_precision</I>
 
 ]
+<BR>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [
 <B>--micro</B>
 
@@ -1751,7 +1759,8 @@ and <B>DF</B> is reported if F is set.  If neither are set, <B>.</B> is
 reported.
 <I>proto</I> is the protocol ID field.
 <I>length</I> is the total length field; if the packet is a presumed TSO
-(TCP Segmentation Offload) send, [was 0, presumed TSO] is reported.
+(TCP Segmentation Offload) send, [was 0, presumed TSO] is reported;
+if the packet is a presumed BIG TCP, [was 0, presumed BIG TCP] is reported.
 <I>options</I> are the IP options, if any.
 <P>
 
@@ -2790,7 +2799,7 @@ skewed time stamps (the time change is ignored).
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 17:37:01 GMT, January 25, 2026
+This HTML man page was generated at 20:04:41 GMT, February 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

@@ -1214,4 +1214,4 @@ BUGS
        and may incorrectly match packets that have a different combination  of
        protocol and hardware.
 
-                                1 February 2026                 PCAP-FILTER(7)
+                                7 February 2026                 PCAP-FILTER(7)
