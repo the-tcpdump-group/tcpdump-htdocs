@@ -4,6 +4,10 @@
                 LINKTYPE_ETW
             </h2>
             <div class="entry">
+                <p>
+                NOTE: This LINKTYPE refers to structures that should be considered a Wireshark internal and is not standardized outside of this document.
+                </p>
+
                 <h3 class="subtitle">Packet structure</h3>
 <pre>
  0                   1                   2                   3
@@ -15,20 +19,29 @@
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 80 octets
 |                      ETW_BUFFER_CONTEXT                       |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                        UserDataLength                         |
+|      ExtendedDataCount        |           TlvCount            |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                      MessageLength                            |
+|                       PropertiesCount                         |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                      ProviderNameLength                       |
+/                   Extended Data Headers                       /
+/      EVENT_HEADER_EXTENDED_DATA_ITEM[ExtendedDataCount]       /
+/                                                               /
+/                                                               /
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-/                          UserData                             /
-/              variable length, padded to 32 bits               /
+/                         TLV Headers                           /
+/                       ETW_TLV[TlvCount]                       /
+/                                                               /
+/                                                               /
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-/                          Message                              /
-/              variable length, padded to 32 bits               /
+/                       Property Headers                        /
+/                   ETW_PROPERTY[PropertiesCount]               /
+/                                                               /
+/                                                               /
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-/                          ProviderName                         /
-/              variable length, padded to 32 bits               /
+/                             DATA                              /
+/                              ..                               /
+/                              ..                               /
+/                                                               /
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 </pre>
 
@@ -76,22 +89,56 @@ href="https://learn.microsoft.com/en-us/windows/win32/api/relogger/ns-relogger-e
 page for the ETW_BUFFER_CONTEXT structure</a>.
 </p>
 <p>
-UserDataLength is the length of UserData; it doesn't include the padding octets of UserData.
+ExtendedDataCount is the amount of <a class=away href="https://learn.microsoft.com/en-us/windows/win32/api/evntcons/ns-evntcons-event_header_extended_data_item">EVENT_HEADER_EXTENDED_DATA_ITEM</a> items.
+The Extended Data Headers are identical to the one described in Microsoft's documentation, which the exception of the DataPtr. This field points towards an offset relative to the beginning of the EVENT_HEADER instead of an actual pointer.
 <p>
-MessageLength is the length of Message; it doesn't include the padding octets of Message.
+TlvCount is the amount of ETW_TLV items.
 </p>
 <p>
-ProviderNameLength is the length of ProviderName; it doesn't include the padding octets of ProviderName.
+PropertiesCount is the amount of ETW_PROPERTY items.
 </p>
+<h4 class="subtitle">ETW_TLV structure</h4>
 <p>
-UserData is specific event data of the provider; its format is defined by the provider.
+ETL_TLV defines arbitrary data that is included by the sniffer in the capture process. It is structured as follows :
+<pre>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                              Type                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                             Offset                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                             Length                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+<ul>
+<li>Type: one of the following</li>
+<pre>
+enum ETL_TLV_TYPE {
+    TLV_USER_DATA     = 0,  // Specific event data of the provider; its format is defined by the provider.
+    TLV_MESSAGE       = 1,  // A null-terminated UTF-16LE string that contains the event message string.
+    TLV_PROVIDER_NAME = 2,  // A null-terminated UTF-16LE string that contains the event provider name string.
+};
+</pre>
+<li>Offset: refers to an offset relative to the beginning of the EVENT_HEADER.</li>
+<li>Length: is the size of the data referred by this TLV.</li>
+</ul>
+For more information about the "EventMessage" or "ProviderName" strings, refer to <a class=away href="https://learn.microsoft.com/en-us/windows/win32/api/tdh/ns-tdh-trace_event_info">TRACE_EVENT_INFO</a>.
 </p>
+<h4 class="subtitle">ETW_PROPERTY structure</h4>
 <p>
-Message is a null-terminated UTF-16LE string that contains the event message string.
+ETW_PROPERTY defines a property by its name (key) and value. It is structured as follows :
+<pre>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                             OFFSET                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|           KEYLENGTH           |          VALUELENGTH          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+It points towards the concatenation of the Key and Value, both as null-terminated UTF-16LE strings without padding in between, as outputed by <a class=away href="https://learn.microsoft.com/en-us/windows/win32/api/tdh/nf-tdh-tdhformatproperty">TdhFormatProperty()</a>. The Offset is from the beginning of the EVENT_HEADER.
 </p>
-<p>
-Providername is a null-terminated UTF-16LE string that contains the event provider name string.
-</p>
-            </div>
+</div>
           </div>
           <!-- End of LINKTYPE_ETW section -->
