@@ -10,7 +10,7 @@
 |                                                                            |
 +----------------------------------------------------------------------------+
 
-PCAP_INIT(3PCAP)                                              PCAP_INIT(3PCAP)
+PCAP_INIT(3PCAP)                                               PCAP_INIT(3PCAP)
 
 NAME
        pcap_init - initialize the library
@@ -23,8 +23,8 @@ SYNOPSIS
        int pcap_init(unsigned int opts, char *errbuf);
 
 DESCRIPTION
-       pcap_init()  is  used  to  initialize the Packet Capture library.  opts
-       specifies options for the library; errbuf is a buffer large  enough  to
+       pcap_init()  is  used  to  initialize  the Packet Capture library.  opts
+       specifies options for the library; errbuf is a buffer  large  enough  to
        hold at least PCAP_ERRBUF_SIZE chars.
 
        Currently, the options that can be specified in opts are:
@@ -33,36 +33,35 @@ DESCRIPTION
               Map packet buffers with 32-bit addresses.
 
        PCAP_CHAR_ENC_LOCAL
-              Treat  all strings supplied as arguments, and return all strings
+              Treat  all  strings supplied as arguments, and return all strings
               to the caller, as being in the local character encoding.
 
        PCAP_CHAR_ENC_UTF_8
-              Treat all strings supplied as arguments, and return all  strings
+              Treat all strings supplied as arguments, and return  all  strings
               to the caller, as being in UTF-8.
 
-       On  UNIX-like  systems,  the  local character encoding is assumed to be
+       On  UNIX-like  systems,  the  local  character encoding is assumed to be
        UTF-8, so no character encoding transformations are done.
 
        On Windows, the local character encoding is the local ANSI code page.
 
-       If pcap_init() is not called, strings are treated as being in the local
-       ANSI  code page on Windows, pcap_lookupdev(3PCAP) will succeed if there
-       is a device on which to capture, and pcap_create(3PCAP)  makes  an  at-
-       tempt  to  check whether the string passed as an argument is a UTF-16LE
-       string - note that this attempt is unsafe, as it may run past  the  end
-       of the string - to handle pcap_lookupdev() returning a UTF-16LE string.
+       If pcap_init() is not called, strings are treated as being in the  local
+       ANSI  code  page on Windows, pcap_lookupdev(3PCAP) will succeed if there
+       is a device on which to capture, and pcap_create(3PCAP) makes an attempt
+       to check whether the string passed as an argument is a UTF-16LE string -
+       note that this attempt is unsafe, as it may run  past  the  end  of  the
+       string - to handle pcap_lookupdev() returning a UTF-16LE string.
 
 RETURN VALUE
-       pcap_init()  returns  0  on  success  and  PCAP_ERROR  on  failure.  If
-       PCAP_ERROR is returned, errbuf is filled in with an  appropriate  error
-       message.
+       pcap_init() returns 0 on success and PCAP_ERROR on failure.  If PCAP_ER-
+       ROR is returned, errbuf is filled in with an appropriate error message.
 
 BACKWARD COMPATIBILITY
-       This  function became available in libpcap release 1.10.0.  In previous
-       releases, on Windows,  all  strings  supplied  as  arguments,  and  all
-       strings returned to the caller, are in the local character encoding.
+       This  function  became available in libpcap release 1.10.0.  In previous
+       releases, on Windows, all strings supplied as arguments, and all strings
+       returned to the caller, are in the local character encoding.
 
 SEE ALSO
        pcap(3PCAP)
 
-                               30 December 2025               PCAP_INIT(3PCAP)
+                                30 December 2025               PCAP_INIT(3PCAP)

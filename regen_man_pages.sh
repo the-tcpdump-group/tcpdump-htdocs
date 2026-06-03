@@ -38,8 +38,8 @@
 #
 # This script has been tested to work on the following Linux systems:
 #
-# * Debian 11
-# * Debian 12 <--- please use this one
+# * Debian 12
+# * Debian 13 <--- please use this one
 # * Ubuntu 22.04
 # * Ubuntu 24.04
 #

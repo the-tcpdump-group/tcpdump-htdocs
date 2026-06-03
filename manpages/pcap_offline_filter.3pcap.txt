@@ -10,7 +10,7 @@
 |                                                                            |
 +----------------------------------------------------------------------------+
 
-PCAP_OFFLINE_FILTER(3PCAP)                          PCAP_OFFLINE_FILTER(3PCAP)
+PCAP_OFFLINE_FILTER(3PCAP)                           PCAP_OFFLINE_FILTER(3PCAP)
 
 NAME
        pcap_offline_filter - check whether a filter matches a packet
@@ -22,21 +22,21 @@ SYNOPSIS
            const struct pcap_pkthdr *h, const u_char *pkt);
 
 DESCRIPTION
-       pcap_offline_filter()  checks whether a filter matches a packet.  fp is
-       a pointer to a bpf_program structure, usually the result of a  call  to
-       pcap_compile(3PCAP).   h  points  to  the pcap_pkthdr structure for the
+       pcap_offline_filter() checks whether a filter matches a packet.  fp is a
+       pointer  to  a  bpf_program  structure,  usually the result of a call to
+       pcap_compile(3PCAP).  h points to  the  pcap_pkthdr  structure  for  the
        packet, and pkt points to the data in the packet.
 
-       The filter program must have been compiled for a link-layer header type
-       that matches the packet data; also on Linux the filter must not use BPF
+       The  filter program must have been compiled for a link-layer header type
+       that matches the packet data; also on Linux the filter must not use  BPF
        extensions, see pcap_compile() for more information.
 
 RETURN VALUE
-       pcap_offline_filter() returns the return value of the  filter  program.
-       This  will  be zero if the packet doesn't match the filter and non-zero
-       if the packet matches the filter.
+       pcap_offline_filter()  returns  the  return value of the filter program.
+       This will be zero if the packet doesn't match the filter and non-zero if
+       the packet matches the filter.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                24 January 2025     PCAP_OFFLINE_FILTER(3PCAP)
+                                24 January 2025      PCAP_OFFLINE_FILTER(3PCAP)

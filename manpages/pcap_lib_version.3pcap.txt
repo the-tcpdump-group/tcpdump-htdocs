@@ -10,7 +10,7 @@
 |                                                                            |
 +----------------------------------------------------------------------------+
 
-PCAP_LIB_VERSION(3PCAP)                                PCAP_LIB_VERSION(3PCAP)
+PCAP_LIB_VERSION(3PCAP)                                 PCAP_LIB_VERSION(3PCAP)
 
 NAME
        pcap_lib_version - get the version information for libpcap
@@ -21,15 +21,14 @@ SYNOPSIS
        const char *pcap_lib_version(void);
 
 DESCRIPTION
-       pcap_lib_version()  returns  a  pointer  to a string giving information
-       about the version of the libpcap library being used.  The string begins
-       with  the  words  "libpcap version" and a space.  Then follows the ver-
-       sion, which consists of three dot-separated numbers  and  the  optional
-       "-PRE-GIT"  suffix  to  indicate a development snapshot, same as in the
-       output of pcap-config --version  in  sufficiently  recent  libpcap  re-
-       leases.   After the version often follow a space and additional text in
-       an arbitrary human-readable form to indicate particular features.   For
-       example:
+       pcap_lib_version()  returns  a  pointer  to  a string giving information
+       about the version of the libpcap library being used.  The string  begins
+       with the words "libpcap version" and a space.  Then follows the version,
+       which  consists  of  three dot-separated numbers and the optional "-PRE-
+       GIT" suffix to indicate a development snapshot, same as in the output of
+       pcap-config --version in sufficiently recent  libpcap  releases.   After
+       the version often follow a space and additional text in an arbitrary hu-
+       man-readable form to indicate particular features.  For example:
 
        an old release, on any OS
               libpcap version 1.5.3
@@ -46,4 +45,4 @@ DESCRIPTION
 SEE ALSO
        pcap-config(1), pcap(3PCAP)
 
-                                21 October 2025        PCAP_LIB_VERSION(3PCAP)
+                                21 October 2025         PCAP_LIB_VERSION(3PCAP)

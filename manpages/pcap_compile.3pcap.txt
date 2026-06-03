@@ -10,7 +10,7 @@
 |                                                                            |
 +----------------------------------------------------------------------------+
 
-PCAP_COMPILE(3PCAP)                                        PCAP_COMPILE(3PCAP)
+PCAP_COMPILE(3PCAP)                                         PCAP_COMPILE(3PCAP)
 
 NAME
        pcap_compile - compile a filter expression
@@ -22,56 +22,55 @@ SYNOPSIS
            const char *str, int optimize, bpf_u_int32 netmask);
 
 DESCRIPTION
-       pcap_compile() is used to compile the string str into a filter program.
-       See pcap-filter(7) for the syntax of that string.  fp is a pointer to a
-       bpf_program  structure  and  is  filled in by pcap_compile().  optimize
-       controls whether optimization on the resulting code is performed.  net-
-       mask  specifies the IPv4 netmask (in host byte order) of the network on
-       which packets are being captured; it is used  only  when  checking  for
-       IPv4  broadcast addresses in the filter program.  If the netmask of the
-       network on which packets are being captured isn't known to the program,
-       or  if the network interface does not have exactly one IPv4 netmask, or
-       if packets are being captured  on  the  Linux  "any"  pseudo-interface,
-       which  can  capture  on  more  than  one  network interface, a value of
-       PCAP_NETMASK_UNKNOWN can be supplied; in this case an attempt  to  com-
-       pile  a filter expression that contains the ip broadcast primitive will
-       fail.
+       pcap_compile()  is used to compile the string str into a filter program.
+       See pcap-filter(7) for the syntax of that string.  fp is a pointer to  a
+       bpf_program structure and is filled in by pcap_compile().  optimize con-
+       trols  whether optimization on the resulting code is performed.  netmask
+       specifies the IPv4 netmask (in host byte order) of the network on  which
+       packets  are  being  captured;  it  is  used only when checking for IPv4
+       broadcast addresses in the filter program.  If the netmask of  the  net-
+       work  on which packets are being captured isn't known to the program, or
+       if the network interface does not have exactly one IPv4 netmask,  or  if
+       packets  are  being  captured on the Linux "any" pseudo-interface, which
+       can capture on more than one network interface,  a  value  of  PCAP_NET-
+       MASK_UNKNOWN  can be supplied; in this case an attempt to compile a fil-
+       ter expression that contains the ip broadcast primitive will fail.
 
-       On Linux, if the pcap_t handle corresponds to a  live  packet  capture,
-       the  resulting filter program may use Linux BPF extensions.  This works
-       transparently if the filter program is used to filter  packets  on  the
-       same  pcap_t  handle, which should be done when possible.  In other use
-       cases  trying  to  use  a  filter  program  with  BPF   extensions   in
-       pcap_offline_filter(3PCAP) or for filtering an input savefile would re-
-       ject more packets than expected because the extensions depend on auxil-
-       iary  packet  data, which would not be available.  The workaround is to
-       compile the filter without the extensions by using a pcap_t handle from
-       pcap_open_dead(3PCAP)  or pcap_open_offline(3PCAP) rather than a handle
+       On Linux, if the pcap_t handle corresponds to a live packet capture, the
+       resulting filter program may  use  Linux  BPF  extensions.   This  works
+       transparently  if  the  filter  program is used to filter packets on the
+       same pcap_t handle, which should be done when possible.   In  other  use
+       cases   trying   to   use  a  filter  program  with  BPF  extensions  in
+       pcap_offline_filter(3PCAP) or for filtering an input savefile would  re-
+       ject  more packets than expected because the extensions depend on auxil-
+       iary packet data, which would not be available.  The  workaround  is  to
+       compile  the filter without the extensions by using a pcap_t handle from
+       pcap_open_dead(3PCAP) or pcap_open_offline(3PCAP) rather than  a  handle
        from pcap_create(3PCAP) or pcap_open_live(3PCAP).
 
-       If BPF extensions are disabled as described above  or  the  OS  is  not
-       Linux,  pcap_compile()  may start rejecting some filter expressions for
-       some link-layer header types, this is the expected behaviour.  For  ex-
-       ample,  the ifindex keyword is valid for any live capture on Linux, but
-       when reading packets from a savefile, regardless of the OS it is  valid
+       If  BPF  extensions  are  disabled  as  described above or the OS is not
+       Linux, pcap_compile() may start rejecting some  filter  expressions  for
+       some link-layer header types, this is the expected behaviour.  For exam-
+       ple,  the  ifindex  keyword  is valid for any live capture on Linux, but
+       when reading packets from a savefile, regardless of the OS it  is  valid
        for DLT_LINUX_SLL2 only.
 
 RETURN VALUE
-       pcap_compile()  returns  0  on  success  and  PCAP_ERROR on failure. If
-       PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be
+       pcap_compile()  returns  0  on  success  and  PCAP_ERROR  on failure. If
+       PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may  be
        called with p as an argument to fetch or display the error text.
 
 BACKWARD COMPATIBILITY
-       The  PCAP_NETMASK_UNKNOWN  constant became available in libpcap release
+       The  PCAP_NETMASK_UNKNOWN  constant  became available in libpcap release
        1.1.0.
 
-       In libpcap 1.8.0 and later, pcap_compile()  can  be  used  in  multiple
-       threads within a single process.  However, in earlier versions of libp-
-       cap, it is not safe to use pcap_compile() in multiple threads in a sin-
-       gle  process  without  some  form of mutual exclusion allowing only one
+       In libpcap 1.8.0 and later,  pcap_compile()  can  be  used  in  multiple
+       threads  within a single process.  However, in earlier versions of libp-
+       cap, it is not safe to use pcap_compile() in multiple threads in a  sin-
+       gle  process  without  some  form  of mutual exclusion allowing only one
        thread to call it at any given time.
 
 SEE ALSO
        pcap(3PCAP), pcap_setfilter(3PCAP), pcap_freecode(3PCAP)
 
-                                  29 May 2025              PCAP_COMPILE(3PCAP)
+                                  29 May 2025               PCAP_COMPILE(3PCAP)

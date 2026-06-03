@@ -10,11 +10,10 @@
 |                                                                            |
 +----------------------------------------------------------------------------+
 
-RPCAPD(8)                   System Manager's Manual                  RPCAPD(8)
+RPCAPD(8)                   System Manager's Manual                   RPCAPD(8)
 
 NAME
-       rpcapd  -  capture daemon to be controlled by a remote libpcap applica-
-       tion
+       rpcapd - capture daemon to be controlled by a remote libpcap application
 
 SYNOPSIS
        rpcapd [ -b address ] [ -p port ] [ -t data_port ] [ -4 ]
@@ -23,132 +22,131 @@ SYNOPSIS
                [ -K tls_keyfile ] [ -X tls_certfile ] [ -C ]
 
 DESCRIPTION
-       Rpcapd is a daemon (Unix) or service (Win32) that  allows  the  capture
-       and filter part of libpcap to be run on a remote system.
+       Rpcapd is a daemon (Unix) or service (Win32) that allows the capture and
+       filter part of libpcap to be run on a remote system.
 
        Rpcapd can run in two modes: passive mode (default) and active mode.
 
-       In  passive  mode, the client (e.g., a network sniffer) connects to rp-
-       capd.  The client then sends the  appropriate  commands  to  rpcapd  to
-       start the capture.
+       In  passive  mode,  the client (e.g., a network sniffer) connects to rp-
+       capd.  The client then sends the appropriate commands to rpcapd to start
+       the capture.
 
-       In  active  mode,  rpcapd  tries  to  establish a connection toward the
-       client (e.g., a network sniffer). The client then sends the appropriate
-       commands to rpcapd to start the capture.
+       In active mode, rpcapd tries to establish a connection toward the client
+       (e.g., a network sniffer). The client then sends  the  appropriate  com-
+       mands to rpcapd to start the capture.
 
-       Active  mode is useful in case rpcapd is run behind a firewall and can-
-       not receive connections from the external world. In this  case,  rpcapd
-       can  be  configured  to establish the connection to a given host, which
-       has to be configured in order to wait for that connection. After estab-
-       lishing  the  connection,  the protocol continues its job in almost the
-       same way in both active and passive mode.
+       Active mode is useful in case rpcapd is run behind a firewall and cannot
+       receive connections from the external world. In this case, rpcapd can be
+       configured  to establish the connection to a given host, which has to be
+       configured in order to wait for that connection. After establishing  the
+       connection,  the  protocol  continues  its job in almost the same way in
+       both active and passive mode.
 
 TLS support
-       By default rpcapd will not support TLS connections. If built  with  TLS
-       support,  it  will  support TLS connections only if run with the -S op-
-       tion, in which case it will require TLS connections.
+       By default rpcapd will not support TLS connections. If  built  with  TLS
+       support, it will support TLS connections only if run with the -S option,
+       in which case it will require TLS connections.
 
 Configuration file
-       The user can create a configuration file in the same directory  as  the
-       executable,  and  put the configuration commands in there. In order for
-       rpcapd to execute the commands, it needs to be restarted on Win32, i.e.
-       the  configuration  file is parsed only at the beginning. The UNIX ver-
-       sion of rpcapd will reread the configuration file upon receiving a  HUP
-       signal.  In  that  case,  all the existing connections remain in place,
-       while the new connections will be created according to the new  parame-
-       ters.
+       The  user  can  create a configuration file in the same directory as the
+       executable, and put the configuration commands in there.  In  order  for
+       rpcapd  to execute the commands, it needs to be restarted on Win32, i.e.
+       the configuration file is parsed only at the beginning. The UNIX version
+       of rpcapd will reread the configuration file upon receiving a  HUP  sig-
+       nal.  In  that case, all the existing connections remain in place, while
+       the new connections will be created according to the new parameters.
 
-       In case a user does not want to create the configuration file manually,
-       they can launch rpcapd with the desired flags plus -s filename.  Rpcapd
-       will parse all the parameters and save them into the specified configu-
+       In case a user does not want to create the configuration file  manually,
+       they  can launch rpcapd with the desired flags plus -s filename.  Rpcapd
+       will parse all the parameters and save them into the specified  configu-
        ration file.
 
 Installing rpcapd on Win32
-       The remote daemon is installed automatically when  installing  WinPcap.
-       The  installation  process  places  the rpcapd executable file into the
-       WinPcap folder.  This file can be  executed  either  from  the  command
-       line,  or as a service.  For instance, the installation process updates
-       the list of available services list and it creates a new  item  (Remote
-       Packet  Capture  Protocol v.0 (experimental)).  To avoid security prob-
-       lems, the service is inactive and it has to be started  manually  (con-
-       trol panel - administrative tools - services - start).
+       The  remote  daemon  is installed automatically when installing WinPcap.
+       The installation process places the rpcapd executable file into the Win-
+       Pcap folder.  This file can be executed either from the command line, or
+       as a service.  For instance, the installation process updates  the  list
+       of available services list and it creates a new item (Remote Packet Cap-
+       ture Protocol v.0 (experimental)).  To avoid security problems, the ser-
+       vice  is inactive and it has to be started manually (control panel - ad-
+       ministrative tools - services - start).
 
-       The  service  has  a  set of "standard" parameters, i.e. it is launched
-       with the -d flag (in order to make it run as a service) and the -f  rp-
-       capd.ini flag.
+       The service has a set of "standard" parameters, i.e. it is launched with
+       the -d flag (in order to make it run as a service) and the -f rpcapd.ini
+       flag.
 
 Starting rpcapd on Win32
-       The rpcapd executable can be launched directly, i.e.  it can run in the
-       foreground as well (not as a daemon/service).  The procedure  is  quite
-       simple:  you  have  to invoke the executable from the command line with
-       all the requested parameters except  for  the  -d  flag.   The  capture
-       server will start in the foreground.
+       The rpcapd executable can be launched directly, i.e.  it can run in  the
+       foreground  as  well  (not as a daemon/service).  The procedure is quite
+       simple: you have to invoke the executable from the command line with all
+       the requested parameters except for the -d  flag.   The  capture  server
+       will start in the foreground.
 
 Installing rpcapd on Unix-like systems
        TBD
 
 Starting rpcapd on Unix-like systems
-       rpcapd needs sufficient privileges to perform packet capture, e.g.  run
-       as root or be owned by root and have suid set. Most  operating  systems
-       provide  more  elegant  solutions when run as user than the above solu-
+       rpcapd  needs sufficient privileges to perform packet capture, e.g.  run
+       as root or be owned by root and have suid set.  Most  operating  systems
+       provide  more  elegant  solutions  when run as user than the above solu-
        tions, all of them different.
 
-       If your system supports systemd(1) and the corresponding  rpcapd.socket
-       and  rpcapd@.service service files have been installed, the rpcapd ser-
+       If your system supports systemd(1) and the  corresponding  rpcapd.socket
+       and  rpcapd@.service  service files have been installed, the rpcapd ser-
        vice can be enabled by enabling the rpcapd.socket unit.
 
-       If your system supports  launchd(8)  and  the  org.tcpdump.rpcapd.plist
-       file  has  been installed, the rpcapd service can be enabled by loading
-       the org.tcpdump.rpcapd service.
+       If your system supports launchd(8) and the org.tcpdump.rpcapd.plist file
+       has been installed, the rpcapd service can be  enabled  by  loading  the
+       org.tcpdump.rpcapd service.
 
-       If your system supports inetd(8) and the  rpcapd.inetd.conf  entry  has
-       been  added  to  inetd.conf(5),  the  rpcapd  service can be enabled by
+       If  your  system  supports  inetd(8) and the rpcapd.inetd.conf entry has
+       been added to inetd.conf(5),  the  rpcapd  service  can  be  enabled  by
        telling inetd to reread its configuration file.
 
-       If your system supports xinetd(8) and the rpcapd.xinetd.conf entry  has
-       been  added  to  xinetd.conf(5),  the  rpcapd service can be enabled by
+       If  your  system supports xinetd(8) and the rpcapd.xinetd.conf entry has
+       been added to xinetd.conf(5), the  rpcapd  service  can  be  enabled  by
        telling xinetd to reread its configuration file.
 
 OPTIONS
        -b address
-              Bind to the IP address specified by address (either  numeric  or
-              literal).   By  default, rpcapd binds to all local IPv4 and IPv6
+              Bind  to  the  IP address specified by address (either numeric or
+              literal).  By default, rpcapd binds to all local  IPv4  and  IPv6
               addresses.
 
        -p port
-              Bind to the port specified by port.  By default, rpcapd binds to
+              Bind  to the port specified by port.  By default, rpcapd binds to
               port 2002.
 
        -t data_port
-              Use  the port specified by data_port as the port for data trans-
-              fer.  By default, rpcapd uses a port  chosen  by  the  operating
-              system.
+              Use the port specified by data_port as the port for  data  trans-
+              fer.  By default, rpcapd uses a port chosen by the operating sys-
+              tem.
 
-       -4     Listen  only  on  IPv4 addresses.  By default, rpcapd listens on
+       -4     Listen  only  on  IPv4  addresses.  By default, rpcapd listens on
               both IPv4 and IPv6 addresses.
 
        -l host_list
-              Only allow hosts specified in the host_list argument to  connect
-              to  this  server.   host_list  is a list of host names or IP ad-
-              dresses, separated by commas.  We  suggest  that  you  use  host
-              names  rather  than literal IP addresses in order to avoid prob-
-              lems with different address families.
+              Only allow hosts specified in the host_list argument  to  connect
+              to  this  server.   host_list  is  a list of host names or IP ad-
+              dresses, separated by commas.  We suggest that you use host names
+              rather than literal IP addresses in order to avoid problems  with
+              different address families.
 
        -n     Permit NULL authentication (usually used with the -l flag).
 
        -a host1,port1,host2,port2,...,hostN,portN
-              Run in active mode, connecting to each host host (which may be a
-              hostname  or an address) on TCP port port (which may be either a
-              number or a service name recognized  by  getaddrinfo(3)  or  the
-              word  DEFAULT  to  mean  port  number 2003).  Only the very last
-              value of the port may be omitted (for  example,  -a  host  is  a
-              valid syntax), which means the same as DEFAULT.
+              Run  in active mode, connecting to each host host (which may be a
+              hostname or an address) on TCP port port (which may be  either  a
+              number or a service name recognized by getaddrinfo(3) or the word
+              DEFAULT  to  mean port number 2003).  Only the very last value of
+              the port may be omitted (for example, -a host is a valid syntax),
+              which means the same as DEFAULT.
 
-       -v     Run  in active mode only; by default, if -a is specified, rpcapd
+       -v     Run in active mode only; by default, if -a is  specified,  rpcapd
               accepts passive connections as well.
 
-       -d     Run in daemon mode (UNIX only) or as  a  service  (Win32  only).
-              Warning  (Win32):  this flag is specified automatically when the
+       -d     Run  in  daemon  mode  (UNIX  only) or as a service (Win32 only).
+              Warning (Win32): this flag is specified  automatically  when  the
               service is started from the control panel.
 
        -i     Run in inetd mode (UNIX only).
@@ -156,22 +154,22 @@ OPTIONS
        -D     Log debugging messages.
 
        -s config_file
-              Save the current configuration  to  config_file  in  the  format
-              specified by rpcapd-config(5).
+              Save the current configuration to config_file in the format spec-
+              ified by rpcapd-config(5).
 
        -f config_file
-              Load  the  current  configuration from config_file in the format
-              specified by rpcapd-config(5) and ignore all flags specified  on
+              Load  the  current  configuration  from config_file in the format
+              specified by rpcapd-config(5) and ignore all flags  specified  on
               the command line.
 
        -h     Print this help screen.
 
-       If rpcapd was compiled with TLS support, the following options are also
+       If  rpcapd was compiled with TLS support, the following options are also
        available:
 
        -S     Enable TLS, and require that TLS be used on connections.
 
-       -C     With TLS enabled, XXX - I'm not sure how *fetching* the list  of
+       -C     With TLS enabled, XXX - I'm not sure how *fetching* the  list  of
               compression mechanisms does anything to compression.
 
        -K tls_keyfile
@@ -183,4 +181,4 @@ OPTIONS
 SEE ALSO
        pcap(3PCAP), rpcapd-config(5)
 
-                                18 October 2025                      RPCAPD(8)
+                                18 October 2025                       RPCAPD(8)

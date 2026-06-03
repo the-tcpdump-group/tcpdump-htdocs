@@ -10,7 +10,7 @@
 |                                                                            |
 +----------------------------------------------------------------------------+
 
-PCAP_OPEN_LIVE(3PCAP)                                    PCAP_OPEN_LIVE(3PCAP)
+PCAP_OPEN_LIVE(3PCAP)                                     PCAP_OPEN_LIVE(3PCAP)
 
 NAME
        pcap_open_live - open a device for capturing
@@ -24,37 +24,36 @@ SYNOPSIS
            int promisc, int to_ms, char *errbuf);
 
 DESCRIPTION
-       pcap_open_live()  is  used to obtain a packet capture handle to capture
-       packets   on   a   device   (typically   a   network   interface,   see
-       pcap_findalldevs(3PCAP)  for a more detailed explanation).  device is a
-       string that specifies the capture device to open, in this function NULL
+       pcap_open_live()  is  used  to obtain a packet capture handle to capture
+       packets   on   a   device   (typically   a   network   interface,    see
+       pcap_findalldevs(3PCAP)  for  a more detailed explanation).  device is a
+       string that specifies the capture device to open, in this function  NULL
        means the same as the string "any".
 
-       snaplen  specifies the snapshot length to be set on the handle.  If the
-       packet data should not be truncated at  the  end,  a  value  of  262144
-       should  be  sufficient  for  most  devices, but D-Bus devices require a
-       value of 128MiB (128*1024*1024).
+       snaplen  specifies  the snapshot length to be set on the handle.  If the
+       packet data should not be truncated at the end, a value of 262144 should
+       be sufficient for most devices, but D-Bus devices  require  a  value  of
+       128MiB (128*1024*1024).
 
-       promisc specifies whether the device is  to  be  put  into  promiscuous
-       mode.   If promisc is non-zero, promiscuous mode will be set, otherwise
-       it will not be set.
+       promisc specifies whether the device is to be put into promiscuous mode.
+       If  promisc is non-zero, promiscuous mode will be set, otherwise it will
+       not be set.
 
-       to_ms specifies the packet buffer timeout, as a non-negative value,  in
-       milliseconds.  (See pcap(3PCAP) for an explanation of the packet buffer
+       to_ms specifies the packet buffer timeout, as a non-negative  value,  in
+       milliseconds.   (See pcap(3PCAP) for an explanation of the packet buffer
        timeout.)
 
-       errbuf is a buffer large  enough  to  hold  at  least  PCAP_ERRBUF_SIZE
-       chars.
+       errbuf is a buffer large enough to hold at least PCAP_ERRBUF_SIZE chars.
 
 RETURN VALUE
-       pcap_open_live() returns a pcap_t * on success and NULL on failure.  If
-       NULL is returned, errbuf is filled in with an  appropriate  error  mes-
-       sage.   errbuf  may  also  be set to warning text when pcap_open_live()
-       succeeds; to detect this case the caller  should  store  a  zero-length
-       string  in errbuf before calling pcap_open_live() and display the warn-
-       ing to the user if errbuf is no longer a zero-length string.
+       pcap_open_live() returns a pcap_t * on success and NULL on failure.   If
+       NULL is returned, errbuf is filled in with an appropriate error message.
+       errbuf  may  also be set to warning text when pcap_open_live() succeeds;
+       to detect this case the caller should store a zero-length string in  er-
+       rbuf before calling pcap_open_live() and display the warning to the user
+       if errbuf is no longer a zero-length string.
 
 SEE ALSO
        pcap_create(3PCAP), pcap_activate(3PCAP)
 
-                                 11 March 2025           PCAP_OPEN_LIVE(3PCAP)
+                                 11 March 2025            PCAP_OPEN_LIVE(3PCAP)
