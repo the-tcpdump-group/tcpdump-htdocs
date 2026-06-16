@@ -272,7 +272,7 @@ flag, which causes it to read from a saved packet file rather than to
 read packets from a network interface.  It can also be run with the
 <CODE>-V</CODE>
 
-flag, which causes it to read a list of saved packet files. In all cases,
+flag, which causes it to read a list of saved packet files.  In all cases,
 only packets that match
 <I>expression</I>
 
@@ -362,7 +362,7 @@ platforms, such as macOS, the ``status'' character is not set by
 default, so you must set it with
 <B>stty</B>(1)
 
-in order to use it) and will continue capturing packets. On platforms that
+in order to use it) and will continue capturing packets.  On platforms that
 do not support the
 <CODE>SIGINFO</CODE>
 
@@ -429,7 +429,7 @@ option is used, the <I>count</I> starts after the skipped packets.
 
 <DD>
 Print only on stdout the packet count when reading capture file(s) instead
-of parsing/printing the packets. If a filter is specified on the command
+of parsing/printing the packets.  If a filter is specified on the command
 line, <I>tcpdump</I> counts only packets that were matched by the filter
 expression.
 <DT><CODE>-C</CODE><I> file_size</I>
@@ -469,7 +469,7 @@ or the particular DLT of the network interface specified with
 and
 <CODE>-i</CODE>
 
-respectively. In these cases the dump shows the same exact code that
+respectively.  In these cases the dump shows the same exact code that
 would filter the input file or the network interface without
 <CODE>-d</CODE>.
 
@@ -538,7 +538,7 @@ IEEE 802.11.
 <DD>
 Use <I>spi@ipaddr algo:secret</I> for decrypting IPsec ESP packets that
 are addressed to <I>addr</I> and contain Security Parameter Index value
-<I>spi</I>. This combination may be repeated with comma or newline separation.
+<I>spi</I>.  This combination may be repeated with comma or newline separation.
 <DT><DD>
 Note that setting the secret for IPv4 ESP packets is supported at this time.
 <DT><DD>
@@ -569,7 +569,7 @@ you make it visible to others, via
 and other occasions.
 <DT><DD>
 In addition to the above syntax, the syntax <I>file name</I> may be used
-to have tcpdump read the provided file in. The file is opened upon
+to have tcpdump read the provided file in.  The file is opened upon
 receiving the first ESP packet, so any special permissions that tcpdump
 may have been given should already have been given up.
 <DT><CODE>-f</CODE>
@@ -965,12 +965,12 @@ flag.
 
 <DD>
 
-Print every <I>nth</I> packet. This option enables the
+Print every <I>nth</I> packet.  This option enables the
 <CODE>--print</CODE>
 
 flag.
 <DT><DD>
-Unprinted packets are not parsed, which decreases processing time. Setting
+Unprinted packets are not parsed, which decreases processing time.  Setting
 <I>nth</I> to <B>100</B> for example, will (counting from 1) parse and print the
 100th packet, 200th packet, 300th packet, and so on.
 <DT><DD>
@@ -988,7 +988,7 @@ numbers are not tracked for unprinted packets.
 <DD>
 
 Choose send/receive direction <I>direction</I> for which packets should be
-captured. Possible values are `in', `out' and `inout'. Not available
+captured.  Possible values are `in', `out' and `inout'.  Not available
 on all platforms.
 <DT><CODE>-q</CODE>
 
@@ -1080,11 +1080,11 @@ and
 <B>zmtp1</B> (ZeroMQ Message Transport Protocol 1.0).
 <DT><DD>
 Note that the <B>pgm</B> type above affects UDP interpretation only, the native
-PGM is always recognised as IP protocol 113 regardless. UDP-encapsulated PGM is
-often called &quot;EPGM&quot; or &quot;PGM/UDP&quot;.
+PGM is always recognised as IP protocol 113 regardless.  UDP-encapsulated PGM
+is often called &quot;EPGM&quot; or &quot;PGM/UDP&quot;.
 <DT><DD>
 Note that the <B>pgm_zmtp1</B> type above affects interpretation of both native
-PGM and UDP at once. During the native PGM decoding the application data of an
+PGM and UDP at once.  During the native PGM decoding the application data of an
 ODATA/RDATA packet would be decoded as a ZeroMQ datagram with ZMTP/1.0 frames.
 During the UDP decoding in addition to that any UDP packet would be treated as
 an encapsulated PGM packet.
@@ -1164,7 +1164,7 @@ When writing to a file with the
 option and at the same time not reading from a file with the
 <CODE>-r</CODE>
 
-option, report to stderr, once per second, the number of packets captured. In
+option, report to stderr, once per second, the number of packets captured.  In
 Solaris, FreeBSD and possibly other operating systems this periodic update
 currently can cause loss of captured packets on their way from the kernel to
 tcpdump.
@@ -1189,7 +1189,7 @@ telnet options are printed in hex as well.
 <DT><CODE>-V</CODE><I> file</I>
 
 <DD>
-Read a list of filenames from <I>file</I>. Standard input is used
+Read a list of filenames from <I>file</I>.  Standard input is used
 if <I>file</I> is ``-''.
 <DT><CODE>-w</CODE><I> file</I>
 
@@ -1207,11 +1207,11 @@ amount of time after they are received.  Use the
 flag to cause packets to be written as soon as they are received.
 <DT><DD>
 The MIME type <I>application/vnd.tcpdump.pcap</I> has been registered
-with IANA for <I>pcap</I> files. The filename extension <I>.pcap</I>
+with IANA for <I>pcap</I> files.  The filename extension <I>.pcap</I>
 appears to be the most commonly used along with <I>.cap</I> and
-<I>.dmp</I>. <I>tcpdump</I> itself doesn't check the extension when
+<I>.dmp</I>.  <I>tcpdump</I> itself doesn't check the extension when
 reading capture files and doesn't add an extension when writing them
-(it uses magic numbers in the file header instead). However, many
+(it uses magic numbers in the file header instead).  However, many
 operating systems and applications will use the extension if it is
 present and adding one (e.g. .pcap) is recommended.
 <DT><DD>
@@ -1335,7 +1335,7 @@ run &quot;
 &quot; where
 <I>file</I>
 
-is the savefile being closed after each rotation. For example, specifying
+is the savefile being closed after each rotation.  For example, specifying
 <CODE>-z gzip</CODE>
 
 or
@@ -1400,7 +1400,7 @@ implementations of
 and regardless of whether the
 <CODE>POSIXLY_CORRECT</CODE>
 
-environment variable is set. Exception: On Windows, with cmd.exe command line,
+environment variable is set.  Exception: On Windows, with cmd.exe command line,
 single quoting must be replaced by double quoting.
 <P>
 
@@ -1583,9 +1583,9 @@ When the <I>any</I> interface is selected on capture or when a
 <CODE>LINKTYPE_LINUX_SLL2</CODE>
 
 capture file is read, the
-interface name is printed after the timestamp. This is followed by the packet
+interface name is printed after the timestamp.  This is followed by the packet
 type with <I>In</I> and <I>Out</I> denoting a packet destined for this host or
-originating from this host respectively. Other possible values are <I>B</I>
+originating from this host respectively.  Other possible values are <I>B</I>
 for broadcast packets, <I>M</I> for multicast packets, and <I>P</I> for packets
 destined for other hosts.
 <H3 id="lbAJ">Link Level Headers</H3>
@@ -2169,7 +2169,7 @@ This points us to the <I>tcpdump</I> filter expression
 <P>
 
 Some offsets and field values may be expressed as names
-rather than as numeric values. For example,
+rather than as numeric values.  For example,
 <CODE>tcp[13]</CODE>
 
 may be replaced with
@@ -2382,7 +2382,7 @@ the same transaction id and the contents of the link.
 <P>
 
 In the third line, <I>sushi</I> asks (using a new transaction id) <I>wrl</I>
-to lookup the name `<I>xcolors</I>' in directory file 9,74/4096.6878. In
+to lookup the name `<I>xcolors</I>' in directory file 9,74/4096.6878.  In
 the fourth line, <I>wrl</I> sends a reply with the respective transaction id.
 <P>
 
@@ -2812,7 +2812,7 @@ skewed time stamps (the time change is ignored).
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 08:09:04 GMT, May 04, 2026
+This HTML man page was generated at 11:15:39 GMT, June 16, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>
