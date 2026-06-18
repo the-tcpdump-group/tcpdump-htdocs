@@ -49,7 +49,7 @@
               <p>
                 The continuous integration (CI) systems below automatically build the
                 <a href="index.html#source">current development versions</a>
-                of tcpdump, libpcap and tcpslice.  For Cirrus CI and AppVeyor CI the
+                of tcpdump, libpcap and tcpslice.  For AppVeyor CI the
                 badges indicate the git master branch status.  For OpenCSW Buildbot the
                 badges do not indicate a status, the current status can be seen by
                 following the links.  For The Tcpdump Group Buildbot the badges indicate
@@ -77,49 +77,6 @@
                 </thead>
 
                 <tbody>
-                <tr>
-                  <th colspan=4>
-                    <a class=away href="https://cirrus-ci.org/">Cirrus CI</a>
-                  </th>
-                </tr>
-
-                <tr class=even>
-                  <td>
-                    {AArch64} &times; {macOS} &cup; {AMD64} &times; {FreeBSD 13}
-                  </td>
-                  <td>
-                    <a href='https://cirrus-ci.com/github/the-tcpdump-group/tcpdump'><img alt='status badge' class='cibadge'
-                      src='https://api.cirrus-ci.com/github/the-tcpdump-group/tcpdump.svg?branch=master'></a>
-                  </td>
-                  <td>
-                    <a href='https://cirrus-ci.com/github/the-tcpdump-group/libpcap'><img alt='status badge' class='cibadge'
-                      src='https://api.cirrus-ci.com/github/the-tcpdump-group/libpcap.svg?branch=master'></a>
-                  </td>
-                  <td>
-                    <a href='https://cirrus-ci.com/github/the-tcpdump-group/tcpslice'><img alt='status badge' class='cibadge'
-                      src='https://api.cirrus-ci.com/github/the-tcpdump-group/tcpslice.svg?branch=master'></a>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    {AMD64} &times; {Linux} (only for Coverity Scan by
-                    <a class=away href='https://www.synopsys.com/'>Synopsys</a>)
-                  </td>
-                  <td>
-                    <img alt='status badge' class='cibadge'
-                    src='https://scan.coverity.com/projects/230/badge.svg'>
-                  </td>
-                  <td>
-                    <img alt='status badge' class='cibadge'
-                    src='https://scan.coverity.com/projects/120/badge.svg'>
-                  </td>
-                  <td>
-                    <img alt='status badge' class='cibadge'
-                    src='https://scan.coverity.com/projects/21663/badge.svg'>
-                  </td>
-                </tr>
-
                 <tr>
                   <th colspan=4>
                     <a class=away href='https://opencsw.org/'>OpenCSW</a> Buildbot
@@ -561,10 +518,6 @@
                 <li>
                   To skip CI in AppVeyor CI only, append <code>[skip appveyor]</code> to
                   the git commit title.
-                </li>
-                <li>
-                  To skip CI in Cirrus CI only, append <code>[skip cirrus]</code> to the
-                  git commit title or the last line of the commit message.
                 </li>
                 <li>
                   To skip CI in The Tcpdump Group Buildbot only, append
