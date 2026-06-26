@@ -22,7 +22,7 @@ fi
 
 fail()
 {
-	printf "${ANSIFAIL}FAIL:${ANSIRESET} %s\n" "$*"
+	printf "${ANSIFAIL}FAIL:${ANSIRESET} %s\n" "$*" >&2
 	exit 1
 }
 pass()
