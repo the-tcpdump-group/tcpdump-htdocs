@@ -46,7 +46,8 @@ test_html()
 	pass "$cmd"
 }
 
-cd "$(dirname "$(realpath "$0")")"
+MYNAME=$(realpath "$0")
+cd "$(dirname "$MYNAME")"
 workdir_is_clean 'before all tests'
 
 test_html sed
@@ -58,7 +59,7 @@ for phpfile in bpfexam/index.php manpages/restyle.php; do
 done
 pass 'php --syntax-check'
 
-for shellfile in regen_man_pages.sh regen_html_pages.sh release/tarballdiff.sh $(basename "$(realpath "$0")"); do
+for shellfile in regen_man_pages.sh regen_html_pages.sh release/tarballdiff.sh "$MYNAME"; do
 	shellcheck -f gcc "$shellfile" || fail 'shellcheck'
 done
 pass 'shellcheck'
