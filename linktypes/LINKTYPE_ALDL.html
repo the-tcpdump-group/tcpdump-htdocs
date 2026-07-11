@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+Created by       : Luis MartinGarcia <http://www.aldabaknocking.com>
+Original design  : "Collaboration" by Free CSS Templates (later "TEMPLATED")
+Original license : Creative Commons Attribution 2.5 License
+-->
+<html lang="en">
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>LINKTYPE_ALDL | TCPDUMP &amp; LIBPCAP</title>
+        <meta name="keywords" content="tcpdump, libpcap, pcap, packet capture, sniffer, security, eavesdrop">
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="../images/T-32x32.png" rel="shortcut icon" type="image/png">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../manpages/">Man Pages</a></li>
+                <li><a href="../ci.html">CI</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../bpfexam/">BPF Exam</a></li>
+                <li><a href="../related.html">See Also</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_ALDL section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_ALDL
+            </h2>
+            <div class="entry">
+                <h3>Packet structure</h3>
+<pre>
++---------------------+
+|     Message ID      |
+|      (1 Octet)      |
++---------------------+
+| Payload length - 85 |
+|      (1 Octet)      |
++---------------------+
+|       Payload       |
+.                     .
+.                     .
+.                     .
++---------------------+
+|      Checksum       |
+|      (1 Octet)      |
++---------------------+
+</pre>
+
+                <h3>Description</h3>
+<p>
+Assembly Line Diagnostic Link (ALDL) or Assembly Line Communications Link
+(ALCL) is a single-duplex asynchronous serial bus used in GM vehicles
+throughout the 90's and early 00's. It pre-dates the OBDII standard.
+</p>
+            </div>
+            <!-- End of LINKTYPE_ALDL section -->
+          </div>
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                &copy; 2010&ndash;2022 The Tcpdump Group. Designed by
+                <a class=away href="https://www.luismg.com/">Luis MartinGarcia</a>;
+                based on a template by TEMPLATED.
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
