@@ -483,16 +483,16 @@ OPTIONS
               specified type.  Currently known types are aodv (Ad-hoc On-demand
               Distance Vector protocol), carp (Common Address Redundancy Proto-
               col), cnfp (Cisco NetFlow protocol), domain (Domain Name System),
-              lmp  (Link  Management  Protocol),  pgm (Pragmatic General Multi-
-              cast), pgm_zmtp1 (ZMTP/1.0 inside PGM/EPGM), ptp (Precision  Time
-              Protocol),  quic  (QUIC), radius (RADIUS), resp (REdis Serializa-
-              tion Protocol), rpc (Remote Procedure Call), rtcp (Real-Time  Ap-
-              plications  control protocol), rtp (Real-Time Applications proto-
-              col),  snmp  (Simple   Network   Management   Protocol),   someip
-              (SOME/IP), tftp (Trivial File Transfer Protocol), vat (Visual Au-
-              dio  Tool),  vxlan  (Virtual  eXtensible  Local Area Network), wb
-              (distributed White Board) and  zmtp1  (ZeroMQ  Message  Transport
-              Protocol 1.0).
+              geneve  (Generic Network Virtualization Encapsulation), lmp (Link
+              Management  Protocol),   pgm   (Pragmatic   General   Multicast),
+              pgm_zmtp1  (ZMTP/1.0 inside PGM/EPGM), ptp (Precision Time Proto-
+              col), quic (QUIC), radius  (RADIUS),  resp  (REdis  Serialization
+              Protocol),  rpc (Remote Procedure Call), rtcp (Real-Time Applica-
+              tions control protocol), rtp (Real-Time  Applications  protocol),
+              snmp (Simple Network Management Protocol), someip (SOME/IP), tftp
+              (Trivial  File Transfer Protocol), vat (Visual Audio Tool), vxlan
+              (Virtual eXtensible Local Area Network),  wb  (distributed  White
+              Board) and zmtp1 (ZeroMQ Message Transport Protocol 1.0).
 
               Note that the pgm type above affects UDP interpretation only, the
               native  PGM  is  always recognised as IP protocol 113 regardless.
@@ -1394,4 +1394,4 @@ BUGS
        A packet trace that crosses a daylight savings  time  change  will  give
        skewed time stamps (the time change is ignored).
 
-                                 24 April 2026                       TCPDUMP(1)
+                                  31 July 2026                       TCPDUMP(1)
