@@ -43,7 +43,7 @@ DESCRIPTION
        both active and passive mode.
 
 TLS support
-       By default rpcapd will not support TLS connections. If  built  with  TLS
+       By default rpcapd will not support TLS connections.  If built  with  TLS
        support, it will support TLS connections only if run with the -S option,
        in which case it will require TLS connections.
 

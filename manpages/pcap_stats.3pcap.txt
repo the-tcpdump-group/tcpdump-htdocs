@@ -62,7 +62,7 @@ RETURN VALUE
        pcap_stats() returns 0 on success, PCAP_ERROR_NOT_ACTIVATED if called on
        a  capture handle that has been created but not activated, or PCAP_ERROR
        if there is another error or if p doesn't support packet statistics.  If
-       PCAP_ERROR  is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be
+       PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may  be
        called with p as an argument to fetch or display the error text.
 
 SEE ALSO

@@ -77,8 +77,8 @@ RETURN VALUE
        that starts before any packets arrive, the timeout  expires  before  any
        packets  arrive,  or if the file descriptor for the capture device is in
        non-blocking mode and no packets were available to be read),  or  if  no
-       more packets are available in a ``savefile''. Unfortunately, there is no
-       way to determine whether an error occurred or not.
+       more  packets  are available in a ``savefile''.  Unfortunately, there is
+       no way to determine whether an error occurred or not.
 
 SEE ALSO
        pcap(3PCAP)

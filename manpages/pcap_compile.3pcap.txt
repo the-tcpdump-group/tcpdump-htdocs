@@ -56,7 +56,7 @@ DESCRIPTION
        for DLT_LINUX_SLL2 only.
 
 RETURN VALUE
-       pcap_compile()  returns  0  on  success  and  PCAP_ERROR  on failure. If
+       pcap_compile()  returns  0  on  success  and  PCAP_ERROR on failure.  If
        PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may  be
        called with p as an argument to fetch or display the error text.
 

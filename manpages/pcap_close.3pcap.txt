@@ -22,7 +22,7 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_close()  closes  the  files  associated  with p and deallocates re-
-       sources. This means that, for example, if p refers to  a  savefile  that
+       sources.  This means that, for example, if p refers to a  savefile  that
        was     opened     with     pcap_fopen_offline()    or    pcap_fopen_of-
        fline_with_tstamp_precision(), the stream provided to the  routine  will
        be closed unless it is stdin.
