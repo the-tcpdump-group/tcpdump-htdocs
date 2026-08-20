@@ -23,9 +23,14 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_statustostr() converts a PCAP_ERROR_  or  PCAP_WARNING_  value  re-
-       turned by a libpcap routine to an error string.
+       turned by a libpcap routine to an error/warning string.
+
+RETURN VALUE
+       The function never returns NULL: for an argument that is not a known er-
+       ror/warning  value  it  produces a generic message that quotes the argu-
+       ment.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                 3 January 2014         PCAP_STATUSTOSTR(3PCAP)
+                                 12 August 2026         PCAP_STATUSTOSTR(3PCAP)
