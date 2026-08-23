@@ -935,30 +935,38 @@ function detect_graphs (string $text): array
 	return $ret;
 }
 
+function restyle_digraph (string $graphdef): string
+{
+	# Remove any default attributes.
+	$ret = preg_replace ('/^[[:space:]]*(?:graph|node|edge) \[.+\];$/m', '', $graphdef);
+	# Add BPF Exam default attributes.
+	$ret = preg_replace ('/(digraph [[:alnum:]]+ {)$/m', "\\1\n\tnode [shape=box, fontname=\"Courier\"];\n\tedge [fontname=\"Courier\"];", $ret);
+	# For block nodes remove all attributes except "label".
+	$ret = preg_replace ('/^([[:space:]]*"?[[:alnum:]]+"? \[).*(label="[^"]+").*$/m', '\1\2];', $ret);
+	return $ret;
+}
+
 function restyle_libpcap_graph (string $graphdef): string
 {
-	# Do not change the default edge type to "ortho", it does not look well.
-	# Undo explicit node shapes and set the default the same as in Radare2.
-	$ret = preg_replace ('/^([[:space:]]*block.+ \[)shape=ellipse, /m', '\1', $graphdef);
-	$ret = preg_replace ('/^(digraph BPF {)$/m', "\\1\n        node [shape=box fontname=\"Courier\"];", $ret);
-	# Colourize the edges same as in Radare2, but keep the labels.
-	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[label="T")(\])/m', '\1 color="#13a10e"\2', $ret);
-	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[label="F")(\])/m', '\1 color="#c50f1f"\2', $ret);
+	$ret = restyle_digraph ($graphdef);
+	# For JT/JF edges the "label" attribute is already in place, add a commensurate
+	# "color" attribute.  If the destination port is specified, remove it to let
+	# the arrows distribute nicer.
+	$ret = preg_replace ('/("[[:alnum:]]+":[[:alpha:]]+ -> "[[:alnum:]]+")(?::[[:alpha:]]+)?( \[label="T")(\];)/', '\1\2, color="#13a10e"\3', $ret);
+	$ret = preg_replace ('/("[[:alnum:]]+":[[:alpha:]]+ -> "[[:alnum:]]+")(?::[[:alpha:]]+)?( \[label="F")(\];)/', '\1\2, color="#c50f1f"\3', $ret);
 	# Align all node label text to the left.
 	$ret = preg_replace ('/\\\\n/', '\\\\l', $ret);
-	$ret = preg_replace ('/^([[:space:]]*block.+ \[.+ label="[^"]+)(")/m', '\1\\\\l\2', $ret);
-	# Let Graphviz decide where to place incoming edges arrows, so they don't jam as much.
-	$ret = preg_replace ('/^([[:space:]].+:s. -> .+):n /m', '\1 ', $ret);
+	$ret = preg_replace ('/^([[:space:]]*[[:alnum:]]+ \[label="[^"]+)(")/m', '\1\\\\l\2', $ret);
 	return $ret;
 }
 
 function restyle_r2_graph (string $graphdef): string
 {
-	# Drop the default background.
-	$ret = preg_replace ('/^([[:space:]]*graph \[.*)bgcolor=azure /m', '\1', $graphdef);
-	# Label the coloured true/false edges for consistency with libpcap format.
-	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[color="#13a10e")(];)/m', '\1 xlabel="T"\2', $ret);
-	$ret = preg_replace ('/^([[:space:]]*.+ -> .+ \[color="#c50f1f")(];)/m', '\1 xlabel="F"\2', $ret);
+	$ret = restyle_digraph ($graphdef);
+	# For JT/JF edges neither port is specified, specify the source port; the
+	# "color" attribute is already in place, add a commensurate "label" attribute.
+	$ret = preg_replace ('/("[[:alnum:]]+")( -> "[[:alnum:]]+" \[color="#13a10e")(\];)/', '\1:se\2, label="T"\3', $ret);
+	$ret = preg_replace ('/("[[:alnum:]]+")( -> "[[:alnum:]]+" \[color="#c50f1f")(\];)/', '\1:sw\2, label="F"\3', $ret);
 	return $ret;
 }
 
