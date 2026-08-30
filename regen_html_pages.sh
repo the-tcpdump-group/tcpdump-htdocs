@@ -89,6 +89,9 @@ substitute_page_title()
 	marvell-switch-tag)
 		title='Marvell switch tag | '
 		;;
+	gsw1xx-switch-tag)
+		title='GSW1XX switch tag | '
+		;;
 	netanalyzer-header)
 		title='netANALYZER header | '
 		;;
