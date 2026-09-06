@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_OFFLINE_FILTER</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 24 January 2025<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 12 March 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -52,6 +52,27 @@ structure for the packet, and
 points to the data in the packet.
 <P>
 
+In the
+<CODE>bpf_program</CODE>
+
+structure the
+<CODE>bf_insns</CODE>
+
+member is either
+<CODE>NULL</CODE>
+
+(which means to reject all packets) or points to an array of one or more
+<CODE>struct bpf_insn</CODE>
+
+elements, in which case the
+<CODE>bf_len</CODE>
+
+member must be set to the number of elements (this is what
+<B>pcap_compile</B>()
+
+produces).
+<P>
+
 The filter program must have been compiled for a link-layer header type
 that matches the packet data; also on Linux the filter must not use
 BPF extensions, see
@@ -65,7 +86,15 @@ for more information.
 returns the return value of the filter program.  This will be zero if
 the packet doesn't match the filter and non-zero if the packet matches
 the filter.
-<H2 id="lbAF">SEE ALSO</H2>
+<H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
+
+<P>
+
+In libpcap releases before 1.10.7 this function ignored the provided
+<CODE>bf_len</CODE>
+
+value.
+<H2 id="lbAG">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
 
@@ -73,7 +102,7 @@ the filter.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:14:44 GMT, March 14, 2026
+This HTML man page was generated at 08:25:10 GMT, September 06, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

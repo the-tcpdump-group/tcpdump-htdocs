@@ -27,6 +27,11 @@ DESCRIPTION
        pcap_compile(3PCAP).  h points to  the  pcap_pkthdr  structure  for  the
        packet, and pkt points to the data in the packet.
 
+       In  the  bpf_program structure the bf_insns member is either NULL (which
+       means to reject all packets) or points to an array of one or more struct
+       bpf_insn elements, in which case the bf_len member must be  set  to  the
+       number of elements (this is what pcap_compile() produces).
+
        The  filter program must have been compiled for a link-layer header type
        that matches the packet data; also on Linux the filter must not use  BPF
        extensions, see pcap_compile() for more information.
@@ -36,7 +41,11 @@ RETURN VALUE
        This will be zero if the packet doesn't match the filter and non-zero if
        the packet matches the filter.
 
+BACKWARD COMPATIBILITY
+       In libpcap releases before 1.10.7 this  function  ignored  the  provided
+       bf_len value.
+
 SEE ALSO
        pcap(3PCAP)
 
-                                24 January 2025      PCAP_OFFLINE_FILTER(3PCAP)
+                                 12 March 2026       PCAP_OFFLINE_FILTER(3PCAP)
