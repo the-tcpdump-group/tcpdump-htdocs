@@ -1,0 +1,51 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.10.7.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_OFFLINE_FILTER(3PCAP)                           PCAP_OFFLINE_FILTER(3PCAP)
+
+NAME
+       pcap_offline_filter - check whether a filter matches a packet
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       int pcap_offline_filter(const struct bpf_program *fp,
+           const struct pcap_pkthdr *h, const u_char *pkt);
+
+DESCRIPTION
+       pcap_offline_filter() checks whether a filter matches a packet.  fp is a
+       pointer  to  a  bpf_program  struct,  usually  the  result  of a call to
+       pcap_compile(3PCAP).  h points to  the  pcap_pkthdr  structure  for  the
+       packet, and pkt points to the data in the packet.
+
+       In  the  bpf_program structure the bf_insns member is either NULL (which
+       means to reject all packets) or points to an array of one or more struct
+       bpf_insn elements, in which case the bf_len member must be  set  to  the
+       number of elements (this is what pcap_compile() produces).
+
+       The  filter program must have been compiled for a link-layer header type
+       that matches the packet data; also on Linux the filter must not use  BPF
+       extensions, see pcap_compile() for more information.
+
+RETURN VALUE
+       pcap_offline_filter()  returns  the  return value of the filter program.
+       This will be zero if the packet doesn't match the filter and non-zero if
+       the packet matches the filter.
+
+BACKWARD COMPATIBILITY
+       In libpcap releases before 1.10.7 this  function  ignored  the  provided
+       bf_len value.
+
+SEE ALSO
+       pcap(3PCAP)
+
+                                 12 March 2026       PCAP_OFFLINE_FILTER(3PCAP)
