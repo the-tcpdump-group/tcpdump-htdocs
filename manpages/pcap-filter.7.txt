@@ -295,22 +295,22 @@ PRIMITIVES
               For this primitive it does not matter whether the IPv4 packet  is
               fragmented  or not.  Protocol can be a number or one of the names
               recognized by getprotobyname(3),  for  example:  ah,  esp,  eigrp
-              (only in Linux with glibc, FreeBSD, NetBSD, DragonFly BSD, macOS,
-              and  QNX),  icmp,  igmp,  igrp  (only in Haiku and OpenBSD), pim,
-              sctp, tcp, udp or vrrp.  Note that most of these example  identi-
-              fiers  are  also  keywords and must be escaped via backslash (\).
-              Note that this primitive  does  not  chase  the  protocol  header
-              chain.
+              (only  in  Linux with glibc, FreeBSD, NetBSD, DragonFly BSD, Mid-
+              nightBSD, macOS, and QNX), icmp, igmp, igrp (only  in  Haiku  and
+              OpenBSD),  pim,  sctp, tcp, udp or vrrp.  Note that most of these
+              example identifiers are also keywords and  must  be  escaped  via
+              backslash  (\).  Note that this primitive does not chase the pro-
+              tocol header chain.
 
-              Typically  getprotobyname(3)  parses  the  /etc/protocols file to
-              translate protocol names to numbers,  and  the  getent  protocols
-              command  lists the protocols recognized by the function.  This is
-              not entirely so in AIX (which does not have the  command),  Haiku
-              (which  has  the  file at /system/data/network/protocols and does
-              not have the command), on Linux with musl libc (which  hard-codes
-              the  list  of protocols) and on hosts that use a network database
-              to resolve protocol names to numbers (see nsswitch.conf(5)).   If
-              a  protocol  name fails to translate to a number, this version of
+              Typically getprotobyname(3) parses  the  /etc/protocols  file  to
+              translate  protocol  names  to  numbers, and the getent protocols
+              command lists the protocols recognized by the function.  This  is
+              not  entirely  so in AIX (which does not have the command), Haiku
+              (which has the file at  /system/data/network/protocols  and  does
+              not  have the command), on Linux with musl libc (which hard-codes
+              the list of protocols) and on hosts that use a  network  database
+              to  resolve protocol names to numbers (see nsswitch.conf(5)).  If
+              a protocol name fails to translate to a number, this  version  of
               libpcap will treat the filter expression as invalid.
 
        carp, vrrp
@@ -325,9 +325,10 @@ PRIMITIVES
 
        igrp   Abbreviation for:
                    ip proto igrpval
-              where igrpval is 88 on DragonFly BSD, FreeBSD,  macOS,  and  QNX,
-              and 9 on all other OSes.  This abbreviation should not be used in
-              portable applications and may be removed in future.
+              where  igrpval  is  88  on  DragonFly  BSD,  FreeBSD, macOS, Mid-
+              nightBSD, and QNX, and 9 on all other  OSes.   This  abbreviation
+              should not be used in portable applications and may be removed in
+              future.
 
        ip6 proto protocol
               True  if  the packet is an IPv6 packet of protocol type protocol.
@@ -1224,4 +1225,4 @@ BUGS
        and  may  incorrectly match packets that have a different combination of
        protocol and hardware.
 
-                                 19 March 2026                   PCAP-FILTER(7)
+                                7 September 2026                 PCAP-FILTER(7)
