@@ -29,24 +29,25 @@ DESCRIPTION
        list  is empty, there are no devices on which capture is possible.)  er-
        rbuf is a buffer large enough to hold at least PCAP_ERRBUF_SIZE chars.
 
-       If pcap_init(3PCAP) has been called, this interface always returns NULL.
+       If pcap_init(3PCAP) has been called, this  interface  always  returns  a
+       null pointer.
 
        pcap_lookupdev() returns a pointer to a string giving the name of a net-
-       work   device   suitable   for   use   with    pcap_create(3PCAP)    and
-       pcap_activate(3PCAP),    or   with   pcap_open_live(3PCAP),   and   with
+       work    device    suitable   for   use   with   pcap_create(3PCAP)   and
+       pcap_activate(3PCAP),   or   with   pcap_open_live(3PCAP),   and    with
        pcap_lookupnet(3PCAP).  If there is an error, or if pcap_init(3PCAP) has
-       been called, NULL is returned and errbuf is filled in with an  appropri-
-       ate error message.
+       been  called, a null pointer is returned and errbuf is filled in with an
+       appropriate error message.
 
 SEE ALSO
        pcap(3PCAP)
 
 BUGS
        The pointer returned by pcap_lookupdev() points to a static buffer; sub-
-       sequent  calls  to  pcap_lookupdev()  in  the  same  thread, or calls to
+       sequent calls to pcap_lookupdev()  in  the  same  thread,  or  calls  to
        pcap_lookupdev() in another thread, may overwrite that buffer.
 
-       In WinPcap and Npcap, this function may return a  UTF-16  string  rather
+       In  WinPcap  and  Npcap, this function may return a UTF-16 string rather
        than an ASCII or UTF-8 string.
 
-                                30 November 2023          PCAP_LOOKUPDEV(3PCAP)
+                                6 September 2026          PCAP_LOOKUPDEV(3PCAP)

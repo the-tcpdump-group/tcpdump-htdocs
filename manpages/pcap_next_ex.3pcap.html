@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_NEXT_EX</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 26 March 2026<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -189,8 +189,7 @@ as an argument to fetch or display the error text.
 <B>pcap_next</B>()
 
 returns a pointer to the packet data on success, and returns
-<CODE>NULL</CODE>
-
+a null pointer
 if an error occurred, or if no packets were read from a live capture
 (if, for example, they were discarded because they didn't pass the
 packet filter, or if, on platforms that support a packet buffer timeout
@@ -207,7 +206,7 @@ way to determine whether an error occurred or not.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 09:55:24 GMT, August 05, 2026
+This HTML man page was generated at 18:59:35 GMT, September 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

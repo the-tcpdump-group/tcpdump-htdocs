@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_STATUSTOSTR</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 12 August 2026<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -37,14 +37,17 @@ converts a
 or
 <CODE>PCAP_WARNING_</CODE>
 
-value returned by a libpcap routine to an error/warning string.
+value returned by a libpcap routine to an error or warning string.
 <H2 id="lbAE">RETURN VALUE</H2>
 
 The function never returns
-<CODE>NULL</CODE>:
+a null pointer;
+if the
+<I>error</I>
 
-for an argument that is not a known error/warning value it produces a generic
-message that quotes the argument.
+argument
+is not a known error or warning value, it returns a generic
+message that shows the numeric value of the argument.
 <H2 id="lbAF">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
@@ -53,7 +56,7 @@ message that quotes the argument.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 10:32:42 GMT, August 20, 2026
+This HTML man page was generated at 18:59:36 GMT, September 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

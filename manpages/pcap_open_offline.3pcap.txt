@@ -61,16 +61,17 @@ DESCRIPTION
 RETURN VALUE
        pcap_open_offline(),          pcap_open_offline_with_tstamp_precision(),
        pcap_fopen_offline(), and pcap_fopen_offline_with_tstamp_precision() re-
-       turn a pcap_t * on success and NULL on failure.  If  NULL  is  returned,
-       errbuf is filled in with an appropriate error message.
+       turn a pcap_t * on success and a null pointer on  failure.   If  a  null
+       pointer  is returned, errbuf is filled in with an appropriate error mes-
+       sage.
 
 BACKWARD COMPATIBILITY
        pcap_open_offline_with_tstamp_precision()       and       pcap_fopen_of-
        fline_with_tstamp_precision() became available in libpcap release 1.5.1.
-       In previous releases, time stamps from a savefile are  always  given  in
+       In  previous  releases,  time stamps from a savefile are always given in
        seconds and microseconds.
 
 SEE ALSO
        pcap(3PCAP), pcap-savefile(5)
 
-                                12 October 2024        PCAP_OPEN_OFFLINE(3PCAP)
+                                6 September 2026       PCAP_OPEN_OFFLINE(3PCAP)

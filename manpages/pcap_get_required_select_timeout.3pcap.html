@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_GET_REQUIRED_SELECT_TIMEOUT</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 29 January 2020<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -46,13 +46,11 @@ and
 <B>kevent</B>(2)
 
 calls, or
-<CODE>NULL</CODE>
-
+a null pointer
 if there is no such timeout.
 If a
-non-<CODE>NULL</CODE>
-
-value is returned, it must be used regardless of whether
+non-null
+timeout pointer is returned, it must be used regardless of whether
 <A HREF='./pcap_get_selectable_fd.3pcap.html'><B>pcap_get_selectable_fd</B></A>(3PCAP)
 
 returns
@@ -131,16 +129,14 @@ should be called for all
 <CODE>pcap_t</CODE>s
 
 for which a
-non-<CODE>NULL</CODE>
-
-timeout was returned, regardless of whether it's indicated as having
+non-null
+timeout pointer was returned, regardless of whether it's indicated as having
 anything to read from it or not.
 <P>
 
 All devices with a
-non-<CODE>NULL</CODE>
-
-timeout must be put in non-blocking mode with
+non-null
+timeout pointer must be put in non-blocking mode with
 <A HREF='./pcap_setnonblock.3pcap.html'><B>pcap_setnonblock</B></A>(3PCAP).
 
 <P>
@@ -168,8 +164,7 @@ A pointer to a
 <CODE>struct timeval</CODE>
 
 is returned if the timeout is required; otherwise
-<CODE>NULL</CODE>
-
+a null pointer
 is returned.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
 
@@ -241,7 +236,7 @@ even if the code must also work with libpcap 1.9.x.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 22:21:49 GMT, March 08, 2023
+This HTML man page was generated at 18:59:33 GMT, September 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

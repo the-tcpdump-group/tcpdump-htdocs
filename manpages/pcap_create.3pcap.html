@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_CREATE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 11 March 2025<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -40,9 +40,8 @@ is used to create a packet capture handle to capture packets on a device
 for a more detailed explanation).
 <I>source</I>
 
-is a string that specifies the capture device to open, in this function
-<CODE>NULL</CODE>
-
+is a string that specifies the capture device to open; in this function,
+a null pointer
 means the same as the string &quot;any&quot;.
 <I>errbuf</I>
 
@@ -66,12 +65,10 @@ returns a
 <CODE>pcap_t *</CODE>
 
 on success and
-<CODE>NULL</CODE>
-
+a null pointer
 on failure.
 If
-<CODE>NULL</CODE>
-
+a null pointer
 is returned,
 <I>errbuf</I>
 
@@ -84,7 +81,7 @@ is filled in with an appropriate error message.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 18:57:55 GMT, March 11, 2025
+This HTML man page was generated at 18:59:32 GMT, September 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

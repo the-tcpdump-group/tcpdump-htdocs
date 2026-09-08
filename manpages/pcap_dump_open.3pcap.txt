@@ -54,8 +54,8 @@ DESCRIPTION
 RETURN VALUE
        A   pointer   to   a   pcap_dumper_t  structure  to  use  in  subsequent
        pcap_dump(3PCAP) and pcap_dump_close(3PCAP) calls is  returned  on  suc-
-       cess.    NULL   is   returned   on   failure.    If  NULL  is  returned,
-       pcap_geterr(3PCAP) can be used to get the error text.
+       cess.   A null pointer is returned on failure.  If a null pointer is re-
+       turned, pcap_geterr(3PCAP) can be used to get the error text.
 
 BACKWARD COMPATIBILITY
        The pcap_dump_open_append() function became available in libpcap release
@@ -65,4 +65,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP), pcap-savefile(5)
 
-                                  3 July 2020             PCAP_DUMP_OPEN(3PCAP)
+                                6 September 2026          PCAP_DUMP_OPEN(3PCAP)

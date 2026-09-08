@@ -125,123 +125,123 @@ DESCRIPTION
               son.
 
               For now, this doesn't work on the "any" device; if an argument of
-              "any" or NULL is supplied, the setting of promiscuous mode is ig-
-              nored.
+              "any"  or  a null pointer is supplied, the setting of promiscuous
+              mode is ignored.
 
               Promiscuous mode is set with pcap_set_promisc().
 
        monitor mode
-              On  IEEE 802.11 wireless LANs, even if an adapter is in promiscu-
-              ous mode, it will supply to the host only frames for the  network
-              with  which  it's  associated.   It  might  also supply only data
-              frames, not management or control frames, and might  not  provide
-              the  802.11  header  or radio information pseudo-header for those
+              On IEEE 802.11 wireless LANs, even if an adapter is in  promiscu-
+              ous  mode, it will supply to the host only frames for the network
+              with which it's associated.   It  might  also  supply  only  data
+              frames,  not  management or control frames, and might not provide
+              the 802.11 header or radio information  pseudo-header  for  those
               frames.
 
               In "monitor mode", sometimes also called "rfmon mode" (for "Radio
-              Frequency MONitor"), the adapter will supply all frames  that  it
-              receives,  with  802.11 headers, and might supply a pseudo-header
+              Frequency  MONitor"),  the adapter will supply all frames that it
+              receives, with 802.11 headers, and might supply  a  pseudo-header
               with radio information about the frame as well.
 
               Note that in monitor mode the adapter might disassociate from the
-              network with which it's associated, so that you will not be  able
-              to  use any wireless networks with that adapter.  This could pre-
+              network  with which it's associated, so that you will not be able
+              to use any wireless networks with that adapter.  This could  pre-
               vent accessing files on a network server, or resolving host names
-              or network addresses, if you are capturing in  monitor  mode  and
+              or  network  addresses,  if you are capturing in monitor mode and
               are not connected to another network with another adapter.
 
-              Monitor  mode  is set with pcap_set_rfmon(), and pcap_can_set_rf-
+              Monitor mode is set with pcap_set_rfmon(),  and  pcap_can_set_rf-
               mon() can be used to determine whether an adapter can be put into
               monitor mode.
 
        packet buffer timeout
               If, when capturing, packets are delivered as soon as they arrive,
-              the application capturing the packets will be woken up  for  each
+              the  application  capturing the packets will be woken up for each
               packet as it arrives, and might have to make one or more calls to
               the operating system to fetch each packet.
 
-              If,  instead,  packets  are not delivered as soon as they arrive,
-              but are delivered after a short delay (called  a  "packet  buffer
-              timeout"),  more  than  one  packet can be accumulated before the
-              packets are delivered, so that a single wakeup would be done  for
-              multiple  packets,  and  each  set of calls made to the operating
-              system would  supply  multiple  packets,  rather  than  a  single
-              packet.   This reduces the per-packet CPU overhead if packets are
-              arriving at a high rate, increasing the  number  of  packets  per
+              If, instead, packets are not delivered as soon  as  they  arrive,
+              but  are  delivered  after a short delay (called a "packet buffer
+              timeout"), more than one packet can  be  accumulated  before  the
+              packets  are delivered, so that a single wakeup would be done for
+              multiple packets, and each set of calls  made  to  the  operating
+              system  would  supply  multiple  packets,  rather  than  a single
+              packet.  This reduces the per-packet CPU overhead if packets  are
+              arriving  at  a  high  rate, increasing the number of packets per
               second that can be captured.
 
-              The  packet  buffer  timeout  is  required so that an application
-              won't wait for the operating system's capture buffer to  fill  up
-              before  packets  are  delivered;  if packets are arriving slowly,
+              The packet buffer timeout is  required  so  that  an  application
+              won't  wait  for the operating system's capture buffer to fill up
+              before packets are delivered; if  packets  are  arriving  slowly,
               that wait could take an arbitrarily long period of time.
 
-              Not all platforms support a packet buffer timeout;  on  platforms
-              that  don't,  the packet buffer timeout is ignored.  A zero value
-              for the timeout, on platforms that support a packet buffer  time-
+              Not  all  platforms support a packet buffer timeout; on platforms
+              that don't, the packet buffer timeout is ignored.  A  zero  value
+              for  the timeout, on platforms that support a packet buffer time-
               out, will cause a read to wait forever to allow enough packets to
               arrive, with no timeout.  A negative value is invalid; the result
               of setting the timeout to a negative value is unpredictable.
 
-              NOTE:  the  packet  buffer  timeout cannot be used to cause calls
-              that read packets to return within a limited period of time,  be-
-              cause,  on  some  platforms, the packet buffer timeout isn't sup-
+              NOTE: the packet buffer timeout cannot be  used  to  cause  calls
+              that  read packets to return within a limited period of time, be-
+              cause, on some platforms, the packet buffer  timeout  isn't  sup-
               ported, and, on other platforms, the timer doesn't start until at
-              least one packet arrives.  This  means  that  the  packet  buffer
+              least  one  packet  arrives.   This  means that the packet buffer
               timeout should NOT be used, for example, in an interactive appli-
-              cation  to allow the packet capture loop to ``poll'' for user in-
-              put periodically, as there's no guarantee  that  a  call  reading
-              packets  will return after the timeout expires even if no packets
+              cation to allow the packet capture loop to ``poll'' for user  in-
+              put  periodically,  as  there's  no guarantee that a call reading
+              packets will return after the timeout expires even if no  packets
               have arrived.
 
               The packet buffer timeout is set with pcap_set_timeout().
 
        immediate mode
-              In immediate mode, packets are always delivered as soon  as  they
-              arrive,   with   no   buffering.   Immediate  mode  is  set  with
+              In  immediate  mode, packets are always delivered as soon as they
+              arrive,  with  no  buffering.   Immediate  mode   is   set   with
               pcap_set_immediate_mode().
 
        buffer size
               Packets that arrive for a capture are stored in a buffer, so that
-              they do not have to be read by the application as  soon  as  they
-              arrive.   On some platforms, the buffer's size can be set; a size
-              that's too small could mean that, if too many packets  are  being
+              they  do  not  have to be read by the application as soon as they
+              arrive.  On some platforms, the buffer's size can be set; a  size
+              that's  too  small could mean that, if too many packets are being
               captured and the snapshot length doesn't limit the amount of data
-              that's  buffered, packets could be dropped if the buffer fills up
-              before the application can read packets from  it,  while  a  size
-              that's  too  large  could  use more non-pageable operating system
+              that's buffered, packets could be dropped if the buffer fills  up
+              before  the  application  can  read packets from it, while a size
+              that's too large could use  more  non-pageable  operating  system
               memory than is necessary to prevent packets from being dropped.
 
               The buffer size is set with pcap_set_buffer_size().
 
        timestamp type
-              On some platforms, the time stamp given to packets on  live  cap-
-              tures  can  come  from  different sources that can have different
-              resolutions or that can have different relationships to the  time
-              values  for  the  current time supplied by routines on the native
-              operating system.  See pcap-tstamp(7) for a list  of  time  stamp
+              On  some  platforms, the time stamp given to packets on live cap-
+              tures can come from different sources  that  can  have  different
+              resolutions  or that can have different relationships to the time
+              values for the current time supplied by routines  on  the  native
+              operating  system.   See  pcap-tstamp(7) for a list of time stamp
               types.
 
               The time stamp type is set with pcap_set_tstamp_type().
 
-       Reading  packets from a network interface may require that you have spe-
+       Reading packets from a network interface may require that you have  spe-
        cial privileges:
 
        Under Solaris with DLPI:
-              You must have read/write access to  the  network  pseudo  device,
-              e.g.   /dev/le.   On  at least some versions of Solaris, however,
+              You  must  have  read/write  access to the network pseudo device,
+              e.g.  /dev/le.  On at least some versions  of  Solaris,  however,
               this is not sufficient to allow tcpdump to capture in promiscuous
-              mode; on those versions of Solaris, you must be root, or the  ap-
-              plication  capturing packets must be installed setuid to root, in
-              order to capture in promiscuous mode.  Note that, on  many  (per-
-              haps  all)  interfaces, if you don't capture in promiscuous mode,
-              you will not see any outgoing packets, so a capture not  done  in
+              mode;  on those versions of Solaris, you must be root, or the ap-
+              plication capturing packets must be installed setuid to root,  in
+              order  to  capture in promiscuous mode.  Note that, on many (per-
+              haps all) interfaces, if you don't capture in  promiscuous  mode,
+              you  will  not see any outgoing packets, so a capture not done in
               promiscuous mode may not be very useful.
 
-              In  newer  versions  of  Solaris,  you  must  have been given the
+              In newer versions of  Solaris,  you  must  have  been  given  the
               net_rawaccess privilege; this is both necessary and sufficient to
-              give you access to the network pseudo-device - there is  no  need
-              to  change  the  privileges  on that device.  A user can be given
-              that privilege by, for example,  adding  that  privilege  to  the
+              give  you  access to the network pseudo-device - there is no need
+              to change the privileges on that device.  A  user  can  be  given
+              that  privilege  by,  for  example,  adding that privilege to the
               user's defaultpriv key with the usermod(8) command.
 
        Under HP-UX with DLPI:
@@ -250,42 +250,42 @@ DESCRIPTION
 
        Under Linux:
               You must be root or the application capturing packets must be in-
-              stalled  setuid  to  root,  unless your distribution has a kernel
+              stalled setuid to root, unless your  distribution  has  a  kernel
               that supports capability bits such as CAP_NET_RAW and code to al-
-              low those capability bits to be given to particular accounts  and
-              to  cause those bits to be set on a user's initial processes when
-              they log in, in which case you must have CAP_NET_RAW in order  to
+              low  those capability bits to be given to particular accounts and
+              to cause those bits to be set on a user's initial processes  when
+              they  log in, in which case you must have CAP_NET_RAW in order to
               capture.
 
        Under BSD (this includes macOS):
               You must have read access to /dev/bpf* on systems that don't have
               a cloning BPF device, or to /dev/bpf on systems that do.  On BSDs
-              with  a devfs (this includes macOS), this might involve more than
+              with a devfs (this includes macOS), this might involve more  than
               just having somebody with super-user access setting the ownership
-              or permissions on the BPF devices - it might involve  configuring
-              devfs  to  set the ownership or permissions every time the system
-              is booted, if the system even supports that; if it  doesn't  sup-
-              port  that,  you  might  have to find some other way to make that
+              or  permissions on the BPF devices - it might involve configuring
+              devfs to set the ownership or permissions every time  the  system
+              is  booted,  if the system even supports that; if it doesn't sup-
+              port that, you might have to find some other  way  to  make  that
               happen at boot time.
 
        Reading a saved packet file doesn't require special privileges.
 
-       The packets read from the handle may include  a  ``pseudo-header''  con-
+       The  packets  read  from the handle may include a ``pseudo-header'' con-
        taining various forms of packet meta-data, and probably includes a link-
        layer header whose contents can differ for different network interfaces.
-       To  determine  the  format  of  the packets supplied by the handle, call
+       To determine the format of the packets  supplied  by  the  handle,  call
        pcap_datalink(); https://www.tcpdump.org/linktypes.html lists the values
-       it returns and describes the packet formats  that  correspond  to  those
+       it  returns  and  describes  the packet formats that correspond to those
        values.
 
-       Do  NOT assume that the packets for a given capture or ``savefile`` will
-       have any given link-layer header type, such as DLT_EN10MB for  Ethernet.
-       For  example,  the  "any"  device on Linux will have a link-layer header
-       type of DLT_LINUX_SLL or DLT_LINUX_SLL2 even if all devices on the  sys-
-       tem  at  the  time  the "any" device is opened have some other data link
+       Do NOT assume that the packets for a given capture or ``savefile``  will
+       have  any given link-layer header type, such as DLT_EN10MB for Ethernet.
+       For example, the "any" device on Linux will  have  a  link-layer  header
+       type  of DLT_LINUX_SLL or DLT_LINUX_SLL2 even if all devices on the sys-
+       tem at the time the "any" device is opened have  some  other  data  link
        type, such as DLT_EN10MB for Ethernet.
 
-       To obtain the FILE * corresponding to a  pcap_t  opened  for  a  ``save-
+       To  obtain  the  FILE *  corresponding  to a pcap_t opened for a ``save-
        file'', call pcap_file().
 
        Routines
@@ -297,7 +297,7 @@ DESCRIPTION
                      activate a pcap_t for live capture
 
               pcap_findalldevs(3PCAP)
-                     get  a  list of devices that can be opened for a live cap-
+                     get a list of devices that can be opened for a  live  cap-
                      ture
 
               pcap_freealldevs(3PCAP)
@@ -310,14 +310,14 @@ DESCRIPTION
                      open a pcap_t for a ``savefile'', given a pathname
 
               pcap_open_offline_with_tstamp_precision(3PCAP)
-                     open a pcap_t for a ``savefile'', given  a  pathname,  and
+                     open  a  pcap_t  for a ``savefile'', given a pathname, and
                      specify the precision to provide for packet time stamps
 
               pcap_fopen_offline(3PCAP)
                      open a pcap_t for a ``savefile'', given a FILE *
 
               pcap_fopen_offline_with_tstamp_precision(3PCAP)
-                     open  a  pcap_t  for  a  ``savefile'', given a FILE *, and
+                     open a pcap_t for a  ``savefile'',  given  a  FILE *,  and
                      specify the precision to provide for packet time stamps
 
               pcap_open_dead(3PCAP)
@@ -334,15 +334,15 @@ DESCRIPTION
                      get the snapshot length for a pcap_t
 
               pcap_set_promisc(3PCAP)
-                     set promiscuous mode for a  not-yet-activated  pcap_t  for
+                     set  promiscuous  mode  for a not-yet-activated pcap_t for
                      live capture
 
               pcap_set_protocol_linux(3PCAP)
-                     set  capture  protocol  for a not-yet-activated pcap_t for
+                     set capture protocol for a  not-yet-activated  pcap_t  for
                      live capture (Linux only)
 
               pcap_set_rfmon(3PCAP)
-                     set monitor mode for a not-yet-activated pcap_t  for  live
+                     set  monitor  mode for a not-yet-activated pcap_t for live
                      capture
 
               pcap_can_set_rfmon(3PCAP)
@@ -350,7 +350,7 @@ DESCRIPTION
                      live capture
 
               pcap_set_timeout(3PCAP)
-                     set  packet  buffer timeout for a not-yet-activated pcap_t
+                     set packet buffer timeout for a  not-yet-activated  pcap_t
                      for live capture
 
               pcap_set_immediate_mode(3PCAP)
@@ -358,11 +358,11 @@ DESCRIPTION
                      capture
 
               pcap_set_buffer_size(3PCAP)
-                     set buffer size for a not-yet-activated  pcap_t  for  live
+                     set  buffer  size  for a not-yet-activated pcap_t for live
                      capture
 
               pcap_set_tstamp_type(3PCAP)
-                     set  time  stamp  type  for a not-yet-activated pcap_t for
+                     set time stamp type for  a  not-yet-activated  pcap_t  for
                      live capture
 
               pcap_list_tstamp_types(3PCAP)
@@ -382,7 +382,7 @@ DESCRIPTION
                      get time stamp type corresponding to a name
 
               pcap_set_tstamp_precision(3PCAP)
-                     set time stamp precision for  a  not-yet-activated  pcap_t
+                     set  time  stamp  precision for a not-yet-activated pcap_t
                      for live capture
 
               pcap_get_tstamp_precision(3PCAP)
@@ -395,7 +395,7 @@ DESCRIPTION
                      get the FILE * for a pcap_t opened for a ``savefile''
 
               pcap_is_swapped(3PCAP)
-                     determine  whether  a  ``savefile'' being read came from a
+                     determine whether a ``savefile'' being read  came  from  a
                      machine with the opposite byte order
 
               pcap_major_version(3PCAP)
@@ -404,12 +404,12 @@ DESCRIPTION
                      for a ``savefile''
 
    Selecting a link-layer header type for a live capture
-       Some devices may provide more than one link-layer header type.   To  ob-
-       tain  a  list  of all link-layer header types provided by a device, call
-       pcap_list_datalinks() on an activated pcap_t for the device.  To free  a
+       Some  devices  may provide more than one link-layer header type.  To ob-
+       tain a list of all link-layer header types provided by  a  device,  call
+       pcap_list_datalinks()  on an activated pcap_t for the device.  To free a
        list of link-layer header types, call pcap_free_datalinks().  To set the
-       link-layer  header  type  for  a device, call pcap_set_datalink().  This
-       should be done after the device has been activated but before any  pack-
+       link-layer header type for a  device,  call  pcap_set_datalink().   This
+       should  be done after the device has been activated but before any pack-
        ets are read and before any filters are compiled or installed.
 
        Routines
@@ -434,85 +434,86 @@ DESCRIPTION
                      get link-layer header type corresponding to a name
 
    Reading packets
-       Packets  are read with pcap_dispatch() or pcap_loop(), which process one
-       or more packets, calling a callback routine for  each  packet,  or  with
-       pcap_next()  or pcap_next_ex(), which return the next packet.  The call-
-       back for pcap_dispatch() and pcap_loop() is  supplied  a  pointer  to  a
+       Packets are read with pcap_dispatch() or pcap_loop(), which process  one
+       or  more  packets,  calling  a callback routine for each packet, or with
+       pcap_next() or pcap_next_ex(), which return the next packet.  The  call-
+       back  for  pcap_dispatch()  and  pcap_loop()  is supplied a pointer to a
        struct pcap_pkthdr, which includes the following members:
 
-              ts     a  struct  timeval containing the time when the packet was
+              ts     a struct timeval containing the time when the  packet  was
                      captured
 
-              caplen a bpf_u_int32 giving the number of  bytes  of  the  packet
+              caplen a  bpf_u_int32  giving  the  number of bytes of the packet
                      that are available from the capture
 
-              len    a  bpf_u_int32  giving  the length of the packet, in bytes
-                     (which might be more than the number  of  bytes  available
-                     from  the  capture, if the length of the packet was larger
+              len    a bpf_u_int32 giving the length of the  packet,  in  bytes
+                     (which  might  be  more than the number of bytes available
+                     from the capture, if the length of the packet  was  larger
                      than the snapshot length or than some limit imposed by the
                      capture mechanism).
 
        The callback is also supplied a const u_char pointer to the first caplen
-       (as given in the struct pcap_pkthdr mentioned above) bytes of data  from
-       the  packet.   This  won't necessarily be the entire packet; the default
-       value used if pcap_create() and pcap_activate() are used to open a  cap-
+       (as  given in the struct pcap_pkthdr mentioned above) bytes of data from
+       the packet.  This won't necessarily be the entire  packet;  the  default
+       value  used if pcap_create() and pcap_activate() are used to open a cap-
        ture device, and no call to pcap_set_snaplen() is made before pcap_acti-
-       vate()  is  called, should be sufficient for that device.  However, if a
-       smaller value is set with a call to pcap_set_snaplen(), if  the  default
+       vate() is called, should be sufficient for that device.  However,  if  a
+       smaller  value  is set with a call to pcap_set_snaplen(), if the default
        isn't sufficient for that device, or if the mechanism used by libpcap to
-       capture  the traffic imposes a separate limit, some captured packets may
-       not contain all the data sent or received.  When reading from a  ``save-
-       file'',  the  snapshot  length  specified when the capture was performed
+       capture the traffic imposes a separate limit, some captured packets  may
+       not  contain all the data sent or received.  When reading from a ``save-
+       file'', the snapshot length specified when  the  capture  was  performed
        will limit the amount of packet data available.
 
-       pcap_next() is passed an argument that points to  a  struct  pcap_pkthdr
+       pcap_next()  is  passed  an argument that points to a struct pcap_pkthdr
        structure, and fills it in with the time stamp and length values for the
-       packet.   It  returns  a const u_char * to the first caplen bytes of the
-       packet on success, and NULL on error.
+       packet.  It returns a const u_char * to the first caplen  bytes  of  the
+       packet on success, and a null pointer on error.
 
        pcap_next_ex() is passed two pointer arguments, one of which points to a
-       struct pcap_pkthdr * and the other points to a const u_char *.  It  sets
-       the  first  pointer  to point to a struct pcap_pkthdr structure with the
+       struct  pcap_pkthdr * and the other points to a const u_char *.  It sets
+       the first pointer to point to a struct pcap_pkthdr  structure  with  the
        time stamp and length values for the packet, and sets the second pointer
        to point to the first caplen bytes of the packet.
 
-       To force the loop in pcap_dispatch() or pcap_loop() to  terminate,  call
+       To  force  the loop in pcap_dispatch() or pcap_loop() to terminate, call
        pcap_breakloop().
 
-       By  default,  when  reading  packets from an interface opened for a live
-       capture, pcap_dispatch(), pcap_next(), and pcap_next_ex()  will,  if  no
+       By default, when reading packets from an interface  opened  for  a  live
+       capture,  pcap_dispatch(),  pcap_next(),  and pcap_next_ex() will, if no
        packets are currently available to be read, block waiting for packets to
-       become  available.   On some, but not all, platforms, if a packet buffer
-       timeout was specified, the wait will terminate after the  packet  buffer
+       become available.  On some, but not all, platforms, if a  packet  buffer
+       timeout  was  specified, the wait will terminate after the packet buffer
        timeout expires; applications should be prepared for this, as it happens
-       on  some  platforms, but should not rely on it, as it does not happen on
+       on some platforms, but should not rely on it, as it does not  happen  on
        other platforms.  Note that the wait might, or might not, terminate even
        if no packets are available; applications should be prepared for this to
        happen, but must not rely on it happening.
 
-       A handle can be put into ``non-blocking mode'', so that  those  routines
-       will,  rather  than  blocking,  return an indication that no packets are
-       available to read.  Call pcap_setnonblock() to put a  handle  into  non-
-       blocking  mode or to take it out of non-blocking mode; call pcap_getnon-
-       block() to determine whether a handle is  in  non-blocking  mode.   Note
+       A  handle  can be put into ``non-blocking mode'', so that those routines
+       will, rather than blocking, return an indication  that  no  packets  are
+       available  to  read.   Call pcap_setnonblock() to put a handle into non-
+       blocking mode or to take it out of non-blocking mode; call  pcap_getnon-
+       block()  to  determine  whether  a handle is in non-blocking mode.  Note
        that non-blocking mode does not work correctly in Mac OS X 10.6.
 
-       Non-blocking  mode  is often combined with routines such as select(2) or
-       poll(2) or other routines a platform offers to wait for any of a set  of
-       descriptors  to be ready to read.  To obtain, for a handle, a descriptor
-       that can be used in those routines, call  pcap_get_selectable_fd().   If
-       the  routine indicates that data is available to read on the descriptor,
+       Non-blocking mode is often combined with routines such as  select(2)  or
+       poll(2)  or other routines a platform offers to wait for any of a set of
+       descriptors to be ready to read.  To obtain, for a handle, a  descriptor
+       that  can  be used in those routines, call pcap_get_selectable_fd().  If
+       the routine indicates that data is available to read on the  descriptor,
        an attempt should be made to read from the device.
 
-       Not all  handles  have  such  a  descriptor  available;  pcap_get_selec-
-       table_fd()  will  return  -1  if no such descriptor is available.  If no
-       such descriptor is available, this may be because  the  device  must  be
-       polled  periodically  for  packets;  in that case, pcap_get_required_se-
+       Not  all  handles  have  such  a  descriptor  available; pcap_get_selec-
+       table_fd() will return -1 if no such descriptor  is  available.   If  no
+       such  descriptor  is  available,  this may be because the device must be
+       polled periodically for packets;  in  that  case,  pcap_get_required_se-
        lect_timeout() will return a pointer to a struct timeval whose value can
-       be used as a timeout in those routines.  When the  routine  returns,  an
+       be  used  as  a timeout in those routines.  When the routine returns, an
        attempt should be made to read packets from the device.  If pcap_get_re-
-       quired_select_timeout()  returns NULL, no such timeout is available, and
-       those routines cannot be used with the device.
+       quired_select_timeout() returns a null timeout pointer for a device  for
+       which  pcap_get_selectable_fd()  returned  -1, no such timeout is avail-
+       able, and those routines cannot be used with the device.
 
        In addition, for various reasons, one or more of those routines will not
        work properly with the descriptor; the documentation for pcap_get_selec-
@@ -736,4 +737,4 @@ BUGS
        ture,  provide  generic feedback etc please see the file CONTRIBUTING.md
        in the libpcap source tree root.
 
-                               18 September 2024                    PCAP(3PCAP)
+                                6 September 2026                    PCAP(3PCAP)

@@ -26,19 +26,20 @@ DESCRIPTION
        pcap_create() is used to create a packet capture handle to capture pack-
        ets    on    a    device    (typically    a   network   interface,   see
        pcap_findalldevs(3PCAP) for a more detailed explanation).  source  is  a
-       string  that specifies the capture device to open, in this function NULL
-       means the same as the string "any".  errbuf is a buffer large enough  to
-       hold at least PCAP_ERRBUF_SIZE chars.
+       string  that  specifies  the capture device to open; in this function, a
+       null pointer means the same as the string "any".   errbuf  is  a  buffer
+       large enough to hold at least PCAP_ERRBUF_SIZE chars.
 
        The  returned  handle must be activated with pcap_activate(3PCAP) before
        packets can be captured with  it;  options  for  the  capture,  such  as
        promiscuous mode, can be set on the handle before activating it.
 
 RETURN VALUE
-       pcap_create()  returns  a  pcap_t  * on success and NULL on failure.  If
-       NULL is returned, errbuf is filled in with an appropriate error message.
+       pcap_create()  returns a pcap_t * on success and a null pointer on fail-
+       ure.  If a null pointer is returned, errbuf is filled in with an  appro-
+       priate error message.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                 11 March 2025               PCAP_CREATE(3PCAP)
+                                6 September 2026             PCAP_CREATE(3PCAP)

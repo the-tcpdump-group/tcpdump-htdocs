@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_GET_SELECTABLE_FD</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 29 January 2020<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -83,7 +83,11 @@ when the call returns.  If
 <B>pcap_get_required_select_timeout</B>()
 
 returns
-<CODE>NULL</CODE>,
+a null timeout pointer for a device for which
+<B>pcap_get_selectable_fd</B>()
+
+returned
+<B>-1</B>,
 
 it is not possible to wait for packets to arrive on the device in an
 event loop.
@@ -203,7 +207,7 @@ is returned.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 08:15:36 GMT, February 28, 2023
+This HTML man page was generated at 18:59:33 GMT, September 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

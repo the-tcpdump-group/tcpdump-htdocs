@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_FINDALLDEVS</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 1 February 2026<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -96,8 +96,7 @@ succeeds, the pointer pointed to by
 <I>alldevsp</I>
 
 is set to point to the first element of the list, or to
-<CODE>NULL</CODE>
-
+a null pointer
 if no devices were found (this is considered success).
 Each element of the list is of type
 <CODE>pcap_if_t</CODE>,
@@ -109,11 +108,9 @@ and has the following members:
 
 <DD>
 if not
-<CODE>NULL</CODE>,
-
+a null pointer,
 a pointer to the next element in the list;
-<CODE>NULL</CODE>
-
+a null pointer
 for the last element of the list
 <DT><CODE>name</CODE>
 
@@ -128,8 +125,7 @@ or
 
 <DD>
 if not
-<CODE>NULL</CODE>,
-
+a null pointer,
 a pointer to a string giving a human-readable description of the device
 <DT><CODE>addresses</CODE>
 
@@ -137,8 +133,7 @@ a pointer to a string giving a human-readable description of the device
 a pointer to the first element of a list of network addresses for the
 device,
 or
-<CODE>NULL</CODE>
-
+a null pointer
 if the device has no addresses
 <DT><CODE>flags</CODE>
 
@@ -205,11 +200,9 @@ and has the following members:
 
 <DD>
 if not
-<CODE>NULL</CODE>,
-
+a null pointer,
 a pointer to the next element in the list;
-<CODE>NULL</CODE>
-
+a null pointer
 for the last element of the list
 <DT><CODE>addr</CODE>
 
@@ -222,8 +215,7 @@ containing an address
 
 <DD>
 if not
-<CODE>NULL</CODE>,
-
+a null pointer,
 a pointer to a
 <CODE>struct sockaddr</CODE>
 
@@ -234,8 +226,7 @@ that contains the netmask corresponding to the address pointed to by
 
 <DD>
 if not
-<CODE>NULL</CODE>,
-
+a null pointer,
 a pointer to a
 <CODE>struct sockaddr</CODE>
 
@@ -244,15 +235,13 @@ to by
 <CODE>addr</CODE>;
 
 may be
-<CODE>NULL</CODE>
-
+a null pointer
 if the device doesn't support broadcasts
 <DT><CODE>dstaddr</CODE>
 
 <DD>
 if not
-<CODE>NULL</CODE>,
-
+a null pointer,
 a pointer to a
 <CODE>struct sockaddr</CODE>
 
@@ -261,8 +250,7 @@ to by
 <CODE>addr</CODE>;
 
 may be
-<CODE>NULL</CODE>
-
+a null pointer
 if the device isn't a point-to-point interface
 </DL>
 </DL>
@@ -356,8 +344,7 @@ and the pointer pointed to by
 <I>alldevsp</I>
 
 is set to
-<CODE>NULL</CODE>.
-
+a null pointer.
 <H2 id="lbAF">BACKWARD COMPATIBILITY</H2>
 
 <P>
@@ -394,7 +381,7 @@ constants became available in libpcap release 1.9.0.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 09:55:23 GMT, August 05, 2026
+This HTML man page was generated at 18:59:33 GMT, September 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

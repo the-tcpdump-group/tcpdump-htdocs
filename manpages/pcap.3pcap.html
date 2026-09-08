@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 18 September 2024<BR><A HREF="#index">Index</A>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2026<BR><A HREF="#index">Index</A>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -225,8 +225,7 @@ adapter could well be in promiscuous mode for some other reason.
 <DT><DD>
 For now, this doesn't work on the &quot;any&quot; device; if an argument of &quot;any&quot;
 or
-<CODE>NULL</CODE>
-
+a null pointer
 is supplied, the setting of promiscuous mode is ignored.
 <DT><DD>
 Promiscuous mode is set with
@@ -836,8 +835,7 @@ to the first
 <CODE>caplen</CODE>
 
 bytes of the packet on success, and
-<CODE>NULL</CODE>
-
+a null pointer
 on error.
 <P>
 
@@ -941,7 +939,11 @@ device.  If
 <B>pcap_get_required_select_timeout</B>()
 
 returns
-<CODE>NULL</CODE>,
+a null timeout pointer for a device for which
+<B>pcap_get_selectable_fd</B>()
+
+returned
+<B>-1</B>,
 
 no such timeout is available, and those routines cannot be
 used with the device.
@@ -1482,7 +1484,7 @@ in the libpcap source tree root.
 </DL>
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 09:55:21 GMT, August 05, 2026
+This HTML man page was generated at 18:59:31 GMT, September 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

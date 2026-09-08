@@ -24,11 +24,12 @@ SYNOPSIS
 
 DESCRIPTION
        pcap_tstamp_type_val_to_name() translates a time stamp type value to the
-       corresponding time stamp type name.  NULL is returned on failure.
+       corresponding time stamp type name.  A null pointer is returned on fail-
+       ure.
 
        pcap_tstamp_type_val_to_description() translates a time stamp type value
-       to a short description of that time stamp type.   NULL  is  returned  on
-       failure.
+       to a short description of that time stamp type.  A null pointer  is  re-
+       turned on failure.
 
 BACKWARD COMPATIBILITY
        These functions became available in libpcap release 1.2.1.
@@ -37,4 +38,4 @@ SEE ALSO
        pcap(3PCAP),                              pcap_list_tstamp_types(3PCAP),
        pcap_tstamp_type_name_to_val(3PCAP)
 
-                                 22 August 2PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)
+                                6 September PCAP_TSTAMP_TYPE_VAL_TO_NAME(3PCAP)

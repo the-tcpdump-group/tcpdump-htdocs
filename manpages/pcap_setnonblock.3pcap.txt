@@ -37,26 +37,26 @@ DESCRIPTION
 
        pcap_loop(3PCAP) will loop forever, consuming CPU time when  no  packets
        are   currently  available;  pcap_dispatch()  should  be  used  instead.
-       pcap_next(3PCAP) will return NULL if  there  are  no  packets  currently
-       available   to  read;  this  is  indistinguishable  from  an  error,  so
+       pcap_next(3PCAP) will return a null pointer if there are no packets cur-
+       rently available to read; this is indistinguishable from  an  error,  so
        pcap_next_ex() should be used instead.
 
-       When  first  activated  with   pcap_activate(3PCAP)   or   opened   with
+       When   first   activated   with   pcap_activate(3PCAP)  or  opened  with
        pcap_open_live(3PCAP), a capture handle is not in ``non-blocking mode'';
-       a  call to pcap_setnonblock() is required in order to put it into ``non-
+       a call to pcap_setnonblock() is required in order to put it into  ``non-
        blocking'' mode.
 
 RETURN VALUE
-       pcap_setnonblock() return  0  on  success,  PCAP_ERROR_NOT_ACTIVATED  if
-       called  on a capture handle that has been created but not activated, and
-       PCAP_ERROR for other errors.   pcap_getnonblock()  returns  the  current
-       ``non-blocking''  state  of the capture descriptor on success; it always
-       returns 0 on  ``savefiles''.   It  returns  PCAP_ERROR_NOT_ACTIVATED  if
-       called  on a capture handle that has been created but not activated, and
-       PCAP_ERROR for other errors.   If  PCAP_ERROR  is  returned,  errbuf  is
+       pcap_setnonblock()  return  0  on  success,  PCAP_ERROR_NOT_ACTIVATED if
+       called on a capture handle that has been created but not activated,  and
+       PCAP_ERROR  for  other  errors.   pcap_getnonblock() returns the current
+       ``non-blocking'' state of the capture descriptor on success;  it  always
+       returns  0  on  ``savefiles''.   It  returns PCAP_ERROR_NOT_ACTIVATED if
+       called on a capture handle that has been created but not activated,  and
+       PCAP_ERROR  for  other  errors.   If  PCAP_ERROR  is returned, errbuf is
        filled in with an appropriate error message.
 
 SEE ALSO
        pcap(3PCAP), pcap_next_ex(3PCAP), pcap_geterr(3PCAP)
 
-                                30 November 2023        PCAP_SETNONBLOCK(3PCAP)
+                                6 September 2026        PCAP_SETNONBLOCK(3PCAP)
