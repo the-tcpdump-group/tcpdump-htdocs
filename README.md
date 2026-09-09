@@ -12,7 +12,7 @@ of the man pages in this repository.  The script contains a detailed comment on
 what to expect from a clean commit.
 
 When ready, `git add manpages` and commit with a single-line message
-(`Regenerate man pages. [skip ci]` would be sufficient).  With all changes
+(`Regenerate man pages.` would be sufficient).  With all changes
 committed and the git repository clean `regen_man_pages.sh` should exit with
 status 0 without warnings or errors.
 
@@ -27,7 +27,8 @@ in the browser.
 
 When ready, `git add` both the source and the output files and commit with a
 meaningful message.  With all changes committed and the git repository clean
-`regen_html_pages.sh` should exit with status 0 without warnings or errors.
+`regen_html_pages.sh` should pass all tests.  If you have PHP CLI and
+ShellCheck installed, run `test_ci.sh` as well and confirm all tests pass.
 
 ## history and credits
 [Michael Richardson](http://www.sandelman.ca/) started www.tcpdump.org in 1999.

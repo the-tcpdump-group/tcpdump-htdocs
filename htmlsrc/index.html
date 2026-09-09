@@ -13,9 +13,9 @@
               network traffic capture.
             </p>
             <p>
-              Here you can find the latest stable version
+              Here you can find the latest releases
               of <em>tcpdump</em> and <em>libpcap</em>, as well as
-              current development versions, a complete
+              current development versions, various
               documentation, and information about how to report
               bugs or contribute patches.
             </p>
@@ -192,6 +192,9 @@
                 href="https://www.cve.org/CVERecord?id=CVE-2026-18313">CVE-2026-18313</a>
                 and <a class=away
                 href="https://www.cve.org/CVERecord?id=CVE-2026-18238">CVE-2026-18238</a>.
+                For the CVE-2026-31912 fix to have effect, applications that use
+                the now deprecated <code>bpf_filter()</code> must be migrated to
+                <a href="manpages/libpcap-1.10.7/pcap_offline_filter.3pcap.html"><b>pcap_offline_filter</b></a>(3PCAP).
             </p>
           </div>
         </div>
