@@ -237,35 +237,49 @@
         </div>
         <!-- End of DOCUMENTATION section -->
 
-        <!-- Start of CURRENT DEVELOPMENT VERSIONS section -->
+        <!-- Start of DEVELOPMENT section -->
         <div class="post">
           <h2 class="title" id="source">
-            Current Development Versions
+            Development
           </h2>
           <div class="entry">
             <p>
-              The current development versions are freely accessible
-              through the GitHub <a class=away href="https://git-scm.com/">Git</a>
-              hosting site
-              (<a href="https://github.com/the-tcpdump-group/tcpdump">tcpdump</a>,
-              <a href="https://github.com/the-tcpdump-group/libpcap">libpcap</a>).
-              You can clone these repositories with the following commands:
+              <strong>To report a security issue, please see
+              <a href="security.html">this page</a>.</strong>
             </p>
-            <pre>
-git clone https://github.com/the-tcpdump-group/tcpdump
-git clone https://github.com/the-tcpdump-group/libpcap
-</pre>
             <p>
-              A read-only git mirror of all project repositories is available
-              <a href="https://git.tcpdump.org/">here</a> in case anyone needs it.
-              After cloning the git repositories you can configure and compile the
-              source via either GNU Autoconf or CMake. There is various
-              <a href="ci.html">continuous integration</a> involved in the
-              development process.
+              <em>tcpdump</em> and <em>libpcap</em> are open source software.
+              The source code git repositories are available on GitHub
+              (<a href="https://github.com/the-tcpdump-group/tcpdump">tcpdump</a>,
+              <a href="https://github.com/the-tcpdump-group/libpcap">libpcap</a>)
+              and on the <a href="https://git.tcpdump.org/">read-only mirror</a>.
+              Before opening a bug report, a feature request or a pull request
+              on GitHub please read the guidelines for contributing
+              (<a href="https://github.com/the-tcpdump-group/tcpdump/blob/master/CONTRIBUTING.md">tcpdump</a>,
+              <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/CONTRIBUTING.md">libpcap</a>).
+              If you are going to suggest a major change, please also subscribe
+              to the mailing list below and discuss the idea there first
+              because it may have bigger implications than it seems.
             </p>
+            <p>
+              You can also help by:
+            </p>
+            <ul>
+              <li>building and testing <em>tcpdump</em> and <em>libpcap</em> on
+                a new platform</li>
+              <li>adding steps to reproduce the problem and/or a root cause
+                analysis to an existing bug report</li>
+              <li>contributing improvements to the <a href="manpages/">man
+                pages</a> and other documentation</li>
+              <li>providing <code>.pcap</code> files for protocols or protocol
+              features that tcpdump supports, but does not test yet</li>
+              <li>contributing improvements to the various <a href="ci.html">continuous
+                integration</a> that supports the development</li>
+              <li>contributing improvements to this web site</li>
+            </ul>
           </div>
         </div>
-        <!-- End of CURRENT DEVELOPMENT VERSIONS section -->
+        <!-- End of DEVELOPMENT section -->
 
         <!-- Start of MAILING LISTS section -->
         <div class="post">
@@ -298,71 +312,6 @@ git clone https://github.com/the-tcpdump-group/libpcap
         </div>
         <!-- End of MAILING LISTS section -->
 
-        <!-- Start of PATCHES, BUGS, AND FEATURE REQUESTS section -->
-        <div class="post">
-          <h2 class="title" id="patches">
-            Patches, Bug Reports and Feature Requests
-          </h2>
-          <div class="entry">
-            <p>
-              Please use
-              <a href="https://github.com/the-tcpdump-group/">GitHub</a>
-              as follows:
-            </p>
-            <ul>
-              <li>Read the guidelines for contributing
-                (<a href="https://github.com/the-tcpdump-group/tcpdump/blob/master/CONTRIBUTING.md">tcpdump</a>,
-                <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/CONTRIBUTING.md">libpcap</a>).
-              </li>
-              <li>Submit bug reports and feature requests using the issue tracker
-                (<a href="https://github.com/the-tcpdump-group/tcpdump/issues">tcpdump</a>,
-                <a href="https://github.com/the-tcpdump-group/libpcap/issues">libpcap</a>).
-              </li>
-              <li>Submit patches by forking the repository
-                (<a href="https://github.com/the-tcpdump-group/tcpdump">tcpdump</a>,
-                <a href="https://github.com/the-tcpdump-group/libpcap">libpcap</a>)
-                and opening a pull request.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- End of PATCHES, BUGS, AND FEATURE REQUESTS section -->
-
-          <!-- Start of HOW TO CONTRIBUTE section -->
-          <div class="post">
-            <h2 class="title" id="contribute">
-              How to Contribute
-            </h2>
-            <div class="entry">
-              <p>
-                <em>tcpdump</em> and <em>libpcap</em> are open
-                source software and anyone can make contributions.
-                You can help by:
-              </p>
-
-              <ul>
-                <li>downloading and testing <em>libpcap</em>
-                and <em>tcpdump</em> on your platform</li>
-                <li>contributing code</li>
-                <li>proofreading the documentation and the man pages</li>
-                <li>providing <code>.pcap</code> files for protocols or protocol
-                features that tcpdump supports, but does not test yet</li>
-                <li>helping to improve the <a href="ci.html">continuous
-                  integration</a> scripts and infrastructure</li>
-              </ul>
-
-              <p>
-                    If you want to contribute, please subscribe to the
-                    <a href="#mailing-lists">tcpdump-workers</a> mailing
-                    list. It's a good idea to discuss bugfixes and new
-                    feature additions in advance, because the changes
-                    may have bigger implications than you think and
-                    your patch may not get accepted.
-              </p>
-            </div>
-          </div>
-          <!-- End of HOW TO CONTRIBUTE section -->
-
         <!-- Start of LICENSE section -->
         <div class="post">
           <h2 class="title" id="license">
@@ -390,10 +339,8 @@ git clone https://github.com/the-tcpdump-group/libpcap
                 <ul>
                     <li><a href="index.html#latest-releases">Latest Releases</a></li>
                     <li><a href="index.html#documentation">Documentation</a></li>
-                    <li><a href="index.html#source">Current Development Versions</a></li>
+                    <li><a href="index.html#source">Development</a></li>
                     <li><a href="index.html#mailing-lists">Mailing List</a></li>
-                    <li><a href="index.html#patches">Patches, Bug Reports and Feature Requests</a></li>
-                    <li><a href="index.html#contribute">How to Contribute</a></li>
                     <li><a href="index.html#license">License</a></li>
                 </ul>
             </div>
