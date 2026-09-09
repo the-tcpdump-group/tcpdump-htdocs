@@ -68,6 +68,69 @@
         </div>
         <!-- End of WELCOME section -->
 
+        <!-- Start of LATEST RELEASES section -->
+        <div class="post">
+          <h2 class="title" id="latest-releases">
+            Latest Releases
+          </h2>
+          <div class="entry" id="latest-release"> <!-- for backward compatibility -->
+            <h3 class="subtitle">
+              tcpdump
+            </h3>
+            <p>
+              <strong>Version:</strong> 4.99.6<br>
+              <strong>Release Date:</strong> December 30, 2025<br>
+              <strong>Download:</strong> <a href="release/tcpdump-4.99.6.tar.xz">tcpdump-4.99.6.tar.xz</a>
+                (<a href="https://github.com/the-tcpdump-group/tcpdump/blob/tcpdump-4.99/CHANGES">change log</a>)
+                (PGP <a href="release/tcpdump-4.99.6.tar.xz.sig">signature</a> and
+                <a href="release/signing-key-RSA-E089DEF1D9C15D0D.asc">key</a>)<br>
+              <strong>CLOC analysis and diffs report:</strong> <a class=away href="https://fossies.org/linux/misc/tcpdump">Fossies</a>
+            </p>
+            <p>
+              This tcpdump release makes various improvements and bug fixes
+              available whilst the work on tcpdump 5.0 is still in progress.
+              This release requires libpcap 1.10.5 or later to pass all test cases.
+            </p>
+            <h3 class="subtitle">
+              libpcap
+            </h3>
+            <p>
+              <strong>Version:</strong> 1.10.7<br>
+              <strong>Release Date:</strong> September 5, 2026<br>
+              <strong>Download:</strong> <a href="release/libpcap-1.10.7.tar.xz">libpcap-1.10.7.tar.xz</a>
+                (<a href="https://github.com/the-tcpdump-group/libpcap/blob/libpcap-1.10/CHANGES">change log</a>)
+                (PGP <a href="release/libpcap-1.10.7.tar.xz.sig">signature</a> and
+                <a href="release/signing-key-RSA-E089DEF1D9C15D0D.asc">key</a>)<br>
+              <strong>CLOC analysis and diffs report:</strong> <a class=away href="https://fossies.org/linux/misc/libpcap">Fossies</a>
+            </p>
+            <p>
+              This libpcap release fixes a number of vulnerabilities:
+              <a class=away
+              href="https://www.cve.org/CVERecord?id=CVE-2026-0799">CVE-2026-0799</a>
+              (reported by Include Security in 2018, sponsored by Mozilla under
+              the Secure Open Source program, but reproduced only in 2026),
+              <a class=away
+              href="https://www.cve.org/CVERecord?id=CVE-2026-31912">CVE-2026-31912</a>,
+              <a class=away
+              href="https://www.cve.org/CVERecord?id=CVE-2026-31911">CVE-2026-31911</a>
+              (reported by FuzzAnything Organization),
+              <a class=away
+              href="https://www.cve.org/CVERecord?id=CVE-2026-6244">CVE-2026-6244</a>
+              <a class=away
+              href="https://www.cve.org/CVERecord?id=CVE-2026-6554">CVE-2026-6554</a>
+              (reported by Kaixuan LI),
+              <a class=away
+              href="https://www.cve.org/CVERecord?id=CVE-2026-18313">CVE-2026-18313</a>
+              and <a class=away
+              href="https://www.cve.org/CVERecord?id=CVE-2026-18238">CVE-2026-18238</a>.
+              For the CVE-2026-31912 fix to have effect, applications that use
+              the now deprecated <code>bpf_filter()</code> must be migrated to
+              <a href="manpages/libpcap-1.10.7/pcap_offline_filter.3pcap.html"><b>pcap_offline_filter</b></a>(3PCAP).
+            </p>
+          </div>
+        </div>
+        <!-- End of LATEST RELEASES section -->
+
         <!-- Start of DOCUMENTATION section -->
         <div class="post">
           <h2 class="title" id="documentation">
@@ -181,69 +244,6 @@
           </div>
         </div>
         <!-- End of DOCUMENTATION section -->
-
-        <!-- Start of LATEST RELEASES section -->
-        <div class="post">
-          <h2 class="title" id="latest-releases">
-            Latest Releases
-          </h2>
-          <div class="entry" id="latest-release"> <!-- for backward compatibility -->
-            <h3 class="subtitle">
-              tcpdump
-            </h3>
-            <p>
-              <strong>Version:</strong> 4.99.6<br>
-              <strong>Release Date:</strong> December 30, 2025<br>
-              <strong>Download:</strong> <a href="release/tcpdump-4.99.6.tar.xz">tcpdump-4.99.6.tar.xz</a>
-                (<a href="https://github.com/the-tcpdump-group/tcpdump/blob/tcpdump-4.99/CHANGES">change log</a>)
-                (PGP <a href="release/tcpdump-4.99.6.tar.xz.sig">signature</a> and
-                <a href="release/signing-key-RSA-E089DEF1D9C15D0D.asc">key</a>)<br>
-              <strong>CLOC analysis and diffs report:</strong> <a class=away href="https://fossies.org/linux/misc/tcpdump">Fossies</a>
-            </p>
-            <p>
-                This tcpdump release makes various improvements and bug fixes
-                available whilst the work on tcpdump 5.0 is still in progress.
-                This release requires libpcap 1.10.5 or later to pass all test cases.
-            </p>
-            <h3 class="subtitle">
-              libpcap
-            </h3>
-            <p>
-              <strong>Version:</strong> 1.10.7<br>
-              <strong>Release Date:</strong> September 5, 2026<br>
-              <strong>Download:</strong> <a href="release/libpcap-1.10.7.tar.xz">libpcap-1.10.7.tar.xz</a>
-                (<a href="https://github.com/the-tcpdump-group/libpcap/blob/libpcap-1.10/CHANGES">change log</a>)
-                (PGP <a href="release/libpcap-1.10.7.tar.xz.sig">signature</a> and
-                <a href="release/signing-key-RSA-E089DEF1D9C15D0D.asc">key</a>)<br>
-              <strong>CLOC analysis and diffs report:</strong> <a class=away href="https://fossies.org/linux/misc/libpcap">Fossies</a>
-            </p>
-            <p>
-                This libpcap release fixes a number of vulnerabilities:
-                <a class=away
-                href="https://www.cve.org/CVERecord?id=CVE-2026-0799">CVE-2026-0799</a>
-                (reported by Include Security in 2018, sponsored by Mozilla under
-                the Secure Open Source program, but reproduced only in 2026),
-                <a class=away
-                href="https://www.cve.org/CVERecord?id=CVE-2026-31912">CVE-2026-31912</a>,
-                <a class=away
-                href="https://www.cve.org/CVERecord?id=CVE-2026-31911">CVE-2026-31911</a>
-                (reported by FuzzAnything Organization),
-                <a class=away
-                href="https://www.cve.org/CVERecord?id=CVE-2026-6244">CVE-2026-6244</a>
-                <a class=away
-                href="https://www.cve.org/CVERecord?id=CVE-2026-6554">CVE-2026-6554</a>
-                (reported by Kaixuan LI),
-                <a class=away
-                href="https://www.cve.org/CVERecord?id=CVE-2026-18313">CVE-2026-18313</a>
-                and <a class=away
-                href="https://www.cve.org/CVERecord?id=CVE-2026-18238">CVE-2026-18238</a>.
-                For the CVE-2026-31912 fix to have effect, applications that use
-                the now deprecated <code>bpf_filter()</code> must be migrated to
-                <a href="manpages/libpcap-1.10.7/pcap_offline_filter.3pcap.html"><b>pcap_offline_filter</b></a>(3PCAP).
-            </p>
-          </div>
-        </div>
-        <!-- End of LATEST RELEASES section -->
 
         <!-- Start of CURRENT DEVELOPMENT VERSIONS section -->
         <div class="post">
@@ -396,8 +396,8 @@ git clone https://github.com/the-tcpdump-group/libpcap
             <div id="sidebar">
                 <h2>Contents</h2>
                 <ul>
-                    <li><a href="index.html#documentation">Documentation</a></li>
                     <li><a href="index.html#latest-releases">Latest Releases</a></li>
+                    <li><a href="index.html#documentation">Documentation</a></li>
                     <li><a href="index.html#source">Current Development Versions</a></li>
                     <li><a href="index.html#mailing-lists">Mailing List</a></li>
                     <li><a href="index.html#patches">Patches, Bug Reports and Feature Requests</a></li>
