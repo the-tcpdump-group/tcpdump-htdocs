@@ -128,11 +128,6 @@ hr {
 
 /* Content */
 
-#content {
-	float: right;
-	width: 680px;
-}
-
 .post .title {
 	margin: 0;
 	padding-left: 20px;
@@ -187,28 +182,6 @@ hr {
 /* Caper does not wrap its output. */
 pre.caper {
 	white-space: normal;
-}
-
-/* Sidebar */
-
-#sidebar {
-	float: left;
-	width: 250px;
-}
-
-#sidebar li {
-	padding-bottom: 5px;
-}
-
-#sidebar h2 {
-	height: 20px;
-	margin: 0;
-	padding: 6px 0 0 20px;
-	border-bottom: 1px dashed #B9B9B9;
-	text-transform: uppercase;
-	font-size: smaller;
-	font-weight: bold;
-	color: #000000;
 }
 
 /* Footer */

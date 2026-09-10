@@ -43,7 +43,6 @@
 HTML_HEAD='htmlsrc/_html_head.html'
 TOP_MENU='htmlsrc/_top_menu.html'
 BODY_HEADER='htmlsrc/_body_header.html'
-SIDEBAR='htmlsrc/_sidebar.html'
 BODY_FOOTER='htmlsrc/_body_footer.html'
 : "${SED:=sed}"
 
@@ -145,18 +144,11 @@ highlight_top_menu()
 print_html_page()
 {
 	infile="${1:?}"
-	case $(basename "$infile" .html) in
-	_top_menu)
+	if [ "$(basename "$infile")" = _top_menu.html ]; then
+		# The output file is autoindex_header.html.
 		cat "$infile" "$BODY_HEADER"
 		return
-		;;
-	index)
-		show_sidebar='yes'
-		;;
-	*)
-		show_sidebar='no'
-		;;
-	esac
+	fi
 
 	cat <<ENDOFTEXT
 <!DOCTYPE html>
@@ -181,28 +173,7 @@ $(cat "$BODY_HEADER")
         <div id="page">
 
 ENDOFTEXT
-	if [ "$show_sidebar" = 'yes' ]; then
-		cat <<ENDOFTEXT
-            <!-- RIGHT HAND SIDE PAGE CONTENTS  -->
-ENDOFTEXT
-	fi
 	cat "$infile"
-	if [ "$show_sidebar" = 'yes' ]; then
-		cat <<ENDOFTEXT
-            <!-- RIGHT HAND SIDE PAGE CONTENTS -->
-
-ENDOFTEXT
-	fi
-
-	if [ "$show_sidebar" = 'yes' ]; then
-		cat <<ENDOFTEXT
-            <!-- LEFT SIDEBAR -->
-$(cat "$SIDEBAR")
-            <!-- END OF LEFT SIDEBAR -->
-
-ENDOFTEXT
-	fi
-
 	cat <<ENDOFTEXT
         </div>
         <!-- END OF PAGE CONTENTS -->
