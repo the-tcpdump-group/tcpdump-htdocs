@@ -2059,7 +2059,8 @@ frames.</a>
 <td class="number">290</td>
 <td class="symbol">DLT_ETW</td>
 <td>
-<a href="linktypes/LINKTYPE_ETW.html">Event Tracing for Windows messages</a>.
+<a href="linktypes/LINKTYPE_ETW.html">Event Tracing for Windows messages v1</a>.
+<code>Wireshark &le; 4.6.X</code> will use this to talk with its <code>etwdump</code> extcap.
 </td>
 </tr>
 
@@ -2201,6 +2202,16 @@ Unstructured data for manual debugging only.
 DECT-2020 New Radio (NR) TAP with a <a class=away
 href="https://github.com/DSRCorporation/dect-nr-tap">custom metadata header</a>
 prepended to a standard <code>DLT_DECT_NR</code> MAC-layer frame.
+</td>
+</tr>
+
+<tr>
+<td class="symbol">LINKTYPE_ETW2</td>
+<td class="number">305</td>
+<td class="symbol">DLT_ETW2</td>
+<td>
+<a href="linktypes/LINKTYPE_ETW2.html">Event Tracing for Windows messages v2</a>.
+<code>Wireshark &gt; 4.6</code> will use this to talk with its <code>etwdump</code> extcap.
 </td>
 </tr>
               </table>
