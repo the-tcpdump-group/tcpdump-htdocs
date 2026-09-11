@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_SETFILTER</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 13 February 2025<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 11 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -39,6 +39,20 @@ is a pointer to a
 
 structure, usually the result of a call to
 <A HREF='./pcap_compile.3pcap.html'><B>pcap_compile</B></A>(3PCAP).
+
+The structure members have the same meaning as in
+<A HREF='./pcap_offline_filter.3pcap.html'><B>pcap_offline_filter</B></A>(3PCAP),
+
+except in
+<B>pcap_setfilter</B>()
+
+<I>fp.bf_insns</I>
+
+must be a non-null pointer.  In other words, any successful result of
+<B>pcap_compile</B>()
+
+is always valid in
+<B>pcap_setfilter</B>().
 
 <P>
 
@@ -100,7 +114,7 @@ as an argument to fetch or display the error text.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 13:14:45 GMT, March 14, 2026
+This HTML man page was generated at 14:12:43 GMT, September 11, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

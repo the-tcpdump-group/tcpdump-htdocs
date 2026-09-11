@@ -23,26 +23,29 @@ SYNOPSIS
 DESCRIPTION
        pcap_setfilter()  is  used to specify a filter program.  fp is a pointer
        to  a  bpf_program  structure,  usually  the  result  of   a   call   to
-       pcap_compile(3PCAP).
+       pcap_compile(3PCAP).   The structure members have the same meaning as in
+       pcap_offline_filter(3PCAP), except in pcap_setfilter() fp.bf_insns  must
+       be  a  non-null  pointer.   In  other  words,  any  successful result of
+       pcap_compile() is always valid in pcap_setfilter().
 
-       If  the calls to pcap_compile() and pcap_setfilter() use the same pcap_t
-       handle, packet filtering should either work correctly or fail  correctly
+       If the calls to pcap_compile() and pcap_setfilter() use the same  pcap_t
+       handle,  packet filtering should either work correctly or fail correctly
        without additional efforts.  Otherwise the filter program must have been
-       compiled  for  the  same  link-layer  header type as the one used by the
-       pcap_t handle, also on Linux any usage of BPF extensions must match  the
+       compiled for the same link-layer header type as  the  one  used  by  the
+       pcap_t  handle, also on Linux any usage of BPF extensions must match the
        use case.  Specifically, if the pcap_t stands for an input savefile, the
-       filter  program must not use the extensions, but if it stands for a live
-       packet capture, the filter program may use the extensions if  necessary.
+       filter program must not use the extensions, but if it stands for a  live
+       packet  capture, the filter program may use the extensions if necessary.
        See pcap_compile() for more information.
 
 RETURN VALUE
        pcap_setfilter()  returns  0  on  success,  PCAP_ERROR_NOT_ACTIVATED  if
-       called on a capture handle that has been created but not  activated,  or
-       PCAP_ERROR    on    other    errors.    If   PCAP_ERROR   is   returned,
-       pcap_geterr(3PCAP) or pcap_perror(3PCAP) may be called with p as an  ar-
+       called  on  a capture handle that has been created but not activated, or
+       PCAP_ERROR   on   other   errors.    If    PCAP_ERROR    is    returned,
+       pcap_geterr(3PCAP)  or pcap_perror(3PCAP) may be called with p as an ar-
        gument to fetch or display the error text.
 
 SEE ALSO
        pcap(3PCAP)
 
-                                13 February 2025          PCAP_SETFILTER(3PCAP)
+                               11 September 2026          PCAP_SETFILTER(3PCAP)
