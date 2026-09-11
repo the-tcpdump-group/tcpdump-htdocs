@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_COMPILE</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 29 May 2025<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 11 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.0-PRE-GIT.</H4>
@@ -113,6 +113,21 @@ from a savefile, regardless of the OS it is valid for
 <CODE>DLT_LINUX_SLL2</CODE>
 
 only.
+<P>
+
+By convention, in this function both a null pointer and an empty string are
+valid arguments for the
+<I>str</I>
+
+input parameter and mean the same: to accept all packets.  This should not be
+confused with an empty filter program: even a program that accepts or rejects
+all packets comprises at least one BPF instruction, so on success
+<I>fp.bf_insns</I>
+
+is never a null pointer and
+<I>fp.bf_len</I>
+
+is always greater than zero.
 <H2 id="lbAE">RETURN VALUE</H2>
 
 <B>pcap_compile</B>()
@@ -170,7 +185,7 @@ exclusion allowing only one thread to call it at any given time.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 09:55:22 GMT, August 05, 2026
+This HTML man page was generated at 12:22:16 GMT, September 11, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

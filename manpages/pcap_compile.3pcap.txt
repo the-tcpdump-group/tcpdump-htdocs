@@ -55,6 +55,13 @@ DESCRIPTION
        when reading packets from a savefile, regardless of the OS it  is  valid
        for DLT_LINUX_SLL2 only.
 
+       By  convention, in this function both a null pointer and an empty string
+       are valid arguments for the str input parameter and mean  the  same:  to
+       accept  all  packets.   This should not be confused with an empty filter
+       program: even a program that accepts or rejects all packets comprises at
+       least one BPF instruction, so on success fp.bf_insns  is  never  a  null
+       pointer and fp.bf_len is always greater than zero.
+
 RETURN VALUE
        pcap_compile()  returns  0  on  success  and  PCAP_ERROR on failure.  If
        PCAP_ERROR is returned, pcap_geterr(3PCAP) or pcap_perror(3PCAP) may  be
@@ -73,4 +80,4 @@ BACKWARD COMPATIBILITY
 SEE ALSO
        pcap(3PCAP), pcap_setfilter(3PCAP), pcap_freecode(3PCAP)
 
-                                  29 May 2025               PCAP_COMPILE(3PCAP)
+                               11 September 2026            PCAP_COMPILE(3PCAP)
