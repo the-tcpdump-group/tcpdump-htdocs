@@ -1,6 +1,6 @@
 +----------------------------------------------------------------------------+
 |                                                                            |
-| This man page documents libpcap version 1.11.0-PRE-GIT.                    |
+| This man page documents libpcap version 1.11.1-PRE-GIT.                    |
 |                                                                            |
 | Your system may have a different version installed, possibly with some     |
 | local modifications.  To achieve the best results, please make sure this   |
@@ -1193,6 +1193,10 @@ BACKWARD COMPATIBILITY
        The lldp and slow protocols became available for "ether proto" in  libp-
        cap 1.11.0.
 
+       Before  libpcap 1.11.0 the gateway primitive had a different definition,
+       which did not produce the expected results, also its support was  condi-
+       tional and since libpcap 1.0.0 was disabled by default.
+
 SEE ALSO
        pcap(3PCAP)
 
@@ -1225,4 +1229,4 @@ BUGS
        and  may  incorrectly match packets that have a different combination of
        protocol and hardware.
 
-                                7 September 2026                 PCAP-FILTER(7)
+                               12 September 2026                 PCAP-FILTER(7)
