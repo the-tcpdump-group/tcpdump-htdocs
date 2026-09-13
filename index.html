@@ -72,6 +72,48 @@
           </h2>
           <div class="entry" id="latest-release"> <!-- for backward compatibility -->
             <h3 class="subtitle">
+              testing: libpcap 1.11.0 (2026-09-13)
+            </h3>
+            <p>
+              <strong><a href="release/libpcap-1.11.0.tar.xz">Download</a></strong>,
+              <a href="https://github.com/the-tcpdump-group/libpcap/blob/master/CHANGES">change log</a>,
+              PGP <a href="release/libpcap-1.11.0.tar.xz.sig">signature</a> and
+              <a href="release/signing-key-RSA-E089DEF1D9C15D0D.asc">key</a>,
+              <a class=away href="https://fossies.org/linux/misc/libpcap">CLOC
+              analysis and diffs report</a>.
+              <br>
+              This <em>libpcap</em> release is a result of nearly six years of
+              development done by The Tcpdump Group and many contributors.  In
+              calendar year 2025 Sovereign Tech Agency supported this work
+              financially by contracting one of the maintainers as a part-time
+              fellow via their <a class=away
+              href="https://www.sovereign.tech/programs/fellowship">Fellowship</a>
+              program.
+            <p>
+            </p>
+              This release delivers assorted improvements in the following
+              aspects: the API, the build systems, error detection and
+              reporting, input validation, the man pages and other
+              documentation, and packet filtering.  This release introduces
+              unit tests and refactors various source code to facilitate
+              maintenance and future contributions.
+            <p>
+            </p>
+              Concerning packet capture modules, this release improves support
+              for Endace DAG, Myricom SNF, netmap, and RDMA, it also removes
+              any remaining support for AirPcap, DPDK, Riverbed TurboCap,
+              Septel, and SITA ACN.
+            </p>
+            </p>
+              Concerning platforms, this release adds support for GNU/Hurd and
+              improves support for FreeBSD, illumos, Linux, macOS, NetBSD,
+              OpenBSD, QNX, and Solaris 11.  It also removes any remaining
+              support for AOS (4.3BSD Unix), BSD/OS, DOS, HP-UX before 10.20,
+              IRIX, MinGW, {OSF/1, Digital Unix, Tru64 Unix}, SINIX, Solaris 9,
+              SunOS 3.x, 4.x and 5.x before 5.3.2, and Ultrix.
+            <p>
+
+            <h3 class="subtitle">
               stable: tcpdump 4.99.6 (2025-12-30)
             </h3>
             <p>
