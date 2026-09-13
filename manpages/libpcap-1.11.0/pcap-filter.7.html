@@ -1,0 +1,2743 @@
+<!DOCTYPE html>
+<HTML lang="en"><HEAD><TITLE>Man page of PCAP-FILTER</TITLE>
+<LINK rel="shortcut icon" href="../images/T-32x32.png" type="image/png">
+<LINK rel="stylesheet" type="text/css" href="../style.css">
+<meta charset="utf-8">
+</HEAD><BODY>
+<H1>Man page of PCAP-FILTER</H1>
+Section: Environments, Tables, and Troff Macros (7)<BR>Updated: 12 September 2026<BR><A HREF="#index">Index</A>
+<A HREF="./">Return to Main Contents</A><HR>
+<DIV class=version_boilerplate>
+<H4>This man page documents libpcap version 1.11.0.</H4>
+Your system may have a different version installed, possibly with some
+local modifications.  To achieve the best results, please make sure this
+version of this man page suits your needs.  If necessary, try to look for
+a different version on this web site or in the man pages available in your
+installation.
+</DIV>
+
+<H2 id="lbAB">NAME</H2>
+
+pcap-filter - packet filter syntax
+<BR>
+
+
+<H2 id="lbAC">DESCRIPTION</H2>
+
+<P>
+
+<A HREF='./pcap_compile.3pcap.html'><B>pcap_compile</B></A>(3PCAP)
+
+is used to compile a string into a filter program.
+The resulting filter program can then be applied to
+some stream of packets to determine which packets will be supplied to
+<A HREF='./pcap_loop.3pcap.html'><B>pcap_loop</B></A>(3PCAP),
+
+<A HREF='./pcap_loop.3pcap.html'><B>pcap_dispatch</B></A>(3PCAP),
+
+<A HREF='./pcap_next_ex.3pcap.html'><B>pcap_next</B></A>(3PCAP),
+
+or
+<A HREF='./pcap_next_ex.3pcap.html'><B>pcap_next_ex</B></A>(3PCAP).
+
+<P>
+
+The <I>filter expression</I> consists of one or more
+<I>primitives</I>.
+
+Primitives usually consist of an
+<I>id</I>
+
+(a name, a number or something slightly more complex, such as a CIDR prefix)
+preceded by one or more qualifiers.
+There are three
+different kinds of qualifier:
+<DL>
+<DT><I>proto</I><DD>
+<I>proto</I>
+
+qualifiers restrict the match to a particular protocol.
+(This should not be confused with the
+<B>proto</B>
+
+type qualifier below.)
+Possible
+protocols are:
+<B>ether</B>,
+
+<B>link</B>,
+
+<B>wlan</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>arp</B>,
+
+<B>tcp</B>,
+
+<B>udp</B>,
+
+<B>sctp</B>,
+
+<B>iso</B>,
+
+<B>isis</B>,
+
+<B>rarp</B>,
+
+<B>decnet</B>,
+
+<B>fddi</B>,
+
+<B>tr</B>,
+
+<B>ppp</B>
+
+and
+<B>slip</B>.
+
+E.g., `<B>ether src</B> foo', `<B>arp net</B> 128.3', `<B>tcp port</B> 21',
+`<B>ip proto</B> ospf', `<B>ether proto</B> 0x88CC',
+`<B>udp portrange</B> 7000-7009', `<B>wlan addr2</B> 0:2:3:4:5:6'.
+If there is no
+<I>proto</I>
+
+qualifier, all protocols consistent with the type are assumed.
+E.g., `<B>src</B> foo' means `<B>(ip6 or ip or arp or rarp) src</B> foo',
+`<B>proto</B> tcp' means `<B>(ip6 or ip) proto</B> tcp'
+`<B>net</B> bar' means `<B>(ip6 or ip or arp or rarp) net</B> bar' and
+`<B>port</B> 53' means `<B>(tcp or udp or sctp) port</B> 53'
+(note that these examples use invalid syntax to illustrate the principle).
+<DT><I>dir</I><DD>
+<I>dir</I>
+
+qualifiers specify a particular transfer direction to and/or from
+<I>id</I>.
+
+Possible directions are
+<B>src</B>,
+
+<B>dst</B>,
+
+<B>src or dst</B>,
+
+<B>src and dst</B>,
+
+<B>ra</B>,
+
+<B>ta</B>,
+
+<B>addr1</B>,
+
+<B>addr2</B>,
+
+<B>addr3</B>,
+
+and
+<B>addr4</B>.
+
+E.g., `<B>src</B> foo', `<B>dst net</B> 128.3', `<B>src or dst port</B> ftp-data'.
+If
+there is no dir qualifier, `<B>src or dst</B>' is assumed.
+The
+<B>ra</B>,
+
+<B>ta</B>,
+
+<B>addr1</B>,
+
+<B>addr2</B>,
+
+<B>addr3</B>,
+
+and
+<B>addr4</B>
+
+qualifiers are only valid for IEEE 802.11 Wireless LAN link layers.
+<DT><I>type</I><DD>
+<I>type</I>
+
+qualifiers say what kind of thing the id name or number refers to.
+Possible types are
+<B>host</B>,
+
+<B>net</B>,
+
+<B>proto</B>,
+
+<B>port</B>,
+
+<B>portrange</B>,
+
+<B>protochain</B>
+
+and
+<B>gateway.</B>
+
+E.g., `<B>host</B> foo', `<B>net</B> 128.3', `<B>port</B> 20', `<B>portrange</B> 6000-6008',
+`<B>proto </B> 17'.
+If there is no type
+qualifier,
+<B>host</B>
+
+is assumed.
+</DL>
+<P>
+
+In primitives that follow this pattern each qualifier kind may be present at
+most once, and if more than one kind is present, any
+<I>proto</I>
+
+qualifier must be the first qualifier and any
+<I>type</I>
+
+qualifier must be the last qualifier, for example, `<B>tcp dst port</B> 80'.
+Also not all combinations of these qualifier kinds are valid syntax.  Some
+make no sense in network protocols space, for example:
+<B>ether port</B>
+
+(Ethernet header has no ports),
+<B>tcp net</B>
+
+(TCP header does not have layer 3 fields),
+<B>dst proto</B>
+
+(in a protocol header the same protocol applies to both the source and the
+destination), and so on.  Some other combinations are not valid syntax because
+they are not implemented, even though hypothetically could make sense, for
+example:
+<B>iso net</B>,
+
+<B>aarp host</B>
+
+and so on.
+<P>
+
+[<B>fddi</B> is actually an alias for <B>ether</B>; the parser treats them
+identically as meaning ``the data link level used on the specified
+network interface''.  FDDI headers contain Ethernet-like source
+and destination addresses, and often contain Ethernet-like packet
+types, so you can filter on these FDDI fields just as with the
+analogous Ethernet fields.
+FDDI headers also contain other fields,
+but you cannot name them explicitly in a filter expression.
+Similarly, <B>tr</B> and <B>wlan</B> are aliases for <B>ether</B>; the
+statements about FDDI headers also apply to Token Ring and 802.11 wireless
+LAN headers.  The same stands for the
+<B>link</B>,
+
+<B>ppp</B>
+
+and
+<B>slip</B>
+
+keywords.]
+<P>
+
+For IEEE 802.11 headers, the destination address is the DA field and the
+source address is the SA field.  For both ARP and RARP headers, the
+destination address is the TPA (Target Protocol Address) field and the
+source address is the SPA (Sender Protocol Address) field.
+<P>
+
+In addition to the above, there are some special `primitive' keywords
+that don't follow the pattern (for example:
+<B>broadcast</B>,
+
+<B>multicast</B>,
+
+<B>inbound</B>,
+
+<B>outbound</B>,
+
+<B>ifindex</B>,
+
+<B>llc</B>,
+
+<B>vlan</B>,
+
+<B>mpls</B>,
+
+<B>less</B>,
+
+<B>greater</B>),
+
+packet data accessors and relations of two arithmetic expressions.
+All of these are described below.
+<P>
+
+More complex filter expressions are built up by using the words
+<B>and</B>,
+
+<B>or</B>
+
+and
+<B>not</B>
+
+(or equivalently: `<B>&amp;&amp;</B>', `<B>||</B>' and `<B>!</B>' respectively)
+to combine primitives.
+E.g., `<B>host</B> foo <B>and not port</B> ftp <B>and not port</B> ftp-data'.
+To save typing, identical qualifier lists can be omitted.
+E.g.,
+`<B>tcp dst port</B> ftp <B>or</B> ftp-data <B>or</B> domain' is exactly the same as
+`<B>tcp dst port</B> ftp <B>or tcp dst port</B> ftp-data <B>or tcp dst port</B> domain'.
+<H2 id="lbAD">PRIMITIVES</H2>
+
+<DL>
+<DT><B>host </B><I>hostnameaddr</I><DD>
+True if the source or the destination ARP/IPv4/IPv6/RARP address of the packet is
+<I>hostnameaddr</I>.
+
+May be qualified with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>rarp</B>)
+
+and/or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>host</B>
+
+keyword is optional.  For example,
+
+<PRE>
+<B>ip src </B><I>hostnameaddr</I>
+</PRE>
+
+
+for Ethernet-like link-layer types is equivalent to
+
+<PRE>
+<B>ether proto \</B>ip <B>and ip src host </B><I>hostnameaddr</I>
+</PRE>
+
+
+<DT><DD>
+<I>hostnameaddr</I>
+
+may be either an IPv4 host number or an IPv6 host number or a name.
+<DT><DD>
+An IPv4 host number can be written as a dotted quad (e.g., 192.168.10.20),
+dotted triple (e.g., 192.168.10 means the same as 192.168.10.0/24, so it is
+really a network match), dotted pair (e.g., 192.168 means 192.168.0.0/16, so
+it is really a network match as well), or single number (e.g., [decimal]
+168496141, [octal] 01202606015 and [hexadecimal] 0x0a0b0c0d all mean
+10.11.12.13).
+<DT><DD>
+An IPv6 host number can be written as a complete 128-bit address
+(<B>x:x:x:x:x:x:x:x</B>)
+
+or using the zero compression
+(<B>x::x</B>)
+
+or the IPv4-mapped
+(<B>x:x:x:x:x:x:d.d.d.d</B>)
+
+notations as discussed in
+<B>inet_pton</B>(3).
+
+In this primitive this version of libpcap tolerates an optional &quot;/128&quot; after
+an IPv6 host number, this behaviour is an implementation quirk and it may be
+removed in future.
+<DT><DD>
+A host name must resolve using
+<B>getaddrinfo</B>(3),
+
+which typically means DNS or
+<B>hosts</B>(5),
+
+to at least one IPv4 address for
+`<B>arp host</B>',
+
+`<B>ip host</B>'
+
+and
+`<B>rarp host</B>',
+
+at least one IPv6 address for
+`<B>ip6 host</B>',
+
+and at least one IPv4/IPv6 address for
+`<B>host</B>'.
+
+If the name resolves to more than one address, this primitive evaluates to
+true as soon as one of the addresses matches the packet.
+<DT><DD>
+When not qualified with a protocol, this primitive implies all protocols that
+make sense for the address families of the specified/resolved addresses.  When
+qualified with a protocol, this primitive ignores the address family that does
+not make sense for the protocol.
+For example, for a name that resolves only to an IPv6 address
+`<B>arp host</B>'
+
+returns an error, but
+`<B>host</B>'
+
+is valid and means IPv6, for a name that resolves only to an IPv4 address
+`<B>ip6 host</B>'
+
+returns an error, but
+`<B>host</B>'
+
+is valid and means ARP/IPv4/RARP, for a name that resolves to both IPv4 and
+IPv6 addresses
+`<B>ip host</B>'
+
+ignores the IPv6 addresses and
+`<B>ip6 host</B>'
+
+ignores the IPv4 addresses, and so on.
+<DT><B>ether host </B><I>ethernameaddr</I><DD>
+True if the source or the destination Ethernet/802.11/IPFC/ATM LANE/FDDI/Token Ring
+address of the packet is
+<I>ethernameaddr</I>.
+
+May be qualified with a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in which case the
+<B>host</B>
+
+keyword is optional.
+<DT><DD>
+<I>ethernameaddr</I>
+may be either a name from
+<B>ethers</B>(5)
+
+or a numerical MAC-48 address.  In the latter case a valid format is one of
+&quot;xx:xx:xx:xx:xx:xx&quot;,
+&quot;xx.xx.xx.xx.xx.xx&quot;
+or
+&quot;xx-xx-xx-xx-xx-xx&quot;,
+where every &quot;xx&quot; is a hexadecimal digit (0-9, a-f, or A-F) or a two-digit
+hexadecimal number &mdash; for example,
+&quot;aa:00:04:00:1d:04&quot;
+means the same as
+&quot;AA-0-4-0-1D-4&quot;.
+Another valid format is one of
+&quot;xxxx.xxxx.xxxx&quot;
+or
+&quot;xxxxxxxxxxxx&quot;,
+where each &quot;x&quot; is a hexadecimal digit &mdash; for example,
+&quot;aa0004001d04&quot;.
+<DT><B>gateway</B> <I>host</I><DD>
+True if the packet used <I>host</I> as a gateway.
+I.e., the source or the destination Ethernet-like address is
+<I>host</I>
+
+but neither the source nor the destination ARP/IPv4/RARP address is
+<I>host</I>.
+
+This primitive is valid only for the same link-layer types as the
+<B>ether host</B>
+
+primitive above, also it cannot be applied to packets encapsulated in MPLS,
+VXLAN or Geneve.  May be qualified with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>rarp</B>).
+
+For example,
+
+<PRE>
+<B>ip gateway </B><I>host</I>
+</PRE>
+
+
+is equivalent to
+
+<PRE>
+<B>ether host </B><I>ethernameaddr </I><B>and ip and not ip host </B><I>hostnameaddr</I>
+</PRE>
+
+
+which can be used with either names or numbers for
+<I>hostnameaddr</I>
+
+and
+<I>ethernameaddr</I>.
+
+<DT><DD>
+<I>Host</I> must be a name and
+must be found both by the machine's host-name-to-IP-address resolution
+mechanisms (host name file, DNS, NIS, etc.) and by the machine's
+host-name-to-Ethernet-address resolution mechanism (/etc/ethers, etc.).
+<DT><B>net </B><I>netnameaddr</I><DD>
+True if the source or the destination ARP/IPv4/IPv6/RARP address of the packet
+belongs to the specified network.  May be qualified with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>rarp</B>)
+
+and/or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>net</B>
+
+keyword remains mandatory.
+<I>netnameaddr</I>
+
+may be either an IPv4 network number or an IPv6 network number or an IPv4
+network name.
+<DT><DD>
+An IPv4 network number can be written as a dotted quad (e.g., 192.168.1.0),
+dotted triple (e.g., 192.168.1), dotted pair (e.g, 172.16), or single
+number (e.g., 10); the netmask is 255.255.255.255 (/32) for a dotted quad
+(which means that it's really a host match), 255.255.255.0 (/24) for a dotted
+triple, 255.255.0.0 (/16) for a dotted pair, or 255.0.0.0 (/8) for a single number.
+<DT><DD>
+An IPv6 network number is an IPv6 address as discussed for the
+<B>host</B>
+
+primitive above; the implicit netmask is
+ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff (/128), so in this primitive IPv6
+&quot;network&quot; matches are really always host matches.  For an actual IPv6 network
+match see the `<B>net </B><I>netaddr</I>/<I>len</I>' primitive below.
+<DT><DD>
+An IPv4 network name is a name from the networks database (traditionally
+<B>networks</B>(5),
+
+in OpenBSD
+<B>hosts</B>(5),
+
+also possibly NIS, LDAP, etc.).  Some operating systems do not implement a
+networks database, in those that do the implemented behaviour varies.  For
+example, POSIX does not specify a format of
+<B>networks</B>(5),
+
+so the line
+<B>somenet 192.168</B>
+
+therein can translate to either 192.168.0.0/32 or 192.168.0.0/16 depending on
+the implementation.  In this sense, the only reliable address notation to be
+used with an IPv4 network name would be a dotted quad (/32), in which case it
+would be simpler just to use a host match with a hostname, as well as DNS.
+For these reasons IPv4 network names should not be used in portable
+applications and this form of ID may be removed from this primitive in future.
+<DT><B>net </B><I>netaddr</I> <B>mask </B><I>netmask</I><DD>
+True if the source or the destination ARP/IPv4/RARP address of the packet
+belongs to <I>netaddr</I> with the specified <I>netmask</I>.  May be qualified
+with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>rarp</B>)
+
+and/or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>net</B>
+
+keyword remains mandatory.  In this implementation this primitive does not
+support IPv6 networks.
+<DT><DD>
+Both
+<I>netaddr</I>
+
+and
+<I>netmask</I>
+
+use the IPv4 network number notation described above, except the &quot;single
+number&quot; form is not valid in this primitive.  For example,
+
+<PRE>
+<B>net </B>192.168 <B>mask </B>255.255
+</PRE>
+
+
+is equivalent to
+
+<PRE>
+<B>net </B>192.168.0.0 <B>mask </B>255.255.0.0
+</PRE>
+
+
+<DT><DD>
+The
+<I>netmask</I>
+
+can represent any 32-bit value, which is why the
+`<B>net </B><I>netaddr</I>/<I>len</I>' primitive below is usually a better fit for
+use cases that require the value to be strictly one of the 33 CIDR masks (from
+/0 to /32).
+<DT><B>net </B><I>netaddr</I>/<I>len</I><DD>
+True if the source or the destination ARP/IPv4/IPv6/RARP address of the packet
+belongs to
+<I>netaddr</I>
+
+where the bit-length of the network mask equals
+<I>len</I>
+
+(in other words, the address belongs to the specified CIDR prefix).  May be
+qualified with a specific protocol
+(<B>arp</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>rarp</B>)
+
+and/or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>net</B>
+
+keyword is optional.
+<DT><DD>
+For IPv4,
+<I>len</I>
+
+is an integer between 0 and 32 (both inclusive) and
+<I>netaddr</I>
+
+is the same as the above.  For IPv6,
+<I>len</I>
+
+is an integer between 0 and 128 (both inclusive) and
+<I>netaddr</I>
+
+is an IPv6 address as discussed for the
+<B>host</B>
+
+primitive above.  For both IPv4 and IPv6 the maximum value of
+<I>len</I>
+
+is equivalent to a host match and the 0 value (which implies an all-zeroes
+value of
+<I>netaddr</I>)
+
+matches any address.  In the latter case this primitive reduces to matching
+the specified (or implied) protocols only.
+<DT><B>port </B><I>portnamenum</I><DD>
+True if the source or the destination TCP/UDP/SCTP port of an IPv4/IPv6 packet
+is
+<I>portnamenum</I>.
+
+For IPv4 this also implies that the packet is the first fragment or is not
+fragmented; for IPv6 this also implies that the packet does not use any
+extension (e.g. Routing, Fragment, Destination Options) headers.  May be
+qualified with a specific layer 4 protocol
+(<B>tcp</B>,
+
+<B>udp</B>,
+
+<B>sctp</B>)
+
+or a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in the latter case the
+<B>port</B>
+
+keyword remains mandatory.  Cannot be qualified with a specific layer 3
+protocol (IPv4/IPv6) in the same primitive, but can be trivially combined with
+other primitives to achieve the required effect, for example:
+
+<PRE>
+<B>ip and tcp dst port </B>80
+</PRE>
+
+
+<DT><DD>
+The <I>portnamenum</I> can be a number or a name used in /etc/services (see
+<B>services</B>(5)).
+
+If a name is used, both the port
+number and protocol are checked.
+If a number or ambiguous name is used,
+only the port number is checked (e.g., `<B>dst port</B> 513' will print both
+tcp/login traffic and udp/who traffic, and `<B>port</B> domain' will print
+both tcp/domain and udp/domain traffic).
+<DT><B>portrange </B><I>portnamenum1-portnamenum2</I><DD>
+This is a more generic form of the above: true if the port number in the
+packet is between
+<I>portnamenum1</I>
+
+and
+<I>portnamenum2</I>
+
+(both inclusive), everything else holds the same meaning.
+In this predicate
+<I>portnamenum1</I>
+
+and
+<I>portnamenum2</I>
+
+can be specified in either order.  If the two values are equal, this primitive
+has the same effect as the
+<B>port</B>
+
+primitive above.
+<DT><B>less </B><I>length</I><DD>
+True if the packet has a length less than or equal to <I>length</I>.
+This is equivalent to:
+
+<PRE>
+<B>len &lt;= </B><I>length</I>
+</PRE>
+
+
+<DT><B>greater </B><I>length</I><DD>
+True if the packet has a length greater than or equal to <I>length</I>.
+This is equivalent to:
+
+<PRE>
+<B>len &gt;= </B><I>length</I>
+</PRE>
+
+
+<DT><B>ip proto </B><I>protocol</I><DD>
+True if the packet is an IPv4 packet of protocol type <I>protocol</I>.
+For this primitive it does not matter whether the IPv4 packet is fragmented
+or not.
+<I>Protocol</I> can be a number or one of the names recognized by
+<B>getprotobyname</B>(3),
+
+for example:
+<B>ah</B>,
+
+<B>esp</B>,
+
+<B>eigrp</B>
+
+(only in Linux with glibc, FreeBSD, NetBSD, DragonFly BSD, MidnightBSD, macOS, and QNX),
+<B>icmp</B>,
+
+<B>igmp</B>,
+
+<B>igrp</B>
+
+(only in Haiku and OpenBSD),
+<B>pim</B>,
+
+<B>sctp</B>,
+
+<B>tcp</B>,
+
+<B>udp</B>
+
+or
+<B>vrrp</B>.
+
+Note that most of these example identifiers
+are also keywords and must be escaped via backslash (\).
+Note that this primitive does not chase the protocol header chain.
+<DT><DD>
+Typically
+<B>getprotobyname</B>(3)
+
+parses the
+<I>/etc/protocols</I>
+
+file to translate protocol names to numbers, and the
+<B>getent protocols</B>
+
+command lists the protocols recognized by the function.  This is not entirely
+so in AIX (which does not have the command), Haiku (which has the file at
+<I>/system/data/network/protocols</I>
+
+and does not have the command), on Linux with musl libc (which hard-codes the
+list of protocols) and on hosts that use a network database to resolve
+protocol names to numbers (see
+<B>nsswitch.conf</B>(5)).
+
+If a protocol name fails to translate to a number, this version of libpcap
+will treat the filter expression as invalid.
+<DT><B>carp</B>, <B>vrrp</B><DD>
+Abbreviations for:
+
+<PRE>
+<B>ip proto</B> 112
+</PRE>
+
+
+<DT><B>icmp</B><DD>
+Abbreviation for:
+
+<PRE>
+<B>ip proto</B> 1
+</PRE>
+
+
+<DT><B>igmp</B><DD>
+Abbreviation for:
+
+<PRE>
+<B>ip proto</B> 2
+</PRE>
+
+
+<DT><B>igrp</B><DD>
+Abbreviation for:
+
+<PRE>
+<B>ip proto </B><I>igrpval</I>
+</PRE>
+
+
+where
+<I>igrpval</I>
+
+is 88 on DragonFly BSD, FreeBSD, macOS, MidnightBSD, and QNX, and 9 on all other OSes.  This
+abbreviation should not be used in portable applications and may be removed
+in future.
+<DT><B>ip6 proto </B><I>protocol</I><DD>
+True if the packet is an IPv6 packet of protocol type <I>protocol</I>.
+Besides IPv6 packets that have
+<I>protocol</I>
+
+in the Next Header field of the basic header, this also matches IPv6 packets
+that have 44 in the Next Header field of the basic header and
+<I>protocol</I>
+
+in the Next Header field of the immediately following Fragment extension
+header.  (See `<B>ip proto</B>' above for the meaning of <I>protocol</I>.)
+Note that the IPv6 variant of ICMP uses a different protocol number, named
+<B>ipv6-icmp</B>.
+
+Note that this primitive does not chase the protocol header chain.
+<DT><B>icmp6</B><DD>
+Abbreviation for:
+
+<PRE>
+<B>ip6 proto</B> 58
+</PRE>
+
+
+<DT><B>proto </B><I>protocol</I><DD>
+True if the packet is an IPv4 or IPv6 packet of protocol type
+<I>protocol</I>.  (See `<B>ip proto</B>' above for the meaning of
+<I>protocol</I>.)  Note that this primitive does not chase the protocol
+header chain.
+<DT><B>ah</B>, <B>esp</B>, <B>pim</B>, <B>sctp</B>, <B>tcp</B>, <B>udp</B><DD>
+Abbreviations for:
+
+<PRE>
+<B>proto \</B><I>protocol</I>
+</PRE>
+
+
+where <I>protocol</I> is one of the above protocols.
+<DT><B>ip6 protochain </B><I>protocol</I><DD>
+True if the packet is IPv6 packet,
+and contains protocol header with type <I>protocol</I>
+in its protocol header chain.
+(See `<B>ip proto</B>' above for the meaning of <I>protocol</I>.)
+For example,
+
+<PRE>
+<B>ip6 protochain</B> 6
+</PRE>
+
+
+matches any IPv6 packet with TCP protocol header in the protocol header chain.
+The packet may contain, for example,
+authentication header, routing header, or hop-by-hop option header,
+between IPv6 header and TCP header.
+The BPF code emitted by this primitive is complex and
+cannot be optimized by the BPF optimizer code, and is not supported by
+filter engines in the kernel, so this can be somewhat slow, and may
+cause more packets to be dropped.
+<DT><B>ip protochain </B><I>protocol</I><DD>
+Equivalent to <B>ip6 protochain </B><I>protocol</I>, but this is for IPv4.
+(See `<B>ip proto</B>' above for the meaning of <I>protocol</I>.)
+<DT><B>protochain </B><I>protocol</I><DD>
+True if the packet is an IPv4 or IPv6 packet of protocol type
+<I>protocol</I>.  (See `<B>ip proto</B>' above for the meaning of
+<I>protocol</I>.)  Note that this primitive chases the protocol
+header chain.
+<DT><B>ether broadcast</B><DD>
+True if the destination Ethernet/802.11/IPFC/ARCnet/ATM LANE/FDDI/Token Ring address of
+the packet is the broadcast address (e.g.
+<B>FF:FF:FF:FF:FF:FF</B>
+
+for Ethernet).  The
+<B>ether</B>
+
+keyword is optional.
+<DT><B>ip broadcast</B><DD>
+True if the packet is an IPv4 packet with the host part of the destination
+address being either all-ones or all-zeroes.  This primitive requires to
+specify the netmask, which cannot be done in the filter expression; the only
+way to specify a netmask is via the
+<B>netmask</B>
+
+argument of the
+<B>pcap_compile</B>()
+
+function.  If a netmask has not been specified, an attempt to compile a
+filter expression with this primitive will return an error.
+<DT><DD>
+Note that this primitive ignores the network part of the destination address,
+thus it can match more packets than expected, especially if the interface has
+multiple IPv4 addresses with different netmasks.  For example, if the
+interface has addresses 10.1.2.100/29 and 192.168.202.200/24 configured and
+the
+<B>netmask</B>
+
+argument corresponds to the first address, its value will be
+<B>0xFFFFFFF8</B>
+
+and the host mask value will be
+<B>0x00000007</B>.
+
+This will match the expected two addresses in the first prefix (10.1.2.96 and
+10.1.2.103), as well as 64 addresses in the second prefix (192.168.202.0,
+192.168.202.7, 192.168.202.8, 192.168.202.15, 192.168.202.16 and so on), as
+well as any other IPv4 address with the lowest 3 bits being all-ones or
+all-zeroes (for example: 10.73.74.151, 192.168.50.63, 172.19.0.128) &mdash; in
+other words, 25% of the complete IPv4 address space.  This is why in use
+cases that require more precision it would be better to match the required
+address(es) explicitly, for example:
+
+<PRE>
+<B>ip dst host 10.1.2.96 or 10.1.2.103</B>
+</PRE>
+
+
+<DT><B>ether multicast</B><DD>
+True if the destination Ethernet/802.11/IPFC/ARCnet/ATM LANE/FDDI/Token Ring address of
+the packet is a multicast address (e.g.
+<B>ether[0] &amp; 1 != 0</B>
+
+for Ethernet).  The
+<B>ether</B>
+
+keyword is optional.
+<DT><B>ip multicast</B><DD>
+True if the packet is an IPv4 multicast packet.
+<DT><B>ip6 multicast</B><DD>
+True if the packet is an IPv6 multicast packet.
+<DT><B>ether proto </B><I>protocol</I><DD>
+True if the packet is of ether type <I>protocol</I>.
+<I>Protocol</I> can be a number or one of the names:
+<DL><DT><DD>
+<DL>
+<DT><B>aarp</B>
+
+<DD>
+AppleTalk ARP Protocol
+<DT><B>arp</B>
+
+<DD>
+ARP
+<DT><B>atalk</B>
+
+<DD>
+AppleTalk
+<DT><B>decnet</B>
+
+<DD>
+DECNet
+<DT><B>ip</B>
+
+<DD>
+IPv4
+<DT><B>ip6</B>
+
+<DD>
+IPv6
+<DT><B>ipx</B>
+
+<DD>
+Novell IPX
+<DT><B>iso</B>
+
+<DD>
+OSI protocols
+<DT><B>lat</B>
+
+<DD>
+DEC Local Area Transport (LAT)
+<DT><B>lldp</B>
+
+<DD>
+Link-Layer Discovery Protocol
+<DT><B>loopback</B>
+
+<DD>
+Loopback frames (DIX Ethernet Configuration Test Protocol)
+<DT><B>mopdl</B>
+
+<DD>
+DEC DNA Dump/Load (MOP),
+<DT><B>moprc</B>
+
+<DD>
+DEC DNA Remote Console (MOP)
+<DT><B>netbeui</B>
+
+<DD>
+NetBIOS Frame Protocol
+<DT><B>rarp</B>
+
+<DD>
+Reverse ARP
+<DT><B>sca</B>
+
+<DD>
+DEC System Communication Architecture (SCA)
+<DT><B>slow</B>
+
+<DD>
+IEEE Slow Protocols, such as LACP, OAM and OSSP
+<DT><B>stp</B>
+
+<DD>
+IEEE Spanning Tree Protocol
+</DL>
+</DL>
+
+<DT><DD>
+Note these identifiers (except <B>lldp</B>, <B>loopback</B> and <B>slow</B>)
+are also keywords and must be escaped via backslash (\).
+<DT><DD>
+[In the case of FDDI (e.g., `<B>fddi proto \arp</B>'), Token Ring
+(e.g., `<B>tr proto \arp</B>'), and IEEE 802.11 wireless LANs (e.g.,
+`<B>wlan proto \arp</B>'), for most of those protocols, the
+protocol identification comes from the 802.2 Logical Link Control (LLC)
+header, which is usually layered on top of the FDDI, Token Ring, or
+802.11 header.
+<DT><DD>
+When filtering for most protocol identifiers on FDDI, Token Ring, or
+802.11, the filter checks only the protocol ID field of an LLC header
+in so-called SNAP format with an Organizational Unit Identifier (OUI) of
+0x000000, for encapsulated Ethernet; it doesn't check whether the packet
+is in SNAP format with an OUI of 0x000000.
+The exceptions are:
+<DL><DT><DD>
+<DL>
+<DT><B>iso</B><DD>
+the filter checks the DSAP (Destination Service Access Point) and
+SSAP (Source Service Access Point) fields of the LLC header;
+<DT><B>stp</B> and <B>netbeui</B><DD>
+the filter checks the DSAP of the LLC header;
+<DT><B>atalk</B><DD>
+the filter checks for a SNAP-format packet with an OUI of 0x080007
+and the AppleTalk EtherType.
+</DL>
+</DL>
+
+<DT><DD>
+In the case of Ethernet, the filter checks the EtherType field
+for most of those protocols.  The exceptions are:
+<DL><DT><DD>
+<DL>
+<DT><B>iso</B>, <B>stp</B>, and <B>netbeui</B><DD>
+the filter checks for an 802.3 frame and then checks the LLC header as
+it does for FDDI, Token Ring, and 802.11;
+<DT><B>atalk</B><DD>
+the filter checks both for the AppleTalk EtherType in an Ethernet frame and
+for a SNAP-format packet as it does for FDDI, Token Ring, and 802.11;
+<DT><B>aarp</B><DD>
+the filter checks for the AppleTalk ARP EtherType in either an Ethernet
+frame or an 802.2 SNAP frame with an OUI of 0x000000;
+<DT><B>ipx</B><DD>
+the filter checks for the IPX EtherType in an Ethernet frame, the IPX
+DSAP in the LLC header, the 802.3-with-no-LLC-header encapsulation of
+IPX, and the IPX EtherType in a SNAP frame.
+</DL>
+</DL>
+
+<DT><B>ip</B>, <B>ip6</B>, <B>arp</B>, <B>rarp</B>, <B>atalk</B>, <B>aarp</B>, <B>decnet</B>, <B>iso</B>, <B>stp</B>, <B>ipx</B>, <B>netbeui</B><DD>
+Abbreviations for:
+
+<PRE>
+<B>ether proto \</B><I>protocol</I>
+</PRE>
+
+
+where <I>protocol</I> is one of the above protocols.
+<DT><B>lat</B>, <B>mopdl</B>, <B>moprc</B>, <B>sca</B><DD>
+Abbreviations for:
+
+<PRE>
+<B>ether proto \</B><I>protocol</I>
+</PRE>
+
+
+where <I>protocol</I> is one of the above protocols, all of which originated
+at DEC, but are not the same as DECnet.
+<DT><B>decnet host </B><I>decnetaddr</I><DD>
+True if the source or the destination DECnet address of the packet is
+<I>decnetaddr</I>.
+
+May be qualified with a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in which case the
+<B>host</B>
+
+keyword is optional.
+<DT><DD>
+<I>decnetaddr</I>
+
+is an address of the form
+<B>AREANUMBER.NODENUMBER</B>,
+
+where the area number can be between 0 and 63 (both inclusive) and the node
+number can be between 0 and 1023 (both inclusive) and both numbers always use
+decimal base.  For example:
+
+<PRE>
+<B>decnet src </B>10.123
+</PRE>
+
+
+<DT><B>llc</B><DD>
+True if the packet has an 802.2 LLC header.  This includes:
+<DT><DD>
+Ethernet packets with a length field rather than a type field that
+aren't raw NetWare-over-802.3 packets;
+<DT><DD>
+IEEE 802.11 data packets;
+<DT><DD>
+Token Ring packets (no check is done for LLC frames);
+<DT><DD>
+FDDI packets (no check is done for LLC frames);
+<DT><DD>
+LLC-encapsulated ATM packets, for SunATM on Solaris.
+<DT><B>llc</B> <I>type</I><DD>
+True if the packet has an 802.2 LLC header and has the specified
+<I>type</I>.
+
+<I>type</I>
+
+can be one of:
+<DL><DT><DD>
+<DL>
+<DT><B>i</B><DD>
+Information (I) PDUs
+<DT><B>s</B><DD>
+Supervisory (S) PDUs
+<DT><B>u</B><DD>
+Unnumbered (U) PDUs
+<DT><B>rr</B><DD>
+Receiver Ready (RR) S PDUs
+<DT><B>rnr</B><DD>
+Receiver Not Ready (RNR) S PDUs
+<DT><B>rej</B><DD>
+Reject (REJ) S PDUs
+<DT><B>ui</B><DD>
+Unnumbered Information (UI) U PDUs
+<DT><B>ua</B><DD>
+Unnumbered Acknowledgment (UA) U PDUs
+<DT><B>disc</B><DD>
+Disconnect (DISC) U PDUs
+<DT><B>dm</B><DD>
+Disconnected Mode (DM) U PDUs
+<DT><B>sabme</B><DD>
+Set Asynchronous Balanced Mode Extended (SABME) U PDUs
+<DT><B>test</B><DD>
+Test (TEST) U PDUs
+<DT><B>xid</B><DD>
+Exchange Identification (XID) U PDUs
+<DT><B>frmr</B><DD>
+Frame Reject (FRMR) U PDUs
+</DL>
+</DL>
+
+<DT><B>inbound</B><DD>
+True if the packet was received by the host performing the capture rather than
+sent by that host.  This primitive is supported for certain link-layer types
+only, namely,
+<B>DLT_SLIP</B>,
+
+<B>DLT_IPNET</B>,
+
+<B>DLT_LINUX_SLL</B>,
+
+<B>DLT_LINUX_SLL2</B>,
+
+<B>DLT_PFLOG</B>,
+
+<B>DLT_PPP_PPPD</B>,
+
+a number of Juniper Networks private types and some types of Linux DSA tag.
+For reference, the ``any'' pseudo-interface uses
+<B>DLT_LINUX_SLL</B>
+
+or
+<B>DLT_LINUX_SLL2</B>
+
+on Linux, and
+<B>DLT_IPNET</B>
+
+on Solaris.
+<DT><B>outbound</B><DD>
+Same as the above, but for the opposite direction (from the capturing host
+to the network).
+<DT><B>ifindex </B><I>interface_index</I><DD>
+True if the packet was logged via the specified interface (applies only to
+packets logged by the Linux &quot;any&quot; cooked v2 interface).
+<DT><B>ifname </B><I>interface</I><DD>
+True, for
+<B>DLT_PFLOG</B>
+
+only, if the packet was logged as coming from the specified interface.
+<DT><B>on </B><I>interface</I><DD>
+Synonymous with the
+<B>ifname</B>
+
+primitive.
+<DT><B>rnr </B><I>num</I><DD>
+True, for
+<B>DLT_PFLOG</B>
+
+only, if the packet was logged as matching the specified PF rule number.
+<DT><B>rulenum </B><I>num</I><DD>
+Synonymous with the
+<B>rnr</B>
+
+primitive.
+<DT><B>reason </B><I>code</I><DD>
+True, for
+<B>DLT_PFLOG</B>
+
+only, if the packet was logged with the specified PF reason code.  Valid
+codes are:
+<B>match</B>,
+
+<B>bad-offset</B>,
+
+<B>fragment</B>,
+
+<B>short</B>,
+
+<B>normalize</B>,
+
+<B>memory</B>,
+
+<B>bad-timestamp</B>,
+
+<B>congestion</B>,
+
+<B>ip-option</B>,
+
+<B>proto-cksum</B>,
+
+<B>state-mismatch</B>,
+
+<B>state-insert</B>,
+
+<B>state-limit</B>,
+
+<B>src-limit</B>,
+
+<B>synproxy</B>,
+
+<B>map-failed</B>
+
+(on FreeBSD only),
+<B>state-locked</B>
+
+(on NetBSD only),
+<B>translate</B>
+
+(on OpenBSD only),
+<B>no-route</B>
+
+(on OpenBSD only) and
+<B>dummynet</B>
+
+(on macOS only).
+<DT><B>rset </B><I>name</I><DD>
+True, for
+<B>DLT_PFLOG</B>
+
+only, if the packet was logged as matching the specified PF ruleset
+name of an anchored ruleset.
+<DT><B>ruleset </B><I>name</I><DD>
+Synonymous with the
+<B>rset</B>
+
+primitive.
+<DT><B>srnr </B><I>num</I><DD>
+True, for
+<B>DLT_PFLOG</B>
+
+only, if the packet was logged as matching the specified PF rule number
+of an anchored ruleset.
+<DT><B>subrulenum </B><I>num</I><DD>
+Synonymous with the
+<B>srnr</B>
+
+primitive.
+<DT><B>action </B><I>act</I><DD>
+True, for
+<B>DLT_PFLOG</B>
+
+only, if PF took the specified action when the packet was logged.  Valid
+actions are:
+<B>pass</B>
+
+(or
+<B>accept</B>),
+
+<B>block</B>
+
+(or
+<B>drop</B>)
+
+and, with later versions of
+<B>pf</B>(4),
+
+<B>scrub</B>,
+
+<B>noscrub</B>,
+
+<B>nat</B>,
+
+<B>nonat</B>,
+
+<B>binat</B>,
+
+<B>nobinat</B>,
+
+<B>rdr</B>,
+
+<B>nordr</B>,
+
+<B>synproxy-drop</B>,
+
+<B>defer</B>
+
+(on FreeBSD and OpenBSD only),
+<B>match</B>
+
+(on OpenBSD only),
+<B>divert</B>
+
+(on OpenBSD only),
+<B>rt</B>
+
+(on OpenBSD only),
+<B>afrt</B>
+
+(on OpenBSD only),
+<B>dummynet</B>
+
+(on macOS only),
+<B>nodummynet</B>
+
+(on macOS only),
+<B>nat64</B>
+
+(on macOS only) and
+<B>nonat64</B>
+
+(on macOS only).
+<DT><B>wlan ra </B><I>ehost</I><DD>
+True if the IEEE 802.11 RA is
+<I>ehost</I>.
+
+The RA field is used in all frames except for management frames.
+<DT><B>wlan ta </B><I>ehost</I><DD>
+True if the IEEE 802.11 TA is
+<I>ehost</I>.
+
+The TA field is used in all frames except for management frames and
+CTS (Clear To Send) and ACK (Acknowledgment) control frames.
+<DT><B>wlan addr1 </B><I>ehost</I><DD>
+True if the first IEEE 802.11 address is
+<I>ehost</I>.
+
+<DT><B>wlan addr2 </B><I>ehost</I><DD>
+True if the second IEEE 802.11 address, if present, is
+<I>ehost</I>.
+
+The second address field is used in all frames except for CTS (Clear To
+Send) and ACK (Acknowledgment) control frames.
+<DT><B>wlan addr3 </B><I>ehost</I><DD>
+True if the third IEEE 802.11 address, if present, is
+<I>ehost</I>.
+
+The third address field is used in management and data frames, but not
+in control frames.
+<DT><B>wlan addr4 </B><I>ehost</I><DD>
+True if the fourth IEEE 802.11 address, if present, is
+<I>ehost</I>.
+
+The fourth address field is only used for
+WDS (Wireless Distribution System) frames.
+<DT><B>wlan type </B><I>wlan_type</I><DD>
+True if the IEEE 802.11 frame type matches the specified <I>wlan_type</I>.
+Valid <I>wlan_type</I>s are:
+<B>mgt</B>,
+<B>ctl</B>
+and <B>data</B>.
+The
+<B>wlan</B>
+
+keyword is optional.
+<DT><B>wlan type </B><I>wlan_type </I><B>subtype </B><I>wlan_subtype</I><DD>
+True if the IEEE 802.11 frame type matches the specified <I>wlan_type</I>
+and frame subtype matches the specified <I>wlan_subtype</I>.
+The
+<B>wlan</B>
+
+keyword is optional.
+<DT><DD>
+If the specified <I>wlan_type</I> is <B>mgt</B>,
+then valid <I>wlan_subtype</I>s are:
+<B>assoc-req</B>,
+<B>assoc-resp</B>,
+<B>reassoc-req</B>,
+<B>reassoc-resp</B>,
+<B>probe-req</B>,
+<B>probe-resp</B>,
+<B>beacon</B>,
+<B>atim</B>,
+<B>disassoc</B>,
+<B>auth</B> and
+<B>deauth</B>.
+<DT><DD>
+If the specified <I>wlan_type</I> is <B>ctl</B>,
+then valid <I>wlan_subtype</I>s are:
+<B>bar</B>,
+<B>ba</B>,
+<B>ps-poll</B>,
+<B>rts</B>,
+<B>cts</B>,
+<B>ack</B>,
+<B>cf-end</B> and
+<B>cf-end-ack</B>.
+<DT><DD>
+If the specified <I>wlan_type</I> is <B>data</B>,
+then valid <I>wlan_subtype</I>s are:
+<B>data</B>,
+
+<B>data-cf-ack</B>,
+
+<B>data-cf-poll</B>,
+
+<B>data-cf-ack-poll</B>,
+
+<B>null</B>,
+
+<B>cf-ack</B>,
+
+<B>cf-poll</B>,
+
+<B>cf-ack-poll</B>,
+
+<B>qos-data</B>,
+
+<B>qos-data-cf-ack</B>,
+
+<B>qos-data-cf-poll</B>,
+
+<B>qos-data-cf-ack-poll</B>,
+
+<B>qos</B>,
+
+<B>qos-cf-poll</B>
+
+and
+<B>qos-cf-ack-poll</B>.
+
+<DT><B>wlan subtype </B><I>wlan_subtype</I><DD>
+True if the IEEE 802.11 frame subtype matches the specified <I>wlan_subtype</I>
+and frame has the type to which the specified <I>wlan_subtype</I> belongs.
+The
+<B>wlan</B>
+
+keyword is optional.
+<DT><B>wlan dir </B><I>direction</I><DD>
+True if the IEEE 802.11 frame direction matches the specified
+<I>direction</I>.
+
+Valid directions are:
+<B>nods</B>,
+
+<B>tods</B>,
+
+<B>fromds</B>,
+
+<B>dstods</B>,
+
+or a numeric value.
+The
+<B>wlan</B>
+
+keyword is optional.
+<DT><B>vlan </B><I>[vlan_id]</I><DD>
+True if the packet is an IEEE 802.1Q VLAN packet.
+If the optional <I>vlan_id</I> is specified, only true if the packet has the specified
+<I>vlan_id</I>.
+Note that the first <B>vlan</B> keyword encountered in an expression
+changes the decoding offsets for the remainder of the expression on
+the assumption that the packet is a VLAN packet.  The `<B>vlan
+</B><I>[vlan_id]</I>` keyword may be used more than once, to filter on VLAN
+hierarchies.  Each use of that keyword increments the filter offsets
+by 4.
+<DT><DD>
+For example:
+
+<PRE>
+<B>vlan</B> 100 <B>&amp;&amp; vlan</B> 200
+</PRE>
+
+
+filters on VLAN 200 encapsulated within VLAN 100, and
+
+<PRE>
+<B>vlan &amp;&amp; vlan </B>300 <B>&amp;&amp; ip</B>
+</PRE>
+
+
+filters IPv4 protocol encapsulated in VLAN 300 encapsulated within any
+higher order VLAN.
+<DT><B>mpls </B><I>[label_num]</I><DD>
+True if the packet is an MPLS packet.
+If the optional <I>label_num</I> is specified, only true if the packet has the specified
+<I>label_num</I>.
+Note that the first <B>mpls</B> keyword encountered in an expression
+changes the decoding offsets for the remainder of the expression on
+the assumption that the packet is a MPLS-encapsulated IP packet.  The
+`<B>mpls </B><I>[label_num]</I>` keyword may be used more than once, to
+filter on MPLS hierarchies.  Each use of that keyword increments the
+filter offsets by 4.
+<DT><DD>
+For example:
+
+<PRE>
+<B>mpls</B> 100000 <B>&amp;&amp; mpls</B> 1024
+</PRE>
+
+
+filters packets with an outer label of 100000 and an inner label of
+1024, and
+
+<PRE>
+<B>mpls &amp;&amp; mpls</B> 1024 <B>&amp;&amp; host</B> 192.9.200.1
+</PRE>
+
+
+filters packets to or from 192.9.200.1 with an inner label of 1024 and
+any outer label.
+<DT><B>pppoed</B><DD>
+True if the packet is a PPP-over-Ethernet Discovery packet (EtherType 0x8863).
+<DT><B>pppoes </B><I>[session_id]</I><DD>
+True if the packet is a PPP-over-Ethernet Session packet (EtherType 0x8864).
+If the optional <I>session_id</I> is specified, only true if the packet has the specified
+<I>session_id</I>.
+Note that the first <B>pppoes</B> keyword encountered in an expression
+changes the decoding offsets for the remainder of the expression on
+the assumption that the packet is a PPPoE session packet.
+<DT><DD>
+For example:
+
+<PRE>
+<B>pppoes</B> 0x27 <B>&amp;&amp; ip</B>
+</PRE>
+
+
+filters IPv4 protocol encapsulated in PPPoE session id 0x27.
+<DT><B>geneve </B><I>[vni]</I><DD>
+True if the packet is a Geneve packet (UDP port 6081). If the optional <I>vni</I>
+is specified, only true if the packet has the specified <I>vni</I>.
+Note that when the <B>geneve</B> keyword is encountered in
+an expression, it changes the decoding offsets for the remainder of
+the expression on the assumption that the packet is a Geneve packet.
+<DT><DD>
+For example:
+
+<PRE>
+<B>geneve</B> 0xb <B>&amp;&amp; ip</B>
+</PRE>
+
+
+filters IPv4 protocol encapsulated in Geneve with VNI 0xb. This will
+match both IPv4 directly encapsulated in Geneve as well as IPv4 contained
+inside an Ethernet frame.
+<DT><B>vxlan </B><I>[vni]</I><DD>
+True if the packet is a VXLAN packet (UDP port 4789). If the optional
+<I>vni</I> is specified, only true if the packet has the specified
+<I>vni</I>.  Note that when the <B>vxlan</B> keyword is encountered in
+an expression, it changes the decoding offsets for the remainder of
+the expression on the assumption that the packet is a VXLAN packet.
+<DT><DD>
+For example:
+
+<PRE>
+<B>vxlan</B> 0x7 <B>&amp;&amp; ip6 </B>
+</PRE>
+
+
+filters IPv6 protocol encapsulated in VXLAN with VNI 0x7.
+<DT><B>iso proto </B><I>protocol</I><DD>
+True if the packet is an OSI packet of protocol type <I>protocol</I>.
+<I>Protocol</I> can be a number or one of the names
+<B>clnp</B>, <B>esis</B>, or <B>isis</B>.
+<DT><B>clnp</B>, <B>esis</B>, <B>isis</B><DD>
+Abbreviations for:
+
+<PRE>
+<B>iso proto \</B><I>protocol</I>
+</PRE>
+
+
+where <I>protocol</I> is one of the above protocols.  Also in this context
+<B>es-is</B>
+
+is an alias for
+<B>esis</B>
+
+and
+<B>is-is</B>
+
+is an alias for
+<B>isis</B>.
+
+<DT><B>isis proto </B><I>protocol</I><DD>
+True if the packet is an IS-IS packet of protocol type
+<I>protocol</I>,
+
+which can be a number only.
+<DT><B>l1</B>, <B>l2</B>, <B>iih</B>, <B>lsp</B>, <B>snp</B>, <B>csnp</B>, <B>psnp</B><DD>
+Abbreviations for IS-IS PDU types.
+<DT><I>atmfield relop val</I><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and the relation
+holds.
+<I>atmfield</I>
+
+is one of
+{<B>vpi</B>,
+
+<B>vci</B>};
+
+<I>relop</I>
+
+is one of
+{<B>&gt;</B>,
+
+<B>&lt;</B>,
+
+<B>&gt;=</B>,
+
+<B>&lt;=</B>,
+
+<B>=</B>,
+
+<B>==</B>,
+
+<B>!=</B>}
+
+(where
+<B>=</B>
+
+means the same as
+<B>==</B>);
+
+<I>val</I>
+
+is an integer.
+<B>vpi</B>
+
+and
+<B>vci</B>
+
+stand for the virtual path identifier (VPI) and the virtual channel
+identifier (VCI) fields respectively.
+<DT><I>atmfield</I> <I>val</I><DD>
+Abbreviation for
+
+<PRE>
+<I>atmfield</I> == <I>val</I>
+</PRE>
+
+
+in the expression above.
+<DT><I>atmfield</I> (<I>val1</I> <B>or</B> ... <B>or</B> <I>valN</I>)<DD>
+Abbreviation for
+
+<PRE>
+(<I>atmfield</I> == <I>val1</I> <B>or</B> ... <B>or</B> <I>atmfield</I> == <I>valN</I>)
+</PRE>
+
+
+in the expression above.
+<DT><B>lane</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+an ATM LANE packet.
+Note that the first <B>lane</B> keyword encountered in an expression
+changes the tests done in the remainder of the expression
+on the assumption that the packet is either a LANE emulated Ethernet
+packet or a LANE LE Control packet.  If <B>lane</B> isn't specified, the
+tests are done under the assumption that the packet is an
+LLC-encapsulated packet.
+<DT><DD>
+Also the first
+<B>lane</B>
+
+keyword enables primitives that do not apply to ATM in general, such as
+<B>link host</B>
+
+and
+<B>link multicast</B>.
+
+<DT><B>oamf4sc</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+a segment OAM F4 flow cell (VPI=0 &amp; VCI=3).
+<DT><B>oamf4ec</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+an end-to-end OAM F4 flow cell (VPI=0 &amp; VCI=4).
+<DT><B>oamf4</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+a segment or end-to-end OAM F4 flow cell (VPI=0 &amp; (VCI=3 | VCI=4)).
+<DT><B>oam</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+a segment or end-to-end OAM F4 flow cell (VPI=0 &amp; (VCI=3 | VCI=4)).
+<DT><B>metac</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+on a meta signaling circuit (VPI=0 &amp; VCI=1).
+<DT><B>bcc</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+on a broadcast signaling circuit (VPI=0 &amp; VCI=2).
+<DT><B>sc</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+on a signaling circuit (VPI=0 &amp; VCI=5).
+<DT><B>ilmic</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+on an ILMI circuit (VPI=0 &amp; VCI=16).
+<DT><B>connectmsg</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+on a signaling circuit and is a Q.2931 Setup, Call Proceeding, Connect,
+Connect Ack, Release, or Release Done message.
+<DT><B>metaconnect</B><DD>
+True if the packet is an ATM packet, for SunATM on Solaris, and is
+on a meta signaling circuit and is a Q.2931 Setup, Call Proceeding, Connect,
+Release, or Release Done message.
+<DT><B>fisu</B><DD>
+True if the packet is a Fill-In Signal Unit (FISU) MTP2 packet.
+<DT><B>lssu</B><DD>
+True if the packet is a Link Status Signal Unit (LSSU) MTP2 packet.
+<DT><B>msu</B><DD>
+True if the packet is a Message Signal Unit (MSU) MTP2 packet.
+<DT><I>mtpfield relop val</I><DD>
+True if the relation holds.
+<I>mtpfield</I>
+
+is one of
+{<B>sio</B>,
+
+<B>dpc</B>,
+
+<B>opc</B>,
+
+<B>sls</B>};
+
+<I>relop</I>
+
+is one of
+{<B>&gt;</B>,
+
+<B>&lt;</B>,
+
+<B>&gt;=</B>,
+
+<B>&lt;=</B>,
+
+<B>=</B>,
+
+<B>==</B>,
+
+<B>!=</B>}
+
+(where
+<B>=</B>
+
+means the same as
+<B>==</B>);
+
+<I>val</I>
+
+is an integer.
+<B>sio</B>
+
+stands for the Service Information Octet (SIO) field of the MTP2 MSU header.
+<B>dpc</B>,
+
+<B>opc</B>
+
+and
+<B>sls</B>
+
+stand for the Destination Point Code (DPC), Originating Point Code (OPC) and
+Signalling Link Selection (SLS) fields respectively of the MTP3 standard
+routing label.
+<DT><I>mtpfield</I> <I>val</I><DD>
+Abbreviation for
+
+<PRE>
+<I>mtpfield</I> == <I>val</I>
+</PRE>
+
+
+in the expression above.
+<DT><I>mtpfield</I> (<I>val1</I> <B>or</B> ... <B>or</B> <I>valN</I>)<DD>
+Abbreviation for
+
+<PRE>
+(<I>mtpfield</I> == <I>val1</I> <B>or</B> ... <B>or</B> <I>mtpfield</I> == <I>valN</I>)
+</PRE>
+
+
+in the expression above.
+<DT><B>hfisu</B>, <B>hlssu</B>, <B>hmsu</B>, <B>hsio</B>, <B>hdpc</B>, <B>hopc</B>, <B>hsls</B><DD>
+Same as
+<B>fisu</B>,
+
+<B>lssu</B>,
+
+<B>msu</B>,
+
+<B>sio</B>,
+
+<B>dpc</B>,
+
+<B>opc</B>
+
+and
+<B>sls</B>
+
+respectively, but only if the MTP2 link uses the extended sequence numbers
+encoding specified for high speed signalling links (HSL) in ITU-T
+Recommendation Q.703 Annex A.
+<DT><B>link host </B><I>mac8addr</I><DD>
+True if the source or the destination ARCnet node ID (for
+<B>DLT_ARCNET</B>
+
+and
+<B>DLT_ARCNET_LINUX</B>
+
+only) or MS/TP station address (for
+<B>DLT_BACNET_MS_TP</B>
+
+only) is
+<I>mac8addr</I>.
+
+May be qualified with a different direction
+(<B>src</B>,
+
+<B>dst</B>,
+
+<B>src and dst</B>),
+
+in which case the
+<B>host</B>
+
+keyword is optional.
+<DT><DD>
+<I>mac8addr</I>
+
+is a string of the form
+<B>$xx</B>
+
+or
+<B>$x</B>,
+
+where &quot;x&quot; is a hexadecimal digit.  For example:
+
+<PRE>
+<B>link host </B>$2b
+</PRE>
+
+
+<DT><DD>
+Also in ARCnet context
+<B>broadcast</B>
+
+and
+<B>multicast</B>
+
+are equivalent to
+<B>link dst $0</B>,
+
+and in MS/TP context
+<B>broadcast</B>
+
+is equivalent to
+<B>link dst $ff</B>.
+
+<DT><DD>
+Note that this address syntax clashes with the parameter expansion syntax
+in POSIX-compatible shells and elsewhere, so depending on the use case the
+filter string may require the use of single quotes or a backslash.
+<DT><B>byte </B><I>idx op val</I><DD>
+True if the value of the link layer byte number
+<I>idx</I>
+
+satisfies a condition with regard to
+<I>val</I>,
+
+which can be a number only.  The condition is one of: &quot;equals to&quot; (if
+<I>op</I>
+
+is
+<B>=</B>),
+
+&quot;less than&quot; (if
+<I>op</I>
+
+is
+<B>&lt;</B>),
+
+&quot;greater than&quot; (if
+<I>op</I>
+
+is
+<B>&gt;</B>),
+
+&quot;the result of bitwise AND is not zero&quot; (if
+<I>op</I>
+
+is
+<B>&amp;</B>),
+
+&quot;the result of bitwise OR is not zero&quot; (if
+<I>op</I>
+
+is
+<B>|</B>).
+
+<DT><DD>
+The arithmetic expressions and packet data accessors below implement all of
+these and many other things much better, so this primitive will be removed in
+a future release and should not be used in applications that require forward
+compatibility.
+</DL>
+<H2 id="lbAE">ARITHMETIC EXPRESSIONS</H2>
+
+Arithmetic expressions are the operands of a relational operator in a
+relation of the following form:
+
+<PRE>
+<I>expr1 relop expr2</I>
+</PRE>
+
+
+This evaluates to true if and only if the relation holds.
+<I>relop</I>
+
+(the relational operator) is one of
+{<B>&gt;</B>,
+
+<B>&lt;</B>,
+
+<B>&gt;=</B>,
+
+<B>&lt;=</B>,
+
+<B>=</B>,
+
+<B>==</B>,
+
+<B>!=</B>}
+
+(where
+<B>=</B>
+
+means the same as
+<B>==</B>).
+
+Each of <I>expr1</I> and <I>expr2</I> is an arithmetic expression composed of
+integer constants (expressed in standard C syntax), the common arithmetic and
+bitwise binary operations
+{<B>+</B>,
+
+<B>-</B>,
+
+<B>*</B>,
+
+<B>/</B>,
+
+<B>%</B>,
+
+<B>&amp;</B>,
+
+<B>|</B>,
+
+<B>^</B>,
+
+<B>&lt;&lt;</B>,
+
+<B>&gt;&gt;</B>},
+
+a length accessor, and packet data accessors.  All arithmetic expressions
+regardless of the complexity and composition resolve to an integer value.
+Note that all comparisons are unsigned, so that, for example, both 0x80000000
+and 0xffffffff are &gt; 0.
+<P>
+
+Note that 32-bit octal integer constants in the [010000000000 .. 037777777777]
+interval, which includes 75% of all 32-bit integers, are interpreted as MAC-48
+addresses when prepended with a single zero (e.g., 012345670123 means
+01:23:45:67:01:23).  To disambiguate the expression, prepend such an octal
+number with more zeroes (0012345670123) or represent the same value using a
+decimal (1402433619) or hexadecimal (0x53977053) number.
+<P>
+
+The
+<B>%</B>
+
+and
+<B>^</B>
+
+operators are currently only supported for filtering in the kernel on
+particular operating systems (for example: FreeBSD, Linux with 3.7 and later
+kernels, NetBSD); on all other systems (for example: AIX, Hurd, illumos, Solaris,
+OpenBSD), if
+those operators are used, filtering will be done in user mode, which
+will increase the overhead of capturing packets and may cause more
+packets to be dropped.
+<P>
+
+The length accessor, indicated by the keywords <B>len</B> or <B>length</B>, gives the
+length of the packet.
+<H2 id="lbAF">PACKET DATA ACCESSORS</H2>
+
+To use the packet data in an arithmetic expression, use the following syntax:
+
+<PRE>
+<I>proto</I><B> [ </B><I>expr</I><B> : </B><I>size</I><B> ]</B>
+</PRE>
+
+
+<I>Proto</I>
+
+is one of
+<B>arp</B>,
+
+<B>atalk</B>,
+
+<B>carp</B>,
+
+<B>decnet</B>,
+
+<B>ether</B>,
+
+<B>fddi</B>,
+
+<B>icmp</B>,
+
+<B>icmp6</B>,
+
+<B>igmp</B>,
+
+<B>igrp</B>,
+
+<B>ip</B>,
+
+<B>ip6</B>,
+
+<B>lat</B>,
+
+<B>link</B>,
+
+<B>mopdl</B>,
+
+<B>moprc</B>,
+
+<B>pim</B>,
+
+<B>ppp</B>,
+
+<B>radio</B>,
+
+<B>rarp</B>,
+
+<B>sca</B>,
+
+<B>sctp</B>,
+
+<B>slip</B>,
+
+<B>tcp</B>,
+
+<B>tr</B>,
+
+<B>udp</B>,
+
+<B>vrrp</B>
+
+or
+<B>wlan</B>,
+
+and
+indicates the protocol layer for the index operation.
+(<B>ether</B>,
+
+<B>fddi</B>,
+
+<B>link</B>,
+
+<B>ppp</B>,
+
+<B>slip</B>,
+
+<B>tr</B>
+
+and
+<B>wlan</B>
+
+all refer to the
+link layer, <B>radio</B> refers to the &quot;radio header&quot; added to some
+802.11 captures.)
+<P>
+
+Note that in the current implementation of packet data accessors the
+<B>tcp</B>,
+
+<B>udp</B>,
+
+<B>icmp</B>,
+
+<B>igmp</B>,
+
+<B>pim</B>,
+
+<B>vrrp</B>,
+
+<B>carp</B>,
+
+<B>sctp</B>
+
+and
+<B>igrp</B>
+
+above do not match IPv6 packets (this may be fixed for some of these protocols
+in future), also the
+<B>icmp6</B>
+
+above implies that the IPv6 packet does not have any extension (e.g. Fragment)
+headers, also the
+<B>igrp</B>
+
+above uses an OS-specific protocol number (as discussed for the
+<B>igrp</B>
+
+abbreviation earlier) and therefore should not be used in portable
+applications and may be removed in future.
+<P>
+
+The byte offset, relative to the indicated protocol layer, is
+given by <I>expr</I>, which can be an integer constant or any other valid
+arithmetic expression.
+<I>Size</I> is optional and indicates the number of bytes in the
+field of interest; it can be either one, two, or four, and defaults to one;
+also it must be one of these valid integer constants only and cannot be a
+more complex expression.
+<P>
+
+For example, `<B>ether[</B>0<B>] &amp;</B> 1 <B>!=</B> 0' catches all multicast traffic.
+The expression `<B>ip[</B>0<B>] &amp;</B> 0xf <B>!=</B> 5'
+catches all IPv4 packets with options.
+The expression
+`<B>ip[</B>6:2<B>] &amp;</B> 0x1fff <B>=</B> 0'
+catches only unfragmented IPv4 datagrams and the first fragment of fragmented
+IPv4 datagrams.
+This check is implicitly applied to the
+<B>tcp</B>,
+
+<B>udp</B>,
+
+<B>icmp</B>,
+
+<B>sctp</B>,
+
+<B>igmp</B>,
+
+<B>pim</B>,
+
+<B>igrp</B>,
+
+<B>vrrp</B>
+
+and
+<B>carp</B>
+
+index operations.
+For instance, <B>tcp[</B>0<B>]</B> always means the first
+byte of the TCP <I>header</I>, and never means the first byte of an
+intervening fragment.
+<H2 id="lbAG">NAMED VALUES</H2>
+
+Some offsets and field values may be expressed as names rather than
+as numeric values.
+The following protocol header field offsets are
+available: <B>icmptype</B> (ICMP type field), <B>icmp6type</B> (ICMPv6 type field),
+<B>icmpcode</B> (ICMP code field), <B>icmp6code</B> (ICMPv6 code field) and
+<B>tcpflags</B> (TCP flags field).
+<P>
+
+The following ICMP type field values are available:
+<B>icmp-echoreply</B>,
+
+<B>icmp-unreach</B>,
+
+<B>icmp-sourcequench</B>,
+
+<B>icmp-redirect</B>,
+
+<B>icmp-echo</B>,
+
+<B>icmp-routeradvert</B>,
+
+<B>icmp-routersolicit</B>,
+
+<B>icmp-timxceed</B>,
+
+<B>icmp-paramprob</B>,
+
+<B>icmp-tstamp</B>,
+
+<B>icmp-tstampreply</B>,
+
+<B>icmp-ireq</B>,
+
+<B>icmp-ireqreply</B>,
+
+<B>icmp-maskreq</B>,
+
+<B>icmp-maskreply</B>.
+
+<P>
+
+The following ICMPv6 type field values are available:
+<B>icmp6-destinationunreach</B>,
+
+<B>icmp6-packettoobig</B>,
+
+<B>icmp6-timeexceeded</B>,
+
+<B>icmp6-parameterproblem</B>,
+
+<B>icmp6-echo</B>,
+
+<B>icmp6-echoreply</B>,
+
+<B>icmp6-multicastlistenerquery</B>,
+
+<B>icmp6-multicastlistenerreportv1</B>,
+
+<B>icmp6-multicastlistenerdone</B>,
+
+<B>icmp6-routersolicit</B>,
+
+<B>icmp6-routeradvert</B>,
+
+<B>icmp6-neighborsolicit</B>,
+
+<B>icmp6-neighboradvert</B>,
+
+<B>icmp6-redirect</B>,
+
+<B>icmp6-routerrenum</B>,
+
+<B>icmp6-nodeinformationquery</B>,
+
+<B>icmp6-nodeinformationresponse</B>,
+
+<B>icmp6-ineighbordiscoverysolicit</B>,
+
+<B>icmp6-ineighbordiscoveryadvert</B>,
+
+<B>icmp6-multicastlistenerreportv2</B>,
+
+<B>icmp6-homeagentdiscoveryrequest</B>,
+
+<B>icmp6-homeagentdiscoveryreply</B>,
+
+<B>icmp6-mobileprefixsolicit</B>,
+
+<B>icmp6-mobileprefixadvert</B>,
+
+<B>icmp6-certpathsolicit</B>,
+
+<B>icmp6-certpathadvert</B>,
+
+<B>icmp6-multicastrouteradvert</B>,
+
+<B>icmp6-multicastroutersolicit</B>,
+
+<B>icmp6-multicastrouterterm</B>.
+
+<P>
+
+The following TCP flags field values are available: <B>tcp-fin</B>,
+<B>tcp-syn</B>, <B>tcp-rst</B>, <B>tcp-push</B>,
+<B>tcp-ack</B>, <B>tcp-urg</B>, <B>tcp-ece</B>,
+<B>tcp-cwr</B>.
+<H2 id="lbAH">COMPOUND EXPRESSIONS</H2>
+
+Primitives and relations may be combined using:
+<P>
+
+Parentheses.
+<P>
+
+Negation (`<B>!</B>' or `<B>not</B>').
+<P>
+
+Concatenation (`<B>&amp;&amp;</B>' or `<B>and</B>').
+<P>
+
+Alternation (`<B>||</B>' or `<B>or</B>').
+<P>
+
+Negation has the highest precedence.
+Alternation and concatenation have equal precedence and associate
+left to right.
+<P>
+
+For primitives, if an identifier is given without a keyword, the most recent
+keyword is assumed.  For example,
+
+<PRE>
+<B>not host</B> vs <B>and</B> ace
+</PRE>
+
+
+is short for
+
+<PRE>
+<B>not host</B> vs <B>and host</B> ace
+</PRE>
+
+
+which should not be confused with
+
+<PRE>
+<B>not (host </B>vs<B> and host </B>ace<B>)</B>
+</PRE>
+
+
+<H2 id="lbAI">PROTOCOL NAMES IN VARIOUS CONTEXTS</H2>
+
+The table below shows which protocol names can be used in which contexts of
+the currently implemented syntax.  The &quot;name&quot; column contains a protocol name,
+which can be used as a keyword and/or as an ID for the
+<B>proto</B>
+
+case of the
+<I>type</I>
+
+qualifier kind.
+<P>
+
+For keywords: if the keyword is an alias, the &quot;K/see&quot; column refers to the
+main keyword; the &quot;K/abbr&quot; column tells whether the keyword can be used as an
+abbreviation (that is, if the keyword is the only contents of a primitive, it
+means a more complex expression); the &quot;K/PDA&quot; column tells whether the keyword
+can be used in a packet data accessor; the &quot;K/pqual&quot; column tells whether the
+keyword can be used as a case of the
+<I>proto</I>
+
+qualifier kind.
+<P>
+
+For IDs: the &quot;ID/tqual&quot; column shows the valid context(s).
+<P>
+<TABLE BORDER><TR><TD><TABLE>
+<TR VALIGN=top><TD>name</TD><TD>K/see</TD><TD>K/abbr</TD><TD>K/PDA</TD><TD>K/pqual</TD><TD>ID/tqual<BR></TD></TR>
+<TR VALIGN=top><TD COLSPAN=6><HR></TD></TR>
+<TR VALIGN=top><TD><B>aarp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>link proto \aarp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ah</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>[ip|ip6] proto \ah</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>arp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \arp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>atalk</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \atalk</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>carp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \carp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>clnp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>iso proto \clnp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>csnp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>decnet</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \decnet</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>esis</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>iso proto \esis</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>es-is</B></TD><TD><B>esis</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>esp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>[ip|ip6] proto \esp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ether</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>fddi</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>icmp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \icmp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>icmp6</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>igmp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \igmp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>igrp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \igrp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>iih</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ip</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \ip</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ip6</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \ip6</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ipx</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>link proto \ipx</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>isis</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>yes</TD><TD><B>iso proto \isis</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>is-is</B></TD><TD><B>isis</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>iso</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>yes</TD><TD><B>link proto \iso</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>l1</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>l2</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>lat</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \lat</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>link</B></TD><TD><B></B></TD><TD>no</TD><TD>yes</TD><TD>yes</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>lldp</B></TD><TD><B></B></TD><TD></TD><TD></TD><TD></TD><TD><B>link proto lldp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>loopback</B></TD><TD><B></B></TD><TD></TD><TD></TD><TD></TD><TD><B>link proto loopback</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>lsp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>mopdl</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \mopdl</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>moprc</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \moprc</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>netbeui</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>link proto \netbeui</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>pim</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>[ip|ip6] proto \pim</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>ppp</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>psnp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>radio</B></TD><TD><B></B></TD><TD>no</TD><TD>yes</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>rarp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>link proto \rarp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>sca</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>link proto \sca</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>sctp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>[ip|ip6] proto \sctp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>slip</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>slow</B></TD><TD><B></B></TD><TD></TD><TD></TD><TD></TD><TD><B>link proto slow</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>snp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>stp</B></TD><TD><B></B></TD><TD>yes</TD><TD>no</TD><TD>no</TD><TD><B>link proto \stp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>tcp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>[ip|ip6] proto \tcp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>tr</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+<TR VALIGN=top><TD><B>udp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>yes</TD><TD><B>[ip|ip6] proto \udp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>vrrp</B></TD><TD><B></B></TD><TD>yes</TD><TD>yes</TD><TD>no</TD><TD><B>ip proto \vrrp</B><BR></TD></TR>
+<TR VALIGN=top><TD><B>wlan</B></TD><TD><B>link</B></TD><TD></TD><TD></TD><TD></TD><TD><B></B><BR></TD></TR>
+</TABLE></TABLE>
+
+<P>
+<H2 id="lbAJ">EXAMPLES</H2>
+
+<P>
+
+To select all packets arriving at or departing from `sundown':
+<DL><DT><DD>
+<PRE>
+<B>host</B> sundown
+</PRE>
+
+</DL>
+
+<P>
+
+To select traffic between `helios' and either `hot' or `ace':
+<DL><DT><DD>
+<PRE>
+<B>host</B> helios <B>and (</B>hot <B>or</B> ace<B>)</B>
+</PRE>
+
+</DL>
+
+<P>
+
+To select all IPv4 packets between `ace' and any host except `helios':
+<DL><DT><DD>
+<PRE>
+<B>ip host</B> ace <B>and not</B> helios
+</PRE>
+
+</DL>
+
+<P>
+
+To select all traffic between local hosts and hosts at Berkeley:
+<DL><DT><DD>
+<PRE>
+<B>net</B> ucb-ether
+</PRE>
+
+</DL>
+
+<P>
+
+To select all FTP traffic through Internet gateway `snup':
+<DL><DT><DD>
+<PRE>
+<B>gateway</B> snup <B>and (port</B> ftp <B>or</B> ftp-data<B>)</B>
+</PRE>
+
+</DL>
+
+<P>
+
+To select IPv4 traffic neither sourced from nor destined for local hosts
+(if you gateway to one other net, this stuff should never make it
+onto your local net).
+<DL><DT><DD>
+<PRE>
+<B>ip and not net </B>localnet
+</PRE>
+
+</DL>
+
+<P>
+
+To select the start and end packets (the SYN and FIN packets) of each
+TCP conversation that involves a non-local host.
+<DL><DT><DD>
+<PRE>
+<B>tcp[tcpflags] &amp; (tcp-syn|tcp-fin) !=</B> 0 <B>and not src and dst net</B> localnet
+</PRE>
+
+</DL>
+
+<P>
+
+To select the TCP packets with flags RST and ACK both set.
+(i.e. select only the RST and ACK flags in the flags field, and if the result
+is &quot;RST and ACK both set&quot;, match)
+<DL><DT><DD>
+<PRE>
+<B>tcp[tcpflags] &amp; (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)</B>
+</PRE>
+
+</DL>
+
+<P>
+
+To select all IPv4 HTTP packets to and from port 80, i.e. print only
+packets that contain data, not, for example, SYN and FIN packets and
+ACK-only packets.  (IPv6 is left as an exercise for the reader.)
+<DL><DT><DD>
+<PRE>
+<B>tcp port</B> 80 <B>and (((ip[</B>2:2<B>] - ((ip[</B>0<B>]&amp;</B>0xf<B>)&lt;&lt;</B>2<B>)) - ((tcp[</B>12<B>]&amp;</B>0xf0<B>)&gt;&gt;</B>2<B>)) != </B>0<B>)
+</B></PRE>
+
+</DL>
+
+<P>
+
+To select IPv4 packets longer than 576 bytes sent through gateway `snup':
+<DL><DT><DD>
+<PRE>
+<B>gateway</B> snup <B>and ip[</B>2:2<B>] &gt;</B> 576
+</PRE>
+
+</DL>
+
+<P>
+
+To select IPv4 broadcast or multicast packets that were
+<I>not</I>
+
+sent via Ethernet broadcast or multicast:
+<DL><DT><DD>
+<PRE>
+<B>ether[</B>0<B>] &amp;</B> 1 <B>=</B> 0 <B>and ip[</B>16<B>] &gt;=</B> 224
+</PRE>
+
+</DL>
+
+<P>
+
+To select all ICMP packets that are not echo requests/replies (i.e., not
+ping packets):
+<DL><DT><DD>
+<PRE>
+<B>icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply</B>
+<B>icmp6[icmp6type] != icmp6-echo and icmp6[icmp6type] != icmp6-echoreply</B>
+</PRE>
+
+</DL>
+
+<H2 id="lbAK">BACKWARD COMPATIBILITY</H2>
+
+The
+<B>carp</B>
+
+keyword became available in libpcap 1.2.1.
+<P>
+
+The
+<B>hfisu</B>,
+
+<B>hlssu</B>,
+
+<B>hmsu</B>,
+
+<B>hsio</B>,
+
+<B>hopc</B>,
+
+<B>hdpc</B>
+
+and
+<B>hsls</B>
+
+keywords became available in libpcap 1.5.3.
+<P>
+
+The modulo
+(<B>%</B>)
+
+and bitwise XOR
+(<B>^</B>)
+
+binary operators became available in libpcap 1.6.2.
+<P>
+
+The
+<B>geneve</B>
+
+keyword became available in libpcap 1.8.0.
+<P>
+
+The ICMPv6 type code names, as well as the
+<B>tcp-ece</B>
+
+and
+<B>tcp-cwr</B>
+
+TCP flag names became available in libpcap 1.9.0.
+<P>
+
+The
+<B>ifindex</B>
+
+keyword became available in libpcap 1.10.0.
+<P>
+
+The
+<B>vxlan</B>
+
+keyword became available in libpcap 1.11.0.
+<P>
+
+The
+<B>lldp</B>
+
+and
+<B>slow</B>
+
+protocols became available for &quot;ether proto&quot; in libpcap 1.11.0.
+<P>
+
+Before libpcap 1.11.0 the
+<B>gateway</B>
+
+primitive had a different definition, which did not produce the expected
+results, also its support was conditional and since libpcap 1.0.0 was disabled
+by default.
+<H2 id="lbAL">SEE ALSO</H2>
+
+<A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
+
+<H2 id="lbAM">BUGS</H2>
+
+To report a security issue please send an e-mail to security@tcpdump.org.
+<P>
+
+To report bugs and other problems, contribute patches, request a
+feature, provide generic feedback etc please see the file
+<I>CONTRIBUTING.md</I>
+
+in the libpcap source tree root.
+<P>
+
+Filter expressions on fields other than those in Token Ring headers will
+not correctly handle source-routed Token Ring packets.
+<P>
+
+Filter expressions on fields other than those in 802.11 headers will not
+correctly handle 802.11 data packets with both To DS and From DS set.
+<P>
+
+`<B>ip6 proto</B>'
+should chase header chain, but at this moment it does not.
+`<B>ip6 protochain</B>'
+is supplied for this behavior.  For example, to match IPv6 fragments:
+`<B>ip6 protochain</B> 44'
+<P>
+
+Arithmetic expression against transport layer headers, like <B>tcp[0]</B>,
+does not work against IPv6 packets.
+It only looks at IPv4 packets.
+<P>
+
+The
+<B>sio</B>
+
+and
+<B>hsio</B>
+
+keywords do not test whether the packet is an MSU packet.  The
+<B>dpc</B>,
+
+<B>opc</B>,
+
+<B>sls</B>,
+
+<B>hdpc</B>,
+
+<B>hopc</B>
+
+and
+<B>hsls</B>
+
+keywords do not test whether the packet is an MTP3 packet.
+<P>
+
+For ARP and RARP the current implementation assumes IPv4 over Ethernet and may
+incorrectly match packets that have a different combination of protocol and
+hardware.
+<P>
+
+<HR>
+<H2 id="index">Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAD">PRIMITIVES</A><DD>
+<DT><A HREF="#lbAE">ARITHMETIC EXPRESSIONS</A><DD>
+<DT><A HREF="#lbAF">PACKET DATA ACCESSORS</A><DD>
+<DT><A HREF="#lbAG">NAMED VALUES</A><DD>
+<DT><A HREF="#lbAH">COMPOUND EXPRESSIONS</A><DD>
+<DT><A HREF="#lbAI">PROTOCOL NAMES IN VARIOUS CONTEXTS</A><DD>
+<DT><A HREF="#lbAJ">EXAMPLES</A><DD>
+<DT><A HREF="#lbAK">BACKWARD COMPATIBILITY</A><DD>
+<DT><A HREF="#lbAL">SEE ALSO</A><DD>
+<DT><A HREF="#lbAM">BUGS</A><DD>
+</DL>
+<HR>
+<H2>COLOPHON</H2>
+This HTML man page was generated at 14:52:11 GMT, September 13, 2026
+from a source man page in "The Tcpdump Group" git repositories
+using man2html and other tools.
+</BODY>
+</HTML>

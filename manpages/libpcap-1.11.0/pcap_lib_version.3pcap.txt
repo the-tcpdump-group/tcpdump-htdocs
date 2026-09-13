@@ -1,0 +1,48 @@
++----------------------------------------------------------------------------+
+|                                                                            |
+| This man page documents libpcap version 1.11.0.                            |
+|                                                                            |
+| Your system may have a different version installed, possibly with some     |
+| local modifications.  To achieve the best results, please make sure this   |
+| version of this man page suits your needs.  If necessary, try to look for  |
+| a different version on this web site or in the man pages available in your |
+| installation.                                                              |
+|                                                                            |
++----------------------------------------------------------------------------+
+
+PCAP_LIB_VERSION(3PCAP)                                 PCAP_LIB_VERSION(3PCAP)
+
+NAME
+       pcap_lib_version - get the version information for libpcap
+
+SYNOPSIS
+       #include <pcap/pcap.h>
+
+       const char *pcap_lib_version(void);
+
+DESCRIPTION
+       pcap_lib_version()  returns  a  pointer  to  a string giving information
+       about the version of the libpcap library being used.  The string  begins
+       with the words "libpcap version" and a space.  Then follows the version,
+       which  consists  of  three dot-separated numbers and the optional "-PRE-
+       GIT" suffix to indicate a development snapshot, same as in the output of
+       pcap-config --version in sufficiently recent  libpcap  releases.   After
+       the version often follow a space and additional text in an arbitrary hu-
+       man-readable form to indicate particular features.  For example:
+
+       an old release, on any OS
+              libpcap version 1.5.3
+
+       a newer release on a Linux host
+              libpcap version 1.10.4 (with TPACKET_V3)
+
+       the same, built with DAG support only
+              libpcap version 1.10.4 (DAG-only)
+
+       a development snapshot on a FreeBSD host
+              libpcap version 1.11.0-PRE-GIT (64-bit time_t, with zerocopy and netmap support)
+
+SEE ALSO
+       pcap-config(1), pcap(3PCAP)
+
+                                21 October 2025         PCAP_LIB_VERSION(3PCAP)
