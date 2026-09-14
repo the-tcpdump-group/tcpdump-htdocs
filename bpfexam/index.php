@@ -96,64 +96,64 @@ $versions = array
 (
 	'1.11.1-PRE-GIT' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-master',
-		'filtertest' => LIBEXEC_DIR . 'filtertest-master',
+		'tcpdump' => 'tcpdump-master',
+		'filtertest' => 'filtertest-master',
 	),
 	'1.11.0' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.11.0',
-		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.11.0',
+		'tcpdump' => 'tcpdump-libpcap-1.11.0',
+		'filtertest' => 'filtertest-libpcap-1.11.0',
 	),
 	'1.10.7' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.7',
-		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.7',
+		'tcpdump' => 'tcpdump-libpcap-1.10.7',
+		'filtertest' => 'filtertest-libpcap-1.10.7',
 	),
 	'1.10.6' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.6',
-		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.6',
+		'tcpdump' => 'tcpdump-libpcap-1.10.6',
+		'filtertest' => 'filtertest-libpcap-1.10.6',
 	),
 	'1.10.5' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.5',
-		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.5',
+		'tcpdump' => 'tcpdump-libpcap-1.10.5',
+		'filtertest' => 'filtertest-libpcap-1.10.5',
 	),
 	'1.10.4' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.4',
-		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.4',
+		'tcpdump' => 'tcpdump-libpcap-1.10.4',
+		'filtertest' => 'filtertest-libpcap-1.10.4',
 	),
 	'1.10.2' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.2',
-		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.2',
+		'tcpdump' => 'tcpdump-libpcap-1.10.2',
+		'filtertest' => 'filtertest-libpcap-1.10.2',
 	),
 	'1.10.1' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.10.1',
-		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.10.1',
+		'tcpdump' => 'tcpdump-libpcap-1.10.1',
+		'filtertest' => 'filtertest-libpcap-1.10.1',
 	),
 	'1.9.1' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.9.1',
-		'filtertest' => LIBEXEC_DIR . 'filtertest-libpcap-1.9.1',
+		'tcpdump' => 'tcpdump-libpcap-1.9.1',
+		'filtertest' => 'filtertest-libpcap-1.9.1',
 	),
 	'1.8.1' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.8.1',
+		'tcpdump' => 'tcpdump-libpcap-1.8.1',
 	),
 	'1.7.4' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.7.4',
+		'tcpdump' => 'tcpdump-libpcap-1.7.4',
 	),
 	'1.6.2' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.6.2',
+		'tcpdump' => 'tcpdump-libpcap-1.6.2',
 	),
 	'1.5.3' => array
 	(
-		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.5.3',
+		'tcpdump' => 'tcpdump-libpcap-1.5.3',
 	),
 );
 
@@ -862,6 +862,7 @@ function run_tcpdump (array $argv, object $bytecode): string
 	# a sufficiently recent tcpdump version with the required libpcap version.
 	if (count ($argv) < 1)
 		throw new Exception ('$argv must have at least one element');
+	$argv[0] = LIBEXEC_DIR . $argv[0];
 	if (! $bytecode->optreq)
 		$argv []= '-O';
 	$argv []= '-y';
@@ -881,7 +882,7 @@ function run_filtertest (string $filtertest_bin, object $bytecode): string
 	(
 		array
 		(
-			$filtertest_bin,
+			LIBEXEC_DIR . $filtertest_bin,
 			'-g',
 			'-s', $bytecode->snaplen,
 			'--',
