@@ -155,15 +155,6 @@ $versions = array
 	(
 		'tcpdump' => LIBEXEC_DIR . 'tcpdump-libpcap-1.5.3',
 	),
-	# libpcap 1.10.1 in Ubuntu 22.04 (/usr/bin/tcpdump, v4.99.1)
-	# libpcap 1.10.4 in Ubuntu 24.04 (/usr/bin/tcpdump, v4.99.4)
-	# libpcap 1.10.3 in Debian 12 (/usr/bin/tcpdump, v4.99.3)
-	# libpcap 1.10.5 in Debian 13 (/usr/bin/tcpdump, v4.99.5)
-	'random' => array
-	(
-		'descr' => 'random (OS default)',
-		'tcpdump' => 'tcpdump',
-	),
 );
 
 $dltlist = array
@@ -727,9 +718,8 @@ foreach (array_keys ($versions) as $ver)
 
 foreach ($versions as $ver => $vdata)
 {
-	$optlabel = array_fetch ($vdata, 'descr', $ver);
-	if (array_key_exists ('filtertest', $vdata))
-		$optlabel .= ' (with optimizer debugging)';
+	$optlabel = array_key_exists ('filtertest', $vdata) ? $ver :
+		"{$ver} (without optimizer debugging)";
 	echo "<OPTION value='{$ver}'";
 	if ($ver == $req_ver)
 		echo ' selected';
@@ -1330,7 +1320,7 @@ try
 		(
 			'Generated at https://www.tcpdump.org%s using libpcap %s.',
 			preg_replace ('/\?.*$/', '', $_SERVER['REQUEST_URI']),
-			array_key_exists ('descr', $versions[$req_ver]) ? 'unknown version' : $req_ver
+			$req_ver
 		);
 
 		switch ($req_action)
