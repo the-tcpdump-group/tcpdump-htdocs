@@ -285,12 +285,12 @@
 				<td class=addr>x</td>
 			</tr>
 			<tr class=alu>
-				<td class=op>lsh</td>
+				<td class=op><span class=hl>lsh</span><sup>[<a href='#footnote10'>10</a>]</sup></td>
 				<td class='addr brd'>#k</td>
 				<td class=addr>x</td>
 			</tr>
 			<tr class='alu bbs'>
-				<td class=op>rsh</td>
+				<td class=op><span class=hl>rsh</span><sup>[<a href='#footnote10'>10</a>]</sup></td>
 				<td class='addr brd'>#k</td>
 				<td class=addr>x</td>
 			</tr>
@@ -467,6 +467,12 @@
 			<li id='footnote9'>
 				In libpcap the notation for this addressing mode of this instruction is
 				just <code>ret</code> rather than <code>ret a</code>.
+			</li>
+			<li id='footnote10'>
+				When the operand of <code>lsh</code> and <code>rsh</code> is outside of
+				the valid [0,&nbsp;31] interval, the interpreter must execute
+				<code>ld #0x0</code> instead to implement a deterministic behaviour on
+				all hardware architectures.
 			</li>
 		</ol>
 	</div>
