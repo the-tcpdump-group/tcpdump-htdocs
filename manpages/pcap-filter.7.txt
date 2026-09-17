@@ -941,10 +941,13 @@ ARITHMETIC EXPRESSIONS
        the same as ==).  Each of expr1 and expr2 is  an  arithmetic  expression
        composed of integer constants (expressed in standard C syntax), the com-
        mon  arithmetic  and  bitwise binary operations {+, -, *, /, %, &, |, ^,
-       <<, >>}, a length accessor, and packet data accessors.   All  arithmetic
-       expressions  regardless  of the complexity and composition resolve to an
-       integer value.  Note that all comparisons are unsigned, so that, for ex-
-       ample, both 0x80000000 and 0xffffffff are > 0.
+       <<, >>}, parentheses, the negative of any arithmetic  expression  (using
+       unary  -  and  defined as the expression subtracted from zero), a length
+       accessor, and packet data accessors.  All arithmetic expressions regard-
+       less of the complexity and composition  resolve  to  an  integer  value.
+       Note that in a filter program all integer values are 32-bit unsigned, so
+       that,  for  example, both 0x80000000 and 0xffffffff are > 0, and -1 is a
+       synonym for 0xffffffff.
 
        Note that  32-bit  octal  integer  constants  in  the  [010000000000  ..
        037777777777]  interval,  which includes 75% of all 32-bit integers, are
@@ -954,12 +957,14 @@ ARITHMETIC EXPRESSIONS
        sent  the  same  value  using  a  decimal  (1402433619)  or  hexadecimal
        (0x53977053) number.
 
-       The  % and ^ operators are currently only supported for filtering in the
-       kernel on particular operating systems (for example: FreeBSD, Linux with
-       3.7 and later kernels, NetBSD); on all other systems (for example:  AIX,
-       Hurd, illumos, Solaris, OpenBSD), if those operators are used, filtering
-       will be done in user mode, which will increase the overhead of capturing
-       packets and may cause more packets to be dropped.
+       The  modulo  (%)  and  bitwise XOR (^) operators are currently only sup-
+       ported for filtering in the kernel on particular operating systems  (for
+       example:  FreeBSD  12.0  and  later,  Linux  with 3.7 and later kernels,
+       NetBSD 8.0 and later, OpenBSD 7.9 and later, Windows with Npcap 1.81 and
+       later); on all other systems (for example: AIX, Hurd, illumos, Solaris),
+       if those operators are used, filtering will be done in user mode,  which
+       will increase the overhead of capturing packets and may cause more pack-
+       ets to be dropped.
 
        The  length accessor, indicated by the keywords len or length, gives the
        length of the packet.
@@ -1229,4 +1234,4 @@ BUGS
        and  may  incorrectly match packets that have a different combination of
        protocol and hardware.
 
-                               12 September 2026                 PCAP-FILTER(7)
+                               16 September 2026                 PCAP-FILTER(7)
