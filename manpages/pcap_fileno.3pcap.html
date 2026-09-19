@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_FILENO</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 25 July 2018<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 10 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.1-PRE-GIT.</H4>
@@ -32,7 +32,7 @@ pcap_fileno - get the file descriptor for a live capture
 If
 <I>p</I>
 
-refers to a network device that was opened for a live capture using
+refers to a capture device that was opened for a live capture using
 a combination of
 <A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
 
@@ -45,6 +45,12 @@ or using
 <B>pcap_fileno</B>()
 
 returns the file descriptor from which captured packets are read.
+<P>
+
+A
+<B>close</B>(2)
+
+must not be performed on the file descriptor.
 <P>
 
 If
@@ -82,7 +88,7 @@ it returns
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:15:20 GMT, September 13, 2026
+This HTML man page was generated at 08:27:31 GMT, September 19, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

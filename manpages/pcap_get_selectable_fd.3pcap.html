@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_GET_SELECTABLE_FD</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2026<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 10 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.1-PRE-GIT.</H4>
@@ -30,10 +30,23 @@ be done for a live capture
 
 <H2 id="lbAD">DESCRIPTION</H2>
 
+If
+<I>p</I>
+
+refers to a network device that was opened for a live capture using
+a combination of
+<A HREF='./pcap_create.3pcap.html'><B>pcap_create</B></A>(3PCAP)
+
+and
+<A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP),
+
+or using
+<A HREF='./pcap_open_live.3pcap.html'><B>pcap_open_live</B></A>(3PCAP),
+
 <B>pcap_get_selectable_fd</B>()
 
-returns, on UNIX, a file descriptor number for a file descriptor on
-which one can
+returns, on Unix-like systems, a file descriptor number for a
+file descriptor on which one can
 do a
 <B>select</B>(2),
 
@@ -44,11 +57,19 @@ do a
 <B>kevent</B>(2),
 
 or other such call
-to wait for it to be possible to read packets without blocking, if such
-a descriptor exists, or
+to wait for it to be possible to read or inject packets without
+blocking, if such a descriptor exists, or
 <B>-1</B>,
 
 if no such descriptor exists.
+<P>
+
+The returned file descriptor must only be used for detecting
+whether reading or injecting packets can be done without blocking.
+No other operations, including
+<B>close</B>(2),
+
+should be performed on the file descriptor.
 <P>
 
 Some network devices opened with
@@ -201,13 +222,19 @@ is returned.
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP),
 
+<B>select</B>(2),
+
+<B>poll</B>(2),
+
+<B>epoll_wait</B>(2),
+
 <B>kqueue</B>(2)
 
 <P>
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:15:20 GMT, September 13, 2026
+This HTML man page was generated at 08:27:31 GMT, September 19, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

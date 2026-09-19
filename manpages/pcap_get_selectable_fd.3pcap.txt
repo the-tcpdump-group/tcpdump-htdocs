@@ -22,11 +22,18 @@ SYNOPSIS
        int pcap_get_selectable_fd(pcap_t *p);
 
 DESCRIPTION
-       pcap_get_selectable_fd() returns, on UNIX, a file descriptor number  for
-       a   file   descriptor   on  which  one  can  do  a  select(2),  poll(2),
-       epoll_wait(2), kevent(2), or other such call to wait for it to be possi-
-       ble to read packets without blocking, if such a  descriptor  exists,  or
-       -1, if no such descriptor exists.
+       If p refers to a network device that was opened for a live capture using
+       a combination of pcap_create(3PCAP) and pcap_activate(3PCAP),  or  using
+       pcap_open_live(3PCAP),  pcap_get_selectable_fd()  returns,  on Unix-like
+       systems, a file descriptor number for a file descriptor on which one can
+       do a select(2), poll(2), epoll_wait(2), kevent(2), or other such call to
+       wait for it to be possible to read or inject packets  without  blocking,
+       if such a descriptor exists, or -1, if no such descriptor exists.
+
+       The  returned  file  descriptor  must only be used for detecting whether
+       reading or injecting packets can be done without blocking.  No other op-
+       erations, including close(2), should be performed on the  file  descrip-
+       tor.
 
        Some  network  devices  opened  with  pcap_create(3PCAP)  and pcap_acti-
        vate(3PCAP), or with pcap_open_live(3PCAP), do not support  those  calls
@@ -87,6 +94,6 @@ RETURN VALUE
        returned.
 
 SEE ALSO
-       pcap(3PCAP), kqueue(2)
+       pcap(3PCAP), select(2), poll(2), epoll_wait(2), kqueue(2)
 
-                                6 September 2026  PCAP_GET_SELECTABLE_FD(3PCAP)
+                               10 September 2026  PCAP_GET_SELECTABLE_FD(3PCAP)
