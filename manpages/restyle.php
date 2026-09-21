@@ -43,6 +43,7 @@ $taxonomy = array
 		'versions' => array
 		(
 			GIT_MASTER,
+			'4.99.7',
 			'4.99.6',
 			'4.99.5',
 			'4.99.4',
