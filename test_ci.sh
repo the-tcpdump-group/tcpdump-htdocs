@@ -25,6 +25,7 @@ fail()
 	printf "${ANSIFAIL}FAIL:${ANSIRESET} %s\n" "$*" >&2
 	exit 1
 }
+
 pass()
 {
 	printf "${ANSIPASS}PASS:${ANSIRESET} %s\n" "$*"
