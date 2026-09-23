@@ -413,20 +413,22 @@ class ByteCode
 		}
 	}
 
-	public function getBinaryBE(): string
+	protected function packStatements (string $format): string
 	{
 		$ret = '';
 		foreach ($this->statements as $stmt)
-			$ret .= pack ('nCCN', $stmt['opcode'], $stmt['jt'], $stmt['jf'], $stmt['k']);
+			$ret .= pack ($format, $stmt['opcode'], $stmt['jt'], $stmt['jf'], $stmt['k']);
 		return $ret;
+	}
+
+	public function getBinaryBE(): string
+	{
+		return $this->packStatements ('nCCN');
 	}
 
 	public function getBinaryLE(): string
 	{
-		$ret = '';
-		foreach ($this->statements as $stmt)
-			$ret .= pack ('vCCV', $stmt['opcode'], $stmt['jt'], $stmt['jf'], $stmt['k']);
-		return $ret;
+		return $this->packStatements ('vCCV');
 	}
 
 	protected static function getStringTLV (int $t, string $s): string
