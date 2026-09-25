@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- HEAD -->
+    <head>
+        <meta charset="utf-8">
+        <title>LINKTYPE_ETW2 | TCPDUMP &amp; LIBPCAP</title>
+        <meta name="description" content="Web site of Tcpdump and Libpcap">
+        <link href="../style.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="../images/T-32x32.png" rel="shortcut icon" type="image/png">
+    </head>
+    <!-- END OF HTML HEAD -->
+
+    <!-- BODY -->
+    <body>
+
+        <!-- TOP MENU -->
+        <div id="menu">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../security.html">Security</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+                <li><a href="../manpages/">Man Pages</a></li>
+                <li><a href="../ci.html">CI</a></li>
+                <li><a href="../linktypes.html">Link-Layer Header Types</a></li>
+                <li><a href="../related.html">See Also</a></li>
+                <li><a href="../old_releases.html">Old Releases</a></li>
+                <li><a href="../thanks.html">Thanks!</a></li>
+            </ul>
+        </div>
+        <!-- END OF TOP MENU -->
+
+        <!-- PAGE HEADER -->
+        <div id="splash">
+            <br><img src="../images/logo.png" alt="">
+        </div>
+        <div id="logo">
+            <hr>
+        </div>
+        <!-- END OF PAGE HEADER -->
+
+        <!-- PAGE CONTENTS -->
+        <div id="page">
+
+          <!-- Start of LINKTYPE_ETW section -->
+          <div class="post">
+            <h2 class="title">
+                LINKTYPE_ETW2
+            </h2>
+            <div class="entry">
+                <p>
+                    NOTE: This LINKTYPE describes structures that are used internally by Wireshark to transfer data between <code>etwdump</code> and its dissector. This superseeds <a href="LINKTYPE_ETW.html">LINKTYPE_ETW</a>.
+                </p>
+
+                <h3 class="subtitle">Packet structure</h3>
+<pre>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/                                                               /
+/                        EVENT_HEADER                           /
+/                                                               /
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 80 octets
+|                      ETW_BUFFER_CONTEXT                       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|      ExtendedDataCount        |           TlvCount            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                       PropertiesCount                         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/                   Extended Data Headers                       /
+/      EVENT_HEADER_EXTENDED_DATA_ITEM[ExtendedDataCount]       /
+/                                                               /
+/                                                               /
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/                         TLV Headers                           /
+/                       ETW_TLV[TlvCount]                       /
+/                                                               /
+/                                                               /
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/                       Property Headers                        /
+/                   ETW_PROPERTY[PropertiesCount]               /
+/                                                               /
+/                                                               /
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+/                             DATA                              /
+/                              ..                               /
+/                              ..                               /
+/                                                               /
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+
+                <h3 class="subtitle">Description</h3>
+<p>
+
+All multi-octet numerical fields are little-endian.  All primitive types
+in this document are from Windows and their size can be found in <a class=away
+href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/efda8314-6e41-4837-8299-38ba0ee04b92">section
+2.2 "Common Data Types"</a> of
+<a class=away
+href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/cca27429-5689-4a16-b2b4-9325d93e4ba2">[MS-DTYP]:
+Windows Data Types</a>.
+
+</p>
+<p>
+<code>EVENT_HEADER</code> is 80 octets long; its structure is described on <a class=away
+href="https://learn.microsoft.com/en-us/windows/win32/api/evntcons/ns-evntcons-event_header">Microsoft's
+page for the <code>EVENT_HEADER</code> structure</a>.
+</p>
+<p>
+The bit values of Flags in <code>EVENT_HEADER</code> are:
+</p>
+<pre>
+#define EVENT_HEADER_FLAG_EXTENDED_INFO         0x0001
+#define EVENT_HEADER_FLAG_PRIVATE_SESSION       0x0002
+#define EVENT_HEADER_FLAG_STRING_ONLY           0x0004
+#define EVENT_HEADER_FLAG_TRACE_MESSAGE         0x0008
+#define EVENT_HEADER_FLAG_NO_CPUTIME            0x0010
+#define EVENT_HEADER_FLAG_32_BIT_HEADER         0x0020
+#define EVENT_HEADER_FLAG_64_BIT_HEADER         0x0040
+#define EVENT_HEADER_FLAG_CLASSIC_HEADER        0x0100
+</pre>
+<p>
+The bit values of <code>EventProperty</code> in <code>EVENT_HEADER</code> are:
+</p>
+<pre>
+#define EVENT_HEADER_PROPERTY_XML               0x0001
+#define EVENT_HEADER_PROPERTY_FORWARDED_XML     0x0002
+#define EVENT_HEADER_PROPERTY_LEGACY_EVENTLOG   0x0004
+</pre>
+<p>
+<code>ETW_BUFFER_CONTEXT</code> is 4 octets long; its structure is described on <a class=away
+href="https://learn.microsoft.com/en-us/windows/win32/api/relogger/ns-relogger-etw_buffer_context">Microsoft's
+page for the <code>ETW_BUFFER_CONTEXT</code> structure</a>.
+</p>
+<p>
+<code>ExtendedDataCount</code> is the amount of <a class=away href="https://learn.microsoft.com/en-us/windows/win32/api/evntcons/ns-evntcons-event_header_extended_data_item"><code>EVENT_HEADER_EXTENDED_DATA_ITEM</code></a> items.
+The Extended Data Headers are identical to the one described in Microsoft's documentation, which the exception of the <code>DataPtr</code>. This field points towards an offset relative to the beginning of the <code>EVENT_HEADER</code> instead of an actual pointer.
+<p>
+<code>TlvCount</code> is the amount of <code>ETW_TLV</code> items.
+</p>
+<p>
+<code>PropertiesCount</code> is the amount of <code>ETW_PROPERTY</code> items.
+</p>
+<h4 class="subtitle"><code>ETW_TLV</code> structure</h4>
+<p>
+<code>ETL_TLV</code> defines arbitrary data that is included by the sniffer in the capture process. It is structured as follows :
+<pre>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                              Type                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                             Offset                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                             Length                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+<ul>
+<li>Type: one of the following</li>
+<pre>
+enum ETL_TLV_TYPE {
+    TLV_USER_DATA     = 0,  // Specific event data of the provider; its format is defined by the provider.
+    TLV_MESSAGE       = 1,  // A null-terminated UTF-16LE string that contains the event message string.
+    TLV_PROVIDER_NAME = 2,  // A null-terminated UTF-16LE string that contains the event provider name string.
+};
+</pre>
+<li><code>Offset</code>: refers to an offset relative to the beginning of the EVENT_HEADER.</li>
+<li><code>Length</code>: is the size of the data referred by this TLV.</li>
+</ul>
+For more information about the <code>EventMessage</code> or <code>ProviderName</code> strings, refer to <a class=away href="https://learn.microsoft.com/en-us/windows/win32/api/tdh/ns-tdh-trace_event_info">TRACE_EVENT_INFO</a>.
+</p>
+<h4 class="subtitle"><code>ETW_PROPERTY</code> structure</h4>
+<p>
+<code>ETW_PROPERTY</code> defines a property by its name (key) and value. It is structured as follows :
+<pre>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                             OFFSET                            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|           KEYLENGTH           |          VALUELENGTH          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+It points towards the concatenation of the Key and Value, both as null-terminated UTF-16LE strings without padding in between, as outputed by <a class=away href="https://learn.microsoft.com/en-us/windows/win32/api/tdh/nf-tdh-tdhformatproperty">TdhFormatProperty()</a>. The Offset is from the beginning of the <code>EVENT_HEADER</code>.
+</p>
+</div>
+          </div>
+          <!-- End of LINKTYPE_ETW section -->
+        </div>
+        <!-- END OF PAGE CONTENTS -->
+
+        <!-- FOOTER -->
+        <div id="footer">
+            <p>
+                This web site is &copy; 1999&ndash;2026 The Tcpdump Group
+                (<a href="https://github.com/the-tcpdump-group/tcpdump-htdocs/blob/master/README.md">more
+                information</a>).
+            </p>
+        </div>
+        <!-- END OF FOOTER -->
+
+    </body>
+    <!-- END OF HTML BODY -->
+</html>
