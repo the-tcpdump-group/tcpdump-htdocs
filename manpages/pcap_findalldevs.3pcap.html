@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_FINDALLDEVS</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 6 September 2026<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 28 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.1-PRE-GIT.</H4>
@@ -159,6 +159,19 @@ set if the device is running
 set if the device is a wireless interface; this includes IrDA as well as
 radio-based networks such as IEEE 802.15.4 and IEEE 802.11, so it
 doesn't just mean Wi-Fi
+<DT><CODE>PCAP_IF_NO_CAPTURE</CODE>
+
+<DD>
+set if the device does not support packet capture in principle, thus any
+attempt to capture on the device will fail with an error; note that this flag
+<B>not</B>
+
+being set does not mean all attempts to capture will succeed: some may fail
+as usual because of the capture parameters, device status, permissions etc.
+<DT><CODE>PCAP_IF_NO_INJECT</CODE>
+
+<DD>
+same as the above, but with regard to packet injection
 <DT><CODE>PCAP_IF_CONNECTION_STATUS</CODE>
 
 <DD>
@@ -373,6 +386,15 @@ and
 <CODE>PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE</CODE>
 
 constants became available in libpcap release 1.9.0.
+<P>
+
+The
+<CODE>PCAP_IF_NO_CAPTURE</CODE>
+
+and
+<CODE>PCAP_IF_NO_INJECT</CODE>
+
+constants became available in libpcap release 1.11.1.
 <H2 id="lbAG">SEE ALSO</H2>
 
 <A HREF='./pcap.3pcap.html'><B>pcap</B></A>(3PCAP)
@@ -381,7 +403,7 @@ constants became available in libpcap release 1.9.0.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:15:20 GMT, September 13, 2026
+This HTML man page was generated at 20:00:04 GMT, October 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

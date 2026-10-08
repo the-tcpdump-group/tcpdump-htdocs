@@ -71,30 +71,31 @@ RETURN VALUE
               The capture source device is not up.
 
        PCAP_ERROR_CAPTURE_NOTSUP
-              Packet capture is not supported on the capture source.
+              Packet  capture is not supported on the capture source.  See also
+              the PCAP_IF_NO_CAPTURE device flag in pcap_findalldevs(3PCAP).
 
        PCAP_ERROR
-              Another  error  occurred.   pcap_geterr() or pcap_perror() may be
-              called with p as an argument to fetch or display  a  message  de-
+              Another error occurred.  pcap_geterr() or  pcap_perror()  may  be
+              called  with  p  as an argument to fetch or display a message de-
               scribing the error.
 
-       If   PCAP_WARNING_PROMISC_NOTSUP,   PCAP_ERROR_NO_SUCH_DEVICE,  PCAP_ER-
+       If  PCAP_WARNING_PROMISC_NOTSUP,   PCAP_ERROR_NO_SUCH_DEVICE,   PCAP_ER-
        ROR_PERM_DENIED, or PCAP_ERROR_CAPTURE_NOTSUP is returned, pcap_geterr()
        or pcap_perror() may be called with p as an argument to fetch or display
-       an message giving additional details about the  problem  that  might  be
+       an  message  giving  additional  details about the problem that might be
        useful for debugging the problem if it's unexpected.
 
        Additional warning and error codes may be added in the future; a program
-       should  check  for  positive, negative, and zero return codes, and treat
-       all positive return codes as warnings and all negative return  codes  as
-       errors.   pcap_statustostr(3PCAP) can be called, with a warning or error
-       code as an argument, to fetch a message describing the warning or  error
+       should check for positive, negative, and zero return  codes,  and  treat
+       all  positive  return codes as warnings and all negative return codes as
+       errors.  pcap_statustostr(3PCAP) can be called, with a warning or  error
+       code  as an argument, to fetch a message describing the warning or error
        code.
 
-       If  pcap_activate()  fails,  the  pcap_t  *  is not closed and freed; it
+       If pcap_activate() fails, the pcap_t *  is  not  closed  and  freed;  it
        should be closed using pcap_close(3PCAP).
 
 SEE ALSO
        pcap(3PCAP)
 
-                                  3 June 2024              PCAP_ACTIVATE(3PCAP)
+                               28 September 2026           PCAP_ACTIVATE(3PCAP)

@@ -91,6 +91,18 @@ DESCRIPTION
                             IEEE 802.15.4 and IEEE 802.11, so it  doesn't  just
                             mean Wi-Fi
 
+                     PCAP_IF_NO_CAPTURE
+                            set  if  the device does not support packet capture
+                            in principle, thus any attempt to  capture  on  the
+                            device will fail with an error; note that this flag
+                            not being set does not mean all attempts to capture
+                            will succeed: some may fail as usual because of the
+                            capture parameters, device status, permissions etc.
+
+                     PCAP_IF_NO_INJECT
+                            same as the above, but with regard to packet injec-
+                            tion
+
                      PCAP_IF_CONNECTION_STATUS
                             a  bitmask for an indication of whether the adapter
                             is connected or not; for wireless interfaces, "con-
@@ -176,7 +188,10 @@ BACKWARD COMPATIBILITY
        TION_STATUS_DISCONNECTED,  and  PCAP_IF_CONNECTION_STATUS_NOT_APPLICABLE
        constants became available in libpcap release 1.9.0.
 
+       The PCAP_IF_NO_CAPTURE and PCAP_IF_NO_INJECT constants became  available
+       in libpcap release 1.11.1.
+
 SEE ALSO
        pcap(3PCAP)
 
-                                6 September 2026        PCAP_FINDALLDEVS(3PCAP)
+                               28 September 2026        PCAP_FINDALLDEVS(3PCAP)

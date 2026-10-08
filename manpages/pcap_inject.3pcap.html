@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 </HEAD><BODY>
 <H1>Man page of PCAP_INJECT</H1>
-Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 23 November 2024<BR>
+Section: Misc. Reference Manual Pages (3PCAP)<BR>Updated: 28 September 2026<BR>
 <A HREF="./">Return to Main Contents</A><HR>
 <DIV class=version_boilerplate>
 <H4>This man page documents libpcap version 1.11.1-PRE-GIT.</H4>
@@ -55,7 +55,12 @@ The same limitation applies to
 and
 <A HREF='./pcap_activate.3pcap.html'><B>pcap_activate</B></A>(3PCAP).
 
-Note also that some devices might not support sending packets.
+Note also that some devices might not support sending packets.  See also the
+<CODE>PCAP_IF_NO_INJECT</CODE>
+
+device flag in
+<A HREF='./pcap_findalldevs.3pcap.html'><B>pcap_findalldevs</B></A>(3PCAP).
+
 <P>
 
 Note that, on some platforms, the link-layer header of the packet that's
@@ -138,7 +143,7 @@ as an argument to fetch or display the error text.
 
 <HR>
 <H2>COLOPHON</H2>
-This HTML man page was generated at 15:15:21 GMT, September 13, 2026
+This HTML man page was generated at 20:00:04 GMT, October 08, 2026
 from a source man page in "The Tcpdump Group" git repositories
 using man2html and other tools.
 </BODY>

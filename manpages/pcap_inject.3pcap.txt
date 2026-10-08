@@ -33,7 +33,8 @@ DESCRIPTION
        you cannot request an open that supports sending and be notified at open
        time whether sending will be possible.  The same limitation  applies  to
        pcap_create(3PCAP)  and  pcap_activate(3PCAP).   Note also that some de-
-       vices might not support sending packets.
+       vices might not support sending packets.  See also the PCAP_IF_NO_INJECT
+       device flag in pcap_findalldevs(3PCAP).
 
        Note that, on some platforms, the link-layer header of the packet that's
        sent might not be the same as the link-layer header of the  packet  sup-
@@ -66,4 +67,4 @@ RETURN VALUE
 SEE ALSO
        pcap(3PCAP)
 
-                                23 November 2024             PCAP_INJECT(3PCAP)
+                               28 September 2026             PCAP_INJECT(3PCAP)
