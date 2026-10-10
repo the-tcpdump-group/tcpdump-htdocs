@@ -149,12 +149,14 @@ OPTIONS
 
        -D
        --list-interfaces
-              Print  the list of the network interfaces available on the system
-              and on which tcpdump can capture packets.  For each  network  in-
-              terface,  a  number and an interface name, possibly followed by a
-              text description of the interface, are  printed.   The  interface
-              name  or  the number can be supplied to the -i flag to specify an
-              interface on which to capture.
+              Print the list of libpcap devices (regular and pseudo network in-
+              terfaces,    802.11/Bluetooth/USB   monitors,   DAG/D-Bus/netfil-
+              ter/RDMA/SNF devices etc.)  available for tcpdump use.  For  each
+              device  print a name, a text description (if available) and a set
+              of flags.  Also print a number unless libpcap indicates that  the
+              device  does  not  support packet capture.  The interface name or
+              the number can be supplied to the -i flag to specify an interface
+              on which to capture.
 
               This can be useful on systems that don't have a command  to  list
               them  (e.g.,  Windows  systems,  or UNIX systems lacking ifconfig
@@ -1394,4 +1396,4 @@ BUGS
        A packet trace that crosses a daylight savings  time  change  will  give
        skewed time stamps (the time change is ignored).
 
-                                  31 July 2026                       TCPDUMP(1)
+                               10 September 2026                     TCPDUMP(1)
