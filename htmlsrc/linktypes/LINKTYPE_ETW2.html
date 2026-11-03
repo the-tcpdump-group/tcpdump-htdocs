@@ -7,7 +7,7 @@
                 <p>
                     NOTE: This LINKTYPE describes structures that are used
                     internally by Wireshark to transfer data between <code>etwdump</code>
-                    and its dissector. This superseds <a href="LINKTYPE_ETW.html">LINKTYPE_ETW</a>.
+                    and its dissector. This supersedes <a href="LINKTYPE_ETW.html">LINKTYPE_ETW</a>.
                 </p>
 
                 <h3 class="subtitle">Packet structure</h3>
@@ -94,7 +94,7 @@ page for the <code>ETW_BUFFER_CONTEXT</code> structure</a>.
 <code>ExtendedDataCount</code> is the amount of
 <a class=away href="https://learn.microsoft.com/en-us/windows/win32/api/evntcons/ns-evntcons-event_header_extended_data_item"><code>EVENT_HEADER_EXTENDED_DATA_ITEM</code></a> items.
 The Extended Data Headers are identical to the one described in Microsoft's documentation, which the exception of the <code>DataPtr</code>.
-This field points towards an offset relative to the beginning of the <code>EVENT_HEADER</code> instead of an actual pointer.
+This field is an offset relative to the beginning of the <code>EVENT_HEADER</code> instead of an actual pointer.
 <p>
 <code>TlvCount</code> is the amount of <code>ETW_TLV</code> items.
 </p>
@@ -124,7 +124,7 @@ enum ETL_TLV_TYPE {
     TLV_PROVIDER_NAME = 2,  // A null-terminated UTF-16LE string that contains the event provider name string.
 };
 </pre>
-<li><code>Offset</code>: refers to an offset relative to the beginning of the EVENT_HEADER.</li>
+<li><code>Offset</code>: is an offset relative to the beginning of the EVENT_HEADER.</li>
 <li><code>Length</code>: is the size of the data referred by this TLV.</li>
 </ul>
 For more information about the <code>EventMessage</code> or <code>ProviderName</code> strings, refer to
