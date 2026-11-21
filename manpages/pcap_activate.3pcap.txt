@@ -82,17 +82,17 @@ RETURN VALUE
        If  PCAP_WARNING_PROMISC_NOTSUP,   PCAP_ERROR_NO_SUCH_DEVICE,   PCAP_ER-
        ROR_PERM_DENIED, or PCAP_ERROR_CAPTURE_NOTSUP is returned, pcap_geterr()
        or pcap_perror() may be called with p as an argument to fetch or display
-       an  message  giving  additional  details about the problem that might be
-       useful for debugging the problem if it's unexpected.
+       a message giving additional details about the problem that might be use-
+       ful for debugging the problem if it's unexpected.
 
        Additional warning and error codes may be added in the future; a program
-       should check for positive, negative, and zero return  codes,  and  treat
-       all  positive  return codes as warnings and all negative return codes as
-       errors.  pcap_statustostr(3PCAP) can be called, with a warning or  error
-       code  as an argument, to fetch a message describing the warning or error
+       should  check  for  positive, negative, and zero return codes, and treat
+       all positive return codes as warnings and all negative return  codes  as
+       errors.   pcap_statustostr(3PCAP) can be called, with a warning or error
+       code as an argument, to fetch a message describing the warning or  error
        code.
 
-       If pcap_activate() fails, the pcap_t *  is  not  closed  and  freed;  it
+       If  pcap_activate()  fails,  the  pcap_t  *  is not closed and freed; it
        should be closed using pcap_close(3PCAP).
 
 SEE ALSO

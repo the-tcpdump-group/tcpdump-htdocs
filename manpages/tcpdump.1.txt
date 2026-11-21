@@ -13,7 +13,7 @@
 TCPDUMP(1)                  General Commands Manual                  TCPDUMP(1)
 
 NAME
-       tcpdump - dump traffic on a network
+       tcpdump - dump traffic on a network interface or other capture device
 
 SYNOPSIS
        tcpdump [ -AbdDefghHIJKlLnNOpqStuUvxX# ] [ -B buffer_size ]
@@ -198,7 +198,7 @@ OPTIONS
        -f     Print  `foreign'  IPv4 addresses numerically rather than symboli-
               cally (this option is intended to get around serious brain damage
               in Sun's NIS server -- usually it hangs forever translating  non-
-              local internet numbers).
+              local Internet numbers).
 
               The  test for `foreign' IPv4 addresses is done using the IPv4 ad-
               dress and netmask of the interface on that capture is being done.
@@ -805,8 +805,8 @@ OUTPUT FORMAT
               arp who-has csam tell rtsg
               arp reply csam is-at CSAM
        The first line says that rtsg sent an ARP packet asking for the Ethernet
-       address  of  internet host csam.  Csam replies with its Ethernet address
-       (in this example, Ethernet addresses are in caps and internet  addresses
+       address  of  Internet host csam.  Csam replies with its Ethernet address
+       (in this example, Ethernet addresses are in caps and Internet  addresses
        in lower case).
 
        This would look less redundant if we had done tcpdump -n:
@@ -1134,7 +1134,7 @@ OUTPUT FORMAT
               helios.domain > h2opolo.1537: 2 NXDomain* 0/1/0 (97)
        In the first example, helios responds to query id 3 from h2opolo with  3
        answer  records,  3  name  server records and 7 additional records.  The
-       first answer record is type A (address) and its data is internet address
+       first answer record is type A (address) and its data is Internet address
        128.32.137.3.  The total size of the response was 273  bytes,  excluding
        TCP  or  UDP and IP headers.  The op (Query) and response code (NoError)
        were omitted, as was the class (C_IN) of the A record.
@@ -1396,4 +1396,4 @@ BUGS
        A packet trace that crosses a daylight savings  time  change  will  give
        skewed time stamps (the time change is ignored).
 
-                               10 September 2026                     TCPDUMP(1)
+                                20 November 2026                     TCPDUMP(1)
