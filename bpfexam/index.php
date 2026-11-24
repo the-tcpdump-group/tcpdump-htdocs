@@ -38,7 +38,7 @@ define ('EXPR_INPUT_NAME', 'filter');
 define ('SUBMIT_INPUT_NAME', 'examine');
 define ('SNAPLEN_INPUT_NAME', 'snaplen');
 define ('ACTION_INPUT_NAME', 'cbpf');
-define ('DEFAULT_VER', '1.11.0');
+define ('DEFAULT_VER', '1.11.1');
 define ('DEFAULT_DLT', 'EN10MB');
 define ('MIN_SNAPLEN', 10);
 define ('DEFAULT_SNAPLEN', 65535);
@@ -94,10 +94,15 @@ define ('CAPER_BIN', LIBEXEC_DIR . 'caper.native-master');
 # with the same version of libpcap built _without_ "--enable-optimizer-dbg".
 $versions = array
 (
-	'1.11.1-PRE-GIT' => array
+	'1.11.2-PRE-GIT' => array
 	(
 		'tcpdump' => 'tcpdump-master',
 		'filtertest' => 'filtertest-master',
+	),
+	'1.11.1' => array
+	(
+		'tcpdump' => 'tcpdump-libpcap-1.11.1',
+		'filtertest' => 'filtertest-libpcap-1.11.1',
 	),
 	'1.11.0' => array
 	(
